@@ -1,0 +1,1654 @@
+alan: wafer
+ozet: '1) Geometri ve revizyonun en onemli sonucu. Tek parca formatta kesit kullanimi geometriyle sinirli: tam kare
+  2/pi = 0.637, M10 psodo-kare 0.690 (taslanmis kesit) ve 0.667-0.670 (as-grown kesit), altigen 0.827. Onceki ciktidaki
+  ''k_split wafer boyunu ingot capindan bagimsiz kilar'' iddiasi yalnizca D her a icin serbestce secilebiliyorsa
+  dogru; o zaman eta her boyutta ~0.66-0.67 olur. Tek bir firin tasariminda D sabitse tamsayi paketleme verimi basamakli
+  ve sureksiz degisir. D=250 mm''de: a=40 icin 0.72, 50 icin 0.66, 80 icin 0.52, 105 icin 0.45, 156 icin 0.50, 182
+  icin 0.67; 210 sigmaz. D=300 mm''de: a=50 icin 0.74 (satir paketleme), 105 icin 0.62, 156 icin 0.34, 182 icin
+  0.47, 210 icin 0.62. Iyi wafer m2 basina kristallesen kutle bu yuzden ayni D''de 2.3 kata kadar degisir (ilk nesilde
+  D=300 ile 50 mm''de 0.61, 156 mm''de 1.40 kg/m2). P_panel -> a eslemesi eta(a|D) basamaklarini icermeli; a ''tatli
+  noktalardan'' secilmeli ya da D ayarlanabilir bir bant olarak kristal ajaniyla birlikte optimize edilmeli.
+
+  2) H1 duzeltildi: varsayilan senaryo artik ilk nesil kendi testeremiz. Degerler: kerf 57 um, celik tel 36 um,
+  t 115-125 um, besleme 1.2 mm/dk, kesim kirilma referansi %2, hucre kirilmasi %2, tel tuketimi 1.8 kat. Olgun degerler
+  (kerf 50, t 95-115, besleme 1.75, kirilma %0.5 / %0.25) ayri parametre olarak tutuldu ve bir ogrenme egrisiyle
+  (wf_learn_half_m2) birlestiriliyor. a=182 icin ilk nesilde kristallesen kutle 0.72 kg/m2 (olgunda 0.62, yani +%15),
+  taze poli 0.48 kg/m2 (olgunda 0.42), testere 25 m2/saat (olgunda 44, yani -%42).
+
+  3) Kerf en buyuk geri kazanilamayan kayip: tugla kutlesinin %31-35''i. HJT kalitesinde unite icinde kerf geri
+  kazanimi gosterilmedi. Tek kanit (CABRISS) bulamac kerfi, DS mc-Si ve grafit pota kontaminasyonuyla yapilmis;
+  bu yuzden bu bir dogal sinir degil, teknoloji/ekonomi engeli (''bilmiyoruz''). Temel senaryoda 0 alindi.
+
+  4) Geri donusum (K8) iyi wafer m2 basina kristallesen kutleyi degistirmez; taze poli alimini ~%33-40 azaltir.
+  Firin eriyik/taze orani yerlesime gore 1.4 ile 2.5 arasinda degisir. Modelin taze/wafer orani 130 um ve kayipsiz
+  ideal durumda 1.385; bu, ITRPV 17''nin M10 degerine (1.68 g/W, orani 1.39-1.44) uyuyor. Varsayilan kayiplarla
+  oran 1.55; fark pota kalintisi (+%3), dilim geri kazanim kaybi (+%5.5) ve kirilma/ret/tugla ucundan (+%3) geliyor.
+
+  5) Testere alan hizi, tel agi dolu tutuldugunda wafer boyundan buyuk olcude bagimsiz. 600 mm yuklu kendi testeremiz
+  ilk nesilde 17-28 m2/saat (eta_cell 0.25 ile 36-62 MW/yil), olgunda 29-49 m2/saat (64-106 MW/yil) verir. Onceki
+  ''~70 MW'' degeri tutarsizdi; artik tek eta_cell ile saw_MW_per_yr formulunden hesaplaniyor. Ornek unitede (2
+  firin x 60 kg/gun kristallesen) cikti 167 m2/gun (~15 MW/yil), testere kullanimi %27.
+
+  6) H3 dogru ama sinirli. Ilk nesil parametrelerle kesim kirilmasi 182 mm / 125 um''de %2.23, 50 mm / 115 um''de
+  %0.55 (4 kat azalma). n_a=3 ve taban payi 0.25 ile en fazla ~6.7 kat azalabilir; n_a=1 ise yalnizca 1.2-1.5 kat.
+  m2 basina wafer sayisi 13 kat artar. Unite olceginde adet bazli istasyonlar dusuk kullanimli (M10''da %7) ve maliyet
+  basamakli: 50 mm''de D=300 ile 2 muayene istasyonu gerekir. Onceki ''adet maliyeti patlar'' ifadesi GW sezgisiydi.
+
+  7) Yap-ya-da-al, tutarli iki zincirle yeniden kuruldu. Cin zinciri: satin alinan M10 teslim ~$4.91/m2 ($0.0196/W;
+  FOB $0.148 artisi tahmini gumruk ve lojistik). Kendi yapimimizda Cin polisi $2.10/m2, kristal donusumu (kristal
+  ajani) ve wafer donusumu gelir. Wafer donusumunun unite olcegindeki merkez tahmini $7.2/m2; parametre uclarinda
+  $1.6-21/m2 (tahminlere dayali). Cin zincirinde kendi yapimimiz en iyimser durumda bile ancak basabas. Izlenebilir
+  zincir: Cin disi poli $17.5/kg ($8.4/m2); Cin disi wafer fiyati bilinmiyor (tahmin $0.35/adet), yani sonuc teklif
+  alinmadan belirlenemez. K3 kalici bir secenek olarak modellenmeli. AB 2024/3015 (zorla calistirma) 13 Aralik 2024''te
+  yururluge girdi; uygulama tarihi dogrulanmadi. Bu, balkon (A) senaryosunda izlenebilirlik riskini artirir.
+
+  8) Satin alinan wafer''i bolme: TaiyangNews''teki ''half-wafer processing'', yan dilimlerden yarim tugla cikarmak
+  anlamina geliyor (tugla bolme, k_split fikrini destekliyor), TLS ile on-bolme degil. TLS''in 6000 wph degeri hucre
+  ayirma icin; ciplak wafer''in hucre oncesi bolunmesi deneyle dogrulanmali. Geometri kontrolu: standart D/a oranlarinda
+  yan dilimin en kalin yeri 0.18-0.20a, yani yarim tugla sigmaz. Bu kaldirac ancak buyuk D / kucuk a durumunda calisir
+  ve yerlesim fonksiyonunun icinde zaten var.
+
+  9) En buyuk belirsizlikler: kendi firinimizda D''nin ayarlanabilirlik bandi; zincire gore teslim poli ve wafer
+  fiyatlari ile Turkiye gumrugu; unite olcegindeki donusum maliyeti (capex, personel, CRF); kendi testeremizin kerf,
+  besleme ve kirilmasi; kirilmanin boyut ussu ve taban payi; bolunmus HJT parcalarinda kenar kaybi; k x k ve satir
+  parcalarinin radyal ozellik farki.'
+parametreler:
+- id: wf_si_density_kg_m3
+  ad: Silisyum yogunlugu (oda sicakligi)
+  birim: kg/m3
+  deger: 2329
+  alt: 2329
+  ust: 2329
+  kaynak: https://en.wikipedia.org/wiki/Silicon
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: 2.329085 g/cm3 (20 C); liquid at m.p. 2.57 g/cm3
+  kaynak_tarihi: erisim 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Evrensel sabit.
+  aciklama: Sivi Si 2.57 g/cm3 (pota hacmi icin kristal ajanina).
+  dogrulama_deneyi: Gerekmez.
+- id: wf_t_ascut_mature_um
+  ad: HJT as-cut wafer kalinligi, olgun hat
+  birim: um
+  deger: 110
+  alt: 100
+  ust: 120
+  kaynak: https://taiyangnews.info/technology/wafer-developments-continue-to-support-hjt-adoption
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: mainstream wafer thickness for HJT is about 110 μm, which is expected to narrow to 100 μm between
+    2026 and 2028
+  kaynak_tarihi: '2026-06-05'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Cin'deki GW olcekli HJT hatlarinin degeri (H1); yalnizca ogrenme sonrasi gecerli. ITRPV 17
+    (TaiyangNews 2026-09-07) 2026 icin HJT'de 120 um veriyor; ust sinir buna gore.
+  aciklama: 'Ayni sayfa: ''expected to decline steadily from ~110-118 μm toward ~95-100 μm''. Olgun t(a) onerisi:
+    50-80 mm icin 95, 105 mm icin 100, 156-182 mm icin 110, 210 mm icin 115 um. Hepsi wf_t_final_min_um + wf_texture_removal_um
+    = 95 um siniri ustunde.'
+  dogrulama_deneyi: Kendi testeremizde 130/110/95 um kesim; her kalinlikta kirilma, TTV ve testere izi.
+- id: wf_t_ascut_firstgen_um
+  ad: HJT as-cut wafer kalinligi, ilk nesil (varsayilan)
+  birim: um
+  deger: 125
+  alt: 115
+  ust: 135
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ilk nesil testere (TTV 15-25 um) ve yari otomatik tasima icin. Kucuk wafer (<=105 mm) kirilma
+    yuku a^2/t ile dustugu icin 115 um ile baslayabilir (ornekte boyle alindi).
+  aciklama: 'Dayanak: satin alinan standart n-tipi wafer 130 um (InfoLink/TrendForce satirlari ''130µm''). Olgun
+    degerin ~15 um ustu TTV payi olarak birakildi.'
+  dogrulama_deneyi: Ilk 20-50 kesimde kalinliga gore kirilma ve TTV dagilimi.
+- id: wf_t_final_min_um
+  ad: Nihai (dokulama sonrasi) HJT wafer kalinligi alt siniri
+  birim: um
+  deger: 80
+  alt: 75
+  ust: 90
+  kaynak: https://taiyangnews.info/technology/low-temperature-hjt-manufacturing-adapts-to-wider-wafer-variants
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: companies put an 80 µm cap for wafer thickness reduction, as any further lowering beyond this
+    would start affecting efficiency; 100 µm has already entered production, while a thickness of 90 µm is being
+    evaluated
+  kaynak_tarihi: '2025-06-03'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Boyuttan bagimsiz (optik sogurma, verim). Kucuk wafer'in kirilma avantaji bu siniri asagi
+    cekmez. Kaynak as-cut mi nihai mi oldugunu belirtmiyor; temkinli olarak nihai kalinliga uygulandi.
+  aciklama: 'Kisit: t_wafer_um - wf_texture_removal_um >= wf_t_final_min_um, yani as-cut alt sinir ~95 um. arXiv
+    1906.06770 (Harrison vd.): HIT hattinda ~90 um''ye kadar ~%93 verim, 80 um alti <%80 (el ile tasima).'
+  dogrulama_deneyi: Satin alinan wafer'lari KOH ile 90/100/110 um'ye inceltip HJT hucre verimi ve adim bazli kirilma
+    olcumu.
+- id: wf_texture_removal_um
+  ad: Hasar daglama + dokulamada toplam kalinlik kaybi (iki yuz)
+  birim: um
+  deger: 15
+  alt: 8
+  ust: 25
+  kaynak: hafiza; hucre ajaniyla ortak
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: yok (hafizadan)
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Hucre ajaninin degeri esas alinir.
+  aciklama: 'Alt capa: Ge 2025, kalinti gerilmenin ''~5 μm of material removal via etching'' ile buyuk olcude kalktigini
+    soyluyor (yuz basina).'
+  dogrulama_deneyi: Dokulama oncesi ve sonrasi tartim ile kalinlik kaybi.
+- id: saw_wire_core_um
+  ad: 'Elmas tel cekirdek capi (ilk nesil: karbon celik)'
+  birim: um
+  deger: 36
+  alt: 28
+  ust: 40
+  kaynak: https://strathprints.strath.ac.uk/94630/1/Ge-etal-MSSP-2025-Progress-and-critical-challenges-in-slicing-of-thin-semiconductor-wafers.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'diamond wires with diameters of 35 μm are employed in PV wafer slicing, while tungsten-core
+    wires (33 μm in 2024) are expected to shrink below 25 μm within five years; Table 2: 36 | 51±5 | 36±2 | >5.8'
+  kaynak_tarihi: '2025'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ilk nesil icin 36 um celik (affedici gerginlik kontrolu). 28-30 um tungsten, olgun secenek
+    (alt sinir).
+  aciklama: 'Kopma kuvveti: 28 um >4.8 N, 36 um >5.8 N, 40 um >7.0 N (Tablo 2). InfoLink 2022: ''now sits at 36-40μm.
+    Some manufacturers even use 32μm tungsten''.'
+  dogrulama_deneyi: Gerginlik ve besleme taramasinda tel kopma sikligi.
+- id: saw_wire_coating_add_um
+  ad: Elmas kaplamanin tel capina ekledigi (dis cap eksi cekirdek)
+  birim: um
+  deger: 15
+  alt: 12
+  ust: 20
+  kaynak: https://strathprints.strath.ac.uk/94630/1/Ge-etal-MSSP-2025-Progress-and-critical-challenges-in-slicing-of-thin-semiconductor-wafers.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Table 2: 28 43±2 28±2 >4.8; 30 45±2 30±2 >5.0; 36 51±5 36±2 >5.8; 40 55±5 40±2 >7.0'
+  kaynak_tarihi: '2025'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tek tedarikci tablosu (derlemenin [140] kaynagi).
+  aciklama: Tum satirlarda dis cap - cekirdek = 15 um (+-2 ile +-5).
+  dogrulama_deneyi: Satin alinan telin optik veya SEM ile dis cap olcumu.
+- id: saw_kerf_excess_um
+  ad: Tel titresimi/sapmasi kaynakli ek kerf (dis cap ustu)
+  birim: um
+  deger: 6
+  alt: 2
+  ust: 12
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kendi makara hassasiyetimize ve gerginlik kontrolumuze bagli.
+  aciklama: 'Dayanak: ITRPV 2023''teki 55 um kerf ile o donemin 36-40 um celik telinin dis capi (51-55 um) arasindaki
+    0-4 um fark; ilk nesil icin biraz ustu. pv-magazine 2025: ''Kerf loss decreases with a higher wire tension and
+    a lower wire span''; ''smaller wafers suffer from greater excess kerf loss'' (350 um tel, laboratuvar). Bu yuzden
+    kucuk wafer icin kerf avantaji varsayilmadi.'
+  dogrulama_deneyi: Olculen pitch eksi wafer kalinligi; tel acikligi ve gerginlik taramasi.
+- id: saw_kerf_firstgen_um
+  ad: Kerf, ilk nesil kendi testeremiz (varsayilan)
+  birim: um
+  deger: 57
+  alt: 48
+  ust: 65
+  kaynak: 'saw_kerf_calc (36 + 15 + 6); capa: https://cdn.qualenergia.it/wp-content/uploads/2023/05/itrpv_2023.pdf'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: A kerf width of 55 µm is standard in 2023 with DWS.
+  kaynak_tarihi: 2023-05 (capa) / 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Celik telli ilk nesil kendi testeremiz; ITRPV 2023'teki celik tel donemi degeriyle uyumlu.
+  aciklama: saw_wire_core_um + saw_wire_coating_add_um + saw_kerf_excess_um = 36 + 15 + 6 = 57.
+  dogrulama_deneyi: Ilk kesimlerde tugla boyu / wafer sayisi ve olculen t'den kerf.
+- id: saw_kerf_mature_um
+  ad: Kerf, olgun testere + ~30 um tungsten tel
+  birim: um
+  deger: 50
+  alt: 45
+  ust: 55
+  kaynak: https://cdn.qualenergia.it/wp-content/uploads/2023/05/itrpv_2023.pdf ; https://strathprints.strath.ac.uk/94630/1/Ge-etal-MSSP-2025-Progress-and-critical-challenges-in-slicing-of-thin-semiconductor-wafers.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: The kerf loss is predicted to decline to 43 µm within the next 10 years. | M10 wafers decreasing
+    from 55 μm in 2023 to as low as 44 μm within a decade
+  kaynak_tarihi: 2023-05 / 2025
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: GW endustri trendi (H1); yalnizca ogrenme egrisinin sonunda gecerli.
+  aciklama: 55'ten 43'e (2023-2033) dogrusal interpolasyon 2026 icin ~51 veriyor; tel geometrisi 30 + 15 + 5 = 50.
+    2030 sonrasi <25 um cekirdekle 35-42 um mumkun; bu uzun vade degeri araliga katilmadi.
+  dogrulama_deneyi: Tungsten telle ikinci nesil testerede kerf olcumu.
+- id: wf_ttv_um
+  ad: Toplam kalinlik degiskenligi (TTV), ilk nesil
+  birim: um
+  deger: 15
+  alt: 8
+  ust: 25
+  kaynak: tahmin (olgun capa ITRPV 2023)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'Olgun endustri degeri 10 um (ITRPV 2023: ''TTV of 10 µm is reached by today'', dogrulandi).
+    Ilk nesilde 15-25 um.'
+  aciklama: TTV minimum kalinligi ve HJT PECVD/PVD tasiyici temasini etkiler. Kisa temas uzunlugunda (kucuk tugla)
+    daha iyi TTV beklenir; dogrulanmadi.
+  dogrulama_deneyi: Kapasitif kalinlik haritasi (5-9 nokta).
+- id: saw_wire_speed_m_s
+  ad: Tel hizi, ilk nesil
+  birim: m/s
+  deger: 25
+  alt: 15
+  ust: 40
+  kaynak: tahmin (endustri capasi Ge 2025)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'Endustri: Ge 2025 ''typically maintained within the range of 30 m/s to 40 m/s''; PMC11279129
+    ''over 40 m/s'' (ikisi de dogrulandi). Ilk nesil kendi makinemizde daha dusuk.'
+  aciklama: Formulde dogrudan yok. Besleme hizi tel hiziyla yaklasik orantili dusurulmeli (asindirici basina kesme
+    derinligi = kerf*v_f/(n_g*v_w*w)).
+  dogrulama_deneyi: Farkli tel hizlarinda testere izi P-V ve mikro-catlak derinligi.
+- id: saw_feed_firstgen_mm_min
+  ad: Besleme hizi, ilk nesil (~182 mm temas)
+  birim: mm/dk
+  deger: 1.2
+  alt: 0.8
+  ust: 1.75
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ilk nesil gerginlik kontrolu ve ~25 m/s tel hizi icin.
+  aciklama: Olgun degerin (1.75) ~%70'i.
+  dogrulama_deneyi: Besleme taramasi; tel sehimi, kirilma ve TTV izlenerek.
+- id: saw_feed_mature_mm_min
+  ad: Besleme hizi, olgun endustri (~182 mm temas)
+  birim: mm/dk
+  deger: 1.75
+  alt: 1.5
+  ust: 2
+  kaynak: https://pmc.ncbi.nlm.nih.gov/articles/PMC11279129/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: The slicing speed of photovoltaic silicon wafers is within the range of 1.5 mm/min~2 mm/min using
+    DWS.
+  kaynak_tarihi: '2024'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 30-40 m/s endustri makineleri (H1); ogrenme sonrasi.
+  aciklama: Referans temas uzunlugu 182 mm kabul edildi.
+  dogrulama_deneyi: Ikinci nesil testerede besleme taramasi.
+- id: saw_feed_contact_exp
+  ad: Besleme hizinin tel basina Si temas uzunluguna bagimlilik ussu (beta)
+  birim: '-'
+  deger: 0.5
+  alt: 0
+  ust: 1
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ag dolu tutulursa etkisi kucuk (50 mm icin beta 0 ile 1 arasinda alan hizi ~%4 degisir).
+  aciklama: 'beta=0: asindirici basina kesme derinligi temas uzunlugundan bagimsiz. beta=1: sabit tel sehimi. Gercek
+    deger ikisi arasinda.'
+  dogrulama_deneyi: Ayni tel ve hizla 1, 2 ve 4 kucuk tugla yan yana; sehim sabitken ulasilan en yuksek besleme.
+- id: saw_L_load_mm
+  ad: Yuklu tugla boyu (tel agi uzunlugu), kendi tasarim
+  birim: mm
+  deger: 600
+  alt: 300
+  ust: 950
+  kaynak: tasarim secimi
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tasarim secimi)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'Istisnaen ''orta'': deger bir tasarim secimi. Ust sinir Gaoce GC-800XC arama ozeti (''maximum
+    silicon ingot loading capacity of 950 mm''; sayfa acilamadi). Meyer Burger DW288 (PV Tech 2016, dogrulandi):
+    ''enlarged to 650mm''.'
+  aciklama: Kisa tuglada birden fazla tugla uc uca yuklenir; her uc wf_brick_end_mm kaybi getirir.
+  dogrulama_deneyi: Prototipte tel agi uzunlugu ile TTV iliskisi.
+- id: saw_W_web_mm
+  ad: Kullanilabilir tel agi genisligi (yan yana tugla icin)
+  birim: mm
+  deger: 250
+  alt: 200
+  ust: 450
+  kaynak: tasarim tahmini
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Genis aciklik titresimi ve ek kerfi artirir.
+  aciklama: 'Gaoce arama ozeti (dogrulanmadi): makara ekseni 315-455 mm (182 mm icin 370, 210 mm icin 400).'
+  dogrulama_deneyi: Prototipte aciklik ile kerf/TTV iliskisi.
+- id: saw_brick_gap_mm
+  ad: Yan yana tuglalar arasi bosluk
+  birim: mm
+  deger: 5
+  alt: 3
+  ust: 10
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kendi tasarimimiz.
+  aciklama: Tutkal tasmasi ve hizalama toleransi.
+  dogrulama_deneyi: Prototip yukleme denemesi.
+- id: saw_overcut_mm
+  ad: Asiri kesim (recine plakaya giris) ve yaklasma
+  birim: mm
+  deger: 3
+  alt: 2
+  ust: 6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 50 mm'de kesim derinliginin ~%6'si.
+  aciklama: ''
+  dogrulama_deneyi: Prototipte olcum.
+- id: saw_t_overhead_h
+  ad: Kesim disi cevrim suresi (yukleme, bosaltma, tel agi, temizlik), ilk nesil
+  birim: saat/cevrim
+  deger: 1
+  alt: 0.5
+  ust: 1.5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Olgun hatta ~0.75 saat. Tutkallama makine disinda paralel yapilirsa kisalir.
+  aciklama: 'Onceki ciktidaki Meyer Burger ''tutarlilik kontrolu'' kaldirildi: ''<2 saat kesim, 35 MW'' yalnizca
+    arama ozetiydi, PV Tech sayfasinda yok; 80 um kerf de varsayimdi.'
+  dogrulama_deneyi: Prototipte zaman etudu.
+- id: saw_uptime
+  ad: Testere kullanilabilirlik orani, ilk nesil
+  birim: '-'
+  deger: 0.85
+  alt: 0.75
+  ust: 0.95
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Olgunda ~0.9.
+  aciklama: Tel kopmalari, makara kaplama degisimi, bakim.
+  dogrulama_deneyi: Ilk 6 ay OEE kaydi.
+- id: saw_wire_use_ref_m_per_m2
+  ad: Tel tuketimi, kesilen wafer alani basina (referans kerf 57 um, olgun endustri)
+  birim: m/m2
+  deger: 115
+  alt: 105
+  ust: 121
+  kaynak: https://www.infolink-group.com/energy-article/quest-for-thinner-wafers-and-wires-ramp-up-tungsten-diamond-wire-application
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Wire consumption sits at 3.5-4m/piece for 182mm wafers | The figure now sits at 36-40μm
+  kaynak_tarihi: '2022-08-01'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 2022 GW endustrisi, celik tel donemi (kerf ~55-60 um), bu yuzden referans kerf 57 um. Ilk
+    nesil fazlasi saw_wire_use_mult_firstgen ile verilir.
+  aciklama: '3.5-4 m / 0.0331 m2 = 106-121 m/m2. Capraz kontrol: ''500,000km of wires/GW'' ve ~220 W/m2 ile ~110
+    m/m2. Tungsten tel ''reduces wire loss by 10%''. Ge 2025: ''~10 meters per 8-inch silicon wafer'' (~318 m/m2,
+    muhtemelen yari iletken).'
+  dogrulama_deneyi: Kesim basina harcanan tel; tel giris/cikis capi.
+- id: saw_wire_use_mult_firstgen
+  ad: Ilk nesil testerede tel tuketimi carpani
+  birim: '-'
+  deger: 1.8
+  alt: 1
+  ust: 2.5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Tel yonetimi optimize edilmemis kendi testeremiz.
+  aciklama: Ogrenmeyle 1'e yaklasir (saw_wire_mult_blend).
+  dogrulama_deneyi: Prototipte km tel / m2.
+- id: saw_wire_price_steel_usd_km
+  ad: Elmas tel fiyati (celik cekirdek agirlikli ortalama)
+  birim: USD/km
+  deger: 2.5
+  alt: 1.8
+  ust: 5.5
+  kaynak: https://mp.ofweek.com/solar/a856714294547
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 2024年，金刚线单价从上一年的37.64元/公里骤降至17元/公里，同比下滑54.83%
+  kaynak_tarihi: 2024 yillik ortalama (Meichang)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Meichang'in urun karmasi ortalamasi (agirlikli celik oldugu varsayildi, dogrulanmadi). Cin
+    ic piyasa, buyuk alici; kucuk hacim primi, nakliye ve gumruk haric. 2025-2026 fiyati dogrulanamadi.
+  aciklama: 17/6.8 = $2.5/km. Ust sinir 2023 ortalamasi 37.64/6.8 = $5.5.
+  dogrulama_deneyi: 2-3 tedarikciden <1000 km/yil icin teslim teklifi.
+- id: saw_wire_price_w_usd_km
+  ad: Tungsten cekirdekli elmas tel fiyati
+  birim: USD/km
+  deger: 3.5
+  alt: 2.5
+  ust: 6
+  kaynak: tahmin; alt capa https://finance.sina.com.cn/roll/2025-01-07/doc-ineecmqz1633344.shtml
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Olgun senaryodaki ince tel icin; kerf ve fiyat ayni tel tipinden secilmeli.
+  aciklama: 'Sina 2025-01-07 (dogrulandi): ''28-35微米规格的光伏钨丝价格大幅下降至约16.3元/公里''. Bu yalnizca tungsten cekirdek (母线)
+    fiyati; bitmis elmas tel bundan pahali olmali, yani > $2.4/km.'
+  dogrulama_deneyi: Kucuk hacim tungsten elmas tel teklifi.
+- id: saw_coolant_usd_m2
+  ad: Sogutma sivisi ve katki maliyeti
+  birim: USD/m2
+  deger: 0.3
+  alt: 0.1
+  ust: 1
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Kaynak bulunamadi.
+  aciklama: 'Dayanak: testere sarfinin tel mertebesinde oldugu kaba varsayimi.'
+  dogrulama_deneyi: Prototipte litre/kesim ve filtre degisim sikligi.
+- id: saw_beam_usd_m2
+  ad: Recine plaka + tutkal maliyeti (plaka alani basina)
+  birim: USD/m2 plaka
+  deger: 150
+  alt: 50
+  ust: 400
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Kendi plastik enjeksiyon altyapimizla yapilabilir.
+  aciklama: 'Kenar-olcekli kalem: wafer basina ~a*(t+kerf), m2 basina ~(t+kerf)/a.'
+  dogrulama_deneyi: Tedarikci teklifi veya kendi uretim maliyeti.
+- id: saw_power_kW
+  ad: Testere ortalama elektrik gucu (600 mm yuk)
+  birim: kW
+  deger: 25
+  alt: 10
+  ust: 60
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kaynak yok.
+  aciklama: Kaldirilan hacim ~1000 mm3/s x 10-30 J/mm3 (varsayim) = 10-30 kW, arti pompa ve sogutma. Ilk nesilde
+    ~1 kWh/m2, olgunda ~0.6.
+  dogrulama_deneyi: Prototipte enerji olcer.
+- id: saw_capex_usd
+  ad: Kendi yapim cok telli testere yatirimi
+  birim: USD
+  deger: 200000
+  alt: 80000
+  ust: 500000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 'Ticari fiyat dogrulanamadi. Baskin kalemler: hassas oluklu makaralar, gerginlik servolari,
+    tel yonetimi, kontrol.'
+  aciklama: Unite ihtiyacinin cok ustunde kapasite; saha paylasimi secenegi var.
+  dogrulama_deneyi: BOM cikarimi + 2 tedarikci teklifi.
+- id: saw_filtration_capex_usd
+  ad: Sogutma sivisi filtrasyonu ve kerf camuru susuzlastirma yatirimi
+  birim: USD
+  deger: 50000
+  alt: 20000
+  ust: 150000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Onceki ciktida eksikti (fizik denetcisi).
+  aciklama: Santrifuj/filtre pres ve H2 havalandirmasi dahil.
+  dogrulama_deneyi: Teklif.
+- id: saw_maint_usd_per_h
+  ad: Testere bakim sarfi (makara PU kaplama yenileme, rulman, filtre)
+  birim: USD/calisma saati
+  deger: 8
+  alt: 3
+  ust: 20
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Onceki ciktida eksikti.
+  aciklama: ''
+  dogrulama_deneyi: Ilk yil bakim kaydi.
+- id: saw_life_yr
+  ad: Wafer ekipmanlari amortisman omru
+  birim: yil
+  deger: 8
+  alt: 5
+  ust: 12
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Finans ajaninin fin_crf hesabina girdi.
+  aciklama: Formullerde fin_crf (faiz dahil sermaye geri kazanim faktoru) kullanilir.
+  dogrulama_deneyi: Finans ajani ile uyum.
+- id: saw_labor_h_per_cycle
+  ad: Testere cevrimi basina iscilik
+  birim: adam-saat/cevrim
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kucuk tuglalar arttikca artar.
+  aciklama: Dusuk hacimde iscilik bu kalemle degil, wf_staff_min_per_shift tabaniyla belirlenir.
+  dogrulama_deneyi: Zaman etudu.
+- id: wf_staff_min_per_shift
+  ad: Wafer alani asgari vardiya personeli (kare kesim, testere, ayirma, temizlik, muayene, geri donusum)
+  birim: kisi/vardiya
+  deger: 1.5
+  alt: 1
+  ust: 3
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Unite olceginde (15-35 MW) m2 basina iscilik bu tabanla belirlenir; paylasimli saha organizasyonunda
+    azalabilir.
+  aciklama: 7/24 calisma varsayildi.
+  dogrulama_deneyi: Pilot hat vardiya plani.
+- id: sq_kerf_mm
+  ad: Kare kesim / tugla bolme kerfi
+  birim: mm
+  deger: 0.4
+  alt: 0.25
+  ust: 1.5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Elmas telli kare kesim ~0.3-0.5 mm; serit testere ~1-1.5 mm (tahmin).
+  aciklama: Yerlesim fonksiyonlarina girer.
+  dogrulama_deneyi: Kare kesim prototipinde olcum.
+- id: sq_grind_margin_mm
+  ad: As-grown ile kullanilabilir cap arasi radyal pay
+  birim: mm
+  deger: 2
+  alt: 1
+  ust: 5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kristal ajaninin cap kontrol hassasiyetine bagli.
+  aciklama: Satir paketlemede taslama gerekmeyebilir, ama yuzey dalgalanmasi icin ayni pay kullanildi.
+  dogrulama_deneyi: Ilk ingotlarda cap profili.
+- id: sq_D_over_a_pseudo
+  ad: 'Psodo-kare (tek parca veya kxk blok): taslanmis cap / blok kenari'
+  birim: '-'
+  deger: 1.3557
+  alt: 1.2
+  ust: 1.4142
+  kaynak: M10 (182.2 mm, cap 247 mm); G12 (210 mm, cap 295 mm)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: yok (hafizadan)
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Serbest-D ters probleminde kullanilir. Sabit D'de yerlesim sq_chamfer_max_frac kisitiyla secilir.
+  aciklama: 'Hesap kontrolu: M10 alani 330.8 cm2 (bilinen ~330 cm2). G12 orani 1.405 (eta 0.645).'
+  dogrulama_deneyi: Modul ajani ile kose pahi ve dolum optimizasyonu.
+- id: sq_chamfer_max_frac
+  ad: Izin verilen kose pahi bacagi / wafer kenari
+  birim: '-'
+  deger: 0.1
+  alt: 0.04
+  ust: 0.2
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Modul ajani (dolum, gorunum, dizme) ile birlikte secilir.
+  aciklama: 'M10: 7.5-7.7 mm = a''nin %4.2''si (hesap). Serbest-D kxk tasariminda (a=50, k=4) kose parcalarinda
+    %17''ye cikar.'
+  dogrulama_deneyi: Modul yerlesim maketi.
+- id: sq_capex_usd
+  ad: Kare kesim + silindirik taslama + tugla bolme makinesi yatirimi
+  birim: USD
+  deger: 150000
+  alt: 60000
+  ust: 400000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Onceki ciktida eksikti. Kullanim cok dusuk (kesim yuzeyi 0.003-0.009 m2 / m2 wafer); saha
+    paylasimi adayi.
+  aciklama: ''
+  dogrulama_deneyi: BOM veya teklif.
+- id: sq_cut_rate_m2_h
+  ad: Kare kesim / bolme makinesi kesim yuzeyi hizi
+  birim: m2 kesim yuzeyi/saat
+  deger: 2
+  alt: 0.5
+  ust: 5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kaynak yok; kapasite unite ihtiyacinin cok ustunde.
+  aciklama: Kesim yuzeyi / wafer alani = sq_cut_area_m2_per_m2.
+  dogrulama_deneyi: Prototipte zaman etudu.
+- id: sq_consumable_usd_m2cut
+  ad: Kare kesim sarfi (tel/serit), kesim yuzeyi basina
+  birim: USD/m2 kesim
+  deger: 1
+  alt: 0.3
+  ust: 5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kesim yuzeyi m2 wafer basina ~0.004 oldugu icin ihmal edilebilir (<$0.01/m2).
+  aciklama: Kenar-olcekli (k>1 ic kesimler m2 basina ~2(k-1)/(k*a)).
+  dogrulama_deneyi: Prototipte tuketim.
+- id: wf_crown_h_over_D
+  ad: Tac/omuz konisi yuksekligi / ingot capi
+  birim: '-'
+  deger: 0.35
+  alt: 0.15
+  ust: 0.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kristal ajaniyla ortak; kristal ajaninin degeri esas.
+  aciklama: Koni hacmi pi/12*D^2*h, yani govdeye esdeger uzunluk h/3.
+  dogrulama_deneyi: Ilk ingotlarin agirlik ve profili.
+- id: wf_tail_h_over_D
+  ad: Kuyruk konisi yuksekligi / ingot capi
+  birim: '-'
+  deger: 0.8
+  alt: 0.4
+  ust: 1.2
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kristal ajaniyla ortak.
+  aciklama: Kuyruk, ayrilma anindaki termal sokla olusan dislokasyonlarin govdeye kaymasini sinirlamak icin yavasca
+    daraltilir (hafizadan).
+  dogrulama_deneyi: Kuyruk bolgesinde dislokasyon ve omur haritasi.
+- id: wf_crop_mm
+  ad: Govdeden kesilen uc ve test dilimleri
+  birim: mm/ingot
+  deger: 20
+  alt: 10
+  ust: 50
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uctan uca proses kontrolu (H6) test dilimini azaltabilir.
+  aciklama: Geri donusume girer.
+  dogrulama_deneyi: Ilk ingotlarda olcum.
+- id: wf_brick_end_mm
+  ad: Tugla ucu basina kayip (yarim/kirik ilk-son wafer'lar)
+  birim: mm/uc
+  deger: 3
+  alt: 1
+  ust: 8
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kisa tuglada oransal olarak buyur (K7).
+  aciklama: ''
+  dogrulama_deneyi: Ilk kesimlerde olcum.
+- id: wf_break_wafering_ref_firstgen
+  ad: Kesim + tutkal cozme + on temizlik kirilma orani, ilk nesil (182 mm, 130 um referansi)
+  birim: '-'
+  deger: 0.02
+  alt: 0.005
+  ust: 0.06
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ilk nesil kendi hattimiz (varsayilan).
+  aciklama: 'Capa: Liu 2022 simulasyonu (156 mm, eski parametreler) 150 um''de %6, 200 um''de ~%2 veriyor. Endustriyel
+    wafering kirilmasi icin dogrulanmis kaynak bulunamadi.'
+  dogrulama_deneyi: Ilk 20-50 kesimde adim bazli kirik sayimi (~10 bin wafer ile %0.1 cozunurluk).
+- id: wf_break_wafering_ref_mature
+  ad: Kesim + tutkal cozme + on temizlik kirilma orani, olgun (182 mm, 130 um)
+  birim: '-'
+  deger: 0.005
+  alt: 0.002
+  ust: 0.015
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ogrenme sonrasi.
+  aciklama: 'Dayanak: olgun hucre hattinin %0.25 degeri (Risen) ile ayni mertebe, testere kirilmasi icin 2 kat pay.'
+  dogrulama_deneyi: Olgun hatta istatistiksel kirik kaydi.
+- id: wf_break_cell_ref_mature
+  ad: HJT hucre hatti kirilma orani, olgun hat (110 um)
+  birim: '-'
+  deger: 0.0025
+  alt: 0.001
+  ust: 0.005
+  kaynak: https://www.prnewswire.co.uk/news-releases/from-concept-to-mass-production-risen-energys-journey-with-ultra-thin-wafers-302711087.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: yield rate consistently above 99.5% with a fragment rate below 0.25%
+  kaynak_tarihi: '2026-03-11'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Olgun, stres azaltilmis GW HJT hatti; format ve olcum adimlari belirtilmemis, baglamda 110
+    um. Ilk hatta aktarilamaz (H1).
+  aciklama: Hucre ajanina arayuz.
+  dogrulama_deneyi: Hucre hattinda adim bazli kirik sayimi.
+- id: wf_break_cell_ref_firstgen
+  ad: HJT hucre hatti kirilma orani, ilk nesil (110 um referansi)
+  birim: '-'
+  deger: 0.02
+  alt: 0.005
+  ust: 0.1
+  kaynak: tahmin; capalar https://pmc.ncbi.nlm.nih.gov/articles/PMC11076549/ ve https://arxiv.org/pdf/1906.06770
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ilk nesil hucre hatti (varsayilan).
+  aciklama: 'PMC11076549 (dogrulandi): CEA-INES SHJ pilotu ''from about 10% at 100 μm thickness to a terrible ~96%
+    at 70 μm'' (2016). Hanwha''nin %4.5 degeri ''high-temperature diffused junction cells'' icin, HJT degil. arXiv
+    1906.06770: HIT hattinda ~90 um''ye kadar ~%93 verim, el ile tasima.'
+  dogrulama_deneyi: Pilot hucre hattinda adim bazli kirik sayimi.
+- id: wf_break_exp_thickness
+  ad: 'Kesim kirilmasinin kalinlik ussu n_t: P ~ (t_ref/t)^n_t'
+  birim: '-'
+  deger: 3.8
+  alt: 2.5
+  ust: 5
+  kaynak: https://pmc.ncbi.nlm.nih.gov/articles/PMC9692905/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '156 mm x 156 mm: 0.15 mm thickness 6% breakage ratio; 0.2 mm ~2% (at end of sawing)'
+  kaynak_tarihi: '2022'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kaynak bir SIMULASYON (100 μm tel, 2 m/s tel hizi, 6 μm/s besleme); guncel elmas tel kesimini
+    temsil etmez.
+  aciklama: n_t = ln(6/2)/ln(200/150) = 3.82. Weibull m=3.5 simulasyona girdi olarak verildigi icin (onceki bir
+    calismadan) us ile m arasindaki uyum bagimsiz bir dogrulama degildir.
+  dogrulama_deneyi: 90/110/130 um wafer'larla adim bazli kirilma deneyi.
+- id: wf_break_exp_thickness_cell
+  ad: Hucre adimlari kirilmasinin kalinlik ussu
+  birim: '-'
+  deger: 3.8
+  alt: 1.5
+  ust: 6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kesim simulasyonundan turetilen ussu hucre adimlarina aktarmak dayanaksiz; belirsizlik genisletildi.
+  aciklama: CEA-INES'in 100 um'den 70 um'ye gecisteki sicramasi (10% -> ~96%) esik davranisi gosteriyor; guc yasasi
+    bunu iyi temsil etmeyebilir.
+  dogrulama_deneyi: Hucre hattinda kalinliga gore kirilma.
+- id: wf_break_exp_size
+  ad: 'Kirilmanin boyut ussu n_a: P ~ (a/a_ref)^n_a'
+  birim: '-'
+  deger: 3
+  alt: 1
+  ust: 8
+  kaynak: tahmin (Weibull + plak teorisi sinirlari)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: H3'un nicellestirilmesi.
+  aciklama: 'Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1 = 8: atalet/titresim
+    yuklerinde sigma ~ a^2/t. Sabit egrilik yuklerinde (lehim/CTE) boyut etkisi yok.'
+  dogrulama_deneyi: M10'lari 1/2/4/9 parcaya bolup ayni adimlardan gecirme; parca boyuna gore kirilma regresyonu.
+- id: wf_weibull_m
+  ad: As-cut wafer Weibull modulu
+  birim: '-'
+  deger: 3.5
+  alt: 3
+  ust: 10
+  kaynak: https://pmc.ncbi.nlm.nih.gov/articles/PMC9692905/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Shape parameter (mA): 3.5 ... From the reference [28]'
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Liu 2022 degeri onceki bir olcumden almis. Ince tel ve parlatilmis tugla yuzeyinde daha yuksek
+    olabilir (ust sinir tahmin).
+  aciklama: Kirilma formulunde dogrudan yok; n_a sinirlari icin.
+  dogrulama_deneyi: 4-nokta egme veya halka-uzerinde-halka, boy/kalinlik basina 30-50 numune.
+- id: wf_weibull_sigma0_MPa
+  ad: As-cut wafer Weibull karakteristik dayanimi
+  birim: MPa
+  deger: 151
+  alt: 100
+  ust: 300
+  kaynak: https://pmc.ncbi.nlm.nih.gov/articles/PMC9692905/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Scale parameter (σ0): 151.3 MPa'
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Testere izi yonune ve tel durumuna gore degisir.
+  aciklama: 'Ge 2025 (dogrulandi): kalinti gerilme 200 MPa cekme / 300 MPa basma; ''~5 μm of material removal via
+    etching'' ile buyuk olcude kalkar.'
+  dogrulama_deneyi: Egme testi.
+- id: wf_break_floor_frac
+  ad: Kirilmanin boyut ve kalinliktan bagimsiz taban payi (referansa oran)
+  birim: '-'
+  deger: 0.25
+  alt: 0.1
+  ust: 0.5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'H3 faydasinin ust siniri: 182/110 referansina gore en fazla ~6.7 kat azalma.'
+  aciklama: Darbe, kenar ezilmesi, tasiyici hatasi, operator.
+  dogrulama_deneyi: Kirilma kok neden siniflandirmasi (kamera + log).
+- id: wf_reject_quality
+  ad: Kirilma disi kalite ret orani
+  birim: '-'
+  deger: 0.015
+  alt: 0.005
+  ust: 0.05
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ret kriterlerini HJT hucre sonuclarina gore biz koyariz.
+  aciklama: Retler geri donusume girmez (satilir) varsayildi.
+  dogrulama_deneyi: Ret siniflarinin hucre verimine etkisi.
+- id: wf_learn_half_m2
+  ad: 'Ogrenme egrisi: ilk nesil-olgun farkinin yarilandigi kumulatif iyi wafer alani'
+  birim: m2
+  deger: 50000
+  alt: 10000
+  ust: 300000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ornek unitenin ~10 aylik ciktisi. Egri bicimi (ussel) de varsayim.
+  aciklama: Kerf, besleme, kirilma ve tel carpanina uygulanir; t, TTV, kullanilabilirlik ve ek sure icin ayni bicim
+    onerilir.
+  dogrulama_deneyi: Ilk 12 ay KPI trendleri.
+- id: wf_etch_depth_um
+  ad: Geri donusum parcalari icin yuzey daglama derinligi
+  birim: um
+  deger: 30
+  alt: 10
+  ust: 100
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Testere hasar katmani ~5 um (Ge 2025). Taslama ve serit testere yuzeyindeki metal kontaminasyonunun
+    derinligi bilinmiyor.
+  aciklama: Kutle kaybi dilimde 2d/h (~%0.27), 20 mm parcada 6d/L (~%0.9).
+  dogrulama_deneyi: 10/30/100 um daglanmis geri donusum malzemesinden kucuk ingot; omur ve ozdirenc.
+- id: wf_scrap_chunk_mm
+  ad: Besleyici icin geri donusum parca boyu (kirma sonrasi)
+  birim: mm
+  deger: 20
+  alt: 5
+  ust: 50
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'K1''in RCz mi CCz mi olduguna bagli: RCz yeniden doldurmada 20-50 mm parca uygun; CCz besleyicileri
+    granul/kucuk parca isteyebilir (hafizadan).'
+  aciklama: Kirma once, daglama sonra. 30 um daglamada kayip 20 mm'de %0.9, 5 mm'de %3.6. WC veya Si kaplamali kirici.
+  dogrulama_deneyi: Besleyici prototipinde parca boyu dagilimi ve akis.
+- id: wf_etch_util_factor
+  ad: Asit kullanimi / stokiyometrik ihtiyac orani
+  birim: '-'
+  deger: 3
+  alt: 1.5
+  ust: 6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kucuk partilerde banyo tukenmeden atilir.
+  aciklama: ''
+  dogrulama_deneyi: Banyo omru boyunca Si yuku (g/L).
+- id: wf_hf_stoich_kg_per_kg
+  ad: Daglanan kg Si basina HF (100% baz)
+  birim: kg/kg Si
+  deger: 4.27
+  alt: 4.27
+  ust: 4.27
+  kaynak: 3Si + 4HNO3 + 18HF -> 3H2SiF6 + 4NO + 8H2O
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: yok (hesap)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Evrensel stokiyometri; iki denetci de dengeyi dogruladi.
+  aciklama: '6*20.006/28.086 = 4.27. Alkali alternatif: Si + 2KOH + H2O -> K2SiO3 + 2H2: 4.0 kg KOH ve 1.60 Nm3
+    H2 / kg Si.'
+  dogrulama_deneyi: Gerekmez.
+- id: wf_hno3_stoich_kg_per_kg
+  ad: Daglanan kg Si basina HNO3 (100% baz)
+  birim: kg/kg Si
+  deger: 2.99
+  alt: 2.99
+  ust: 8.97
+  kaynak: stokiyometri (NO ve NO2 yollari)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: yok (hesap)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: NO/NO2 orani banyo kosuluna bagli.
+  aciklama: 'NO yolu (4/3)*63.01/28.086 = 2.99; NO2 yolu 4*63.01/28.086 = 8.97. NOx: 1.42 kg NO veya 6.55 kg NO2
+    / kg Si.'
+  dogrulama_deneyi: Banyo analizi ve gaz olcumu.
+- id: wf_hf_price_usd_kg
+  ad: HF fiyati (100% baz, teslim)
+  birim: USD/kg
+  deger: 2.5
+  alt: 1
+  ust: 6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kaynak bulunamadi; m2 basina etkisi sentler mertebesinde.
+  aciklama: ''
+  dogrulama_deneyi: Yerel kimyasal tedarikci teklifi.
+- id: wf_hno3_price_usd_kg
+  ad: HNO3 fiyati (100% baz, teslim)
+  birim: USD/kg
+  deger: 0.6
+  alt: 0.3
+  ust: 1.5
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kaynak bulunamadi.
+  aciklama: ''
+  dogrulama_deneyi: Teklif.
+- id: wf_waste_treat_usd_per_kg_si
+  ad: Daglama atigi notralizasyon ve bertarafi (daglanan kg Si basina)
+  birim: USD/kg Si
+  deger: 4
+  alt: 1.5
+  ust: 10
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Saha aritmasi saha_sabit; bu kalem yalnizca degisken kimyasal ve camur bertarafi.
+  aciklama: 'Stokiyometri (hesap): kg Si basina 8.3 kg CaF2 camuru ve ~7.9 kg Ca(OH)2. Birim bertaraf fiyati bilinmiyor.'
+  dogrulama_deneyi: Lisansli bertaraf firmasi teklifi.
+- id: wf_crusher_capex_usd
+  ad: Kontaminasyonsuz kirici (WC/Si kaplamali) ve eleme yatirimi
+  birim: USD
+  deger: 60000
+  alt: 20000
+  ust: 200000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Onceki ciktida eksikti.
+  aciklama: ''
+  dogrulama_deneyi: BOM veya teklif.
+- id: wf_etch_station_capex_usd
+  ad: Geri donusum daglama tezgahi + lokal gaz yikayici yatirimi
+  birim: USD
+  deger: 120000
+  alt: 40000
+  ust: 400000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: HF atik aritma ve NOx yakma saha_sabit (saha ajani).
+  aciklama: ''
+  dogrulama_deneyi: Teklif.
+- id: wf_slab_recovery_frac
+  ad: Kare kesim artiginin geri kazanilabilir payi (taslama tozu ve kerf haric)
+  birim: '-'
+  deger: 0.886
+  alt: 0.8
+  ust: 0.97
+  kaynak: hesap (geometri)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: yok (hesap)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: M10 benzeri geometride (D 251, 2 mm taslama, 0.4 mm kerf). Satir paketlemede taslama yoksa
+    daha yuksek; kucuk ingotta daha dusuk.
+  aciklama: (pi/4*D_g^2 - A_ps - 4*kerf_sq*A_b) / (pi/4*D^2 - A_ps).
+  dogrulama_deneyi: Ilk ingotlarda artik tartimi.
+- id: wf_kerf_recovery_frac
+  ad: Kerf tozunun HJT kalitesinde unite icinde geri kazanim payi
+  birim: '-'
+  deger: 0
+  alt: 0
+  ust: 0.1
+  kaynak: tahmin (varsayim); en yakin kanit https://circulareconomy.europa.eu/platform/sites/default/files/remelting_and_purification_of_si-kerf_for_pv-wafers.pdf
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Istisnaen ''orta'': unite olceginde HJT kalitesinde gosterilmis bir yol yok, 0 temkinli bir
+    temel. Bu bir dogal sinir DEGIL; teknoloji/ekonomi engeli.'
+  aciklama: 'CABRISS (dogrulandi): ''Kerf from slurry based wafer cutting''; Crystalox DS250 (yonlu katilasma, mc-Si);
+    %10 geri kazanilmis ingotta ''The maximum lifetime was less than 1 µs''; ''contamination from the graphite crucible
+    used for melting and refining''; 0.1-0.2 Ωcm. Yani bulamac kerfi, DS ve grafit pota; elmas tel kerfi ve CZ icin
+    veri yok. SiliconPV 2025: karbotermik yolla ''closely matches the characteristics of metallurgical-grade silicon''.
+    Tam geri kazanim $17.5/kg poli ile en fazla ~$2.3/m2 eder; K3 sonucunu degistirmez.'
+  dogrulama_deneyi: Elmas tel kerfini HF ile yikayip presleme, kucuk CZ'de %5-10 katki; O, C, metal ve omur olcumu
+    (veya ticari kerf geri donusumcusunden numune).
+- id: wf_kerf_value_usd_kg
+  ad: Kerf camurunun degeri (+ satis, - bertaraf maliyeti)
+  birim: USD/kg Si
+  deger: 0
+  alt: -0.5
+  ust: 1
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Bilmiyoruz; alici piyasasi (MG-Si, anot, SiN) arastirilmali.
+  aciklama: 0.12-0.14 kg/m2 kerf; +-$1/kg icin m2 basina +-$0.14.
+  dogrulama_deneyi: Alici/bertaraf teklifi.
+- id: wf_price_m10_usd
+  ad: Satin alinan n-tipi M10 (182-183.75 mm, 130 um) wafer, FOB Cin
+  birim: USD/adet
+  deger: 0.148
+  alt: 0.13
+  ust: 0.3
+  kaynak: https://www.infolink-group.com/spot-price/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '182-183.75mm/130µm USD: High $0.148, Low $0.141, Average $0.148 (September 23, 2026)'
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: 'InfoLink sayfasi USD wafer fiyatinin teslim seklini belirtmiyor. FOB teyidi OPIS''ten: ayni
+    donemde ''FOB China M10 ... $0.149/pc'' (pv-magazine 2026-09-11). Cogunlukla TOPCon sinifi; HJT sinifi (ince,
+    yuksek omur) fiyati bilinmiyor. Nakliye, gumruk ve olasi ticari korunma haric.'
+  aciklama: 'Alt sinir: Cin ic fiyati KDV haric 1.0/1.13/6.8 = $0.130. Ust sinir 0.30: 8 yillik ufukta dongusel
+    risk (Ocak 2026 FOB $0.180; gecmis fiyatlar daha yuksekti, hafizadan). $0.148 = $4.47/m2.'
+  dogrulama_deneyi: Turkiye'ye teslim (CIF + gumruk) HJT sinifi wafer teklifi, 3 tedarikci.
+- id: wf_price_210r_usd
+  ad: Satin alinan n-tipi 210R (182x210 mm) wafer, FOB Cin
+  birim: USD/adet
+  deger: 0.156
+  alt: 0.14
+  ust: 0.3
+  kaynak: https://www.pv-magazine.com/2026/09/11/china-wafer-prices-fall-as-august-rally-fades-polysilicon-outlook-remains-uncertain/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: FOB China M10 and 210R wafer prices fell to $0.149/pc and $0.156/pc, respectively
+  kaynak_tarihi: 2026-09-08 (OPIS)
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: wf_price_m10_usd ile ayni kisitlar.
+  aciklama: '= $4.08/m2. TrendForce 2026-09-23: ortalama 1.02 RMB.'
+  dogrulama_deneyi: Teklif.
+- id: wf_price_g12_usd
+  ad: Satin alinan n-tipi G12 (210 mm, 130 um) wafer
+  birim: USD/adet
+  deger: 0.17
+  alt: 0.15
+  ust: 0.33
+  kaynak: https://www.trendforce.com/price/pv/cell
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'N-Type G12 Mono Wafer - 210mm/130μm: High 1.20, Low 1.08, Average 1.13 (RMB)'
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Cin ic fiyatinin (KDV dahil) USD'ye cevrimi; FOB degil.
+  aciklama: '1.13/6.8 = $0.166 = $3.8/m2. OPIS FOB (pv-magazine 2026-01-09): ''G12 wafers: $0.215 per piece''.'
+  dogrulama_deneyi: Teklif.
+- id: wf_price_traceable_m10_usd
+  ad: Izlenebilir (Cin disi poli/zincir) M10 esdegeri wafer fiyati
+  birim: USD/adet
+  deger: 0.35
+  alt: 0.25
+  ust: 0.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: BILMIYORUZ; hicbir fiyat kaynaginda listelenmiyor.
+  aciklama: 'Kaba dayanak: 130 um M10 = 10.0 g; poli 1.42 x 10.0 g x $17.5/kg = $0.25; buna Cin disi donusum ve
+    marj eklenir (Cin zincirinde donusum + marj ~$0.086/adet).'
+  dogrulama_deneyi: Cin disi wafer ureticilerinden mense belgeli teklif.
+- id: wf_A_m10_m2
+  ad: M10 wafer alani (psodo-kare)
+  birim: m2
+  deger: 0.03309
+  alt: 0.033
+  ust: 0.0331
+  kaynak: hesap (sq_A_ps, a=182.2, D_g=247)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: yok (hesap)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Satin alma kiyaslari icin.
+  aciklama: 33,081-33,088 mm2 (iki bagimsiz hesap).
+  dogrulama_deneyi: Gerekmez.
+- id: wf_import_logistics_usd_per_wafer
+  ad: Ithalat nakliye + sigorta + ambalaj (wafer basina)
+  birim: USD/adet
+  deger: 0.005
+  alt: 0.002
+  ust: 0.015
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Onceki ciktida yalnizca 'haric' denmisti.
+  aciklama: FOB fiyatin ~%1.5-10'u.
+  dogrulama_deneyi: Nakliyeci teklifi.
+- id: wf_import_duty_frac
+  ad: Turkiye ithalat vergisi + ilave vergiler (wafer degerine oran)
+  birim: '-'
+  deger: 0.05
+  alt: 0
+  ust: 0.3
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: BILMIYORUZ.
+  aciklama: GTIP 3818 icin gumruk, ilave gumruk vergisi ve olasi ticari korunma durumu gumruk musaviriyle teyit
+    edilmeli.
+  dogrulama_deneyi: Gumruk musaviri gorusu.
+- id: wf_incoming_qc_usd_per_wafer
+  ad: Satin alinan wafer giris kontrolu (orneklemeli)
+  birim: USD/adet
+  deger: 0.002
+  alt: 0.0005
+  ust: 0.006
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: 'H6: satin alinan wafer''da gecmis bilinmedigi icin gerekli.'
+  aciklama: ''
+  dogrulama_deneyi: Giris kontrol prosedurunun zaman etudu.
+- id: wf_poly_price_nonchina_usd_kg
+  ad: Poli-Si fiyati, Cin disi mense
+  birim: USD/kg
+  deger: 17.5
+  alt: 11
+  ust: 26.7
+  kaynak: https://www.trendforce.com/price/pv/cell
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Polysilicon Outside China (USD): High 22.00, Low 13.10, Average 17.50'
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 'Kristal ajani asil sahibi; burada yalnizca yap-ya-da-al kiyasi icin. InfoLink ayni gun: ortalama
+    $18.5 (11.0-26.7), ''not translated from RMB prices''. Turkiye teslimi bilinmiyor.'
+  aciklama: Maliyet toplamina yalnizca kristal ajanindan girer (cift sayim onlemi).
+  dogrulama_deneyi: Wacker, OCI Malaysia, Hemlock, Tokuyama vb. teslim teklifleri.
+- id: wf_poly_price_china_rmb_kg
+  ad: Poli-Si fiyati, Cin ic piyasa (n-tipi recharge, KDV dahil)
+  birim: RMB/kg
+  deger: 33.5
+  alt: 31
+  ust: 45
+  kaynak: https://www.trendforce.com/price/pv/cell
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'N-Type Recharge Polysilicon (RMB): High 45.00, Low 33.00, Average 33.50'
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Cin ic fiyati; ihracat kosullari bilinmiyor. InfoLink ayni gun mono-grade 40.0 RMB/kg.
+  aciklama: 'KDV haric 33.5/1.13/6.8 = $4.36/kg. pv-magazine 2026-09-11: wafer ureticileri vadeli piyasadan ~CNY
+    37/kg poli aliyor.'
+  dogrulama_deneyi: Cin'den Turkiye'ye poli ithalat teklifi.
+- id: wf_cn_vat
+  ad: Cin KDV orani (ic fiyatlari KDV haric USD'ye cevirmek icin)
+  birim: '-'
+  deger: 0.13
+  alt: 0.13
+  ust: 0.13
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: yok (hafizadan)
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Imalat urunlerinde %13.
+  aciklama: ''
+  dogrulama_deneyi: Resmi kaynaktan teyit.
+- id: wf_fx_cny_per_usd
+  ad: Kur varsayimi
+  birim: CNY/USD
+  deger: 6.8
+  alt: 6.6
+  ust: 7.3
+  kaynak: https://www.pv-magazine.com/2026/09/11/china-wafer-prices-fall-as-august-rally-fades-polysilicon-outlook-remains-uncertain/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: n-type 183 wafers ... approximately CNY 1/pc ($0.149)
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tum modelde tek kur (finans ajani).
+  aciklama: 1/0.149 = 6.71 (Eylul 2026); Ocak 2026 'CNY 1.4 ($0.20)' = 7.0.
+  dogrulama_deneyi: Calistirma tarihindeki piyasa kuru.
+- id: wf_resistivity_ohm_cm
+  ad: HJT n-tipi wafer ozdirenci
+  birim: ohm.cm
+  deger: 1
+  alt: 0.3
+  ust: 2.1
+  kaynak: https://taiyangnews.info/technology/wafer-developments-continue-to-support-hjt-adoption
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: typical resistivity ranges from 0.3 to 2.1 Ω·cm
+  kaynak_tarihi: '2026-06-05'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 7 katlik bant. RCz'de her ingot kendi icinde Scheil segregasyonu gosterir; g=0.9'da ozdirenc
+    orani ~4.5 (<7), yani toplu segregasyon bu banda buyuk olcude sigar. Yalnizca CCz eksenel sapmayi pratikte ortadan
+    kaldirir.
+  aciklama: 'TaiyangNews 2025-06-03: ''0.3 - 2.1 Ω·cm and 1–7 Ω·cm, with 0.3 - 2.1 Ω·cm being the mainstream''.'
+  dogrulama_deneyi: Girdap akimi ozdirenc (tugla/ingot seviyesinde).
+- id: wf_lifetime_min_ms
+  ad: HJT icin minimum wafer tasiyici omru (spesifikasyon)
+  birim: ms
+  deger: 1
+  alt: 0.3
+  ust: 3
+  kaynak: hafiza; nitel destek https://taiyangnews.info/technology/low-temperature-hjt-manufacturing-adapts-to-wider-wafer-variants
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: 'yok (hafizadan); nitel: ''HJT wafers have lower lifetime requirements compared to TOPCon wafers''
+    (2025-06-03)'
+  kaynak_tarihi: 2025-06-03 (nitel ifade)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Sayisal deger dogrulanamadi. Ayni kaynak: ''Annealing is now the standard in the HJT process
+    sequence''; HJT ''can now use wafers from different positions of the ingot''.'
+  aciklama: Olcum kosulu (as-cut, pasivasyonlu, gettering sonrasi) belirtilmeli.
+  dogrulama_deneyi: Farkli omur sinifi wafer'larla HJT verimi ile PL/QSSPC omru korelasyonu.
+- id: wf_oxygen_cm3
+  ad: CZ wafer tipik oksijen konsantrasyonu
+  birim: atom/cm3
+  deger: 1000000000000000000
+  alt: 300000000000000000
+  ust: 1200000000000000000
+  kaynak: https://en.wikipedia.org/wiki/Czochralski_method
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Czochralski silicon therefore contains oxygen at a typical concentration of 10^18 cm−3
+  kaynak_tarihi: erisim 2026-09-27
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'HJT <250 C: TaiyangNews 2026-06: ''HJT can better tolerate higher oxygen content, since it
+    does not involve high-temperature steps''.'
+  aciklama: Alt ve ust sinirlar tahmin.
+  dogrulama_deneyi: FTIR ile Oi ve omur haritasi.
+- id: wf_inspect_capex_usd
+  ad: Wafer muayene/siniflandirma istasyonu yatirimi
+  birim: USD
+  deger: 150000
+  alt: 50000
+  ust: 600000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kendi yapim (kamera + IR gecirim + kapasitif kalinlik) daha ucuz olabilir.
+  aciklama: Amortisman oldugu icin 'zaman' sinifina alindi; kapasite birimi wafer/saat.
+  dogrulama_deneyi: Prototip BOM.
+- id: wf_inspect_wph
+  ad: Muayene ve ayirma istasyonu kapasitesi
+  birim: wafer/saat
+  deger: 3600
+  alt: 1500
+  ust: 8000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Tray uzerinde toplu goruntuleme ile kapasite k^2 kat artar.
+  aciklama: ''
+  dogrulama_deneyi: Prototipte cevrim suresi.
+- id: wf_inspect_uptime
+  ad: Muayene ve ayirma istasyonu kullanilabilirligi
+  birim: '-'
+  deger: 0.9
+  alt: 0.8
+  ust: 0.95
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Onceki formul testere kullanilabilirligini kullaniyordu (duzeltildi).
+  aciklama: ''
+  dogrulama_deneyi: OEE kaydi.
+- id: wf_handling_capex_usd
+  ad: Tutkal cozme + ayirma + on temizlik hatti yatirimi
+  birim: USD
+  deger: 250000
+  alt: 80000
+  ust: 800000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kucuk wafer icin dogrudan tray'e toplu ayirma tasarlanmali.
+  aciklama: Kapasite wf_inspect_wph ile ayni kabul edildi (N_inspect ile olceklenir).
+  dogrulama_deneyi: Prototip.
+- id: wf_brick_metrology_capex_usd
+  ad: Tugla seviyesinde olcum (girdap akimi ozdirenc, PL/omur haritasi, IR inkluzyon)
+  birim: USD
+  deger: 80000
+  alt: 30000
+  ust: 250000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: H6 stratejisinin yatirimi (onceki ciktida eksikti).
+  aciklama: ''
+  dogrulama_deneyi: BOM veya teklif.
+- id: wf_preclean_chem_usd_m2
+  ad: On temizlik kimyasal + su maliyeti
+  birim: USD/m2
+  deger: 0.2
+  alt: 0.05
+  ust: 0.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Saf su saha altyapisindan (saha_sabit).
+  aciklama: ''
+  dogrulama_deneyi: Prototipte tuketim.
+- id: wf_split_tls_wph
+  ad: Termal lazer ayirma (TLS) kapasitesi
+  birim: wafer/saat
+  deger: 6000
+  alt: 3000
+  ust: 6000
+  kaynak: https://3d-micromac.com/microcell
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'High throughput: up to 6,000 wph; No crystal damage is experienced at the cutting edge'
+  kaynak_tarihi: erisim 2026-09-27
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Urun hucreleri yarim hucreye ayirmak icin ('separating standard units into half cells'). Ciplak
+    wafer'in hucre oncesi bolunmesine uygulanabilirligi dogrulanmadi.
+  aciklama: Erken asamada kendi yapim lazer cizme + mekanik yarma yeterli olabilir.
+  dogrulama_deneyi: Bolunmus ciplak wafer'larin kenar dayanimi ve HJT hucre verimi.
+- id: wf_split_capex_usd
+  ad: Wafer bolme istasyonu yatirimi (TLS veya lazer cizme + yarma)
+  birim: USD
+  deger: 400000
+  alt: 60000
+  ust: 1000000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Alt sinir kendi yapim, ust sinir ticari TLS.
+  aciklama: ''
+  dogrulama_deneyi: Teklif veya BOM.
+- id: wf_split_edge_loss_rel
+  ad: Hucre oncesi bolunmus HJT parcasinda kenar kaynakli goreli verim kaybi (91 mm ceyrek)
+  birim: '-'
+  deger: 0.01
+  alt: 0.002
+  ust: 0.04
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (tahmin)
+  kaynak_tarihi: 2026-09 (bu calisma)
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Hucre ajaniyla ortak. Kenar/alan = 4/a (50 mm'de 182 mm'nin 3.6 kati).
+  aciklama: Kenar dokulama ve a-Si:H ile kismen pasive olur; buyuklugu bilinmiyor. Kenar-olcekli kalem.
+  dogrulama_deneyi: M10'u 1/2/4/9 parcaya bolup HJT I-V ve PL kenar haritasi.
+- id: wf_poly_ratio_itrpv
+  ad: 'Endustri referansi: taze poli / wafer Si kutlesi (M10, 2026, 130 um) - kalibrasyon'
+  birim: '-'
+  deger: 1.42
+  alt: 1.33
+  ust: 1.58
+  kaynak: https://taiyangnews.info/technology/itrpv-expects-topcon-to-lead-as-bc-and-tandem-technologies-expand
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'M10: 1.68 g/W (2026) -> 1.27 g/W (2036); G12R: 1.61 -> 1.29; G12: 1.84 -> 1.39 (TOPCon)'
+  kaynak_tarihi: '2026-09-07'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'GW olcek, TOPCon, 130 um. Formata gore: M10 1.39-1.44, G12R 1.33-1.38, G12 1.52-1.58. Fark
+    psodo-kare D/a oranindan geliyor (G12 eta 0.645, M10 0.690).'
+  aciklama: 'Hesap: M10 130 um = 10.02 g; %25-26 ile 8.27-8.60 W; 1.68 g/W -> 13.9-14.45 g; oran 1.39-1.44. ITRPV
+    2023: ''That means 14 g or 140% of remaining Si in the wafer were necessary in 2022''. Modelin ideal hali (kirilma,
+    ret, uc, pota yok; dilim geri kazanimi 1; t 130; kerf 50) 1.385 veriyor, yani uyumlu. Varsayilan kayiplarla
+    1.55.'
+  dogrulama_deneyi: Kendi kutle dengesi kaydi.

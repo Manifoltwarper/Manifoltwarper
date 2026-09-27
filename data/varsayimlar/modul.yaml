@@ -1,0 +1,1753 @@
+alan: modul
+ozet: 'REVİZE. Modül alanı P_panel_W değerinden N_s, N_p, a_wafer_mm, yerleşim, panel boyutu, kütle, cam gereksinimi,
+  BOM ve zaman maliyetini hesaplar. Bu revizyonda iki denetçinin bulguları kontrol edildi (WebFetch, curl, python3)
+  ve çıktıya işlendi.
+
+
+  (1) Gerilim ve sınıf. IEC 60364-7-712:2017 madde 712.414.101''e göre PV''nin DC tarafında SELV/PELV için UOC MAX
+  60 V DC''yi geçemez. UOC MAX = KU·UOC_STC; KU = 1 + α(Tmin − 25) ve Tmin sahanın en düşük ortam sıcaklığıdır (Ek
+  B). SELV''de modül Class III ya da Class II olabilir. Kısacası K6''daki ''60 V SELV'' PV kurulum standardında
+  tanımlı bir sınırdır. Ancak DC tarafın SELV sayılabilmesi için kutunun şebekeden güvenli ayırma sağlaması gerekir.
+
+  IEC 61730-1 Class III sınırları STC''de Voc ≤ 35 V, Isc ≤ 8 A ve P ≤ 240 W''tır (2016 baskısında madde 4.4.1;
+  2023 baskısında madde 5.4''e taşınmış, metni doğrulanmadı). %3 Voc ve Isc marjıyla N_s ≤ 45, a ≤ 137 mm, P ≤ ~198
+  W çıkar. 60 V''luk panel Class II olmak zorundadır.
+
+  N_s_max: 60 V''ta T_min −20 °C için 70; −37.2 °C''de 68, −40 °C''de 67. Standardın varsayılan KU = 1.2 değeri
+  kullanılırsa 65. 35 V''ta 41, çift sütunlu yerleşim nedeniyle 40.
+
+
+  (2) MPPT penceresi. Sıcak Vmp artık 85 °C ile hesaplanıyor (70 °C bir P98 sınıf eşiğidir). 60 V dalında 37.3 V,
+  bir baypas iletimdeyken 24.5 V. 35 V dalında 21.3 V ve 10.6 V.
+
+
+  (3) Rüzgâr. EN 1990 γQ = 1.5 ile IEC 61215 γM = 1.5 birlikte uygulanırsa gereken test yükü 2.25·qp·cp_net olur.
+  Örnek: qp = 850 Pa, cp_net = 1.8 (EN 1991-1-4 Tablo 7.9, B bölgesi, dönüşlü) ile ≈ 3440 Pa. Bu durumda balkonda
+  2400 Pa belirsizdir. Öneri: simetrik 3600 Pa varyantı ile birlikte yükseklik ve uç bölge kısıtı. Uç bölgede (A,
+  l/h ≥ 10) cp 3.4''e çıkar ve yük 6.5 kPa''yı bulur; bu konumlar montaj talimatıyla dışlanmalı.
+
+
+  (4) Cam. Kalibrasyon Waaree''nin 2+2 yarı temperli (HS) çerçeveli modülüne göre yenilendi.
+
+  - Cam-cam 2+2, çerçevesiz ve ≤ 3600 Pa''da 500 W''a kadar yeterli; bu aralıkta cam maliyeti alanla doğrusal.
+
+  - Tek camlı 2.0 mm HS cam-arka tabaka yapı 2400 Pa''da yalnızca ~200 W''a kadar (b ≲ 0.9 m) yeterli.
+
+  - 5400 Pa''da çerçevesiz 2+2, ~400 W üstünde yetmiyor.
+
+
+  (5) Hücre hariç BOM (GG, çerçevesiz, 60 V). Arka cam ayrı fiyatlandı.
+
+  - 50 W: 15.0 ¢/W
+
+  - 100 W: 10.7 ¢/W
+
+  - 200 W: 8.5 ¢/W
+
+  - 300 W: 7.9 ¢/W
+
+  - 400 W: 7.6 ¢/W
+
+  - 500 W: 7.5 ¢/W
+
+  K5''ten gelen panel-kutu kablosu ve konnektör (3 m) bu rakamlara eklenir: 50 W''ta 5.6 ¢/W, 500 W''ta 0.9 ¢/W.
+  Bu kalem eskiden hiç yoktu.
+
+
+  (6) En büyük yeni bulgu: zaman sınıfı maliyeti. Modül hattının yıllık sabit maliyeti ~69 k$''dır (laminatör +
+  dizgi + test ≈ 280 k$ yatırım ve asgari ekip). Tek ünitenin K9 senkronundan çıkabilecek hacim 0.2-1.5 MWp/yıl;
+  bu hacimde zaman maliyeti 34-7 ¢/W olur ve BOM''u aşar. Karşılaştırma için Çin''de hücre dahil tam 210 mm HJT
+  modül 0.110 $/W (InfoLink, 23.09.2026). Modül montajı saha düzeyinde paylaşılmalı: ≥ 3 MWp/yıl''da ~2.8 ¢/W.
+
+
+  (7) Ara bağlantı modeline parmak direnci eklendi. Optimum tel sayısında kayıp 55 mm hücrede %1.8, 110 mm''de %3.0,
+  176 mm''de %4.5; buna göre CTM(a) 0.99''dan 0.96''ya iner.
+
+
+  En büyük belirsizlikler:
+
+  - γQ ve γM''nin birlikte uygulanıp uygulanmayacağı ve cp_net (yapı mühendisi ve onaylı kuruluş karar verir)
+
+  - K9''dan panel/gün hacmi
+
+  - 60364-7-712:2025 baskısında 712.414''ün değişip değişmediği
+
+  - HS cam dayanımı ve çerçevesiz kelepçe katsayısı
+
+  - Küçük hacimde Türkiye''ye teslim fiyatları (RFQ ile ölçülecek)'
+parametreler:
+- id: mod_voc_cell_stc_V
+  ad: HJT hücre Voc (STC, modül içinde, hücre başı)
+  birim: V
+  deger: 0.745
+  alt: 0.72
+  ust: 0.77
+  kaynak: 'Waaree Plexus HJT BiH-11-730 veri sayfası: Voc 50.62 V / 66 seri pozisyon (132 yarım G12, 11x6||11x6)
+    = 0.767 V. Yeni hat için nominal 0.745 seçildi.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: BiH-11-730 730 557.00 42.52 40.60 17.17 13.82 18.22 14.69 50.62 47.43 23.50; 132 cells / (11x6
+    || 11x6)
+  kaynak_tarihi: 2025-01-10 (veri sayfası; bu revizyonda açıldı)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Olgun, GW ölçekli hattın üst segmenti. Yeni ve küçük hat 0.72-0.75 V verir. Gerilim sınırı
+    için nominal değil, üretim dağılımının P99'u kullanılmalı.
+  aciklama: 50.62/66 = 0.767 V. Hücre ajanının ölçümü gelince yerine geçer.
+  dogrulama_deneyi: 50+ hücrede 25 °C IV ölçümü; Voc P50/P99.
+- id: mod_beta_voc_per_K
+  ad: Voc bağıl sıcaklık katsayısı
+  birim: 1/K
+  deger: -0.0024
+  alt: -0.0028
+  ust: -0.002
+  kaynak: 'Veri sayfası β = -0.22 %/°C. Fizik tahmini: β = -(Eg0/q − Voc + γkT/q)/(T·Voc), Eg0 = 1.206 V, γ = 1-3
+    → Voc 0.745 V için -0.22 ile -0.24; 0.72 V için -0.24 ile -0.26 %/K. Soğuk Voc''de muhafazakâr olduğu için -0.24
+    seçildi.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Temperature coefficient of Voltage (Voc), ß (%/ºC) -0.22
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi hücrelerimizin Voc'si düşükse büyüklükçe daha yüksek çıkar; N_s 1-2 hücre düşebilir.
+  aciklama: Önceki 'dogrulanmis_url' etiketi yanlıştı (sayfada -0.22 var); türetilmiş olarak düzeltildi.
+  dogrulama_deneyi: İklim odasında -25..+75 °C, 10 hücrede Voc(T).
+- id: mod_vmp_cell_stc_V
+  ad: HJT hücre Vmp (STC)
+  birim: V
+  deger: 0.64
+  alt: 0.62
+  ust: 0.66
+  kaynak: 'Waaree BiH-11-730: Vmp 42.52 V / 66 = 0.644 V'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Vmp (V) STC 42.52
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Üst segment değeri; kendi hücrelerimizde 0.62-0.64 V beklenir.
+  aciklama: MPPT alt gerilimi ve akım/kablo boyutlandırması.
+  dogrulama_deneyi: Hücre IV ölçümü.
+- id: mod_beta_vmp_per_K
+  ad: Vmp sıcaklık katsayısı
+  birim: 1/K
+  deger: -0.0028
+  alt: -0.0033
+  ust: -0.0024
+  kaynak: 'Waaree: γ_Pmax -0.24, α_Isc +0.04 %/°C; β_Vmp ≈ γ − α_Imp ≈ -0.28 %/K'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Temperature coefficient of Current (Isc), α (%/ºC) 0.04 ... Power (Pm), γ (%/ºC) -0.24
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: α_Imp ≈ α_Isc varsayımı yaklaşık.
+  aciklama: -0.24 − 0.04 = -0.28 %/K
+  dogrulama_deneyi: Mini modülde 25/50/75/85 °C IV.
+- id: mod_jsc_A_per_cm2
+  ad: Modül içi hücre Jsc (STC, ön yüz)
+  birim: A/cm2
+  deger: 0.0413
+  alt: 0.038
+  ust: 0.042
+  kaynak: 'Waaree: Isc 18.22 A (iki paralel yarım G12 dizisi = bir tam G12 eşdeğeri) / 441 cm² (G12 = 210 mm, hafızadan)'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Isc (A) STC 18.22; G12 Bifacial HJT cells
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi hücrelerimizde 0.038-0.040 beklenir; Class III 8 A sınırında hücre kenarını belirler.
+  aciklama: 18.22/441 = 0.0413
+  dogrulama_deneyi: Hücre IV ve aktif alan ölçümü.
+- id: mod_T_min_design_C
+  ad: En düşük tasarım sıcaklığı (UOC MAX için sahanın en düşük ortam sıcaklığı)
+  birim: C
+  deger: -20
+  alt: -40
+  ust: -9
+  kaynak: 'MGM (bu revizyonda açıldı): İstanbul Şubat -9.0 (1950-2025), Ankara Ocak -24.9 (1927-2025), Erzurum Aralık
+    -37.2 °C (1929-2025). Almanya: Hüll -37.8 °C (12.02.1929, wetterdienst.de), Funtensee -45.9 °C (24.12.2001,
+    Wikipedia; özel çukur konum).'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'En Düşük Sıcaklık (°C): İstanbul -9,0 (Şubat); Ankara -24,9 (Ocak); Erzurum -37,2 (Aralık)'
+  kaynak_tarihi: 2025 (MGM ölçüm periyodu sonu)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: IEC 60364-7-712:2017 Ek B, 'the lowest ambient temperature of the PV installation site' değerini
+    kullanır. Bu nedenle rekor ortam sıcaklığı standardın kendi yöntemidir; ışınıma koşullu daha iyimser bir değerin
+    kabul edilip edilmeyeceği belirsiz. Tek ürün tüm pazarlara gidecekse -40 °C (N_s 67); yalnız Marmara/Ege için
+    -10 °C (N_s 72). Sıcaklık bilgisi yoksa standart KU = 1.2 ister (N_s 65).
+  aciklama: Pazar ve standart ajanının kararıdır.
+  dogrulama_deneyi: Hedef pazarlar için MGM/DWD rekor listeleri. Işınım koşullu yaklaşımın kabulü onaylı kuruluşa
+    sorulmalı.
+- id: mod_voc_margin
+  ad: Voc tasarım marjı (ölçüm belirsizliği, 1000 W/m² üstü ışınım, binleme)
+  birim: '-'
+  deger: 1.03
+  alt: 1
+  ust: 1.08
+  kaynak: 'Tahmin. Dayanak: Waaree''deki ±%3 değeri güç ölçüm belirsizliğidir (Voc belirsizliği tipik olarak daha
+    küçük). 1.2 kW/m² ışınımda Voc ≈ +n·kT/q·ln(1.2) ≈ +%0.6.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: Measuring Uncertainty ± 3% (güç için)
+  kaynak_tarihi: '2025-01-10'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi flaş test cihazımızın Voc belirsizlik bütçesi bilinmiyor.
+  aciklama: Marj 1.00 alınırsa 60 V'ta N_s 72. Dayanak adı düzeltildi (güç belirsizliği, Voc değil).
+  dogrulama_deneyi: Flaş simülatörü ile referans modül korelasyonu; üretim Voc P99.
+- id: mod_T_cell_max_C
+  ad: MPPT penceresi için en yüksek hücre sıcaklığı
+  birim: C
+  deger: 85
+  alt: 75
+  ust: 90
+  kaynak: 'Waaree veri sayfası çalışma aralığı -40..85 °C. MGM en yüksek ortam sıcaklıkları: İstanbul 40.6 °C (Temmuz),
+    Ankara 41.0 °C (Temmuz).'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Operating temperature range (ºC) -40 to 85
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Dikey balkon montajında arka yüz duvara yakınsa ısınma artar. 41 °C ortama 35-45 K eklenince
+    76-86 °C olur (tahmin).
+  aciklama: 'Önceki 70 °C değeri bir P98 sınıf eşiğiydi (mod_T_p98_class_C), en yüksek sıcaklık değil; düzeltildi.
+    85 °C''de Vmp: 60 V dalı 37.3 V, 35 V dalı 21.3 V.'
+  dogrulama_deneyi: Prototip panelde balkon montajında yaz boyunca termokupl kaydı; P99.9 değeri.
+- id: mod_T_p98_class_C
+  ad: Modül çalışma sıcaklığı sınıf eşiği (P98)
+  birim: C
+  deger: 70
+  alt: 70
+  ust: 70
+  kaynak: IEC 61730-1:2023 ED3 kapsamı (iTeh örnek sayfaları, bu revizyonda açıldı)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: open-air climates with 98th percentile module operating temperatures of 70 °C or less; > 70 °C
+    98th percentile module operating temperature as the default maximum
+  kaynak_tarihi: 2023-09
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalnız malzeme ve nitelendirme sınıfı için. Aşılırsa IEC TS 63126 devreye girer. MPPT hesabında
+    kullanılmaz.
+  aciklama: Duvara yakın dikey montajda aşılabilir.
+  dogrulama_deneyi: Balkon prototipinde yıllık sıcaklık dağılımının P98 değeri.
+- id: mod_ctm_optical
+  ad: CTM'nin optik ve diğer kısmı (ara bağlantı kaybı hariç)
+  birim: '-'
+  deger: 1.01
+  alt: 0.99
+  ust: 1.03
+  kaynak: 'Tahmin. Dayanak: sektörde CTM ~%98-100 (hafızadan) ve bu değer 182/210 yarım hücrede ~%2-4 ara bağlantı
+    kaybını içerir; bu kayıp ayrı modellendiği için optik kısım ≥ 1 olmalı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Cam-cam POE'de optik bağlanma kazancı ile cam soğurması dengelenir.
+  aciklama: mod_ctm_power_calc = mod_ctm_optical × (1 − mod_loss_interconnect(a)).
+  dogrulama_deneyi: 3 hücre boyutunda mini modül; laminasyon öncesi ve sonrası IV ölçümü.
+- id: mod_classIII_voc_max_V
+  ad: 'Class III modül: STC''de en yüksek Voc'
+  birim: V
+  deger: 35
+  alt: 35
+  ust: 35
+  kaynak: IEC 61730-1:2016 madde 4.4.1 (SIS önizlemesi, bu revizyonda açıldı). 2023 baskısında Class III madde 5.4'e
+    taşınmış; değişiklik listesinde yalnız yalıtım koordinasyonunun Tablo 4'ten çıkarıldığı yazıyor.
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit
+    voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard
+    test conditions.
+  kaynak_tarihi: 2016-08 (2023-09 baskısında 5.4)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sınır STC içindir; soğuk koşuldaki üst sınır ayrıca 712.414.101'den (UOC MAX ≤ 60 V) gelir.
+  aciklama: 'Güven ''yuksek''ten ''orta''ya indirildi: 2023 metni doğrulanmadı.'
+  dogrulama_deneyi: Standart ajanı IEC 61730-1:2023 madde 5.4.1 metnini doğrulamalı.
+- id: mod_classIII_isc_max_A
+  ad: 'Class III modül: STC''de en yüksek Isc'
+  birim: A
+  deger: 8
+  alt: 8
+  ust: 8
+  kaynak: 'IEC 61730-1:2016 madde 4.4.1. 2023 değişiklik listesi h(2): bifacial modüllerin yüksek akımı için testler
+    değiştirildi.'
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: the short-circuit current does not exceed 8 A; 2) relevant tests have been changed to account
+    for higher current of bifacial modules
+  kaynak_tarihi: 2016-08 / 2023-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: HJT'de bağlayıcı sınır. Marjla a ≤ 137 mm; şeffaf arka yüzde (bifacial) daha küçük.
+  aciklama: mod_isc_margin ve mod_bifacial_isc_factor ile birlikte kullanılır.
+  dogrulama_deneyi: 'Standart ajanı: bifacial akım tanımı Class III''e nasıl uygulanıyor?'
+- id: mod_classIII_p_max_W
+  ad: 'Class III modül: en yüksek güç'
+  birim: W
+  deger: 240
+  alt: 240
+  ust: 240
+  kaynak: IEC 61730-1:2016 madde 4.4.1
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: shall not have electrical ratings greater than 240 W
+  kaynak_tarihi: 2016-08
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: HJT'de 8 A sınırı önce bağlar (≈ 176-198 W).
+  aciklama: '-'
+  dogrulama_deneyi: Standart ajanı.
+- id: mod_isc_margin
+  ad: Class III için Isc üretim/ölçüm marjı
+  birim: '-'
+  deger: 1.03
+  alt: 1
+  ust: 1.05
+  kaynak: 'Tahmin. Dayanak: Voc''ye konan %3 marjın simetriği; flaş ölçüm belirsizliği ve hücre binleme toleransı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sertifika ölçümünde 8 A'nın aşılması riskine karşı.
+  aciklama: a_max = 10·sqrt(8/(Jsc·N_p·marj·bif)) → 137.1 mm.
+  dogrulama_deneyi: Üretim Isc dağılımının P99'u.
+- id: mod_bifacial_isc_factor
+  ad: Arka yüz ışınımından Isc artış çarpanı
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 1.26
+  kaynak: 'Türetildi: opak veya beyaz arka yüzde 1.0; şeffaf arka camda BSI koşulu (1000 + 300 W/m², hafızadan)
+    ve bifasiyalite 0.85 ile 1 + 0.85·0.3 = 1.26.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Waaree: Bifaciality 85 ±10'
+  kaynak_tarihi: '2025-01-10'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Class III varyantında opak arka yüz önerilir (çarpan 1.0). Kablo ve baypas boyutlandırmasında
+    şeffaf arkalı cam-cam için >1 kullanılmalı.
+  aciklama: Isc ×1.1 alınırsa Class III en büyük güç 45 hücrede ~180 W'a iner.
+  dogrulama_deneyi: 'Standart ajanı: IEC 61730-1:2023''te bifacial Isc tanımı.'
+- id: mod_isc_max_factor
+  ad: ISC MAX / ISC STC (kablo, konnektör, baypas boyutlandırma)
+  birim: '-'
+  deger: 1.25
+  alt: 1.25
+  ust: 1.25
+  kaynak: IEC 60364-7-712:2017 Ek B.2. Tam metin bu oturumun paylaşılan önbelleğinde okundu; özgün URL kayıtlı değil.
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: ISC MAX = KI ISC STC; Minimum value for KI is 1,25.
+  kaynak_tarihi: 2017-04
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kurulum standardı; 2025 baskısı (Ed.3) kontrol edilmeli.
+  aciklama: Baypas elemanı ve konnektör akım sınıfı ≥ 1.25·Isc.
+  dogrulama_deneyi: Standart ajanı 2025 baskısını doğrulamalı.
+- id: mod_cells_per_bypass_max
+  ad: Baypas elemanı başına en fazla seri hücre
+  birim: adet
+  deger: 24
+  alt: 14
+  ust: 28
+  kaynak: 'Tahmin. Dayanak: Waaree 132 yarım hücre / 3 diyot = 22 seri pozisyon (doğrulandı). Gölgeli hücreye binen
+    ters gerilim ≈ (n−1)·Vmp; n = 24''te ~14.7 V.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: IP68 / Weatherproof PPO, 3 Diodes
+  kaynak_tarihi: '2025-01-10'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi HJT hücrelerimizin ters kırılma davranışı bilinmiyor. Musluk yalnız U dönüşlerinden
+    alınabilir.
+  aciklama: '-'
+  dogrulama_deneyi: 30 hücrede -20 V'a kadar ters IV; 2 mini modülde MQT 09.
+- id: mod_bypass_vf_V
+  ad: Schottky baypas diyotu ileri gerilimi (Isc'de)
+  birim: V
+  deger: 0.45
+  alt: 0.35
+  ust: 0.55
+  kaynak: 'Tahmin: 15-20 A Schottky diyotta tipik Vf (hafızadan)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Aktif baypasta eşdeğer 0.02-0.05 V.
+  aciklama: Önceden formüle gömülüydü, parametreye çıkarıldı.
+  dogrulama_deneyi: MQT 18 baypas diyot termal testi.
+- id: mod_gap_cell_mm
+  ad: Dizi içi hücre aralığı
+  birim: mm
+  deger: 2
+  alt: 0.5
+  ust: 3
+  kaynak: 'Tahmin. Dayanak: tel ara bağlantıda telin iki hücre arasında bükülme payı 1.5-2.5 mm (hafızadan).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Küçük hücrede aralık kaybının oranı büyür.
+  aciklama: '-'
+  dogrulama_deneyi: Dizgi makinesinin tekrarlanabilirliği; laminasyonda kayma.
+- id: mod_gap_string_mm
+  ad: Diziler arası aralık
+  birim: mm
+  deger: 3
+  alt: 2
+  ust: 5
+  kaynak: 'Tahmin. Dayanak: laminasyonda dizi kayması ±1 mm + yerleştirme toleransı ±0.5 mm + kısa devre güvenlik
+    payı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi yerleşim toleransımıza bağlı.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip laminasyonda kayma ölçümü.
+- id: mod_edge_side_mm
+  ad: Yan kenar boşluğu (hücreden cam kenarına)
+  birim: mm
+  deger: 12
+  alt: 6
+  ust: 18
+  kaynak: Tahmin. Class III'te yalnız fonksiyonel yalıtım gerekir (IEC 61730-1:2016 4.4.2). 2023 baskısında ≤ 35
+    V çalışma gerilimli Class II modüller için ayrı mesafe tablosu var (Tablo C.1).
+  kaynak_turu: tahmin
+  kaynak_alintisi: there are no requirements for construction or insulation beyond functional insulation; Table
+    C.1 – ... (values for Class II modules with working voltage of ≤ 35 V)
+  kaynak_tarihi: 2016-08 / 2023-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Butil kenar contalı cam-camda 10-15 mm tipik. Sabit kenar payı küçük panelin alan verimini
+    düşürür.
+  aciklama: Kesin mesafe standart ajanından gelecek (Tablo C.1).
+  dogrulama_deneyi: DH1000 sonrası EL'de kenar kararması.
+- id: mod_edge_end_mm
+  ad: Uç bölge (bara + kenar), her uçta
+  birim: mm
+  deger: 20
+  alt: 12
+  ust: 35
+  kaynak: 'Tahmin. Dayanak: U-bara şeridi 5-8 mm + bara-hücre boşluğu 3-5 mm + kenar contası 10-12 mm.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Serpantin dizilimde iki uçta da bara var.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip yerleşim.
+- id: mod_aspect_target
+  ad: Hedef panel en-boy oranı (W/L)
+  birim: '-'
+  deger: 1.4
+  alt: 1.2
+  ust: 1.8
+  kaynak: 'Tahmin. Dayanak: ~1 m korkuluğa yatay montaj ve ambalaj/taşıma oranı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Senaryo B'de (taşınabilir) katlanabilirlik başka oran gerektirebilir.
+  aciklama: mod_f_layout bu hedefe en yakın çift sütunlu yerleşimi seçer.
+  dogrulama_deneyi: Pazar ve montaj etüdü.
+- id: mod_a_cell_min_mm
+  ad: Üretilebilir en küçük hücre kenarı
+  birim: mm
+  deger: 60
+  alt: 40
+  ust: 100
+  kaynak: 'Tahmin. Dayanak: hücre başı işlem maliyeti, aralık kaybı ve kenar rekombinasyonu (~4/a ile artar).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: H3 bu sınırı aşağı iter, hücre başı adet maliyetleri yukarı iter.
+  aciklama: 60 V'ta 50 W panelde N_s 70 ile a = 54.8 mm çıkıyor (sınırın altında) → N_s ~60 (a 59 mm) ya da 40-42
+    (a 71-73 mm).
+  dogrulama_deneyi: 2-3 boyutta hücre; kenar kaybı ve dizgi kırılması.
+- id: mod_a_cell_max_mm
+  ad: En büyük hücre kenarı (tam hücre, N_p = 1)
+  birim: mm
+  deger: 210
+  alt: 182
+  ust: 230
+  kaynak: G12 = 210 mm endüstri formatı (hafızadan; Waaree 'G12' diyor)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: G12 Bifacial HJT cells
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Pratik üst sınırı kendi külçe çapımız (k_split = 1'de a = D/√2) ve ara bağlantı kaybı (%5+)
+    belirler.
+  aciklama: Aşılırsa N_p = 2.
+  dogrulama_deneyi: Mini modülde CTM(a).
+- id: mod_glass_density_kg_m2_per_mm
+  ad: Cam birim alan kütlesi (mm kalınlık başına)
+  birim: kg/m2/mm
+  deger: 2.5
+  alt: 2.45
+  ust: 2.55
+  kaynak: 'Soda-kireç camı ~2500 kg/m³. Çapraz kontrol: Waaree 2+2 çerçeveli modül 39 kg / (2.384 × 1.303) = 12.6
+    kg/m².'
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: Weight 39 kgs; 2384 mm (L) x 1303 mm (W) x 35 mm (T)
+  kaynak_tarihi: '2025-01-10'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Fiziksel sabit.
+  aciklama: 2+2 GG ≈ 10.9 kg/m² (cam + film).
+  dogrulama_deneyi: '-'
+- id: mod_glass_t_min_mm
+  ad: PV camı için en düşük kalınlık (yarı temperli)
+  birim: mm
+  deger: 2
+  alt: 1.6
+  ust: 3.2
+  kaynak: 'Waaree HJT: ön ve arka cam 2 mm yarı temperli. 1.6 mm PV camının varlığı hafızadan.'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Front Glass 2 mm Low Iron HTAR semi-tempered glass; Back Glass 2 mm Low Iron Printed semi-tempered
+    glass
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Mekanik olarak 1.6+1.6 küçük panellerde yeterli görünüyor, ancak dolu testi (MQT 17) bilinmiyor.
+  aciklama: GG'de tabloların tamamında 2+2 belirleyici.
+  dogrulama_deneyi: 1.6/2.0 mm teklif; mini modülde dolu testi.
+- id: mod_glass_ft_min_mm
+  ad: Havayla tam temperlenebilen en ince cam
+  birim: mm
+  deger: 2.5
+  alt: 2
+  ust: 3.2
+  kaynak: 'Hafızadan: ~2.5-3 mm altında tam temperleme (FT) zordur; ince PV camı yarı temperli (HS) üretilir (Waaree
+    2 mm ''semi-tempered'' ile tutarlı).'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Bu değerin altındaki cam HS kabul edilir ve kalınlık gereksinimi mod_glass_temper_factor_HS
+    ile çarpılır.
+  aciklama: mod_f_t_glass_select içinde kullanılır.
+  dogrulama_deneyi: Cam tedarikçisi teknik föyü.
+- id: mod_glass_ct_GG_mm_per_m
+  ad: Cam-cam (HS) toplam kalınlık / kısa kenar kalibrasyonu (5400 Pa, çerçeveli, 4 kenar mesnet)
+  birim: mm/m
+  deger: 2.8
+  alt: 2.2
+  ust: 3.1
+  kaynak: 'Türetildi: Waaree 2+2 HS çerçeveli cam-cam, b = 1.303 m, 5400 Pa sertifikalı → c ≤ 4/1.303 = 3.07 mm/m.
+    Sektör tasarım marjı için nominal 2.8.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Sustain heavy snow & wind loads (5400 Pa & 2400 Pa); Framed Dual Glass Bifacial HJT Module; 2384
+    mm (L) x 1303 mm (W)
+  kaynak_tarihi: '2025-01-10'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tek bir modülden kalibre edildi; gerçek gereksinim daha düşük olabilir. Çerçevesiz kelepçeli
+    montaja mod_glass_mount_factor_frameless ile aktarılır.
+  aciklama: t_toplam_gerekli = c_GG · b · (q/5400)^n · k_mesnet. Önceki FT/GB kalibrasyonu GG'ye uygulanmıştı; ayrıldı.
+  dogrulama_deneyi: 3 boyut × (2+2 çerçevesiz ve çerçeveli, 1.6+1.6) mini modülde kendi hava yastıklı düzeneğimizde
+    2400/3600/5400 Pa; öncesi ve sonrası EL, gerinim ölçer.
+- id: mod_glass_ct_GB_mm_per_m
+  ad: Cam-arka tabaka (tek FT cam) kalınlık / kısa kenar kalibrasyonu (5400 Pa, çerçeveli)
+  birim: mm/m
+  deger: 2.82
+  alt: 2
+  ust: 3.4
+  kaynak: 'Türetildi: 3.2 mm FT cam / 1.134 m (5400 Pa sertifikalı 182 GB modül; 2278×1134 ölçüsü hafızadan).'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sektör marjı içerir, bu yüzden bir üst sınırdır. 2.0 mm HS cam için mod_glass_temper_factor_HS
+    ile çarpılır → 2400 Pa'da b ≲ 0.9 m.
+  aciklama: t_gerekli = c_GB · b · (q/5400)^n · f_temper
+  dogrulama_deneyi: Aynı yük testi, GB 2.0 HS ve 3.2 FT.
+- id: mod_glass_temper_factor_HS
+  ad: Yarı temperli camın kalınlık gereksinimi çarpanı (FT'ye göre)
+  birim: '-'
+  deger: 1.4
+  alt: 1.3
+  ust: 1.5
+  kaynak: 'Hafızadan: EN 12150-1 FT ~120 MPa, EN 1863-1 HS ~70 MPa karakteristik dayanım; t ∝ σ^-0.5 (doğrusal)
+    ile σ^-0.75 (membran) → 1.31-1.50. Wikipedia: FT, tavlanmış camdan ~4 kat dayanıklı (doğrulandı; HS için değer
+    yok).'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: Tempered glass is about four times stronger than annealed glass.
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel malzeme davranışı. İnce PV camında gerçek yüzey basıncı tedarikçiye bağlı.
+  aciklama: Kaynak denetçisi bulgusu uygulandı.
+  dogrulama_deneyi: Tedarikçi yüzey gerilimi ölçümü; 4 nokta eğilme testi.
+- id: mod_glass_mount_factor_frameless
+  ad: Çerçevesiz 4 kelepçeli montajda kalınlık çarpanı (4 kenar mesnede göre)
+  birim: '-'
+  deger: 1.25
+  alt: 1.1
+  ust: 1.45
+  kaynak: 'Tahmin. Dayanak: nokta mesnette eğilme momenti 4 kenar mesnetten ~1.3-1.6 kat (plaka tabloları, hafızadan);
+    kalınlıkta karekökü 1.15-1.26, membran etkisiyle 1.45''e kadar.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kelepçe konumu (L/5 noktası vb.) sonucu büyük ölçüde değiştirir.
+  aciklama: Önceden yalnız metinde anılıyordu, artık tablolara uygulandı.
+  dogrulama_deneyi: Kelepçe konumu değişken yük testi (FEM + deney).
+- id: mod_glass_nq_exp
+  ad: Cam kalınlığının yüke bağımlılık üssü
+  birim: '-'
+  deger: 0.75
+  alt: 0.5
+  ust: 1
+  kaynak: 'Plaka teorisi: küçük sehimde t ∝ q^0.5, büyük sehimde (membran) t ∝ q^1'
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel fizik.
+  aciklama: '-'
+  dogrulama_deneyi: Yük testinde gerinim-yük eğrisi.
+- id: mod_q_test_Pa
+  ad: Ürünün beyan test yükü (ön/arka)
+  birim: Pa
+  deger: 2400
+  alt: 1600
+  ust: 5400
+  kaynak: 'IEC 61215-2 MQT 16: her iki yüze 2400 Pa, 1 saat, 3 çevrim (pv-tech, 27.03.2026). 5400 Pa ön yüz kar
+    seçeneği (Synapsun).'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Applies a uniform test pressure of 2,400 Pa on each side of the module for one hour ... Repeat
+    for 3 cycles.
+  kaynak_tarihi: '2026-03-27'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 2400 Pa standart asgari değer. Balkon için γQ dahil gereksinim ~3440 Pa (nominal) → simetrik
+    3600 Pa varyantı önerilir.
+  aciklama: Tasarımda max(q_test, q_req) kullanılır.
+  dogrulama_deneyi: '-'
+- id: mod_load_safety_factor
+  ad: IEC 61215 test yükü / tasarım yükü katsayısı (γM)
+  birim: '-'
+  deger: 1.5
+  alt: 1.5
+  ust: 1.5
+  kaynak: IEC 61215'te en düşük tasarım yükü 1600 Pa ve güvenlik katsayısı 1.5 (ilk analizde arama özetinde görüldü;
+    ecogeneration sayfası iki denetçide boş döndü). Synapsun test yükü ile tasarım yükü ayrımını doğruluyor ama
+    sayı vermiyor.
+  kaynak_turu: arama_ozeti
+  kaynak_alintisi: 'Synapsun: ''Design Load ... often lower than the test load to incorporate a safety factor'''
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Standart kavramı.
+  aciklama: '-'
+  dogrulama_deneyi: Standart ajanı IEC 61215-2 MQT 16 metnini doğrulamalı.
+- id: mod_gamma_Q
+  ad: Değişken etki kısmi güvenlik katsayısı (rüzgâr, EN 1990)
+  birim: '-'
+  deger: 1.5
+  alt: 1
+  ust: 1.5
+  kaynak: EN 1990:2002+A1 Tablo A1.2(B) Not 2 (phd.eng.br'deki BS EN kopyası, bu revizyonda açıldı)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: γQ,1 = 1,50 where unfavourable (0 where favourable)
+  kaynak_tarihi: 2002 (+A1:2005)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Değerin kendisi doğrulandı. γM ile birlikte uygulanıp uygulanmayacağı belirsiz: 1.0 = emniyet
+    gerilmesi / TS 498 yolu, 1.5 = EN 1990 sınır durum yolu (muhafazakâr varsayılan).'
+  aciklama: q_req = qp · cp_net · γQ · γM
+  dogrulama_deneyi: 'Yapı mühendisi ve onaylı kuruluş görüşü: modülün tasarım yükü E_d ile mi karşılaştırılır?'
+- id: mod_wind_qp_Pa
+  ad: Balkon yüksekliğinde tepe hız basıncı qp(z)
+  birim: Pa
+  deger: 850
+  alt: 370
+  ust: 1450
+  kaynak: 'EN 1991-1-4 formülleri (4.5)-(4.8) (PDF ve SkyCiv, açıldı) + DIN NA vb0 22.5-30 m/s (designforms, açıldı)
+    + TS 498 (insapedia, açıldı): 0-8 m 0.5, 9-20 m 0.8, 21-100 m 1.1 kN/m²'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: qp(z) = 0.5 [1 + 7 lv(z)] ρair vm(z)²; kr = 0.19 (z0/z0,II)^0.07; WZ1 22.5 m/s 0.32 ... WZ4 30.0
+    m/s 0.56 kN/m²
+  kaynak_tarihi: 2026-09 (hesap)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'z = 10-30 m; kategori III-IV; vb 22.5-30. Örnekler: 10 m, kat. IV, vb 25 → 459 Pa; 20 m,
+    kat. III, vb 25 → 852 Pa.'
+  aciklama: qp = (1+7·Iv)·0.5·1.25·(kr·ln(z/z0)·vb)²; Iv = 1/ln(z/z0)
+  dogrulama_deneyi: TS EN 1991-1-4 Türkiye ulusal ekinin temini; pazar ve bina tipine göre hesap.
+- id: mod_wind_cp_net
+  ad: Korkuluğa monte panel için net basınç katsayısı
+  birim: '-'
+  deger: 1.8
+  alt: 1.2
+  ust: 3.4
+  kaynak: 'EN 1991-1-4:2005+A1 Tablo 7.9 (PDF açıldı). φ = 1, dönüşsüz: l/h ≤ 3 için A 2.3 / B 1.4 / C 1.2 / D 1.2;
+    l/h = 5 için 2.9/1.8/1.4/1.2; l/h ≥ 10 için 3.4/2.1/1.7/1.2. Dönüşlü (2h): 2.1/1.8/1.4/1.2. φ = 0.8: 1.2. Eurocodeapplied:
+    7.4.1 ''free-standing walls and parapets''.'
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: Table 7.9 - Recommended pressure coefficients cp,net for free-standing walls and parapets ...
+    ℓ/h≥10 3,4 2,1 1,7 1,2; with return corners 2,1 1,8 1,4 1,2
+  kaynak_tarihi: 2010 (A1)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Korkuluk paneli 'parapet' sayılırsa geçerlidir (bu bir yorumdur). Nominal 1.8 = B bölgesi,
+    dönüşlü balkon. Uç bölge (A, h×0.3) ve uzun kesintisiz balkonlar 2.3-3.4. Ulusal ek değiştirebilir.
+  aciklama: Üst sınır 2.5'ten 3.4'e çekildi (kaynak ve fizik denetçisi).
+  dogrulama_deneyi: CFD ve literatür; gerekirse rüzgâr tüneli (5-40 k$). Montaj talimatında bölge kısıtı.
+- id: mod_railing_height_m
+  ad: Balkon korkuluk yüksekliği
+  birim: m
+  deger: 1
+  alt: 0.9
+  ust: 1.2
+  kaynak: 'Hafızadan: yönetmeliklerde ~0.9-1.1 m (doğrulanmadı)'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalnız senaryo A. Kısa kenar b ≤ ~1.0-1.1 m olmalı; 60 V'ta bu ≈ 300-350 W demek.
+  aciklama: Korkuluğun taşıma kapasitesi de sınırlar.
+  dogrulama_deneyi: TR ve DE yönetmelik taraması.
+- id: mod_mass_max_portable_kg
+  ad: Taşınabilir panel için kabul edilebilir en yüksek kütle
+  birim: kg
+  deger: 12
+  alt: 8
+  ust: 20
+  kaynak: 'Tahmin. Dayanak: tek kişi taşıma ergonomisi (ISO 11228-1''deki 25 kg referansı, hafızadan) ile ürün kullanılabilirliği.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Senaryo B. 2+2 GG 200 W ≈ 11 kg.
+  aciklama: '-'
+  dogrulama_deneyi: Kullanıcı testi.
+- id: mod_frame_kg_per_m_ref
+  ad: Al çerçeve birim kütlesi (büyük modül referansı, 5400 Pa)
+  birim: kg/m
+  deger: 0.4
+  alt: 0.33
+  ust: 0.48
+  kaynak: 'SMM (26.09.2024): 0.45-0.48万吨/GW. Cinda raporu (2023-09, bu revizyonda açıldı): 182 mm modülde 2.60 kg/takım,
+    210 mm''de 2.90 kg/takım → 2.60/6.82 m = 0.381, 2.90/7.37 m = 0.393 kg/m (çevre ölçüleri hafızadan).'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 182mm 组件功率（W） 550 ... 单套边框重量（kg） 2.60 ... 210mm ... 2.90; 目前光伏边框用铝量单耗...0.45-0.48万吨/GW
+  kaynak_tarihi: 2023-09 / 2024-09-26
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Büyük modül ve 5400 Pa için. Küçük panelde gereken kesit ∝ q·b·L² ile çok daha küçük; alt
+    sınır belirler.
+  aciklama: Referans modül 2.278 × 1.134 m (formülde kalibrasyon noktası).
+  dogrulama_deneyi: Kendi profilimizin FEM analizi ve yük testi.
+- id: mod_frame_kg_per_m_min
+  ad: Çerçeve profilinin üretilebilir en küçük birim kütlesi
+  birim: kg/m
+  deger: 0.2
+  alt: 0.12
+  ust: 0.3
+  kaynak: 'Tahmin. Dayanak: 1.0-1.2 mm et kalınlığı, 25-30 mm yükseklik ve cam kanalı; ~75 mm² kesit × 2.7 g/cm³
+    ≈ 0.2 kg/m.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tablolarda tüm boyutlarda bu alt sınır belirleyici çıktı.
+  aciklama: '-'
+  dogrulama_deneyi: Ekstrüzyon teklifi.
+- id: mod_encap_mass_kg_m2
+  ad: Enkapsülan film birim kütlesi (tek kat)
+  birim: kg/m2
+  deger: 0.46
+  alt: 0.42
+  ust: 0.5
+  kaynak: 'Tianxia Gongchang Research (bu revizyonda açıldı): HJT POE 500 µm 460 g/m²; EVA ~450 µm 420 g/m²'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'HJT POE monolayer: 500 μm, 460 g/m²'
+  kaynak_tarihi: '2026-06-24'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel malzeme özelliği.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: mod_backsheet_mass_kg_m2
+  ad: Arka tabaka birim kütlesi
+  birim: kg/m2
+  deger: 0.4
+  alt: 0.3
+  ust: 0.5
+  kaynak: 'Tahmin. Dayanak: ~300 µm PET esaslı katman × ~1.4 g/cm³ ≈ 0.42 kg/m².'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalnız GB yapı.
+  aciklama: Önceden formüle gömülüydü.
+  dogrulama_deneyi: Tedarikçi föyü.
+- id: mod_jbox_mass_kg
+  ad: Bağlantı kutusu + kısa lead kütlesi
+  birim: kg
+  deger: 0.3
+  alt: 0.15
+  ust: 0.5
+  kaynak: 'Tahmin. Dayanak: PPO gövde ~60-100 g + potting + terminal + 2 × 0.3 m kablo.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Önceden formüle gömülüydü.
+  dogrulama_deneyi: Kendi kutu tasarımımızın tartımı.
+- id: mod_fx_cny_per_usd
+  ad: Kur varsayımı CNY/USD
+  birim: CNY/USD
+  deger: 6.7
+  alt: 6.5
+  ust: 7.3
+  kaynak: Federal Reserve H.10 (ham HTML curl ile okundu; WebFetch özetleyicisi bu sayfada yanlış değer üretiyor)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '18-SEP-26 6.6975 (Last Update: September 21, 2026)'
+  kaynak_tarihi: '2026-09-18'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tüm RMB fiyatlarının çevrimi.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: mod_glass_price_usd_m2_per_mm
+  ad: Ön yüz PV camı fiyatı (çift kaplamalı, Çin spot)
+  birim: USD/m2/mm
+  deger: 0.8
+  alt: 0.55
+  ust: 1.3
+  kaynak: 'Montagtech (03.09.2026, SCI/SMM verisi): 2.0 mm RMB 11 (31.08), RMB 11.5 (01.09); 3.2 mm RMB 17.15. EnergyTrend
+    (23.09.2026): 2.0 mm ortalama 10.5, 3.2 mm 17. Her ikisi de bu revizyonda açıldı. /6.70 → 0.78-0.86 $/m²/mm.'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 2.0mm Double-glazed and Coated PV Glass (RMB) 11 10 10.5; 3.2mm ... 17.5 17 17
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 'GW ölçekli standart ölçü fiyatı; mod_landed_factor_glass ile çarpılır. Fiyat döngüsel: 2026
+    Mayıs dibi RMB 8-8.5.'
+  aciklama: '-'
+  dogrulama_deneyi: TR teslim, özel ölçü 2.0 ve 3.2 mm için 3-5 RFQ.
+- id: mod_glass_rear_price_usd_m2_per_mm
+  ad: Arka PV camı fiyatı (cam-cam arka cam)
+  birim: USD/m2/mm
+  deger: 0.63
+  alt: 0.45
+  ust: 1
+  kaynak: 'EnergyTrend (23.09.2026, bu revizyonda açıldı): 2.0 mm arka cam ortalama 8.5 RMB/m² → 8.5/6.70/2'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 2.0 Rear PV Glass (RMB) 9 8 8.5
+  kaynak_tarihi: '2026-09-23'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kutu deliği ve özel kesim ek maliyeti bilinmiyor (RFQ).
+  aciklama: 'Önceki çıktı arka camı da ön cam fiyatıyla hesaplıyordu: 2+2 maliyeti ~%14 fazlaydı.'
+  dogrulama_deneyi: RFQ (delikli arka cam).
+- id: mod_landed_factor_glass
+  ad: Cam için TR'ye teslim ve küçük hacim çarpanı
+  birim: '-'
+  deger: 1.4
+  alt: 1.15
+  ust: 2.5
+  kaynak: 'Tahmin. Dayanak: cam ağır (2 mm ≈ 5 kg/m²); 40'' konteyner ~26 t ≈ 5000 m² 2 mm ve ~2-3 k$ navlunla (hafızadan)
+    +0.2-0.3 $/m²/mm; artı gümrük/olası anti-damping, MOQ, özel ölçü kesim ve kırılma.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'H1 düzeltmesi: ünite hacmi MW mertebesinde.'
+  aciklama: Kalem bazında ayrıştırıldı (önceden tek çarpandı).
+  dogrulama_deneyi: RFQ; en ucuz ve en hızlı ölçülecek belirsizlik.
+- id: mod_encap_price_usd_m2
+  ad: POE (veya EPE) enkapsülan fiyatı, tek kat
+  birim: USD/m2
+  deger: 1.94
+  alt: 0.95
+  ust: 2.6
+  kaynak: 'Tianxia Gongchang Research (24.06.2026, bu revizyonda açıldı; Infolink, PVInsights ve SolarMedia endekslerine
+    dayanır): 2025 sonu POE RMB 13, EPE 11.5 /m². Bölü 6.70.'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'POE monolayer: fell from RMB 26 to 13; EPE co-extruded ... to 11.5'
+  kaynak_tarihi: 2026-06-24 (fiyatlar 2025 sonu)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Tek ikincil kaynak ve 9 ay eski. Alan kalemlerinin en büyüğü. Alt sınır ~6.4 RMB'ye indirildi
+    (EVA'nın 2024'te 5-7 RMB bandına indiği hafızadan).
+  aciklama: Güven 'orta'dan 'dusuk'a çekildi (kaynak denetçisi).
+  dogrulama_deneyi: InfoLink/SMM enkapsülan endeksi + RFQ; kendi hücremizle UV + DH testi.
+- id: mod_encap_eva_price_usd_m2
+  ad: Şeffaf EVA enkapsülan fiyatı, tek kat (60 V PID'siz dal)
+  birim: USD/m2
+  deger: 1.31
+  alt: 0.9
+  ust: 1.8
+  kaynak: 'Tianxia Gongchang Research: şeffaf EVA RMB 8.8 /m² (2025 sonu) / 6.70'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'EVA transparent: fell from RMB 22 per square meter to RMB 8.8'
+  kaynak_tarihi: '2026-06-24'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: '≤ 60 V''ta PID gerilimi pratikte yok; EVA+EVA veya EPE+EVA dalı açılabilir (InfoLink: TOPCon
+    cam-camda EPE+EPE''den EPE+EVA''ya ve EVA+EVA''ya geçiş). Ancak cam-camda EVA''nın asetik asit birikimi HJT''nin
+    TCO ve düşük sıcaklık Ag''sine risk oluşturur (hafızadan). Ooitech ''HJT modules: POE essential'' diyor (üretici
+    görüşü).'
+  aciklama: İki katta POE'ye göre ~1.76 $/m² tasarruf (çarpan 1.4 ile).
+  dogrulama_deneyi: GG-HJT mini modülde EVA, EPE ve POE ile DH1000 + UV + TC200 karşılaştırması.
+- id: mod_landed_factor_film
+  ad: Enkapsülan için TR teslim ve küçük hacim çarpanı
+  birim: '-'
+  deger: 1.4
+  alt: 1.15
+  ust: 2
+  kaynak: 'Tahmin. Dayanak: film hafif (0.46 kg/m²) olduğundan navlun küçük; ağırlık rulo MOQ, raf ömrü (POE ~6
+    ay, hafızadan) ve distribütör marjında.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: H1 düzeltmesi.
+  aciklama: '-'
+  dogrulama_deneyi: RFQ.
+- id: mod_backsheet_price_usd_m2
+  ad: Arka tabaka fiyatı (yalnız GB)
+  birim: USD/m2
+  deger: 1.1
+  alt: 0.7
+  ust: 1.8
+  kaynak: 'Hafızadan: 2024-2025''te RMB ~6-10/m² (doğrulanmadı)'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: HJT'nin nem duyarlılığı nedeniyle GB ikincil seçenek.
+  aciklama: mod_landed_factor_film ile çarpılır.
+  dogrulama_deneyi: RFQ.
+- id: mod_al_lme_usd_kg
+  ad: Alüminyum LME fiyatı
+  birim: USD/kg
+  deger: 3.29
+  alt: 2.8
+  ust: 3.8
+  kaynak: SMM Aluminum Morning Meeting (21.09.2026, bu revizyonda açıldı)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: LME aluminum closed at $3,293.5/mt, down 0.20%.
+  kaynak_tarihi: '2026-09-21'
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: TR alımı LME + prim üzerinden yapılır. Önceki çıktı Çin iç fiyatını (A00 24,380 yuan/t, KDV
+    dahil) kullanıyordu; değiştirildi.
+  aciklama: Çerçeve maliyeti panel başına ve çevreyle ölçeklenir.
+  dogrulama_deneyi: TR ekstrüzyon firmasından teklif.
+- id: mod_al_premium_usd_kg
+  ad: Bölgesel alüminyum primi (Avrupa/TR teslim)
+  birim: USD/kg
+  deger: 0.35
+  alt: 0.15
+  ust: 0.6
+  kaynak: 'Tahmin. Hafızadan: Rotterdam gümrüklü primi 2024-25''te ~250-450 $/t.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: H1 düzeltmesi.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: mod_frame_processing_cn_usd_kg
+  ad: Çerçeve işleme ücreti (Çin, GW ölçek)
+  birim: USD/kg
+  deger: 0.78
+  alt: 0.63
+  ust: 0.93
+  kaynak: 'Türetildi, Cinda (信达证券) 光伏边框行业深度报告, 2023-09 (bu revizyonda açıldı): çerçeve ''külçe fiyatı + işleme ücreti''
+    ile fiyatlanır; 2022 ortalama çerçeve birim fiyatı 2.42万元/t; A00 külçe 2021''de 1.5→2.3万, rapor tarihinde 1.8-1.9万元/t.
+    İşleme ≈ 24,200 − (18,000..20,000) = 4,200-6,200 RMB/t.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 铝边框通常以'铝锭价格+加工费'定价; 估计 2022年铝边框平均单价为 2.42万元/吨; 目前基本维持在 1.8万元/吨-1.9万元/吨
+  kaynak_tarihi: '2023-09-19'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: GW ölçeği ve farklı yılların verisi karışık. Önceki '5500元/吨' alıntısı PDF'te bulunmadığı
+    için kaldırıldı.
+  aciklama: (4200..6200)/6.70/1000
+  dogrulama_deneyi: RFQ.
+- id: mod_landed_factor_frame
+  ad: Çerçeve işleme için TR kısa seri çarpanı
+  birim: '-'
+  deger: 1.9
+  alt: 1.2
+  ust: 3.2
+  kaynak: 'Tahmin. Dayanak: özel profil kalıbı amortismanı, kısa seri eloksal, kesim/delme ve köşe montajı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Etkin işleme ücreti 0.8-2.5 $/kg eder (kaynak denetçisinin önerdiği üst sınıra uyumlu).
+  aciklama: '-'
+  dogrulama_deneyi: RFQ.
+- id: mod_cu_interconnect_price_usd_kg
+  ad: Kaplamalı Cu ara bağlantı teli fiyatı
+  birim: USD/kg
+  deger: 15
+  alt: 10
+  ust: 25
+  kaynak: 'Made-in-China ilanı (bu revizyonda açıldı): 100-999 kg için 20 $/kg, 1000+ kg için 10 $/kg. Ürün Cu+Sn+Pb
+    kalay kaplı; SnBi(Ag) değil.'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: US$20.00 100-999 kg / US$10.00 1,000+ kg; Cu+Sn+Pb; Tin-Coated
+  kaynak_tarihi: 2026-09 (ilan)
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 'Ürün uyuşmuyor: Bi ve Ag kaplama fiyatı artırır (üst sınır 25). RoHS: PV istisnası yalnız
+    profesyonelce kurulan sabit sistemleri kapsar (Wikipedia RoHS, açıldı); fişli balkon kiti kapsam içinde kalabilir
+    → Pb''siz tel gerekli (SnBi uyumlu).'
+  aciklama: 'Sınıf ''adet''ten ''alan''a alındı: hücre alanı başına Cu = 2·A_tel·ρ/p, yalnız tel aralığına bağlı.'
+  dogrulama_deneyi: SnBi(Ag) kaplı tel RFQ; RoHS kapsamı standart ajanına.
+- id: mod_wire_d_mm
+  ad: Ara bağlantı teli çapı
+  birim: mm
+  deger: 0.25
+  alt: 0.18
+  ust: 0.35
+  kaynak: 'TaiyangNews (15.12.2023, bu revizyonda açıldı): 0BB/ZBB ~0.2 mm, eski 0.29-0.4 mm'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Earlier, the diameter of ribbon ranged between 0.29 mm to 0.4 mm but ZBB is much smaller with
+    a diameter of around 0.2 mm
+  kaynak_tarihi: '2023-12-15'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tasarım değişkeni.
+  aciklama: Tarih 2025'ten 2023-12'ye düzeltildi.
+  dogrulama_deneyi: Mini modül CTM.
+- id: mod_wire_shading_k
+  ad: Yuvarlak telin optik etkin gölgeleme oranı
+  birim: '-'
+  deger: 0.4
+  alt: 0.25
+  ust: 0.7
+  kaynak: 'Tahmin. Dayanak: yuvarlak tel ışığın bir kısmını cam içi toplam yansımayla hücreye geri gönderir.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Hücre verimi tel benzeri problarla ölçülüyorsa gölgelemenin bir kısmı zaten eta_cell'in içindedir.
+  aciklama: '-'
+  dogrulama_deneyi: Laminasyon öncesi ve sonrası IV + EQE.
+- id: mod_wire_n_min
+  ad: Hücre başına en az tel sayısı
+  birim: adet
+  deger: 4
+  alt: 3
+  ust: 6
+  kaynak: 'Tahmin. Dayanak: mekanik tutunma ve tek tel kopmasına karşı yedeklilik.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Parmak terimi eklendikten sonra 55 mm hücrede optimum 6 tel; sınır bağlamıyor.
+  aciklama: Önceden formüle gömülüydü.
+  dogrulama_deneyi: TC200 sonrası tel kopma istatistiği.
+- id: mod_finger_k_ohm
+  ad: Parmak (finger) kayıp katsayısı f_yüz·ρ_f·s_f/(3·A_f)
+  birim: ohm
+  deger: 0.21
+  alt: 0.08
+  ust: 0.6
+  kaynak: 'Tahmin: f_yüz 1.5 (ön ve arka ızgara) × ρ_f 6e-8 Ω·m (düşük sıcaklık Ag, 4e-8..1.2e-7) × s_f 1.5 mm /
+    (3 × A_f 2.1e-10 m², 25×12 µm × 0.7).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Hücre ajanının parmak geometrisine bağlı.
+  aciklama: Kayıp_f = 0.95·J·k_f·(p/2)²/Vmp. p = 9 mm'de ~%0.3, 14 mm'de ~%0.7 (fizik denetçisi bulgusu).
+  dogrulama_deneyi: Hücre ajanından ρ_f, parmak kesiti ve aralığı; mini modül Rs ölçümü.
+- id: mod_cu_resistivity_op_ohm_m
+  ad: Bakır özdirenci (çalışma sıcaklığında)
+  birim: ohm*m
+  deger: 1.9e-08
+  alt: 1.8e-08
+  ust: 2.0e-08
+  kaynak: 1.72e-8 Ω·m (20 °C) × (1 + 0.0039·(T − 20)), T = 45-65 °C
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Fizik.
+  aciklama: Önceden formüllere 1.72e-8 olarak gömülüydü.
+  dogrulama_deneyi: '-'
+- id: mod_interconnect_fixed_usd_per_cell
+  ad: Hücre başı sabit ara bağlantı sarfiyatı (lehim/film/ECA, bara payı)
+  birim: USD/hücre
+  deger: 0.01
+  alt: 0.003
+  ust: 0.04
+  kaynak: 'Tahmin. Dayanak: SnBi flux/film ve bara payı ~0.2-0.5 g malzeme/hücre; ECA gümüş içerdiği için üst sınır.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: İndüksiyon lehim (firmanın yetkinliği) daha ucuz olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Dizgi prototipinde sarfiyat ölçümü.
+- id: mod_edge_seal_usd_per_m
+  ad: Butil kenar contası + kalıplı kenar koruyucu (GG çerçevesiz)
+  birim: USD/m
+  deger: 0.3
+  alt: 0.1
+  ust: 0.8
+  kaynak: 'Tahmin. Dayanak: butil 12 × 0.6 mm × 1.3 g/cm³ ≈ 9 g/m × ~5 $/kg ≈ 0.05 $/m; kendi enjeksiyonumuzla PP/TPE
+    koruyucu 30-60 g/m × 2-3 $/kg ≈ 0.06-0.18 $/m; artı işçilik payı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'InfoLink: ''innovations have included UV light-transmitting encapsulants, low-temperature ribbons,
+    and butyl sealants'''
+  kaynak_tarihi: '2025-09-23'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: 'Çevreyle ölçeklenir. InfoLink alıntısı düzeltildi: ''require'' değil, ''yenilikler arasında''.'
+  aciklama: '-'
+  dogrulama_deneyi: RFQ ve DH1000 testi.
+- id: mod_edge_seal_gb_usd_per_m
+  ad: Çerçeve silikonu (GB veya GG çerçeveli)
+  birim: USD/m
+  deger: 0.1
+  alt: 0.05
+  ust: 0.2
+  kaynak: 'Tahmin. Dayanak: 10-15 g/m silikon × 5-8 $/kg.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Önceden yalnız metinde vardı.
+  dogrulama_deneyi: RFQ.
+- id: mod_jbox_base_usd
+  ad: Bağlantı kutusu gövdesi + terminal + kısa lead (kendi kalıbımız, diyot hariç)
+  birim: USD/adet
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: 'Tahmin. Dayanak: PPO ~80 g × 3-4 $/kg ≈ 0.3 $ + terminal/bakır 0.3-0.5 + potting 0.2-0.4 + montaj. Karşılaştırma:
+    Çin 1500 V 3 diyotlu kutu RMB 18-22 (2022; bjx sayfası WAF engelli, doğrulanamadı).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: ≤ 60 V kutu küçük olabilir.
+  aciklama: Panel-kutu ana kablosu ve konnektörü artık ayrı kalemde (mod_f_cost_cable).
+  dogrulama_deneyi: Kendi kutu BOM'u.
+- id: mod_bypass_device_usd
+  ad: Baypas elemanı maliyeti (Schottky veya aktif MOSFET)
+  birim: USD/adet
+  deger: 0.3
+  alt: 0.1
+  ust: 0.8
+  kaynak: 'Tahmin. Dayanak: 15-20 A SMD Schottky distribütör fiyatı ~0.1-0.3 $ (hafızadan); aktif baypas (IC + MOSFET)
+    0.5-0.8 $.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Akım sınıfı ≥ 1.25·Isc olmalı.
+  aciklama: '-'
+  dogrulama_deneyi: MQT 18.
+- id: mod_pack_fixed_usd
+  ad: Ambalaj, etiket, belge (panel başı sabit)
+  birim: USD/adet
+  deger: 0.6
+  alt: 0.3
+  ust: 1.5
+  kaynak: 'Tahmin. Dayanak: etiket ~0.1, kılavuz 0.1-0.2, bant/köşe elemanları 0.2-0.4 $.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Perakende ambalajı paletli sevkiyattan pahalı.
+  aciklama: Tablo ve örnek hesap artık tutarlı biçimde 0.6 kullanıyor.
+  dogrulama_deneyi: Teklif.
+- id: mod_pack_area_usd_m2
+  ad: Ambalajın alanla ölçeklenen kısmı
+  birim: USD/m2
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: 'Tahmin. Dayanak: çift oluklu karton ~0.5-0.8 $/m² × ~2.2 m² karton/m² panel + köşe koruyucu.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Tekli kutulu sevkiyat.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: mod_cable_length_m
+  ad: Panelden kutuya tek yön kablo uzunluğu
+  birim: m
+  deger: 3
+  alt: 1
+  ust: 15
+  kaynak: 'Tahmin. Dayanak: K5''e göre kutu gölgede ve ayrı; balkonda korkuluk ile zemin arası 1-3 m; çok panelli
+    kutuda 3-10 m.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sistem ajanıyla ortak karar.
+  aciklama: 5 m'den 3 m'ye çekildi; küçük panelde maliyeti belirleyen kalem.
+  dogrulama_deneyi: Kurulum senaryosu çizimi.
+- id: mod_cable_cross_min_mm2
+  ad: En küçük PV kablo kesiti
+  birim: mm2
+  deger: 1.5
+  alt: 1.5
+  ust: 4
+  kaynak: 'Hafızadan: EN 50618 PV kablo kesitleri 1.5 mm²''den başlar. Waaree 4 mm² kullanıyor (doğrulandı).'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: Cable cross - section & Length 4 mm2 & 500mm
+  kaynak_tarihi: '2025-01-10'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Küçük akımda (1-5 A) mekanik ve UV alt sınırı belirleyici.
+  aciklama: Seçilen kesit mod_f_cable_cross ile hesaplanır (kesit kataloğu 1.5/2.5/4/6/10/16).
+  dogrulama_deneyi: Standart ajanı (EN 50618 / IEC 62930).
+- id: mod_cable_core_fixed_usd_per_m
+  ad: PV kablo damarının bakır dışı maliyeti (yalıtım + kılıf + üretim)
+  birim: USD/m
+  deger: 0.2
+  alt: 0.1
+  ust: 0.4
+  kaynak: 'Tahmin. Dayanak: XLPO yalıtım + kılıf 20-40 g/m × 3-5 $/kg + üretim payı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: TR üretimi kablo.
+  aciklama: '-'
+  dogrulama_deneyi: Kablo üreticisi RFQ.
+- id: mod_cu_price_usd_kg
+  ad: Kablo için etkin bakır fiyatı (örgü payı dahil)
+  birim: USD/kg
+  deger: 12
+  alt: 9.5
+  ust: 15
+  kaynak: 'Hafızadan: LME bakır 2025''te ~9.5-10 k$/t; 2026 değeri doğrulanmadı. ×1.1 örgü/kablolama payı.'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: LME günlük veri.
+- id: mod_connector_pair_usd
+  ad: PV konnektör çifti (MC4 uyumlu, IEC 62852)
+  birim: USD/adet
+  deger: 0.6
+  alt: 0.3
+  ust: 1.5
+  kaynak: 'Tahmin. Dayanak: Çin''de hacimde konnektör çifti ~0.2-0.4 $ (hafızadan) + küçük hacim ve teslim.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: SELV'de konnektör şartı standart ajanında.
+  aciklama: '-'
+  dogrulama_deneyi: RFQ.
+- id: mod_cable_loss_target
+  ad: Kablo kesit seçimi için STC kayıp hedefi
+  birim: '-'
+  deger: 0.01
+  alt: 0.005
+  ust: 0.02
+  kaynak: Tahmin (tasarım kuralı; optimizasyonla değiştirilebilir)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Asıl amaç kesit maliyeti ile enerji kaybının dengelenmesi.
+  aciklama: '-'
+  dogrulama_deneyi: Sistem modelinde optimizasyon.
+- id: mod_cable_loss_energy_factor
+  ad: Yıllık enerji ağırlıklı I² kaybı / STC kaybı
+  birim: '-'
+  deger: 0.55
+  alt: 0.4
+  ust: 0.75
+  kaynak: 'Türetildi: güneşli günde sinüs profilinde ∫G²/∫G = (π/4)·Gmax; dikey balkonda Gmax 600-900 W/m² (tahmin)
+    → 0.47-0.71.'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Bulutlu günler değeri düşürür.
+  aciklama: Fizik denetçisi bulgusu uygulandı.
+  dogrulama_deneyi: Enerji ajanının saatlik ışınım verisi.
+- id: mod_lam_cycle_min
+  ad: Laminatör çevrim süresi (POE, cam-cam)
+  birim: min
+  deger: 15
+  alt: 10
+  ust: 22
+  kaynak: 'Hafızadan: EVA 8-12, POE 12-18 dk. Ooitech: POE işleme sıcaklığı 145-155 °C (açıldı; çevrim süresi sayfada
+    yok).'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: Processing Temperature 145-155°C
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Fiziğe (ısınma, erime ve çapraz bağlanma) dayandığı için ölçekten bağımsız.
+  aciklama: SnBi (~139 °C) bu sıcaklıkta yeniden erir; bkz. mod_ds_interconnect.
+  dogrulama_deneyi: Prototip laminatörde termokupl profili, jel içeriği ve soyulma testi.
+- id: mod_lam_area_m2
+  ad: Laminatör etkin alanı (kendi tasarım)
+  birim: m2
+  deger: 3
+  alt: 1.5
+  ust: 6
+  kaynak: Tasarım seçimi (tahmin)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Panel alanının tam katı olarak seçilmeli. 300 W (1.40 m²) için 2 panel/çevrim ≥ 3.23 m² ister;
+    3 m² ile yalnız 1 panel sığar.
+  aciklama: Örnek hesaptaki '2 panel/çevrim' hatası düzeltildi.
+  dogrulama_deneyi: '-'
+- id: mod_lam_packing_factor
+  ad: Laminatörde panel başına alan payı
+  birim: '-'
+  deger: 1.15
+  alt: 1.05
+  ust: 1.3
+  kaynak: 'Tahmin. Dayanak: paneller arası 30-50 mm ve kenar payı.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: Önceden formüle gömülüydü.
+  dogrulama_deneyi: Prototip.
+- id: mod_lam_capex_usd
+  ad: Laminatör yatırımı (kendi yapım)
+  birim: USD
+  deger: 60000
+  alt: 25000
+  ust: 150000
+  kaynak: 'Tahmin. Dayanak: ısıtma plakası (indüksiyon/yağ) 10-25 k$, vakum sistemi 5-15 k$, membran ve kasa 5-15
+    k$, kontrol 5-10 k$, mühendislik.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: Tek ünitenin çıktısı laminatörü az kullanır; saha düzeyinde paylaşım önerilir.
+  aciklama: '-'
+  dogrulama_deneyi: Kendi BOM'umuz.
+- id: mod_lam_energy_kWh_m2
+  ad: Laminasyon duyulur ısı enerjisi (işlenen m² başına)
+  birim: kWh/m2
+  deger: 0.3
+  alt: 0.25
+  ust: 0.45
+  kaynak: 'Türetildi: 2+2 cam 10 kg/m² × 0.84 kJ/kgK × 125 K = 1050 kJ = 0.29 kWh/m²'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: saha
+  senaryoya_uygunluk: Bekleme kaybı ayrı ve zaman sınıfında (mod_lam_standby_kW).
+  aciklama: H5'in laminatördeki karşılığı artık modelde uygulandı.
+  dogrulama_deneyi: Enerji ölçer.
+- id: mod_lam_standby_kW
+  ad: Laminatör bekleme/ısıl kayıp gücü
+  birim: kW
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: 'Tahmin. Dayanak: 3 m² plaka 150 °C''de; yalıtım + yükleme sırasında açık yüzey kaybı ~0.7-2.5 kW/m².'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: Asıl belirleyici izolasyon tasarımı (H5).
+  aciklama: '-'
+  dogrulama_deneyi: Prototipte boşta güç ölçümü.
+- id: mod_stringer_capex_usd
+  ad: Düşük sıcaklık dizgi makinesi yatırımı
+  birim: USD
+  deger: 120000
+  alt: 40000
+  ust: 400000
+  kaynak: 'Tahmin. Dayanak: hücre besleme + görüntüleme 20-40 k$, tel çekme/kesme 15-30 k$, indüksiyon/IR lehim
+    başlığı 15-40 k$, taşıma ve kontrol 20-40 k$, mühendislik; değişken hücre ölçüsü (55-210 mm) desteklenmeli.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: Ticari tek formatlı makinelerden farklı.
+  aciklama: Küçük hücrede hücre/gün sayısı artar; hız kapasitesi kontrol edilmeli.
+  dogrulama_deneyi: Tasarım çalışması.
+- id: mod_test_capex_usd
+  ad: Test ekipmanı yatırımı (IV flaş + EL + yalıtım/hipot + süreklilik)
+  birim: USD
+  deger: 70000
+  alt: 30000
+  ust: 170000
+  kaynak: 'Tahmin. Dayanak: IV 20-120 k$, EL 5-40 k$, hipot 2-12 k$ (hafızadan).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: Zorunlu testler sınıfa (II/III) bağlı.
+  aciklama: '-'
+  dogrulama_deneyi: RFQ + standart ajanı.
+- id: mod_misc_capex_usd
+  ad: Diğer modül hattı donanımı (kenar/çerçeve aparatı, kutu yapıştırma, taşıma)
+  birim: USD
+  deger: 30000
+  alt: 10000
+  ust: 80000
+  kaynak: 'Tahmin. Dayanak: kenar koruyucu pres/aparatı 5-15 k$, kutu dozajlama 5-15 k$, arabalar ve raflar 5-10
+    k$.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: Önceden yalnız örnek hesapta vardı.
+  dogrulama_deneyi: Tasarım BOM'u.
+- id: mod_equip_life_y
+  ad: Ekipman amortisman ömrü
+  birim: yıl
+  deger: 7
+  alt: 5
+  ust: 10
+  kaynak: 'Tahmin. Dayanak: üretim makinelerinde tipik 5-10 yıl; teknoloji eskimesi.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ekonomi ajanının değeri gelince yerine geçer.
+  aciklama: Önceden tanımsızdı (life_years).
+  dogrulama_deneyi: Ekonomi ajanı.
+- id: mod_maint_frac_per_y
+  ad: Yıllık bakım ve yedek parça / yatırım
+  birim: 1/yıl
+  deger: 0.05
+  alt: 0.02
+  ust: 0.08
+  kaynak: 'Tahmin. Dayanak: membran, conta, flaş lambası ve vakum pompası sarfları.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Pilot hat kayıtları.
+- id: mod_test_time_s_per_panel
+  ad: Panel başı test makine süresi (EL + IV + gerekirse hipot)
+  birim: s
+  deger: 90
+  alt: 40
+  ust: 240
+  kaynak: 'Tahmin. Dayanak: EL 10-30 s, IV 10-20 s, hipot ve süreklilik 30-120 s, taşıma dahil.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Yalnız ekipman kapasitesinde kullanılır. İşçilikte çift sayım kaldırıldı.
+  aciklama: '-'
+  dogrulama_deneyi: Pilot hat zaman etüdü.
+- id: mod_labor_min_per_panel
+  ad: Panel başı elle yapılan iş (dizim, bara, kutu, kenar/çerçeve, temizlik, test yükleme, ambalaj)
+  birim: min
+  deger: 22
+  alt: 10
+  ust: 50
+  kaynak: 'Tahmin. Dayanak: yarı otomatik küçük hat; GW hatlarında ~2-5 dk (hafızadan). Test makine süresi hariç.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: 25'ten 22 dk'ya indirildi (test makine süresi çıkarıldı).
+  dogrulama_deneyi: Zaman etüdü (10 panel × 3 boyut).
+- id: mod_labor_s_per_cell
+  ad: Hücre başı işçilik (besleme, onarım, EL hatası)
+  birim: s
+  deger: 3
+  alt: 1
+  ust: 8
+  kaynak: 'Tahmin. Dayanak: otomatik dizgide hücre başı müdahale olasılığı %5-10 × 30-60 s.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Küçük panelde (çok hücre, düşük W) c/W'ı belirler.
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etüdü.
+- id: mod_labor_rate_usd_h
+  ad: Tam yüklü işçilik maliyeti (Gebze)
+  birim: USD/h
+  deger: 7
+  alt: 5
+  ust: 12
+  kaynak: 'Tahmin. Dayanak: TR asgari ücretin işveren maliyeti (hafızadan, 2025''te ~1100-1300 $/ay) × vasıf primi
+    1.2-1.5 / ~190 saat.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: genel
+  senaryoya_uygunluk: Ekonomi ajanının değeri yerine geçer.
+  aciklama: '-'
+  dogrulama_deneyi: Ekonomi ajanı / İK verisi.
+- id: mod_crew_min
+  ad: Modül hattında vardiya başına asgari operatör
+  birim: kişi
+  deger: 1
+  alt: 1
+  ust: 2
+  kaynak: 'Tahmin. Dayanak: laminatör + dizgi + test tek operatörle yürüyebilir; iş güvenliği için 2 kişi gerekebilir.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: saha
+  senaryoya_uygunluk: Düşük hacimde işçiliği belirleyen asgari ekip bileşeni (fizik denetçisi bulgusu).
+  aciklama: '-'
+  dogrulama_deneyi: Pilot hat.
+- id: mod_shift_h_per_day
+  ad: Modül hattı çalışma saati
+  birim: h/gün
+  deger: 8
+  alt: 8
+  ust: 24
+  kaynak: Tahmin (tasarım seçimi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Düşük hacimde tek vardiya yeterli.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: mod_module_yield
+  ad: Modül hattı verimi (kırılma, EL ret, yeniden işleme)
+  birim: '-'
+  deger: 0.98
+  alt: 0.94
+  ust: 0.995
+  kaynak: 'Tahmin. Dayanak: pilot hatta EL ret %1-3 + kırılma %0.5-2 (hafızadan, benzer küçük hatlar).'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Küçük hücre daha az kırılır (H3) ama hücre sayısı fazladır.
+  aciklama: BOM/W formülünde ve örnekte artık tutarlı biçimde uygulanıyor.
+  dogrulama_deneyi: Pilot üretim istatistiği.
+- id: mod_mold_small_parts_usd
+  ad: Küçük plastik parça kalıp seti (kutu, köşe takozu, kenar koruyucu ucu), varyant başına
+  birim: USD
+  deger: 12000
+  alt: 4500
+  ust: 35000
+  kaynak: 'Tahmin (kendi kalıphanemiz). Dayanak: 3-4 kalıp × 1.5-8 k$.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Panel boyutundan büyük ölçüde bağımsız.
+  aciklama: '-'
+  dogrulama_deneyi: Kalıphane iç maliyeti.
+- id: mod_mold_frame_base_usd
+  ad: Tek parça çerçeve kalıbının boyuttan bağımsız kısmı
+  birim: USD
+  deger: 15000
+  alt: 5000
+  ust: 30000
+  kaynak: 'Tahmin. Dayanak: yolluk, soğutma, itici sistemi ve tasarım.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Önceden formüle gömülüydü.
+  dogrulama_deneyi: Kalıphane teklifi.
+- id: mod_mold_frame_usd_per_m2
+  ad: Tek parça çerçeve kalıbının panel ayak izi başına maliyeti (pay dahil)
+  birim: USD/m2
+  deger: 30000
+  alt: 10000
+  ust: 80000
+  kaynak: 'Tahmin. Dayanak: kalıp çeliği/alüminyum hacmi ve tabla ölçüsü ayak iziyle büyür.'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: 'H2: yalnız küçük panelde (≤ ~0.5-0.8 m²) mantıklı.'
+  aciklama: '-'
+  dogrulama_deneyi: Pres envanteri + teklif.
+- id: mod_mold_cavity_pressure_MPa
+  ad: Kalıp boşluk basıncı (pres tonajı için)
+  birim: MPa
+  deger: 50
+  alt: 0.5
+  ust: 80
+  kaynak: 'Hafızadan: termoplastik 30-80 MPa, RIM-PU ~0.5-1 MPa'
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: RIM daha büyük parçaya izin verir.
+  aciklama: Önceden tanımsız girdiydi.
+  dogrulama_deneyi: Malzeme tedarikçisi föyü.
