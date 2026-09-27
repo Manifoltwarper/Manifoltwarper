@@ -1,0 +1,3600 @@
+{
+ "gorev": "zincir",
+ "sonuc": {
+  "zincir": [
+   {
+    "sira": 1,
+    "alan": "standart+modul (tasarim)",
+    "adim": "GECIS A - Gerilim rejimi, K_U, soguk Voc; N_s_max = min(tasarim tavani, sinir tavani)",
+    "girdiler": [
+     "P_panel_W [W]",
+     "senaryo [A_balkon/B_tasinabilir] (formullerde scenario 'A'/'B')",
+     "pazar [TR_marmara/TR_ic/DE_AT/tek_urun] -> std_tmin_site_c [C] (-10/-25/-40/-40)",
+     "gerilim_rejimi [selv60/dvca35/class3/elv30/class2_120] (std_ds_dc_voltage_regime)",
+     "ku_yontemi [varsayilan_1.2 (kendi hucre olcumu oncesi varsayilan) / beyan_alfa] (formulde alpha_declared)",
+     "hjt_voc_cell_V [V] (nominal) ve Voc_sinir [V] (olculen P99; olcum yokken aralik ust ucu 0.77)",
+     "hjt_tc_voc_pct_per_K [%/K] (nominal) ve alfa_sinir [%/K] (olcum yokken aralik ucu -0.28)",
+     "mod_voc_margin [-]",
+     "std_uocmax_default_factor [-] (1.2)",
+     "std_selv_pv_uocmax_limit_v / std_dvca_dc_wet_v / std_selv_wet_no_basic_protection_dc_v [V]",
+     "std_class3_voc_stc_max_v [V], std_class3_isc_max_a [A], std_class3_pmax_w [W]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "V_lim",
+      "birim": "V",
+      "formul_idleri": [],
+      "aciklama": "Kategorik rejimden esleme (formul yok): selv60 -> 60 V ve dvca35 -> 35 V soguk U_OC_MAX'a; class3 -> 35 V STC'ye; elv30 -> 30 V; class2_120 -> 120 V (yalniz kiyas)."
+     },
+     {
+      "anahtar": "K_U, K_U_sinir",
+      "birim": "-",
+      "formul_idleri": [
+       "std_f_ku"
+      ],
+      "aciklama": "beyan_alfa: K_U = 1 + (alfa/100)(T_min - 25); K_U_sinir ayni formul alfa_sinir ile. varsayilan_1.2: ikisi de 1.2 (IEC 60364-7-712 Ek B.1). Kendi hucremizin alfa'si olculup beyan edilene kadar varsayilan_1.2 (-40 C'de nominal K_U 1.159 < 1.2, yani T_min belirsizligini de kapsar)."
+     },
+     {
+      "anahtar": "mod_voc_cell_cold_V",
+      "birim": "V",
+      "formul_idleri": [
+       "mod_f_voc_cell_cold"
+      ],
+      "aciklama": "DEGISIKLIK: = Voc_STC x K_U (std_f_ku ciktisi). Mevcut formul mod_beta_voc_per_K ve mod_T_min_design_C ile hesapliyor, varsayilan_1.2 dalini atliyor. f_hjt_voc_cold emekli (hucre'nin +6 mV payi mod_voc_margin icinde)."
+     },
+     {
+      "anahtar": "N_s_max_tasarim",
+      "birim": "adet",
+      "formul_idleri": [
+       "mod_f_ns_max"
+      ],
+      "aciklama": "floor(V_lim / (mod_voc_cell_cold_V x mod_voc_margin)). 60 V: K_U 1.2 ile 65; beyan_alfa (-0.244 %/K) ile -40 C 67, -37.2 C 67, -30 C 68, -25 C 69, -20 C 70, -9 C 72."
+     },
+     {
+      "anahtar": "N_s_max_sinir",
+      "birim": "adet",
+      "formul_idleri": [
+       "std_f_ns_max"
+      ],
+      "aciklama": "DEGISIKLIK: std_f_ns_max, Voc_sinir ve K_U_sinir ile MARJSIZ kosulur (P99, marjin yerine gecer; ust uste eklenmez). 60 V: K_U 1.2 ve 0.77 V ile 64; beyan_alfa -0.28 %/K, -40 C, 0.77 V ile 65. N_s_max = min(tasarim, sinir) -> varsayilan 64 (70 yalniz olcum sonrasi ve T_min >= -20 C pazarinda)."
+     },
+     {
+      "anahtar": "N_s_max_class3, a_max_classIII_mm, P_class3_max_W",
+      "birim": "adet, mm, W",
+      "formul_idleri": [
+       "mod_f_ns_max_class3",
+       "mod_f_a_max_class3",
+       "mod_f_p_max_class3",
+       "std_f_class3_pmax_eff"
+      ],
+      "aciklama": "Yalniz class3: STC N_s <= 45 (0.77 V sinir ucuyla da 45; cift 44); a <= ~137 mm (sinir Jsc 41.3 ve marj 1.03); P ilk nesil eta 0.22 ile N_s 40-45'te ~161-181 W, olgun (0.255) ~187-210 W; dvca35 ile birlikte (K_U 1.2) N_s <= 36 -> ~145 W."
+     },
+     {
+      "anahtar": "n_series_panels_max",
+      "birim": "adet",
+      "formul_idleri": [
+       "std_f_n_series_panels_max"
+      ],
+      "aciklama": "60 V ve N_s 64'te 1."
+     }
+    ]
+   },
+   {
+    "sira": 2,
+    "alan": "tasarim (hucre+modul)",
+    "adim": "N_s secimi ve eta(a)-CTM(a)-a sabit nokta yinelemesi; N_p ve hucre boyut sinirlari",
+    "girdiler": [
+     "N_s_max [adet] (adim 1)",
+     "ns_kurali [selv_max/sabit/optimize] (optimize -> adim 19 dis dongu)",
+     "ogrenme_durumu [ilk_nesil/olgun/egri] -> wf_learn_weight [-] (varsayilan 1)",
+     "cell_eta_core_start_pct / cell_eta_core_mature_pct [%]",
+     "tau_bulk_ms [ms], preanneal [bool], hjt_preanneal_recovery_frac [-]",
+     "edge_mode [B_arka/B_on/C/D/cizik/baslangic], k_post [-]",
+     "hjt_edge_weq_native_mm, hjt_edge_weq_tls_mm, hjt_edge_weq_repass_mm, hjt_w_eq_start_mm, hjt_tco_excl_mm [mm]",
+     "mod_ctm_optical [-], mod_wire_n_min [adet], mod_wire_d_mm [mm], mod_gap_cell_mm [mm]",
+     "mod_a_cell_max_mm, mod_a_cell_min_mm [mm]",
+     "wafer_area_factor [-]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "N_s",
+      "birim": "adet",
+      "formul_idleri": [
+       "mod_f_ns_select"
+      ],
+      "aciklama": "selv_max: N_s_max'tan cift toplam (varsayilan 64; 35 V dvca35 36; class3 44); sabit: kullanici (> N_s_max ELEME); optimize: [N_s_min (MPPT, adim 4), N_s_max] araliginda aday listesi, secim adim 19'da."
+     },
+     {
+      "anahtar": "hjt_w_eq_mm, hjt_edge_loss_rel",
+      "birim": "mm, -",
+      "formul_idleri": [
+       "f_hjt_w_eq",
+       "f_hjt_edge_loss"
+      ],
+      "aciklama": "Kenar tipi uretim yoluna bagli: on-bolme B 0.61 mm, TLS kesik C 0.8, yeniden pasive D 0.26-0.35 (dogrulanmamis), baslangic 0.75."
+     },
+     {
+      "anahtar": "eta_cell",
+      "birim": "-",
+      "formul_idleri": [
+       "f_hjt_eta_core_calib",
+       "f_hjt_tau_anneal",
+       "f_hjt_eta_tau",
+       "f_hjt_queue_factor",
+       "f_eta_cell"
+      ],
+      "aciklama": "Kanonik hucre verimi; tum alanlar yalniz bunu okur. DEGISIKLIK: f_hjt_eta_tau'daki hjt_eta_core_pct = w x cell_eta_core_start_pct + (1 - w) x cell_eta_core_mature_pct (w = wf_learn_weight; simdi ikisinden biri seciliyor). Ilk nesil a=50-210 mm %21.2-22.2, olgun B-arka %24.8-25.8."
+     },
+     {
+      "anahtar": "mod_ctm_power_calc, n_tel",
+      "birim": "-, adet",
+      "formul_idleri": [
+       "mod_f_loss_interconnect",
+       "mod_f_n_wires_opt",
+       "mod_f_wire_pitch",
+       "mod_f_ctm_calc",
+       "mod_f_design_loop"
+      ],
+      "aciklama": "CTM(a) 0.964-0.992. DEGISIKLIK: mod_f_design_loop yalniz CTM'i yineliyor; eta(a) da donguye alinir (tasarim kurali adim 4)."
+     },
+     {
+      "anahtar": "A_cell_m2, a_cell_mm",
+      "birim": "m2, mm",
+      "formul_idleri": [
+       "mod_f_A_cell",
+       "mod_f_a_wafer",
+       "f_cell_area"
+      ],
+      "aciklama": "Sabit nokta a = 1000 sqrt(P / (N_s N_p eta(a) 1000 CTM(a))); |da| < 0.01 mm'de dur. Ornek N_s 64, ilk nesil eta: 50 W 61, 100 W 85, 200 W 120, 300 W 148, 500 W 191 mm (olgun eta 0.255: 56 / 79 / 112 / 137 / 178 mm)."
+     },
+     {
+      "anahtar": "N_p",
+      "birim": "adet",
+      "formul_idleri": [
+       "mod_f_n_p",
+       "std_f_p_string_max_at_vlim"
+      ],
+      "aciklama": "a > a_max (210 mm; class3'te ~137) veya P > P_string_max ise N_p = ceil((a/a_max)^2); N_s x N_p cift. N_s 64'te 500 W bile N_p = 1."
+     },
+     {
+      "anahtar": "P_cell_W, a_min_mm (kontrol)",
+      "birim": "W, mm",
+      "formul_idleri": [
+       "f_p_cell",
+       "f_hjt_a_min_selv"
+      ],
+      "aciklama": "a_min yalniz kontrol; DEGISIKLIK: icindeki sabit CTM 0.97 yerine mod_ctm_power_calc."
+     }
+    ]
+   },
+   {
+    "sira": 3,
+    "alan": "wafer+kristal",
+    "adim": "a-D eslemesi: yerlesim, k_split, eta(a|D), tatli noktalar, kuantize guc; satin alinan wafer bolme (K3)",
+    "girdiler": [
+     "a_cell_mm [mm]",
+     "k_post [-], n_cut [adet]",
+     "wafer_kaynagi [ic/satin_alma]",
+     "cap_kurali [wafer_capi/sabit_cap/bant]",
+     "D_ingot_mm veya bant [D_min, D_max] [mm] (unite_tanimi'ndan)",
+     "sq_grind_margin_mm, sq_kerf_mm [mm]",
+     "sq_chamfer_max_frac, sq_D_over_a_pseudo [-]",
+     "wafer_geometrisi [psodo_kare/kare/altigen]",
+     "N_s, N_p [adet], eta_cell, mod_ctm_power_calc [-]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "a_wafer_mm",
+      "birim": "mm",
+      "formul_idleri": [
+       "mod_f_a_wafer"
+      ],
+      "aciklama": "= k_post x a_cell (islem sonrasi kesimde); on-bolmede a_cell ile ayni."
+     },
+     {
+      "anahtar": "D_ingot_mm (serbest D)",
+      "birim": "mm",
+      "formul_idleri": [
+       "sq_D_required"
+      ],
+      "aciklama": "Yalniz cap_kurali = wafer_capi (firin tasarimi ters problemi); 260-300 mm UYARI, >300 veya FZ'de >200 ELEME. Ornek k=1: a=156 -> 215, a=182 -> 251, a=210 -> 289 mm."
+     },
+     {
+      "anahtar": "sq_D_ground_mm, k_split",
+      "birim": "mm, adet",
+      "formul_idleri": [
+       "sq_D_ground",
+       "sq_k_max",
+       "sq_k_select"
+      ],
+      "aciklama": "Sabit D'de k_split = sq_k_max."
+     },
+     {
+      "anahtar": "sq_eta_cross = eta(a|D), yerlesim tipi",
+      "birim": "-",
+      "formul_idleri": [
+       "sq_A_brick_side",
+       "sq_A_ps",
+       "sq_eta_kxk",
+       "sq_n_rows",
+       "sq_eta_rows",
+       "sq_n_side",
+       "sq_eta_mix",
+       "sq_eta_cross",
+       "sq_eta_cross_fullsquare",
+       "sq_eta_cross_hex"
+      ],
+      "aciklama": "a izgarasinda tablolanir; tatli nokta = yerel maksimum ve eta >= ~0.66. D=250: a 40 (0.72), 50 (0.66), 90 (0.66), 182 (0.67); D=300: 40, 50 (0.74), 105 ve 210 (0.62). D=210 icin tablo yok (tek parca psodo a ~152 mm, serbest-D esdegeri ~0.67); uretilmeli."
+     },
+     {
+      "anahtar": "A_cell_m2 (yerlesime gore), sq_A_corner_mm2",
+      "birim": "m2, mm2",
+      "formul_idleri": [
+       "A_cell",
+       "sq_A_corner"
+      ],
+      "aciklama": "Psodo-kare (sq_A_ps) veya tam kare; kxk kose parcalari ayri sinif, ayni dizide karistirilmaz."
+     },
+     {
+      "anahtar": "P_panel_gercek_W",
+      "birim": "W",
+      "formul_idleri": [
+       "A_cell",
+       "f_p_cell"
+      ],
+      "aciklama": "DEGISIKLIK: P_gercek = N_s x N_p x f_p_cell(A_cell(a_wafer(D, yerlesim), n_cut)) x CTM. mod_f_P_quantized EMEKLI (ice cizilmis tam kare f_pack = 1/(k sqrt2) varsayiyor; wafer psodo-kare kullaniyor, hucre alaninda ~%5-6 fark). Ornek N_s 64, ilk nesil (turetilmis): D=250 tam psodo ~448 W, yarim ~225, ucte bir ~150; a=90 (k=2) ~111 W; D=210 tam ~314, yarim ~158, ucte bir ~105 W."
+     },
+     {
+      "anahtar": "wf_split_piece_mm",
+      "birim": "mm",
+      "formul_idleri": [
+       "wf_split_piece"
+      ],
+      "aciklama": "K3: satin alinan M10'un k x k bolumu (veya n_cut serit); hucre oncesi bolme deneyle dogrulanmali."
+     }
+    ]
+   },
+   {
+    "sira": 4,
+    "alan": "modul+standart",
+    "adim": "Panel yerlesimi, geometri, mekanik yuk, gerilim/akim penceresi ve sinif bayraklari",
+    "girdiler": [
+     "N_s, N_p [adet]",
+     "a_cell_mm [mm]",
+     "eta_cell, mod_ctm_power_calc, K_U, K_U_sinir [-]",
+     "mod_vmp_cell_stc_V [V], mod_beta_vmp_per_K [1/K]",
+     "mod_T_cell_max_C [C], std_tmin_site_c [C]",
+     "mod_jsc_A_per_cm2 [A/cm2] (sinir Jsc), hjt_jsc_mA_cm2 [mA/cm2] (nominal), mod_bifacial_isc_factor [-]",
+     "mod_cells_per_bypass_max [adet]",
+     "mod_wind_qp_Pa [Pa], mod_wind_cp_net [-], mod_gamma_Q [-], mod_q_test_Pa [Pa]",
+     "build [GG_frameless/GB_framed]",
+     "mod_cable_length_m [m]",
+     "n_series_panels [adet], isolated_converter / pv_batt_isolated / has_lv_circuit [bool]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "n_cols, n_rows",
+      "birim": "adet",
+      "formul_idleri": [
+       "mod_f_layout"
+      ],
+      "aciklama": "Cift sutunlu yerlesim (64 -> 8x8, 40 -> 8x5)."
+     },
+     {
+      "anahtar": "mod_W_mm, mod_L_mm, mod_A_panel_m2, mod_perimeter_m",
+      "birim": "mm, mm, m2, m",
+      "formul_idleri": [
+       "mod_f_W",
+       "mod_f_L",
+       "mod_f_A_panel",
+       "mod_f_perimeter"
+      ],
+      "aciklama": "Alan ve cevre sinifi maliyetlerin surucusu."
+     },
+     {
+      "anahtar": "mod_eta_module",
+      "birim": "-",
+      "formul_idleri": [
+       "mod_f_eta_module"
+      ],
+      "aciklama": "Panel alan verimi; eta_cell ile karistirilmaz."
+     },
+     {
+      "anahtar": "U_OC_MAX (tasarim ve sinir)",
+      "birim": "V",
+      "formul_idleri": [
+       "mod_f_voc_string_cold",
+       "std_f_uoc_max"
+      ],
+      "aciklama": "K_U x N_s x Voc x n_series_panels <= V_lim. N_s 64, K_U 1.2: nominal 57.2 V; sinir (0.77 V) 59.1 V. Sinir kontrolu FALSE -> ELEME."
+     },
+     {
+      "anahtar": "Vmp_sicak, Vmp_sicak_baypas, Vmp_soguk, n_bypass",
+      "birim": "V, V, V, adet",
+      "formul_idleri": [
+       "mod_f_n_bypass",
+       "mod_f_vmp_hot",
+       "mod_f_vmp_hot_bypass"
+      ],
+      "aciklama": "85 C / T_min: N_s 64 (n_bypass 3): 34.1 / 22.4 / 48.4 V (-40 C); N_s 70 (-20 C): 37.3 / 24.5 / 50.4 V; 35 V dali N_s 36: 19.2 / 9.6 / 27.2 V. Elektronik el_V_mp_* yerine bunlari okur."
+     },
+     {
+      "anahtar": "Isc, ISC_MAX",
+      "birim": "A",
+      "formul_idleri": [
+       "mod_f_isc",
+       "mod_f_isc_max",
+       "f_hjt_isc"
+      ],
+      "aciklama": "Sinir kontrolleri (ISC_MAX = 1.25 Isc, Class III 8 A, kablo, konnektor, baypas, sigorta) mod_f_isc ile sinir Jsc'den (41.3 mA/cm2); f_hjt_isc nominal Jsc (40) ile yalniz performans ve akima bagli kayiplar."
+     },
+     {
+      "anahtar": "sinif bayraklari",
+      "birim": "bool",
+      "formul_idleri": [
+       "std_f_selv_ok",
+       "std_f_dvca_wet_ok",
+       "std_f_class3_ok",
+       "std_f_connector_tool_required",
+       "std_f_connector_class2_required",
+       "std_f_imd_required",
+       "std_f_rohs_pv_applies"
+      ],
+      "aciklama": "Sinir degerlerle kosulur; secilen rejimde FALSE -> ELEME; kosullu tip testi ve konnektor maliyetlerini acar/kapatir."
+     },
+     {
+      "anahtar": "cam kalinligi, cerceve, kutle",
+      "birim": "mm, kg/m, kg",
+      "formul_idleri": [
+       "mod_f_q_req",
+       "mod_f_q_design",
+       "mod_f_t_req_GG",
+       "mod_f_t_req_GB",
+       "mod_f_t_glass_select",
+       "mod_f_frame_kg_per_m",
+       "mod_f_mass"
+      ],
+      "aciklama": "Test yuku 2.25 qp cp_net (orn. ~3440 Pa); GG 2+2 <= 3600 Pa'da 500 W'a kadar."
+     },
+     {
+      "anahtar": "kablo kesiti, kablo kaybi, baypas kaybi",
+      "birim": "mm2, -, W",
+      "formul_idleri": [
+       "mod_f_cable_cross",
+       "mod_f_cable_loss_stc",
+       "mod_f_cable_loss_energy",
+       "mod_f_p_diode"
+      ],
+      "aciklama": "Panel-kutu kablosu modul alaninda (K5)."
+     }
+    ]
+   },
+   {
+    "sira": 5,
+    "alan": "tasarim+elektronik+standart",
+    "adim": "Kutu eslemesi: n_panel_per_box, P_box, P_inv, MPPT kanallari, paralel koruma",
+    "girdiler": [
+     "P_panel_gercek_W [W]",
+     "senaryo",
+     "fis_tipi [schuko/ozel_enerji_fisi/sabit] (formulde plug_type)",
+     "kutu_kurali [sabit_n/hedef_guc]",
+     "std_plugin_schuko_pv_max_wp / std_plugin_special_plug_pv_max_wp [Wp]",
+     "el_grid_limit_VA [VA]",
+     "el_n_panel_per_mppt [-], el_P_ch_max_W [W]",
+     "Isc, ISC_MAX [A]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "n_panel_per_box",
+      "birim": "adet",
+      "formul_idleri": [
+       "std_f_n_panel_max_plugin"
+      ],
+      "aciklama": "min(kutu_kurali n, floor(P_pv_kutu_maks / P)); A-Schuko 960 Wp, ozel fis 2000 Wp (fis_tipi ile, belirsizlik araligi degil); class3'te kutu toplami <= 240 W. Pil kisitlari (adim 6: kutu_enerji_siniri, B'de 5 kg) n'yi ayrica sinirlar."
+     },
+     {
+      "anahtar": "P_box_W, P_inv_W",
+      "birim": "W, VA",
+      "formul_idleri": [
+       "el_f_P_box",
+       "el_f_P_inv"
+      ],
+      "aciklama": "P_box = n x P; P_inv = min(P_box, 800 VA) (A)."
+     },
+     {
+      "anahtar": "n_mppt, P_ch_W",
+      "birim": "adet, W",
+      "formul_idleri": [
+       "el_f_n_mppt",
+       "el_f_P_ch"
+      ],
+      "aciklama": "Kanal basina 300-500 W; P >= 200 W'ta panel basina MPPT."
+     },
+     {
+      "anahtar": "sigorta/OCP, bara Isc",
+      "birim": "bool, A",
+      "formul_idleri": [
+       "el_f_fuse_needed",
+       "std_f_string_ocp_needed",
+       "std_f_isc_max_bus"
+      ],
+      "aciklama": "Paralel panel + pil geri beslemesi; sinir Jsc ile."
+     },
+     {
+      "anahtar": "plugin_ok, energy_hazard",
+      "birim": "bool",
+      "formul_idleri": [
+       "std_f_plugin_ok",
+       "std_f_energy_hazard"
+      ],
+      "aciklama": "A'da fis siniri asimi ELEME; tehlikeli enerji erisim onlemleri."
+     }
+    ]
+   },
+   {
+    "sira": 6,
+    "alan": "pil+elektronik+standart",
+    "adim": "Pil paketi: format/kimya secimi, E_cell, seri/paralel, kutu enerjisi, gerilim penceresi, MPPT modu, sarj sinirlari, mevzuat siniflari",
+    "girdiler": [
+     "pil_formati [otomatik/26700/prismatic_small/prismatic] (formulde bat_format), pil_kimyasi [otomatik/LO/NFPP/LFP] (bat_chem)",
+     "kutu_enerji_siniri [le_1800Wh/serbest] (bat_ds_box_energy_cap, KARAR kullanici)",
+     "bat_wh_usable_per_wp_A / _B [Wh/Wp]",
+     "bat_usable_fraction_* [-], bat_capacity_oversize [-]",
+     "V_lim_batt [V], bat_v_lim_margin [-]",
+     "bat_v_min_cutoff_V [V]",
+     "bat_charge_c_max_cyl / _pris / _subzero [1/h], bat_pv_peak_factor [-]",
+     "std_tmin_site_c [C]",
+     "n_panel_per_box [adet], P_box_W [W]",
+     "Vmp_sicak, Vmp_sicak_baypas, Vmp_soguk, U_OC_MAX [V]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "E_target_Wh (nominal)",
+      "birim": "Wh",
+      "formul_idleri": [
+       "bat_f01_wh_usable_per_wp",
+       "bat_f05_usable_fraction",
+       "bat_f07_box_energy_target",
+       "el_f_E_batt_target"
+      ],
+      "aciklama": "E_nom = max(n P WhWp / usable, P_box x bat_pv_peak_factor / C_max(format, T)). el_f_E_batt_target'taki el_h_store_h ve sabit 0.5C kaldirilir."
+     },
+     {
+      "anahtar": "bat_format, bat_chem (otomatik)",
+      "birim": "-",
+      "formul_idleri": [],
+      "aciklama": "Kural (bat_ds_cell_format, bat_ds_chemistry; formul yok): E_target < ~800 Wh -> 26700 LO; 800-2000 Wh -> prismatic_small (NFPP 20 Ah); > 2000 Wh -> prismatic (NFPP 50 Ah). E_target once LO kullanilabilir oraniyla, >= 800 Wh ise NFPP oraniyla yeniden hesaplanir. Tipik sonuc: A (960 Wp) NFPP 20 Ah, B 26700 LO."
+     },
+     {
+      "anahtar": "E_cell_Wh",
+      "birim": "Wh",
+      "formul_idleri": [
+       "bat_f02_cell_v_max",
+       "bat_f03_cell_v_min",
+       "bat_f04_cell_v_nom",
+       "bat_f06_cell_energy"
+      ],
+      "aciklama": "Kanonik E_cell formata bagli: 20 Ah NFPP 58 Wh (A varsayilan), 26700 LO 10.23 Wh, 50 Ah NFPP ~142.5-145 Wh; el_E_cell_Wh (20 Wh) kaldirilir."
+     },
+     {
+      "anahtar": "N_s_batt",
+      "birim": "adet",
+      "formul_idleri": [
+       "bat_f08_ns",
+       "el_f_N_batt_series_max",
+       "std_f_n_batt_series_max"
+      ],
+      "aciklama": "NFPP 15, LO 14 (0.97 marjli); dvca35 ve erisilebilir port icin LO 8."
+     },
+     {
+      "anahtar": "N_p_batt, cells_per_box, E_box_Wh, kullanilabilir Wh",
+      "birim": "adet, adet, Wh, Wh",
+      "formul_idleri": [
+       "bat_f11_np",
+       "bat_f12_cells_per_box",
+       "bat_f13_box_energy",
+       "bat_f14_cells_per_panel",
+       "bat_f15_usable",
+       "el_f_E_batt_eff"
+      ],
+      "aciklama": "Kuantizasyon. A 960 Wp: NFPP 20 Ah 15S x 2P = 1740 Wh (26700 LO olsaydi 14S x 14P = 2005 Wh > 2 kWh). le_1800Wh altinda E_box > 1800 Wh adayi ELEME (kutu_kurali daha kucuk n'yi secer; sessiz n dusurme yok)."
+     },
+     {
+      "anahtar": "V_batt_min, V_batt_max",
+      "birim": "V",
+      "formul_idleri": [
+       "bat_f09_v_batt_max",
+       "bat_f10_v_batt_min",
+       "el_f_V_batt_window"
+      ],
+      "aciklama": "NFPP 15S 30.0-57.0 V; LO 14S 28.0-55.3 V; LO 8S 16.0-31.6 V."
+     },
+     {
+      "anahtar": "mppt_mode, k_worst",
+      "birim": "-",
+      "formul_idleri": [
+       "el_f_mppt_mode",
+       "el_f_k_worst"
+      ],
+      "aciklama": "Modul penceresiyle (adim 4) hesaplanir: N_s 64 (22.4-48.4 V) ile NFPP 15S ve LO 14S -> buck-boost; buck disi topolojide bagimsiz OVP."
+     },
+     {
+      "anahtar": "I_max, sarj C-orani, soguk guc, isitici",
+      "birim": "A, 1/h, W, bool",
+      "formul_idleri": [
+       "bat_f16_i_max",
+       "bat_f17_charge_c",
+       "bat_f18_charge_limited",
+       "bat_f19_cold_power",
+       "bat_f20_heater",
+       "el_f_P_charge_max"
+      ],
+      "aciklama": "Prizmatik 0.5C, 26700 1.0C, 0 C altinda 0.2C; PV kirpma yumusak kisit."
+     },
+     {
+      "anahtar": "paket kutlesi ve mevzuat siniflari",
+      "birim": "kg, bool",
+      "formul_idleri": [
+       "bat_f21_pack_mass",
+       "bat_f22_eu_industrial",
+       "bat_f23_eu_over_2kwh",
+       "std_f_batt_mass",
+       "std_f_batt_is_portable",
+       "std_f_batt_is_sbess",
+       "std_f_batt_gt2kwh",
+       "std_f_air_fully_regulated",
+       "std_f_air_pax_allowed",
+       "el_f_reg_check"
+      ],
+      "aciklama": "SBESS (A), <= 5 kg tasinabilir (B), > 2 kWh yukumlulukleri (kutu_enerji_siniri = serbest ise maliyet acilir), hava tasimasi."
+     },
+     {
+      "anahtar": "omur sonu SOH",
+      "birim": "-",
+      "formul_idleri": [
+       "bat_f51_cycles_needed",
+       "bat_f52_soh_end",
+       "bat_f53_life_ok"
+      ],
+      "aciklama": "Veri sayfasina bagli kontrol (A/30 C'de LO silindirik SOH 0.67 < 0.7 esik; NFPP prizmatik 0.77)."
+     }
+    ]
+   },
+   {
+    "sira": 7,
+    "alan": "kristal",
+    "adim": "Firin basina kapasite, enerji ve kampanya (D, yontem ve ogrenme durumuna bagli, talepten bagimsiz)",
+    "girdiler": [
+     "D_ingot_mm [mm]",
+     "kristal_yontemi [RCz/CCz/FZ] (formulde xtal_mode), xtal_jacket [bool], cz_feeder [cable/side]",
+     "cz_crucible_diameter_ratio [-], cz_insulation_thickness_m [m], cz_ins_loss_mult [-]",
+     "cz_zd_yield, cz_availability_unplanned [-] (wf_learn_weight ile harmanlanir; kristalin 'ogrenme yili' varyanti w=1)",
+     "cz_g_pull [-], cz_shoulder_height_ratio, cz_tail_length_ratio [-], cz_L_body_max_mm [mm]",
+     "cz_rho_window_min/max_ohmcm (hucre penceresi) [ohm.cm], hjt_tau_srh_target_ms [ms]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "v_govde, kutle hizi, v/G",
+      "birim": "mm/min, kg/h, mm2/(min.K)",
+      "formul_idleri": [
+       "cz_fv",
+       "cz_v_theory_mm_min",
+       "cz_v_body_mm_min",
+       "cz_A_crystal_m2",
+       "cz_mdot_body_kg_h",
+       "cz_v_over_G"
+      ],
+      "aciklama": "v ~ D^-0.5 yalniz teori; f_v 0.36-0.45."
+     },
+     {
+      "anahtar": "P_hold_kW, P_supply_kW, isitici akimi",
+      "birim": "kW, kW, A",
+      "formul_idleri": [
+       "cz_D_crucible_m",
+       "cz_r_ins_in_m",
+       "cz_H_hotzone_m",
+       "cz_k_eff_W_mK",
+       "cz_Q_side_kW",
+       "cz_Q_topbottom_kW",
+       "cz_Q_open_kW",
+       "cz_Q_crystal_kW",
+       "cz_argon_slpm",
+       "cz_Q_gas_kW",
+       "cz_P_hold_kW",
+       "cz_P_supply_kW",
+       "cz_P_melt_net_kW",
+       "cz_heater_current_A",
+       "cz_P_aux_kW"
+      ],
+      "aciklama": "H5: kayip sicak bolge yuzeyiyle; guc kaynagi bagimsiz tasarim degiskeni."
+     },
+     {
+      "anahtar": "m_charge, m_ingot, cz_L_body_mm, baglayici kisit",
+      "birim": "kg, kg, mm, -",
+      "formul_idleri": [
+       "cz_m_charge_kg",
+       "cz_m_ingot_kg",
+       "cz_L_body_mm"
+      ],
+      "aciklama": "cz_m_ingot_kg = min(g_pull x m_charge, L_body_max kutlesi). g_pull baglayiciysa (120-210 mm) deger fiilen koniler dahil cekilen eriyiktir; L_body_max baglayiciysa (250-260 mm, 2.5 m) yalniz govdedir. DEGISIKLIK: m_cryst = m_govde + koni kutleleri (pi/12 D^2 h; esdeger boy ~0.33 D, kutlenin %3-4'u) ayri tutulur ve L_body yalniz govdeden."
+     },
+     {
+      "anahtar": "kampanya: ingot/pota, sicak saat, takvim",
+      "birim": "adet, h",
+      "formul_idleri": [
+       "cz_t_recharge_h",
+       "cz_t_between_h",
+       "cz_t_cycle_h",
+       "cz_t_first_melt_h",
+       "cz_n_life",
+       "xtal_feed_Fe_cm3",
+       "cz_Fe_tail_cm3",
+       "cz_n_max_metal",
+       "cz_n_max_carbon",
+       "cz_n_ingots_per_crucible",
+       "cz_T_hot_h",
+       "cz_T_campaign_h",
+       "cz_m_good_per_campaign_kg"
+      ],
+      "aciklama": "Kampanya pota omru, metal ve karbon birikimiyle sinirli."
+     },
+     {
+      "anahtar": "xtal_kg_per_day",
+      "birim": "kg/firin/takvim gunu",
+      "formul_idleri": [
+       "xtal_kg_per_day"
+      ],
+      "aciklama": "KANONIK TANIM: ZD toplam kristallesen kutle (tac + govde + kuyruk). Mevcut degerler ESKI tanimla (capa gore karisik), yeniden hesaplanacak (+-%3-5): olgun baz 120 mm 31, 160 53, 210 86, 260 120; ogrenme yili (ilk nesil, MC medyan) 15.1 / 27.8 / 45.9 / 66.0; 250 mm log-log ara degerleme ~113 / ~62 (turetilmis, kristal modeliyle kosulmali)."
+     },
+     {
+      "anahtar": "kWh/kg (zaman + ergitme)",
+      "birim": "kWh/kg",
+      "formul_idleri": [
+       "cz_E_time_kWh_per_kg",
+       "cz_E_melt_kWh_per_kg",
+       "xtal_kwh_per_kg"
+      ],
+      "aciklama": "Zaman ve alan bilesenleri ayri siniflanir; 210 mm olgun 15.6, ogrenme yili ~29."
+     },
+     {
+      "anahtar": "ozdirenc penceresi",
+      "birim": "ohm.cm, -",
+      "formul_idleri": [
+       "cz_rho_at_g",
+       "cz_g_window",
+       "cz_frac_in_window"
+      ],
+      "aciklama": "cz_frac_in_window adim 9-10'daki kutle dengesine carpan (bolen) olarak girer; varsayilan pencere 0.3-2.1 ohm.cm ile g_window 0.95 >= g_pull 0.8 -> 1.0; 0.8-2.0 penceresinde 0.945."
+     },
+     {
+      "anahtar": "FZ dali",
+      "birim": "mm/min, kW, kg/gun, kWh/kg",
+      "formul_idleri": [
+       "fz_v_mm_min",
+       "fz_P_kW",
+       "fz_kg_per_day",
+       "fz_kwh_per_kg"
+      ],
+      "aciklama": "Yalniz D <= 200 mm."
+     },
+     {
+      "anahtar": "hjt_tau_srh_target_ms",
+      "birim": "ms",
+      "formul_idleri": [
+       "f_hjt_tau_target"
+      ],
+      "aciklama": "Kristal kalite hedefi (kayip <= 0.3 puan -> 3.7 ms)."
+     }
+    ]
+   },
+   {
+    "sira": 8,
+    "alan": "wafer+hucre",
+    "adim": "m2 basina kutle dengesi, kalinlik, kerf, kirilma ve geri donusum (hacimden bagimsiz)",
+    "girdiler": [
+     "a_wafer_mm [mm], A_cell_m2 [m2], sq_eta_cross [-], k_split [adet]",
+     "t_wafer politikasi (wf_t_ascut_firstgen/mature_um) [um]",
+     "hjt_si_etch_removal_um [um]",
+     "wf_learn_weight [-] (varsayilan 1 = ilk nesil)",
+     "cz_L_body_mm [mm], D_ingot_mm [mm], cz_shoulder_height_ratio / cz_tail_length_ratio [-] (wf_crown_h_over_D / wf_tail_h_over_D yerine)",
+     "wf_crop_mm, wf_brick_end_mm, saw_L_load_mm [mm]",
+     "wf_slab_recovery_frac, wf_etch_depth_um, wf_scrap_chunk_mm"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "harmanlanmis kerf, besleme, kirilma referansi, tel",
+      "birim": "um, mm/dk, -, -",
+      "formul_idleri": [
+       "wf_learn_weight",
+       "saw_kerf_blend",
+       "saw_feed_blend",
+       "wf_break_wafering_blend",
+       "wf_break_cell_blend",
+       "saw_wire_mult_blend",
+       "saw_kerf_calc"
+      ],
+      "aciklama": "Tek ogrenme agirligi tum alanlarda ayni; wf_break_cell_ref varsayilan ilk nesil 0.02."
+     },
+     {
+      "anahtar": "t_min_ascut, t_esit_kirilma, t_cell",
+      "birim": "um",
+      "formul_idleri": [
+       "wf_t_min_ascut",
+       "wf_t_equal_break",
+       "f_hjt_t_cell"
+      ],
+      "aciklama": "t >= 80 + 12 = 92 um."
+     },
+     {
+      "anahtar": "wf_P_break_wafering, wf_P_break_cell",
+      "birim": "-",
+      "formul_idleri": [
+       "wf_P_break_wafering",
+       "wf_P_break_cell",
+       "wf_sigma_rel"
+      ],
+      "aciklama": "Kanonik kirilma modeli. Ilk nesil hucre kirilmasi: 50 mm %0.53, 105 %0.74, 156 %1.08, 182 %1.42, 210 %1.91; olgun %0.07-0.30."
+     },
+     {
+      "anahtar": "hjt_yield_total",
+      "birim": "-",
+      "formul_idleri": [
+       "f_hjt_yield"
+      ],
+      "aciklama": "hat verimi (harmanli) x (1 - wf_P_break_cell); f_hjt_break emekli. Ilk nesil ~0.883-0.895, olgun ~0.98."
+     },
+     {
+      "anahtar": "wf_m_wafer, wf_m_brick, wf_m_body, wf_m_cryst",
+      "birim": "kg/m2",
+      "formul_idleri": [
+       "saw_kerf_frac",
+       "wf_brick_len_yield",
+       "wf_eta_crop",
+       "wf_eta_cone",
+       "wf_m_wafer",
+       "wf_m_brick",
+       "wf_m_body",
+       "wf_m_cryst"
+      ],
+      "aciklama": "Kristalin xtal_kg_ingot_per_m2_wafer'i yerine. Ilk nesil serbest D 0.68-0.73, olgun 0.57-0.65; sabit D=250 ilk nesil 0.67 (a 50) - 1.00 (a 105), a=182'de 0.71; D=300 0.61-1.40 kg/m2."
+     },
+     {
+      "anahtar": "geri donusum ve taze poli referansi",
+      "birim": "kg/m2, -",
+      "formul_idleri": [
+       "sq_slab_thick",
+       "sq_cut_area",
+       "wf_etch_frac",
+       "wf_m_rec",
+       "wf_m_melt_ref",
+       "wf_m_fresh_ref",
+       "wf_k_melt",
+       "wf_poly_ratio",
+       "wf_kerf_loss",
+       "wf_si_etched",
+       "wf_hf_use"
+      ],
+      "aciklama": "wf_m_rec kristalin poli dengesine girer (xtal_recycle_kg_day yerine); ozdirenc penceresi disi kutle de geri donusume eklenir."
+     }
+    ]
+   },
+   {
+    "sira": 9,
+    "alan": "model (unite_tanimi)",
+    "adim": "GECIS B - Hacim capasi: W_unit_yr [panel Wp/yil] tanimi, unite_tanimi'na gore kapasite, kutu adedi ve kapsam haritasi",
+    "girdiler": [
+     "unite_tanimi [U1_firin_capali/U2_saha_hucre_kopya_kristal/U3_k9_capali/U4_satin_wafer_hucre_modul/U5_iki_katman]",
+     "N_units, N_units_planned [adet]",
+     "xtal_kg_per_day [kg/gun], cz_frac_in_window [-], wf_m_cryst_kg_m2 [kg/m2] (U1/U2/U5 firin fazi)",
+     "eta_cell, hjt_yield_total, mod_ctm_power_calc, mod_module_yield [-]",
+     "hjt_carrier_side_mm, takt ve paketleme (U2/U4/U5)",
+     "bat_line_cells_per_year [hucre/yil], E_cell_Wh, cells_per_box (U3)",
+     "bat_pack_cells_per_h_* [hucre/h], el_hours_per_year_h [h/yil], eco_uptime_frac_default [-] (U5)",
+     "mod_lam_area_m2, mod_lam_cycle_min (U5)",
+     "el_N_demand_per_yr [kutu/yil] (talep tavani), u_hedef [-]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "hjt_line_W_per_yr",
+      "birim": "W/yil (hucre)",
+      "formul_idleri": [
+       "f_hjt_n_per_row",
+       "f_hjt_eta_pack",
+       "f_hjt_pecvd_cap",
+       "f_hjt_pvd_cap",
+       "f_hjt_wet_cap",
+       "f_hjt_print_cap",
+       "f_hjt_line_cap"
+      ],
+      "aciklama": "HUCRE W'i. L=1 m: ilk nesil 31-39 MW (29-37 MWp panel), olgun 40-50 MW (38-48 MWp); a=210 alt uc (tasiyici paketleme)."
+     },
+     {
+      "anahtar": "K9 hat kapasitesi",
+      "birim": "hucre/yil, MWh/yil",
+      "formul_idleri": [
+       "bat_f26_electrode_area",
+       "bat_f27_own_yield",
+       "bat_f28_line_capacity",
+       "bat_f29_line_mwh"
+      ],
+      "aciklama": "Yalniz pil_kaynagi = ic_hat iken capa (U3)."
+     },
+     {
+      "anahtar": "laminator ve paket hatti kapasitesi",
+      "birim": "panel/h, adet",
+      "formul_idleri": [
+       "mod_f_lam_panels_per_cycle",
+       "mod_f_lam_capacity",
+       "bat_f42_pack_lines"
+      ],
+      "aciklama": "U5 montaj unitesi capasi; cizelge 4000 h x A_teknik 0.9 = 3600 h: laminator 4.3-7.2 MWp/yil; paket hatti 26700 1.44 M hucre (14.7 MWh), prizmatik 216 bin hucre (20 Ah 12.5 MWh)."
+     },
+     {
+      "anahtar": "W_unit_yr",
+      "birim": "Wp/yil (panel)",
+      "formul_idleri": [
+       "wf_m2_per_day",
+       "cz_frac_in_window",
+       "eco_unit_output_W_yr",
+       "f_hjt_required_W"
+      ],
+      "aciklama": "TEK TANIM panel Wp. U1: N_f x xtal_kg_per_day x 365 x cz_frac_in_window / wf_m_cryst x eta_cell x 1000 x hjt_yield_total x CTM x mod_module_yield. U2/U5 firin fazi: ayni zincir modul basina. U3: K9 x E_cell x verimler / (Wh/Wp nominal) (f_hjt_required_W panel Wp olarak; DEGISIKLIK: hucre W icin /(CTM x mod_module_yield)). U4/U5 cekirdek: hjt_line_W_per_yr x CTM x mod_module_yield x u_hedef. Hepsinde min(kapasite, talep). eco_unit_output_W_yr hucre W verir; x CTM x mod_module_yield ile panele cevrilir. Ornek hacimler kullanilmaz."
+     },
+     {
+      "anahtar": "boxes_per_yr",
+      "birim": "kutu/yil",
+      "formul_idleri": [
+       "std_f_boxes_per_year_unit",
+       "el_f_N_box_batt_yr",
+       "el_f_N_box_yr"
+      ],
+      "aciklama": "= W_unit_yr / (n x P_panel_gercek); K9 tavani yalniz ic_hat'ta (satin_hucre'de paket hatti kapasitesi)."
+     },
+     {
+      "anahtar": "n_units_served, kapsam haritasi",
+      "birim": "adet",
+      "formul_idleri": [
+       "f_hjt_util"
+      ],
+      "aciklama": "xtal_furnace_scope, hjt_ts_line_sharing, mod_ds_line_scope U secimine gore atanir."
+     }
+    ]
+   },
+   {
+    "sira": 10,
+    "alan": "model (akis)",
+    "adim": "Gunluk akislar (365 takvim gunu): panel/gun -> hucre/gun -> wafer/gun -> m2/gun -> kristallesen kg/gun (U1'de ayni zincir firindan itilir)",
+    "girdiler": [
+     "W_unit_yr [Wp/yil]",
+     "P_panel_gercek_W [W]",
+     "N_s, N_p [adet]",
+     "mod_module_yield, hjt_yield_total [-]",
+     "A_cell_m2 [m2], wf_m_cryst_kg_m2 [kg/m2], cz_frac_in_window [-]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "panels_per_day",
+      "birim": "panel/gun",
+      "formul_idleri": [
+       "mod_f_panels_per_day_sync"
+      ],
+      "aciklama": "Genel: W_unit_yr / (365 x P_panel_gercek). mod_f_panels_per_day_sync yalniz U3'te ve op_days_per_year = 365 ile."
+     },
+     {
+      "anahtar": "cells_per_day",
+      "birim": "hucre/gun",
+      "formul_idleri": [
+       "mod_f_cells_demand"
+      ],
+      "aciklama": "panels_per_day x N_s x N_p / mod_module_yield (iyi hucre ihtiyaci)."
+     },
+     {
+      "anahtar": "hjt_required_m2_per_h, wafer_per_day_needed",
+      "birim": "m2/h, wafer/gun",
+      "formul_idleri": [
+       "f_hjt_required_m2"
+      ],
+      "aciklama": "DEGISIKLIK: wafer_per_day_needed = hjt_required_m2_per_h x 24 / A_cell_m2 (= cells_per_day / hjt_yield_total); mevcut formul hjt_yield_total'i ikinci kez boluyor (ilk nesilde ~%13 sisirme)."
+     },
+     {
+      "anahtar": "wf_m2_per_day, wf_wafers_per_day",
+      "birim": "m2/gun, wafer/gun",
+      "formul_idleri": [
+       "wf_m2_per_day",
+       "wf_wafers_per_day"
+      ],
+      "aciklama": "U1'de N_furnace x xtal_kg_per_day x cz_frac_in_window / wf_m_cryst (itme); digerlerinde talepten (cekme)."
+     },
+     {
+      "anahtar": "xtal_ingot_demand_kg_day",
+      "birim": "kg/gun",
+      "formul_idleri": [
+       "wf_m_cryst"
+      ],
+      "aciklama": "= wf_m2_per_day x wf_m_cryst_kg_m2 / cz_frac_in_window (kanonik ZD toplam kristallesen tanimiyla). Ilk nesil ~3.86, olgun ~2.58 g kristallesen / panel Wp."
+     }
+    ]
+   },
+   {
+    "sira": 11,
+    "alan": "kristal",
+    "adim": "Firin sayisi, kullanim, poli/geri donusum akislari ve saatlik maliyet siniflari",
+    "girdiler": [
+     "xtal_ingot_demand_kg_day [kg/gun]",
+     "xtal_furnace_scope [unite/saha] (unite_tanimi'ndan)",
+     "xtal_kg_per_day [kg/gun/firin]",
+     "wf_m_rec_kg_m2 x wf_m2_per_day [kg/gun]",
+     "xtal_pot_scrap_frac_of_charge [-]",
+     "eco_* fiyatlar ve eco_crf_tax_machine [1/yil]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "N_furnace, xtal_utilization",
+      "birim": "adet, -",
+      "formul_idleri": [
+       "N_furnace",
+       "xtal_utilization"
+      ],
+      "aciklama": "Bolunmezlik; u < 1 ise sabit maliyet 1/u ile artar; pota degisimi icin tampon/N+1. Ogrenme ile kg/gun ~2 kat artar -> ilk nesilde gereken firin olgunda yariya iner (fazlama)."
+     },
+     {
+      "anahtar": "pota artigi, taze poli",
+      "birim": "kg/gun",
+      "formul_idleri": [
+       "xtal_pot_scrap_kg_day",
+       "xtal_poly_new_kg_day"
+      ],
+      "aciklama": "Taze = ZD iyi kutle + pota artigi - wafer geri donusu (wf_m_rec)."
+     },
+     {
+      "anahtar": "firin saati maliyetleri (sabit/degisken) ve donusum",
+      "birim": "USD/h, USD/kg",
+      "formul_idleri": [
+       "cz_capex_usd",
+       "cz_cost_capex_usd_h",
+       "cz_cost_crucible_usd_h",
+       "cz_cost_hotzone_usd_h",
+       "cz_cost_argon_usd_h",
+       "cz_cost_elec_time_usd_h",
+       "cz_cost_elec_melt_usd_per_kg",
+       "cz_cost_labor_fixed_usd_h",
+       "cz_cost_labor_crew_usd_h",
+       "cz_cost_outage_usd_h",
+       "cz_cost_fixed_usd_h",
+       "cz_cost_var_usd_h",
+       "xtal_cost_per_furnace_hour_usd",
+       "xtal_conversion_cost_usd_per_kg",
+       "fz_cost_per_hour_usd",
+       "fz_conversion_cost_usd_per_kg"
+      ],
+      "aciklama": "cz_cost_capex_usd_h'deki xtal_wacc yerine eco_crf_tax_machine; donusum yalniz raporlama."
+     },
+     {
+      "anahtar": "altyapi arayuzu",
+      "birim": "Nm3/kg, kVA, kW, m",
+      "formul_idleri": [
+       "cz_argon_nm3_per_kg",
+       "xtal_backup_power_kVA",
+       "xtal_heat_load_kW",
+       "xtal_puller_height_m"
+      ],
+      "aciklama": "Argon, yedek guc, sogutma, bina yuksekligi."
+     },
+     {
+      "anahtar": "yap/al karsilastirmasi",
+      "birim": "USD/m2",
+      "formul_idleri": [
+       "xtal_make_cost_usd_m2",
+       "xtal_buy_cost_usd_m2",
+       "xtal_kg_ingot_per_m2_wafer",
+       "xtal_recycle_kg_day"
+      ],
+      "aciklama": "xtal_kg_ingot_per_m2_wafer ve xtal_recycle_kg_day EMEKLI (yerine wf_m_cryst ve wf_m_rec); yalniz geriye donuk karsilastirma icin listelendi."
+     }
+    ]
+   },
+   {
+    "sira": 12,
+    "alan": "wafer",
+    "adim": "Testere, kare kesim, muayene sayisi ve donusum maliyeti; satin alma dali",
+    "girdiler": [
+     "wf_m2_per_day [m2/gun], wf_wafers_per_day [wafer/gun]",
+     "a_wafer_mm [mm], t_wafer_um, saw_kerf_blend [um]",
+     "saw_L_load_mm, saw_W_web_mm [mm], saw_uptime [-]",
+     "wafer_kaynagi, wafer_chain_is_cn [anahtar]",
+     "eco_crf_tax_machine, iscilik ve elektrik (altyapi)"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "testere kapasitesi",
+      "birim": "wafer/h, m2/h, MW/yil",
+      "formul_idleri": [
+       "saw_N_wires",
+       "saw_n_side",
+       "saw_feed",
+       "saw_t_cycle",
+       "saw_wafers_per_h",
+       "saw_m2_per_h",
+       "saw_MW_per_yr"
+      ],
+      "aciklama": "600 mm ilk nesil 17-28 m2/h -> kanonik ilk nesil eta (0.221) ile ~32-55 MW/yil hucre-esdegeri (~27-47 MWp panel); wafer alaninin 36-62 MW/yil'i eta 0.25 ile idi."
+     },
+     {
+      "anahtar": "N_saw, saw_util, cevrim/gun",
+      "birim": "adet, -, 1/gun",
+      "formul_idleri": [
+       "N_saw",
+       "saw_util",
+       "saw_cycles_per_day"
+      ],
+      "aciklama": "Tek firinli unitede kullanim dusuk (U1 ilk nesil ~%10-15); bir testere 6-10 firini besleyebilir."
+     },
+     {
+      "anahtar": "N_inspect, wf_inspect_util",
+      "birim": "adet, -",
+      "formul_idleri": [
+       "N_inspect",
+       "wf_inspect_util"
+      ],
+      "aciklama": "Adet bazli basamakli istasyonlar."
+     },
+     {
+      "anahtar": "wafer donusum maliyeti",
+      "birim": "USD/m2",
+      "formul_idleri": [
+       "saw_capex_cost",
+       "saw_wire_cost",
+       "saw_energy",
+       "saw_maint_cost",
+       "saw_beam_cost",
+       "sq_capex_cost",
+       "sq_consumable_cost",
+       "wf_station_capex_cost",
+       "wf_labor",
+       "wf_kerf_cost",
+       "wf_etch_cost",
+       "wf_wafering_conv"
+      ],
+      "aciklama": "fin_crf yerine eco_crf_tax_machine."
+     },
+     {
+      "anahtar": "satin alma dali ve yap-al farki",
+      "birim": "USD/m2, USD/W",
+      "formul_idleri": [
+       "wf_buy_price_chain",
+       "wf_buy_cost_m2",
+       "wf_buy_cost_W",
+       "wf_split_cost",
+       "wf_poly_price_chain",
+       "wf_poly_cost",
+       "wf_make_minus_buy"
+      ],
+      "aciklama": "M10 teslim ~4.91 USD/m2 -> ilk nesil zincirle (~186 Wp/m2) ~2.6 c/Wp (eski 1.96 c/W eta 0.25 ile)."
+     }
+    ]
+   },
+   {
+    "sira": 13,
+    "alan": "hucre",
+    "adim": "Hucre hatti kullanim/paylasim, malzeme, gaz-kimya akislari ve maliyet siniflari",
+    "girdiler": [
+     "hjt_required_W_per_yr [W/yil, hucre], hjt_required_m2_per_h [m2/h]",
+     "hjt_line_m2_per_h [m2/h], n_units_served [adet]",
+     "eta_cell, hjt_yield_total [-], A_cell_m2 [m2], a_cell_mm [mm]",
+     "metalizasyon [ag/ag_cu/cu_kaplama], hjt_ts_operation_mode",
+     "eco_* fiyatlar, eco_crf_tax_machine"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "hjt_utilization, HF-son parti siniri",
+      "birim": "-, m2",
+      "formul_idleri": [
+       "f_hjt_util",
+       "f_hjt_queue_batch"
+      ],
+      "aciklama": "u < ~0.5 ise saha paylasimi veya kampanya modu."
+     },
+     {
+      "anahtar": "alan sinifi (Ag, ITO, kimya, gaz, tasiyici)",
+      "birim": "USD/W, g/m2, mg/W",
+      "formul_idleri": [
+       "f_hjt_ag_g",
+       "f_hjt_ag_cost",
+       "f_hjt_ag_cell",
+       "f_hjt_ito_target",
+       "f_hjt_ito_cost",
+       "f_hjt_in_mg_W",
+       "f_hjt_koh",
+       "f_hjt_chem_cost",
+       "f_hjt_gas_cost",
+       "f_hjt_carrier_cost",
+       "f_hjt_alan_other"
+      ],
+      "aciklama": "a'dan neredeyse bagimsiz; ilk nesilde Ag ~5.8 c/W (olgun 3.5)."
+     },
+     {
+      "anahtar": "altyapi akislari (gaz, UPW, HF, KOH, elektrik)",
+      "birim": "kg/gun, m3/gun, kWh/yil",
+      "formul_idleri": [
+       "f_hjt_gas_day",
+       "f_hjt_wet_day",
+       "f_hjt_elec"
+      ],
+      "aciklama": "Altyapi adim 17'nin girdisi."
+     },
+     {
+      "anahtar": "adet sinifi",
+      "birim": "adet, USD/W",
+      "formul_idleri": [
+       "f_hjt_adet_stations",
+       "f_hjt_adet"
+      ],
+      "aciklama": "Robot + IV istasyonu; kucuk a'da coklu tutucu."
+     },
+     {
+      "anahtar": "zaman sinifi",
+      "birim": "USD, USD/yil, USD/W",
+      "formul_idleri": [
+       "f_hjt_capex",
+       "f_hjt_labor",
+       "f_hjt_campaign",
+       "f_hjt_zaman_per_W"
+      ],
+      "aciklama": "W_out = min(ihtiyac x n_units_served, hat); 1/depr_years yerine eco_crf_tax_machine. Yillik sabit ~1.23 M$ (Tablo 3): dolu hat ilk nesil ~3.3, olgun 2.7; 10 MW 12.3; 4.9 MW ~25 c/W (hucre)."
+     },
+     {
+      "anahtar": "urun_sabit",
+      "birim": "USD/W",
+      "formul_idleri": [
+       "f_hjt_urun_sabit"
+      ],
+      "aciklama": "Arac NRE + boyut basina takim; tum hatlarin omur boyu W'ina."
+     }
+    ]
+   },
+   {
+    "sira": 14,
+    "alan": "modul",
+    "adim": "Modul hatti: laminator sayisi, BOM, iscilik, zaman ve kalip",
+    "girdiler": [
+     "panels_per_day [panel/gun] (365 gun tabani)",
+     "mod_A_panel_m2 [m2], mod_perimeter_m [m], N_s x N_p [adet]",
+     "build, encap, frame_type",
+     "cizelge saati el_hours_per_year_h [h/yil] x A_teknik (eco_uptime_frac_default)",
+     "N_panels_variant_life [adet]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "N_laminators",
+      "birim": "adet",
+      "formul_idleri": [
+       "mod_f_n_laminators"
+      ],
+      "aciklama": "DEGISIKLIK: payda mod_lam_panels_per_h x (el_hours_per_year_h x A_teknik / 365) (mod_shift_h_per_day yerine); basamakli."
+     },
+     {
+      "anahtar": "BOM (hucre ve kablo haric)",
+      "birim": "USD/panel, USD/W",
+      "formul_idleri": [
+       "mod_f_cost_glass",
+       "mod_f_cost_encap",
+       "mod_f_cost_backsheet",
+       "mod_f_cost_frame",
+       "mod_f_cost_edge",
+       "mod_f_cost_cu_wire",
+       "mod_f_cost_interconnect_fixed",
+       "mod_f_cost_jbox",
+       "mod_f_cost_pack_fixed",
+       "mod_f_cost_pack_area",
+       "mod_f_bom_per_W"
+      ],
+      "aciklama": "GG 60 V: 50 W 15.0 ... 500 W 7.5 c/W (modul alaninin eta 0.24 ile; ilk nesil eta ile ~%9 yuksek)."
+     },
+     {
+      "anahtar": "panel-kutu kablosu",
+      "birim": "USD/panel",
+      "formul_idleri": [
+       "mod_f_cost_cable"
+      ],
+      "aciklama": "K5 kalemi; 50 W'ta 5.6 c/W."
+     },
+     {
+      "anahtar": "iscilik ve zaman sinifi",
+      "birim": "h/panel, USD/panel",
+      "formul_idleri": [
+       "mod_f_labor_h_var",
+       "mod_f_cost_labor_var",
+       "mod_f_cost_labor_idle",
+       "mod_f_cost_equipment",
+       "mod_f_cost_lam_energy",
+       "mod_f_cost_lam_standby"
+      ],
+      "aciklama": "Yillik sabit ~69 k$: 0.2 MWp 34.5, 1 MWp 6.9, 3 MWp 2.8, 5 MWp 2.3 c/W; paylasimda panels_per_day saha toplami."
+     },
+     {
+      "anahtar": "urun_sabit (kalip)",
+      "birim": "USD/panel, t",
+      "formul_idleri": [
+       "mod_f_cost_molds",
+       "mod_f_press_tonnage"
+      ],
+      "aciklama": "H2: kalip ayak iziyle buyur."
+     },
+     {
+      "anahtar": "modul toplam (hucre haric)",
+      "birim": "USD/W",
+      "formul_idleri": [
+       "mod_f_total_per_W"
+      ],
+      "aciklama": "Siniflar ayri raporlanir."
+     }
+    ]
+   },
+   {
+    "sira": 15,
+    "alan": "pil",
+    "adim": "Pil hucre/paket akislari: yillik hucre, hat sayilari, satin alma vs kendi hat, kutu basi pil maliyeti",
+    "girdiler": [
+     "panels_per_day [panel/gun], bat_cells_per_panel [adet/panel]",
+     "bat_pack_yield [-]",
+     "pil_kaynagi [satin_hucre/ic_hat] (formulde bat_make_or_buy 'buy'/'make')",
+     "bat_line_cells_per_year (K9) [hucre/yil]",
+     "bat_pack_cells_per_h_* [hucre/h], cizelge = el_hours_per_year_h x A_teknik [h/yil] (bat_pack_line_hours_yr yerine)",
+     "bat fiyatlari, eco_crf_tax_machine"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "yillik hucre ihtiyaci ve talep",
+      "birim": "hucre/yil, MWh/yil, -",
+      "formul_idleri": [
+       "bat_f30_cells_needed",
+       "bat_f31_demand_mwh",
+       "bat_f32_k9_match"
+      ],
+      "aciklama": "days_per_year = 365 (takvim)."
+     },
+     {
+      "anahtar": "hat sayilari (hucre, paket, formasyon, yaslandirma)",
+      "birim": "adet, kanal, hucre, kWh/yil",
+      "formul_idleri": [
+       "bat_f33_n_lines",
+       "bat_f42_pack_lines",
+       "bat_f39_formation_channels",
+       "bat_f40_aging_slots",
+       "bat_f41_prod_energy"
+      ],
+      "aciklama": "K9 yalniz ic_hat'ta. Paket hatti: 26700 400 x 3600 = 1.44 M hucre, prizmatik 60 x 3600 = 216 bin hucre/yil."
+     },
+     {
+      "anahtar": "hucre maliyeti (satin alma/kendi)",
+      "birim": "USD/Wh, MWh/yil",
+      "formul_idleri": [
+       "bat_f24_cn_price",
+       "bat_f25_buy_cost",
+       "bat_f34_crf",
+       "bat_f35_line_fixed",
+       "bat_f36_own_cost",
+       "bat_f37_cell_cost_select",
+       "bat_f38_breakeven",
+       "bat_f54_premium_same_format",
+       "bat_f55_premium_2027"
+      ],
+      "aciklama": "bat_f34_crf yerine eco_crf_tax_machine."
+     },
+     {
+      "anahtar": "paket ve kutu basi pil maliyeti",
+      "birim": "USD/kutu, USD/panel, USD/W",
+      "formul_idleri": [
+       "bat_f43_pack_labor",
+       "bat_f44_pack_line_alloc",
+       "bat_f45_pack_parts",
+       "bat_f46_unit_tests",
+       "bat_f47_product_fixed",
+       "bat_f48_misc_per_box",
+       "bat_f49_cost_per_panel",
+       "bat_f50_cost_per_W"
+      ],
+      "aciklama": "BMS ve guc elektronigi haric."
+     }
+    ]
+   },
+   {
+    "sira": 16,
+    "alan": "elektronik",
+    "adim": "Kutu elektronigi: guc kati, sabit elektronik, kasa/termal, test istasyonu, garanti, urun_sabit",
+    "girdiler": [
+     "P_box_W, P_inv_W [W], n_mppt [adet], P_ch_W [W]",
+     "V_batt_min/max [V], mppt_mode, k_worst [-], E_box_Wh [Wh]",
+     "guc_kati [si_sarimli/gan_planar] (el_ds_semis: ilk nesilde Si), senaryo",
+     "boxes_per_yr [kutu/yil]",
+     "eco_crf_tax_machine (el_f_crf yerine), iscilik"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "guc kati",
+      "birim": "USD/kutu",
+      "formul_idleri": [
+       "el_f_fet_cost",
+       "el_f_P_sw_node",
+       "el_f_Ap_inductor",
+       "el_f_Ap_xfmr",
+       "el_f_mag_mass",
+       "el_f_mag_cost_wound",
+       "el_f_mag_cost_planar",
+       "el_f_mppt_channel",
+       "el_f_mppt_box",
+       "el_f_inv_lv",
+       "el_f_dc_link_C",
+       "el_f_dc_link_cost",
+       "el_f_dc_link_ripple",
+       "el_f_hbridge",
+       "el_f_grid_L",
+       "el_f_Ap_grid_L",
+       "el_f_inv_total",
+       "el_f_bidir_rect",
+       "el_f_bms_switch",
+       "el_f_pcb_var",
+       "el_f_power_stage"
+      ],
+      "aciklama": "guc_enerji sinifi; V penceresi modul ve pil ciktilarindan."
+     },
+     {
+      "anahtar": "sabit elektronik",
+      "birim": "USD/kutu",
+      "formul_idleri": [
+       "el_f_fixed"
+      ],
+      "aciklama": "adet sinifi."
+     },
+     {
+      "anahtar": "kasa, termal, dolgu",
+      "birim": "L, m2, USD/kutu",
+      "formul_idleri": [
+       "el_f_V_elec",
+       "el_f_V_box",
+       "el_f_A_box",
+       "el_f_A_proj",
+       "el_f_shell_var",
+       "el_f_press",
+       "el_f_P_loss",
+       "el_f_A_thermal_req",
+       "el_f_thermal_cost",
+       "el_f_potting",
+       "el_f_kasa"
+      ],
+      "aciklama": "H2: yuzey V^(2/3)."
+     },
+     {
+      "anahtar": "adet, garanti, test istasyonu, lab",
+      "birim": "USD/kutu",
+      "formul_idleri": [
+       "el_f_adet_other",
+       "el_f_warranty",
+       "el_f_test_station",
+       "el_f_site_lab"
+      ],
+      "aciklama": "Test istasyonu amortismani gercek boxes_per_yr'a."
+     },
+     {
+      "anahtar": "urun_sabit",
+      "birim": "USD/varyant, USD/kutu",
+      "formul_idleri": [
+       "el_f_mold_tooling",
+       "el_f_F_variant",
+       "el_f_urun_sabit"
+      ],
+      "aciklama": "A ~0.57-0.62 M$, B ~0.29-0.34 M$ varyant basina."
+     },
+     {
+      "anahtar": "toplam ve H4 testi",
+      "birim": "USD/kutu, USD/W, -",
+      "formul_idleri": [
+       "el_f_total_box",
+       "el_f_cost_per_W",
+       "el_f_power_share"
+      ],
+      "aciklama": "Toplayici yalniz el_f_* ciktilarini toplar."
+     },
+     {
+      "anahtar": "performans ve ekonomik degerlendirme",
+      "birim": "-, h, USD",
+      "formul_idleri": [
+       "el_f_eta_delivered",
+       "el_f_standby_loss",
+       "el_f_standby_drain_h",
+       "el_f_cap_life",
+       "el_f_reinforced_premium",
+       "el_f_gan_value",
+       "el_f_mag_market_saving",
+       "el_f_crf",
+       "el_f_AF"
+      ],
+      "aciklama": "el_f_crf EMEKLI (eco_crf_tax_machine); el_f_AF yalniz GaN enerji degeri icin."
+     },
+     {
+      "anahtar": "BOS kablo (kutu toplamina girmez)",
+      "birim": "kg/panel, USD/panel",
+      "formul_idleri": [
+       "el_f_cable_cu",
+       "el_f_cable_cost"
+      ],
+      "aciklama": "Panel kablosu modul alaninda sayilir; cift sayim yok."
+     }
+    ]
+   },
+   {
+    "sira": 17,
+    "alan": "altyapi",
+    "adim": "Ekonomik girdiler, unite-ici altyapi, saha basamakli altyapi ve saha payi (N_units unite_tanimi kapsamindan)",
+    "girdiler": [
+     "N_units, N_units_planned [adet] ve kapsam haritasi (adim 9)",
+     "wafer_per_day, m2/gun, gaz/islak/elektrik akislari (adim 10-15)",
+     "P_elec_unit_kW [kW], N_furnace [adet], cz_P_hold_kW [kW]",
+     "A_minienv_m2 [m2], Q_exhaust_m3h [m3/h]",
+     "site_module_architecture [a/b], eco_site_phasing"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "sermaye yuku, WACC, iscilik",
+      "birim": "1/yil, USD/yil, USD/h",
+      "formul_idleri": [
+       "eco_crf_machine",
+       "eco_crf_infra",
+       "eco_pv_dep_machine",
+       "eco_pv_dep_infra",
+       "eco_crf_tax_machine",
+       "eco_crf_tax_infra",
+       "eco_annual_capex_charge_usd_yr",
+       "eco_annual_infra_charge_usd_yr",
+       "eco_wacc_usd_calc",
+       "eco_labor_rate_calc",
+       "eco_cost_24x7_position_usd_yr"
+      ],
+      "aciklama": "Tum alanlarin tek sermaye yuku kaynagi."
+     },
+     {
+      "anahtar": "elektrik rejimi ve fiyat",
+      "birim": "kWh/yil, USD/kWh",
+      "formul_idleri": [
+       "site_energy_kwh_yr",
+       "eco_elec_price_regulated",
+       "eco_elec_price_market",
+       "eco_elec_price_select"
+      ],
+      "aciklama": "Saha tuketimine gore rejim."
+     },
+     {
+      "anahtar": "sarf fiyatlari",
+      "birim": "USD/m3, USD/kg, USD/h, USD/yil",
+      "formul_idleri": [
+       "eco_water_price_calc",
+       "eco_argon_price_calc",
+       "eco_argon_cost_usd_h",
+       "eco_argon_tank_cost_usd_yr",
+       "eco_gas_cost_var_usd_per_m2",
+       "eco_gas_cost_idle_usd_h",
+       "eco_dopant_cyl_cost_usd_yr"
+      ],
+      "aciklama": "Alan yer tutucularinin yerine."
+     },
+     {
+      "anahtar": "unite talepleri (UPW, atiksu, trafo, jenerator, sogutma, egzoz, H2, N2, POU)",
+      "birim": "m3/h, kVA, MWth, kW, slm, adet",
+      "formul_idleri": [
+       "site_d_upw_m3h",
+       "site_d_wwt_m3h",
+       "site_p_util_unit_kw",
+       "site_d_trafo_kva",
+       "site_genset_kva",
+       "site_d_cool_mwth",
+       "site_ffu_power_kw",
+       "site_exhaust_energy_kwh_yr",
+       "site_cooling_power_kw",
+       "site_h2_alkaline_m3h",
+       "site_h2_exhaust_min_m3h",
+       "site_n2_dilution_slm",
+       "site_n2_purge_burnwet_slm",
+       "site_n_pou",
+       "site_pou_capex_usd"
+      ],
+      "aciklama": "Proses akislarindan; ornek 5000 wafer/gun degerleri kullanilmaz."
+     },
+     {
+      "anahtar": "su, HF ve kerf maliyetleri",
+      "birim": "USD/wafer, USD/m2, USD/yil",
+      "formul_idleri": [
+       "site_upw_var_m3_per_wafer",
+       "site_upw_fixed_m3_yr",
+       "site_upw_unit_cost",
+       "site_water_cost_usd_per_wafer",
+       "site_water_fixed_cost_usd_yr",
+       "site_hf_unit_cost_usd_per_kg",
+       "site_hf_treatment_var_usd_per_m2",
+       "site_hf_treatment_fixed_usd_h",
+       "site_kerf_cost_usd_per_wafer"
+      ],
+      "aciklama": "Alan ve zaman bilesenleri ayri."
+     },
+     {
+      "anahtar": "saha payi",
+      "birim": "USD, USD/yil/unite",
+      "formul_idleri": [
+       "site_step_modules",
+       "site_step_capex_stacked_usd",
+       "site_step_capex_sized_usd",
+       "site_share_per_unit_usd_yr",
+       "site_share_approx",
+       "site_module_cost_scaled"
+      ],
+      "aciklama": "N=1/2/4/8/16: (a) 706/370/247/194/165, (b) 617/350/207/139/99 k$/yil (altyapinin 5000 wafer/gun unitesiyle; proses akislariyla yeniden hesaplanmali)."
+     },
+     {
+      "anahtar": "unite-ici altyapi ve kira",
+      "birim": "USD, USD/yil",
+      "formul_idleri": [
+       "site_unit_infra_capex_machine_usd",
+       "site_unit_infra_capex_building_usd",
+       "site_unit_infra_annual_usd_yr",
+       "site_rent_unit_usd_yr",
+       "site_seismic_capex_usd"
+      ],
+      "aciklama": "~218 + ~195 k$/yil (ornek unite)."
+     },
+     {
+      "anahtar": "guc surekliligi ve guvenlik",
+      "birim": "s, USD/yil, -, L",
+      "formul_idleri": [
+       "site_melt_t_onset_calc",
+       "site_melt_t_campaign_loss_s",
+       "site_backup_net_value_usd_yr",
+       "site_power_quality_loss_usd_yr",
+       "site_bekra_ratio",
+       "site_flam_liquid_max_l"
+      ],
+      "aciklama": "Firin varsa (U1/U2, U5 firin fazi)."
+     },
+     {
+      "anahtar": "kopyalama terimleri ve W basina",
+      "birim": "USD, USD/yil, W/yil, USD/W",
+      "formul_idleri": [
+       "eco_nre_per_unit_usd",
+       "eco_unit_copy_capex_usd",
+       "eco_rampup_loss_usd",
+       "eco_working_capital_cost_usd_yr",
+       "eco_unit_output_W_yr",
+       "eco_usd_per_w",
+       "eco_tool_hour_cost_usd_h"
+      ],
+      "aciklama": "eco_usd_per_w paydasi W_unit_yr (panel Wp); eco_tool_hour_cost_usd_h yalniz raporlama (uptime cift sayimi)."
+     }
+    ]
+   },
+   {
+    "sira": 18,
+    "alan": "standart",
+    "adim": "Unite basi zorunlu rutin testler, varyant tip testi/sertifika payi, EPR, saha mevzuati, makine uygunlugu",
+    "girdiler": [
+     "panels_per_year_unit [panel/yil], boxes_per_year_unit [kutu/yil]",
+     "N_units_total [adet], years_amort [yil]",
+     "varyant kararlari (n_module_families, n_batt_designs, n_countries, plug_type ...)",
+     "m_panel_kg, m_box_kg_excl_batt [kg], E_batt_Wh [Wh]",
+     "avail_h_per_year = el_hours_per_year_h x A_teknik [h/yil]"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "zorunlu rutin testler",
+      "birim": "USD/panel, USD/kutu, adet, USD/set",
+      "formul_idleri": [
+       "std_f_rt_panel_usd",
+       "std_f_rt_box_usd",
+       "std_f_rt_module_stations",
+       "std_f_rt_box_stations",
+       "std_f_rt_capex_per_set"
+      ],
+      "aciklama": "H6: unite basi kalan zorunlu testler (iscilik 0.02-0.22 c/W)."
+     },
+     {
+      "anahtar": "tip testi ve sertifika payi",
+      "birim": "USD, kutu, USD/W",
+      "formul_idleri": [
+       "std_f_typetest_total_usd",
+       "std_f_sample_cost_usd",
+       "std_f_n_box_lifetime",
+       "std_f_typetest_per_w"
+      ],
+      "aciklama": "A-DE 91/268/706 k$; payda toplam kopya unite hacmi."
+     },
+     {
+      "anahtar": "EPR",
+      "birim": "USD/set",
+      "formul_idleri": [
+       "std_f_epr_panel_per_set",
+       "std_f_epr_batt_per_set",
+       "std_f_epr_box_per_set",
+       "std_f_epr_admin_per_set"
+      ],
+      "aciklama": "alan, guc_enerji, adet, urun_sabit siniflarina bolunmus."
+     },
+     {
+      "anahtar": "saha mevzuati ve makine uygunlugu",
+      "birim": "USD/unite/yil, USD/unite",
+      "formul_idleri": [
+       "std_f_saha_fixed_per_unit",
+       "std_f_mach_techfile_per_unit",
+       "std_f_mach_copy_per_unit"
+      ],
+      "aciklama": "Makine Tuzugu 2023/1230; RF isitma varsa CISPR 11."
+     }
+    ]
+   },
+   {
+    "sira": 19,
+    "alan": "model (optimizasyon)",
+    "adim": "DIS DONGU: hacme bagli secimler (ns_kurali = optimize, cap_kurali = bant, sabit D'de tatli nokta secimi, n_cut, kutu_kurali/format adaylari) icin Gecis A + B birlikte",
+    "girdiler": [
+     "aday kumesi {N_s, a veya (D, k_split, n_cut, yerlesim), n_panel_per_box, bat_format} (adim 1-6'nin kisit ELEME'sinden gecenler)",
+     "unite_tanimi ve talep (sabit)",
+     "ogrenme_durumu"
+    ],
+    "ciktilar": [
+     {
+      "anahtar": "aday on-eleme (asama 1)",
+      "birim": "USD/Wp",
+      "formul_idleri": [
+       "mod_f_total_per_W",
+       "f_hjt_alan_other",
+       "f_hjt_adet",
+       "el_f_power_stage"
+      ],
+      "aciklama": "Yalniz hacimden bagimsiz siniflar (alan + adet + guc_enerji) ile ilk ~5-10 aday tutulur (Gecis A icinde; dairesellik yok)."
+     },
+     {
+      "anahtar": "secim (asama 2)",
+      "birim": "USD/Wp",
+      "formul_idleri": [
+       "eco_usd_per_w"
+      ],
+      "aciklama": "Her aday icin Gecis B (adim 9-18: zaman, urun_sabit, saha_sabit dahil) kosulur; en dusuk toplam USD/Wp secilir. selv_max + sabit_cap/wafer_capi + sabit format iken bu adim atlanir ve Gecis A hacimden bagimsizdir."
+     }
+    ]
+   }
+  ],
+  "kanonik_parametreler": [
+   {
+    "kavram": "Hucre acik devre gerilimi Voc (STC)",
+    "kanonik_id": "hjt_voc_cell_V",
+    "ad": "HJT hucre Voc (25 C, STC, hucre basi); sinir kontrolunde Voc_sinir = olculen P99",
+    "birim": "V",
+    "deger": 0.745,
+    "alt": 0.72,
+    "ust": 0.77,
+    "kaynak": "Hucre: Wohler 2024 endustriyel M6 olcumu 739-740 mV; LONGi sampiyon 749-755 mV. Modul: Waaree Plexus BiH-11-730 veri sayfasi 50.62 V / 66 seri pozisyon = 0.767 V",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "'open-circuit voltages between Voc=(739 to 740) mV'; 'Voc: 749.2 mV / 755.0 mV'; Waaree BiH-11-730: Voc 50.62 V (132 yarim G12, 11x6||11x6)",
+    "guven": "orta",
+    "gerekce_secim": "Olculen buyuklugun sahibi hucre; iki alan ayni degeri (0.745) kullaniyor. Ust sinir (hucre CSV'de 0.755) modul veri sayfasi turetmesini (0.767) kapsasin diye 0.77. Nominal deger tasarim tavaninda (mod_f_ns_max, marjla) kullanilir; gerilim SINIR kontrolunde (std_f_ns_max, std_f_uoc_max; ELEME) kendi hucremizin olculen P99'u, olcum yokken 0.77 kullanilir. Modulun kendi notu da 'gerilim siniri icin nominal degil, uretim dagiliminin P99'u' diyor.",
+    "takma_adlar": [
+     {
+      "id": "mod_voc_cell_stc_V",
+      "alan": "modul",
+      "deger": 0.745,
+      "birim": "V",
+      "fark_aciklamasi": "Ayni deger; aralik 0.72-0.77. Modul bundan sonra hucre ciktisini okur."
+     },
+     {
+      "id": "Voc_cell_V",
+      "alan": "standart",
+      "deger": 0.745,
+      "birim": "V",
+      "fark_aciklamasi": "std_f_ku / std_f_ns_max / std_f_uoc_max / std_f_class3_ok formul girdi adi; sinir kontrolunde Voc_sinir baglanir."
+     }
+    ]
+   },
+   {
+    "kavram": "Voc sicaklik katsayisi (hucre = modul)",
+    "kanonik_id": "hjt_tc_voc_pct_per_K",
+    "ad": "Voc bagil sicaklik katsayisi (K_U ve soguk Voc); sinir kontrolunde alfa_sinir",
+    "birim": "%/K",
+    "deger": -0.244,
+    "alt": -0.28,
+    "ust": -0.2,
+    "kaynak": "Hucre: PVEducation 'Effect of Temperature' formulu; Modul: Waaree veri sayfasi beta_Voc -0.22 %/C ve fizik tahmini -0.22..-0.24",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'dVoc/dT = -0.0043 + Voc1/300' -> -1.817 mV/K = -0.244 %/K; Waaree: 'Temperature coefficient of Voltage (Voc), ß (%/ºC) -0.22'",
+    "guven": "orta",
+    "gerekce_secim": "IEC 60364-7-712 Ek B K_U formulu %/K kullanir (std_f_ku); tek birim %/K. Modulun -0.0024 1/K degeri ayni buyuklugun yuvarlanmisi; -20 C'de N_s_max'i degistirmez (70) ama soguk uclarda 1 hucre fark eder (-37.2 C: kanonikle 67, -0.0024 ile 68). Beyan edilecek alfa kendi hucremizin olcumunden gelir; olcum ve beyan yokken std_f_ku K_U = 1.2 kullanir (ku_yontemi = varsayilan_1.2), beyan sonrasi sinir kontrolunde alfa_sinir = olcumun guvensiz ucu (olcum yokken -0.28).",
+    "takma_adlar": [
+     {
+      "id": "mod_beta_voc_per_K",
+      "alan": "modul",
+      "deger": -0.0024,
+      "birim": "1/K",
+      "fark_aciklamasi": "Birim farki (1/K = %/K / 100) ve yuvarlama; soguk uclarda N_s_max'i 1 artiriyor (guvensiz yon)."
+     },
+     {
+      "id": "alpha_Voc_pct_K",
+      "alan": "standart",
+      "deger": -0.244,
+      "birim": "%/K",
+      "fark_aciklamasi": "std_f_ku formul girdi adi; kanonigi okur."
+     }
+    ]
+   },
+   {
+    "kavram": "Hucre Vmp (STC) ve MPPT penceresi",
+    "kanonik_id": "mod_vmp_cell_stc_V",
+    "ad": "HJT hucre Vmp (STC); sicaklik katsayisi mod_beta_vmp_per_K -0.28 %/K",
+    "birim": "V",
+    "deger": 0.64,
+    "alt": 0.62,
+    "ust": 0.66,
+    "kaynak": "Waaree BiH-11-730 veri sayfasi: Vmp 42.52 V / 66 = 0.644 V; beta_Vmp = gamma_Pmax (-0.24) - alfa_Isc (0.04)",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'Vmp (V) STC 42.52'; 'Power (Pm), γ (%/ºC) -0.24'; 'Current (Isc), α (%/ºC) 0.04'",
+    "guven": "orta",
+    "gerekce_secim": "Yalniz modul tanimliyor; MPPT penceresi (mod_f_vmp_hot, mod_f_vmp_hot_bypass) ve soguk Vmp buradan turer. Elektronik'in panel gerilim tahminleri (N_s~66 varsayimli, kaynaksiz) kaldirilir. Varsayilan N_s 64 (n_bypass 3): Vmp_sicak 34.1 V, baypasla 22.4 V, Vmp_soguk (-40 C) 48.4 V, U_OC_MAX (K_U 1.2) 57.2 V. N_s 70 (-20 C, yalniz olcum sonrasi): 37.3 / 24.5 / 50.4 / 57.9 V (turetilmis).",
+    "takma_adlar": [
+     {
+      "id": "el_V_mp_min_V",
+      "alan": "elektronik",
+      "deger": 30,
+      "birim": "V",
+      "fark_aciklamasi": "Sicak Vmp tahmini; kanonik cikti 34.1 V (baypasla 22.4 V)."
+     },
+     {
+      "id": "el_V_mp_max_V",
+      "alan": "elektronik",
+      "deger": 46,
+      "birim": "V",
+      "fark_aciklamasi": "Soguk Vmp tahmini; kanonik 48.4 V (N_s 64, -40 C)."
+     },
+     {
+      "id": "el_V_mp_nom_V",
+      "alan": "elektronik",
+      "deger": 40,
+      "birim": "V",
+      "fark_aciklamasi": "Nominal; kanonik 64 x 0.64 = 41.0 V."
+     },
+     {
+      "id": "Vmp_cell_V",
+      "alan": "standart",
+      "deger": 0.64,
+      "birim": "V",
+      "fark_aciklamasi": "std_f_p_string_max_at_vlim formul girdisi."
+     }
+    ]
+   },
+   {
+    "kavram": "Kisa devre akim yogunlugu Jsc - nominal (performans)",
+    "kanonik_id": "hjt_jsc_mA_cm2",
+    "ad": "Hucre Jsc nominal (STC, on yuz): performans ve akima bagli kayiplar (f_hjt_isc)",
+    "birim": "mA/cm2",
+    "deger": 40,
+    "alt": 38,
+    "ust": 41.4,
+    "kaynak": "Hucre: Wohler 2024 endustriyel M6 olcumu 38.02-38.05; LONGi sampiyon 41.4",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "'Jsc=(38.02 to 38.05) mA/cm2'; 'Jsc: 41.4 mA/cm2'",
+    "guven": "orta",
+    "gerekce_secim": "Onceki ciktida tek parametre iki rol icin kullanilmisti; ikiye ayrildi. Nominal Jsc hucre sahipli ve yalniz performans/kayip hesaplarina girer (verim ayrica eta_core'dan). Tutarlilik: 0.745 V x 40 mA/cm2 ile ilk nesil eta 0.22 FF ~0.74 (ilk nesilde dusuk Voc/FF ile tutarli), olgun eta 0.257 FF ~0.86 ima eder. Guvenlik kontrolleri ayri kanonik mod_jsc_A_per_cm2'yi kullanir.",
+    "takma_adlar": [
+     {
+      "id": "mod_jsc_A_per_cm2",
+      "alan": "modul",
+      "deger": 0.0413,
+      "birim": "A/cm2",
+      "fark_aciklamasi": "Farkli rol: sinir kontrol Jsc'si (ayri kanonik)."
+     }
+    ]
+   },
+   {
+    "kavram": "Kisa devre akim yogunlugu Jsc - sinir kontrolu (akim sinirlari)",
+    "kanonik_id": "mod_jsc_A_per_cm2",
+    "ad": "Modul ici hucre Jsc, sinir kontrolu: Class III 8 A, ISC_MAX, kablo, sigorta (mod_f_isc, mod_f_a_max_class3)",
+    "birim": "A/cm2",
+    "deger": 0.0413,
+    "alt": 0.038,
+    "ust": 0.042,
+    "kaynak": "Waaree BiH-11-730 veri sayfasi Isc 18.22 A / 441 cm2 (G12)",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'Isc (A) STC 18.22'",
+    "guven": "orta",
+    "gerekce_secim": "Guvenlik yonu yuksek akim; ticari ust segment modulden turetilen 41.3 mA/cm2 mod_isc_margin 1.03 ile birlikte kullanilir -> N_p = 1'de a <= ~137 mm. Kendi hucremizin olculen Isc dagiliminin ust ucu gelince yerine gecer. Nominal performans icin kullanilmaz.",
+    "takma_adlar": [
+     {
+      "id": "hjt_jsc_mA_cm2",
+      "alan": "hucre",
+      "deger": 40,
+      "birim": "mA/cm2",
+      "fark_aciklamasi": "Nominal (ayri kanonik); sinir kontrolunde kullanilmaz."
+     },
+     {
+      "id": "A_cell <= ~202 cm2 (8 A yorumu)",
+      "alan": "standart",
+      "deger": 202,
+      "birim": "cm2",
+      "fark_aciklamasi": "8 A marjsiz ~39.6 mA/cm2 ile alana cevrilmis; kanonikle (41.3, marj 1.03) a <= 137 mm (~188 cm2)."
+     }
+    ]
+   },
+   {
+    "kavram": "Hucre verimi eta_cell (hucre / modul / wafer / altyapi / kristal)",
+    "kanonik_id": "eta_cell",
+    "ad": "STC hucre verimi (kenar, omur, on-tavlama, bekleme dahil; f_eta_cell ciktisi, ogrenme agirligiyla)",
+    "birim": "-",
+    "deger": 0.22,
+    "alt": 0.19,
+    "ust": 0.26,
+    "kaynak": "Hucre f_eta_cell ve Tablo 1: baslangic (eta_core 22.5, w_eq 0.75) a=50-210 mm'de %21.2-22.2; olgun B-arka %24.8-25.8, D %25.6-26.0; cell_eta_core_start_pct 22.5 [19-24.5], cell_eta_core_mature_pct 26.1",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'improvement in average cell efficiency from 20.5% to 22.8% in 10 months during 2017/18'; 'It places HJT efficiency at around 25.7% in 2025'",
+    "guven": "dusuk",
+    "gerekce_secim": "eta_cell parametre degil, zincir adim 2'nin ciktisidir (a, edge_mode, tau_SRH, wf_learn_weight). Baz 0.22 varsayilan ilk nesil (w = 1) icin; olgun (w = 0) ~0.25-0.26. Alanlarin sabit 0.23/0.24/0.25 degerleri kaldirilir. Bu revizyonda zincirdeki tum turetilmis kontrol degerleri (a ornekleri, Class III gucu, unite hacimleri, testere MW, M10 c/W) ilk nesil eta ile yeniden hesaplandi, olgun degerler ayri verildi.",
+    "takma_adlar": [
+     {
+      "id": "eta_cell (saw_MW_per_yr)",
+      "alan": "wafer",
+      "deger": 0.25,
+      "birim": "-",
+      "fark_aciklamasi": "MW cevrimlerinde sabit; olgun uca yakin (testere 36-62 MW -> ilk nesil ~32-55)."
+     },
+     {
+      "id": "eta_cell (varsayilan)",
+      "alan": "modul",
+      "deger": 0.24,
+      "birim": "-",
+      "fark_aciklamasi": "Modul taramalarinda (a, CTM, Class III P_max, BOM c/W) sabit girdi."
+     },
+     {
+      "id": "eta (eco_unit_output_W_yr ornegi)",
+      "alan": "altyapi",
+      "deger": 0.23,
+      "birim": "-",
+      "fark_aciklamasi": "Saha payi USD/W orneklerinde sabit."
+     },
+     {
+      "id": "eta (0.019 USD/W @%24)",
+      "alan": "kristal",
+      "deger": 0.24,
+      "birim": "-",
+      "fark_aciklamasi": "Yap/al W cevriminde."
+     },
+     {
+      "id": "cell_eta_industry_2025_pct",
+      "alan": "hucre",
+      "deger": 25.7,
+      "birim": "%",
+      "fark_aciklamasi": "GW endustri referansi (H1); yalniz kalibrasyon."
+     },
+     {
+      "id": "mod_eta_module",
+      "alan": "modul",
+      "deger": 0.214,
+      "birim": "-",
+      "fark_aciklamasi": "Farkli kavram: panel alan verimi."
+     }
+    ]
+   },
+   {
+    "kavram": "Hucreden module guc orani CTM",
+    "kanonik_id": "mod_ctm_power_calc",
+    "ad": "CTM(a) = mod_ctm_optical x (1 - ara baglanti kaybi(a))",
+    "birim": "-",
+    "deger": 0.974,
+    "alt": 0.956,
+    "ust": 0.992,
+    "kaynak": "Modul mod_f_ctm_calc / mod_f_design_loop: 60 V dalinda 50 W 0.992 ... 300 W 0.974 ... 500 W 0.964; 35 V dalinda 0.956-0.988; optik bilesen 1.01 (tahmin)",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "Modul ornek hesap: 'CTM = 1.01 x 0.9645 = 0.974 -> a = 135.4 mm'",
+    "guven": "dusuk",
+    "gerekce_secim": "CTM a'ya baglidir; modul sahip. Hucre'nin a_min ve f_hjt_required_W'deki sabit 0.97 bu ciktiyla degistirilir. W_unit_yr (panel Wp) hesabinda zorunlu carpan. Guven, optik bilesen tahmin oldugu icin dusuk.",
+    "takma_adlar": [
+     {
+      "id": "CTM (f_hjt_a_min_selv, f_hjt_required_W)",
+      "alan": "hucre",
+      "deger": 0.97,
+      "birim": "-",
+      "fark_aciklamasi": "a'dan bagimsiz sabit."
+     }
+    ]
+   },
+   {
+    "kavram": "Soguk Voc tasarim marji",
+    "kanonik_id": "mod_voc_margin",
+    "ad": "Voc tasarim marji (uretim toleransi, >1000 W/m2 isinim, arka yuz) - yalniz tasarim tavaninda",
+    "birim": "-",
+    "deger": 1.03,
+    "alt": 1,
+    "ust": 1.08,
+    "kaynak": "Modul tahmini; Waaree veri sayfasi +-%3 guc olcum belirsizligi; 1.2 kW/m2'de Voc ~+%0.6",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "'Measuring Uncertainty ± 3%' (guc icin)",
+    "guven": "dusuk",
+    "gerekce_secim": "Nominal Voc ile tasarim tavaninda (mod_f_ns_max) tek marj; hucre'nin +6 mV payi bunun alt bileseni. Sinir kontrolunde (std_f_ns_max) Voc_sinir (P99) marjin yerine gecer, ikisi ust uste eklenmez. K_U 1.2 ile tasarim tavani 65; sinir tavani (0.77 V) 64 -> baglayici olan sinir.",
+    "takma_adlar": [
+     {
+      "id": "hjt_voc_irr_margin_mV",
+      "alan": "hucre",
+      "deger": 6,
+      "birim": "mV",
+      "fark_aciklamasi": "Yalniz isinim + arka yuz; mutlak mV."
+     }
+    ]
+   },
+   {
+    "kavram": "Seri hucre tavani N_s_max (60 V SELV)",
+    "kanonik_id": "N_s_max",
+    "ad": "Gerilim sinirindan azami seri hucre = min(mod_f_ns_max tasarim, std_f_ns_max sinir)",
+    "birim": "adet",
+    "deger": 64,
+    "alt": 64,
+    "ust": 72,
+    "kaynak": "IEC 60364-7-712:2017 712.414.101 ve Ek B.1; hesap: min(floor(60 / (1.2 x 0.745 x 1.03)) = 65, floor(60 / (1.2 x 0.77)) = 64) = 64",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not exceed 60 V DC.'; Ek B.1: '...UOC MAX shall be chosen equal to 1,2 UOC STC.'",
+    "guven": "orta",
+    "gerekce_secim": "K6 sert sinir. Kendi hucremizin alfa ve Voc P99 olcumu yokken K_U = 1.2 (Ek B) ve Voc_sinir = 0.77: 64 (cift, varsayilan N_s 64). Olcum/beyan sonrasi (beyan_alfa): tek urun/DE-AT T_min -40 C ile tasarim tavani 67 (N_s 66); -20 C pazarinda 70; -9 C 72. Onceki kanonik 70, nominal degerlerle -36.7 C altinda 60 V'u asiyordu (-37.8 C'de 60.1 V) ve aralik ucunda (0.77 V, -0.28 %/K) -20 C'de bile 60.7 V veriyordu. 35 V dvca35: 36; Class III STC: 44.",
+    "takma_adlar": [
+     {
+      "id": "N_s_max (f_hjt_voc_cold)",
+      "alan": "hucre",
+      "deger": 72,
+      "birim": "adet",
+      "fark_aciklamasi": "-20 C, nominal Voc + 6 mV, marjsiz; f_hjt_voc_cold emekli."
+     },
+     {
+      "id": "std_f_ns_max (K_U 1.2, marjsiz, nominal Voc)",
+      "alan": "standart",
+      "deger": 67,
+      "birim": "adet",
+      "fark_aciklamasi": "Nominal Voc ile; sinir rolunde Voc_sinir 0.77 ile 64."
+     },
+     {
+      "id": "mod_f_ns_max (-20 C, marj 1.03)",
+      "alan": "modul",
+      "deger": 70,
+      "birim": "adet",
+      "fark_aciklamasi": "T_min -20 C ve beyanli alfa varsayimi; onceki kanonik."
+     },
+     {
+      "id": "N_s~66 (el_V_mp_* dayanagi)",
+      "alan": "elektronik",
+      "deger": 66,
+      "birim": "adet",
+      "fark_aciklamasi": "Kaynaksiz varsayim; kanonikle degistirilir."
+     }
+    ]
+   },
+   {
+    "kavram": "Saha en dusuk sicakligi T_min",
+    "kanonik_id": "std_tmin_site_c",
+    "ad": "U_OC_MAX hesabinda saha en dusuk ortam sicakligi (pazar anahtari ile)",
+    "birim": "C",
+    "deger": -40,
+    "alt": -40,
+    "ust": -9,
+    "kaynak": "Tasarim secimi; dayanak MGM rekorlari (modul revizyonunda acildi): Istanbul -9.0, Ankara -24.9, Erzurum -37.2 C; modul kaynaginda Almanya Hull -37.8 C",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "'En Düşük Sıcaklık (°C): İstanbul -9,0 (Şubat); Ankara -24,9 (Ocak); Erzurum -37,2 (Aralık)'",
+    "guven": "orta",
+    "gerekce_secim": "Pazar/saha kavrami -> standart sahip. Deger bir tasarim secimidir (istasyon rekorlari dayanak, -40 degil); bu yuzden kaynak_turu tahmin. Pazar anahtari: TR_marmara -10, TR_ic -25, DE_AT -40, tek_urun -40 (varsayilan; A'nin ana pazari Almanya, rekor -37.8 C). Modulun guveni yuksek itirazi ('tek urun icin -40 C') uygulandi. ku_yontemi = varsayilan_1.2 iken T_min N_s_max'i baglamaz (K_U 1.2 > 1.159); beyan_alfa'da baglar.",
+    "takma_adlar": [
+     {
+      "id": "mod_T_min_design_C",
+      "alan": "modul",
+      "deger": -20,
+      "birim": "C",
+      "fark_aciklamasi": "Ayni kavram; aralik -40..-9 (kanonik bu araligi benimsedi, deger -40'a kaydi)."
+     },
+     {
+      "id": "std_tmin_site_c (onceki)",
+      "alan": "standart",
+      "deger": -20,
+      "birim": "C",
+      "fark_aciklamasi": "Aralik -30..-5 tahmin; DE rekorunu kapsamiyordu."
+     },
+     {
+      "id": "T_min_C",
+      "alan": "hucre",
+      "deger": -20,
+      "birim": "C",
+      "fark_aciklamasi": "f_hjt_voc_cold girdisi (emekli)."
+     },
+     {
+      "id": "T_site_min_C",
+      "alan": "pil",
+      "deger": -20,
+      "birim": "C",
+      "fark_aciklamasi": "B isitici karari (bat_f20); ayni saha buyuklugu, pazar anahtarindan okunur. bat_charge_temp_min_C (-10) farkli kavram."
+     }
+    ]
+   },
+   {
+    "kavram": "PV DC gerilim siniri V_lim (SELV, kuru)",
+    "kanonik_id": "std_selv_pv_uocmax_limit_v",
+    "ad": "PV DC SELV/PELV icin azami U_OC_MAX",
+    "birim": "V",
+    "deger": 60,
+    "alt": 60,
+    "ust": 60,
+    "kaynak": "IEC 60364-7-712:2017 madde 712.414.101",
+    "kaynak_turu": "standart_metni_dogrulanmis",
+    "kaynak_alintisi": "'712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not exceed 60 V DC.'",
+    "guven": "yuksek",
+    "gerekce_secim": "Sinir soguk U_OC_MAX'a uygulanir (K6). Deger okunan baskinin (2017) metninden; guncel baskida korundugu ayrica dogrulanacak (Class III ile ayni kural). SELV icin kutunun PV-sebeke arasi guvenli ayirmasi sart.",
+    "takma_adlar": [
+     {
+      "id": "el_V_lim_dry_V",
+      "alan": "elektronik",
+      "deger": 60,
+      "birim": "V",
+      "fark_aciklamasi": "Ayni sayi; dayanak 414.4.5 ve DVC-A kuru."
+     },
+     {
+      "id": "std_dvca_dc_dry_v",
+      "alan": "standart",
+      "deger": 60,
+      "birim": "V",
+      "fark_aciklamasi": "Urun DVC-A kuru siniri; ayri kontrol."
+     },
+     {
+      "id": "V_lim",
+      "alan": "modul/hucre/pil",
+      "deger": 60,
+      "birim": "V",
+      "fark_aciklamasi": "Girdi adi; gerilim_rejimi seciminden gelir."
+     }
+    ]
+   },
+   {
+    "kavram": "Islak ortam gerilim siniri (U_OC_MAX)",
+    "kanonik_id": "std_dvca_dc_wet_v",
+    "ad": "IEC 62109-1 DVC-A islak konum DC siniri",
+    "birim": "V",
+    "deger": 35,
+    "alt": 35,
+    "ust": 35,
+    "kaynak": "DEKRA test raporu 6067599.50A (TRF IEC62109_1B); IEC TS 62257-9-8:2020 onizlemesi",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "'DVC A: 60Vdc (35Vdc for wet location)'",
+    "guven": "yuksek",
+    "gerekce_secim": "dvca35 rejiminde soguk U_OC_MAX'a uygulanir (varsayilan N_s 36). 414.4.5'in islak temel korumasiz 30 V'u ayri kategori (elv30); Class III 35 V STC'dir ve ayri kanonik.",
+    "takma_adlar": [
+     {
+      "id": "el_V_lim_wet_V",
+      "alan": "elektronik",
+      "deger": 35,
+      "birim": "V",
+      "fark_aciklamasi": "Alt sinir 30 V ile urun (35) ve tesisat (30) kurallarini tek parametrede karistiriyor; ikiye ayrildi."
+     },
+     {
+      "id": "std_austria_selv_pv_v",
+      "alan": "standart",
+      "deger": 35,
+      "birim": "V",
+      "fark_aciklamasi": "AT PV SELV siniri; ayni sayi, farkli dayanak."
+     },
+     {
+      "id": "V_lim = 35 V dali",
+      "alan": "modul",
+      "deger": 35,
+      "birim": "V",
+      "fark_aciklamasi": "Modulde 'hafizadan' etiketliydi; standart dogruladi."
+     }
+    ]
+   },
+   {
+    "kavram": "Class III modul Voc siniri (STC)",
+    "kanonik_id": "std_class3_voc_stc_max_v",
+    "ad": "IEC 61730-1 Class III azami Voc (STC); birlikte Isc <= 8 A, P <= 240 W",
+    "birim": "V",
+    "deger": 35,
+    "alt": 35,
+    "ust": 35,
+    "kaynak": "IEC 61730-1:2016 madde 4.4.1 (SIS resmi onizlemesi)",
+    "kaynak_turu": "standart_metni_dogrulanmis",
+    "kaynak_alintisi": "'Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard test conditions.'",
+    "guven": "yuksek",
+    "gerekce_secim": "STC degeridir (soguk degil). Guven 60 V SELV ile ayni kuralla yuksek (okunan baskinin metni); 2023 baskisinda (madde 5.4) korundugu ayrica dogrulanacak. Belirsiz olan deger degil, 'kutu toplami' yorumu (UL ozeti; 4.4.3 goruntulenmedi). Formul standart'in, marjlar modul'un: N_s <= 45 (cift 44), ilk nesil eta ile P ~161-181 W, olgun ~187-210 W.",
+    "takma_adlar": [
+     {
+      "id": "mod_classIII_voc_max_V",
+      "alan": "modul",
+      "deger": 35,
+      "birim": "V",
+      "fark_aciklamasi": "Ayni (modulde guven orta)."
+     }
+    ]
+   },
+   {
+    "kavram": "Class III modul Isc siniri (STC)",
+    "kanonik_id": "std_class3_isc_max_a",
+    "ad": "IEC 61730-1 Class III azami Isc (STC)",
+    "birim": "A",
+    "deger": 8,
+    "alt": 8,
+    "ust": 8,
+    "kaynak": "IEC 61730-1:2016 madde 4.4.1",
+    "kaynak_turu": "standart_metni_dogrulanmis",
+    "kaynak_alintisi": "'...the short-circuit current does not exceed 8 A when tested under standard test conditions.'",
+    "guven": "yuksek",
+    "gerekce_secim": "Hucre ALANINI sinirlar: sinir Jsc 41.3, marj 1.03, N_p = 1 ile a <= ~137 mm (mod_f_a_max_class3). 182-210 mm wafer n_cut/k_split ile uyar.",
+    "takma_adlar": [
+     {
+      "id": "mod_classIII_isc_max_A",
+      "alan": "modul",
+      "deger": 8,
+      "birim": "A",
+      "fark_aciklamasi": "Ayni."
+     }
+    ]
+   },
+   {
+    "kavram": "Wafer kalinligi t_wafer (as-cut)",
+    "kanonik_id": "wf_t_ascut_firstgen_um",
+    "ad": "HJT as-cut wafer kalinligi, ilk nesil (boyuta bagli politika)",
+    "birim": "um",
+    "deger": 125,
+    "alt": 115,
+    "ust": 135,
+    "kaynak": "Wafer: ilk nesil tahmin (satin alinan n-tipi 130 um'den TTV payi); olgun 110 um TaiyangNews; nihai alt sinir 80 um",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Olgun capa: 'mainstream wafer thickness for HJT is about 110 μm, which is expected to narrow to 100 μm between 2026 and 2028'",
+    "guven": "dusuk",
+    "gerekce_secim": "Wafer sahip: ilk nesil a <= 105 mm 115, a >= 156 mm 125 um; olgun 95-115; wf_learn_weight ile harmanlanir. Kisit t >= 80 + 12 = 92 um. K3 dalinda t = satin alinan kalinlik (130 um). Hucre, modul ve kristal bu degeri okur.",
+    "takma_adlar": [
+     {
+      "id": "wf_t_ascut_mature_um",
+      "alan": "wafer",
+      "deger": 110,
+      "birim": "um",
+      "fark_aciklamasi": "Olgun uc."
+     },
+     {
+      "id": "t (yap/al ornegi)",
+      "alan": "kristal",
+      "deger": 130,
+      "birim": "um",
+      "fark_aciklamasi": "Satin alinan M10 kalinligi; kendi yapim kutle dengesinde kullanilmaz."
+     },
+     {
+      "id": "t_wafer_um",
+      "alan": "hucre/modul",
+      "deger": 125,
+      "birim": "um",
+      "fark_aciklamasi": "Girdi adi."
+     }
+    ]
+   },
+   {
+    "kavram": "Hasar daglama + dokulama Si kaybi",
+    "kanonik_id": "hjt_si_etch_removal_um",
+    "ad": "SDE + dokulama toplam Si asindirma (iki yuz)",
+    "birim": "um",
+    "deger": 12,
+    "alt": 8,
+    "ust": 25,
+    "kaynak": "Hucre tahmini (piramit 2-5 um + hasar giderme); wafer hafizadan 15 um; alt capa Ge 2025",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Ge 2025 (wafer notu): '~5 μm of material removal via etching' (yuz basina)",
+    "guven": "dusuk",
+    "gerekce_secim": "Wafer arayuzu 'hucre ajaninin degeri esas' diyor; hucre sahip. Aralik wafer'in 8-25'ine genisletildi. t_cell, KOH ve H2 ayni degeri kullanir.",
+    "takma_adlar": [
+     {
+      "id": "wf_texture_removal_um",
+      "alan": "wafer",
+      "deger": 15,
+      "birim": "um",
+      "fark_aciklamasi": "Hafizadan; ayni buyukluk."
+     }
+    ]
+   },
+   {
+    "kavram": "Tel testere kerf",
+    "kanonik_id": "saw_kerf_firstgen_um",
+    "ad": "Kerf, ilk nesil kendi testeremiz (saw_kerf_blend ile olgun 50 um'ye)",
+    "birim": "um",
+    "deger": 57,
+    "alt": 48,
+    "ust": 65,
+    "kaynak": "Wafer: tel geometrisi 36 + 15 + 6 = 57 um (saw_kerf_calc); capa qualenergia/ITRPV 2023",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "'A kerf width of 55 µm is standard in 2023 with DWS.'",
+    "guven": "orta",
+    "gerekce_secim": "Wafer sahip; kullanilan deger saw_kerf_blend. Kristalin 60 um'lik yap/al ornegi ve xtal_kg_ingot_per_m2_wafer kaldirilir. Kare kesim kerfi (sq_kerf_mm 0.4 mm) farkli kavram.",
+    "takma_adlar": [
+     {
+      "id": "saw_kerf_mature_um",
+      "alan": "wafer",
+      "deger": 50,
+      "birim": "um",
+      "fark_aciklamasi": "Olgun uc."
+     },
+     {
+      "id": "wafer_kerf_um",
+      "alan": "kristal",
+      "deger": 60,
+      "birim": "um",
+      "fark_aciklamasi": "xtal_kg_ingot_per_m2_wafer formul girdisi (emekli); wafer ciktisiyla degistirilir."
+     }
+    ]
+   },
+   {
+    "kavram": "Kirilma orani (hucre hatti referansi)",
+    "kanonik_id": "wf_break_cell_ref",
+    "ad": "HJT hucre hatti kirilma referansi (110 um, 182 mm), wf_break_cell_blend ciktisi; varsayilan ilk nesil",
+    "birim": "-",
+    "deger": 0.02,
+    "alt": 0.001,
+    "ust": 0.1,
+    "kaynak": "wf_break_cell_blend: ilk nesil wf_break_cell_ref_firstgen 0.02 [0.005-0.1] (tahmin), olgun wf_break_cell_ref_mature 0.0025 (Risen, PRNewswire 2026)",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Olgun capa: 'yield rate consistently above 99.5% with a fragment rate below 0.25%'",
+    "guven": "dusuk",
+    "gerekce_secim": "Onceki ciktida kanonik olgun uctu (0.0025); varsayilan senaryo ilk nesil oldugundan harmanli referans (w = 1 -> 0.02) kanonik yapildi. Tek kirilma modeli wf_P_break_cell: ref x [taban + (1 - taban)(sqrt(A)/182)^n_a (110/t)^n_t]; f_hjt_yield bunu kullanir, f_hjt_break emekli. Ilk nesil hucre kirilmasi 182 mm/125 um %1.42, 50 mm %0.53. Risen verisi 210-yarim hucre (sqrt(A) ~148 mm); 182 mm'ye tasinmasi n_a'ya bagli ve bilinmiyor.",
+    "takma_adlar": [
+     {
+      "id": "hjt_breakage_ref",
+      "alan": "hucre",
+      "deger": 0.0025,
+      "birim": "-",
+      "fark_aciklamasi": "Olgun kaynak; referans 210-yarim, kalinlik terimi ve taban yok, baslangicta x3 (0.0075)."
+     },
+     {
+      "id": "wf_break_cell_ref_mature",
+      "alan": "wafer",
+      "deger": 0.0025,
+      "birim": "-",
+      "fark_aciklamasi": "Olgun uc (w = 0)."
+     },
+     {
+      "id": "wf_break_cell_ref_firstgen",
+      "alan": "wafer",
+      "deger": 0.02,
+      "birim": "-",
+      "fark_aciklamasi": "Ilk nesil uc (w = 1) = varsayilan."
+     }
+    ]
+   },
+   {
+    "kavram": "Kirilmanin boyut ussu (H3)",
+    "kanonik_id": "wf_break_exp_size",
+    "ad": "Kirilma boyut ussu n_a: P ~ (sqrt(A)/182)^n_a",
+    "birim": "-",
+    "deger": 3,
+    "alt": 1,
+    "ust": 8,
+    "kaynak": "Wafer tahmini (Weibull + plak teorisi sinirlari); hucre tahmini us 1 (0.5-2)",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Wafer notu: 'Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1 = 8'",
+    "guven": "dusuk",
+    "gerekce_secim": "Tek (taban payli) form secildi; hucre'nin us 1'i alt uca denk. H3 kazanci bu usse cok duyarli; deneyle olculmeli.",
+    "takma_adlar": [
+     {
+      "id": "hjt_breakage_size_exp",
+      "alan": "hucre",
+      "deger": 1,
+      "birim": "-",
+      "fark_aciklamasi": "(a/210)^1 formu, taban payi yok."
+     }
+    ]
+   },
+   {
+    "kavram": "Hat verimleri (hucre hatti, kirilma haric)",
+    "kanonik_id": "hjt_line_yield_start",
+    "ad": "Baslangic HJT hat verimi (kirilma haric); wf_learn_weight ile olgun 0.985'e harmanlanir",
+    "birim": "-",
+    "deger": 0.9,
+    "alt": 0.75,
+    "ust": 0.96,
+    "kaynak": "Hucre tahmini; Ballif 2019 (ilk hatlarda tasima/bekleme sorunlari); olgun 0.985 (Risen)",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "'many first lines having suffered from issues linked to wafer handling, queue time and sometimes low process control'",
+    "guven": "dusuk",
+    "gerekce_secim": "Varsayilan ilk nesil. hjt_yield_total = hat verimi x (1 - wf_P_break_cell): ilk nesil ~0.883-0.895, olgun ~0.98; modul verimi (mod_module_yield 0.98) ve CTM ayri carpan. Altyapinin sabit Y_line 0.95'i bu carpimla degistirilir.",
+    "takma_adlar": [
+     {
+      "id": "hjt_line_yield_mature",
+      "alan": "hucre",
+      "deger": 0.985,
+      "birim": "-",
+      "fark_aciklamasi": "Olgun uc."
+     },
+     {
+      "id": "Y_line",
+      "alan": "altyapi",
+      "deger": 0.95,
+      "birim": "-",
+      "fark_aciklamasi": "eco_unit_output_W_yr orneginde sabit; zincirden gelir."
+     }
+    ]
+   },
+   {
+    "kavram": "Ogrenme durumu (ilk nesil / olgun agirligi)",
+    "kanonik_id": "wf_learn_weight",
+    "ad": "Ogrenme agirligi w: 1 = ilk nesil, 0 = olgun; tum alanlarin ilk-nesil/olgun ciftlerini ayni agirlikla harmanlar",
+    "birim": "-",
+    "deger": 1,
+    "alt": 0,
+    "ust": 1,
+    "kaynak": "Wafer wf_learn_weight = 0.5^(Q_cum_m2 / wf_learn_half_m2); wf_learning_scenario onerisi",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "wf_learning_scenario: 'ONERILEN: Ilk nesil + ogrenme egrisi; olgun senaryo yalnizca duyarlilik icin.'",
+    "guven": "orta",
+    "gerekce_secim": "Onceki ciktida kanonik varsayilan ilk nesil olmasina ragmen unite sayilari olgun degerlerle verilmisti; tek anahtar (ogrenme_durumu) ile tum alanlar ayni w'yu okur: cz_zd_yield ve cz_availability_unplanned (kristalin 'ogrenme yili' varyanti = w 1; ayri id yok, eklenmeli), cell_eta_core_start/mature, hjt_line_yield_start/mature, hjt_w_eq_start/B, saw_*, wf_break_*, wf_t_ascut_*. Karar kullanicinin (wf_learning_scenario KARAR: kullanici).",
+    "takma_adlar": [
+     {
+      "id": "cz_zd_yield",
+      "alan": "kristal",
+      "deger": 0.8,
+      "birim": "-",
+      "fark_aciklamasi": "Yalniz olgun; kristal baz sayilari olgun (ogrenme yili ZD 0.3-0.7 varyant)."
+     },
+     {
+      "id": "mod_module_yield",
+      "alan": "modul",
+      "deger": 0.98,
+      "birim": "-",
+      "fark_aciklamasi": "Tek deger, ilk nesil/olgun ayrimi yok."
+     },
+     {
+      "id": "Y_line / eta 0.23",
+      "alan": "altyapi",
+      "deger": 0.95,
+      "birim": "-",
+      "fark_aciklamasi": "Olgun'a yakin sabitler."
+     }
+    ]
+   },
+   {
+    "kavram": "Wh/Wp orani (A) ve E_batt/P_box",
+    "kanonik_id": "bat_wh_usable_per_wp_A",
+    "ad": "Senaryo A: KULLANILABILIR Wh / panel Wp",
+    "birim": "Wh/Wp",
+    "deger": 1.6,
+    "alt": 0.9,
+    "ust": 2.6,
+    "kaynak": "Pil: rakip urunlerin nominal 0.96-2.8 Wh/Wp orani x LFP kullanilabilir 0.92",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "Anker SB3 '2,700 Wh', '3,600 Watts'; Zendure '1,920 Wh', '2640W'; VDE: Schuko 'bis zu 960 Wp', Wieland '2.000 Wp'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip; kullanilabilir enerji tanimi. Nominal = oran / usable: A varsayilan NFPP 1.78, LO 2.0 Wh/Wp. Tek kural: E_nom = max(hedef, P_box x bat_pv_peak_factor / C_max(format, T)), sonra N_s x E_cell kuantizasyonu. Elektronik'in 1.5 h depolama suresi kaldirilir.",
+    "takma_adlar": [
+     {
+      "id": "el_h_store_h",
+      "alan": "elektronik",
+      "deger": 1.5,
+      "birim": "h",
+      "fark_aciklamasi": "E_batt/P_box (nominal); kanonik nominal 1.78-2.0 ile celisik."
+     },
+     {
+      "id": "E_batt/(n x P_panel)",
+      "alan": "hucre",
+      "deger": 2,
+      "birim": "Wh/W",
+      "fark_aciklamasi": "K9 orneginde 1-5 taramasi; kullanilabilir/nominal ayrimi yok."
+     }
+    ]
+   },
+   {
+    "kavram": "Wh/Wp orani (B)",
+    "kanonik_id": "bat_wh_usable_per_wp_B",
+    "ad": "Senaryo B: KULLANILABILIR Wh / panel Wp",
+    "birim": "Wh/Wp",
+    "deger": 3.2,
+    "alt": 1.8,
+    "ust": 5.5,
+    "kaynak": "Pil: EcoFlow River 3 245 Wh + 110 W; Jackery 1000 v2 1070 Wh + 200 W; nominal 2.2-5.35 x 0.92",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "EcoFlow River 3 '245Wh' + '110W'; Jackery 1000 v2 '1,070Wh' + '200W'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip; nominal LO 4.0, NFPP 3.56 Wh/Wp. B'de 5 kg (tasinabilir pil) ve hava tasimasi sinirlari E_batt'i ayrica kisar.",
+    "takma_adlar": [
+     {
+      "id": "el_h_store_h",
+      "alan": "elektronik",
+      "deger": 1.5,
+      "birim": "h",
+      "fark_aciklamasi": "Senaryodan bagimsiz tek deger."
+     }
+    ]
+   },
+   {
+    "kavram": "Pil hucre enerjisi E_cell",
+    "kanonik_id": "bat_E_cell_Wh",
+    "ad": "Pil hucresi nominal enerjisi (bat_f06_cell_energy; A varsayilani prismatic_small NFPP 20 Ah)",
+    "birim": "Wh",
+    "deger": 58,
+    "alt": 57,
+    "ust": 62,
+    "kaynak": "Pil: 20 Ah x 2.9 V (bat_cell_pris_small_capacity_Ah, bat_cell_v_nom_nfpp_V 2.85-3.1); 26700 LO 3.10 V x 3.3 Ah = 10.23 Wh (Tycorun); 50 Ah NFPP 142.5 Wh",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "bat_ds_cell_format: 'Minimum paket = Ns x E_cell: 143 Wh (26700), 870 Wh (20 Ah), 2138 Wh (50 Ah)'; SMM '10-28Ah Prismatic (NFPP)'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip; format secimine bagli cikti (pil_formati; format bir kategorik secimdir, belirsizlik araligina konmaz). Aralik yalniz 20 Ah hucrenin nominal gerilim belirsizligi (2.85-3.1 V). Diger formatlar: 26700 LO 10.23 Wh [9.6-10.85] (B ve < 0.8 kWh kutular), 50 Ah NFPP ~142.5-145 Wh (> 2 kWh). Belirli bir 20 Ah hucre dogrulanmadi (RFQ). Elektronik'in 20 Wh'i hicbir formata karsilik gelmiyor.",
+    "takma_adlar": [
+     {
+      "id": "el_E_cell_Wh",
+      "alan": "elektronik",
+      "deger": 20,
+      "birim": "Wh",
+      "fark_aciklamasi": "Kaynaksiz tahmin; en kucuk paketi (280 Wh) ve kutu adedini (1786/yil) yanlis kuantize ediyor."
+     },
+     {
+      "id": "E_cell_Wh (ornek)",
+      "alan": "standart",
+      "deger": 10,
+      "birim": "Wh",
+      "fark_aciklamasi": "10 ve 50 Wh ornekleri."
+     },
+     {
+      "id": "E_batt_cell_Wh",
+      "alan": "hucre",
+      "deger": 10,
+      "birim": "Wh",
+      "fark_aciklamasi": "K9 ornegi 4-310 Wh taramasi."
+     }
+    ]
+   },
+   {
+    "kavram": "Na hucre gerilim penceresi ust ucu",
+    "kanonik_id": "bat_cell_v_max_V",
+    "ad": "Hucre sarj ust gerilimi (bat_f02 ciktisi, kimyaya bagli; A varsayilani NFPP)",
+    "birim": "V",
+    "deger": 3.8,
+    "alt": 3.7,
+    "ust": 3.95,
+    "kaynak": "Pil bat_cell_v_max_nfpp_V (OGSolar 160 Ah 3.8 V; 18650 3.7 V; EVLithium 210 Ah 3.95 V); LO bat_cell_v_max_lo_V 3.95 (Tycorun)",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "160Ah 'Max Charge Voltage 3.8 V'; 18650 '3.7 V'; EVLithium 210Ah NFPP '3.95 ±0.05 V'; Tycorun 26700 'Charge Voltage: 3.95 ± 0.05V'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip; kimyaya gore (NFPP 3.8, LO 3.95, LFP 3.65). Seri sayiyi ve V_batt_max'i belirler; NFPP etiketleri tutarsiz, 3.95 V'luk hucre gelirse 15S yerine 14S. SELV kontrolunde secilen hucrenin veri sayfasi ust ucu kullanilir.",
+    "takma_adlar": [
+     {
+      "id": "el_Vcell_max_na_V",
+      "alan": "elektronik",
+      "deger": 3.95,
+      "birim": "V",
+      "fark_aciklamasi": "LO degeri tum kimyalar icin sabit."
+     },
+     {
+      "id": "bat_cell_v_max_lo_V",
+      "alan": "pil",
+      "deger": 3.95,
+      "birim": "V",
+      "fark_aciklamasi": "LO (B varsayilani)."
+     },
+     {
+      "id": "V_cell_max (ornek)",
+      "alan": "standart",
+      "deger": 4,
+      "birim": "V",
+      "fark_aciklamasi": "15S (4.0 V) / 13S (4.3 V) ornekleri."
+     }
+    ]
+   },
+   {
+    "kavram": "Na hucre gerilim penceresi alt ucu (tasarim kesimi)",
+    "kanonik_id": "bat_v_min_cutoff_V",
+    "ad": "Tasarimda secilen Na hucre desarj kesimi",
+    "birim": "V",
+    "deger": 2,
+    "alt": 1.5,
+    "ust": 2.5,
+    "kaynak": "Pil tasarim onerisi; veri sayfasi alt siniri 1.50 V (Tycorun)",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "'Discharge cut-off 1.50±0.05V' (veri sayfasi siniri)",
+    "guven": "dusuk",
+    "gerekce_secim": "Pil sahip. V_batt_min = 15 x 2.0 = 30 V (NFPP) / 14 x 2.0 = 28 V (LO) -> MPPT penceresi, azami akim ve kullanilabilir oran (LO ~0.8, NFPP ~0.9) buna bagli. 1.5 V veri sayfasi siniri farkli kavram.",
+    "takma_adlar": [
+     {
+      "id": "el_Vcell_min_use_V",
+      "alan": "elektronik",
+      "deger": 2,
+      "birim": "V",
+      "fark_aciklamasi": "Ayni."
+     },
+     {
+      "id": "bat_cell_v_min_lo_V",
+      "alan": "pil",
+      "deger": 1.5,
+      "birim": "V",
+      "fark_aciklamasi": "Veri sayfasi siniri; tasarim kesimi degil."
+     }
+    ]
+   },
+   {
+    "kavram": "Pil seri hucre sayisi (14S/15S)",
+    "kanonik_id": "bat_ns_cells",
+    "ad": "Paket seri sayisi (bat_f08_ns ciktisi)",
+    "birim": "adet",
+    "deger": 15,
+    "alt": 14,
+    "ust": 15,
+    "kaynak": "bat_f08: min(bat_ns_design, floor(V_lim x 0.97 / V_cell_max)); NFPP 15 (57.0 V), LO 14 (55.3 V), LFP 15; 35 V rejiminde LO 8",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "Pil ornegi: 'Ns = floor(60 x 0.97 / Vmax). LO: 14 (55.3 V) ... NFPP: 15 (57.0 V / 30 V)'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip, marjli formul. A varsayilani (NFPP) 15, B (LO) 14; aralik yalniz kimya/veri sayfasi (NFPP 3.95 V gelirse 14). dvca35'te erisilebilir pil portu <= 35 V -> 8S (rejim secimi, belirsizlik degil). PV ile pil galvanik ayrik degilse V_batt_max <= 60 V (std_f_selv_ok).",
+    "takma_adlar": [
+     {
+      "id": "el_N_batt_series",
+      "alan": "elektronik",
+      "deger": 14,
+      "birim": "adet",
+      "fark_aciklamasi": "LO varsayimi; marjsiz floor(60/3.95) = 15'ten 'onerilen' 14."
+     },
+     {
+      "id": "N_batt_series (ornek)",
+      "alan": "standart",
+      "deger": 15,
+      "birim": "adet",
+      "fark_aciklamasi": "4.0 V/hucre ile ornek."
+     }
+    ]
+   },
+   {
+    "kavram": "Pil sarj C-orani (E_batt tabani)",
+    "kanonik_id": "bat_charge_c_max_pris",
+    "ad": "Prizmatik surekli sarj C-orani (0-45 C); A varsayilani",
+    "birim": "1/h",
+    "deger": 0.5,
+    "alt": 0.3,
+    "ust": 1,
+    "kaynak": "EVLithium 210 Ah prizmatik veri sayfasi; 26700 icin bat_charge_c_max_cyl 1.0 (Tycorun); sifir alti 0.2C",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "'0~45°C – ≤0.50C'",
+    "guven": "orta",
+    "gerekce_secim": "Pil sahip, formata ve sicakliga bagli: prizmatik 0.5C (A varsayilani), 26700 1.0C (B), -10..0 C 0.2C. E_nom >= P_box x bat_pv_peak_factor / C_max. 210 Ah verisi; 20 Ah hucrede farkli olabilir (veri sayfasi).",
+    "takma_adlar": [
+     {
+      "id": "el_C_charge_max_C",
+      "alan": "elektronik",
+      "deger": 0.5,
+      "birim": "1/h",
+      "fark_aciklamasi": "Farkli hucre (ecoteardown); A varsayilaniyla sayisal olarak ayni ama format secimine baglanmali."
+     },
+     {
+      "id": "bat_charge_c_max_cyl",
+      "alan": "pil",
+      "deger": 1,
+      "birim": "1/h",
+      "fark_aciklamasi": "26700 (B varsayilani)."
+     }
+    ]
+   },
+   {
+    "kavram": "Kutu basina PV gucu (P_box, n_panel_per_box) siniri - A",
+    "kanonik_id": "std_plugin_schuko_pv_max_wp",
+    "ad": "Almanya fisli PV: Schuko ile azami toplam modul gucu (kutu basina)",
+    "birim": "Wp",
+    "deger": 960,
+    "alt": 960,
+    "ust": 960,
+    "kaynak": "VDE basin bildirisi (DIN VDE V 0126-95:2025-12)",
+    "kaynak_turu": "dogrulanmis_url",
+    "kaynak_alintisi": "'800 Wp + 20% (i.e., 960 Wp)'",
+    "guven": "yuksek",
+    "gerekce_secim": "Onceki ciktida ust uc 2000 idi (ozel fis); iki mevzuat secenegi bir belirsizlik araligina konmustu, duzeltildi. Ozel enerji fisi ayri id std_plugin_special_plug_pv_max_wp (2000 Wp) ve fis_tipi anahtariyla secilir. A'da n_panel_per_box = min(kutu_kurali n, floor(960 / P_panel)); P_box = n x P, P_inv = min(P_box, 800 VA). B'de fis siniri yok; class3'te kutu toplami <= 240 W; kutu_enerji_siniri ve (B) 5 kg n'yi ayrica kisar.",
+    "takma_adlar": [
+     {
+      "id": "std_plugin_special_plug_pv_max_wp",
+      "alan": "standart",
+      "deger": 2000,
+      "birim": "Wp",
+      "fark_aciklamasi": "Ayri mevzuat secenegi (fis_tipi = ozel_enerji_fisi)."
+     },
+     {
+      "id": "el_grid_limit_VA",
+      "alan": "elektronik",
+      "deger": 800,
+      "birim": "VA",
+      "fark_aciklamasi": "AC invertor siniri; PV DC siniri degil."
+     },
+     {
+      "id": "bat_ds_n_panel_per_box (orneklerde n=4)",
+      "alan": "pil",
+      "deger": 4,
+      "birim": "adet",
+      "fark_aciklamasi": "Tum P icin n=4; P > 240 W'ta Schuko'yu asar."
+     }
+    ]
+   },
+   {
+    "kavram": "Ingot capi D ve aralik",
+    "kanonik_id": "D_ingot_mm",
+    "ad": "Ingot capi (as-grown); karar degiskeni, unite_tanimi ve cap_kurali ciktisi; deger yalniz ornek referansi",
+    "birim": "mm",
+    "deger": 250,
+    "alt": 80,
+    "ust": 300,
+    "kaynak": "Kristal model 80-260 mm (+290 kalibrasyon), oneri kucuk talepte 120, saha duzeyinde 160-210; wafer eta(a|D) tablolari D=250/300 (D=250'de a=182 psodo 0.672, M10 uyumlu); FZ <= 200 mm",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "FZ: 'The diameters of float-zone wafers are generally not greater than 200 mm due to the surface tension limitations during growth.'",
+    "guven": "dusuk",
+    "gerekce_secim": "D sabit bir baz degil; kristal sahipliginde karar degiskeni. Ornek referansi 250 mm: (i) a=182 tek parca psodo ile satin alinan M10 (K3) ayni hucre/tasiyici boyutunu kullanir, (ii) wafer tablosu mevcut (tatli noktalar 40, 50, 90, 182), (iii) kristal modeli icinde (210 ile 260 arasi ara degerleme; L_body_max baglayici). 210 mm tek parca a ~152 mm (ozel boyut, serbest-D esdegeri ~0.67) verir, M10/G12 tasimaz ve eta(a|D) tablosu yok. Bant 80-300: 260-300 UYARI, >300 ve FZ'de >200 ELEME. Ayni sicak bolgede ayarlanabilir bant bilinmiyor.",
+    "takma_adlar": [
+     {
+      "id": "xtal_D_ingot (oneri)",
+      "alan": "kristal",
+      "deger": 210,
+      "birim": "mm",
+      "fark_aciklamasi": "Saha duzeyi onerisinin ust ucu; wafer tablosu yok."
+     },
+     {
+      "id": "D (eta(a|D) tablolari)",
+      "alan": "wafer",
+      "deger": 250,
+      "birim": "mm",
+      "fark_aciklamasi": "Geometri 250 ve 300 mm'de."
+     },
+     {
+      "id": "sq_D_required (a=182, k=1)",
+      "alan": "wafer",
+      "deger": 251,
+      "birim": "mm",
+      "fark_aciklamasi": "Serbest D'de gereken cap; a'ya gore 215-330 mm."
+     },
+     {
+      "id": "fz_diameter_max_mm",
+      "alan": "kristal",
+      "deger": 200,
+      "birim": "mm",
+      "fark_aciklamasi": "FZ ust siniri."
+     }
+    ]
+   },
+   {
+    "kavram": "Ekipman ekonomik omru",
+    "kanonik_id": "eco_life_machine_yr",
+    "ad": "Makine ekonomik omru (eco_crf_tax_machine icin)",
+    "birim": "yil",
+    "deger": 8,
+    "alt": 5,
+    "ust": 12,
+    "kaynak": "Altyapi tahmini; CRF(0.12; 8) = 0.2013, vergi duzeltmeli 0.2122, yuk faktoru 0.258",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Altyapi notu: 'CRF(0.12; 8) = 0.2013'",
+    "guven": "dusuk",
+    "gerekce_secim": "Tum makine capex'i tek formulle yilliklastirilir (eco_annual_capex_charge_usd_yr); alan-ozel omurler yalniz fiziksel sarflarda kalir. Hucre'nin 1/depr_years yaklasimi sermaye maliyetini atliyor.",
+    "takma_adlar": [
+     {
+      "id": "cz_puller_life_yr",
+      "alan": "kristal",
+      "deger": 7,
+      "birim": "yil",
+      "fark_aciklamasi": "xtal_wacc 0.10 ile CRF."
+     },
+     {
+      "id": "saw_life_yr",
+      "alan": "wafer",
+      "deger": 8,
+      "birim": "yil",
+      "fark_aciklamasi": "fin_crf 0.17."
+     },
+     {
+      "id": "depr_years",
+      "alan": "hucre",
+      "deger": 5,
+      "birim": "yil",
+      "fark_aciklamasi": "Formul girdisi; dogrusal, faizsiz + bakim 0.05."
+     },
+     {
+      "id": "mod_equip_life_y",
+      "alan": "modul",
+      "deger": 7,
+      "birim": "yil",
+      "fark_aciklamasi": "Dogrusal + bakim."
+     },
+     {
+      "id": "el_n_amort_yr",
+      "alan": "elektronik",
+      "deger": 5,
+      "birim": "yil",
+      "fark_aciklamasi": "CRF(0.08; 5) = 0.2505."
+     },
+     {
+      "id": "bat_line_life_years",
+      "alan": "pil",
+      "deger": 7,
+      "birim": "yil",
+      "fark_aciklamasi": "CRF(0.12; 7) = 0.2191."
+     }
+    ]
+   },
+   {
+    "kavram": "Yillik saat tabani (takvim)",
+    "kanonik_id": "eco_hours_calendar_yr",
+    "ad": "Takvim saati",
+    "birim": "h/yil",
+    "deger": 8760,
+    "alt": 8760,
+    "ust": 8760,
+    "kaynak": "365 x 24",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "Altyapi notu: 'Planli durus eco_uptime_frac_default icinde dusulur.'",
+    "guven": "yuksek",
+    "gerekce_secim": "Tum akislar takvim gunu (365) tabaninda; firin ve HJT hatti kapasitesi 8760 h x arac A_teknik; vardiyali hatlar cizelge saatiyle. Modul ve pil'in 250 gunluk panels_per_day tanimi 365'e cevrilir.",
+    "takma_adlar": [
+     {
+      "id": "op_days_per_year",
+      "alan": "modul",
+      "deger": 250,
+      "birim": "gun/yil",
+      "fark_aciklamasi": "mod_f_panels_per_day_sync paydasi (formul girdisi); akislari 1.46 kat sisiriyor."
+     },
+     {
+      "id": "yil = 8760 h",
+      "alan": "hucre/wafer",
+      "deger": 8760,
+      "birim": "h/yil",
+      "fark_aciklamasi": "Ayni."
+     }
+    ]
+   },
+   {
+    "kavram": "Teknik kullanilabilirlik (uptime) tanimi",
+    "kanonik_id": "eco_uptime_frac_default",
+    "ad": "Varsayilan zaman kullanilabilirligi A_teknik",
+    "birim": "-",
+    "deger": 0.9,
+    "alt": 0.8,
+    "ust": 0.95,
+    "kaynak": "Altyapi tahmini ve tanim notu",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Altyapi notu: 'Tanim: (takvim - planli durus - plansiz durus) / takvim. Performans ve kalite kayiplari ayri tutulur; OEE'nin kalite bileseni burada kullanilmaz (cift sayim olmasin).'",
+    "guven": "dusuk",
+    "gerekce_secim": "Tanimin sahibi altyapi. Kapasite = nominal hiz x cizelge saati x A_teknik; araca ozgu deger varsa (hjt_line_uptime, saw_uptime, cz_availability_unplanned) o aracin kapasite formulunde YALNIZ BIR KEZ, yoksa bu varsayilan (laminator, paket hatti, kutu testi). Kullanim cikti; verim/kirilma ayri. eco_tool_hour_cost_usd_h yalniz raporlama.",
+    "takma_adlar": [
+     {
+      "id": "hjt_line_uptime",
+      "alan": "hucre",
+      "deger": 0.85,
+      "birim": "-",
+      "fark_aciklamasi": "Araca ozgu; yalniz kapasitede (dogru kullanim)."
+     },
+     {
+      "id": "saw_uptime",
+      "alan": "wafer",
+      "deger": 0.85,
+      "birim": "-",
+      "fark_aciklamasi": "Araca ozgu; kapasitede."
+     },
+     {
+      "id": "cz_availability_unplanned",
+      "alan": "kristal",
+      "deger": 0.9,
+      "birim": "-",
+      "fark_aciklamasi": "Yalniz plansiz durus; pota degisimi acik sure olarak ayri."
+     },
+     {
+      "id": "el_station_util_max",
+      "alan": "elektronik",
+      "deger": 0.7,
+      "birim": "-",
+      "fark_aciklamasi": "Kullanilabilirlik degil, planli azami doluluk."
+     },
+     {
+      "id": "bat_channel_utilization",
+      "alan": "pil",
+      "deger": 0.8,
+      "birim": "-",
+      "fark_aciklamasi": "Formasyon kanali doluluk orani."
+     }
+    ]
+   },
+   {
+    "kavram": "Calisma cizelgesi saati (vardiyali hatlar)",
+    "kanonik_id": "el_hours_per_year_h",
+    "ad": "Montaj/test hatlari yillik cizelge saati (2 vardiya)",
+    "birim": "h/yil",
+    "deger": 4000,
+    "alt": 2000,
+    "ust": 6000,
+    "kaynak": "2 vardiya x 8 h x 250 gun; altyapi eco_shift_pattern onerisi (firin ve HJT 24/7, modul/pil/kutu 2 vardiya + ara stok)",
+    "kaynak_turu": "hesap_turetilmis",
+    "kaynak_alintisi": "Elektronik: '2 vardiya x 8 h x 250 gun'",
+    "guven": "orta",
+    "gerekce_secim": "Firin ve HJT 8760 h; modul, pil paketi ve kutu hatlari bu cizelgeyle ve ustune A_teknik (0.9) -> etkin 3600 h. Bu revizyonda laminator (4.3-7.2 MWp) ve paket hatti (26700 1.44 M, prizmatik 216 bin hucre/yil) bu tanimla yeniden hesaplandi.",
+    "takma_adlar": [
+     {
+      "id": "bat_pack_line_hours_yr",
+      "alan": "pil",
+      "deger": 3600,
+      "birim": "h/yil",
+      "fark_aciklamasi": "2 x 8 x 300 gun x OEE 0.75: gun sayisi ve OEE gomulu; sayisal olarak 4000 x 0.9 ile ayni ama ayristirilmali."
+     },
+     {
+      "id": "mod_shift_h_per_day x 250",
+      "alan": "modul",
+      "deger": 2000,
+      "birim": "h/yil",
+      "fark_aciklamasi": "1 vardiya, A_teknik yok; eco_shift_pattern'in 2 vardiya onerisiyle celisik."
+     }
+    ]
+   },
+   {
+    "kavram": "Pil hatti kapasitesi K9",
+    "kanonik_id": "bat_line_cells_per_year",
+    "ad": "Kendi pil hucre hatti kapasitesi (K9)",
+    "birim": "hucre/yil",
+    "deger": 150000,
+    "alt": 100000,
+    "ust": 200000,
+    "kaynak": "Kullanici karari K9",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "'K9: hat basina ~150 bin hucre/yil'",
+    "guven": "orta",
+    "gerekce_secim": "Yalniz pil_kaynagi = ic_hat iken baglayici. Satin alinan hucrede tavan paket hatti kapasitesi (26700 ~1.44 M, prizmatik ~216 bin hucre/yil). std_f_boxes_per_year_unit ve el_f_N_box_batt_yr bu ayrimi yapmali. K9'un anlami kullaniciya sorulmali.",
+    "takma_adlar": [
+     {
+      "id": "el_N_cell_per_year",
+      "alan": "elektronik",
+      "deger": 150000,
+      "birim": "hucre/yil",
+      "fark_aciklamasi": "Her durumda kutu adedine tavan yapiliyor."
+     },
+     {
+      "id": "cells_per_year_line",
+      "alan": "standart",
+      "deger": 150000,
+      "birim": "hucre/yil",
+      "fark_aciklamasi": "std_f_boxes_per_year_unit'te tavan (formul girdisi)."
+     },
+     {
+      "id": "batt_cells_per_yr",
+      "alan": "hucre",
+      "deger": 150000,
+      "birim": "hucre/yil",
+      "fark_aciklamasi": "f_hjt_required_W girdisi."
+     }
+    ]
+   },
+   {
+    "kavram": "Ingot omuz/kuyruk konisi",
+    "kanonik_id": "cz_tail_length_ratio",
+    "ad": "Kuyruk konisi boyu / D (omuz: cz_shoulder_height_ratio 0.4)",
+    "birim": "-",
+    "deger": 0.6,
+    "alt": 0.4,
+    "ust": 1,
+    "kaynak": "Kristal tahmini; wafer tahmini 0.8",
+    "kaynak_turu": "tahmin",
+    "kaynak_alintisi": "Kaynak yok (her iki alanda tahmin)",
+    "guven": "dusuk",
+    "gerekce_secim": "Kristal sahip: ayni geometri cevrim suresini (cz_t_cycle_h) ve koni kutlesini belirler; wafer wf_eta_cone ayni parametreleri okur. Prototiple olculecek.",
+    "takma_adlar": [
+     {
+      "id": "wf_tail_h_over_D",
+      "alan": "wafer",
+      "deger": 0.8,
+      "birim": "-",
+      "fark_aciklamasi": "Wafer tahmini; kanonikle degistirilir."
+     },
+     {
+      "id": "wf_crown_h_over_D",
+      "alan": "wafer",
+      "deger": 0.35,
+      "birim": "-",
+      "fark_aciklamasi": "Omuz; kanonik cz_shoulder_height_ratio 0.4."
+     }
+    ]
+   }
+  ],
+  "celiskiler": [
+   {
+    "konu": "Tek-unite hacim varsayimlari (MW/yil)",
+    "alanlar": [
+     "modul",
+     "pil",
+     "altyapi",
+     "wafer",
+     "hucre",
+     "standart",
+     "elektronik",
+     "kristal"
+    ],
+    "degerler": "modul 0.2-1.5 MWp/yil (K9 + 26700 senkron); standart 1500 kutu/yil ~1.2 MW (10 Wh) / 7500 kutu ~6 MW (50 Wh); pil 6-13 MWp/yil (dayanak: pil denetcisinin kaba hesabi, 150 mm firin 1.0-1.5 mm/dk -> 59-89 kg/gun, 2-3 g/W); altyapi 4.0-17.6 MW/yil (5000 wafer/gun, a 100-210, eta 0.23); wafer ~15 MW/yil (2 firin x 60 kg/gun kristallesen); hucre 45 MW/yil (hat kapasitesi) ve K9'dan 0.1-46; elektronik 3000 kutu/yil talep, pil hatti sinirli 1786 kutu/yil (20 Wh, 800 W); kristal unite ingot talebi 1-360 kg/gun",
+    "cozum": "Unite hacmi hicbir alanda sabit varsayim olamaz: W_unit_yr [panel Wp/yil] = min(capa kapasitesi x u_hedef, talep), unite_tanimi seciminden (zincir adim 9) ve ogrenme_durumundan gelir. Tum zaman/urun_sabit/saha_sabit paydalari bu tek degeri okur. Ornek hacimler yalniz ornek olarak etiketlenir.",
+    "ciddiyet": "kritik"
+   },
+   {
+    "konu": "'Unite = PV + pil senkron' tanimi ile asgari ekonomik olcekler",
+    "alanlar": [
+     "hucre",
+     "modul",
+     "kristal",
+     "wafer",
+     "pil",
+     "altyapi"
+    ],
+    "degerler": "Hucre hatti L=1 m ilk nesil 31-39 / olgun 40-50 MW hucre (zaman 45 MW'de 2.7, 10 MW'de 12.3, 2 MW'de 61 c/W); modul hatti ~69 k$/yil sabit (0.2 MWp'ta 34.5, >=3 MWp'ta <=2.8 c/W); firin basina panel MWp/yil ilk nesil / olgun: 120 mm 1.4 / 4.4, 210 mm 4.3 / 12.2, 260 mm 6.2 / 17.0 (turetilmis); testere ilk nesil ~32-55 MW hucre-esdegeri; K9: 26700 ile B ~0.38 MWp, 20 Ah NFPP ile A ~4.9 MWp; saha sabiti N=1 ~1.1 M$/yil",
+    "cozum": "Tek tanim yok; secim anahtari unite_tanimi (U1-U5) ile model her birini ayri hesaplar, karar kullanicinin. Bkz. unite_tanimi_secenekleri (ilk nesil ve olgun satirlariyla).",
+    "ciddiyet": "kritik"
+   },
+   {
+    "konu": "SELV siniri: T_min, soguk Voc marji, K_U ve N_s_max",
+    "alanlar": [
+     "standart",
+     "modul",
+     "hucre",
+     "elektronik",
+     "pil"
+    ],
+    "degerler": "T_min: standart std_tmin_site_c -20 [-30, -5] tahmin; modul mod_T_min_design_C -20 [-40, -9] (istasyon rekorlari dogrulanmis: Erzurum -37.2, Almanya Hull -37.8 C); hucre ve pil -20; modul itirazi (guven yuksek): 'pazar varyantlari -10/-25/-40 C ya da tek urun icin -40 C (N_s 67)'. N_s_max: hucre 72 (+6 mV, marjsiz); modul 70 (marj 1.03); standart std_f_ns_max marjsiz K_U 1.2 ile 67, notta 71-74; elektronik N_s~66; onceki kanonik 70. std_f_ns_max ve mod_f_ns_max 'es' tutulmustu ama 72 / 70 veriyor. Hesap: N_s 70 nominal degerlerle -36.7 C altinda 60 V'u asar (-37.8 C 60.1 V); aralik ucunda (0.77 V, -0.28 %/K) -20 C'de bile 60.7 V; onceki kural bunu yalniz UYARI sayiyordu.",
+    "cozum": "K6 sert sinir -> ELEME. std_tmin_site_c pazar anahtari (TR_marmara -10, TR_ic -25, DE_AT -40, tek_urun -40; varsayilan tek_urun). ku_yontemi varsayilani, kendi hucremizin alfa/Voc olcumu ve beyani olana kadar varsayilan_1.2 (Ek B). N_s_max = min(mod_f_ns_max tasarim: nominal Voc x K_U x marj 1.03; std_f_ns_max sinir: Voc_sinir (P99; olcum yokken 0.77) x K_U_sinir, marjsiz) = 64 (varsayilan N_s 64). Olcum sonrasi beyan_alfa ile -40 C'de 66, -20 C pazarinda 70. mod_f_voc_cell_cold K_U'yu (std_f_ku) kullanacak sekilde degisir; f_hjt_voc_cold emekli.",
+    "ciddiyet": "kritik"
+   },
+   {
+    "konu": "Ogrenme durumu (varsayilan senaryo) alanlar arasinda ve onceki ciktinin kendi sayilarinda farkli",
+    "alanlar": [
+     "kristal",
+     "wafer",
+     "hucre",
+     "modul",
+     "altyapi"
+    ],
+    "degerler": "kristal baz = olgun (ZD 0.8, kullanilabilirlik 0.9), ogrenme yili (ZD 0.3-0.7) varyant; wafer varsayilan ilk nesil; hucre baslangic (22.5, 0.9) ve olgun (26.1, 0.985); modul eta 0.24 ve verim 0.98; altyapi eta 0.23 ve 0.95. Onceki ciktida kanonik varsayilan ilk nesil (eta 0.22) iken unite secenekleri olgun kristal kg/gun, eta 0.25 ve olgun hucre hatti kapasitesiyle; kanonik kirilma olgun uctan (0.0025) verilmisti. Ilk nesil ile olgun arasinda firin basina panel MWp ~2.8 kat, gereken firin/hucre hatti orani ~2 kat farkli.",
+    "cozum": "Tek 'ogrenme_durumu' secimi -> wf_learn_weight (kanonik; varsayilan 1 = ilk nesil) tum ilk-nesil/olgun ciftlerini ayni agirlikla harmanlar (kristal icin ogrenme yili ZD/kullanilabilirlik degerlerine id eklenmeli). Unite sayisal ipuclari iki satirda (ilk nesil / olgun) verildi; kanonik kirilma harmanli referans (varsayilan 0.02).",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Hucre verimi baz degeri",
+    "alanlar": [
+     "hucre",
+     "modul",
+     "wafer",
+     "altyapi",
+     "kristal"
+    ],
+    "degerler": "altyapi 0.23; modul 0.24; wafer 0.25; kristal %24; endustri %25.7; hucre ciktisi baslangic %21.2-22.2, olgun %24.8-25.8 (a ve kenar tipine gore)",
+    "cozum": "eta_cell yalniz f_eta_cell'den (zincir adim 2, wf_learn_weight ile) okunur; sabitler kaldirilir. Baz ilk nesil ~0.22. Turetilmis kontrol degerleri buna gore yeniden hesaplandi (or. Class III P_max ilk nesil 161-181 W, olgun 187-210 W; testere 32-55 MW; M10 ~2.6 c/Wp).",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Uptime ve yillik saat tanimlari",
+    "alanlar": [
+     "hucre",
+     "wafer",
+     "kristal",
+     "altyapi",
+     "modul",
+     "elektronik",
+     "pil",
+     "standart"
+    ],
+    "degerler": "hucre 8760 h + hjt_line_uptime 0.85 yalniz kapasitede; wafer saw_uptime 0.85 + 8760; kristal cz_availability_unplanned 0.9 + acik pota degisimi; altyapi eco_uptime 0.9 ve eco_tool_hour_cost = yuk/(8760 x 0.9); modul 8 h/gun x 250 gun, uptime yok; elektronik 4000 h + util max 0.7; pil 3600 h (2x8x300xOEE 0.75); standart avail_h_per_year girdi. Onceki ciktinin U4/U5 ipuclari da gomulu OEE'li 3600 h ve uptime'siz 24/7 kullanmisti.",
+    "cozum": "Kanonik tanim (altyapi sahip): takvim 8760 h; cizelge saati (firin + HJT 24/7 = 8760; montaj 2 vardiya = 4000); A_teknik arac basina, kapasite formulunde bir kez; kullanim cikti; verim ayri. Kapasite = nominal hiz x cizelge x A_teknik. Laminator ve paket hatti kapasiteleri bu tanimla yeniden verildi (4000 x 0.9 = 3600 h).",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Firin sayisi ve firin kapsami",
+    "alanlar": [
+     "kristal",
+     "wafer",
+     "altyapi",
+     "modul",
+     "pil"
+    ],
+    "degerler": "kristal: unite talebi 1-360 kg/gun, 120 mm firin 27-31 kg/gun (olgun), u 0.04-0.7 -> firin saha varligi; wafer ornegi 2 firin x 60 kg/gun; altyapi ornegi 100 kg ergiyik / 60 kW, N_furnace girdi; hucre hattini doldurmak icin firin: ilk nesil 210 mm ~8-9 / 250 mm ~6-7, olgun ~4 / ~3 (turetilmis)",
+    "cozum": "N_furnace = ceil(talep / xtal_kg_per_day) ciktidir; kapsam (xtal_furnace_scope) unite_tanimi'ndan (U1/U2 unite, U5 saha, U4 yok). Ogrenmeyle gereken firin sayisi yariya indiginden firin yatirimi fazlanir; pota degisimi (12-40 h) icin ingot/wafer tamponu veya N+1.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Firin cikisi kg/gun tanimi (govde vs toplam kristallesen) ve capa gore degisen anlam",
+    "alanlar": [
+     "kristal",
+     "wafer"
+    ],
+    "degerler": "kristal: xtal_kg_per_day = kampanya basina iyi (ZD) ingot / takvim; cz_m_ingot_kg = min(g_pull x m_charge, L_body_max kutlesi) 'govde kutlesi' diye adlandirilmis; 120-210 mm'de g_pull baglayici (fiilen koniler dahil cekilen eriyik), 260 mm'de L_body_max 2.5 m baglayici (yalniz govde, 309 kg); wafer arayuzu: cz_kg_per_day = TOPLAM kristallesen (tac + govde + kuyruk)",
+    "cozum": "Kanonik: firin cikisi = ZD toplam kristallesen kutle [kg/firin/takvim gunu]. Kristal m_cryst = m_govde + koni kutleleri (pi/12 D^2 h; kutlenin %3-4'u) olarak ayirir, L_body'yi yalniz govdeden hesaplar; wafer wf_eta_cone'u ayni oranlarla uygular. Mevcut 31/53/86/120 kg/gun degerleri eski tanimla; yeniden hesaplanacak (+-%3-5).",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "D araligi ve referans D",
+    "alanlar": [
+     "kristal",
+     "wafer",
+     "modul"
+    ],
+    "degerler": "kristal model 80-260 mm (+290 kalibrasyon), oneri kucuk talepte 120, saha duzeyinde 160-210; FZ <= 200; wafer eta(a|D) tablolari yalniz D=250/300 (serbest D'de gereken D 215-330 mm); modul ornegi D=250; onceki kanonik baz 210 (tablosu yok, M10/G12 tasimaz: tek parca a ~152 mm); wafer arayuzu cz_D_min_mm/cz_D_max_mm bandi istiyor, kristal tanimlamadi",
+    "cozum": "D kristal sahipliginde karar degiskeni (unite_tanimi, cap_kurali ciktisi); model bandi 80-300 (260-300 UYARI, >300 ve FZ'de >200 ELEME). Ornek referansi 250 mm (M10/K3 uyumu, tablo mevcut); D=210 icin eta(a|D) tablosu uretilmeli. Tatli nokta disinda sabit D'de kg/m2 1.0-1.4'e cikar; unite MW'lari bu yuzden tatli noktaya kosullu. Ayarlanabilir bant bilinmiyor (deney/2B isil simulasyon).",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "MPPT giris penceresi",
+    "alanlar": [
+     "elektronik",
+     "modul",
+     "pil"
+    ],
+    "degerler": "elektronik el_V_mp_min_V 30 / max 46 / nom 40 V (kaynaksiz, N_s~66); modul N_s 70: 37.3 / 24.5 (baypas) / 57.9 (Voc_soguk) V; kanonik N_s 64 (-40 C): Vmp_sicak 34.1, baypasli 22.4, Vmp_soguk 48.4, U_OC_MAX 57.2 V; 35 V dali N_s 36: 19.2 / 9.6 / 27.2 / 32.2 V",
+    "cozum": "Elektronik modul ciktilarini okur; k_worst ve topoloji yeniden hesaplanir. 60 V dalinda PV penceresi (22.4-48.4 V) hem NFPP 15S (30-57 V) hem LO 14S (28-55.3 V) pencereleriyle ortusur -> buck-boost + bagimsiz OVP; 35 V dalinda 14/15S pille boost, DVC-A islakta erisilebilir pil <= 8S (16-31.6 V) -> buck-boost.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Pil formati varsayilani ve AB 2 kWh esigi",
+    "alanlar": [
+     "pil",
+     "elektronik",
+     "standart"
+    ],
+    "degerler": "Onceki kanonik: tum senaryolarda 26700 LO. Pil alaninin kurali (bat_ds_cell_format): kutu < ~0.8 kWh 26700, 0.8-2 kWh 10-28 Ah, > 2 kWh 50-100 Ah; bat_ds_chemistry: A NFPP prizmatik veya LFP, B LO silindirik veya LFP; bat_ds_box_energy_cap: A'da <= 1.8 kWh onerisi (KARAR kullanici). Hesap: Schuko dolu A kutusu (960 Wp) LO ile E_target 1920 Wh -> 14S x 14P = 2005 Wh (> 2 kWh); NFPP 20 Ah ile 1707 Wh -> 15S x 2P = 1740 Wh.",
+    "cozum": "pil_formati = otomatik (varsayilan): bat_ds_cell_format kurali E_target'a gore; kimya formata bagli (26700 -> LO, prizmatik -> NFPP). Tipik: A NFPP 20 Ah 15S, B 26700 LO 14S. 1.8 kWh siniri kutu_enerji_siniri anahtari (le_1800Wh / serbest; karar kullanicinin); le_1800Wh'de asan aday ELEME, sessiz n dusurme yok.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "Pil hucre enerjisi E_cell",
+    "alanlar": [
+     "elektronik",
+     "pil",
+     "standart",
+     "hucre"
+    ],
+    "degerler": "elektronik el_E_cell_Wh 20 Wh (tahmin, 10-71); pil 26700 LO 10.23, 20 Ah NFPP 58, 50 Ah NFPP 142.5 Wh; standart 10 / 50 Wh ornekleri; hucre 4-310 Wh taramasi",
+    "cozum": "Pil sahip (bat_f06, format secimi); elektronik el_f_E_batt_eff ve el_f_N_box_batt_yr pilin E_cell ve N_s'ini okur. 20 Wh ile hesaplanan elektronik ornekleri (280 Wh en kucuk paket, 1786 kutu/yil) yeniden hesaplanmali; en kucuk paket 26700 14S 143 Wh, 20 Ah 15S 870 Wh, 50 Ah 15S 2138 Wh.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "K9'un yorumu (kendi hucre hatti vs paket hatti)",
+    "alanlar": [
+     "pil",
+     "standart",
+     "elektronik",
+     "hucre",
+     "modul"
+    ],
+    "degerler": "pil: K9 kendi hucre hattinin kapasitesi; satin almada 'pil hatti' = paket hatti (26700 1.44 M, prizmatik 216 bin hucre/yil, 4000 h x 0.9 ile); standart std_f_boxes_per_year_unit ve elektronik el_f_N_box_batt_yr K9'u her durumda tavan yapiyor; hucre/modul K9'dan PV hacmi turetiyor",
+    "cozum": "K9 yalniz pil_kaynagi = ic_hat iken baglayici; satin_hucre'de tavan paket hatti kapasitesi. K9'un kastedilen anlami kullaniciya sorulmali; U3 ancak K9 = kendi hucre hatti ise anlamli.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "konu": "W_unit_yr: hucre W mi panel Wp mi; verimlerin eksik/cift sayimi",
+    "alanlar": [
+     "hucre",
+     "altyapi",
+     "modul",
+     "wafer"
+    ],
+    "degerler": "f_hjt_line_cap ve eco_unit_output_W_yr hucre W veriyor (CTM ve modul verimi yok); f_hjt_required_W CTM'e boluyor ama mod_module_yield'i atliyor; mod_f_cells_demand mod_module_yield'i kullaniyor; f_hjt_required_m2'de wafer_per_day_needed = m2/h x 24 / (A_cell x hjt_yield_total), oysa m2/h zaten hjt_yield_total'a bolunmus (cift sayim; ilk nesilde ~%13); cz_frac_in_window 'wafer verimine carpan' diye tanimli ama zincire bagli degildi",
+    "cozum": "W_unit_yr panel Wp olarak tek tanim: m2_iyi_wafer x cz_frac_in_window x eta_cell x 1000 x hjt_yield_total x CTM x mod_module_yield. Hucre hatti kapasitesi ayni carpanlarla panele cevrilir; f_hjt_required_W'ye /mod_module_yield eklenir; f_hjt_required_m2'deki ikinci /hjt_yield_total kaldirilir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Kesit geometrisi: modulun tam kare varsayimi vs wafer psodo-kare",
+    "alanlar": [
+     "modul",
+     "wafer"
+    ],
+    "degerler": "mod_f_P_quantized: (D x f_pack)^2, f_pack = 1/(k sqrt2) (ice cizilmis tam kare, %63.7); wafer: psodo-kare sq_D_over_a_pseudo 1.3557, kesit verimi 0.667-0.672. D=250, k=1: tam karede a 176.8 mm, psodo-karede 181.5 mm; hucre alaninda ~%5-6 fark",
+    "cozum": "mod_f_P_quantized emekli; P_gercek = N_s N_p x f_p_cell(A_cell(a_wafer(D, yerlesim))) x CTM (wafer'in A_cell / sq_A_ps ciktisi).",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Gunluk akis tabani: 250 calisma gunu vs 365 takvim gunu",
+    "alanlar": [
+     "modul",
+     "pil",
+     "wafer",
+     "kristal",
+     "altyapi"
+    ],
+    "degerler": "mod_f_panels_per_day_sync / op_days_per_year (250); bat_f30 panel_per_day x days_per_year; wafer/kristal/altyapi x 365; fark 365/250 = 1.46 kat",
+    "cozum": "Tum gunluk akislar takvim gunu (365); 250 yalniz vardiyali hatlarin kapasitesinde (cizelge saati) kullanilir; 24/7 ust akis ile 2 vardiyali montaj arasindaki fark ara stokla tamponlanir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Voc sicaklik katsayisi birimi ve degeri",
+    "alanlar": [
+     "hucre",
+     "modul",
+     "standart"
+    ],
+    "degerler": "hucre -0.244 %/K (PVEducation formulu); modul -0.0024 1/K (veri sayfasi -0.22 %/C, fizik -0.22..-0.24); standart alpha_Voc_pct_K girdi. -37.2 C'de kanonikle N_s_max 67, modul degeriyle 68 (onceki ciktinin tablosu modul degeriyle hesaplanmisti).",
+    "cozum": "Hucre sahip, birim %/K (std_f_ku ile uyumlu); modul 1/K'ye cevirir. SELV sinirina etkisi oldugu icin sinir kontrolunde alfa_sinir (olcum yokken -0.28) kullanilir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Jsc'nin iki rolu ve 8 A alan siniri",
+    "alanlar": [
+     "hucre",
+     "modul",
+     "standart"
+    ],
+    "degerler": "hucre Jsc 40 mA/cm2 (olcum 38.0, sampiyon 41.4); modul 41.3 (Waaree 18.22 A / 441 cm2) -> Class III a <= 137.1 mm; standart '8 A -> A_cell <= ~202 cm2' (a ~142 mm); onceki kanonik hucre id'sini 41.3'e cekmisti",
+    "cozum": "Iki kanonik: hjt_jsc_mA_cm2 40 (nominal; performans, kayiplar, f_hjt_isc) ve mod_jsc_A_per_cm2 0.0413 (sinir; Class III, ISC_MAX, kablo, sigorta; marj 1.03 -> a <= ~137 mm).",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Class III sinirlari, marjlar ve kutu toplami",
+    "alanlar": [
+     "modul",
+     "standart"
+    ],
+    "degerler": "modul: %3 marjla N_s <= 45, a <= 137.1 mm, P_max 176-198 W (eta 0.24); standart: marjsiz STC N_s 46 ve 214-228 W, islak/AT ile N_s 42 ve 195-208 W; std_f_class3_ok kutudaki toplam n x P <= 240 W (UL ozetinden, 4.4.3 goruntulenmedi)",
+    "cozum": "Formul standart, marjlar modul (N_s <= 45, cift 44). Ilk nesil eta ile P ~161-181 W, olgun ~187-210 W; dvca35 ile birlikte ~145 W. Kutu toplami kurali varsayilan acik (muhafazakar) -> class3 fiilen B ve tek/iki kucuk panelle sinirli; yorum onayli kurulusla dogrulanmali.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Islak ortam gerilim siniri (30 vs 35 V; STC vs U_OC_MAX)",
+    "alanlar": [
+     "elektronik",
+     "standart",
+     "modul"
+    ],
+    "degerler": "elektronik el_V_lim_wet_V 35 (alt 30): urun DVC-A 35 V ve tesisat 414.4.5 30 V tek parametrede; modul 35 V dali soguk Voc'a uygulanmis ve 'hafizadan' etiketli; Class III 35 V STC'de",
+    "cozum": "Uc ayri kanonik: std_dvca_dc_wet_v 35 (soguk U_OC_MAX), std_selv_wet_no_basic_protection_dc_v 30 (elv30), std_class3_voc_stc_max_v 35 (STC).",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Guven derecelendirmesi: iki standart sinirda asimetri",
+    "alanlar": [
+     "standart",
+     "modul"
+    ],
+    "degerler": "onceki cikti: std_class3_voc_stc_max_v guven orta ('2023 baskisi dogrulanmadi'), std_selv_pv_uocmax_limit_v guven yuksek ('2025 baskisinda korundugu dogrulanmadi' notuyla); CSV'de ikisi de yuksek; modulde Class III orta",
+    "cozum": "Ayni kural: deger okunan baskinin metninden -> ikisi de yuksek; guncel baskida korundugu ayrica dogrulanacak (deney/kaynak isi). Class III'te belirsiz olan deger degil kutu-toplami yorumu.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Wh/Wp, depolama suresi ve C-rate tabani",
+    "alanlar": [
+     "pil",
+     "elektronik",
+     "hucre",
+     "standart"
+    ],
+    "degerler": "pil A 1.6 / B 3.2 Wh/Wp kullanilabilir (nominal NFPP 1.78 / 3.56, LO 2.0 / 4.0); elektronik el_h_store_h 1.5 h ve C-rate tabani E >= 2 x P_box (0.5C); hucre 1-5 Wh/W; standart '1 kWh kutu' ornegi",
+    "cozum": "Pil sahip: E_nom = max(n P WhWp / usable, P_box x bat_pv_peak_factor / C_max(format, T)); el_h_store_h kaldirilir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Sarj C-orani degeri",
+    "alanlar": [
+     "elektronik",
+     "pil"
+    ],
+    "degerler": "elektronik el_C_charge_max_C 0.5 (ecoteardown veri sayfasi); pil 26700 1.0C (Tycorun), prizmatik 0.5C, sifir alti 0.2C",
+    "cozum": "Pil sahip, format ve sicakliga bagli; A varsayilani (prizmatik) 0.5C, B (26700) 1.0C.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "n_panel_per_box ve fis siniri",
+    "alanlar": [
+     "pil",
+     "elektronik",
+     "standart"
+    ],
+    "degerler": "pil n=2-4 onerisi, orneklerde tum P icin n=4 (4 x 500 = 2000 Wp); elektronik A-800 (2 x 400 W) ve 50 W x 16 ornegi; standart Schuko <= 960 Wp (500 W panelde 1 panel), ozel fis 2000 Wp; onceki kanonik Schuko kaydinin ust ucu 2000 idi",
+    "cozum": "n = min(kutu_kurali, floor(P_pv_kutu_maks / P)); Schuko kaydi 960/960/960, ozel fis ayri id ve fis_tipi anahtari; ayrica kutu_enerji_siniri ve C-rate kisitlari.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Omuz/kuyruk konisi ve govde boyu",
+    "alanlar": [
+     "kristal",
+     "wafer"
+    ],
+    "degerler": "omuz/D: kristal 0.4, wafer 0.35; kuyruk/D: kristal 0.6, wafer 0.8; L_body: kristal azami 2500 mm (120 mm'de hesaplanan 1.34 m, 210 mm'de 2.34 m), wafer ornegi 1500 mm (6D ile sinirli)",
+    "cozum": "Kristal sahip (cz_shoulder_height_ratio, cz_tail_length_ratio, cz_L_body_mm ciktisi); wafer ayni degerleri okur. Tumu tahmin; prototiple olculecek.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Kristal-wafer kutle dengesi ve geri donusum formulleri cift",
+    "alanlar": [
+     "kristal",
+     "wafer"
+    ],
+    "degerler": "kristal: xtal_kg_ingot_per_m2_wafer = rho (t + kerf) / brick_yield (t 130, kerf 60, brick 0.70 -> 0.63 kg/m2), xtal_recycle_kg_day = talep (1 - brick_yield) x 0.85; wafer: wf_m_cryst ilk nesil serbest D 0.68-0.73, olgun 0.57-0.65, sabit D'de 0.61-1.40; wf_m_rec detayli",
+    "cozum": "m2 basina kutle ve geri donus akimi wafer sahip; kristal xtal_kg_ingot_per_m2_wafer ve xtal_recycle_kg_day'i emekli eder, wf_m_cryst ve wf_m_rec'i okur. Poli dengesi kristalde: taze = ZD iyi kutle + pota artigi - wafer geri donusu (daglama sonrasi).",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Wafer kalinligi t_wafer",
+    "alanlar": [
+     "wafer",
+     "kristal",
+     "hucre",
+     "modul"
+    ],
+    "degerler": "wafer ilk nesil 115 (a<=105) / 125 (a>=156) um, olgun 95-115 um; kristal yap/al ornegi 130 um; hucre ve modul girdi",
+    "cozum": "Wafer sahip (boyuta bagli politika, ogrenme harmani); K3 dalinda satin alinan kalinlik (130 um) ayri parametre.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Kirilma modeli (H3)",
+    "alanlar": [
+     "wafer",
+     "hucre"
+    ],
+    "degerler": "wafer: P = ref [0.25 + 0.75 (sqrt(A)/182)^3 (110/t)^3.8], ref olgun 0.0025, ilk nesil 0.02; hucre: p = 0.0025 (a/210)^1, baslangicta x3, kalinlik terimi yok; ayni Risen verisi iki farkli referans boyuta baglanmis",
+    "cozum": "Tek model wf_P_break_cell (wafer sahip) f_hjt_yield'e girer; f_hjt_break emekli; kanonik referans harmanli (varsayilan ilk nesil 0.02). Referans boyut duzeltmesi n_a bilinmedigi icin acik; us 1-8, deneyle olculecek.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Sermaye yuku, ekipman omru ve iskonto",
+    "alanlar": [
+     "hucre",
+     "modul",
+     "kristal",
+     "wafer",
+     "elektronik",
+     "pil",
+     "altyapi"
+    ],
+    "degerler": "hucre 1/depr_years (5 yil, faizsiz) + bakim 0.05; modul 1/7 + bakim; kristal CRF(xtal_wacc 0.10, 7 yil); wafer fin_crf 0.17; elektronik CRF(0.08, 5) = 0.2505; pil CRF(0.12, 7) = 0.2191; altyapi CRF_tax(0.12, 8, t 0.125) = 0.2122 + bakim 0.04 + sigorta 0.006",
+    "cozum": "Tum makine capex'i eco_annual_capex_charge_usd_yr (eco_crf_tax_machine, eco_life_machine_yr 8) ile; alana ozel omur yalniz fiziksel sarflarda.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Tasarim dongusunde eta sabit, CTM sabit",
+    "alanlar": [
+     "modul",
+     "hucre"
+    ],
+    "degerler": "mod_f_design_loop yalniz CTM(a)'yi yineliyor, eta_cell sabit girdi (0.24); hucre f_hjt_a_min_selv ve f_hjt_required_W'de CTM sabit 0.97",
+    "cozum": "Sabit nokta hem eta(a) (kenar kaybi w_eq, ogrenme agirligi) hem CTM(a) uzerinden; hucre mod_ctm_power_calc'i okur.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "secimler.py anahtar adlari ve varsayilanlari ile alan onerileri",
+    "alanlar": [
+     "model",
+     "wafer",
+     "elektronik",
+     "kristal",
+     "pil"
+    ],
+    "degerler": "secimler.py: senaryo ('A_balkon', 'B_tasinabilir') vs formullerde scenario 'A'/'B'; kristal_yontemi vs formullerde xtal_mode; pil_kaynagi ('satin_hucre', 'ic_hat') vs bat_make_or_buy ('buy', 'make'); bat_format degerleri '26700', 'prismatic', 'prismatic_small'. Varsayilanlar: wafer_kaynagi = 'ic' (K3 ve wafer/kristal bulgusu satin alma), guc_kati = 'gan_planar' (el_ds_semis: 'Ilk nesilde Si'), cap_kurali'nda 'bant' yok",
+    "cozum": "Mevcut anahtar adlari korunur, formul degiskenlerine esleme tablosu (notlar 4) verilir; yeni anahtarlarin degerleri formuldeki yazimla ayni (bat_format, bat_chem, edge_mode). Varsayilan degisiklikleri (wafer_kaynagi -> satin_alma, guc_kati -> si_sarimli) kullanici kararina acik madde olarak isaretlendi.",
+    "ciddiyet": "orta"
+   },
+   {
+    "konu": "Dokulama Si kaybi",
+    "alanlar": [
+     "wafer",
+     "hucre"
+    ],
+    "degerler": "wafer wf_texture_removal_um 15 (8-25, hafizadan); hucre hjt_si_etch_removal_um 12 (8-20, tahmin)",
+    "cozum": "Hucre sahip (12 um, aralik 8-25); t_min_ascut = 80 + 12 = 92 um.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "konu": "Kerf",
+    "alanlar": [
+     "wafer",
+     "kristal"
+    ],
+    "degerler": "wafer ilk nesil 57 / olgun 50 um; kristal ornegi 60 um",
+    "cozum": "Wafer sahip (saw_kerf_blend).",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "konu": "Pil seri sayisi 14S/15S",
+    "alanlar": [
+     "elektronik",
+     "pil",
+     "standart"
+    ],
+    "degerler": "elektronik 14 (LO, marjsiz 15'ten 'onerilen'); pil 0.97 marjla LO 14, NFPP 15, LFP 15; standart 15S (4.0 V) / 13S (4.3 V) ornekleri",
+    "cozum": "bat_f08_ns kanonik; kimya secimine bagli (A NFPP 15, B LO 14); dvca35 ve erisilebilir port icin LO 8S.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "konu": "En kucuk hucre boyutu",
+    "alanlar": [
+     "modul",
+     "hucre",
+     "wafer"
+    ],
+    "degerler": "modul mod_a_cell_min_mm 60 (40-100, tahmin); hucre ve wafer tablolari a = 40-50 mm'yi isliyor; N_s 64 ve ilk nesil eta ile 50 W'ta a ~61 mm",
+    "cozum": "mod_a_cell_min_mm yumusak kisit (UYARI); asil sinir dizgi/tel sayisi ve adet maliyeti; hucre/tasiyici isleme tabani alti ELEME.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "konu": "Kur, elektrik ve iscilik fiyatlari (ekonomik)",
+    "alanlar": [
+     "hucre",
+     "pil",
+     "modul",
+     "wafer",
+     "elektronik",
+     "altyapi",
+     "standart",
+     "kristal"
+    ],
+    "degerler": "CNY/USD 6.72 (hucre, pil), 6.7 (modul), 6.8 (wafer); TRY/USD 48.92 (hucre, elektronik) / 49.0 (altyapi); EUR/USD 1.139 (elektronik) / 1.15 (standart, tahmin); elektrik 0.10 (kristal), 0.12 (wafer, hucre, modul yer tutucu), 0.105 (altyapi); iscilik 7 (modul) - 12 (kristal) USD/h, 20 k$/FTE (hucre), 8.4 operator (altyapi)",
+    "cozum": "Ekonomik kanoniklerin sahibi altyapi (eco_*); bu teknik gorevin kapsami disinda ayri kanoniklestirilmeli; alan yer tutuculari kaldirilir. Bu ciktidaki c/W ipuclari alanlarin kendi yer tutucu fiyatlariyla ve kabadir.",
+    "ciddiyet": "dusuk"
+   }
+  ],
+  "unite_tanimi_secenekleri": [
+   {
+    "kod": "U1_firin_capali",
+    "ad": "Firin-capali unite",
+    "tanim": "Unite = k (varsayilan 1) sabit capli Cz firini + firinin tum ciktisini isleyen wafer (testere, kare kesim, geri donusum daglama), hucre (kucultulmus L=0.5 m tasiyicili arac seti), modul, pil paketi ve kutu hatlari. Hacim firin kapasitesinden gelir (itme); asagi akis hatlari firina gore boyutlanir ve unite oldugu gibi kopyalanir. Kullanicinin 'kopyalanan tam zincir' fikrine en yakin, bolunmezligi firin lehine cozen tanim.",
+    "capa_darbogaz": "Capa: firin (xtal_kg_per_day, D). W_unit (panel Wp) = N_f x kg/gun x 365 x cz_frac_in_window / wf_m_cryst x eta_cell x 1000 x hjt_yield_total x CTM x mod_module_yield. Uyumsuzluk: hucre hatti L=1 m (ilk nesil 29-37, olgun 38-48 MWp) ve testere (ilk nesil ~27-47 MWp) firin basina 1.4-17 MWp'in cok ustunde; hucre hatti L=0.5 m (~11.6 MW olgun hucre) ile eslenir, testere dusuk kullanimda kalir. Ilk yilda firin cikisi olgunun ~%35'i (kg/gun ~yari, kg/m2 +%15, eta ve verim dusuk).",
+    "unite_icinde": [
+     "N_f firin (sicak bolge, pota, guc kaynagi, argon hatti)",
+     "testere + kare kesim + muayene + geri donusum daglama",
+     "HJT hucre hatti (L=0.5 m arac seti: islak, PECVD, PVD, baski, IV)",
+     "modul hatti (dizgi, 1 laminator, zorunlu test)",
+     "pil paket hatti (satin alinan hucre) ve kutu montaj/test",
+     "unite-ici altyapi: VMB, gaz izleme, POU abatement, UPS, mini-ortam, HVAC, pil yangin bolmesi"
+    ],
+    "saha_duzeyinde": [
+     "gaz kabini + yakma-islak ana hat, silan tup alani",
+     "UPW, HF atik aritma, kerf camuru",
+     "argon tanki, trafo, jenerator/UPS",
+     "kalite laboratuvari; tip testi/sertifika (urun_sabit)",
+     "makine NRE'si planlanan kopya sayisina"
+    ],
+    "sayisal_ipuclari": "Firin basina panel MWp/yil, ilk nesil / olgun (turetilmis; ilk nesil = kristal ogrenme yili MC medyan kg/gun, 0.72 kg/m2, eta 0.221, hjt_yield 0.887, CTM 0.97, modul verimi 0.98 -> 3.86 g kristallesen/Wp; olgun = olgun baz kg/gun, 0.62 kg/m2, eta 0.2575, 0.982 -> 2.58 g/Wp): 120 mm 1.4 / 4.4; 160 mm 2.6 / 7.5; 210 mm 4.3 / 12.2; 250 mm ~5.8 / ~16.0 (ara degerleme); 260 mm 6.2 / 17.0. Bu kg/m2 degerleri tatli noktada gecerli (D=210'da tek parca a ~152 mm, D=250'de a=182); tatli nokta disinda sabit D'de 1.0-1.4 kg/m2 ve MW orantili duser. kg/gun degerleri eski tanimla (+-%3-5). A kutusu (960 Wp) 210 mm: ~4.5 / ~12.7 bin/yil. Zaman + saha + kristal donusum (wafer, modul, malzeme haric; turetilmis, kaba, alan yer tutucu fiyatlariyla): 210 mm ilk nesil hucre L=0.5 m (~1.1 M$/yil sabit: 2.63 M$ / 5 yil + bakim + 16.6 FTE + taban enerji) ~26 + saha N=1 (~1.12 M$/yil) ~26 + kristal (21 USD/kg) ~8 = ~60 c/Wp; olgun ~10 + ~9 + ~2-3 = ~21-22 c/Wp (olgunda 12.2 MWp, L=0.5 m hattin ~11 MWp kapasitesini asar). Kiyas: dolu L=1 m hucre hatti zaman 2.7-3.5 c/W. Ilk nesil 210 mm unitenin A pil talebi (~7.7 MWh/yil, NFPP 1.78 Wh/Wp) 20 Ah K9 hattina (~8.7 MWh/yil) yakin.",
+    "artilar": [
+     "Firin tam kullanimda; u = 0.04-0.7 bolunmezlik sorunu ortadan kalkar",
+     "Kopyalama felsefesiyle uyumlu: her kopya tam zincir; tek firin tasarimi ve sabit D ile makine NRE'si bir kez",
+     "Kristal kalitesi (tau_SRH, O, C, Fe) kendi wafer'imizla dogrudan hucreye baglanir",
+     "Ilk nesil 210 mm unitenin pil talebi 20 Ah K9 hattiyla ayni mertebe (U3 ile birlesebilir)"
+    ],
+    "eksiler": [
+     "Ilk nesilde firin basina yalniz ~1.4-6 MWp: zaman+saha+kristal ~60 c/Wp (210 mm), olgunda ~21 c/Wp; her iki durumda dolu L=1 m hat ve satin wafer yolunun cok ustunde",
+     "Hucre hatti icin ayri L=0.5 m arac tasarimi; capex/(W/yil) L=1 m'nin ~4 kati",
+     "Testere (~%10-15; tek testere 6-10 firini besleyebilir) ve adet istasyonlari dusuk kullanimda",
+     "D sabit -> a yalniz tatli noktalardan ve P kuantize (N_s 64 ile D=210: ~314 / ~158 / ~105 W; D=250: ~448 / ~225 / ~150 W); D=210 icin eta(a|D) tablosu yok",
+     "Pota degisimi (12-40 h) ve kesintiler icin ingot/wafer tamponu gerekir",
+     "Kendi ingot + poli (dilimleme haric) 7-25 USD/m2, satin alinan wafer ~4.9 USD/m2: kristal adimi ancak stratejik gerekceyle",
+     "Talep bilinmiyor"
+    ]
+   },
+   {
+    "kod": "U2_saha_hucre_kopya_kristal",
+    "ad": "Saha paylasimli hucre/modul/wafer hatti + kopyalanan kristal modulu",
+    "tanim": "Saha cekirdegi: bir L=1 m HJT hucre hatti, modul hat(lar)i, wafer bolumu (testere, kare kesim, geri donusum daglama) ve ortak altyapi. Kopyalanan birim: kristal modulu (1 firin D=210-260 mm + ingot tamponu) ve eslenik pil-kutu modulu (paket hatti + kutu montaj/test). Hucre hatti dolana kadar moduller eklenir, sonra ikinci hucre hatti ve yeni saha basamagi.",
+    "capa_darbogaz": "Saha capasi: hucre hatti (f_hjt_line_cap -> panel Wp). Unite capasi: firin. n_units_served = floor(hat / W_modul); xtal_furnace_scope = unite, hucre/modul = saha. Darbogaz: ilk moduller eklenirken hucre hatti bos kalir; ogrenmeyle firin basina cikti ~2.8 kat artar, hucre hatti ~1.3 kat -> gereken modul sayisi zamanla yariya iner.",
+    "unite_icinde": [
+     "1 firin (D 210-260 mm) + sicak bolge/pota + ingot tamponu",
+     "pil paket hatti ve kutu montaj/test (modulun PV cikisiyla senkron)"
+    ],
+    "saha_duzeyinde": [
+     "HJT hucre hatti (L=1 m) + metroloji + IV",
+     "wafer bolumu: bir 600 mm testere ilk nesilde ~7-10, olgunda ~6-8 kristal modulunu besler (turetilmis; testere ilk nesil ~41, olgun ~93 MWp a=182'de), kare kesim, geri donusum",
+     "modul hatti (dizgi, laminator(ler), test)",
+     "gaz/yakma, UPW, HF, argon, jenerator, sogutma",
+     "hucre arac NRE ve boyuta ozgu takim (urun_sabit)"
+    ],
+    "sayisal_ipuclari": "Hucre hattini (ilk nesil ~35, olgun ~45 MWp) doldurmak icin firin (turetilmis): ilk nesil 210 mm ~8-9, 250 mm ~6-7, 260 mm ~6; olgun 210 mm ~4, 250 mm ~3, 260 mm ~3. Ilk nesilde kurulan firinlarin yarisi olgunlukta ya atil kalir ya da ikinci hucre hattini gerektirir (fazlama karari). Hucre zaman (Tablo 3 sabit ~1.23 M$/yil): 1 modulle (~4.5 MW hucre) ~27, 20 MW 6.1, dolu hat ilk nesil ~3.3, olgun 2.7 c/W. Modul hatti >= 3 MWp <= 2.8 c/W. Saha payi N=4: 247 (a) / 207 (b) k$/yil/unite; N=8: 194 / 139. Ilk basamak: hucre hatti ~3.1 M$ (2.0-6.5) + arac NRE ~2.5 M$ + saha N=1 ~2.2 M$ + modul basina firin capex ~225-277 k$ (testere/kare kesim haric) (tahmin agirlikli).",
+    "artilar": [
+     "Hem firin hem hucre hatti yuksek kullanima ulasabilir",
+     "Kopyalanan birim (kristal modulu) kucuk ve tekrarlanabilir; firin tasarimi bir kez",
+     "Saha altyapisi ve testere zaten saha basina"
+    ],
+    "eksiler": [
+     "'Unite = PV + pil senkron' kirilir; kopyalanan modul tek basina urun cikarmaz",
+     "Ilk basamakta buyuk sabit yatirim ve ~35-45 MWp/yil talep gerekir",
+     "Ilk nesilde 6-9 firin; ogrenmeyle bunlarin yarisi fazla kalir",
+     "Moduller eklenene kadar hucre zaman sinifi ~27 c/W ve ustu",
+     "Kristal adimi satin alinan wafer'dan pahali; stratejik gerekce sayisallasmadi",
+     "Hucre hatti tek nokta ariza"
+    ]
+   },
+   {
+    "kod": "U3_k9_capali",
+    "ad": "Kullanicinin K9-capali senkron unitesi",
+    "tanim": "Unite = 1 pil hucre hatti (K9: ~150 bin hucre/yil) + onunla senkron poliden panele tum PV zinciri + kutu; kapasite unite kopyalanarak artar. Hacim pil hucre formati ve Wh/Wp oraniyla belirlenir (cekme).",
+    "capa_darbogaz": "Capa: pil hucre hatti (bat_f28_line_capacity, bat_f29_line_mwh). W_unit (panel Wp) = K9 x E_cell x verimler / (Wh/Wp nominal); hucre W icin /(CTM x mod_module_yield). Darbogaz tersine: hicbir PV hatti dolmaz. Hacim ogrenme durumundan bagimsiz (talep capasi), ama PV hatlarinin kullanimi ilk nesilde daha yuksek.",
+    "unite_icinde": [
+     "kendi pil hucre hatti (kaplama, montaj, formasyon, yaslandirma, kuru oda)",
+     "firin(lar), testere, hucre hatti, modul hatti (hepsi unite basina)",
+     "paket ve kutu montaj/test"
+    ],
+    "saha_duzeyinde": [
+     "gaz/yakma, UPW, HF; pil yangin ve NMP altyapisinin saha kismi",
+     "tip testi/sertifika"
+    ],
+    "sayisal_ipuclari": "K9 x E_cell (turetilmis): 26700 LO (10.23 Wh) 1.53 MWh/yil -> B ~0.38 MWp (4.0 Wh/Wp nominal); A'da yalniz < 0.8 kWh kutularda ~0.77 MWp; 20 Ah NFPP (58 Wh; A varsayilan formati) 8.7 MWh -> A ~4.9, B ~2.4 MWp; 50 Ah NFPP (142.5 Wh; kendi hat verimiyle 17.1 MWh) -> A ~9.6, B ~4.8 MWp ama en kucuk paket 15S = 2.14 kWh > 2 kWh (kutu_enerji_siniri = le_1800Wh ile uyumsuz). Zaman: hucre 4.9 MWp ~25, 0.77 MWp ~160 c/W; modul 1 MWp 6.9, 0.2 MWp 34.5 c/W; firin: 4.9 MWp icin ilk nesilde ~1 x 250 mm (u ~0.85), olgunda u ~0.3; saha sabiti N=1 ~1.1 M$/yil -> 4.9 MWp'de ~23, 0.77'de ~145 c/Wp. Kendi pil hucresi: 26700 1.03 $/Wh (0.51-1.89) vs satin alma 0.129; 50 Ah 0.165-0.21 vs ~0.13 $/Wh.",
+    "artilar": [
+     "Kullanicinin senkron ve kopyalama tanimina birebir uyar",
+     "Pil ve PV ayni hizda; ara stok kucuk",
+     "20 Ah NFPP ile A kutusu (<= 1.8 kWh) ve ilk nesil tek firin (250 mm) ayni mertebede"
+    ],
+    "eksiler": [
+     "26700 ile PV zincirinin tum hatlari %2-15 kullanimda; zaman ve saha maliyetleri 1-2 mertebe yuksek",
+     "20 Ah ile bile ~4.9 MWp: hucre zaman ~25, saha ~23 c/Wp",
+     "50 Ah ile hacim artar ama AB 2 kWh esigi ve Schuko 960 Wp ile uyumsuz",
+     "Kendi pil hucresi satin almaya gore 1.3-8 kat pahali (pil onerisi: Faz 1'de satin al)",
+     "K9 yalniz kendi hucre hattinda baglayici; hucre satin alinirsa paket hatti capa olmaktan cikarir"
+    ]
+   },
+   {
+    "kod": "U4_satin_wafer_hucre_modul",
+    "ad": "Satin alinan wafer ile hucre-modul-kutu unitesi",
+    "tanim": "Unite = HJT hucre hatti (L=1 m) + modul hat(lar)i + pil paket ve kutu hatlari; wafer satin alinir (K3 kalici), gerekirse bolme istasyonu. Firin/testere yok; kristal saha duzeyinde AR-GE (1 prototip cekici). Kapasite hucre hattiyla belirlenir; kopya = yeni hucre hatli unite.",
+    "capa_darbogaz": "Capa: hucre hatti veya talep, hangisi kucukse: W_unit = min(hjt_line_W_per_yr x CTM x mod_module_yield x u_hedef, talep). Darbogaz: talep; hat dolmazsa zaman sinifi hizla artar.",
+    "unite_icinde": [
+     "HJT hucre hatti (L=1 m) + metroloji + IV",
+     "wafer giris kalite kontrolu ve (K3 bolme modunda) bolme istasyonu",
+     "modul hatti (1-3 laminator; 24/7 veya 2 vardiya)",
+     "pil paket hatlari (satin alinan hucre) ve kutu montaj/test"
+    ],
+    "saha_duzeyinde": [
+     "gaz/yakma, UPW, HF (firinsiz: argon, jenerator, NOx yok)",
+     "kristal AR-GE prototip cekici (opsiyonel)",
+     "tip testi/sertifika, arac NRE"
+    ],
+    "sayisal_ipuclari": "Hucre hatti panel ciktisi ilk nesil 29-37, olgun 38-48 MWp/yil. Zaman: dolu ~3.5 (ilk nesil) / ~2.8 (olgun) c/Wp; talep 10 MWp'te ~13 c/Wp. Satin alinan M10 teslim ~4.91 USD/m2 -> ~2.6 c/Wp (ilk nesil zincir, ~186 Wp/m2); kendi kristal + poli 7-25 USD/m2 (dilimleme haric) + wafer donusumu ~7.2 (1.6-21) USD/m2 -> ~7.6-17 c/Wp. 35 / 45 MWp: A'da (960 Wp) ~36 / ~47 bin kutu/yil; pil (NFPP 1.78 Wh/Wp) ~62 / ~80 MWh/yil = 20 Ah hucreyle ~1.07 / ~1.38 M hucre/yil -> prizmatik paket hatti (216 bin hucre/hat/yil) 5 / 7 hat. Saha capex N=1 (a) ~2.16 -> firinsiz faz ~1.8 M$. 50 mm hucrede adet maliyeti tekli tutucuda 0.9, 16'li tutucuda 0.13 c/W.",
+    "artilar": [
+     "En ucuz wafer; firin bolunmezligi ve kristal riski yok",
+     "Hucre hatti kendi ekonomik olceginde (L=1 m, 0.062 $/(W/yil))",
+     "K3 ve saha fazlamasi (eco_site_phasing) ile uyumlu; kristal yatirimi ertelenebilir",
+     "Az a varyanti ile NRE/urun_sabit genis hacme yayilir"
+    ],
+    "eksiler": [
+     "Talep bilinmiyor; elektronik alaninin 3000 kutu/varyant/yil tahmini (~2-3 MW) hat kapasitesinin cok altinda; 10 MWp'te hucre zaman ~13 c/Wp",
+     "a satin alinan wafer bolmeleriyle sinirli (182/210 mm'nin 1/2, 1/3'u); kesik kenar w_eq 0.8 mm (C) ve hucre oncesi bolme dogrulanmadi",
+     "Cin tedarik zinciri, AB 2024/3015 izlenebilirlik riski (A); Cin disi wafer fiyati bilinmiyor",
+     "'Polisilikondan son urune' hedefi ertelenir"
+    ]
+   },
+   {
+    "kod": "U5_iki_katman",
+    "ad": "Iki katmanli: saha cekirdegi + kopyalanan montaj unitesi",
+    "tanim": "(a) Saha cekirdegi: HJT hucre hatti (L=1 m basamaklari), once satin alinan wafer, sonra fazli olarak firin grubu + testere (saha varligi, hucre hattina gore boyutlanir) ve ortak altyapi. (b) Kopyalanan montaj unitesi: modul hatti (dizgi + 1-2 laminator + zorunlu test) + pil paket hatti + kutu montaj/rutin test. 'PV + pil senkron' tanimi montaj unitesinde korunur; unite pazar/varyant basina (A-DE, B) kopyalanir. Kendi pil hucresi secilirse (K9) saha varligidir.",
+    "capa_darbogaz": "Montaj unitesi capasi: laminator + paket hatti (cizelge 4000 h x A_teknik 0.9). Saha capasi: hucre hatti; n_units_served = floor(hjt_line_Wp_per_yr / W_montaj). Darbogaz: toplam montaj talebi hucre hattini doldurmadikca cekirdegin zaman maliyeti.",
+    "unite_icinde": [
+     "modul hatti (dizgi, laminator, EL/IV/hipot zorunlu testler)",
+     "pil paket hatti (satin alinan hucre) ve kutu montaj",
+     "kutu zorunlu rutin testleri (IEC 62109-1 dielektrik vb.)",
+     "ara stok (hucre ve pil hucresi)"
+    ],
+    "saha_duzeyinde": [
+     "HJT hucre hatti(lari) + metroloji",
+     "wafer: satin alma (Faz 0) -> firin grubu + testere + geri donusum (Faz 1)",
+     "kendi pil hucre hatti (secilirse)",
+     "gaz/yakma, UPW, HF, argon, jenerator, sogutma; kalite laboratuvari",
+     "arac NRE, tip testi/sertifika"
+    ],
+    "sayisal_ipuclari": "Montaj unitesi (turetilmis; 2 vardiya 4000 h x A_teknik 0.9 = 3600 h): laminator (3 m2, 15 dk) 4.3-7.2 MWp/yil (P'ye gore; 24/7 x 0.9 ile 9.5-15.8); A pil paket hatti 20 Ah NFPP 216 bin hucre = 12.5 MWh -> ~7.0 MWp; B 26700 paket hatti 1.44 M hucre = 14.7 MWh -> ~3.7 MWp -> montaj unitesi ~4.3-7.2 MWp (laminator sinirli). Modul zaman 3 MWp 2.8, 5 MWp 2.3 c/W. Cekirdek hucre hatti ilk nesil 29-37 MWp -> ~5-8 montaj unitesi; olgun 38-48 -> ~6-10; dolu hatta hucre zaman ~2.7-3.5 c/W. Firin fazinda ilk nesil ~6 x 250 mm veya ~8 x 210 mm, olgun ~3 x 250 veya ~4 x 210 (u~1).",
+    "artilar": [
+     "Her katman kendi ekonomik olceginde (hucre ~35-45 MWp, montaj 4-7 MWp)",
+     "Senkron PV+pil montaj unitesinde korunur ve kucuk adimlarla kopyalanir",
+     "Varyant basina unite: urun_sabit (tip testi, kalip) o varyantin hacmine dogrudan dagitilir",
+     "Fazlama K3 ile uyumlu (once satin wafer, sonra saha firin grubu; firin sayisi ogrenmeyle ayarlanir)",
+     "Montaj unitesi pazara yakin konumlanabilir"
+    ],
+    "eksiler": [
+     "Kullanicinin 'poliden urune tam zincirin kopyalanmasi' tanimindan sapar",
+     "Cekirdegin ilk basamagi buyuk (~35-45 MWp hucre talebi, ~5-10 montaj unitesi) ve talep bilinmiyor",
+     "Ara hucre stogu, siniflama ve (farkli konumda) lojistik maliyeti",
+     "Hucre boyutu (a) montaj uniteleri arasinda ortak olmali (1-2 a); P esnekligi N_s/N_p/n_cut ile"
+    ]
+   }
+  ],
+  "tasarim_kurali_P_geometri": "ALGORITMA P_panel -> (N_s, N_p, a_hucre, a_wafer, k_split/n_cut, D, yerlesim, pil paketi, kutu). Gecis A = zincir adim 1-6. Gecis A yalniz ns_kurali in {selv_max, sabit}, cap_kurali in {wafer_capi, sabit_cap} ve tek aday kaldiginda hacimden bagimsizdir; optimize, bant veya sabit D'de birden cok tatli nokta adayi varsa secim adim 12'deki dis dongude (zincir adim 19) yapilir.\n0) GIRDILER/SECIMLER: P_hedef [W]; senaryo (A_balkon/B_tasinabilir); pazar (TR_marmara -10 / TR_ic -25 / DE_AT -40 / tek_urun -40 C; varsayilan tek_urun); gerilim_rejimi = selv60 | dvca35 | class3 | elv30 | class2_120 (oneri A: selv60; B yalniz-DC <= ~200 W: class3 + dvca35); ku_yontemi = varsayilan_1.2 (kendi hucre alfa/Voc olcumu ve beyani olana kadar) | beyan_alfa; ns_kurali = selv_max | sabit | optimize; wafer_kaynagi = ic | satin_alma; cap_kurali = wafer_capi | sabit_cap | bant [D_min, D_max]; edge_mode, k_post, n_cut; ogrenme_durumu -> wf_learn_weight (varsayilan 1 = ilk nesil); kutu_kurali, fis_tipi; pil_formati (varsayilan otomatik), kutu_enerji_siniri (le_1800Wh | serbest; karar kullanicinin). Kanonik degerler: Voc 0.745 V (sinir: olculen P99, olcum yokken 0.77), alfa -0.244 %/K (sinir: olcumun guvensiz ucu, olcum yokken -0.28), marj 1.03 (yalniz tasarim tavaninda), Vmp 0.64 V, beta_Vmp -0.28 %/K, Jsc nominal 40 / sinir 41.3 mA/cm2 (+ mod_isc_margin 1.03), T_hucre_maks 85 C.\n1) V_LIM DALI: selv60 -> V_lim = 60 V soguk U_OC_MAX'a (712.414.101); modul Class II; sebeke/AC cikis/dahili sarj varsa PV-sebeke arasi guvenli ayirma sart (std_f_selv_ok); 35 V ustu oldugundan konnektor Class II + kilitli (712.526.1); IMD <= 60 V'ta belirsiz (std_f_imd_required, muhafazakar bayrak). dvca35 -> V_lim = 35 V soguk U_OC_MAX'a (IEC 62109-1 DVC-A islak; AT sapmasi). class3 -> STC'de Voc <= 35 V, Isc <= 8 A, P <= 240 W modul basina ve muhafazakar yorumda kutudaki tum panellerin toplamina; pil ayni baradaysa geri besleme korumasi; islak/AT de isteniyorsa ayrica U_OC_MAX <= 35 V. elv30 -> 30 V (60364-4-41 414.4.5). class2_120 -> SELV degil, yalniz kiyas.\n2) SOGUK Voc VE N_s_max (iki tavan): K_U = 1 + (alfa/100)(T_min - 25) (beyan_alfa) veya 1.2 (varsayilan_1.2) (std_f_ku); K_U_sinir ayni kuralla alfa_sinir'dan. Tasarim tavani N_s_max_t = floor(V_lim / (K_U x Voc_nom x mod_voc_margin)) (mod_f_ns_max; mod_f_voc_cell_cold = Voc_nom x K_U olacak sekilde degisir). Sinir tavani N_s_max_s = floor(V_lim / (K_U_sinir x Voc_sinir)) (std_f_ns_max; MARJSIZ, cunku P99 marjin yerine gecer). N_s_max = min(N_s_max_t, N_s_max_s). class3: N_s_max3 = min(floor(35 / (Voc_nom x marj)), floor(35 / Voc_sinir), N_s_max) (STC, K_U yok; dvca35 birlikteyse K_U da). Kontrol (60 V): varsayilan_1.2 -> 65 / 64 -> 64; beyan_alfa ornegi (olcum P99 0.75 V, alfa_sinir -0.26 %/K): -40 C -> 67 / 68 -> 67 (cift 66); -20 C -> 70 / 71 -> 70. 35 V (dvca35, 1.2): 38 / 37 -> 37 (cift 36); class3 STC: 45 / 45 (cift 44); elv30: 32.\n3) N_s SECIMI: selv_max -> N_s = N_s_max - ((N_s_max x N_p) mod 2) (mod_f_ns_select; varsayilan 64). sabit -> kullanici N_s; N_s > N_s_max ise ELEME. optimize -> [N_s_min, N_s_max] araligi aday listesi; N_s_min adim 9'daki MPPT alt gerilim kosulundan; secim adim 12'de (amac toplam USD/Wp; kablo kaybi ~1/N_s^2 ve elektronik(V) terimleri dahil).\n4) eta(a) - CTM(a) - a SABIT NOKTASI (N_p = 1 ile basla): hjt_eta_core_pct = w x cell_eta_core_start_pct + (1 - w) x cell_eta_core_mature_pct; a_0 = 1000 sqrt(P / (N_s N_p eta_0 1000 CTM_0)), CTM_0 = 0.97. Her yinelemede: w_eq = f_hjt_w_eq(edge_mode, k_post); kenar kaybi = cevre x w_eq / alan (f_hjt_edge_loss; kare icin 4 w_eq / a); eta_k = f_eta_cell(f_hjt_eta_tau, kenar, f_hjt_queue_factor); n_tel = mod_f_n_wires_opt(a_k); CTM_k = mod_ctm_optical x (1 - mod_f_loss_interconnect(a_k, a_k/n_tel)) (mod_f_ctm_calc); A_hucre = P / (N_s N_p eta_k 1000 CTM_k) (mod_f_A_cell); a_{k+1} = 1000 sqrt(A_hucre / wafer_area_factor). Dur: |a_{k+1} - a_k| < 0.01 mm (eta a ile artar, CTM a ile azalir; 3-6 yinelemede yakinsar); 20 yinelemede yakinsamazsa HATA. Ornek N_s 64, ilk nesil (turetilmis): 50 W 61, 100 W 85, 200 W 120, 300 W 148, 500 W 191 mm; olgun 56 / 79 / 112 / 137 / 178 mm; dvca35 N_s 36'da 50 W ~81 mm. Kenar tipi uretim yoluna bagli: on-bolme -> B (w_eq 0.61), islem sonrasi kesim (k_post > 1 veya n_cut > 1) -> C (0.8) veya D (0.26-0.35, dogrulanmamis).\n5) N_p VE BOYUT SINIRLARI: a_hucre > a_max (mod_a_cell_max_mm 210; class3'te mod_f_a_max_class3 ~137 mm, sinir Jsc ile) veya P > P_string_max (std_f_p_string_max_at_vlim) ise N_p = ceil((a/a_max)^2) (mod_f_n_p); N_s x N_p cift olacak sekilde N_s duzeltilir ve adim 4 N_p ile tekrarlanir (N_s 64'te 500 W bile N_p = 1). a_hucre < mod_a_cell_min_mm (60) -> UYARI (sabit/optimize'da N_s dusurulup a buyutulur). a_hucre hucre/tasiyici isleme tabaninin altinda (tablolar 40-50 mm'ye kadar) -> ELEME. Isc = Jsc_sinir A N_p x arka yuz (mod_f_isc), ISC_MAX = 1.25 Isc (mod_f_isc_max) -> kablo kesiti, konnektor, baypas ve sigorta akim sinifi; nominal Isc (f_hjt_isc) yalniz kayiplar icin.\n6) WAFER-D BAGLANTISI: (a) satin_alma: a_wafer {182.2, 210} mm sabit; hucre = a_wafer / n_cut serit (1, 1/2, 1/3) veya k x k on-bolme (wf_split_piece; hucre oncesi bolme deneyle dogrulanmali). Her (format, n_cut) adayi icin N_s' = cift(round(P / (A_hucre eta CTM 1000))) <= N_s_max; P_gercek = N_s' N_p A_hucre eta CTM 1000; kesik kenar icin edge_mode C/D. (b) ic + wafer_capi (serbest D): k_split = D'yi firin bandina sokan en kucuk k; D = sq_D_required(a_wafer, k); kesit verimi ~0.66-0.67 her a'da; D 260-300 mm -> UYARI, D > 300 veya FZ'de D > 200 -> ELEME. (c) ic + sabit_cap veya bant: eta(a|D) = sq_eta_cross(a, D) a izgarasinda (or. 0.5 mm adim) onceden tablolanir. TATLI NOKTA = eta(a|D) yerel maksimumu ve eta >= eta_serbest ~0.66. Adaylar: a_hedef'e komsu tatli noktalar x n_cut. P_gercek mod_f_P_quantized (tam kare) ile DEGIL, A_cell (psodo-kare, sq_A_ps) ve f_p_cell ile hesaplanir. Sabit D ve selv_max N_s ile P basamaklidir: N_s 64, ilk nesil (turetilmis): D=250 -> a=181.5 tam ~448 W, n_cut 2 ~225 W, n_cut 3 ~150 W, a=90 (k=2) ~111 W, a=50 (satir) ~34 W; D=210 -> a ~152 tam ~314 W, yarim ~158 W, ucte bir ~105 W. P_hedef tolerans disinda kalirsa (tolerans kullanici parametresi, varsayilan yok): N_s dusurulur (<= N_s_max; MPPT penceresi yeniden kontrol), n_cut veya N_p degistirilir; hicbiri yetmezse UYARI ve en yakin P_gercek raporlanir. Aday maliyeti kristallesen kg/m2'yi (wf_m_cryst; eta(a|D) ile 2.3 kata kadar), hucre adet maliyetini ve boyuta ozgu urun_sabit'i icerir; birden cok aday kalirsa secim adim 12'de. kxk kose parcalari (sq_A_corner) ayri siniflanir, ayni dizide karistirilmaz.\n7) YERLESIM VE PANEL: (n_cols, n_rows) = mod_f_layout (cift sutun, en-boy hedefi; 64 -> 8x8); W, L, A_panel, eta_modul (mod_f_W/L/A_panel/eta_module); test yuku -> cam ve cerceve (mod_f_q_req, mod_f_q_design, mod_f_t_req_GG/GB, mod_f_t_glass_select); balkon korkulugunu asan kisa kenar -> UYARI.\n8) GERILIM/SINIF KONTROLU (sinir degerlerle): U_OC_MAX_sinir = K_U_sinir x N_s x Voc_sinir x n_seri_panel (std_f_uoc_max) <= V_lim; class3: N_s Voc_sinir <= 35 V (STC), N_p Isc_sinir x marj <= 8 A, P <= 240 W ve kutuda n P <= 240 W (std_f_class3_ok); dvca35: pil portu erisilebilirse V_batt_max <= 35 V (std_f_dvca_wet_ok) -> LO'da <= 8S veya PV portu ile pil arasinda tek-ariza korumasi; selv60: pil PV'den galvanik ayrik degilse V_batt_max <= 60 V (std_f_selv_ok). Bir kontrol FALSE ise o rejimde ELEME (model baska rejime kendiliginden gecmez, nedenini raporlar). Kontrol: N_s 64, K_U 1.2 -> nominal 57.2 V, sinir 59.1 V.\n9) MPPT PENCERESI VE BAYPAS: n_bypass = ceil(N_s / mod_cells_per_bypass_max) (mod_f_n_bypass); Vmp_sicak = N_s Vmp (1 + beta_Vmp (85 - 25)) (mod_f_vmp_hot); Vmp_sicak_baypas = (N_s - ceil(N_s / n_bypass)) Vmp (1 + beta_Vmp (85 - 25)) (mod_f_vmp_hot_bypass); Vmp_soguk = N_s Vmp (1 + beta_Vmp (T_min - 25)); Voc_soguk = U_OC_MAX. Elektronik bu degerleri el_V_mp_* yerine kullanir; pil penceresi [V_batt_min, V_batt_max] (adim 11) ile mppt_mode (el_f_mppt_mode) ve k_worst (el_f_k_worst); buck disi topolojide bagimsiz OVP zorunlu. Voc_soguk > MPPT azami giris -> ELEME; Vmp_sicak_baypas < MPPT asgari giris -> UYARI ve optimize'da N_s_min kisiti. Kontrol: 60 V / N_s 64 / -40 C -> 57.2 / 34.1 / 22.4 / 48.4 V (NFPP 15S 30-57 V ve LO 14S 28-55.3 V ile buck-boost); 35 V / N_s 36 -> 32.2 / 19.2 / 9.6 / 27.2 V (14-15S pille boost; DVC-A islakta LO 8S 16-31.6 V ile buck-boost).\n10) KUTU ESLEMESI: n_panel_per_box = min(kutu_kurali n, floor(P_pv_kutu_maks / P)) (A: fis_tipi schuko 960 Wp veya ozel_enerji_fisi 2000 Wp; std_f_n_panel_max_plugin); P_box = n P; P_inv = min(P_box, 800 VA) (el_f_P_box, el_f_P_inv); kanal basina <= el_P_ch_max_W; paralel panelde ters akim/sigorta (el_f_fuse_needed, std_f_string_ocp_needed). A'da n P > fis siniri -> ELEME.\n11) PIL PAKETI: E_nom = max(n P WhWp / usable, P_box x bat_pv_peak_factor / C_max(format, T)) (bat_f07). pil_formati = otomatik ise bat_ds_cell_format kurali: E < ~800 Wh -> 26700 LO; 800-2000 Wh -> prismatic_small NFPP 20 Ah; > 2000 Wh -> prismatic NFPP 50 Ah (E once LO, >= 800 Wh ise NFPP kullanilabilir oraniyla). N_s_batt = bat_f08 (NFPP 15, LO 14; dvca35 erisilebilir port LO 8); N_p = ceil(E / (N_s E_cell)); E_box = N_s N_p E_cell. kutu_enerji_siniri = le_1800Wh ve E_box > 1800 Wh -> o (n, format) adayi ELEME; kutu_kurali = hedef_guc ise kosulu saglayan en buyuk n secilir (sessiz n dusurme yok, neden raporlanir). Ornek A, 960 Wp: NFPP 20 Ah 15S x 2P = 1740 Wh (LO olsaydi 14S x 14P = 2005 Wh -> le_1800Wh'de ELEME). B'de paket > 5 kg -> UYARI (tasinabilir pil sinifi disi).\n12) DIS DONGU (yalniz birden cok aday varsa): asama 1 - adaylar {N_s, a/(D, k, n_cut, yerlesim), n, format} hacimden bagimsiz siniflarla (alan + adet + guc_enerji) siralanir, ilk ~5-10 tutulur; asama 2 - her aday icin Gecis B (unite_tanimi ve talep sabit; zaman, urun_sabit, saha_sabit dahil) kosulur, en dusuk toplam USD/Wp secilir.\n13) CIKTI: N_s, N_p, a_hucre, a_wafer, k_split / n_cut / k_post, D, yerlesim, eta_cell, CTM, P_gercek, A_panel, U_OC_MAX (nominal ve sinir), Vmp penceresi, Isc / ISC_MAX, pil formati / N_s_batt x N_p / E_box / V penceresi, n_panel_per_box, P_box, sinif bayraklari ve Sonuc.uyarilar'a yazilan uyari/eleme nedenleri.\nKISIT SINIFLARI. ELEME (sert; standart/fizik): U_OC_MAX_sinir > V_lim (parametre ucu dahil; onceki surumde yalniz UYARI idi); class3 sinirlarindan biri; N_s > N_s_max; Voc_soguk > MPPT azami giris; a_hucre isleme tabani alti; D bandi disi (> 300 mm, FZ'de > 200 mm); A'da n P > fis siniri; kutu_enerji_siniri = le_1800Wh iken E_box > 1800 Wh; yakinsama hatasi. Eleme olan nokta taramada NaN maliyet ve neden koduyla raporlanir; optimize modunda aday kumeden cikar. UYARI (yumusak; maliyet/performans): a_hucre < mod_a_cell_min_mm; Vmp_sicak_baypas < MPPT asgari; eta(a|D) < eta_serbest; P_gercek sapmasi; kablo kaybi hedef ustu; D 260-300 mm; IMD belirsizligi (<= 60 V); balkon genisligi; B'de paket > 5 kg; kutu_enerji_siniri = serbest iken E_box > 2 kWh (yukumlulukler acilir).",
+  "notlar": "KAPSAM VE YONTEM: Kirmizi takim raporunun 16 bulgusu dosyalardan tek tek kontrol edildi (parametreler_tum.csv, formuller_tum.md, tasarim_secimleri_tum.md, kompakt_* ve faz1/pil.json); sayilar python3 ile yeniden hesaplandi (scratchpad rev_calc*.py). Repo dosyalari degistirilmedi. Yeni kaynak sayisi uretilmedi; turetilmis degerler 'turetilmis' veya hesap_turetilmis etiketli, 250 mm kristal degerleri 210-260 arasi log-log ara degerleme.\n1) KIRMIZI TAKIM DEGERLENDIRMESI (14 kabul, 2 kismi kabul): [1 T_min/SELV] KABUL, daha muhafazakar: rapor varsayilan N_s 67-68 onerdi; ancak Ek B.1 beyan edilmis alfa yokken K_U = 1.2 ister ve Voc ust ucu 0.77 ile sinir tavani 64 -> varsayilan N_s 64; 66-70 yalniz kendi hucre olcumu ve beyan sonrasi (beyan_alfa, pazara gore). Parametre ucu ihlali artik ELEME; T_min pazar anahtari, kaynak_turu tahmin. [2 olgun degerlerle boyutlandirma] KABUL: unite ipuclari ilk nesil/olgun iki satir; firin/hucre hatti orani ilk nesilde ~6-9, olgunda ~3-4; kanonik kirilma harmanli (varsayilan 0.02). [3 pil formati] KABUL, degistirilerek: format senaryoya sabitlenmedi, pil alaninin E_target kurali (otomatik) varsayilan; tipik sonuc raporun onerisiyle ayni (A NFPP 20 Ah 15S, B 26700 LO 14S); 1.8 kWh ayri anahtar. [4 -37.2 C] KABUL (67). [5 W_unit_yr] KABUL (panel Wp tek tanim; f_hjt_required_m2, f_hjt_required_W, eco_unit_output_W_yr duzeltmeleri; cz_frac_in_window varsayilanda 1.0). [6 dairesellik] KABUL: iki asamali dis dongu (zincir 19, kural 12). [7 D baz] KISMEN: sabit baz kaldirildi, 250 mm yalniz ornek referansi (M10/K3 uyumu, tablo mevcut). Reddedilen kisim: 'U1/U2/U5 MW'larini 0.67-1.07 kg/m2 araliginda belirsiz isaretleyin' - D=210'da tek parca psodo a ~152 mm serbest-D esdegeridir (a=156 icin serbest D 215 mm, 0.718 kg/m2), yani 0.72 tatli noktada gecerli; 1.0-1.4 yalniz tatli nokta disi a'da. Degerler 'tatli noktaya kosullu' etiketlendi. [8 sabit eta'li turetmeler] KABUL (ilk nesil eta ile yeniden: a ornekleri, Class III 161-181 W, testere 32-55 MW, M10 ~2.6 c/Wp; modul BOM c/W alanin eta 0.24'uyle kaldi, not edildi). [9 mod_f_P_quantized] KABUL (emekli). [10 Schuko] KABUL. [11 pil 6-13 MWp atfi] KABUL (dayanak pil denetcisinin 150 mm firin, 2-3 g/W kaba hesabi; faz1/pil.json'da dogrulandi). [12 formul esligi ve sayim] KABUL. [13 kg/gun tanimi] KABUL (degerler eski tanimla, +-%3-5). [14 cizelge] KABUL (4000 x 0.9 = 3600 h; paket hatti sayisi degismedi, laminator 24/7 uptime'li 9.5-15.8 MWp). [15 siralama ve guven] KISMEN: siralama ve T_min celiskisi eklendi; guven simetrisi 'ikisi de orta' yerine 'ikisi de yuksek' (deger okunan baskinin metninden; baski guncelligi ayri dogrulama). [16 Jsc] KABUL (iki kanonik).\n2) ZINCIR IKI GECISLI + DIS DONGU: Gecis A (1-8) tasarim buyukluklerini uretir; Gecis B (9-18) unite_tanimi ve ogrenme_durumu ile hacmi kurar; 19 yalniz hacme bagli secimler icin. W_unit_yr panel Wp; tum gunluk akislar 365 takvim gunu; U1'de akis firindan itilir, digerlerinde capadan cekilir. Formul sayimi: formuller_tum.md'de 505 formul; zincirde 502'si atandi (emekli olarak listelenen xtal_kg_ingot_per_m2_wafer, xtal_recycle_kg_day, el_f_crf dahil); atanmayan 3 emekli: f_hjt_break, f_hjt_voc_cold, mod_f_P_quantized.\n3) ONERILEN FORMUL DEGISIKLIKLERI: (a) mod_f_design_loop eta(a)'yi da yineler; f_hjt_eta_tau'da hjt_eta_core_pct wf_learn_weight ile harmanlanir. (b) f_hjt_break emekli, f_hjt_yield'de wf_P_break_cell. (c) f_hjt_voc_cold emekli; mod_f_voc_cell_cold = Voc_STC x K_U (std_f_ku); std_f_ns_max sinir rolunde (Voc_sinir, K_U_sinir, marjsiz); N_s_max = min(mod_f_ns_max, std_f_ns_max). (d) mod_f_P_quantized emekli; P_gercek = N_s N_p f_p_cell(A_cell) CTM. (e) Kristal: xtal_kg_ingot_per_m2_wafer ve xtal_recycle_kg_day emekli (wf_m_cryst, wf_m_rec); xtal_kg_per_day = ZD toplam kristallesen; cz_m_ingot_kg'de govde/koni ayrimi. (f) f_hjt_required_m2'den ikinci /hjt_yield_total kaldirilir; f_hjt_required_W'ye /mod_module_yield; eco_unit_output_W_yr x CTM x mod_module_yield (panel Wp); cz_frac_in_window kutle dengesine bolen. (g) Elektronik el_V_mp_*, el_E_cell_Wh, el_h_store_h, el_C_charge_max_C, el_N_batt_series yerine modul/pil ciktilari. (h) mod_f_panels_per_day_sync, bat_f30 ve std_f_boxes_per_year_unit: 365 gun ve 'K9 yalniz ic_hat'. (i) mod_f_n_laminators ve bat_f42: cizelge (el_hours_per_year_h) x A_teknik. (j) el_f_crf, bat_f34_crf, cz_cost_capex_usd_h (xtal_wacc), hucre 1/depr_years ve wafer fin_crf yerine eco_crf_tax_machine. (k) Hucre'deki sabit CTM 0.97 yerine mod_ctm_power_calc. (l) std_f_n_panel_max_plugin'e fis_tipi = sabit dali (fis siniri yok). (m) Yeni fonksiyon: pil format/kimya otomatik secimi (bat_ds_cell_format kurali).\n4) SECIM ANAHTARLARI (secimler.py) VE FORMUL ESLEMESI: Mevcut adlar korunur: senaryo (A_balkon, B_tasinabilir) -> formullerde scenario 'A'/'B'; kristal_yontemi (RCz, CCz, FZ) -> xtal_mode (ayni degerler); pil_kaynagi (satin_hucre, ic_hat) -> bat_make_or_buy ('buy', 'make'); wafer_kaynagi, ns_kurali, wafer_geometrisi, metalizasyon, guc_kati, kutu_kurali aynen. cap_kurali'na 'bant' eklenir. Yeni: unite_tanimi (U1_firin_capali, U2_saha_hucre_kopya_kristal, U3_k9_capali, U4_satin_wafer_hucre_modul, U5_iki_katman); gerilim_rejimi (selv60, dvca35, class3, elv30, class2_120); pazar (TR_marmara, TR_ic, DE_AT, tek_urun) -> std_tmin_site_c; ku_yontemi (varsayilan_1.2, beyan_alfa) -> alpha_declared (False/True); ogrenme_durumu (ilk_nesil, olgun, egri) -> wf_learn_weight (1 / 0 / 0.5^(Q_cum_m2 / wf_learn_half_m2)); edge_mode (B_arka, B_on, C, D, cizik, baslangic; formuldekiyle ayni); pil_formati (otomatik, 26700, prismatic_small, prismatic) -> bat_format; pil_kimyasi (otomatik, LO, NFPP, LFP) -> bat_chem; fis_tipi (schuko, ozel_enerji_fisi, sabit) -> plug_type; kutu_enerji_siniri (le_1800Wh, serbest). Varsayilan degisikligi onerileri (KULLANICI KARARI): wafer_kaynagi 'ic' -> 'satin_alma' (K3 ve yap-al bulgusu); guc_kati 'gan_planar' -> 'si_sarimli' (el_ds_semis); ogrenme_durumu 'ilk_nesil' (wf_learning_scenario); kutu_enerji_siniri 'le_1800Wh' (bat_ds_box_energy_cap); pazar 'tek_urun'.\n5) ONERILEN YENI PARAMETRELER (mevcut id degil, eklenmeli): Voc_sinir (kendi hucre Voc P99), alfa_sinir, kristal ogrenme yili ZD ve kullanilabilirlik degerleri (su an yalniz varyant), pazar -> T_min tablosu. Degerleri olcumle/alanla doldurulmali; burada sayi uydurulmadi.\n6) GOZLEM (karar kullanicinin): Ilk nesil degerleriyle unite secenekleri arasindaki fark buyudu. U1 (210 mm) ilk nesilde zaman + saha + kristal ~60 c/Wp, olgunda ~21 c/Wp; U3 20 Ah NFPP ile ~4.9 MWp ve hucre + saha ~48 c/Wp; U4/U5 dolu hucre hattinda hucre zaman ~3.5 c/W ve satin wafer ~2.6 c/Wp. Kendi kristal her D'de satin alinan wafer'dan pahali (~7.6-17 vs ~2.6 c/Wp, ilk nesil). Hepsi bilinmeyen TALEBE bagli: ilk nesil hucre hatti ~35 MWp/yil = A'da ~36 bin kutu/yil ister; talep birkac MWp/yil ise hicbir secenek hucre hattini ekonomik doldurmaz. En kritik bilinmeyenler: talep, K9'un anlami, kendi hucremizin Voc P99 ve alfa olcumu (N_s 64 -> 66-70 ve dolayisiyla a, P basamaklari).\n7) ACIK BILINMEYENLER: ayni sicak bolgede ayarlanabilir D bandi; D=210 icin eta(a|D) tablosu; 250 mm kristal kosusu (ara degerleme yerine); yeni kg/gun tanimiyla kristal degerleri; Class III kutu-toplami yorumu (4.4.3); IEC 60364-7-712 ve 61730-1'in guncel baskilari; kirilma boyut ussu ve Risen referans boyutu; firin tutma gucu ve ZD ogrenme egrisi (U1/U2 hacmini ~2.8 kat oynatir); hucre oncesi wafer bolme; 20 Ah NFPP hucrenin veri sayfasi (3.8 vs 3.95 V -> 15S/14S; C-orani); dizgi hizi (montaj unitesi kapasitesi yalniz laminatorden).\n8) KAPSAM DISI: Ekonomik kanonikler (kur, WACC, elektrik, iscilik, su) altyapi sahipliginde ayri kanoniklestirilmeli; buradaki c/W ipuclari alanlarin yer tutucu fiyatlariyla ve kabadir."
+ },
+ "revize_edildi": true,
+ "denetim": {
+  "genel_degerlendirme": "Cikti kapsamli ve buyuk olcude dosyalara sadik. Kontrol sonuclari:\n- Zincirdeki 503 benzersiz formul id'sinin tamami formuller_tum.md'de var. Dosyada 505 formul bulunuyor; ciktinin iddia ettigi sayi 506. Atanmayan iki formul emekli edilenler: f_hjt_break ve f_hjt_voc_cold.\n- Kanonik tablodaki kaynak alintilarinin hepsi (Wohler, Waaree, MGM, IEC 60364-7-712, IEC 61730-1, DEKRA, Tycorun, VDE, TaiyangNews, Risen, altyapi notlari) JSON dosyalarinda birebir bulundu; uydurma alinti yok.\n- Sayisal aktarimlarin cogu dogru: N_s_max 70/41/65/45, Vmp 37.3/24.5/50.4 V, U_OC_MAX 57.9 V, 14S 28-55.3 V, K9 MWh degerleri, hucre Tablo 3 (2.73/6.14/12.3/61.4 c/W), saha payi 706/370/247/194/165, U1 icin MW = kg/gun x 365 / 0.72 x 250.\n- Uc tur de guvenilirligi dusuren sorunlar var.\n(1) Iyimserlik: Unite seceneklerindeki basat sayilar olgun kristal kg/gun, eta 0.25 ve olgun hucre hatti kapasitesiyle hesaplanmis. Oysa ciktinin kendi kanonik varsayilani ilk_nesil ve eta 0.22. Bu, firin/hucre hatti oranini ~2 kat degistirir.\n(2) Guvenlik sinirinin gevsetilmesi: T_min = -20 C icin A-DE pazarinda dayanak yok. Modul alaninin -40 C / pazar varyanti onerisi dusurulmus. Parametrelerin guvensiz ucunda 60 V asiliyor ama sonuc yalniz UYARI.\n(3) Hesap zinciri tutarsizliklari:\n  - W_unit_yr'nin hucre W mi panel Wp mi oldugu tanimsiz; CTM ve verim eksik ya da cift sayilmis.\n  - 'Gecis A hacimden bagimsiz' iddiasi, $/W optimizasyonu gerektiren adimlarla dairesel.\n  - D=210 baz degeri icin geometri tablosu yok, M10 ile uyumsuz.\n  - Pil varsayilan formati (26700 LO), pil alaninin format kuralini ve 1.8 kWh esigini A senaryosunda ihlal ediyor.\nKucuk sorunlar: celiski listesi ciddiyete gore sirali degil, bir kaynak yanlis atfedilmis ve secimler.py ile anahtar adlari uyumsuz. Bu eksikler giderilmeden unite secenekleri karsilastirmasina ve N_s=70 varsayilanina guvenilmemeli.",
+  "bulgular": [
+   {
+    "hedef": "kanonik_parametreler: std_tmin_site_c (T_min) + N_s_max + tasarim_kurali adim 2 (guvensiz uc -> UYARI)",
+    "sorun": "A senaryosunun ana pazari Almanya, ama kanonik T_min = -20 C'nin dayanagi yok. Modul alaninin yuksek guvenli itirazi ('pazar varyantlari -10/-25/-40 C ya da tek urun icin -40 C, N_s 67') aktarilmamis. Ayrica 60 V SELV sert bir sinir (K6), ama parametre ucunda asilmasi yalniz UYARI'ya indirilmis. Kaynak_turu 'dogrulanmis_url' yalnizca istasyon rekorlari icin gecerli; -20 degeri bir tasarim secimi.",
+    "kanit": "faz1/modul.json itirazlar: 'oneri: Pazar varyantlari (-10 / -25 / -40 C) ya da tek urun icin -40 C (N_s 67)', guven yuksek. mod_voc_cell_stc_V senaryoya_uygunluk: 'Gerilim siniri icin nominal degil, uretim dagiliminin P99'u kullanilmali.' mod_T_min_design_C kaynagi: Almanya Hull -37.8 C. python3 hesaplari: (a) N_s=70, nominal Voc 0.745 V ve alfa -0.244 %/K ile U_OC_MAX T < -36.7 C'de 60 V'u asar; -37.8 C'de 60.1 V. (b) Guvensiz uc Voc 0.77 V ve alfa -0.28 %/K ile -20 C'de bile 70 x 0.77 x 1.126 = 60.7 V. Ciktinin kurali: 'baz gecip uc kaliyorsa UYARI marj yetersiz'.",
+    "onerilen_duzeltme": "std_tmin_site_c'yi pazara bagli bir secim anahtari yapin (A-DE icin varsayilan -40 veya -25 C, dayanakla). Kaynak_turu 'tahmin' olsun, dayanak olarak MGM/DWD rekorlari yazilsin. Kendi hucremizin Voc P99 ve alfa olcumu yokken SELV kontrolunde guvensiz uc ihlalini ELEME sayin (ya da K_U=1.2 ile N_s 65'e dusun). Varsayilan N_s'yi 67-68 olarak raporlayin; 70'i ancak olcum sonrasi kosullu kabul edin.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "unite_tanimi_secenekleri U1/U2/U5 sayisal_ipuclari ve zincir adim 9 (hjt_line_W_per_yr 40-50 MW)",
+    "sorun": "Unite boyutlandirmasi olgun degerlerle yapilmis. Olgun kristal kg/gun (ZD 0.8), eta 0.25 ve olgun verimle hesaplanan hucre hatti kapasitesi (40-50 MW) basat sayilar olarak kullanilmis. Oysa ciktinin kendi varsayilani ilk_nesil ve eta 0.22. 'Ilk nesil ~%22 dusuk (8.5 MW)' notu ilk nesil hucreyi olgun kristalle karistiriyor. Kanonik kirilma degeri de ilk nesil (0.02) yerine olgun degerden (0.0025) secilmis. Sonuc iyimser ve firin/hucre hatti oranini yanlis veriyor.",
+    "kanit": "kompakt_hucre.md Tablo 1: hat MW/yil 40-50, olgun B-arka verimle (%24.8-25.8); baslangic verimi %21.2-22.2. kompakt_kristal.md: 210 mm'de ogrenme yili MC medyani 45.9 kg/gun (olgun baz 85.9). Ilk nesil tutarli hesap (python3): 45.9 kg/gun x 365 / 0.72 kg/m2 x 220 W/m2 x 0.887 = ~4.5 MW hucre (cikti: 10.9 MW). Ilk nesil hucre hatti ~45 x (22.1/25.75) x (0.887/0.98) = ~36 MW. Buna gore hucre hattini doldurmak icin ~8 firin gerekir; U2/U5'teki '4 x 210 mm ~44 MW, u~1' degeri tutmuyor. Kanonik tabloda wf_break_cell_ref_mature 0.0025 var; ilk nesil degeri wf_break_cell_ref_firstgen 0.02.",
+    "onerilen_duzeltme": "Her secenegin sayisal ipuclarini iki satirda verin: ilk_nesil (kristal ogrenme yili, eta ~0.22, hjt_yield ~0.89, wf_break firstgen) ve olgun. U2/U5 icin firin sayisini ilk nesilde ~8, olgunda ~4 olarak yazin. Kanonik kirilma degerinde ogrenme agirligiyla harmanlanmis degeri (wf_break_cell_blend) varsayilan yapin.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "kanonik_parametreler: bat_E_cell_Wh (varsayilan 26700 LO), bat_ns_cells, bat_cell_v_max_lo_V; tasarim_kurali adim 10",
+    "sorun": "Pil formati tum senaryolar icin 26700 LO olarak sabitlenmis. Pil alaninin kendi kurali ise kutu enerjisine bagli: <0.8 kWh icin 26700, 0.8-2 kWh icin 10-28 Ah; A icin NFPP prizmatik veya LFP. A senaryosunda Schuko siniri dolu bir kutu, kanonik varsayilanlarla 2 kWh esigini asiyor ve adim 10'daki '>1.8 kWh ise n dusurulur' kurali kutuyu yariya indiriyor. Kanonik varsayilanlar A senaryosunda kendi aralarinda celisiyor.",
+    "kanit": "tasarim_secimleri_tum.md bat_ds_cell_format: 'Kutu <~0.8 kWh: 26700. 0.8-2 kWh: 10-28 Ah'. bat_ds_chemistry: 'A: NFPP prizmatik veya LFP'. bat_ds_box_energy_cap ornegi: '15S x 20 Ah x 2 = 1.74 kWh'. python3 (bat_f07/f11/f13): n x P = 960 Wp, 1.6 Wh/Wp, kullanilabilir oran 0.8 -> E_target 1920 Wh; N_p = ceil(1920/143.22) = 14 -> E_box 2005 Wh (>2 kWh). NFPP 20 Ah 15S ile 1707 Wh hedef -> 2P -> 1740 Wh (<=1.8 kWh).",
+    "onerilen_duzeltme": "Varsayilan pil formatini senaryoya ve E_target'a bagli yapin (bat_ds_cell_format kurali): A icin NFPP 20 Ah 15S (V 30-57 V), B icin 26700 LO 14S. N_s_batt, V penceresi, MPPT modu ve U3 hacmini (58 Wh ile A ~4.9 MWp) bu varsayilanla yeniden verin. 1.8 kWh karari kullanicinin (bat_ds_box_energy_cap, KARAR: kullanici); otomatik n dusurme yerine secim anahtari olsun.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "kanonik_parametreler: hjt_tc_voc_pct_per_K (gerekce) ve N_s_max (T_min tablosu)",
+    "sorun": "Gerekcedeki 'modulun -0.0024 1/K degeri N_s_max'i degistirmez' iddiasi yalnizca -20 C'de dogru. N_s_max tablosundaki -37.2 C -> 68 degeri kanonik alfa (-0.244 %/K) ile degil, modulun -0.0024 1/K degeriyle hesaplanmis. Celiskiler listesinde bu konu 'dusuk' ciddiyetle gecilmis.",
+    "kanit": "python3: K_U = 1 + 0.00244 x 62.2 = 1.1518 -> 60 / (0.745 x 1.1518 x 1.03) = 67.9 -> N_s_max 67. Ayni hesap -0.0024 ile K_U 1.1493 -> 68.03 -> 68. Kanonik tabloda 'T_min: -9 C 72, -37.2 C 68, -40 C 67' yaziyor. parametreler_tum.csv: hjt_tc_voc_pct_per_K -0.244; mod_beta_voc_per_K -0.0024.",
+    "onerilen_duzeltme": "-37.2 C icin N_s_max'i 67 olarak duzeltin. 'Degistirmez' ifadesini 'soguk uclarda 1 hucre fark eder' diye degistirin. Celiski ciddiyetini ortaya cikarin (SELV sinirina etkisi var).",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "zincir adim 9-10 (W_unit_yr, f_hjt_required_m2, eco_unit_output_W_yr, f_hjt_required_W) ve U1/U4 formulleri",
+    "sorun": "W_unit_yr'nin hucre W mi panel Wp mi oldugu tanimlanmamis; formuller tutarsiz. (a) U1 formulunde mod_module_yield var ama CTM yok. (b) U4'te hjt_line_W_per_yr x u_hedef var; bu hucre W'idir ve CTM ile modul verimi eksik. (c) f_hjt_required_W CTM'e boluyor ama modul verimini atliyor; adim 10'daki mod_f_cells_demand ise modul verimini kullaniyor. (d) f_hjt_required_m2 verimi iki kez sayiyor; cikti bunu 'hucre verimiyle wafer ihtiyaci' diye aynen zincire aliyor. (e) Kristalin 'cz_frac_in_window wafer verimine carpan olarak girsin' onerisi adim 8-9'a baglanmamis.",
+    "kanit": "formuller_tum.md f_hjt_required_m2: 'hjt_required_m2_per_h = W/(eta_cell*1000*hjt_yield_total*8760) ; wafer_per_day_needed = hjt_required_m2_per_h*24/(A_cell_m2*hjt_yield_total)'. Verim iki kez uygulaniyor; ilk nesilde yield 0.887 ile wafer ihtiyaci ~%13 sisiyor. f_hjt_line_cap ve eco_unit_output_W_yr hucre W veriyor. cz_g_window yorumu: 0.8-2.0 ohm.cm icin 0.756; cz_g_pull 0.8 ile frac 0.945.",
+    "onerilen_duzeltme": "W_unit_yr'yi panel Wp olarak tanimlayin: W_panel = m2_iyi_wafer x eta_cell x 1000 x hjt_yield_total x CTM x mod_module_yield (x cz_frac_in_window; bu ya wf_m_cryst icinde ya da ayri). U4/U5'te hucre hatti kapasitesini ayni carpanlarla panel Wp'ye cevirin. f_hjt_required_m2'de ikinci /hjt_yield_total'i kaldirin ve bunu formul degisiklikleri listesine (notlar 2) ekleyin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "zincir 'Gecis A (hacimden bagimsiz)' ve tasarim_kurali adim 3 (optimize) ile adim 6c (en dusuk $/W)",
+    "sorun": "Akil yurutme dairesel. Gecis A 'hacimden bagimsiz' deniyor, ama N_s optimize modu ve sabit D'de tatli nokta secimi 'toplam $/W' ile yapiliyor. Bu $/W'in zaman, urun_sabit ve saha_sabit bilesenleri Gecis B'deki hacme bagli. D'nin kendisi de unite_tanimi ve talebe bagli karar degiskeni; kristal alani 'Talep ve kullanimla birlikte optimize edilmeli' diyor. Iki gecisli zincirde dis dongu tanimlanmamis.",
+    "kanit": "Cikti adim 3: 'optimize -> ... amac toplam $/W (alan + hucre basi adet + panel basi kutu/kablo/iscilik + elektronik(V) + ... + a varyant urun_sabit)'. Adim 6c: 'en dusuk $/W secilir'. Notlar 1: 'Gecis A (adim 1-8) ... hacimden bagimsiz uretir'. tasarim_secimleri_tum.md xtal_D_ingot: 'Talep ve kullanimla birlikte optimize edilmeli'.",
+    "onerilen_duzeltme": "Aciga yazin: optimize ve bant modlarinda her aday (N_s, a, D, n_cut) icin Gecis A ve B birlikte calistirilir (dis dongu, unite_tanimi sabit). Alternatif olarak Gecis A icindeki secim yalniz hacimden bagimsiz siniflarla (alan, adet, guc_enerji) yapilir ve zaman/urun_sabit ikinci asamada eklenir. 'Hacimden bagimsiz' ifadesini yalniz selv_max + sabit D icin kullanin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "kanonik_parametreler: D_ingot_mm (baz 210 mm) ve U1/U2/U5'te 0.72 kg/m2 kullanimi",
+    "sorun": "D = 210 mm baz degerinin gerekcesi zayif. Bu capta wafer alaninin eta(a|D) tablosu yok. Ayrica D=210 hicbir standart hucre boyutunu tek parca tasimiyor: M10 (182) icin D 251, a=156 icin D 215 gerekir. Buna ragmen 210 mm firin icin U1'de 10.9 MW, U2/U5'te '4 x 210 mm' sayilari serbest D / a=182'ye ait 0.72 kg/m2 ile hesaplanmis. Sabit D'de kg/m2 2.3 kata kadar degisebiliyor. D=250 hem wafer tablosunda var (a=182 icin 0.672) hem de K3'teki satin alinan M10 ile ayni hucre/tasiyici boyutunu verir; bu gerekce degerlendirilmemis.",
+    "kanit": "kompakt_wafer.md Tablo A: '156 | 0.665 (k=1, D 215)', '182 | 0.669 (k=1, D 251)', 'D=250 sabit: 182 -> 0.672'. D bolumu: 'D=250 icin ... 182: 0.713 kg/m2; D=300 icin 156: 1.400'. Kristal alani 260 mm'de 7.2 USD/kg (210'da 8.1) veriyor; model araligi 80-260.",
+    "onerilen_duzeltme": "D icin sabit bir 'baz' yazmayin; D'yi unite_tanimi ve cap_kurali'nin ciktisi yapin. Bir baz gerekiyorsa 250 mm'yi (M10 uyumu, tablo mevcut, kristal modeli icinde) gerekcesiyle onerin. D=210 icin wafer alanindan eta(a|D) tablosu isteyin. O gelene kadar U1/U2/U5 MW degerlerini '0.67-1.07 kg/m2 araliginda' belirsiz olarak isaretleyin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "kanonik eta_cell kurali ('0.23/0.24/0.25 sabitleri kaldirilir') ile ciktinin kendi turetilmis sayilari",
+    "sorun": "Cikti kendi kanonik kuralini uygulamiyor. Pek cok turetilmis deger kaldirildigini soyledigi sabit verimlerle (0.24/0.25) hesaplanmis. Bu, P -> geometri kontrol degerlerini ve Class III guc tavanini iyimser gosteriyor.",
+    "kanit": "python3: 50 W, N_s 40, CTM 0.99 ile a eta 0.24'te 72.5 mm, eta 0.22'de 75.8 mm (cikti: '71-73 mm'). 300 W'ta a=135.4 mm eta 0.24 ile; 0.22'de 141.4 mm. Class III P_max 176-198 W eta 0.24 ile (mod_f_p_max_class3); 0.22'de ~161-181 W. Testere '36-62 MW/yil' ve M10 '0.0196 $/W' eta 0.25 ile; U1 MW'lari 'eta 0.25'.",
+    "onerilen_duzeltme": "Tum turetilmis kontrol degerlerini kanonik eta_cell ciktisiyla (ilk nesil ~0.22, a'ya bagli) yeniden hesaplayin veya her birinin yanina hangi eta ile hesaplandigini yazin. B senaryosundaki class3 guc tavanini ilk nesilde ~180 W olarak raporlayin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "zincir adim 3 ve tasarim_kurali adim 6c: mod_f_P_quantized ile sq_eta_cross ve sq_D_required birlikte kullanimi",
+    "sorun": "Iki farkli kesit geometrisi uzlastirilmadan ayni adimda kullaniliyor. mod_f_P_quantized ice cizilmis tam kare varsayiyor (f_pack = 1/(k sqrt2), %63.7). Wafer alani ise psodo-kare kullaniyor (sq_D_over_a_pseudo 1.3557, kesit verimi 0.667-0.672). Ayni D icin a ve P_gercek farkli cikar; bu celiski listede yok.",
+    "kanit": "formuller_tum.md mod_f_P_quantized: 'Izgara icin f_pack = 1/(k sqrt2) (Si kullanimi %63.7) ... D = 250, N_s = 70: k1 -> 506'. parametreler_tum.csv sq_D_over_a_pseudo 1.3557. python3: D=250, k=1 icin tam karede a = 176.8 mm; psodo-karede (250-4)/1.3557 = 181.5 mm; hucre alaninda ~%5-6 fark (psodo pah alani haric).",
+    "onerilen_duzeltme": "mod_f_P_quantized'i emekli edin; P_gercek'i wafer alaninin a_wafer(D, yerlesim) ciktisi ve A_cell (wafer_area_factor dahil) ile hesaplayin. Celiskiler listesine 'kesit geometrisi (modul tam kare vs wafer psodo-kare)' maddesini ekleyin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "kanonik_parametreler: std_plugin_schuko_pv_max_wp (deger 960, alt 960, ust 2000)",
+    "sorun": "Iki ayri mevzuat secenegi tek bir parametrenin belirsizlik araligina konmus: Schuko 960 Wp ve ozel enerji fisi 2000 Wp. Model araligi Monte Carlo veya tornado icin kullaniyor; bu durumda Schuko'lu urun icin fiziksel olarak izin verilmeyen 960-2000 Wp orneklenir. Cikti 'ust uc secenek, belirsizlik degil' diyor ama bu, alt/ust alanlarinin anlamiyla celisiyor.",
+    "kanit": "parametreler_tum.csv: std_plugin_schuko_pv_max_wp 960/960/960, std_plugin_special_plug_pv_max_wp 2000/2000/2000 (ayri id'ler). formuller_tum.md std_f_n_panel_max_plugin bunlari plug_type ile seciyor.",
+    "onerilen_duzeltme": "Kanonik kaydi 960/960/960 birakin. Ozel fis icin ayri kanonik (std_plugin_special_plug_pv_max_wp) ve fis_tipi secim anahtarini kullanin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "celiskiler[0] 'Tek-unite hacim varsayimlari' - pil degeri",
+    "sorun": "Kaynak yanlis atfedilmis. Pil'in 6-13 MWp/yil ornegi 'altyapinin 5000 wafer/gun ornegi, a 125-182 mm' olarak atfedilmis. Pil dosyasinda boyle bir dayanak yok. Sayi bu varsayimla yeniden uretilebiliyor, ama pil'in yazili dayanagi baska.",
+    "kanit": "faz1/pil.json: 'Unite talebi kristal ve modul ajanlarinin ciktisina bagli (ornek 6-13 MWp/yil -> 11-52 MWh/yil)'. Denetim notu: '150 mm ingot 1.0-1.5 mm/dk cekildiginde 59-89 kg/gun ... 2-3 g/W ... firin basina ~6-13 MWp/yil'.",
+    "onerilen_duzeltme": "Dayanagi 'pil: kirmizi takimin 150 mm firin, 2-3 g/W kaba hesabi' olarak duzeltin. Altyapi turetmesi kullanilacaksa 'cikti tarafindan turetildi' diye etiketleyin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "zincir adim 1-2 ('mod_f_ns_max = std_f_ns_max') ve notlar ('506 formulun tamami')",
+    "sorun": "(a) Iki formul es tutulmus ama ayni sonucu vermiyor: std_f_ns_max marjsiz ve -20 C'de 72 veriyor; mod_f_ns_max marjla 70 veriyor. Hangisinin degistirilecegi yazilmamis. (b) mod_f_voc_cell_cold K_U kullanmiyor (mod_beta ve mod_T_min ile); ku_yontemi = varsayilan_1.2 dalinda calismaz. (c) Formul sayisi yanlis ve 'tamami atandi' ifadesi eksik.",
+    "kanit": "formuller_tum.md std_f_ns_max: 'math.floor(V_lim / (K_U * Voc_cell_V))'; mod_f_ns_max: 'floor(V_lim / (mod_voc_cell_cold_V * mod_voc_margin))'. python3: 60/0.8268 = 72.6 -> 72; 60/0.8516 = 70.4 -> 70. formuller_tum.md'de 505 formul var; ciktida 503 atanmis; f_hjt_break ve f_hjt_voc_cold atanmamis (emekli).",
+    "onerilen_duzeltme": "Formul degisiklikleri listesine sunlari ekleyin: 'std_f_ns_max'a mod_voc_margin eklenir veya emekli edilir; mod_f_voc_cell_cold = Voc_STC x K_U (std_f_ku ciktisi)'. Sayiyi '505 formul; 503 atandi, 2 emekli' olarak duzeltin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "zincir adim 7 xtal_kg_per_day 'KANONIK TANIM: toplam kristallesen' ve 31/86/120 kg/gun degerleri",
+    "sorun": "Tanim degistirilmis ama degerler eski formulden aktarilmis. Mevcut formulde cz_m_ingot_kg 'govde kutlesi' olarak adlandirilmis. RCz'de cekilen eriyik kutlesi, yani koniler dahil, g_pull ile sinirli. 260 mm'de ise L_body_max (2.5 m) baglayici; bu durumda kutle yalniz govde. Sonuc olarak 120/210 mm degerleri fiilen toplam, 260 mm degeri govde kutlesi; tanim capa gore degisiyor. Degerlerin yeniden hesaplanmasi gerektigi belirtilmemis.",
+    "kanit": "formuller_tum.md cz_m_ingot_kg: 'min(cz_g_pull*cz_m_charge_kg, rho*A*cz_L_body_max_mm/1000) ... // Ingot govde kutlesi'; cz_L_body_mm = m_ingot/(rho A). kompakt_kristal.md: 'D=260: ... ingot 309 kg (2.5 m sinirli)'. Koni esdeger boyu (0.4+0.6)D/3 = 0.33D, yani %3-4 kutle.",
+    "onerilen_duzeltme": "Degerleri 'eski tanimla; yeniden hesaplanacak (±%3-5)' diye etiketleyin. Kristal formulunde m_cryst = m_govde + koni kutleleri ayrimini ve g_pull / L_body_max hangisi baglayiciysa ona gore tanimi zincire yazin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "notlar 3 (yeni secim anahtarlari) ve /home/user/Manifoltwarper/pvbat/secimler.py",
+    "sorun": "Onerilen anahtarlar mevcut koddaki adlarla uyumsuz; bu, 'id'ler mevcut id'lerle ayni yazilmali' kuralini ihlal ediyor. Ayrica mevcut varsayilanlarin alan onerileriyle celismesi tartisilmamis.",
+    "kanit": "secimler.py: 'kristal_yontemi': (RCz, CCz, FZ); cikti adim 7'de xtal_mode kullaniyor. senaryo: ('A_balkon', 'B_tasinabilir'); cikti A/B kullaniyor. Pil formulu bat_f06 'prismatic' / 'prismatic_small' degerlerini kullaniyor; cikti pil_formati (26700, prizmatik_20Ah, prizmatik_50Ah) oneriyor. Varsayilan guc_kati='gan_planar', elektronik 'Ilk nesil icin Si oneriliyor' diyor. wafer_kaynagi='ic', K3 ve wafer 'satin alma kalici secenek' diyor.",
+    "onerilen_duzeltme": "Mevcut anahtar adlarini kullanin (kristal_yontemi, senaryo degerleri) veya bir esleme tablosu verin; pil_formati degerlerini bat_format ile ayni yazin. Varsayilan degisikliklerini (guc_kati -> si_sarimli, wafer_kaynagi -> satin_alma) kullanici kararina acik bir madde olarak ekleyin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "U5/U4 sayisal_ipuclari (paket hatti 3600 h, laminator 24/7) ile kanonik uptime ve cizelge tanimi",
+    "sorun": "Cikti kendi kanonigiyle celisiyor. Kanonik kurala gore cizelge saati 4000 h, A_teknik bir kez uygulanacak ve pil'in gomulu OEE'si ayristirilacakti. Buna ragmen U4/U5 kapasiteleri gomulu OEE'li 3600 h ve uptime'siz 24/7 (8760 h) ile hesaplanmis.",
+    "kanit": "Cikti U5: 'Paket hatti: 26700 400 hucre/h x 3600 h = 1.44 M hucre'; 'Laminator ... 24/7 10.5-17.5' (2.4-4 x 8760/2000, uptime yok). Kanonik el_hours_per_year_h 4000; bat_pack_line_hours_yr gerekcesi 'gun sayisi ve OEE gomulu; ayristirilmali'.",
+    "onerilen_duzeltme": "Paket hatti ve laminator kapasitesini 'nominal hiz x cizelge saati x A_teknik' ile yeniden verin (or. 400 x 4000 x 0.9 = 1.44 M; 24/7 laminator x 0.9).",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "celiskiler listesinin siralamasi ve guven tutarliligi",
+    "sorun": "(a) Celiskiler ciddiyete gore sirali degil: kritik, yuksek, orta ve dusuk maddeler karisik. Hucre verimi ve sicaklik katsayisi gibi SELV'e etki eden maddeler 'dusuk' derecelendirilmis. T_min ise ayri bir celiski olarak hic yok (standart -30..-5, tahmin; modul -40..-9, dogrulanmis_url). (b) Guven dusurme ayni gerekceyle asimetrik uygulanmis: Class III sinirinin guveni '2023 baskisi dogrulanmadi' diye ortaya indirilmis, ama 60 V SELV icin '2025 baskisinda korundugu dogrulanmadi' denmesine ragmen guven yuksek birakilmis.",
+    "kanit": "Cikti celiskiler: 'Voc sicaklik katsayisi ... ciddiyet dusuk'. std_class3_voc_stc_max_v guven orta (CSV'de yuksek); std_selv_pv_uocmax_limit_v guven yuksek, 'guvenlik 2025 baskisinda korundugu dogrulanmadi' notuyla. parametreler_tum.csv: std_tmin_site_c -20 [-30,-5] tahmin; mod_T_min_design_C -20 [-40,-9].",
+    "onerilen_duzeltme": "Celiskileri ciddiyete gore siralayin. T_min celiskisini ekleyin. Iki standart sinirda da ayni kurali uygulayin: ya ikisi orta ya ikisi yuksek, ve 'yeni baski dogrulanacak' deneyiyle.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "kanonik_parametreler: hjt_jsc_mA_cm2 = 41.3 (hucre sahipli id'ye modul turetmesi)",
+    "sorun": "Guvenlik yonu dogru, ama tek parametre iki farkli rol icin kullaniliyor. Hucre sahipli id'nin degeri, ticari ust segment moduldan turetilen 41.3'e cekilmis. Kendi ilk nesil hucremizin olcum capasi ise 38.0. Bu deger f_hjt_isc araciligiyla hucre Isc tablolarina ve akima bagli kayiplara da girer.",
+    "kanit": "parametreler_tum.csv: hjt_jsc_mA_cm2 40 [38-41.4] (hucre, dogrulanmis_url); mod_jsc_A_per_cm2 0.0413. Cikti tutarlilik kontrolu eta %25.7 ile yapilmis (FF 0.835); kanonik baz eta 0.22 ile 41.3 mA/cm2, FF ~0.72 ima eder.",
+    "onerilen_duzeltme": "Iki parametreye ayirin: nominal Jsc (hucre, ~39-40; performans ve kayiplar icin) ve sinir kontrol Jsc'si (41.3-42; Class III 8 A, ISC_MAX ve kablo icin). Tutarlilik notunu baz verimle yeniden yazin.",
+    "ciddiyet": "dusuk"
+   }
+  ]
+ }
+}

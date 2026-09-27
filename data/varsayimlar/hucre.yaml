@@ -1,0 +1,2104 @@
+alan: hucre
+ozet: 'Revize hucre modeli su bicimde: eta_cell = eta_core(tau_SRH, on-tavlama) x (1 - cevre x w_eq / alan) x bekleme
+  faktoru. w_eq, rekombinasyon ve TCO''suz bant kayiplarini toplayan esdeger olu kenar genisligidir.
+
+
+  (1) KENAR. Dogal kenar icin w_eq = 0.26 mm (Wohler 2024 olcumu j02 = 2.41 nA/cm''e kalibre; fizik denetcisinin
+  bagimsiz modeli 0.24-0.25 mm verdi). Secenekler TOPLAM w_eq ile karsilastirildi:
+
+  - B: islem oncesi kesim + arka yuzde 1 mm TCO dislama -> 0.61 mm
+
+  - C: islem sonrasi TLS kesim -> 0.8 mm. Ilk ciktidaki ''3 kat'' yanlisti; dogru oran ~1.3 kat.
+
+  - Lazer cizik-kir -> 3.8 mm (~6 kat)
+
+  - D: islem sonrasi kesim + 250 C altinda yeniden pasivasyon -> 0.26-0.35 mm olabilir. Ancak bu seviyenin 250 C
+  altinda saglanabildigi kanitlanmadi; Giglia''nin verisi simulasyon.
+
+  - On yuzde dislama -> 0.32 mm. Arka TCO''nun on n-katmanina sarilmasi sont riski tasir; ilk ciktidaki ''kaybi
+  yariya indirir'' ifadesi geri cekildi.
+
+  a=50 mm''de verim: B %24.83, C %24.43, D %25.56 (iyimser). a=210 mm''de B %25.80. Kilit belirsizlik w_eq; Deney
+  1''de B, C, D ve on/arka dislama kollari esit agirlikta denenmeli.
+
+
+  (2) WAFER KALITESI. TaiyangNews 2023 raporunun PDF''i bu gorevde okundu: gettering amacli on-tavlama HJT hatlarinin
+  cogunda standart. ''HJT''de gettering yok'' ifadesi geri cekildi. On-tavlama artik bir tasarim secimi; kurtarma
+  orani bilinmiyor.
+
+  - tau artik acikca SRH-only olarak tanimli. Referans 7 ms; 1 Ohm cm''de efektif yigin omru ~3.8-4.5 ms.
+
+  - Yeniden fit: eta = eta_core + 1.18*[ln(1+3.35/7) - ln(1+3.35/tau)]. tau=2 ms''de -0.70 puan (aralik -0.57 ile
+  -0.82), 1 ms''de -1.27 puan.
+
+  - Kristal hedefi: kayip 0.3 puani gecmesin diye tau_SRH >= 3.7 ms. Ballif''in tau/rho >= 1 kriteri yalnizca asgari
+  esik; 1 Ohm cm''de -1.27 puan demek.
+
+  - K8 itirazi (kuyruk ucunu geri eritmek metal biriktirir) Scheil kutle dengesine gore yanlisti; geri cekildi.
+
+
+  (3) UNITE MIMARISI (en onemli yeni bulgu). K9''dan turetilen unite PV ihtiyaci, pil hucre formatina ve Wh/W oranina
+  gore 0.1-46 MW/yil araliginda. Silindirik Na-ion hucrelerle yalnizca 0.1-1.5 MW/yil.
+
+  - En kucuk makul HJT arac seti (L=1 m tasiyici) 40-50 MW/yil kapasiteli; ~3.1 M$ capex (aralik 2.0-6.5 M$, tahmin)
+  ve ~2.5 M$ arac tasarim NRE''si ister.
+
+  - Tasiyiciyi L=0.5 m''ye kucultmek kapasiteyi 4 kat dusurur, capex''i ise yalnizca ~%15 azaltir (0.062 -> 0.23
+  $/(W/yil)).
+
+  - Zaman sinifi hucre maliyeti (amortisman + bakim + iscilik + taban enerji): 45 MW/yil''da ~2.7 c/W, 10 MW/yil''da
+  ~12 c/W, 2 MW/yil''da ~61 c/W.
+
+  Sonuc: ''unite = PV + pil senkron'' tanimi hucre hattinin asgari ekonomik olcegiyle uyumsuz. Hucre hatti (buyuk
+  olasilikla kristal de) saha duzeyinde N uniteye paylastirilmali ya da unite tanimi degismeli. Karar kullanicinin.
+
+
+  (4) MALIYET.
+
+  - Gumus: pasta kutlesi ve Ag orani artik ayri parametre; kirik ve reddedilen hucre payi paydada. Kendi yazicimizla
+  olgunlukta 3.5-3.7 c/W, baslangicta 5.8-6.0 c/W, AgCu ile 1.4 c/W.
+
+  - ITO kutle dengesi duzeltildi: etkin verim = hedef kullanimi x aktarim, hurda kredisi hedef kullanimina bagli.
+  Sonuc 1.25-1.57 c/W (ilk ciktida ~1.0).
+
+  - Diger alan kalemleri (kimya, gaz, tasiyici yenileme, marjinal elektrik, UPW) ~0.7 c/W.
+
+  - Toplam hucre donusum maliyeti (wafer ve saha altyapisi haric), a=105 mm: 45 MW/yil''da ~8.4 c/W (saf Ag) veya
+  ~6.2 c/W (AgCu); 10 MW/yil''da ~18 c/W. Degerlerin cogu tahmindir, ama Cin GW hatlarinin cok ustunde olduklari
+  acik.
+
+
+  (5) ADET. IV ve tasima capex''i istasyon sayisiyla adet sinifinda modellendi; cift sayim giderildi. 50 mm hucrede
+  tekli tutucuyla ~0.9 c/W, 16''li tutucuyla ~0.13 c/W. 210 mm''de ~0.1 c/W taban var (en az 1 robot + 1 IV istasyonu).
+
+
+  (6) DIGER DUZELTMELER.
+
+  - Enerjide cift sayim giderildi: marjinal kWh/m2 + taban kW.
+
+  - Uptime yalnizca kapasite formulunde uygulaniyor; yil 8760 saat.
+
+  - Islak tezgah kapasitesi artik a''ya bagli (cok seritli kaset).
+
+  - Boyuta ozgu takim ve yeniden kalifikasyon urun_sabit olarak eklendi.
+
+  - Iscilik, bakim, N2, kimyasal ve gaz fiyatlari eklendi.
+
+  - K6 itirazinin yonu duzeltildi: SELV (N_s <= 72) buyuk P_panel''de en kucuk hucreyi zorlar; 500 W icin a >= ~168
+  mm veya N_p >= 2.
+
+  - K5 geregi panel arkasi serbest, cift yuzluluk kullanilabilir.
+
+  - Indiyum birincil arzi USGS''ye gore ~1080 t/yil (2024e).
+
+
+  EN BUYUK BELIRSIZLIKLER: kendi PECVD/PVD aracimizla pasivasyon ve baslangic verimi (%19-24.5), w_eq ve D seceneginin
+  gercekten ulasilabilirligi, on-tavlama kurtarma orani, kendi yapim capex ve NRE, tasiyici omru.
+
+
+  Kur varsayimi: 1 USD = 6.72 CNY = 48.92 TRY (TradingEconomics, 25 Eylul 2026).'
+parametreler:
+- id: cell_eta_industry_2025_pct
+  ad: Endustriyel HJT seri uretim hucre verimi (2025)
+  birim: '%'
+  deger: 25.7
+  alt: 25.3
+  ust: 26.2
+  kaynak: TaiyangNews 'Heterojunction Efficiency Roadmaps Approach 27%' (ITRPV/CPIA)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''It places HJT efficiency at around 25.7% in 2025''; CPIA ~25.9% (2025), ~26.2%'
+  kaynak_tarihi: 2026-06
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: GW olcekli Cin hatlari, ticari arac, ticari (on-tavlanmis) wafer. Bizim baslangicimiz degil,
+    ulasilabilir ust referans. Hucre formati (tam/yarim) kaynakta belirtilmemis.
+  aciklama: 'Ust sinir CPIA ~26.2 ile sinirlandi. Risen %26.61 (pv-tech 2025-07-04) olcen kurum belirtilmemis firma
+    beyani; Maxwell %26.92 ISFH sertifikali laboratuvar hucresi - ikisi de ust sinira alinmadi. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → eta_cell: GW endustri referansi (H1); yalniz kalibrasyon.'
+  dogrulama_deneyi: Referans; kendi verimimiz Deney 3 ile olculur.
+- id: hjt_ref_PA_per_mm
+  ad: Endustri referans hucresinin cevre/alan orani (kalibrasyon formati)
+  birim: 1/mm
+  deger: 0.0286
+  alt: 0.019
+  ust: 0.033
+  kaynak: Geometri + TaiyangNews HJT 2023 (islem oncesi yarim wafer yaygin)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'TaiyangNews 2023: ''newly built factories are increasingly implementing the cutting of wafers
+    beforehand'' (bu gorevde PDF okundu)'
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalnizca kalibrasyon icin.
+  aciklama: 'Tam kare 210: 4/210=0.0190; 210x105 yarim: 2*315/22050=0.0286; 182x91 yarim: 0.0330. ITRPV %25.7''nin
+    formati bilinmiyor.'
+  dogrulama_deneyi: Deney 1 y-kesisimi ile bagimsiz eta_core olculdugunde gereksizlesir.
+- id: cell_eta_core_mature_pct
+  ad: Kenarsiz cekirdek verim, olgun proses, tau_SRH = tau_ref
+  birim: '%'
+  deger: 26.1
+  alt: 25.5
+  ust: 26.8
+  kaynak: f_hjt_eta_core_calib ile cell_eta_industry_2025_pct'ten turetildi
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 25.7/(1-0.61*0.0286)=26.16; tam kare 210 kabulunde 26.0
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ticari arac kalitesinde pasivasyon varsayar; kendi araclarimizla ancak yillar icinde yaklasilabilir.
+  aciklama: 'Bu bir KALIBRASYON noktasidir, bagimsiz dogrulama degildir (ilk ciktidaki ''geri uretiyor'' ifadesi
+    dairesel oldugu icin kaldirildi). Ust sinir: LONGi %27.0 sertifikali sampiyon hucre.'
+  dogrulama_deneyi: 'Deney 1: eta - P/A dogrusunun y-kesisimi.'
+- id: cell_eta_core_start_pct
+  ad: Kendi hattimizda ilk 12 ayin kenarsiz cekirdek verimi (satin alinan wafer, K3)
+  birim: '%'
+  deger: 22.5
+  alt: 19
+  ust: 24.5
+  kaynak: 'Tahmin; dayanak Ballif vd. 2019 PVI: ticari araclarla pilot hat 10 ayda %20.5''ten %22.8''e'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''improvement in average cell efficiency from 20.5% to 22.8% in 10 months during 2017/18'''
+  kaynak_tarihi: '2019'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kendi yapim PECVD/PVD ile ogrenme egrisi tedarikci destekli pilot hatlardan yavas olabilir;
+    alt sinir buna gore dusuk.
+  aciklama: PVD puskurtme hasari ve bekleme sorunlari bu degerin icinde varsayildi (cift sayma).
+  dogrulama_deneyi: Deney 3 (iVoc >= 730 mV hedefi) ardindan tam hucre IV.
+- id: hjt_w_eq_start_mm
+  ad: Baslangic hattinda esdeger olu kenar genisligi
+  birim: mm
+  deger: 0.75
+  alt: 0.5
+  ust: 1.2
+  kaynak: 'Tahmin: olgun B-arka degeri 0.61 mm + genis maske ve kaba kenar islemesi payi'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Baslangic senaryosu.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 1.
+- id: hjt_tau_ref_ms
+  ad: Referans wafer SRH omru (yalniz SRH; intrinsik ve yuzey haric)
+  birim: ms
+  deger: 7
+  alt: 5
+  ust: 10
+  kaynak: Giglia, Varache, Veirman, Fourmond, SOLMAT 238 (2022) 111605 (HAL)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''tau_p0=7ms, which is representative of state-of-the-art wafers used in mass production'';
+    ayni makalede ''bulk carrier lifetime is 4.5ms (injection level of 1x10^15cm-3)'' (efektif)'
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Satin alinan (buyuk olasilikla on-tavlanmis) endustriyel wafer icin. Kendi RCz'miz icin bilinmiyor.
+  aciklama: 'TANIM DUZELTILDI: model enjeksiyondan bagimsiz SRH omru kullanir. Richter 2012 parametrizasyonuyla
+    (hafizadan) 1 Ohm cm, dn=1e15''te tau_intr=8.2 ms; tau_SRH=7 ms -> efektif yigin 3.8 ms (Giglia 4.5 ms; fark
+    SRH enjeksiyon bagimliligindan). LONGi 8 ms sampiyon hucreye ait.'
+  dogrulama_deneyi: 'QSSPC tau_eff(dn=1e15), iyi pasive numunede: 1/tau_SRH = 1/tau_eff - 1/tau_intr(N_D,dn) - J0s_top*(N_D+dn)/(q*ni^2*W).'
+- id: hjt_eta_tau_A_pctabs
+  ad: Verim-omur duyarlilik katsayisi A
+  birim: '%abs'
+  deger: 1.18
+  alt: 1.13
+  ust: 1.23
+  kaynak: 'Kendi toplu hucre modelimiz: Richter intrinsik + enjeksiyondan bagimsiz SRH + J0s + Rs; bu gorevde python
+    ile yeniden fit'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'tau_SRH 0.5/1/2/3/5/20 ms icin 7 ms''ye gore -1.95/-1.27/-0.70/-0.42/-0.14/+0.28 %abs; W=100-160
+    um, J0s=1-4 fA/cm2 taramasinda 2 ms: -0.57 ile -0.82, 1 ms: -1.09 ile -1.45'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Fizik tabanli, boyuttan bagimsiz. Fizik denetcisinin bagimsiz modeli ayni araligi verdi.
+  aciklama: eta = eta_core + A*[ln(1+c/tau_ref) - ln(1+c/tau)]; en buyuk fit hatasi 0.03 %abs. Richter katsayilari
+    hafizadan (dogrulanmadi). Kusur turune bagli SRH enjeksiyon bagimliligi sonucu degistirebilir.
+  dogrulama_deneyi: Deney 2.
+- id: hjt_eta_tau_c_ms
+  ad: Verim-omur fit sabiti c
+  birim: ms
+  deger: 3.35
+  alt: 2.3
+  ust: 4.6
+  kaynak: Ayni fit (A ile korele)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: J0s=4 fA/cm2 icin 2.3-3.3 ms; 1 fA/cm2 icin 3.4-4.6 ms
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel.
+  aciklama: tau < 0.3 ms icin ekstrapolasyon guvenilmez.
+  dogrulama_deneyi: Deney 2.
+- id: hjt_tau_srh_target_ms
+  ad: 'Kristal ajanina verilen hucre hedefi: izin verilen kayip icin asgari SRH omru'
+  birim: ms
+  deger: 3.7
+  alt: 2.7
+  ust: 4.9
+  kaynak: f_hjt_tau_target (A=1.18, c=3.35, tau_ref=7)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'kayip <=0.3 puan: 3.7 ms; <=0.5 puan: 2.7 ms; <=0.15 puan: 4.9 ms'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 1 Ohm cm icin; farkli rho'da tau_intr degisir, fit yeniden yapilmali.
+  aciklama: Ballif'in tau/rho>=1 kriteri bu hedefin yerini tutmaz (1 Ohm cm'de -1.27 puan).
+  dogrulama_deneyi: Deney 2.
+- id: hjt_wafer_tau_over_rho_min
+  ad: Ballif asgari esigi tau/rho (gettering/termal donor yok etme gerekmeyen sinir; kayipsiz DEGIL)
+  birim: ms/(Ohm cm)
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Ballif vd. 2019, Photovoltaics International
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''no longer require gettering or thermal donor killing ... lifetime/resistivity ratio ... greater
+    than unity along the entire ingot'''
+  kaynak_tarihi: '2019'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Asgari kabul esigi olarak; kalite hedefi hjt_tau_srh_target_ms'dir.
+  aciklama: Kaynaktaki omrun efektif mi SRH mi oldugu belirtilmemis.
+  dogrulama_deneyi: Ingot boyunca rezistivite + QSSPC haritasi.
+- id: hjt_preanneal_recovery_frac
+  ad: On-tavlama (gettering) ile metal kaynakli SRH rekombinasyonunun giderilen orani r
+  birim: '-'
+  deger: 0.5
+  alt: 0
+  ust: 0.9
+  kaynak: 'Tahmin. Nitel dayanak: TaiyangNews HJT 2023 (bu gorevde PDF okundu)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''annealing the wafers for gettering ... established themselves as part of the standard process
+    at most of the HJT cell production lines. High wafer quality requirement for HJT is no more a prerequisite,
+    as the annealing process addresses the issue of metallic impurities'''
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Buyukluk kaynakta yok. Oksijen kaynakli kusurlar (termal donor, halka, cokeltiler) gettering
+    ile gitmez; yuksek Oi'li RCz'de tavlama cokelti cekirdeklerini buyutebilir.
+  aciklama: '1/tau_sonra = 1/tau_ref + (1-r)*max(0, 1/tau_once - 1/tau_ref). Ornek: tau 2 ms, r=0.5 -> 3.1 ms (-0.70
+    yerine -0.40 puan).'
+  dogrulama_deneyi: Deney 7.
+- id: hjt_preanneal_capex_usd
+  ad: On-tavlama firini capex'i (kendi yapim bant/tup; induksiyon secenegi)
+  birim: USD
+  deger: 250000
+  alt: 100000
+  ust: 600000
+  kaynak: Tahmin (firin govdesi + isitici + atmosfer kontrolu + tasima)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Firmanin induksiyon isitma tecrubesi avantaj. PDG (P kaynakli) secilirse PSG asindirma (HF)
+    ve P kaynagi eklenir.
+  aciklama: Sicaklik ve sure bilinmiyor (kaynakta yok; tahmin 550-950 C).
+  dogrulama_deneyi: Deney 7 + BOM.
+- id: hjt_preanneal_kWh_per_m2
+  ad: On-tavlama marjinal enerjisi
+  birim: kWh/m2
+  deger: 1.5
+  alt: 0.5
+  ust: 4
+  kaynak: Tahmin (Si + tasiyici isil kutlesinin 700-900 C'ye isitilmasi + kayiplar)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Si isitma ~0.1 kWh/m2 mertebesinde; tasiyici/kayik ve kayiplar baskin.
+  dogrulama_deneyi: Prototip firin olcumu.
+- id: hjt_edge_j02_native_nA_cm
+  ad: Dogal (islenmis, a-Si/TCO sarili) kenar icin cizgisel j02
+  birim: nA/cm
+  deger: 2.41
+  alt: 1
+  ust: 5
+  kaynak: Wohler, Greulich, Bett, SOLMAT 278 (2024) 113192 (Fraunhofer ISE), acik erisim PDF
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''J02,native=(2.41+-0.46)nA/cm''; ''dn_native=-0.1%'' (M6 SHJ, %22.8, OLCUM)'
+  kaynak_tarihi: '2024'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Endustriyel M6 SHJ'de olculdu. Bizim kenarlarimiz (tel testere/lazer + SDE + a-Si sarma) farkli
+    olabilir.
+  aciklama: Dogrusal P/A iliskisinin OLCUM dayanagi budur (Giglia'nin R2=0.999 degeri simulasyondur).
+  dogrulama_deneyi: Deney 1.
+- id: hjt_edge_j02_tls_nA_cm
+  ad: TLS (termal lazer ayirma) kesik kenar icin j02
+  birim: nA/cm
+  deger: 7.77
+  alt: 5
+  ust: 12
+  kaynak: Wohler vd. 2024
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''J02,TLS=(7.77+-0.26)nA/cm''; ''dn_half,TLS=-0.3%'', ''dn_shingle,TLS=-1.1%''; scribe 115 nA/cm:
+    half -1.1%, shingle -5.5%'
+  kaynak_tarihi: '2024'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Islem sonrasi kesim secenegi (C) icin.
+  aciklama: Fell 2017 ciplak p-n kenari icin 'worst-case 19 nA/cm' veriyor; scribe (115) bunu astigi icin 19 mutlak
+    ust sinir degildir.
+  dogrulama_deneyi: Deney 1 C kolu.
+- id: hjt_edge_weq_native_mm
+  ad: Dogal kenarin esdeger olu genisligi (rekombinasyon)
+  birim: mm
+  deger: 0.26
+  alt: 0.12
+  ust: 0.55
+  kaynak: Iki diyotlu toplu model, Wohler verisine kalibre; fizik denetcisi bagimsiz 0.24-0.25 mm
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: M6 %22.8'de model -0.10 (Wohler -0.1); modern %25.7 hucrede a=50/105/210 icin 0.258/0.268/0.273
+    mm
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Fizik tabanli; Voc arttikca goreli etki artar (eski hucrede 0.18 mm).
+  aciklama: j02 1/2.41/5/7.77 nA/cm -> w_eq ~0.11/0.26/0.52/0.8 mm.
+  dogrulama_deneyi: Deney 1.
+- id: hjt_edge_weq_tls_mm
+  ad: TLS kesik kenarin esdeger olu genisligi (TCO kenara kadar, bant yok)
+  birim: mm
+  deger: 0.8
+  alt: 0.5
+  ust: 1.3
+  kaynak: Wohler j02 orani ve model; kaynak denetcisi bagimsiz 0.73-0.76 mm (%22.8 hucre)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'model: j02=7.77 -> a=50 mm''de -1.46 %abs'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Islem sonrasi kesim (C).
+  aciklama: 'Toplam w_eq karsilastirmasi: C 0.8 / B-arka 0.61 = ~1.3 kat (ilk ciktidaki ''3 kat'' yalniz rekombinasyon
+    bilesenini karsilastiriyordu).'
+  dogrulama_deneyi: Deney 1 C kolu.
+- id: hjt_edge_weq_scribe_mm
+  ad: Lazer cizik-kir kesik kenarin esdeger olu genisligi
+  birim: mm
+  deger: 3.8
+  alt: 2.5
+  ust: 6
+  kaynak: 'Wohler: scribe half -1.1%, shingle -5.5%; iki denetcinin bagimsiz hesabi 3.6-4.0 mm'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''dn_half,scribe=-1.1% ... dn_shingle,scribe=-5.5%'''
+  kaynak_tarihi: '2024'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Islem sonrasi kaba lazer kesim; ~6 kat kotu (toplam w_eq ile), elenmeli.
+  aciklama: '-'
+  dogrulama_deneyi: Gerek yok.
+- id: hjt_edge_weq_repass_mm
+  ad: Islem sonrasi kesik kenarin 250 C altinda yeniden pasivasyon sonrasi esdeger olu genisligi (D secenegi)
+  birim: mm
+  deger: 0.35
+  alt: 0.2
+  ust: 0.8
+  kaynak: Tahmin; dayanak Giglia 2022 SIMULASYONU (Dit=3e10 ile yeniden pasivasyon)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Giglia: M6 1/6 hucrede ''0.6%abs of the 0.8%abs cutting-induced drop are recovered (post cutting:
+    22.27% to post-passivation: 22.86%)'' - Tablo 2 ''Predicted'''
+  kaynak_tarihi: '2022'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kesik kenarda TCO bandi olmadigi icin B-arka'dan iyi olabilir. Ancak a-Si:H'yi bozmadan (<~200-250
+    C) dogal seviyede kenar pasivasyonu yapan bir proses kanitlanmadi.
+  aciklama: Ust sinir 0.8 = pasivasyon hic ise yaramazsa TLS seviyesi.
+  dogrulama_deneyi: Deney 1 D kolu.
+- id: hjt_tco_excl_mm
+  ad: TCO kenar dislama (TCO'suz bant) genisligi
+  birim: mm
+  deger: 1
+  alt: 0.3
+  ust: 1.5
+  kaynak: Giglia vd. 2022 (HAL)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''the TCO-free region will be set to 1mm''; ''This TCO-free region is necessary to avoid electrical
+    shunt between the front side and rear side TCO layers'''
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: CEA hattinda tepsi cebi golgesiyle olusur; kendi tasiyici tasarimimizla degistirilebilir.
+  aciklama: Tasiyici cep cikintisi (hjt_carrier_gap_mm) ile bagli.
+  dogrulama_deneyi: 'Deney 1: 0.3/0.5/1.0 mm ve on/arka kollari.'
+- id: hjt_tco_dead_frac_rear
+  ad: Arka (emitor) yuzde TCO'suz bandin etkin olu alan orani
+  birim: '-'
+  deger: 0.35
+  alt: 0.25
+  ust: 0.5
+  kaynak: 'Giglia 2022 simulasyonu: M6''da 1 mm TCO''suz kenar -0.17 (Dit=0) / -0.22 %abs'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''the cell with a TCO-covered edge allows for a 0.17%abs higher eta''; ''suppression of the
+    TCO-free region could allow a 0.22%abs increase'''
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Arka emitorlu HJT; delikler TCO'suz bolgeden yanal toplanamaz.
+  aciklama: '0.17/23.4/0.023 = 0.31; 0.22 -> 0.41. Capraz kontrol: Giglia Tablo 1 egimi 13.3 %abs*mm -> 0.57 mm
+    = 0.18+0.35*1.'
+  dogrulama_deneyi: Deney 1.
+- id: hjt_tco_dead_frac_front
+  ad: On (n) yuzde TCO'suz bandin etkin olu alan orani (yalniz optik + yanal akis)
+  birim: '-'
+  deger: 0.12
+  alt: 0.05
+  ust: 0.3
+  kaynak: 'Tahmin: kayip esasen yansima (ARC yok); elektronlar n-bulk uzerinden yanal akar'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sarma sontu hjt_tco_wrap_weq_mm ile ayrica eklenir.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 1 on/arka kollari.
+- id: hjt_tco_wrap_weq_mm
+  ad: On yuz dislamasinda arka p-TCO'nun on n-katmanina sarilmasinin esdeger kenar kaybi (sont/kuyu)
+  birim: mm
+  deger: 0.1
+  alt: 0
+  ust: 0.5
+  kaynak: Tahmin (fizik muhakemesi; fizik denetcisi bulgusu)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: On yuzde dislama secilirse. p-TCO n-a-Si uzerine sarilirsa ohmik sont olusur; ters sarma yerel
+    rekombinasyon kuyusu yaratir (asimetri dogrulanmadi).
+  aciklama: Iki yuzde dar maske + arka TCO'nun on yuze sarilmamasi kaybi sifira indirebilir.
+  dogrulama_deneyi: 'Deney 1: Suns-Voc pFF, karanlik IV ile Rsh.'
+- id: hjt_queue_time_max_min
+  ad: HF-son -> PECVD izin verilen bekleme suresi (kayipsiz)
+  birim: dk
+  deger: 30
+  alt: 20
+  ust: 60
+  kaynak: Danel vd. 2012, Solid State Phenomena 187:345
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''With a high performance cleaning ... 30 min delay has no impact and 90 min leads to about
+    5% relative degradation of cell performance.'''
+  kaynak_tarihi: '2012'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Temizlik kalitesine bagli (HCl, <50 ppb Cu). N2 tampon etkisi dogrulanmadi.
+  aciklama: Parti boyutu <= PECVD hizi x bekleme.
+  dogrulama_deneyi: Deney 4.
+- id: hjt_queue_penalty_rel_per_min
+  ad: Bekleme siniri asildiginda bagil verim kaybi
+  birim: 1/dk
+  deger: 0.0008
+  alt: 0.0003
+  ust: 0.002
+  kaynak: 'Danel 2012''den: 90 dk''da %5 bagil, 30 dk''da 0 -> 0.05/60'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: ayni
+  kaynak_tarihi: '2012'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Dogrusal varsayim; gercekte doygunluklu olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 4.
+- id: hjt_ag_mg_per_W_itrpv_2025
+  ad: SHJ endustri ortalamasi Ag tuketimi (2025, ITRPV) - capraz referans
+  birim: mg/W
+  deger: 12
+  alt: 10
+  ust: 14
+  kaynak: TaiyangNews 'ITRPV Sees PV Shipments Stabilize At 706 GW In 2025'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''SHJ cells are projected to decline from 12.0 mg/W to 4.3 mg/W'''
+  kaynak_tarihi: 2026-06
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 0BB, AgCu karisimi, ince baski, 182/210 GW hatti. Kendi yazicimiz icin ust referans.
+  aciklama: 'Guven ''yuksek''ten ''orta''ya indirildi: degerin saf Ag mi, pasta mi, AgCu''da yalniz Ag mi oldugu
+    belirtilmemis. 12 mg/W x 257 W/m2 = 3.08 g/m2.'
+  dogrulama_deneyi: Deney 5.
+- id: hjt_paste_laydown_start_g_per_m2
+  ad: Dusuk sicaklik Ag pastasi yas kutle yogunlugu - baslangic (kendi yazicimiz, ilk yil)
+  birim: g/m2
+  deger: 5.5
+  alt: 4.5
+  ust: 7.5
+  kaynak: 'TaiyangNews HJT 2023 (bu gorevde PDF okundu): laydown 18-23 mg/W; M6 basina 180 -> 120 mg'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''leading to a higher laydown of 18 to 23 mg/W''; ''from 180 mg per M6 wafer to 120 mg'''
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: GW hatti 2022 pratigi 4.6-5.9 g/m2 (18-23 x 257); eski pratik 6.6 g/m2. Kendi yazicimizin
+    ilk yili icin 5.5 alindi.
+  aciklama: PASTA kutlesidir; Ag = kutle x hjt_paste_ag_frac. Hucre boyutundan bagimsiz (parmak boyu kolektor araligiyla
+    belirlenir).
+  dogrulama_deneyi: 'Deney 5: baski oncesi/sonrasi tartim.'
+- id: hjt_paste_laydown_mature_g_per_m2
+  ad: Dusuk sicaklik Ag pastasi yas kutle yogunlugu - olgun (SMBB/0BB, cift baski)
+  birim: g/m2
+  deger: 4.3
+  alt: 3.5
+  ust: 5
+  kaynak: 'TaiyangNews HJT 2023 (bu gorevde PDF okundu): Huasun M6 basina 126 mg pasta'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''out of a total laydown of 126 mg of paste per an M6 cell, close to 40 mg is used for busbar
+    formation'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: 126/274.5 cm2 = 4.6 g/m2 (GW, 2022); busbarsiz tasarimla 4.3 hedef.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 5.
+- id: hjt_paste_ag_frac
+  ad: Dusuk sicaklik pastasinda Ag kutle orani
+  birim: '-'
+  deger: 0.88
+  alt: 0.8
+  ust: 0.93
+  kaynak: Hafizadan (dusuk-T pastalar ~%85-92 Ag)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Genel.
+  aciklama: Olgun Ag = 4.3 x 0.88 = 3.78 g/m2; baslangic Ag = 5.5 x 0.88 = 4.84 g/m2.
+  dogrulama_deneyi: Tedarikci veri sayfasi + kul (TGA) analizi.
+- id: hjt_ag_g_per_m2_agcu
+  ad: Ag kapli Cu (AgCu) pasta + 0BB ile saf Ag yuzey yogunlugu
+  birim: g/m2
+  deger: 1.5
+  alt: 1
+  ust: 2.6
+  kaynak: TaiyangNews 'Silver-Coated Copper Drives HJT Metallization Roadmap' (2026-06-10); Fraunhofer ISE (pv magazine
+    2025) 1.4 mg/W
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''pure silver consumption decreases from 10 mg/W to 3.9 mg/W for HJT''; ISE ''only 1.4 mg silver
+    per W'''
+  kaynak_tarihi: 2026 / 2025
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: En iyi endustri seviyesi; 2. asama hedefi. Cu guvenilirligi test edilmeli.
+  aciklama: 6 mg/W x 257 W/m2 = 1.54 g/m2 (saf Ag icerigi).
+  dogrulama_deneyi: Deney 5 + Deney 14.
+- id: hjt_ag_price_usd_per_g
+  ad: Gumus fiyati
+  birim: USD/g
+  deger: 2.066
+  alt: 1.6
+  ust: 2.8
+  kaynak: https://tradingeconomics.com/commodity/silver
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Silver rose to 64.26 USD/t.oz on September 25, 2026'' (onceki turda ve kirmizi takimca acildi);
+    64.26 / 31.1035 = 2.066 USD/g'
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Genel emtia.
+  aciklama: Aralik oynaklik tahmini (50-87 $/oz). Ilk ciktidaki dogrulanmamis arama ozeti notu kaldirildi. Kaynak
+    denetcisi Kitco'da 64.17 $/oz (27 Eylul) gordu. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik
+    yok; tek id. Birim USD/g = USD/t.oz / 31.1035.
+  dogrulama_deneyi: Piyasa takibi.
+- id: hjt_ag_paste_premium_usd_per_g
+  ad: Pasta imalat primi (Ag icerigi basina)
+  birim: USD/g Ag
+  deger: 0.3
+  alt: 0.1
+  ust: 0.7
+  kaynak: Tahmin (pasta ureticisi marji; dogrulanmis kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Ballif 2019: dusuk-T pasta ''similar price per kg to that of conventional paste'''
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kucuk alimda prim daha yuksek olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: 2-3 tedarikci teklifi.
+- id: hjt_ito_thickness_total_nm
+  ad: Toplam TCO kalinligi (on+arka)
+  birim: nm
+  deger: 180
+  alt: 140
+  ust: 220
+  kaynak: TaiyangNews 'Reducing Indium In HJT TCO Processing' (VON ARDENNE 100 nm her iki yuz); Louwen 2016
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '''100 nm of ITO applied on both sides as reference'''
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: On ~75-80 nm (ARC kosulu); arka inceltilebilir.
+  aciklama: 'Film = 7.1 x 180e-3 = 1.278 g/m2. | Örneklem denetimi (2026-09-27): açılan kaynak yüzey başına ~100
+    nm (toplam ~200 nm) veriyor; 180 nm değeri Louwen 2016''ya dayandırılmış ama URL yok ve doğrulanamadı.'
+  dogrulama_deneyi: Elipsometri.
+- id: hjt_ito_density_g_cm3
+  ad: ITO yogunlugu
+  birim: g/cm3
+  deger: 7.1
+  alt: 6.8
+  ust: 7.2
+  kaynak: Malzeme ozelligi (hafizadan)
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel.
+  aciklama: URL ile dogrulanmadi.
+  dogrulama_deneyi: '-'
+- id: hjt_ito_target_util
+  ad: ITO hedef kullanim orani (asinan / satin alinan)
+  birim: '-'
+  deger: 0.85
+  alt: 0.25
+  ust: 0.9
+  kaynak: TaiyangNews 'TCO Deposition' (doner hedef %90); duzlemsel icin hafizadan 0.25-0.4
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''90% of target utilization'''
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Doner hedef varsayildi; kendi PVD'mizde duzlemsel hedef secilirse 0.25-0.4 (tasarim secimi
+    hjt_ts_ito_target_type).
+  aciklama: Alt sinir duzlemsel hedefi temsil eder.
+  dogrulama_deneyi: Deney 8.
+- id: hjt_ito_transfer_frac
+  ad: Asinan ITO'nun tasiyici alanina ulasan payi
+  birim: '-'
+  deger: 0.53
+  alt: 0.35
+  ust: 0.7
+  kaynak: PV-Tech Maxwell (2023-07-24) 12-13.5 mg/W'den geri hesap
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''13.5mg/W of 100% indium-based target materials ... reduced to around 12mg/W'''
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Kalkan geometrisine bagli.
+  aciklama: etkin verim = 1.278/(3.16 x 0.9) = 0.45; /0.85 = 0.53. Maxwell degeri hurda iadesi sonrasi net ise gercek
+    aktarim daha dusuk.
+  dogrulama_deneyi: 'Deney 8: tasiyici ve kalkan birikim tartimi.'
+- id: hjt_in_mass_frac_target
+  ad: ITO hedefte indiyum kutle orani
+  birim: '-'
+  deger: 0.75
+  alt: 0.74
+  ust: 0.8
+  kaynak: 'Stokiyometri: In2O3 0.827; ITO 90:10 -> 0.744; 97:3 -> 0.80'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Genel.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_in_price_usd_per_kg
+  ad: Indiyum fiyati
+  birim: USD/kg
+  deger: 800
+  alt: 350
+  ust: 1100
+  kaynak: https://tradingeconomics.com/commodity/indium ; Procurement Resource ; USGS MCS 2025 (hucre)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'TE: ''Indium traded flat at 5,250 CNY/Kg on September 24, 2026'' (acildi) -> /6.72 = 781 USD/kg;
+    PR ''China (FOB) USD 786.50/KG'' (hucre).'
+  kaynak_tarihi: 2026-09 / 2024
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Genel.
+  aciklama: 'Alt sinir USGS 2024 ortalamasi (geri donus riski); ust sinir oynaklik. Dogrulanmamis ''880-972 $/kg''
+    ifadesi kaldirildi. TE fiyatinin KDV dahil olup olmadigi bilinmiyor. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Tek id. RMB/KDV kuralinin 1. adimi uygulanir: FOB ihracat fiyati (PR 786.5) mevcut, bu yuzden TE CNY fiyatinin
+    KDV durumu (dahilse KDV haric ~691) bazi degistirmez; 800 degeri FOB''un %2 icinde.'
+  dogrulama_deneyi: Hedef tedarikcisinden teklif.
+- id: hjt_ito_target_fab_adder_usd_per_kg
+  ad: ITO hedef imalat ucreti (In degeri disinda)
+  birim: USD/kg hedef
+  deger: 450
+  alt: 300
+  ust: 700
+  kaynak: Ballif vd. 2019 PVI
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''$520-900/kg for In-based target processing, including the price of In (currently at ~$220/kg)'''
+  kaynak_tarihi: '2019'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 2019 Avrupa fiyati.
+  aciklama: 520-900 - 0.75x220 = 355-735 $/kg.
+  dogrulama_deneyi: Teklif.
+- id: hjt_ito_spent_in_recovery_frac
+  ad: Kullanilmis hedefte kalan In degerinin geri satista kredilenen orani
+  birim: '-'
+  deger: 0.7
+  alt: 0.4
+  ust: 0.9
+  kaynak: Tahmin (geri donusumcu marji)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Kredi = hedef x (1 - kullanim) x In orani x In fiyati x bu oran. Doner hedefte kredi kucuk
+    (~%6), duzlemselde buyuk.
+  aciklama: Eski hjt_ito_spent_credit_frac (0.3, kullanimdan bagimsiz) kaldirildi. Kalkan/tasiyici birikiminden
+    In geri kazanimi varsayilan 0.
+  dogrulama_deneyi: Geri alim teklifi.
+- id: hjt_sih4_g_per_m2
+  ad: Silan tuketimi
+  birim: g/m2
+  deger: 2
+  alt: 0.8
+  ust: 5
+  kaynak: Louwen vd. 2016 SOLMAT 147 Tablo A4 (Ref-SHJ 0.039 g/wafer, 239 cm2)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Silane g/wafer ... 0.039'''
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: nc-Si katmanlar ve kucuk odada duvar birikimi tuketimi arttirir.
+  aciklama: 1.63 g/m2 -> 2 alindi; gaz kullanim verimi ~%5-15.
+  dogrulama_deneyi: Deney 10.
+- id: hjt_h2_g_per_m2
+  ad: Hidrojen tuketimi (PECVD)
+  birim: g/m2
+  deger: 10
+  alt: 2.5
+  ust: 40
+  kaynak: Louwen 2016 Ref-SHJ 0.059 g/wafer (2.5 g/m2, a-Si); nc-Si icin H2 seyreltme 50-200x -> tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Hydrogen g/wafer 0.059'''
+  kaynak_tarihi: '2016'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Katkili katman secimine bagli; %1.4 silan karisimi H2 icinde secilirse artar.
+  aciklama: Maliyet kucuk; H2 depolama/algilama altyapisi icin miktar onemli.
+  dogrulama_deneyi: Deney 10.
+- id: hjt_ph3_mg_per_m2
+  ad: Fosfin tuketimi (saf esdeger)
+  birim: mg/m2
+  deger: 10
+  alt: 2
+  ust: 50
+  kaynak: 'Tahmin: katkili katmanda PH3/SiH4 ~%0.5-2; katkili katman silanin ~yarisi'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: H2 icinde %1-2 seyreltik tup; guvenlik altyapisi baskin.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 10.
+- id: hjt_bdopant_mg_per_m2
+  ad: Bor kaynagi (TMB veya B2H6) tuketimi
+  birim: mg/m2
+  deger: 10
+  alt: 2
+  ust: 50
+  kaynak: Tahmin (PH3 ile ayni gerekce)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 10.
+- id: hjt_nf3_g_per_m2
+  ad: NF3 (in-situ oda temizligi) tuketimi
+  birim: g/m2
+  deger: 3
+  alt: 0
+  ust: 10
+  kaynak: 'Tahmin: 4NF3+3Si -> 3SiF4+2N2 (3.4 g NF3/g Si), %30-60 verim, odada biriken Si 0.3-1 g/m2'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Sokulebilir astar + islak temizlik secilirse 0.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 10.
+- id: hjt_sih4_price_usd_per_kg
+  ad: Silan fiyati (tup olcegi, teslim)
+  birim: USD/kg
+  deger: 80
+  alt: 30
+  ust: 300
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: 'Kucuk tuketim: tup kirasi/lojistik baskin.'
+  aciklama: 'Dayanak: dogrulanmis fiyat bulunamadi; Cin bulk fiyati onlarca $/kg mertebesinde (hafizadan); Turkiye''de
+    tup + lojistik ve %1.4 karisim primi ust siniri belirler. 2 g/m2 x 300 $/kg = 0.24 c/W: en kotu durumda bile
+    ikincil. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_sih4_usd_kg üzerinden okunur. Fark: Ayni kavram; tahmin;
+    aralik 30-300 on-karisim primini de kapsiyor.'
+  dogrulama_deneyi: Gaz tedarikcisi teklifi (saf ve %1.4 karisim).
+  esdeger: eco_price_sih4_usd_kg
+  esdeger_carpan: 1.0
+- id: hjt_h2_price_usd_per_kg
+  ad: Hidrojen fiyati (tup/demet)
+  birim: USD/kg
+  deger: 10
+  alt: 4
+  ust: 25
+  kaynak: Tahmin (tup olcegi H2; elektrolizor secenegi altyapi ajaninda)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '10 g/m2 x 10 $/kg = 0.1 $/m2 = 0.04 c/W. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_h2_usd_kg
+    üzerinden okunur. Fark: Ayni kavram (tup/demet fiyati); tahmin; 2.5 kat dusuk; aralik 4-25.'
+  dogrulama_deneyi: Teklif.
+  esdeger: eco_price_h2_usd_kg
+  esdeger_carpan: 1.0
+- id: hjt_dopant_gas_usd_per_m2
+  ad: Katki gazlari (PH3, TMB/B2H6 karisimlari) maliyeti
+  birim: USD/m2
+  deger: 0.03
+  alt: 0.01
+  ust: 0.1
+  kaynak: 'Tahmin: 10 mg/m2 saf esdeger; %1 karisim tupu fiyati belirleyici'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: hjt_n2_Nm3_per_h
+  ad: Hucre hatti N2 tuketimi (pompa purge, kurutma, N2 tampon)
+  birim: Nm3/h
+  deger: 15
+  alt: 5
+  ust: 40
+  kaynak: 'Tahmin: 6-8 kuru pompa x 30-50 slm purge = 11-24 Nm3/h + kurutma'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Uretimden bagimsiz (hat acikken surekli).
+  aciklama: Fiyati altyapi ajani verir (PSA/LN2). Ar/O2 (puskurtme) ~0.06 Nm3/h, ihmal.
+  dogrulama_deneyi: Debimetre.
+- id: hjt_si_etch_removal_um
+  ad: SDE + dokulama toplam Si asindirma (iki yuz)
+  birim: um
+  deger: 12
+  alt: 8
+  ust: 25
+  kaynak: Hucre tahmini (piramit 2-5 um + hasar giderme); wafer hafizadan 15 um; alt capa Ge 2025
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Ge 2025 (wafer notu): ''~5 μm of material removal via etching'' (yuz basina)'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi waferimizda testere/lazer hasar derinligi belirler.
+  aciklama: t_cell = t_wafer - removal. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer arayuzu 'hucre ajaninin
+    degeri esas' diyor; hucre sahip. Aralik wafer'in 8-25'ine genisletildi. t_cell, KOH ve H2 ayni degeri kullanir.
+  dogrulama_deneyi: Once/sonra tartim.
+- id: hjt_koh_excess
+  ad: KOH stokiyometri fazlasi (banyo yenileme/bosaltma)
+  birim: '-'
+  deger: 1.3
+  alt: 1
+  ust: 2
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Dusuk kullanimda (kampanya) banyo bosaltma payi artar.
+  aciklama: KOH = 12 um x 2.33 x 3.995 x 1.3 = 145 g/m2 (Louwen NaOH 160 g/m2 ile tutarli).
+  dogrulama_deneyi: Titrasyon kayitlari.
+- id: hjt_hf_g_per_m2
+  ad: HF tuketimi (temizlik + HF-son)
+  birim: g/m2
+  deger: 20
+  alt: 8
+  ust: 40
+  kaynak: Louwen 2016 Tablo A2 (0.918 g/wafer -> 38 g/m2, RCA donemi); ozonla azalma
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Hydrogen fluoride g/wafer 0.918'''
+  kaynak_tarihi: '2016'
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: HF atik aritma boyutlandirmasi girdisi.
+  aciklama: On-tavlamada PDG secilirse PSG asindirma icin ek HF.
+  dogrulama_deneyi: Banyo kayitlari.
+- id: hjt_upw_L_per_m2
+  ad: Ultra saf su tuketimi
+  birim: L/m2
+  deger: 30
+  alt: 15
+  ust: 60
+  kaynak: Louwen 2016 Tablo A2 (0.745 kg/wafer, 239 cm2)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''DI-water kg/wafer ... 0.745'''
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Kaskad durulama ile dusurulebilir.
+  aciklama: UPW fiyati altyapi ajaninda.
+  dogrulama_deneyi: Debimetre.
+- id: hjt_koh_price_usd_per_kg
+  ad: KOH fiyati (%100 KOH bazinda, yari iletken sinifi)
+  birim: USD/kg
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: Tahmin (endustriyel pul ~1 $/kg mertebesi, hafizadan; saflik primi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 145 g/m2 x 1.5 = 0.22 $/m2.
+  dogrulama_deneyi: Teklif.
+- id: hjt_hf_price_usd_per_kg
+  ad: HF fiyati (%100 HF bazinda, %49 elektronik sinif)
+  birim: USD/kg
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 20 g/m2 x 4 = 0.08 $/m2.
+  dogrulama_deneyi: Teklif.
+- id: hjt_misc_chem_usd_per_m2
+  ad: Diger islak kimya (dokulama katkisi, HCl, H2O2/O3, tasiyici temizlik kimyasi)
+  birim: USD/m2
+  deger: 0.15
+  alt: 0.05
+  ust: 0.4
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Toplam islak kimya ~0.45 $/m2 = 0.18 c/W; Singulus referansi (<0.5-0.6 c/W) ile uyumlu.
+  dogrulama_deneyi: Teklif + banyo kayitlari.
+- id: hjt_wet_consumables_usd_per_W_ref
+  ad: Islak kimya sarf maliyeti referansi (capraz kontrol)
+  birim: USD/W
+  deger: 0.0055
+  alt: 0.002
+  ust: 0.006
+  kaynak: Ballif vd. 2019 PVI (Singulus)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''wet etching and cleaning (currently reported by Singulus at <0.5-0.6c/W with ozone cleaning)'''
+  kaynak_tarihi: '2019'
+  guven: orta
+  maliyet_sinifi: alan
+  olcek: genel
+  senaryoya_uygunluk: Yalniz capraz kontrol; model kalem bazli hesabi kullanir.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_elec_marginal_kWh_per_m2
+  ad: Proses marjinal elektrigi (uretimle artan kisim)
+  birim: kWh/m2
+  deger: 2.5
+  alt: 1
+  ust: 4
+  kaynak: 'Tahmin: RF 0.03-0.1, PVD puskurtme 0.3-1, islak isitma/yenileme 0.5-2, kurleme 0.2-0.5 kWh/m2'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Cift sayimi gidermek icin taban yukten ayrildi.
+  aciklama: 'Capraz kontrol: Louwen 2016 tam yuk endustriyel arac toplami (0.066+0.160+0.1506)/0.0239 = 15.8 kWh/m2
+    (taban + tesis dahil). Bizim L=1 m hat tam kullanimda (120 kW/22.8 m2/h + 2.5) ~8 kWh/m2.'
+  dogrulama_deneyi: Arac bazli enerji olcumu (bos vs yuklu).
+- id: hjt_base_load_kW
+  ad: Hucre hatti calisirken uretimden bagimsiz taban yuk
+  birim: kW
+  deger: 120
+  alt: 60
+  ust: 250
+  kaynak: 'Tahmin: PECVD 4 oda + kilitler kuru/roots pompalar ~40 kW, isiticilar 15 kW, RF bekleme; PVD turbo+on
+    pompa+isitici ~20 kW; islak banyo isitma/egzoz 25 kW; kurleme firini bekleme 10 kW; mini-ortam FFU 5 kW; chiller'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Ilk ciktidaki 60 kW dusuktu (fizik denetcisinin 77 kW marjinal gozlemi). UPW, abatement, HVAC
+    altyapi ajaninda.
+  aciklama: 45 MW/yil'da 0.28 c/W; 10 MW/yil'da 1.26 c/W (0.12 $/kWh ile).
+  dogrulama_deneyi: Prototip arac guc olcumu.
+- id: hjt_idle_base_load_kW
+  ad: Hat bekleme (vakum ve sicaklik korunur) yuku
+  birim: kW
+  deger: 40
+  alt: 15
+  ust: 80
+  kaynak: Tahmin (pompalar dusuk devir, isiticilar bekleme)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kampanya modu icin.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip olcumu.
+- id: hjt_carrier_side_mm
+  ad: PECVD/PVD tasiyici kenar boyu L
+  birim: mm
+  deger: 1000
+  alt: 500
+  ust: 1720
+  kaynak: Tasarim; endustri tepsileri 10x10 M6 / 8x8 210 mm cep (~1.7 m) (TaiyangNews PECVD)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''10x10 pockets suitable for M6 wafers, 9x9 for 180 mm wafers or 8x8 for 210 mm wafers'''
+  kaynak_tarihi: '2022'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kucultmek kapasiteyi L^2 ile, capex'i cok daha az dusurur (sabit pay).
+  aciklama: Model optimizasyon degiskeni.
+  dogrulama_deneyi: '-'
+- id: hjt_carrier_gap_mm
+  ad: Cepler arasi agi + tutma cikintisi g
+  birim: mm
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: 'Tahmin: kenar basina 1-2 mm tutma/maske cikintisi + cep duvari'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Cikinti genisligi TCO dislamasini da belirler.
+  aciklama: 'Paketleme ust siniri (a/(a+g))^2: a=50 -> 0.857, a=210 -> 0.962.'
+  dogrulama_deneyi: Tasiyici prototipi.
+- id: hjt_carrier_margin_mm
+  ad: Tasiyici cevre payi
+  birim: mm
+  deger: 10
+  alt: 5
+  ust: 30
+  kaynak: 'Tahmin: tasima rayi/sikistirma cercevesi'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_pecvd_n_process_ch
+  ad: PECVD proses odasi sayisi (i-on, n, i-arka, p)
+  birim: adet
+  deger: 4
+  alt: 2
+  ust: 4
+  kaynak: Tasarim secimi; katki capraz kirlenmesine karsi ayri odalar
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 2 oda (i+katkili ayni odada, arada purge) takti ~2 kat uzatir, capex'i dusurur.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 9.
+- id: hjt_pecvd_takt_s
+  ad: 'PECVD takt suresi: tam iki yuzlu 4 katmanli yiginin tasiyici cikis araligi'
+  birim: s
+  deger: 120
+  alt: 60
+  ust: 300
+  kaynak: 'Tahmin: en yavas oda = nc-Si katkili 10-20 nm @0.1-0.2 nm/s (50-200 s) + transfer/pompa/gaz stabilizasyonu
+    30-60 s'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Endustri ~65 s/tepsi (TaiyangNews: ''S.C New Energy ... 5,500 wafers of M6 size per hour'',
+    10x10 tepsi -> 3600x100/5500; kendi turetmemiz)'
+  kaynak_tarihi: '2022'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: a-Si katkili katmanlarla 60-90 s mumkun.
+  aciklama: 'TANIM EKLENDI (kaynak denetcisi): hjt_pecvd_n_process_ch=4 odali seri arac icin.'
+  dogrulama_deneyi: Deney 9.
+- id: hjt_pvd_takt_s
+  ad: PVD (TCO, iki yuz) tasiyici takt suresi
+  birim: s
+  deger: 90
+  alt: 45
+  ust: 200
+  kaynak: Tahmin; endustri PVD 7,200-12,800 wafer/h (TaiyangNews TCO)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''XEA|nova L12: 12,000 wafers/hour (M6)'''
+  kaynak_tarihi: '2022'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 9.
+- id: hjt_wet_bath_W_mm
+  ad: Islak tezgah banyo ic genisligi (kaset kesiti)
+  birim: mm
+  deger: 500
+  alt: 300
+  ust: 700
+  kaynak: Tasarim/tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Cok seritli ozel kaset ile kucuk wafer kapasitesi alan-benzeri olur.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 15.
+- id: hjt_wet_bath_H_mm
+  ad: Islak tezgah kullanilabilir derinlik (wafer sirasi)
+  birim: mm
+  deger: 250
+  alt: 220
+  ust: 400
+  kaynak: Tasarim/tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: a=210 icin >= 220 mm olmali.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_wet_slots
+  ad: Kaset yuva sayisi (derinlik yonunde)
+  birim: adet
+  deger: 100
+  alt: 50
+  ust: 100
+  kaynak: Tahmin (standart kaset yuva sayisi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_wet_lane_gap_mm
+  ad: Kasette seritler arasi bosluk
+  birim: mm
+  deger: 10
+  alt: 5
+  ust: 20
+  kaynak: Tahmin (sivi akisi, kabarcik tahliyesi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 15 (dokulama homojenligi).
+- id: hjt_wet_takt_s
+  ad: Islak tezgah parti takt suresi
+  birim: s
+  deger: 600
+  alt: 300
+  ust: 1200
+  kaynak: 'Tahmin: KOH+katki dokulama ~15 dk, 2 paralel dokulama tanki'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Sabit hjt_wet_m2_per_h (15 m2/h) kaldirildi; kapasite a'ya bagli formulle hesaplanir.
+  aciklama: 'a=105: 8 serit x 100 = 800 wafer = 8.8 m2/parti -> 45 m2/h.'
+  dogrulama_deneyi: Prototip tezgah.
+- id: hjt_print_pallet_side_mm
+  ad: Serigrafi paleti kenar boyu
+  birim: mm
+  deger: 330
+  alt: 160
+  ust: 400
+  kaynak: Tasarim/tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '230 mm''den 330''a cikarildi: 156-210 mm hucrede baskinin darbogaz olmamasi icin.'
+  aciklama: '-'
+  dogrulama_deneyi: Prototip yazici.
+- id: hjt_print_cycle_s
+  ad: Palet basina baski cevrimi (bir yuz)
+  birim: s
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: Tahmin (baski hizi 200-250 mm/s, TaiyangNews 2023 + yukleme)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''printing speed of 200 to 250 mm/s'''
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: On ve arka ayri yazicida.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: hjt_cure_temp_C
+  ad: Pasta kurleme sicakligi
+  birim: C
+  deger: 200
+  alt: 180
+  ust: 250
+  kaynak: PV-Manufacturing.org SHJ
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''annealed at 200-250 C for 30-60 min''; ''All manufacturing processes are at low temperature
+    (<300 C)'''
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Modern pastalarda sure daha kisa (tahmin 5-30 dk).
+  aciklama: '-'
+  dogrulama_deneyi: Pasta veri sayfasi.
+- id: hjt_iv_test_s_per_cell
+  ad: IV test islem suresi (bir flas)
+  birim: s
+  deger: 0.75
+  alt: 0.3
+  ust: 3
+  kaynak: TaiyangNews HJT 2023 (WAVELABS)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Throughput up to 5.000 units per hour''; ''Within a single flash, the cell slices are contacted
+    and measured separately'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: Kendi LED flasorumuzde daha yavas olabilir; tek flasta coklu hucre mumkun.
+  aciklama: 3600/5000 = 0.72 s.
+  dogrulama_deneyi: Prototip test istasyonu.
+- id: hjt_cells_per_op
+  ad: Tek islemde (tutucu/flas) islenen hucre sayisi
+  birim: adet
+  deger: 1
+  alt: 1
+  ust: 16
+  kaynak: Tasarim secimi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: 16'li tutucu kucuk hucrede adet capex'ini ~7 kat dusurur.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: hjt_handling_ops_per_wafer
+  ad: Wafer basina tasima (al-birak) islemi
+  birim: adet
+  deger: 6
+  alt: 4
+  ust: 10
+  kaynak: 'Tahmin: kaset yukle/bosalt, tasiyici yukle/bosalt, yazici, IV/siniflama'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: Ortak tasiyici (PECVD+PVD) ile azalir.
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etudu.
+- id: hjt_handling_s_per_pick
+  ad: Robot al-birak cevrim suresi
+  birim: s
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Tahmin (SCARA/delta robot)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: hjt_adet_var_usd_per_op
+  ad: Islem basina capex disi degisken maliyet (enerji, vakum, pin/tutucu asinmasi)
+  birim: USD/islem
+  deger: 0.0001
+  alt: 3.0e-05
+  ust: 0.0005
+  kaynak: 'Tahmin: robot 0.5 kW x 1 s ~0.00002 $; IV pini ~5 $/pin, ~1e6 temas, ~20 pin -> 0.0001 $'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: 'Eski hjt_adet_cost_usd_per_cell (0.007 $, capex dahil) kaldirildi: capex istasyon sayisiyla
+    ayrica sayiliyor.'
+  aciklama: '-'
+  dogrulama_deneyi: Sarf kayitlari.
+- id: hjt_line_uptime
+  ad: Hat kullanilabilirligi
+  birim: '-'
+  deger: 0.85
+  alt: 0.7
+  ust: 0.92
+  kaynak: 'TaiyangNews HJT 2023: endustri hedefi >%90; bizim icin tahmin'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''equipment uptime above 90%'''
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Yalniz kapasite formullerinde uygulanir; yillik saat 8760 (cift sayim giderildi).
+  aciklama: '-'
+  dogrulama_deneyi: MES kaydi.
+- id: hjt_line_yield_mature
+  ad: Olgun HJT hat verimi (kirilma haric)
+  birim: '-'
+  deger: 0.985
+  alt: 0.97
+  ust: 0.995
+  kaynak: Risen (TradingView/EQS 2026-03-11); TaiyangNews 2023 hedef >=98.5%
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''a stabilized yield rate consistently above 99.5% with a fragment rate below 0.25%'''
+  kaynak_tarihi: 2026-03
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: GW hatti; bizde olgunlukta 98-99 gercekci.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → hjt_line_yield_start: Olgun uc.'
+  dogrulama_deneyi: '-'
+- id: hjt_line_yield_start
+  ad: Baslangic hat verimi
+  birim: '-'
+  deger: 0.9
+  alt: 0.75
+  ust: 0.96
+  kaynak: Hucre tahmini; Ballif 2019 (ilk hatlarda tasima/bekleme sorunlari); olgun 0.985 (Risen)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''many first lines having suffered from issues linked to wafer handling, queue time and sometimes
+    low process control'''
+  kaynak_tarihi: '2019'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Varsayilan ilk nesil. hjt_yield_total = hat verimi x (1 -
+    wf_P_break_cell): ilk nesil ~0.883-0.895, olgun ~0.98; modul verimi (mod_module_yield 0.98) ve CTM ayri carpan.
+    Altyapinin sabit Y_line 0.95''i bu carpimla degistirilir.'
+  dogrulama_deneyi: '-'
+- id: hjt_breakage_ref
+  ad: Hucre hatti kirilma orani (referans 210-yarim, 110 um)
+  birim: '-'
+  deger: 0.0025
+  alt: 0.001
+  ust: 0.01
+  kaynak: Risen 2026 (fragment <0.25%); Maxwell PECVD spec 0.25%
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''fragment rate below 0.25%'''
+  kaynak_tarihi: 2026 / 2022
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Olgun otomasyon; bizde baslangicta 2-4 kat (baslangic senaryosunda 3 kat alindi).
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Olgun kaynak; referans 210-yarim,
+    kalinlik terimi ve taban yok, baslangicta x3 (0.0075).'
+  dogrulama_deneyi: Deney 8b.
+- id: hjt_breakage_size_exp
+  ad: Kirilmanin wafer boyutu ussu (H3)
+  birim: '-'
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Tahmin, mekanizma dayanakli
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Wafer ajaniyla ortak.
+  aciklama: 'Dayanak: kenar kusuru kaynakli kirilma kenar uzunlugu ~a ile (us 1); tasima/vakum egilme gerilmesi
+    ~a^2/t^2 ile (us 2); termal soku ~kucuk bagimlilik (us <1). p_break = ref x (a/210)^us. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → wf_break_exp_size: (a/210)^1 formu, taban payi yok.'
+  dogrulama_deneyi: Deney 8b.
+- id: hjt_capex_industry_usd_per_Wyr
+  ad: Endustriyel HJT hucre hatti ekipman capex (yillik kapasite basina) - referans
+  birim: USD/(W/yil)
+  deger: 0.055
+  alt: 0.037
+  ust: 0.065
+  kaynak: TaiyangNews HJT 2023 (350-400 M RMB/GW, hedef 250)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''350 to 400 million RMB/GW as of the end of 2022 ... The target is to attain an equipment CapEx
+    of 250 million/GW'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: zaman
+  olcek: genel
+  senaryoya_uygunluk: 'GW/Cin; kucuk unite icin UYGUN DEGIL. Avrupa (Ballif 2019): 0.10-0.18 $/(W/yil). Kendi L=1
+    m setimiz tam kullanimda ~0.062.'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: hjt_capex_pecvd_base_usd
+  ad: PECVD sabit capex (yukleme/bosaltma kilitleri, tasima, kontrol, gaz paneli arayuzu)
+  birim: USD
+  deger: 300000
+  alt: 150000
+  ust: 600000
+  kaynak: Tahmin (parca BOM mantigi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 'Tasiyici boyutundan bagimsiz sabit pay (fizik denetcisi: saf us kurali kucuk L''de capex''i
+    olmadigindan dusuk gosterir).'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 9 BOM.
+- id: hjt_capex_pecvd_ch_fix_usd
+  ad: PECVD oda basina sabit capex (RF jenerator+esleme, pompa, MFC seti, vana, isitici)
+  birim: USD/oda
+  deger: 120000
+  alt: 70000
+  ust: 250000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 9 BOM.
+- id: hjt_capex_pecvd_ch_per_m2_usd
+  ad: PECVD oda basina tasiyici alani ile olceklenen capex (govde, elektrot/dus basligi, isitici boyu)
+  birim: USD/(oda m2)
+  deger: 100000
+  alt: 50000
+  ust: 250000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 'L=1 m, 4 oda: PECVD toplam 1.18 M$; L=0.5 m: 0.88 M$.'
+  aciklama: '-'
+  dogrulama_deneyi: Iki boyutta BOM.
+- id: hjt_capex_pvd_base_usd
+  ad: PVD sabit capex (kilitler, turbo pompalar, tasima, kontrol)
+  birim: USD
+  deger: 350000
+  alt: 200000
+  ust: 700000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Deney 9 BOM.
+- id: hjt_capex_pvd_per_m_usd
+  ad: PVD katod genisligi ile olceklenen capex (4 katod + DC guc kaynaklari, oda boyu)
+  birim: USD/m
+  deger: 300000
+  alt: 150000
+  ust: 600000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Dinamik puskurtmede katod boyu tasiyici genisligi L ile dogrusal.
+  aciklama: 'L=1 m: PVD 0.65 M$.'
+  dogrulama_deneyi: BOM.
+- id: hjt_capex_wet_usd
+  ad: Islak tezgah capex (8-12 tank, isitici, ozon, durulama, kurutma, egzoz baglantisi)
+  birim: USD
+  deger: 350000
+  alt: 200000
+  ust: 700000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM.
+- id: hjt_capex_print_cure_usd
+  ad: Baski + kurleme + isik iyilestirme capex (2 yazici, bant firin, LED isik bandi)
+  birim: USD
+  deger: 350000
+  alt: 200000
+  ust: 600000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM.
+- id: hjt_capex_iv_station_usd
+  ad: IV test/siniflama istasyonu capex (LED simulator + coklu kontak)
+  birim: USD/istasyon
+  deger: 120000
+  alt: 60000
+  ust: 250000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: Istasyon sayisi wafer/saat ile olceklenir (adet).
+  aciklama: Ilk ciktida hat capex'i (zaman) ve adet maliyetinde iki kez sayiliyordu; duzeltildi.
+  dogrulama_deneyi: BOM.
+- id: hjt_capex_handling_cell_usd
+  ad: Tasima robot hucresi capex (robot + tutucu + kontrol)
+  birim: USD/hucre
+  deger: 80000
+  alt: 40000
+  ust: 150000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM.
+- id: hjt_capex_metrology_usd
+  ad: Metroloji capex (QSSPC, PL goruntuleme, elipsometre, 4 nokta sonda, mikroskop)
+  birim: USD
+  deger: 350000
+  alt: 200000
+  ust: 700000
+  kaynak: Tahmin (QSSPC ~50-100 k$, PL 100-300 k$, elipsometre 50-150 k$)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Hat sahada paylasilirsa saha duzeyine tasinir. H6 icin gerekli.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: hjt_capex_selfbuilt_line_usd
+  ad: Kendi yapim HJT hucre hatti toplam capex (L=1 m, 4 oda, a=105, 16'li tutucu; on-tavlama haric)
+  birim: USD
+  deger: 3080000
+  alt: 2000000
+  ust: 6500000
+  kaynak: f_hjt_capex bilesenlerinin toplami
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: PECVD 1.18 + PVD 0.65 + islak 0.35 + baski/kurleme 0.35 + metroloji 0.35 + adet 0.20 = 3.08 M$
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 'Kapasite ~40-50 MW/yil -> 0.062 $/(W/yil): Cin (0.052-0.060) ile Avrupa (0.10-0.18) arasi.
+    Alt sinir 0.8 M$''dan 2.0 M$''a yukseltildi (kaynak denetcisi).'
+  aciklama: Muhendislik NRE ayrica hjt_tool_nre_usd (urun_sabit).
+  dogrulama_deneyi: Deney 9.
+- id: hjt_pecvd_capex_share
+  ad: Endustri hucre hatti capex'inde 'core layer deposition' payi
+  birim: '-'
+  deger: 0.4
+  alt: 0.3
+  ust: 0.5
+  kaynak: TaiyangNews HJT 2023
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''as much as half of the CapEx required for the entire HJT cell processing line can be attributed
+    to the core layer deposition tools'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kaynaktaki 0.5 bir UST sinirdir; merkez 0.4'e indirildi. 'Core layer deposition' PVD'yi de
+    kapsayabilir (belirsiz).
+  aciklama: Bizim setimizde PECVD+PVD = 1.83/3.08 = 0.59.
+  dogrulama_deneyi: '-'
+- id: hjt_maint_frac_capex_per_yr
+  ad: Bakim + yedek parca (kuru pompa revizyonu, RF, conta, tank) - capex orani/yil
+  birim: 1/yil
+  deger: 0.05
+  alt: 0.03
+  ust: 0.08
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram; tahmin;
+    kuru pompa revizyonu, RF, conta, tank dahil. Kendi tasarim ilk nesil PECVD/PVD icin kanonik 0.04 + ilk nesil
+    eki (seviyelenmis ~0.016) = ~0.056 ile ayni mertebede.'
+  dogrulama_deneyi: Bakim kayitlari.
+  esdeger: eco_maint_frac_capex_yr
+  esdeger_carpan: 1.0
+- id: hjt_carrier_cost_usd
+  ad: PECVD/PVD tasiyici birim maliyeti (1 m2)
+  birim: USD
+  deger: 3000
+  alt: 1000
+  ust: 8000
+  kaynak: Tahmin (grafit/CFC/Al levha + cep isleme)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: Firmanin kalip/isleme altyapisi avantaj.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 17.
+- id: hjt_carrier_life_cycles
+  ad: Tasiyici omru (temizlik dahil cevrim)
+  birim: cevrim
+  deger: 5000
+  alt: 1000
+  ust: 20000
+  kaynak: Tahmin (bilinmiyor)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: unite
+  senaryoya_uygunluk: a-Si ve ITO birikimi periyodik soyma gerektirir; cep kenari asinmasi TCO dislamasini bozar.
+  aciklama: '3000/(5000 x 0.893) = 0.67 $/m2 = 0.27 c/W: belirsiz ama goz ardi edilemez.'
+  dogrulama_deneyi: Deney 17.
+- id: hjt_tool_nre_usd
+  ad: Kendi yapim hucre araclarinin tasarim/devreye alma NRE'si (muhendislik + prototip iterasyonu)
+  birim: USD
+  deger: 2500000
+  alt: 1200000
+  ust: 5000000
+  kaynak: 'Tahmin: 15-40 muhendis-yili x 40-80 k$ + 0.5-1 M$ prototip donanimi'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Arac tasarimi basina bir kez; tum kopyalanan hatlarin toplam uretimine bolunur. Ilk ciktida
+    hicbir sinifa atanmamisti.
+  aciklama: '1 hat x 10 MW x 7 yil: 3.6 c/W; 5 hat x 45 MW x 7 yil: 0.16 c/W.'
+  dogrulama_deneyi: Proje planlama.
+- id: hjt_tooling_per_size_usd
+  ad: Hucre boyutuna (a) ozgu takim seti (tasiyici cepleri, palet/elekler, IV tutuculari, kasetler, robot tutuculari)
+  birim: USD/boyut
+  deger: 150000
+  alt: 60000
+  ust: 400000
+  kaynak: Tahmin (10-20 tasiyici x 3-8 k$ + elek/palet 10-20 k$ + IV 10-30 k$ + kaset 10-20 k$)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: 'H2''nin hucre karsiligi: her a varyanti bu maliyeti tekrarlar.'
+  aciklama: '-'
+  dogrulama_deneyi: Takim teklifi.
+- id: hjt_requal_cost_usd
+  ad: Yeni hucre boyutu icin proses yeniden kalifikasyonu (kenar, paketleme, TCO dislama, IV)
+  birim: USD/boyut
+  deger: 80000
+  alt: 30000
+  ust: 200000
+  kaynak: Tahmin (2-3 ay muhendislik + test waferlari)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 'Takim + kalifikasyon 230 k$/boyut: 5 MW/yil x 5 yil''da 0.9 c/W.'
+  dogrulama_deneyi: '-'
+- id: hjt_fte_per_shift
+  ad: Vardiya basina operator
+  birim: FTE
+  deger: 3
+  alt: 2
+  ust: 5
+  kaynak: Tahmin (islak+PECVD/PVD+baski/IV)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Hat saha duzeyinde paylasilirsa ayni ekip.
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etudu.
+- id: hjt_shift_crews
+  ad: 7/24 icin ekip sayisi
+  birim: '-'
+  deger: 4.2
+  alt: 3.7
+  ust: 4.6
+  kaynak: 'Tahmin: 168 h / 45 h haftalik + izin payi'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kampanya/1-2 vardiya modunda orantili azalir.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fte_per_24x7_position üzerinden okunur. Fark: Ayni kavram (7/24
+    icin ekip sayisi), ayni deger; bagimsiz aralik 3.7-4.6 kaldirilmali, formule baglanmali.'
+  dogrulama_deneyi: '-'
+  esdeger: eco_fte_per_24x7_position
+  esdeger_carpan: 1.0
+- id: hjt_fte_support
+  ad: Gunduz destek kadrosu (proses muhendisi, bakim, kalite)
+  birim: FTE
+  deger: 4
+  alt: 2
+  ust: 6
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Toplam 3 x 4.2 + 4 = 16.6 FTE.
+  dogrulama_deneyi: '-'
+- id: hjt_labor_cost_usd_per_fte_yr
+  ad: Harmanlanmis yuklu iscilik maliyeti (Gebze, operator+muhendis)
+  birim: USD/(FTE yil)
+  deger: 20000
+  alt: 13000
+  ust: 35000
+  kaynak: TradingEconomics Turkiye asgari ucret ve USD/TRY (bu gorevde acildi) x carpanlar (tahmin)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Minimum Wages in Turkey increased to 33030 TRY/Month in 2026''; ''USD/TRY ... 48.9163 on September
+    25, 2026'''
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: genel
+  senaryoya_uygunluk: Ortak maliyet parametresiyle birlestirilmeli.
+  aciklama: 'Brut asgari 675 $/ay; isveren payi ~1.2 (hafizadan) -> ~9.7 k$/yil. Operator 1.3-1.8x, muhendis 3-5x
+    (tahmin). 16.6 FTE -> 332 k$/yil: 45 MW''de 0.74 c/W, 10 MW''de 3.3 c/W.'
+  dogrulama_deneyi: IK ucret etudu.
+- id: hjt_campaign_startup_h
+  ad: Kampanya baslangici isinma/pompalama/kosullama suresi
+  birim: h
+  deger: 8
+  alt: 4
+  ust: 24
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Dusuk kullanimda (u<0.5) kampanya calismasi icin.
+  aciklama: '-'
+  dogrulama_deneyi: Deney 16.
+- id: hjt_seasoning_m2_per_start
+  ad: Baslangicta PECVD oda kosullama icin kukla tasiyici alani
+  birim: m2/baslangic
+  deger: 3
+  alt: 1
+  ust: 10
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Kukla waferlar birkac kez kullanilabilir; gaz/kimya tuketir.
+  dogrulama_deneyi: Deney 16.
+- id: cell_fx_usd_cny
+  ad: Kur varsayimi USD/CNY
+  birim: CNY/USD
+  deger: 6.72
+  alt: 6.5
+  ust: 7.3
+  kaynak: TradingEconomics China currency
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''The USD/CNY exchange rate rose to 6.7204 on September 25, 2026'''
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: RMB kaynakli degerler icin.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer bat_fx_cny_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak
+    (TE 25.09.2026); id adi ''usd_cny'' ama birim CNY/USD.'
+  dogrulama_deneyi: '-'
+  esdeger: bat_fx_cny_per_usd
+  esdeger_carpan: 1.0
+- id: cell_fx_usd_try
+  ad: Kur varsayimi USD/TRY
+  birim: TRY/USD
+  deger: 48.92
+  alt: 45
+  ust: 60
+  kaynak: TradingEconomics Turkey currency (bu gorevde acildi)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''The USD/TRY exchange rate rose to 48.9163 on September 25, 2026'''
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: TRY iscilik ve yerel alimlar icin; ust sinir enflasyon/devalue riski.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram; TradingEconomics
+    25.09.2026; fark %0.16, onemsiz. Id adindaki ''usd_try'' piyasa gosterimi, birim ayni. Aralik 45-60.'
+  dogrulama_deneyi: '-'
+  esdeger: eco_fx_try_per_usd
+  esdeger_carpan: 1.0
+- id: hjt_voc_cell_V
+  ad: Hucre acik devre gerilimi (25 C)
+  birim: V
+  deger: 0.745
+  alt: 0.72
+  ust: 0.77
+  kaynak: 'Hucre: Wohler 2024 endustriyel M6 olcumu 739-740 mV; LONGi sampiyon 749-755 mV. Modul: Waaree Plexus
+    BiH-11-730 veri sayfasi 50.62 V / 66 seri pozisyon = 0.767 V'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''open-circuit voltages between Voc=(739 to 740) mV''; ''Voc: 749.2 mV / 755.0 mV''; Waaree
+    BiH-11-730: Voc 50.62 V (132 yarim G12, 11x6||11x6)'
+  kaynak_tarihi: 2024-2025
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Baslangic hattimizda 0.72-0.735 beklenir.
+  aciklama: Giglia'nin 743.1 mV degeri SIMULASYON oldugu icin olcum dayanagi olarak kullanilmiyor. | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Olculen buyuklugun sahibi hucre; iki alan ayni degeri (0.745) kullaniyor. Ust sinir (hucre
+    CSV'de 0.755) modul veri sayfasi turetmesini (0.767) kapsasin diye 0.77. Nominal deger tasarim tavaninda (mod_f_ns_max,
+    marjla) kullanilir; gerilim SINIR kontrolunde (std_f_ns_max, std_f_uoc_max; ELEME) kendi hucremizin olculen
+    P99'u, olcum yokken 0.77 kullanilir. Modulun kendi notu da 'gerilim siniri icin nominal degil, uretim dagiliminin
+    P99'u' diyor.
+  dogrulama_deneyi: Deney 3.
+- id: hjt_jsc_mA_cm2
+  ad: Hucre kisa devre akim yogunlugu
+  birim: mA/cm2
+  deger: 40
+  alt: 38
+  ust: 41.4
+  kaynak: 'Hucre: Wohler 2024 endustriyel M6 olcumu 38.02-38.05; LONGi sampiyon 41.4'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Jsc=(38.02 to 38.05) mA/cm2''; ''Jsc: 41.4 mA/cm2'''
+  kaynak_tarihi: 2024-2025
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Isc hucre alaniyla olceklenir.
+  aciklama: 'Giglia 38.12 simulasyon. | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida tek parametre iki
+    rol icin kullanilmisti; ikiye ayrildi. Nominal Jsc hucre sahipli ve yalniz performans/kayip hesaplarina girer
+    (verim ayrica eta_core''dan). Tutarlilik: 0.745 V x 40 mA/cm2 ile ilk nesil eta 0.22 FF ~0.74 (ilk nesilde dusuk
+    Voc/FF ile tutarli), olgun eta 0.257 FF ~0.86 ima eder. Guvenlik kontrolleri ayri kanonik mod_jsc_A_per_cm2''yi
+    kullanir. | [Uzlaştırma/zincir] mod_jsc_A_per_cm2 ile ilişkili ama ayrı kanonik: Nominal (ayri kanonik); sinir
+    kontrolunde kullanilmaz.'
+  dogrulama_deneyi: IV.
+- id: hjt_tc_pmax_pct_per_K
+  ad: Pmax sicaklik katsayisi
+  birim: '%/K'
+  deger: -0.26
+  alt: -0.3
+  ust: -0.24
+  kaynak: TaiyangNews HJT 2023 (bu gorevde PDF okundu)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''HJT, having a low temperature coefficient of -0.26%/C and the highest bifaciality'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Balkon ve tasinabilir urunlerde sicak calisma avantaji.
+  aciklama: '-'
+  dogrulama_deneyi: Sicaklik kontrollu IV.
+- id: hjt_tc_voc_pct_per_K
+  ad: Voc sicaklik katsayisi (SELV soguk Voc hesabi)
+  birim: '%/K'
+  deger: -0.244
+  alt: -0.28
+  ust: -0.2
+  kaynak: 'Hucre: PVEducation ''Effect of Temperature'' formulu; Modul: Waaree veri sayfasi beta_Voc -0.22 %/C ve
+    fizik tahmini -0.22..-0.24'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''dVoc/dT = -0.0043 + Voc1/300'' -> -1.817 mV/K = -0.244 %/K; Waaree: ''Temperature coefficient
+    of Voltage (Voc), ß (%/ºC) -0.22'''
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: K6 icin kritik; genel Si formulu, HJT'ye ozgu degil.
+  aciklama: 'Ilk ciktida hafizadan (dogrulanmadi) idi; simdi fizik formuluyle turetildi. | [Uzlaştırma/zincir] Kanonik
+    (tek sahip). IEC 60364-7-712 Ek B K_U formulu %/K kullanir (std_f_ku); tek birim %/K. Modulun -0.0024 1/K degeri
+    ayni buyuklugun yuvarlanmisi; -20 C''de N_s_max''i degistirmez (70) ama soguk uclarda 1 hucre fark eder (-37.2
+    C: kanonikle 67, -0.0024 ile 68). Beyan edilecek alfa kendi hucremizin olcumunden gelir; olcum ve beyan yokken
+    std_f_ku K_U = 1.2 kullanir (ku_yontemi = varsayilan_1.2), beyan sonrasi sinir kontrolunde alfa_sinir = olcumun
+    guvensiz ucu (olcum yokken -0.28).'
+  dogrulama_deneyi: -20...+60 C Voc olcumu.
+- id: hjt_voc_irr_margin_mV
+  ad: Soguk Voc icin isinim (>1000 W/m2, bulut kenari) ve cift yuzlu kazanc payi, hucre basina
+  birim: mV
+  deger: 6
+  alt: 3
+  ust: 10
+  kaynak: 'Hesap: n*Vt*ln(1.2) (-20 C, n=1) = 4 mV + arka yuz kazanci ~2 mV'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Pazar senaryosuna bagli (A/B).
+  aciklama: '-20 C: 0.8255 + 0.006 = 0.8315 V -> N_s <= 72; -25 C -> 71; -30 C -> 70. | [Uzlaştırma/zincir] İlişkili
+    (eşdeğer değil) → mod_voc_margin: Yalniz isinim + arka yuz; mutlak mV.'
+  dogrulama_deneyi: Iklim kabini + yuksek isinim.
+- id: hjt_bifaciality
+  ad: Cift yuzluluk orani
+  birim: '-'
+  deger: 0.85
+  alt: 0.8
+  ust: 0.95
+  kaynak: TaiyangNews HJT 2023
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''bifaciality of 85%'''
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'DUZELTILDI: K5 geregi kutu panel arkasinda degil; arka yuz serbest, balkon korkulugu ve tasinabilir
+    kullanimda cift yuzlu kazanc mumkun.'
+  aciklama: '-'
+  dogrulama_deneyi: Saha olcumu (modul ajani).
+- id: hjt_sputter_damage_dVoc_mV
+  ad: Kendi PVD'mizde ITO puskurtme iyon hasari kaynakli Voc kaybi (kurleme sonrasi kalan)
+  birim: mV
+  deger: 5
+  alt: 0
+  ust: 20
+  kaynak: 'Tahmin (hafizadan: puskurtme hasari a-Si:H pasivasyonunu bozar, tavlamayla kismen geri gelir)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Baslangic senaryosunda cell_eta_core_start_pct icinde; yalniz olgun senaryoda ve dusuk hasarli
+    katod yoksa ayrica uygulanir.
+  aciklama: Bagil verim kaybi ~ 1.1 x dVoc/Voc.
+  dogrulama_deneyi: Deney 13.

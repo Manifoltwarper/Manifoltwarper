@@ -1,0 +1,1512 @@
+alan: standart
+ozet: "Standartlar urunun elektrik mimarisini fiilen belirliyor. Bu revizyonda iki denetcinin bulgularinin cogunu\
+  \ kaynaktan kendim kontrol ettim ve uyguladim. Iki onemli hata duzeltildi: SBESS/2 kWh baglantisi ve hava tasimasi\
+  \ mantigi.\n\n(1) K6 dogru ama eksik. 60 V, IEC 60364-7-712:2017 madde 712.414.101'deki PV SELV/PELV siniridir.\
+  \ Sinir U_OC_MAX'a uygulanir; soguk hava dahildir. Hesap K_U = 1+(alfa/100)(T_min-25) ile yapilir; alfa beyan\
+  \ edilmemisse K_U = 1,2 alinir.\n- 60 V, dis ortamda dokunma siniri degildir. IEC 60364-4-41 madde 414.4.5'e gore\
+  \ kuru olmayan kosulda sinir 30 V DC'dir; IEC 62109-1 DVC-A islak konum siniri 35 V'tur.\n- SELV, 414.1.1 geregi\
+  \ diger devrelerden koruyucu ayirma ister. Sebeke veya AC devresi olmayan yalniz-DC urunde ise pil kendisi SELV\
+  \ kaynagi sayilir (414.3.3), dolayisiyla trafo gerekmez.\n- SELV'in kullaniciya asil kazanci konnektorlerde. 712.526.101'deki\
+  \ 'anahtar veya aletle ayrilan konnektor' sarti SELV kurulumda aranmaz, bu da kullanicinin kendi kurmasini kolaylastirir.\
+  \ Buna karsin 35 V ustundeki her kurulumda konnektor Class II ve cift hareketle ayrilan kilitli tipte olmalidir\
+  \ (712.526.1).\n- 60 V'u gecen dizilerde yalitim izleme (IMD) zorunludur. 60 V ve altinda standart metni belirsiz.\n\
+  \n(2) Class III icin sinirlar: IEC 61730-1:2016 madde 4.4.1 (resmi onizlemede goruldu) modul basina STC'de Voc\
+  \ <= 35 V, Isc <= 8 A ve <= 240 W diyor.\n- UL ozetine gore bu sinirlar seri/paralel kombinasyonlara da uygulanir.\
+  \ Pil gibi baska bir kaynakla paralel kullanimda geri besleme ve asiri gerilim korumasi sarttir.\n- Islak DVC-A\
+  \ veya Avusturya siniri (U_OC_MAX <= 35 V) da istenirse N_s <= 42 olur ve ulasilabilen guc 195-208 W'tir.\n- 8\
+  \ A siniri wafer boyutunu degil, hucre ALANINI sinirlar (<= ~202 cm2). 182-210 mm wafer, yarim veya ucte bir kesimle\
+  \ bu sinira uyar.\n\n(3) Almanya fisli PV sinirlari: invertor 800 VA; toplam modul gucu Schuko fisle 960 Wp, ozel\
+  \ fisle 2000 Wp.\n- DIN VDE V 0126-95:2025-12 depolamali cihazlari kapsamiyor.\n- VDE-AR-N 4105:2026-03, 800 VA'e\
+  \ kadar depolamali sistemin kullanici tarafindan kurulmasina izin veriyor.\n- EEG 2027'nin sizdirilmis taslagi\
+  \ basitlestirmeyi DC kuplaja bagliyor.\n\n(4) AB Pil Tuzugu 2023/1542: metni bu revizyonda AB Yayin Ofisi'nden\
+  \ actim.\n- Tasinabilir pil: muhurlu, <= 5 kg ve endustriyel kullanim icin tasarlanmamis. Madde 11 geregi 18.02.2027'den\
+  \ itibaren son kullanici tarafindan cikarilabilir ve degistirilebilir olmali.\n- 5 kg'dan agir pil endustriyel\
+  \ pildir. SBESS taniminda kWh esigi YOKTUR. Bu yuzden sebekeye ya da son kullaniciya enerji veren 5 kg ustu kutu\
+  \ SBESS sayilir ve Madde 12 + Ek V (11 guvenlik parametresi) uygulanir.\n- 2 kWh esigi yalnizca uc yukumlulugu\
+  \ tetikler: karbon ayak izi (Madde 7), performans belgesi (Madde 10) ve pil pasaportu (Madde 77, 18.02.2027'den\
+  \ itibaren).\n- Durusti inceleme yukumlulugu 2025/1561 ile 18.08.2027'ye ertelendi; 40 M EUR ciro esigi var.\n\
+  \n(5) Hava tasimasi (IATA 2026):\n- Tek basina gonderilen Na-iyon pil (UN 3551), Wh degerinden bagimsiz olarak\
+  \ yolcu ucaginda yasaktir ve SoC en fazla %30 olmalidir. Power bank ve power pack urunleri pil sayilir.\n- 100\
+  \ Wh ve 20 Wh esikleri yalnizca ekipmanla birlikte veya ekipman icinde gonderimde gecerlidir.\n- Ekipman icinde\
+  \ de olsa paket basina pil 5 kg'i asarsa yolcu ucagina yuklenemez.\n\n(6) Uretim tarafi mevzuati bu revizyonda\
+  \ eklendi:\n- Makineyi kendi kullanimi icin yapan firma da 'uretici' sayilir (2006/42/AT Madde 2(i)).\n- Makine\
+  \ Tuzugu 2023/1230, 20.01.2027'den itibaren zorunlu.\n- Silan/H2 (ATEX), HF ve RF induksiyon (CISPR 11 Grup 2)\
+  \ kalemleri eklendi. Maliyetler tahmin.\n\n(7) RoHS: PV panel istisnasi yalnizca profesyonellerce kurulan sabit\
+  \ sistemler icindir. Fisli ve tasinabilir panellerde homojen malzemede Pb <= %0,1 olmali, yani baglanti kursunsuz\
+  \ yapilmali.\n\n(8) Maliyet:\n- Standartlarin zorunlu kildigi unite basi testlerin iscilik payi 0,02-0,22 c/W.\
+  \ Kalite testleri (EL, pil hat sonu, fonksiyon) eklenirse 50-100 W'ta 1,3-2,6 c/W'a cikiyor; bu testler uretim\
+  \ alanina devredildi.\n- Tip testi toplami, parametre araliklarindan turetildi (alt/merkez/ust, tamami tahmin):\n\
+  \  - A-DE, bilesenler satin alinirsa: 75/225/596 bin USD\n  - A-DE, kendi konnektor ve baglanti kutusuyla: 91/268/706\
+  \ bin USD\n  - Genisletilmis program (3 aile, 3 ulke, radyo): 113/363/966 bin USD\n  - B, yalniz-DC ve <= 5 kg\
+  \ pil: 55/165/426 bin USD\n- W basina pay unite ciktisina baglidir. K9'daki 150 bin hucre/yil, 1 kWh kutu ve 10\
+  \ Wh hucreyle unite yilda 1500 kutu cikarir. Bu durumda merkez deger tek unitede ~4,5 c/W, 4 unitede ~1,1 c/W'tir;\
+  \ 50 Wh hucreyle tek unitede ~0,9 c/W'a iner.\n\nEn buyuk belirsizlikler:\n- Turkiye'de fisli PV cercevesi ve\
+  \ urun uygunluk yolu (bilmiyoruz).\n- Na-iyon + PV + invertor entegre fisli urune hangi urun standardinin uygulanacagi.\n\
+  - IEC 60364-7-712:2025'teki sinirlar.\n- Laboratuvar fiyatlari.\n\nKur varsayimi: 1 EUR = 1,15 USD (tahmin)."
+parametreler:
+- id: std_selv_pv_uocmax_limit_v
+  ad: PV DC tarafi SELV/PELV icin azami acik devre gerilimi (U_OC_MAX, soguk hava dahil)
+  birim: V DC
+  deger: 60
+  alt: 60
+  ust: 60
+  kaynak: IEC 60364-7-712:2017 madde 712.414.101
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '''712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall
+    not exceed 60 V DC.'''
+  kaynak_tarihi: IEC 60364-7-712 Ed.2.0 2017-04; revizyonda yeniden okundu 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kurulum standardi; A ve B icin gecerli. Kategorik rejim degeridir, surekli belirsizlik araligi
+    DEGILDIR (Monte Carlo'da orneklenmemeli).
+  aciklama: 'Revizyon: alt deger 35 -> 60 yapildi; Avusturya 35 V ayri pazar bayragi (std_austria_selv_pv_v). Ed.3.0
+    2025-10 yayimlandi; onizlemede 712.414 basligi var, 60 V degerinin korunup korunmadigi dogrulanmadi. | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Sinir soguk U_OC_MAX''a uygulanir (K6). Deger okunan baskinin (2017) metninden; guncel
+    baskida korundugu ayrica dogrulanacak (Class III ile ayni kural). SELV icin kutunun PV-sebeke arasi guvenli
+    ayirmasi sart.'
+  dogrulama_deneyi: IEC 60364-7-712:2025'i satin al (~400 CHF); 712.414 ve yeni DC bara/pil maddelerini oku.
+- id: std_austria_selv_pv_v
+  ad: 'Avusturya ulusal sapmasi: PV DC SELV siniri (pazar bayragi)'
+  birim: V DC
+  deger: 35
+  alt: 35
+  ust: 35
+  kaynak: IEC 60364-7-712:2017 Ek F, AT 712.414.101
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: AT 712.414.101 In Austria ... only a limit of 35 V is acceptable.
+  kaynak_tarihi: 2017-04; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Avusturya pazari hedeflenirse V_lim=35 secilmeli; 60 V mimarisi orada SELV sayilmaz.
+  aciklama: 'Kategorik pazar degeri. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_dvca_dc_wet_v: AT PV SELV
+    siniri; ayni sayi, farkli dayanak.'
+  dogrulama_deneyi: OVE E 8101 guncel metninin kontrolu (AT pazari icin).
+- id: std_selv_dry_no_basic_protection_dc_v
+  ad: 'SELV/PELV: normal KURU kosulda temel korumanin gerekmedigi DC sinir'
+  birim: V DC
+  deger: 60
+  alt: 60
+  ust: 60
+  kaynak: IEC 60364-4-41:2005 madde 414.4.5
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: Basic protection is generally unnecessary in normal dry conditions for SELV circuits where the
+    nominal voltage does not exceed 25 V a.c. or 60 V d.c.
+  kaynak_tarihi: Ed.5.0 2005-12; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Balkon/dis ortam kuru kosul sayilmaz; yalniz ic mekanda kullanilan B kutusu icin.
+  aciklama: K6'daki 60 V ile ayni sayi, ama yalniz kuru kosul icin.
+  dogrulama_deneyi: Ed.5.1 (2017) konsolide metinde degisiklik kontrolu.
+- id: std_selv_wet_no_basic_protection_dc_v
+  ad: 'SELV/PELV: kuru olmayan (diger) kosullarda temel korumasiz DC sinir'
+  birim: V DC
+  deger: 30
+  alt: 30
+  ust: 30
+  kaynak: IEC 60364-4-41:2005 madde 414.4.5
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: In all other cases, basic protection is not required if the nominal voltage of the SELV or PELV
+    system does not exceed 12 V a.c. or 30 V d.c.
+  kaynak_tarihi: 2005-12; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Dis ortamdaki panel/kablo/konnektor icin; 30 V ustunde canli parca yalitimli/kapali olmali.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: std_elv_band1_dc_max_v
+  ad: ELV Band I ust siniri (SELV/PELV mutlak ust sinir)
+  birim: V DC
+  deger: 120
+  alt: 120
+  ust: 120
+  kaynak: IEC 60364-4-41:2005 madde 414.1.1
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: limitation of voltage in the SELV or PELV system to the upper limit of voltage Band I, 50 V a.c.
+    or 120 V d.c.
+  kaynak_tarihi: 2005-12; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: PV icin 712 bunu 60 V'a indirir. Pil barasi icin 120 V yalniz PV'den galvanik ayrilmis (pv_batt_isolated)
+    ise kullanilabilir.
+  aciklama: '414.1.1 ayrica ''protective separation ... from all circuits other than SELV and PELV'' sarti koyar.
+    414.3.3: pil ve yuksek gerilim devresinden bagimsiz kaynaklar SELV kaynagi olabilir.'
+  dogrulama_deneyi: '-'
+- id: std_dvca_dc_wet_v
+  ad: IEC 62109-1 DVC-A siniri, islak konum
+  birim: V DC
+  deger: 35
+  alt: 35
+  ust: 35
+  kaynak: DEKRA test raporu 6067599.50A (TRF IEC62109_1B); IEC TS 62257-9-8:2020 onizlemesi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''DVC A: 60Vdc (35Vdc for wet location)'''
+  kaynak_tarihi: Rapor 2020-01-22; revizyonda yeniden indirildi 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Dis ortam kutusu (K5) islak konumdur; PV ve pil portlari ancak U <= 35 V ise probe ile dokunulabilir
+    olabilir.
+  aciklama: IEC TS 62257-9-8:2020 onizlemesi de 35 V'un 'DVC-A for wet locations in Table 6 of IEC 62109-1:2010'
+    oldugunu teyit ediyor. IEC 62109-1 Ed.2 hazirlaniyor (dogrulanmadi). | [Uzlaştırma/zincir] Kanonik (tek sahip).
+    dvca35 rejiminde soguk U_OC_MAX'a uygulanir (varsayilan N_s 36). 414.4.5'in islak temel korumasiz 30 V'u ayri
+    kategori (elv30); Class III 35 V STC'dir ve ayri kanonik.
+  dogrulama_deneyi: IEC 62109-1 Ed.2 yayimlaninca Tablo 6 kontrolu.
+- id: std_dvca_dc_dry_v
+  ad: IEC 62109-1 DVC-A siniri, kuru konum
+  birim: V DC
+  deger: 60
+  alt: 60
+  ust: 60
+  kaynak: DEKRA TRF IEC62109_1B
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'DVC A: 60Vdc (35Vdc for wet location)'
+  kaynak_tarihi: 2020-01-22; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Yalniz ic mekan (B ev ici).
+  aciklama: 'DVC-B sinirlarini dogrulayamadim. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_selv_pv_uocmax_limit_v:
+    Urun DVC-A kuru siniri; ayri kontrol.'
+  dogrulama_deneyi: Standart Tablo 6.
+- id: std_class3_voc_stc_max_v
+  ad: 'IEC 61730-1:2016 Class III modul: azami Voc (STC)'
+  birim: V DC
+  deger: 35
+  alt: 35
+  ust: 35
+  kaynak: IEC 61730-1:2016 madde 4.4.1 (SIS resmi onizlemesi)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '''Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit
+    voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard
+    test conditions.'''
+  kaynak_tarihi: Standart 2016-08; onizleme 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: B senaryosunda tek dizili kucuk urunde mumkun; A (cok panel, 300-500 W) icin mumkun degil.
+  aciklama: 'Standart metni (4.4.1) modul basina sinir veriyor; ''seri/paralel kombinasyonlara uygulanir'' ifadesi
+    UL ozetinden geliyor (4.4.3 onizlemede yok). Eski 2004 baskisi Application Class C: ''<50 V DC and 240 W''.
+    2023 baskisinda Class III icin DTI sarti kaldirildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). STC degeridir
+    (soguk degil). Guven 60 V SELV ile ayni kuralla yuksek (okunan baskinin metni); 2023 baskisinda (madde 5.4)
+    korundugu ayrica dogrulanacak. Belirsiz olan deger degil, ''kutu toplami'' yorumu (UL ozeti; 4.4.3 goruntulenmedi).
+    Formul standart''in, marjlar modul''un: N_s <= 45 (cift 44), ilk nesil eta ile P ~161-181 W, olgun ~187-210
+    W.'
+  dogrulama_deneyi: IEC 61730-1:2023 madde 5.4 ve 4.4.3 esdegeri metnin satin alinmasi.
+- id: std_class3_pmax_w
+  ad: Class III modul azami gucu (STC)
+  birim: W
+  deger: 240
+  alt: 240
+  ust: 240
+  kaynak: IEC 61730-1:2016 madde 4.4.1 (SIS onizlemesi)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '...shall not have electrical ratings greater than 240 W...'
+  kaynak_tarihi: 2016-08; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'Pratikte V*I*FF siniri baglayici: STC tanimiyla N_s=46 icin 214-228 W; islak DVC-A/AT ile
+    N_s=42 icin 195-208 W (FF 0,78-0,83).'
+  aciklama: Muhafazakar yorumda kutudaki tum panellerin toplamina uygulanir (n_panel_per_box*P_panel_W).
+  dogrulama_deneyi: Sertifika kurulusuyla 'panel basina ayri MPPT girisi paralel sayilir mi' sorusu.
+- id: std_class3_isc_max_a
+  ad: Class III modul azami kisa devre akimi (STC)
+  birim: A
+  deger: 8
+  alt: 8
+  ust: 8
+  kaynak: IEC 61730-1:2016 madde 4.4.1
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '''...the short-circuit current does not exceed 8 A when tested under standard test conditions.'''
+  kaynak_tarihi: 2016-08 / 2020-06; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'HJT Jsc ~39,5 mA/cm2 ile HUCRE alani <= ~202 cm2. Wafer boyutunu sinirlamaz: 182 mm yarim
+    hucre (165,6 cm2, 6,5 A) ve 210 mm ucte bir (147 cm2, 5,8 A) uyar.'
+  aciklama: 'Revizyon: ilk ciktidaki ''a_wafer <= 141 mm, kucuk wafer lehine'' yorumu yanlisti; kisit A_cell_m2
+    uzerinden yazildi. Kesim kenari rekombinasyon kaybi bilinmiyor (hucre alani). | [Uzlaştırma/zincir] Kanonik
+    (tek sahip). Hucre ALANINI sinirlar: sinir Jsc 41.3, marj 1.03, N_p = 1 ile a <= ~137 mm (mod_f_a_max_class3).
+    182-210 mm wafer n_cut/k_split ile uyar.'
+  dogrulama_deneyi: '-'
+- id: std_uocmax_default_factor
+  ad: U_OC_MAX / U_OC_STC geri dusus katsayisi (alfa veya T_min bilinmiyorsa)
+  birim: '-'
+  deger: 1.2
+  alt: 1.2
+  ust: 1.2
+  kaynak: IEC 60364-7-712:2017 Ek B.1
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: Without information of the expected minimum temperature of the site or without information about
+    the temperature coefficient of the PV module, UOC MAX shall be chosen equal to 1,2 UOC STC.
+  kaynak_tarihi: 2017-04; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: IEC 61215 tip testinde sicaklik katsayisi olculdugu icin kendi modulumuzde alfa beyan edilir;
+    1,2 pratikte devreye girmez.
+  aciklama: 'Revizyon: aralik 1,08-1,2 kaldirildi (kural degeri). Belirsizlik std_tmin_site_c ve alpha_Voc_pct_K
+    uzerinden orneklenir; K_U = std_f_ku.'
+  dogrulama_deneyi: '-'
+- id: std_iscmax_factor
+  ad: I_SC_MAX / I_SC_STC asgari katsayi
+  birim: '-'
+  deger: 1.25
+  alt: 1.25
+  ust: 1.4
+  kaynak: IEC 60364-7-712:2017 Ek B.2
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: ISC MAX = KI ISC STC. Minimum value for K I is 1,25.
+  kaynak_tarihi: 2017-04; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Bifasiyel/yansimali balkon kurulumunda artirilmali.
+  aciklama: Ust 1,4 tahmindir.
+  dogrulama_deneyi: Bifasiyel ise arka yuz kazanc olcumu.
+- id: std_tmin_site_c
+  ad: U_OC_MAX hesabinda kullanilan en dusuk saha sicakligi
+  birim: C
+  deger: -40
+  alt: -40
+  ust: -9
+  kaynak: 'Tasarim secimi; dayanak MGM rekorlari (modul revizyonunda acildi): Istanbul -9.0, Ankara -24.9, Erzurum
+    -37.2 C; modul kaynaginda Almanya Hull -37.8 C'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''En Düşük Sıcaklık (°C): İstanbul -9,0 (Şubat); Ankara -24,9 (Ocak); Erzurum -37,2 (Aralık)'''
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Tek urunu tum AB''de satmak icin en kotu pazar alinmali. alfa=-0,24 %/K ile K_U: -30 C 1,132;
+    -20 C 1,108; -10 C 1,084; -5 C 1,072.'
+  aciklama: '60 V''ta N_s_max 71-74 arasinda degisir. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pazar/saha kavrami
+    -> standart sahip. Deger bir tasarim secimidir (istasyon rekorlari dayanak, -40 degil); bu yuzden kaynak_turu
+    tahmin. Pazar anahtari: TR_marmara -10, TR_ic -25, DE_AT -40, tek_urun -40 (varsayilan; A''nin ana pazari Almanya,
+    rekor -37.8 C). Modulun guveni yuksek itirazi (''tek urun icin -40 C'') uygulandi. ku_yontemi = varsayilan_1.2
+    iken T_min N_s_max''i baglamaz (K_U 1.2 > 1.159); beyan_alfa''da baglar.'
+  dogrulama_deneyi: Hedef pazar iklim kayitlari (MGM, DWD) ve sertifika kurulusunun kabul ettigi T_min.
+- id: std_ocpr_to_isc_ratio
+  ad: Modul azami asiri akim koruma degeri / Isc
+  birim: '-'
+  deger: 2
+  alt: 1.5
+  ust: 3
+  kaynak: Tahmin (ticari veri sayfalarindaki 'max series fuse'/Isc oranlarina benzetme)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Tasarimci beyan eder, IEC 61730-2 geri akim testiyle dogrulanir.
+  aciklama: '712.430.3.103: ((n-1) x ISC_MAX) > IMOD_MAX_OCPR ise koruma gerekir; standarttaki ''Ns'' PARALEL dizi
+    sayisidir (modelde n_parallel_on_bus), seri hucre sayisi N_s ile karistirilmamali. Pil geri beslemesi de eklenmeli
+    (std_f_string_ocp_needed).'
+  dogrulama_deneyi: Kendi modulunde geri akim testi (MST 26).
+- id: std_energy_hazard_va
+  ad: IEC 62109-1 tehlikeli enerji esigi (60 s sonra kullanilabilir guc, U >= 2 V)
+  birim: VA
+  deger: 240
+  alt: 240
+  ust: 240
+  kaynak: DEKRA TRF IEC62109_1B madde 7.4.1 (IEC 62109-1:2010 metni)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: A hazardous energy level is considered to exist if a) The voltage is 2 V or more, and power available
+    after 60 s exceeds 240 VA.; 7.4.2 '...no risk of energy hazard in operator access areas'
+  kaynak_tarihi: 2020-01-22; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Her Na-iyon pil barasi (48 V sinifi, yuzlerce A kisa devre) ve 240 W ustu PV girisi SELV olsa
+    da tehlikeli enerji sayilir. K5 (kullanicinin degistirdigi pil) icin konnektor/sigorta/on-sarj tasarimini belirler.
+  aciklama: Yeni parametre (fizik denetcisi bulgusu, bu revizyonda kaynaktan dogrulandi).
+  dogrulama_deneyi: '-'
+- id: std_energy_hazard_cap_j
+  ad: IEC 62109-1 kondansator depolanmis enerji tehlike esigi (U >= 2 V)
+  birim: J
+  deger: 20
+  alt: 20
+  ust: 20
+  kaynak: DEKRA TRF IEC62109_1B madde 7.4.1 b)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'b) The stored energy in a capacitor is at a voltage U of 2 V or more, and the stored energy
+    E, calculated from the following equation, exceeds 20J: E = 0.5 CU²'
+  kaynak_tarihi: 2020-01-22; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Sebeke invertorunun 350-400 V DC barasi icin bosaltma direnci/suresi ve kapak kilidi gerekir.
+  aciklama: Yeni.
+  dogrulama_deneyi: '-'
+- id: std_connector_class2_above_v
+  ad: PV DC konnektorlerinin Class II olma zorunlulugu esigi
+  birim: V
+  deger: 35
+  alt: 35
+  ust: 35
+  kaynak: IEC 60364-7-712:2017 madde 712.526.1
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: comply with Class II for PV installations operating above 35 V; ... if accessible by untrained
+    people, then shall be of the locking type where two independent actions are required to disconnect; ... a male
+    connector from one manufacturer and a female connector from another manufacturer ... shall not be used
+  kaynak_tarihi: 2017-04; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 60 V rejiminde (K6) gecerli. Konnektorler DC icin derecelendirilmis (IEC 62852), korumali,
+    kilitli ve ayni ureticinin erkek/disi eslesmesi olmali. Firma kendi konnektorunu yaparsa tum eslesmeyi (panel,
+    kutu, uzatma) kendisi saglamali.
+  aciklama: Yeni. 712.526.101 anahtar/alet sarti yalnizca SELV/PELV KULLANMAYAN kurulumlar icin.
+  dogrulama_deneyi: '-'
+- id: std_imd_mandatory_above_v
+  ad: PV dizisi yalitim direnci olcumu/izleme zorunlulugunun acikca gecerli oldugu gerilim
+  birim: V
+  deger: 60
+  alt: 60
+  ust: 60
+  kaynak: IEC 60364-7-712:2017 madde 712.531.3.101 basligi ve 712.421.101.2.2
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '''712.531.3.101 Requirements for PV arrays operating at above 60 V''; 712.421.101.2.2 ''Without
+    functional earthing of a live part on the DC side, an insulation monitoring device (IMD), or another device
+    offering equally effective monitoring, shall be installed.'''
+  kaynak_tarihi: 2017-04; 2026-09-27
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'U_OC_MAX <= 60 V''ta olcum maddesi kapsam disi gorunuyor; ancak 712.421.101.2.2''de acik
+    SELV istisnasi yok. Bu yuzden <= 60 V icin yorum belirsiz; muhafazakar varsayim: izoleli invertorde yalitim
+    izleme fonksiyonu (IEC 62109 invertor saglayabilir) bulunsun.'
+  aciklama: 'Yeni. Fizik denetcisinin ''ayirma olsa da IMD gerekli'' tespiti kismen dogru: >60 V icin kesin, <=60
+    V icin belirsiz.'
+  dogrulama_deneyi: Sertifika kurulusu/ulusal komite gorusu; 712:2025 metni.
+- id: std_lvd_dc_lower_v
+  ad: AB Alcak Gerilim Direktifi DC alt siniri
+  birim: V DC
+  deger: 75
+  alt: 75
+  ust: 75
+  kaynak: Avrupa Komisyonu LVD sayfasi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: input or output voltage of between 50 and 1000 V for alternating current [and] 75 and 1500 V
+    for direct current
+  kaynak_tarihi: 2026-09-27 (revizyonda yeniden acildi)
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalniz DC cikisli (<75 V), sebekeye/AC'ye baglanmayan B urunu LVD disinda -> GPSR (2023/988).
+    AC'li her kutu LVD icinde.
+  aciklama: Turkiye karsiligi Alcak Gerilim Yonetmeligi (2014/35/AB uyumlu; hafizadan).
+  dogrulama_deneyi: '-'
+- id: std_lvd_ac_lower_v
+  ad: AB Alcak Gerilim Direktifi AC alt siniri
+  birim: V AC
+  deger: 50
+  alt: 50
+  ust: 50
+  kaynak: Avrupa Komisyonu LVD sayfasi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: between 50 and 1000 V for alternating current
+  kaynak_tarihi: '2026-09-27'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sebekeye bagli A kutusu ve AC prizli B her zaman LVD kapsaminda.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: std_rohs_pb_max_frac
+  ad: RoHS kursun azami konsantrasyonu (homojen malzemede, agirlikca)
+  birim: '-'
+  deger: 0.001
+  alt: 0.001
+  ust: 0.001
+  kaynak: Direktif 2011/65/AB Ek II ve Madde 2(4)(i) (legislation.gov.uk AB kaynakli metin)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Ek II: ''Lead (0,1 %)''; Madde 2(4)(i) istisnasi: ''photovoltaic panels intended to be used
+    in a system that is designed, assembled and installed by professionals for permanent use at a defined location...'''
+  kaynak_tarihi: Istisna 2017/2102 ile eklendi; erisim 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kullanicinin taktigi fisli balkon kiti (A-DE) ve tasinabilir B paneli istisnaya girmez ->
+    panel RoHS kapsaminda; HJT seritlerinde kursunsuz lehim veya ECA gerekir. Kutu (EEE) zaten kapsamda.
+  aciklama: Yeni (fizik denetcisi bulgusu, dogrulandi). legislation.gov.uk AB kaynakli surumu gosterir; 2020 sonrasi
+    AB degisiklikleri icin EUR-Lex kontrolu gerekir (Pb degeri degismedi, hafizadan).
+  dogrulama_deneyi: Kullanilan serit/lehim/ECA'nin XRF/ICP analizi (homojen malzeme bazinda).
+- id: std_plugin_ac_max_va
+  ad: Almanya fisli PV azami invertor besleme gucu
+  birim: VA
+  deger: 800
+  alt: 800
+  ust: 800
+  kaynak: VDE basin bildirisi (DIN VDE V 0126-95:2025-12); pvplug (VDE-AR-N 4105:2026-03 F.1.2)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Maximum inverter feed-in power: ''800 VA''; pvplug: ''<= 800 VA Wechselrichterleistung'''
+  kaynak_tarihi: 2025-12 / 2026-03; revizyonda yeniden acildi 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'A-DE: P_box_W <= 800 VA ise basitlestirilmis rejim. VDE-AR-N 4105:2026-03 depolamali sistemi
+    de 800 VA''e kadar kullanici kurulumuna aciyor (energiezukunft).'
+  aciklama: 'pvplug: pil sistemleri ayrica bildirilir.'
+  dogrulama_deneyi: '-'
+- id: std_plugin_schuko_pv_max_wp
+  ad: 'Almanya fisli PV: Schuko fisle azami toplam modul gucu'
+  birim: Wp
+  deger: 960
+  alt: 960
+  ust: 960
+  kaynak: VDE basin bildirisi (DIN VDE V 0126-95:2025-12)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''800 Wp + 20% (i.e., 960 Wp)'''
+  kaynak_tarihi: 2025-12; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: n_panel_per_box*P_panel_W <= 960. 500 W panelde Schuko ile yalniz n=1; n=4 x 500 W yalniz
+    ozel fisle.
+  aciklama: 'Schuko icin fis temas korumasi: korumali fis, dahili kesici veya invertorde galvanik ayirma (+ek sartlar).
+    | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida ust uc 2000 idi (ozel fis); iki mevzuat secenegi bir
+    belirsizlik araligina konmustu, duzeltildi. Ozel enerji fisi ayri id std_plugin_special_plug_pv_max_wp (2000
+    Wp) ve fis_tipi anahtariyla secilir. A''da n_panel_per_box = min(kutu_kurali n, floor(960 / P_panel)); P_box
+    = n x P, P_inv = min(P_box, 800 VA). B''de fis siniri yok; class3''te kutu toplami <= 240 W; kutu_enerji_siniri
+    ve (B) 5 kg n''yi ayrica kisar.'
+  dogrulama_deneyi: DIN VDE V 0126-95 tam metni (~150 EUR).
+- id: std_plugin_special_plug_pv_max_wp
+  ad: 'Almanya fisli PV: ozel enerji fisiyle azami modul gucu / basit kayit siniri'
+  birim: Wp
+  deger: 2000
+  alt: 2000
+  ust: 2000
+  kaynak: VDE basin bildirisi; pvplug
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'With special energy plug: ''2000 Wp''; ''<= 2.000 Wp installierte Leistung'''
+  kaynak_tarihi: '2026-09-27'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: A, ozel priz kurulumu kullaniciya kalir.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp: Ayri mevzuat secenegi (fis_tipi
+    = ozel_enerji_fisi).'
+  dogrulama_deneyi: '-'
+- id: std_rfg_type_a_min_w
+  ad: AB RfG 2016/631 Tip A uretim modulu alt esigi
+  birim: W
+  deger: 800
+  alt: 800
+  ust: 800
+  kaynak: Regulation (EU) 2016/631 Madde 5
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2016; RfG 2.0 surecte
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 800 W alti 'onemli' uretim modulu degil; RfG 2.0 degistirebilir.
+  aciklama: '-'
+  dogrulama_deneyi: RfG 2.0 nihai metni.
+- id: std_batt_portable_mass_max_kg
+  ad: AB Pil Tuzugu 'tasinabilir pil' ust kutle siniri
+  birim: kg
+  deger: 5
+  alt: 5
+  ust: 5
+  kaynak: Regulation (EU) 2023/1542 Madde 3(9) ve 3(13) (AB Yayin Ofisi XHTML, bu revizyonda indirildi)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: (9) 'portable battery' means a battery that is sealed, weighs 5 kg or less, is not designed specifically
+    for industrial use and is neither an electric vehicle battery, an LMT battery, nor an SLI battery; (13) 'industrial
+    battery' means ... any other battery that weighs more than 5 kg ...
+  kaynak_tarihi: OJ L 191, 28.7.2023; erisim 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'Na-iyon 80-140 Wh/kg icin 5 kg ~ 400-700 Wh. <= 5 kg: Madde 11 son kullanici degistirebilirligi
+    (18.02.2027''den; ticari aletle, ozel alet/isi/solvent olmadan) - K5 ile uyumlu; SBESS olamaz. > 5 kg: endustriyel.'
+  aciklama: 'Revizyon: ilk ciktidaki alinti (''comprising cells of different electrochemical systems...'') yanlisti;
+    dogru tanim metinden aktarildi. EUR-Lex erisilemedi; Yayin Ofisi cellar XHTML kullanildi.'
+  dogrulama_deneyi: Komisyon removability kilavuzu (C/2025/214 bildirim) ile K5 kutusunda pilin 'urune dahil tasinabilir
+    pil' olarak degerlendirilmesi.
+- id: std_batt_industrial_2kwh_threshold_kwh
+  ad: AB Pil Tuzugu 2 kWh esigi (karbon ayak izi Md.7, performans Md.10, pasaport Md.77) - SBESS esigi DEGIL
+  birim: kWh
+  deger: 2
+  alt: 2
+  ust: 2
+  kaynak: Regulation (EU) 2023/1542 Madde 7, 10, 77 ve Madde 3(15) (Yayin Ofisi XHTML)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Md.77: ''From 18 February 2027 each LMT battery, each industrial battery with a capacity greater
+    than 2 kWh and each electric vehicle battery ... shall have ... battery passport''; Md.3(15): ''stationary battery
+    energy storage system'' means an industrial battery with internal storage that is specifically designed to store
+    from and deliver electric energy to the grid or store for and deliver electric energy to end-users, regardless
+    of where and by whom the battery is being used'
+  kaynak_tarihi: 2023-07-28; erisim 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'SBESS taniminda kWh esigi yok: > 5 kg ve enerji veren her kutu SBESS -> Madde 12 + Ek V (2
+    kWh altinda da). > 2 kWh ek olarak: performans belgesi (18.08.2024''ten), pasaport (18.02.2027), karbon ayak
+    izi (18.02.2026 veya ilgili delege+uygulama tuzugu +18 ay, hangisi sonra).'
+  aciklama: 'Revizyon: id std_batt_sbess_min_kwh -> std_batt_industrial_2kwh_threshold_kwh; ilk ciktidaki ''SBESS
+    > 2 kWh'' hatasi duzeltildi (iki denetci de supheli bulmustu).'
+  dogrulama_deneyi: Endustriyel pil karbon ayak izi delege tuzugunun yayim durumu (bu gorevde bulunamadi).
+- id: std_batt_due_diligence_turnover_eur
+  ad: AB Pil Tuzugu durusti inceleme ciro esigi (uygulama 18.08.2027)
+  birim: EUR/yil
+  deger: 40000000
+  alt: 40000000
+  ust: 40000000
+  kaynak: Regulation (EU) 2023/1542 Madde 47; Regulation (EU) 2025/1561 Madde 1
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Md.47: ''This Chapter does not apply to economic operators that had a net turnover of less than
+    EUR 40 million...''; 2025/1561: ''in paragraph 1, the date 18 August 2025 is replaced by 18 August 2027'''
+  kaynak_tarihi: 2023-07-28 / 2025-07-18; erisim 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Ek X hammaddeleri: kobalt, dogal grafit, lityum, nikel ve bunlara dayali bilesikler. Nikel
+    iceren Na-iyon katotlari (NFM) kapsama girebilir; kucuk firma muhtemelen esigin altinda (grup konsolide ciroya
+    dikkat).'
+  aciklama: 'Revizyon: hafizadan -> dogrulanmis.'
+  dogrulama_deneyi: Firma/grup konsolide cirosu kontrolu.
+- id: std_air_batt_wh_threshold
+  ad: 'Hava: ekipmanla/ekipman icinde Na-iyon pil Wh esigi (PI 977/978 Section I/II)'
+  birim: Wh
+  deger: 100
+  alt: 100
+  ust: 100
+  kaynak: IATA Battery Guidance Document 2026 akis semasi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'UN 3552 PI 977/978: ''Cells > 20 Wh / Batteries > 100 Wh -> Section I''; ''Cells <= 20 Wh /
+    Batteries <= 100 Wh -> Section II''; UN 3551 PI 976: ''Pax A/C = Forbidden, CAO = 35 kg'' (Section II yok)'
+  kaynak_tarihi: 2026-01-01; revizyonda yeniden indirildi 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Esik YALNIZ PI 977/978 icin. Tek basina pil/yedek pil (UN 3551) her zaman tam duzenlenir.
+  aciklama: 'Revizyon: formul sevkiyat turuna baglandi.'
+  dogrulama_deneyi: '-'
+- id: std_air_cell_wh_threshold
+  ad: 'Hava: ekipmanla/ekipman icinde Na-iyon hucre Wh esigi'
+  birim: Wh
+  deger: 20
+  alt: 20
+  ust: 20
+  kaynak: IATA Battery Guidance Document 2026
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Cells > 20 Wh / Batteries > 100 Wh -> UN 3552 PI 977/978 Section I
+  kaynak_tarihi: 2026-01-01; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Buyuk prizmatik hucre (>20 Wh) ile pil kucuk olsa da tam duzenleme.
+  aciklama: Yeni.
+  dogrulama_deneyi: '-'
+- id: std_air_soc_max_frac
+  ad: 'Hava: Na-iyon pil azami sarj durumu'
+  birim: '-'
+  deger: 0.3
+  alt: 0.3
+  ust: 0.3
+  kaynak: IATA Battery Guidance Document 2026
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''sodium ion cells and batteries (UN 3551) must be shipped at a state of charge (SoC) not exceeding
+    30%''; PI 977/978: ''ICAO Technical Instructions are silent ... recommended ... not exceeding 30%'''
+  kaynak_tarihi: 2026-01-01; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: UN 3551 icin zorunlu, ekipman icinde oneri. Hat sonu sarj adimi buna gore ayarlanir.
+  aciklama: Na-iyonun 0 V'ta tasinabilir iddiasi resmi muafiyet degil.
+  dogrulama_deneyi: '-'
+- id: std_air_pax_pkg_batt_max_kg
+  ad: 'Hava: yolcu ucaginda paket basina Na-iyon pil net kutlesi siniri (PI 977/978)'
+  birim: kg
+  deger: 5
+  alt: 5
+  ust: 5
+  kaynak: IATA Battery Guidance Document 2026 akis semasi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'UN 3552 PI 977/978 Section I: ''Limit per package: Pax A/C = 5 kg, CAO = 35 kg'''
+  kaynak_tarihi: 2026-01-01; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 1 kWh Na-iyon (~10 kg) iceren kutu yolcu ucagiyla gonderilemez; yalniz kargo ucagi (<= 35
+    kg) veya deniz/kara.
+  aciklama: Yeni.
+  dogrulama_deneyi: '-'
+- id: std_air_a88_low_prod_max_n
+  ad: 'Hava: UN 38.3''ten gecmemis dusuk uretim serisi (SP A88) yillik azami adet'
+  birim: adet/yil
+  deger: 100
+  alt: 100
+  ust: 100
+  kaynak: IATA Battery Guidance Document 2026, B.04
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: low-production runs (i.e. annual production runs consisting of no more than 100 lithium cells
+    and batteries) ... may be transported aboard cargo aircraft, if approved by the appropriate authorities
+  kaynak_tarihi: 2026-01-01; 2026-09-27
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Pilot faz numunelerinin laboratuvara gonderimi icin. Metin lityum diyor; SP A88 Na-iyona da
+    atifli (sayfa 17 listesi), ancak kosullar yetkili makam onayina bagli.
+  aciklama: Yeni.
+  dogrulama_deneyi: SHGM/DGR yetkilisi ile gorusme.
+- id: std_fx_eur_usd
+  ad: Kur varsayimi EUR/USD
+  birim: USD/EUR
+  deger: 1.15
+  alt: 1.05
+  ust: 1.25
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: EUR cinsinden laboratuvar tekliflerinin USD'ye cevrimi.
+  aciklama: 'INR icin ~87 INR/USD (tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer el_fx_eur_usd üzerinden okunur.
+    Fark: Tahmin, kaynak yok; %1 yuksek. Tip testi ve AB ucretlerinin EUR->USD cevriminde kanonik kullanilmali.'
+  dogrulama_deneyi: Guncel TCMB/ECB kuru.
+  esdeger: el_fx_eur_usd
+  esdeger_carpan: 1.0
+- id: std_tt_module_iec_usd
+  ad: 'Modul tip testi + sertifika: IEC 61215 + IEC 61730 birlesik program, ilk aile'
+  birim: USD/aile
+  deger: 60000
+  alt: 20000
+  ust: 150000
+  kaynak: Tahmin; heavengreenenergy.com IEC 61215 sayfasi yalniz nitel
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Testing costs at accredited laboratories run into tens of lakhs of rupees'' (~10-100 lakh
+    INR = ~11-115 bin USD mertebesi)'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Ucret test sirasi basinadir, modul alanina zayif bagli; kucuk panelde W basina payi buyuk.
+  aciklama: Numune maliyeti haric (std_f_sample_cost_usd).
+  dogrulama_deneyi: TUV Rheinland, VDE/Fraunhofer ISE, TUV SUD/PI Berlin, Kiwa'dan kucuk HJT modul ailesi teklifi.
+- id: std_tt_module_duration_month
+  ad: Modul tip testi suresi
+  birim: ay
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: heavengreenenergy.com IEC 61215 / 61730 sozluk
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''The full test sequence at an accredited laboratory takes 2 to 4 months.'''
+  kaynak_tarihi: 2026-09-27 (revizyonda yeniden acildi)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: DH1000/TC200 dizileri belirler; boyuttan bagimsiz.
+  aciklama: Ust 8 ay tekrar test/kuyruk (tahmin).
+  dogrulama_deneyi: Laboratuvar takvimi.
+- id: std_tt_module_samples_n
+  ad: Modul tip testi numune sayisi (aile basina)
+  birim: adet/aile
+  deger: 12
+  alt: 8
+  ust: 30
+  kaynak: heavengreenenergy.com IEC 61215; IEC 61215-1:2021 onizlemesi
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''typically 8 to 12 modules''; 61215-1: ''at least 2 modules each, from the lower end, median
+    and higher end power class'''
+  kaynak_tarihi: 2021-02 / 2026-09-27
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 61730 ile birlikte 20-30 (hafizadan).
+  aciklama: 'Revizyon: sinif urun_sabit -> teknik; maliyeti std_f_sample_cost_usd hesaplar.'
+  dogrulama_deneyi: Laboratuvar test plani.
+- id: std_tt_module_retest_usd
+  ad: Modul ailesi degisikligi/ek boyut icin kismi tekrar test (IEC TS 62915)
+  birim: USD/degisiklik
+  deger: 15000
+  alt: 3000
+  ust: 50000
+  kaynak: Tahmin; zorunluluk IEC 61215-1:2021 onizlemesi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Requirement that retesting be performed according to IEC TS 62915.'''
+  kaynak_tarihi: TS 62915 Ed.2 2023
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: 'TS 62915: 4.2.3 hucre teknolojisi, 4.2.11 boyut, 4.2.12 guc (esikler gorulmedi).'
+  aciklama: 'K3: satin alinan wafer''dan kendi wafer''ina geciste en az bir dongu.'
+  dogrulama_deneyi: IEC TS 62915:2023 tam metni.
+- id: std_tt_inverter_62109_usd
+  ad: Kutu elektronigi guvenlik tip testi IEC/EN 62109-1/-2 (CB raporu)
+  birim: USD/model serisi
+  deger: 30000
+  alt: 10000
+  ust: 70000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Pil portlari ve tehlikeli enerji (7.4) degerlendirmesi dahil.
+  aciklama: Ayni donanimli guc varyantlari genelde tek rapor (hafizadan).
+  dogrulama_deneyi: TUV/VDE/Intertek teklifi.
+- id: std_tt_gridcode_per_country_usd
+  ad: Sebeke baglanti uygunlugu, ulke basina (VDE-AR-N 4105, EN 50549-1, diger)
+  birim: USD/ulke
+  deger: 25000
+  alt: 8000
+  ust: 60000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Yalniz A. Turkiye gereksinimi dogrulanmadi.
+  aciklama: VDE-AR-N 4105:2026-03 Mart 2026'da yayimlandi.
+  dogrulama_deneyi: 'VDE/TUV teklifi; dagitim sirketine (Kocaeli: muhtemelen SEDAS) resmi soru.'
+- id: std_tt_emc_usd
+  ad: EMC tip testleri (EN IEC 61000-6-x, 61000-3-2/-3-3, CISPR 11 DC port)
+  birim: USD/model
+  deger: 12000
+  alt: 5000
+  ust: 30000
+  kaynak: Tahmin (standart listesi hafizadan)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: GaN yuksek dV/dt tekrar test riskini artirir.
+  aciklama: '-'
+  dogrulama_deneyi: Kendi LISN + spektrum analizoru ile on-uyumluluk.
+- id: std_tt_radio_cyber_usd
+  ad: Radyo (RED) + siber guvenlik (RED DA 2022/30; 11.12.2027'den CRA)
+  birim: USD/model
+  deger: 15000
+  alt: 0
+  ust: 40000
+  kaynak: Tahmin; takvim Avrupa Komisyonu RED sayfasi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Delegated Regulation (EU) 2022/30 entered into application in August 2025''; ''main obligations
+    introduced by the CRA will apply as of 11 December 2027''; DA 2026/339 29.04.2026''da yayimlandi'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Radyosuz tasarimda 0.
+  aciklama: '-'
+  dogrulama_deneyi: Test evi teklifi.
+- id: std_tt_plugin_system_incr_usd
+  ad: DIN VDE V 0126-95 fisli sistem sertifikasi - ARTIMSAL (montaj, fis, kablo, sistem degerlendirmesi; 61730/62109/4105
+    raporlari yeniden kullanilir)
+  birim: USD/sistem varyanti
+  deger: 10000
+  alt: 4000
+  ust: 30000
+  kaynak: Tahmin; kapsam VDE Institute duyurusu
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Kapsam: IEC 61730 modul, IEC 62109 invertor, VDE-AR-N 4105, montaj cercevesi, fis baglantilari,
+    kablolar'
+  kaynak_tarihi: VDE 2026-01
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: A-DE. Depolamali cihaz kapsam disi; pil entegre urunun degerlendirmesi belirsiz.
+  aciklama: 'Revizyon: id std_tt_plugin_system_usd -> _incr; cift sayim onlendi (kaynak denetcisi).'
+  dogrulama_deneyi: VDE Institute teklifi (artimsal kapsamla).
+- id: std_tt_batt_un383_usd
+  ad: UN 38.3 tasima testleri (hucre + paket tasarimi basina)
+  birim: USD/tasarim
+  deger: 12000
+  alt: 5000
+  ust: 30000
+  kaynak: Tahmin; zorunluluk IATA 2026
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''All cells and batteries must be tested in accordance with the UN Manual of Tests and Criteria
+    Part III Subsection 38.3''; test ozeti (38.3.5) ureticiden istenir'
+  kaynak_tarihi: 2026-01
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Her hucre formati/paket varyanti yeni test isteyebilir.
+  aciklama: 'K9: hucre kendi uretimse hucre testi firmaya duser.'
+  dogrulama_deneyi: Test evi teklifi.
+- id: std_tt_batt_safety_usd
+  ad: Na-iyon pil guvenlik temel degerlendirmesi (IEC 62619 benzeri / urun guvenligi)
+  birim: USD/tasarim
+  deger: 30000
+  alt: 10000
+  ust: 80000
+  kaynak: Tahmin; IEC 62619 kapsami IEC webstore
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'IEC 62619:2022: ''Safety requirements for secondary lithium cells and batteries, for use in
+    industrial applications'' (sodyum yok)'
+  kaynak_tarihi: 2022-05-24; 2026-09-27
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Na-iyon icin standart boslugu; kurulus benzetme yoluyla test eder.
+  aciklama: 'Revizyon: 40k -> 30k temel; SBESS Ek V artisi ayri (std_tt_batt_annexv_extra_usd).'
+  dogrulama_deneyi: Sertifika kurulusu on degerlendirmesi.
+- id: std_tt_batt_annexv_extra_usd
+  ad: SBESS icin AB Pil Tuzugu Ek V ek guvenlik testleri (isil yayilim, yangin, gaz emisyonu vb.)
+  birim: USD/tasarim
+  deger: 25000
+  alt: 8000
+  ust: 80000
+  kaynak: Tahmin; parametre listesi Regulation (EU) 2023/1542 Ek V
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Ek V: 1 Thermal shock and cycling, 2 External short circuit protection, 3 Overcharge protection,
+    4 Over-discharge, 5 Over-temperature, 6 Thermal propagation protection, 7 Mechanical damage, 8 Internal short
+    circuit, 9 Thermal abuse, 10 Fire test, 11 Emission of gases'
+  kaynak_tarihi: 2023-07-28; 2026-09-27
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: 'batt_is_sbess ise (5 kg ustu, enerji veren kutu). Madde 12: ''safety parameters shall only
+    apply in so far as a corresponding hazard exists''.'
+  aciklama: Yeni.
+  dogrulama_deneyi: Kurulus teklifi; Ek V icin uyumlastirilmis standart durumu.
+- id: std_tt_portable_62368_usd
+  ad: Tasinabilir guc istasyonu guvenligi (EN IEC 62368-1 + PV girisi 62109) - B, AC cikisli
+  birim: USD/model
+  deger: 20000
+  alt: 8000
+  ust: 50000
+  kaynak: Tahmin; standart secimi hafizadan
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: B AC prizli (LVD). Yalniz DC <75 V ise GPSR; <= 350 W yalniz-DC kit icin IEC TS 62257-9-8
+    referans alinabilir (AC cikisli urunler kapsam disi, onizlemede goruldu).
+  aciklama: '-'
+  dogrulama_deneyi: Kurulus on degerlendirmesi.
+- id: std_tt_ul2743_usd
+  ad: ABD tasinabilir guc paketi UL 2743 listelemesi
+  birim: USD/model
+  deger: 50000
+  alt: 25000
+  ust: 120000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Yalniz ABD pazari (is_us_market=1); varsayilan 0.
+  aciklama: '-'
+  dogrulama_deneyi: UL/Intertek teklifi.
+- id: std_cfp_declaration_usd
+  ad: Pil karbon ayak izi beyani + dogrulama (endustriyel > 2 kWh)
+  birim: USD/model
+  deger: 30000
+  alt: 10000
+  ust: 80000
+  kaynak: Tahmin; kapsam 2023/1542 Madde 7
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Md.7: ''...rechargeable industrial batteries with a capacity greater than 2 kWh ... a carbon
+    footprint declaration shall be drawn up for each battery model per manufacturing plant'''
+  kaynak_tarihi: 2023-07-28; 2026-09-27
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Yalniz batt_gt2kwh. 'Model basina, uretim tesisi basina' - unite kopyalama farkli sahaya giderse
+    yeni beyan.
+  aciklama: 'Uygulama: 18.02.2026 veya delege+uygulama tuzugu +18 ay (hangisi sonra); delege tuzuk bu gorevde bulunamadi.'
+  dogrulama_deneyi: LCA danismani teklifi + delege tuzuk durumu.
+- id: std_batt_passport_setup_usd
+  ad: Pil pasaportu altyapisi (veri modeli, QR, veri tasiyici, hizmet) - endustriyel > 2 kWh
+  birim: USD/model
+  deger: 20000
+  alt: 5000
+  ust: 60000
+  kaynak: Tahmin; zorunluluk 2023/1542 Madde 77 ve Battery Pass
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''The EU battery passport will be mandatory from 18 February 2027''; ''...industrial batteries
+    > 2 kWh will be in scope'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Kutu basina E_batt <= 2 kWh tutulursa sifir.
+  aciklama: Yeni. Yillik hizmet ucreti ayrica olabilir (bilmiyoruz).
+  dogrulama_deneyi: Pasaport hizmet saglayici teklifi.
+- id: std_tt_comp_connector_usd
+  ad: Kendi uretimi PV DC konnektor sertifikasi (IEC 62852)
+  birim: USD/konnektor ailesi
+  deger: 20000
+  alt: 8000
+  ust: 50000
+  kaynak: Tahmin; gereklilik IEC 60364-7-712:2017 712.526.1
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''be rated for DC use (IEC 62852)'''
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: make_connector=1 ise (kendi kalip/enjeksiyon). Satin alinirsa 0; ama ayni ureticinin erkek/disi
+    eslesmesi zorunlu.
+  aciklama: Yeni (fizik denetcisi bulgusu).
+  dogrulama_deneyi: Kurulus teklifi.
+- id: std_tt_comp_jbox_usd
+  ad: Kendi uretimi baglanti kutusu sertifikasi (IEC 62790)
+  birim: USD/aile
+  deger: 15000
+  alt: 5000
+  ust: 40000
+  kaynak: Tahmin; standart numarasi hafizadan
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: make_jbox=1 ise.
+  aciklama: Yeni.
+  dogrulama_deneyi: Kurulus teklifi.
+- id: std_tt_comp_enclosure_material_usd
+  ad: Kasa/izolasyon polimeri malzeme testleri (UV, alev, RTI, kizdirma teli) - malzeme basina
+  birim: USD/malzeme
+  deger: 8000
+  alt: 3000
+  ust: 20000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Hazir sertifikali recine kullanilirsa buyuk olcude dusebilir.
+  aciklama: Yeni. H2 ile iliskili.
+  dogrulama_deneyi: Recine tedarikcisi sertifikalari + kurulus teklifi.
+- id: std_rohs_verification_usd_per_bom
+  ad: RoHS uygunluk dogrulamasi (XRF/ICP + teknik dosya) BOM basina
+  birim: USD/BOM
+  deger: 3000
+  alt: 1000
+  ust: 8000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Panel (fisli/tasinabilir) ve kutu icin.
+  aciklama: Yeni.
+  dogrulama_deneyi: Laboratuvar teklifi.
+- id: std_tr_market_extra_usd
+  ad: Turkiye piyasaya arz icin ek uygunluk/kayit maliyeti (AB belgelerinin taninmasi disinda)
+  birim: USD/urun
+  deger: 10000
+  alt: 0
+  ust: 50000
+  kaynak: Tahmin - BILMIYORUZ
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Turkiye AB uyumlu yonetmeliklerle (LVD, EMC, RED, AEEE, pil) CE'yi taniyor (hafizadan, dogrulanmadi);
+    sebeke baglanti belgesi ve pil/AEEE kayitlari ayri.
+  aciklama: Yeni (kaynak denetcisi bulgusu).
+  dogrulama_deneyi: Ticaret Bakanligi/TSE + mevzuat danismani; SEDAS'a resmi yazi.
+- id: std_tr_plugin_pv_regime_known
+  ad: Turkiye fisli/balkon PV yasal cercevesi biliniyor mu (0=dogrulanmadi, 1=var ve uygun)
+  birim: bool
+  deger: 0
+  alt: 0
+  ust: 1
+  kaynak: Resmi Gazete 12.05.2019 Lisanssiz Elektrik Uretim Yonetmeligi (fis/priz/balkon gecmiyor); 2020-2026 degisiklikleri
+    dogrulanamadi
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2019-05-12; 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 0 iken model A-TR senaryosunu kapali tutar.
+  aciklama: Yeni. Bu gorevde arama butcesi bittiginden 2025-2026 durumunu aratamadim.
+  dogrulama_deneyi: EPDK mevzuat taramasi + enerji hukuku danismani.
+- id: std_cert_maintenance_usd_per_cert_year
+  ad: Sertifika/marka surdurme ucreti
+  birim: USD/sertifika/yil
+  deger: 3000
+  alt: 1000
+  ust: 8000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Dusuk hacimde tip testinin kendisi kadar buyuyebilir (6 sertifika x 5 yil = 90 bin USD).
+  aciklama: '-'
+  dogrulama_deneyi: Teklifler.
+- id: std_tt_total_lead_time_month
+  ad: Pazara giris toplam sertifikasyon takvimi
+  birim: ay
+  deger: 9
+  alt: 6
+  ust: 15
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Pil entegre fisli urunde standart olmadigindan ust artabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Laboratuvar + DKE takvimi.
+- id: std_factory_inspection_usd_per_year
+  ad: Sertifika kurulusu fabrika denetimi
+  birim: USD/saha/yil
+  deger: 8000
+  alt: 3000
+  ust: 20000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Ayni sahadaki unitelere bolunur.
+  aciklama: '-'
+  dogrulama_deneyi: Teklifler.
+- id: std_qms_62941_usd_per_year
+  ad: Modul uretimi kalite sistemi (ISO 9001 + IEC 62941)
+  birim: USD/saha/yil
+  deger: 15000
+  alt: 5000
+  ust: 40000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Firma ISO 9001 sahibiyse artis kucuk.
+  aciklama: '-'
+  dogrulama_deneyi: Belgelendirme teklifi.
+- id: std_qms_battery_usd_per_year
+  ad: Hucre/pil ureticisi kalite yonetim programi (UN Model Regs tasima sarti) + pil hatti QMS
+  birim: USD/saha/yil
+  deger: 10000
+  alt: 3000
+  ust: 30000
+  kaynak: Tahmin; gereklilik UN Model Regulations 2.9.4 (lityum icin, hafizadan; Na-iyon karsiligi dogrulanmadi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: 'K9: hucre kendi uretimse.'
+  aciklama: Yeni (fizik denetcisi bulgusu).
+  dogrulama_deneyi: UN Model Regs 23. rev. Na-iyon maddesinin okunmasi.
+- id: std_atex_gascode_compliance_usd_per_site
+  ad: Silan/H2 icin ATEX bolgeleme, patlamadan korunma dokumani, gaz kodu uyum/danismanlik (tek seferlik)
+  birim: USD/saha
+  deger: 60000
+  alt: 15000
+  ust: 200000
+  kaynak: Tahmin; ATEX 2014/34/AB ve 1999/92/AT, gaz kodlari hafizadan
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Yalniz mevzuat/dokuman/danismanlik kismi; gaz kabini, dedektor, abatement donanimi saha altyapi
+    alanindadir (cift sayma).
+  aciklama: Yeni (fizik denetcisi bulgusu).
+  dogrulama_deneyi: Turkiye'deki uygulama (Calisanlarin Patlayici Ortamlar Yonetmeligi, hafizadan) ve silan stok
+    miktarinin BEKRA/Seveso esikleriyle karsilastirilmasi.
+- id: std_env_permit_usd_per_site
+  ad: Cevre izinleri (CED gerekliligi degerlendirmesi, emisyon, desarj - HF/NOx/florur) tek seferlik
+  birim: USD/saha
+  deger: 40000
+  alt: 10000
+  ust: 150000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: K8 (asitle temizleme) ve HJT islak kimya. HF aritma donanimi saha altyapi alaninda.
+  aciklama: Yeni. CED'in gerekip gerekmedigini bilmiyoruz.
+  dogrulama_deneyi: Cevre danismani + OSB desarj limitleri.
+- id: std_epr_admin_usd_per_country_year
+  ad: Genisletilmis uretici sorumlulugu kayit + yetkili temsilci, ulke basina
+  birim: USD/ulke/yil
+  deger: 3000
+  alt: 500
+  ust: 10000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: genel
+  senaryoya_uygunluk: Firma-pazar sabiti; hacme bolunur.
+  aciklama: '-'
+  dogrulama_deneyi: Yetkili temsilci teklifleri.
+- id: std_epr_fee_panel_usd_per_kg
+  ad: WEEE geri alim ucreti - PV panel
+  birim: USD/kg
+  deger: 0.1
+  alt: 0.02
+  ust: 0.5
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: alan
+  olcek: urun
+  senaryoya_uygunluk: Panel kutlesi alanla olceklenir.
+  aciklama: 'Revizyon: tek std_epr_fee_usd_per_kg (adet) uce ayrildi (fizik denetcisi).'
+  dogrulama_deneyi: stiftung ear / ulusal sistem tarifeleri.
+- id: std_epr_fee_batt_usd_per_kg
+  ad: Pil geri alim/EPR ucreti
+  birim: USD/kg
+  deger: 1
+  alt: 0.2
+  ust: 4
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: Pil kutlesi Wh ile olceklenir (m=E_batt/e_pack). Tasinabilir ve endustriyel pil tarifeleri
+    farkli.
+  aciklama: Yeni.
+  dogrulama_deneyi: Stiftung GRS ve diger sistem tarifeleri.
+- id: std_epr_fee_eee_usd_per_kg
+  ad: WEEE ucreti - kutu elektronigi/kasa (pil haric)
+  birim: USD/kg
+  deger: 0.3
+  alt: 0.05
+  ust: 1.5
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kutu basina.
+  aciklama: Yeni.
+  dogrulama_deneyi: Tarifeler.
+- id: std_mach_techfile_usd_per_machine_type
+  ad: Kendi tasarimi makine tipi basina risk degerlendirmesi + teknik dosya + uygunluk (2006/42/AT; 20.01.2027'den
+    2023/1230)
+  birim: USD/makine tipi
+  deger: 25000
+  alt: 8000
+  ust: 80000
+  kaynak: Tahmin; yukumluluk 2006/42/AT Madde 2(i), tarih Avrupa Komisyonu makine sayfasi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '2(i): ''manufacturer means any natural or legal person who designs and/or manufactures machinery
+    ... under his own name or trademark or for his own use''; ''applies on a mandatory basis as of 20 January 2027'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: genel
+  senaryoya_uygunluk: Firma kendi makinesini kendi kullanimi icin yapsa da uretici sayilir. Maliyet makine tipi
+    basina bir kez; kopyalanan unitelere bolunur.
+  aciklama: 'Yeni (fizik denetcisi bulgusu). Turkiye: Makine Emniyeti Yonetmeligi (2006/42 uyumlu, hafizadan); 2023/1230
+    uyumlastirmasi bilinmiyor.'
+  dogrulama_deneyi: Makine tipi listesi (diger alanlardan) + Ek IV kapsami kontrolu + danisman teklifi.
+- id: std_mach_doc_usd_per_machine_copy
+  ad: Kopyalanan her makine icin son kontrol, uygunluk beyani, CE/etiket
+  birim: USD/makine
+  deger: 2000
+  alt: 500
+  ust: 6000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '2(k): ''putting into service means the first use, for its intended purpose, in the Community,
+    of machinery'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Her unite kopyasi yeni makinelerin hizmete alinmasidir; unite yatirimina eklenir.
+  aciklama: Yeni.
+  dogrulama_deneyi: Pilot unitede sure/maliyet kaydi.
+- id: std_rf_ism_shield_usd_per_rf_machine
+  ad: RF induksiyon (FZ vb.) ISM emisyon uyumu (CISPR 11 Grup 2) ve isci EMF maruziyeti icin ekranlama/olcum
+  birim: USD/makine
+  deger: 15000
+  alt: 3000
+  ust: 60000
+  kaynak: Tahmin; CISPR 11 Grup 2 ve 2013/35/AB hafizadan
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Yalniz FZ veya MHz mertebesi induksiyon secilirse (K1 alternatifi). CZ direnc isitmali ise
+    0.
+  aciklama: Yeni.
+  dogrulama_deneyi: Prototip jeneratorde emisyon ve alan olcumu.
+- id: std_rt_hipot_min_s
+  ad: IEC 62109-1 rutin dielektrik testi asgari suresi
+  birim: s
+  deger: 1
+  alt: 1
+  ust: 1
+  kaynak: DEKRA TRF IEC62109_1B madde 7.5.2.5
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: The duration of the test at least 60 s for the type test and 1 s for the routine test.
+  kaynak_tarihi: 2020-01; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Her kutuya zorunlu.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: std_rt_bonding_min_s
+  ad: IEC 62109-1 koruyucu topraklama empedansi rutin testi asgari suresi (Sinif I, tek elemanli baglanti)
+  birim: s
+  deger: 2
+  alt: 2
+  ust: 2
+  kaynak: DEKRA TRF IEC62109_1B madde 7.3.6.3.4
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''the test current may be reduced to any convenient value greater than 10 A''; ''the test duration
+    may be reduced to no less than 2 s''; ''...shall not exceed 0.1 ohm'''
+  kaynak_tarihi: 2020-01; 2026-09-27
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Plastik Sinif II kasada gerekmez.
+  aciklama: Yeni (kosullar ayri parametre).
+  dogrulama_deneyi: '-'
+- id: std_rt_box_hipot_touch_s
+  ad: Kutu rutin dielektrik testi - operator dokunma suresi
+  birim: s/kutu
+  deger: 10
+  alt: 3
+  ust: 30
+  kaynak: Tahmin (test 1 s + kontak/fikstur)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: Zorunlu (IEC 62109-1).
+  aciklama: 'Revizyon: id std_rt_box_hipot_s -> _touch_s; istasyon doluluk ayri.'
+  dogrulama_deneyi: Pilot hat zaman etudu.
+- id: std_rt_box_bonding_touch_s
+  ad: Kutu koruyucu topraklama rutin testi - dokunma suresi (yalniz Sinif I)
+  birim: s/kutu
+  deger: 5
+  alt: 3
+  ust: 15
+  kaynak: Tahmin; kosullar DEKRA TRF 7.3.6.3.4
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: is_class_I=0 (plastik Sinif II) ise uygulanmaz.
+  aciklama: 'Revizyon: kaynak_turu dogrulanmis_url -> tahmin (kaynak denetcisi: deger kaynakta yok).'
+  dogrulama_deneyi: Zaman etudu.
+- id: std_rt_module_iv_touch_s
+  ad: Modul IV (flas) olcumu - dokunma suresi (etiket gucu, fiilen zorunlu)
+  birim: s/panel
+  deger: 20
+  alt: 8
+  ust: 60
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: Etiket toleransi icin fiilen zorunlu.
+  aciklama: 'Revizyon: id _s -> _touch_s.'
+  dogrulama_deneyi: Zaman etudu.
+- id: std_rt_module_hipot_touch_s
+  ad: Modul yalitim/dielektrik rutin testi - dokunma suresi
+  birim: s/panel
+  deger: 10
+  alt: 3
+  ust: 30
+  kaynak: Tahmin; zorunluluk UL 61730 (hafizadan), IEC tarafinda fabrika denetimi (hafizadan)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: unite
+  senaryoya_uygunluk: 60 V sistemde test gerilimi dusuk.
+  aciklama: IEC 61730'da normatif rutin test maddesi dogrulanmadi.
+  dogrulama_deneyi: IEC 61730-2:2023 / UL 61730-1 uretim hatti maddeleri.
+- id: std_rt_module_station_s
+  ad: Modul zorunlu test istasyonu doluluk suresi (IV + hipot)
+  birim: s/panel
+  deger: 30
+  alt: 10
+  ust: 90
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Istasyon sayisini ve CAPEX'i belirler.
+  aciklama: 'Yeni (fizik denetcisi: dokunma/istasyon ayrimi).'
+  dogrulama_deneyi: Zaman etudu.
+- id: std_rt_box_station_s
+  ad: Kutu zorunlu test istasyonu doluluk suresi
+  birim: s/kutu
+  deger: 20
+  alt: 5
+  ust: 60
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Yeni.
+  dogrulama_deneyi: Zaman etudu.
+- id: std_rt_labor_usd_per_h
+  ad: Test teknisyeni tam yuklu iscilik (Turkiye) - uretim alaninin ortak degeriyle degistirilmeli
+  birim: USD/saat
+  deger: 10
+  alt: 6
+  ust: 20
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Cift sayimi onlemek icin uretim/maliyet alaninin tek iscilik parametresi kullanilmali.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: Test teknisyeni,
+    tahmin; kendi notu uretim alaninin tek iscilik parametresini kullanmayi soyluyor. Dokunma testleri operatorce
+    yapilirsa operator ucreti.'
+  dogrulama_deneyi: Firma bordro verisi.
+  esdeger: eco_labor_technician_usd_h
+  esdeger_carpan: 1.0
+- id: std_rt_module_test_capex_usd
+  ad: Modul zorunlu test ekipmani (flas simulator + hipot; EL HARIC)
+  birim: USD/istasyon
+  deger: 80000
+  alt: 30000
+  ust: 250000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Kucuk panelde kucuk aydinlatma alani yeter; firma tasarlayabilir (referans hucre kalibrasyonu
+    gerekir).
+  aciklama: 'Revizyon: EL cikarildi (uretim alani). Flas uretim alaninda sayiliyorsa own_flash_in_std=0.'
+  dogrulama_deneyi: Tedarikci teklifi + kendi tasarim maliyeti.
+- id: std_rt_box_test_capex_usd
+  ad: Kutu zorunlu guvenlik test ekipmani (hipot, topraklama, yalitim; sebeke simulatoru ve pil test cihazi HARIC)
+  birim: USD/istasyon
+  deger: 25000
+  alt: 8000
+  ust: 60000
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: 'Revizyon: 60k -> 25k; fonksiyon/pil test ekipmani uretim alanina devredildi.'
+  dogrulama_deneyi: Tedarikci teklifleri.
+- id: std_rt_module_el_s
+  ad: Modul EL goruntuleme (kalite testi - standart zorunlulugu yok; uretim alanina referans)
+  birim: s/panel
+  deger: 15
+  alt: 5
+  ust: 40
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'H6: orneklemeye indirilebilir.'
+  aciklama: 'Revizyon: adet -> teknik; std maliyet formulunden cikarildi (cift sayim).'
+  dogrulama_deneyi: '-'
+- id: std_rt_box_functional_s
+  ad: Kutu fonksiyon testi (NA koruma esikleri, MPPT, ulke ayari) - uretim/elektronik alanina referans
+  birim: s/kutu
+  deger: 120
+  alt: 30
+  ust: 600
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Standardin her unite icin zorunlu kildigi dogrulanmadi; kurulus fabrika denetiminde isteyebilir
+    (hafizadan).
+  aciklama: 'Revizyon: adet -> teknik (referans).'
+  dogrulama_deneyi: Kurulus fabrika denetim listesi.
+- id: std_rt_batt_eol_s
+  ad: Pil paketi hat sonu testi (OCV/IR, BMS, SoC ayari) - pil alanina referans
+  birim: s/paket
+  deger: 300
+  alt: 60
+  ust: 1800
+  kaynak: Tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: UN 3551 gonderimde SoC <= %30 ayari zorunlu, ekipman icinde onerilen.
+  aciklama: 'Revizyon: adet -> teknik (pil formasyon/derecelendirme alaniyla cift sayim).'
+  dogrulama_deneyi: '-'

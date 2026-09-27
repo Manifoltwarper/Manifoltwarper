@@ -1,0 +1,1965 @@
+alan: pil
+ozet: 'Kur varsayimi 6.72 CNY/USD (25.09.2026). Fiyatlar SMM 24.09.2026 tarihli.
+
+
+  FIYAT (tum degerler ayni kaynaktan, SMM): Na-iyon/LFP primi formata gore -%14 ile +%59 arasinda degisiyor; tek
+  bir ''Na %35-50 pahali'' sonucu gecersiz.
+
+  - 50 Ah NFPP 0.08-0.09 $/Wh, 50 Ah LFP depolama hucresi 0.0565 -> +%50-59.
+
+  - 100 Ah: +%54.
+
+  - 10-28 Ah NFPP 0.073, 20-25 Ah LFP 0.072 -> +%1.
+
+  - 25 Ah NFS kese 0.062 -> -%14.
+
+  - Silindirik Na 0.080-0.085; SMM''de silindirik LFP satiri yok.
+
+  Cin Eylul 2026''dan itibaren Li-iyona %2, Eylul 2027''den itibaren %4 tuketim vergisi uyguluyor; Na-iyon 2028
+  sonuna kadar muaf (Mysteel, dogrulandi). Bu verginin ihracatta uygulanip uygulanmadigi dogrulanmadi. Ihracat KDV
+  iadesinin kaldirilmasi da tum Cin hucrelerini pahalilastirir (oranlar dogrulanmadi).
+
+  Gebze teslim tahmini: Na 26700 0.129 $/Wh (0.09-0.23), LFP 50 Ah 0.091 $/Wh (0.065-0.17).
+
+
+  WH/WP ARTIK KULLANILABILIR ENERJI UZERINDEN TANIMLI: A 1.6, B 3.2 Wh/Wp.
+
+  - Katmanli oksit (LO) 2.0 V kesimle nominal enerjinin ~%80''ini veriyor. Bu nedenle nominal oran A''da 2.0, B''de
+  4.0 Wh/Wp.
+
+  - NFPP ~0.9 kullanilabilir oranla 1.78 / 3.56 Wh/Wp.
+
+  Yalniz hucre maliyeti (satin alma): LO A 0.26, B 0.52 $/W; LFP A 0.16 $/W.
+
+
+  KUANTIZASYONLU TOPLAM PIL MALIYETI (26700, 14S, BMS haric; mekanik, iscilik, takim, sertifika ve garanti dahil):
+
+  - A, tek panelli kutu: 50 W 1.31 / 100 W 0.92 / 200 W 0.59 / 300 W 0.57 / 500 W 0.45 $/W.
+
+  - A, n=4: 0.59-0.38 $/W.
+
+  - 50 W A kutusunda mekanik pay (0.67) hucreyi (0.37) asiyor; cok panelli kutu (K5) nicel olarak dogru.
+
+  - 15S x 50 Ah prizmatik en az 2.14 kWh ediyor; ancak n*P >= ~1.2 kWp (A) oldugunda anlamli.
+
+
+  KENDI HUCRE HATTI — sonuc formata bagli:
+
+  (a) 26700 + K9 (150 bin hucre/yil ~1.4 MWh/yil): 1.03 $/Wh (0.51-1.89). Makineler bedava olsa bile 0.65 $/Wh.
+  Satin almanin 5-8 kati; kesin olarak ekonomik degil.
+
+  (b) 50 Ah prizmatik, K9 ile eslesen genis kaplama makinesi (5 M$, 144k hucre, ~17 MWh/yil, tam doluluk): 0.21
+  $/Wh (0.11-0.70).
+
+  - Na satin almaya gore 1.6 kat, LFP satin almaya gore 2.3 kat pahali.
+
+  - Makineler firmada yapilirsa (2.5 M$, 12 FTE) 0.165 $/Wh, yani Na satin almanin 1.27 kati: belirsizlik icinde.
+
+  - Kendi hat ancak su uc kosul birlikte saglanirsa kazanir: satin alma fiyati karamsar uca (>=~0.2 $/Wh) cikar,
+  hat tam dolu calisir (>=17 MWh/yil) ve LFP kabul edilmez.
+
+  Unite talebi kristal ve modul ajanlarinin ciktisina bagli (ornek 6-13 MWp/yil -> 11-52 MWh/yil). K9 26700 ile
+  talebin 1/8-1/37''sini karsilar; 50 Ah ile yaklasik bir uniteye esit.
+
+  Oneri: Faz 1''de hucre satin al, paketi (kalip, tutucu, kaynak, test) kendin yap. Faz 2''de RFQ ve gercek talep
+  verisiyle prizmatik yolu yeniden hesapla.
+
+
+  SOGUK HAVA:
+
+  - Tycorun 26700: -10 C alti sarj yok; -10..0 C arasinda <0.2C sarj; -30..0 C arasinda desarj <=0.2C (dogrulandi).
+
+  - EVLithium 210 Ah: -20..0 C arasinda <=0.2C sarj.
+
+  - OGSolar NFPP 18650 ve 160 Ah: sarj en dusuk 0 C.
+
+  - ''Na-iyon sogukta iyidir'' iddiasi ancak dusuk akimli desarj icin dogru. Bir 26700 kutusu 0 C altinda 0.2C ile
+  sinirlanirsa, 430 Wh kutudan yalniz ~86 W cekilebilir.
+
+
+  AB 2023/1542 (resmi metin dogrulandi):
+
+  - Resital 15''e gore evde enerji depolayan piller, kutleden bagimsiz olarak endustriyel pildir; A senaryosundaki
+  kutu buyuk olasilikla SBESS''tir.
+
+  - SBESS icin Md. 12 (Ek V guvenlik testleri) ve Md. 14 (BMS''te saglik durumu (SOH) verisi) kapasite esigi olmadan
+  uygulanir.
+
+  - 2 kWh ustunde: Md. 10 (performans belgesi), Md. 7 (karbon ayak izi), Md. 77 (pil pasaportu, 18.02.2027).
+
+  - ''Rated capacity'' ureticinin beyanidir. Esigin altinda kalinacaksa %10 pay birakilmali (<=1.8 kWh).
+
+  - B senaryosunda 5 kg ve alti kutu tasinabilir pil sayilir; Md. 11 (son kullanici tarafindan cikarilabilirlik)
+  18.02.2027''den itibaren gecerli.
+
+
+  EN BUYUK BELIRSIZLIKLER: kucuk alicinin DDP fiyati ve MOQ; Turkiye ek gumruk vergisi (EGV) ve Cin ihracat KDV
+  iadesi; hedef pazarin Wh/Wp orani; Na-iyonun kesime gore kullanilabilir enerjisi; takvim yaslanmasi.'
+parametreler:
+- id: bat_fx_cny_per_usd
+  ad: USD/CNY kuru
+  birim: CNY/USD
+  deger: 6.72
+  alt: 6.5
+  ust: 7.3
+  kaynak: https://tradingeconomics.com/china/currency ; https://www.tcmb.gov.tr/kurlar/today.xml
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'TE: ''The USD/CNY exchange rate rose to 6.7204 on September 25, 2026'' (pil alaninda). TCMB
+    25.09.2026 CNY CrossRateUSD 6.7133 (onceki turda ve kirmizi takimca acildi).'
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: CNY fiyatlarini USD'ye cevirmek icin kullanilir.
+  aciklama: 'SMM''nin USD fiyatlari KDV haric gorunuyor: SMM 314 Ah 0.0483 $/Wh x 6.72 = 0.325 CNY; KDV''li 0.367
+    CNY. Mysteel araligi 0.38-0.41 CNY/Wh. Bu cikarim dogrulanmadi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Altyapida karsiligi yok; yeni eco_ id zorunlu degil. bat_ ve cell_ ayni kaynak ve deger; bat_ secildi (tam URL;
+    id adi birim yonunu eco_fx_try_per_usd ile ayni kalipta veriyor). TCMB capraz kuru 6.713 teyit ediyor. Aralik
+    birlesimi: pil 6.5-7.2, hucre/modul/wafer ust 7.3 -> 6.5-7.3.'
+  dogrulama_deneyi: Siparis tarihindeki kur; teklifte KDV ve iade durumunu yazili sor.
+- id: bat_cell_price_na_cyl_usd_Wh
+  ad: Na-iyon silindirik 26700 (LO) Cin fiyati
+  birim: USD/Wh
+  deger: 0.084
+  alt: 0.079
+  ust: 0.088
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Sep 24, 2026 (USD/Wh): 26700 0.079-0.088, ort. 0.084 (pil alaninda; onceki turda sayfa JS nedeniyle
+    yeniden okunamadi)'
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: GWh olcekli Cin ic piyasa fiyati; kucuk aliciya bat_small_lot_markup, bat_cn_export_vat_cost_frac
+    ve lojistik eklenir.
+  aciklama: '6.72 kurla 0.56 CNY/Wh; HiNa GM''nin 0.5-0.7 CNY/Wh degeriyle ortusuyor. Vanadyumlu polianyon (NVP/NVPF)
+    hucreler 2.4 kat pahali: ''NFPP'' etiketli bir 18650 aslinda NVPF olabilir. | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Tek sahip pil; diger alanlarda es anlamli yok. Cin ic GWh fiyati (KDV haric kabul). Gebze teslim bat_f25,
+    2027 kuraliyla: 0.084 x (1 + 0.13) x 1.3 + 0.012 = 0.135 USD/Wh. Aralik spot kotasyon dagilimidir, 12-24 aylik
+    ileri belirsizligi kapsamaz.'
+  dogrulama_deneyi: 'En az 5 tedarikciye RFQ: 10k/50k adet, DDP Gebze, MOQ, UN38.3 ozeti, cevrim garantisi.'
+- id: bat_cell_price_na_prismatic_usd_Wh
+  ad: Na-iyon NFPP prizmatik 50-200 Ah Cin fiyati
+  birim: USD/Wh
+  deger: 0.085
+  alt: 0.079
+  ust: 0.09
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 50Ah Prismatic (NFPP) 0.08-0.09; 100Ah 0.082-0.089; 200Ah 0.079-0.084 USD/wh, Sep 24, 2026 (pil
+    alaninda)
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: GWh fiyati; kucuk alim payi eklenir.
+  aciklama: Deger 50 Ah araliginin orta noktasi. SMM'nin ortalama sutunu 0.090 ve bu, araligin ust ucuna esit (tutarsiz).
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok. Teslim hesabinda bat_cn_export_vat_cost_frac
+    0.13.
+  dogrulama_deneyi: RFQ.
+- id: bat_cell_price_na_pris_small_usd_Wh
+  ad: Na-iyon NFPP kucuk prizmatik 10-28 Ah Cin fiyati
+  birim: USD/Wh
+  deger: 0.073
+  alt: 0.07
+  ust: 0.076
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 10-28Ah Prismatic (NFPP) 0.07-0.076, ort. 0.073 USD/wh (Sep 24, 2026; pil alaninda)
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: Orta boy kutular (0.8-2 kWh) icin en ucuz Na formati. 25 Ah NFS kese 0.059-0.066 daha ucuz,
+    ama dis mekanik baski ister ve NFS icin gerilim verisi yok.
+  aciklama: Ayni sinifta LFP 20-25 Ah 0.072 -> prim ~+%1. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip
+    pil; es anlamli yok.
+  dogrulama_deneyi: RFQ.
+- id: bat_cell_price_lfp_50ah_usd_Wh
+  ad: LFP 50 Ah depolama (ESS) hucresi Cin fiyati
+  birim: USD/Wh
+  deger: 0.0565
+  alt: 0.0543
+  ust: 0.0588
+  kaynak: https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: China 50Ah ESS Battery 0.0543-0.0588 avg 0.0565 USD/wh (Sep 24, 2026; pil alaninda)
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: 'Na 50 Ah ile ayni kaynak ve ayni format: prim +%50-59. 314 Ah (~1 kWh/hucre) bu urune uymaz.'
+  aciklama: 'Mysteel Eylul 2026: 314 Ah icin 0.38-0.41 CNY/Wh (KDV dahil gorunuyor). SMM USD degeri KDV haric gorunuyor
+    (bkz. kur notu). Li2CO3 158,750 CNY/t (~23.6 k$/t). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil;
+    es anlamli yok. Na ile ayni kaynak ve format (prim +%50-59). Lityum iyon pil de 2027''de iadesiz (pv-magazine:
+    ''lithium-ion batteries and battery packs'').'
+  dogrulama_deneyi: Na RFQ'sunda ayni formatta LFP teklifi iste.
+- id: bat_cell_price_lfp_small_usd_Wh
+  ad: LFP kucuk prizmatik 20-25 Ah Cin fiyati
+  birim: USD/Wh
+  deger: 0.072
+  alt: 0.069
+  ust: 0.09
+  kaynak: https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: China 20-25Ah Prismatic LFP Battery 0.069-0.075 avg 0.072 USD/wh (Sep 24, 2026; pil alaninda);
+    ust 0.09 silindirik LFP icin tahmin payi.
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: EV (guc) sinifi. Silindirik LFP (32700) fiyati SMM'de yok; ust sinir 0.09 bunun icin tahmin
+    payi.
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok.'
+  dogrulama_deneyi: 32700 LFP RFQ.
+- id: bat_cn_li_consumption_tax_frac
+  ad: Cin Li-iyon pil tuketim vergisi (Na-iyon muaf)
+  birim: '-'
+  deger: 0.02
+  alt: 0
+  ust: 0.04
+  kaynak: https://www.mysteel.net/analysis/5139214-china-lithium-industry-in-h2-2026-from-aggregate-surplus-to-structural-rebalancing
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''a 2% consumption tax will apply to lithium-ion batteries from September 1, 2026, rising to
+    4% from September 1, 2027.'' ''Solid-state and sodium-ion batteries are exempt through end-2028.'''
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ic piyasa fiyatlarini etkiler. Ihracatta uygulanip uygulanmadigi DOGRULANMADI (alt sinir 0
+    = muaf).
+  aciklama: 2027 prim hesabinda LFP fiyatina +0.02 fark eklenir (bat_f57).
+  dogrulama_deneyi: Tedarikci tekliflerinde vergi kalemi; gumruk musaviri.
+- id: bat_cn_export_vat_cost_frac
+  ad: Ihracatta iade edilmeyen KDV payi (Cin ic fiyatin ustune)
+  birim: '-'
+  deger: 0.13
+  alt: 0.07
+  ust: 0.13
+  kaynak: https://www.pv-magazine.com/2026/01/09/china-to-abolish-solar-export-tax-rebates-from-april/ + wf_cn_vat
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''For battery products, the export rebate rate will be cut from 9% to 6% between April 1 and
+    Dec. 31, 2026, before being eliminated entirely from Jan. 1, 2027.'' ; ''VAT export rebates for solar products
+    will be fully removed from April 1, 2026.'' (bu gorevde acildi). 2027: 0.13 - 0 = 0.13.'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: Na ve LFP'ye ayni uygulanir; ikisinin farkini degil, ikisinin satin alma fiyatini etkiler.
+  aciklama: '%13 KDV - %6 iade = 0.07; iade sifirlanirsa 0.13. SMM fiyati KDV haric varsayildi. Ihracatci bu farki
+    kismen ustlenebilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Pil sahibi 0.07 (= 0.13 - 0.06, 2026 kurali;
+    kendi notu 2027 sifirlamasini dogrulanmadi diye biliyordu). Iade takvimi artik dogrulandi; zaman tabani kurumlar
+    vergisiyle ayni (2027) yapildi -> 0.13. Konvansiyon (KDV - iade, fiyat uzerinden) UST SINIRDIR: gercek iade
+    edilmeyen KDV yalniz girdi KDV''sidir ve ihracatcinin fiyata yansitma orani piyasaya bagli; alt 0.07 (2026 kurali
+    / kismi yansitma). Etki: 26700 teslim 0.084 x 1.13 x 1.3 + 0.012 = 0.135 USD/Wh (0.129''dan +%5). PV urunleri
+    icin ayri parametre ACILMADI: kullanilan wafer fiyati (InfoLink USD, FOB) Nisan 2026 sonrasi ihracat fiyatidir,
+    iptalin etkisini zaten icerir; 15.24 cm ustu mono wafer iptal kapsaminda (pv-magazine: ''monocrystalline silicon
+    wafers with diameters above 15.24 cm'').'
+  dogrulama_deneyi: MOF/STA duyurusu ve tedarikci teklifleri (2026 ve 2027 teslim fiyatlarini ayri ayri iste).
+- id: bat_small_lot_markup
+  ad: Kucuk alim primi — fabrikadan dogrudan alim
+  birim: '-'
+  deger: 0.3
+  alt: 0.1
+  ust: 0.8
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: Yilda 5-50 MWh alim, MOQ saglandiginda.
+  aciklama: 'Dayanak: SMM toptan ile HiNa uygulama fiyati (0.5-0.7 CNY/Wh) arasinda %0-25 fark ve distributor marjlari.'
+  dogrulama_deneyi: RFQ fiyati / SMM - 1.
+- id: bat_small_lot_markup_pilot
+  ad: Kucuk alim primi — distributor/pilot kanal (Faz 1 prototip)
+  birim: '-'
+  deger: 2
+  alt: 1
+  ust: 4
+  kaynak: https://ogsolarstore.com/products/sodium-ion-nfpp-cylindrical-cells-rechargeable-battery-cell
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Unit price $4.25 each'' (toplu), 900 mAh, 3.0 V -> ~1.57 $/Wh (ABD perakende, SMM''nin ~18
+    kati)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: Perakende fiyat ust sinirin yonunu gosteriyor. 1-4 araligi, perakende ile fabrika arasindaki
+    distributor kanali icin tahmin.
+  aciklama: MOQ'ya ulasilamazsa kullanilir. Seri uretim maliyetine uygulanmaz.
+  dogrulama_deneyi: Distributor teklifleri (1k hucre).
+- id: bat_moq_cells
+  ad: Fabrikadan dogrudan alim icin asgari siparis (MOQ)
+  birim: hucre
+  deger: 5000
+  alt: 1000
+  ust: 50000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: BILMIYORUZ.
+  aciklama: 'Dayanak: 26700 (82 g) icin ~1 palet (~500 kg) ~6000 hucre. Yalniz mertebe.'
+  dogrulama_deneyi: RFQ.
+- id: bat_import_logistics_usd_Wh
+  ad: Ithalat lojistigi + gumruk + EGV + giris
+  birim: USD/Wh
+  deger: 0.012
+  alt: 0.005
+  ust: 0.05
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: Cin->Turkiye deniz yolu. 0 V sevkiyatla ADR SP 400 muafiyeti mumkun; IMDG karsiligi dogrulanmadi.
+  aciklama: Turkiye'nin Cin mensei pillere EGV uygulayip uygulamadigi DOGRULANMADI; ust sinir bu nedenle 0.05'e
+    genisletildi. Na-iyonun GTIP'i (8507.80?) da dogrulanmadi.
+  dogrulama_deneyi: 'Gumruk musaviri: GTIP, vergi ve EGV teyidi; DG ve DG olmayan navlun teklifi.'
+- id: bat_wh_usable_per_wp_A
+  ad: 'Senaryo A: KULLANILABILIR Wh / panel Wp'
+  birim: Wh/Wp
+  deger: 1.6
+  alt: 0.9
+  ust: 2.6
+  kaynak: 'Pil: rakip urunlerin nominal 0.96-2.8 Wh/Wp orani x LFP kullanilabilir 0.92'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Anker SB3 ''2,700 Wh'', ''3,600 Watts''; Zendure ''1,920 Wh'', ''2640W''; VDE: Schuko ''bis
+    zu 960 Wp'', Wieland ''2.000 Wp'''
+  kaynak_tarihi: 2025-2026
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: AB (DE) balkon pazari (LFP urunler). Turkiye icin ayri dogrulanmali.
+  aciklama: 'Rakiplerin nominal oranlari 0.96-2.8 Wh/Wp. Bunlar LFP kullanilabilir orani (0.92) ile carpildi: 0.9-2.6,
+    orta 1.75 x 0.92 = 1.6. Nominal kutu enerjisi = r x P / bat_usable_fraction. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip; kullanilabilir enerji tanimi. Nominal = oran / usable: A varsayilan NFPP 1.78, LO 2.0 Wh/Wp.
+    Tek kural: E_nom = max(hedef, P_box x bat_pv_peak_factor / C_max(format, T)), sonra N_s x E_cell kuantizasyonu.
+    Elektronik''in 1.5 h depolama suresi kaldirilir.'
+  dogrulama_deneyi: PVGIS saatlik uretim + yuk profiliyle 1 yillik simulasyon; 20+ SKU taramasi.
+- id: bat_wh_usable_per_wp_B
+  ad: 'Senaryo B: KULLANILABILIR Wh / panel Wp'
+  birim: Wh/Wp
+  deger: 3.2
+  alt: 1.8
+  ust: 5.5
+  kaynak: 'Pil: EcoFlow River 3 245 Wh + 110 W; Jackery 1000 v2 1070 Wh + 200 W; nominal 2.2-5.35 x 0.92'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: EcoFlow River 3 '245Wh' + '110W'; Jackery 1000 v2 '1,070Wh' + '200W'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 100-200 W paneller tasinabilir; 300-500 W sabit sebeke disi kabin senaryosu.
+  aciklama: Nominal oranlar 2.2-5.35 x 0.92 -> ~2-4.9; ortasi 3.5 x 0.92 = 3.2. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip; nominal LO 4.0, NFPP 3.56 Wh/Wp. B'de 5 kg (tasinabilir pil) ve hava tasimasi sinirlari E_batt'i
+    ayrica kisar.
+  dogrulama_deneyi: Kullanim anketi ve SKU taramasi.
+- id: bat_cell_v_max_lo_V
+  ad: LO hucre sarj ust gerilimi
+  birim: V
+  deger: 3.95
+  alt: 3.9
+  ust: 4
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Charge Voltage: 3.95 ± 0.05V'
+  kaynak_tarihi: '2026'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun.
+  aciklama: 'SELV''e gore seri sayiyi belirler. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_cell_v_max_V:
+    LO (B varsayilani).'
+  dogrulama_deneyi: Giris muayenesinde CV sonu gerilimi.
+- id: bat_cell_v_min_lo_V
+  ad: LO veri sayfasi desarj alt gerilimi
+  birim: V
+  deger: 1.5
+  alt: 1.5
+  ust: 2
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.evlithium.com/sodium-ion-battery/10ah-32140-sodium-ion-battery-for-sale.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Tycorun ''Discharge Cut-off Voltage: 1.50 ± 0.05V''; EVLithium 32140 ''Discharge Cutoff 2.0
+    V'''
+  kaynak_tarihi: '2026'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_v_min_cutoff_V: Veri sayfasi siniri; tasarim kesimi
+    degil.'
+  dogrulama_deneyi: OCV-kapasite egrisi.
+- id: bat_cell_v_nom_lo_V
+  ad: LO nominal gerilim
+  birim: V
+  deger: 3.1
+  alt: 3
+  ust: 3.1
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Nominal Voltage: 3.10V'
+  kaynak_tarihi: '2026'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun.
+  aciklama: 'EVLithium 32140: 3.05 V.'
+  dogrulama_deneyi: '-'
+- id: bat_cell_v_max_nfpp_V
+  ad: Polianyon (NFPP etiketli) sarj ust gerilimi
+  birim: V
+  deger: 3.8
+  alt: 3.7
+  ust: 3.95
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 160Ah 'Max Charge Voltage 3.8 V'; 18650 '3.7 V'; EVLithium 210Ah NFPP '3.95 ±0.05 V'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Etiketler tutarsiz: bayi 18650''yi ''NFPP (Na3V2(PO4)2F3)'' = NVPF diye listeliyor. 3.95
+    V gelirse seri sayi 14S olur.'
+  aciklama: Seri sayi hesabinda secilen hucrenin veri sayfasindaki deger kullanilmali.
+  dogrulama_deneyi: Numunede XRD/ICP ile kimya dogrulamasi; CV sonu gerilimi.
+- id: bat_cell_v_min_nfpp_V
+  ad: Polianyon desarj alt gerilimi
+  birim: V
+  deger: 1.5
+  alt: 1.5
+  ust: 2
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Discharge Cutoff: 1.5 V'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun.
+  aciklama: '-'
+  dogrulama_deneyi: OCV egrisi.
+- id: bat_cell_v_nom_nfpp_V
+  ad: Polianyon nominal gerilim
+  birim: V
+  deger: 2.9
+  alt: 2.85
+  ust: 3.1
+  kaynak: https://egroup18650.com/73-sodium-ion-cells ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''50Ah ... 2.85V platform voltage''; OGSolar 160Ah ''3.0 V''; EVLithium 210Ah ''≈3.10V'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun. Tablolarda 50 Ah hucre icin 2.85 V kullanildi.
+  aciklama: 'AB 2 kWh esigi hesabinda bu aralik (%9) kritik. | Örneklem denetimi (2026-09-27): kaynaklar NFPP için
+    2,85–3,10 V aralığı veriyor; 2,9 V bu aralıktan seçilmiş muhafazakâr değer, doğrudan yazılı değil.'
+  dogrulama_deneyi: Olculen C/5 enerjisi / Ah.
+- id: bat_cell_v_max_lfp_V
+  ad: LFP sarj ust gerilimi (referans)
+  birim: V
+  deger: 3.65
+  alt: 3.55
+  ust: 3.65
+  kaynak: hafiza (LFP veri sayfalari)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Payli seri sayi 15S (54.8 V); 16S yalniz paysiz.
+  aciklama: Nominal 3.2 V, alt sinir 2.5 V (hafiza).
+  dogrulama_deneyi: Secilen LFP hucresinin veri sayfasi.
+- id: bat_cell_v_min_lfp_V
+  ad: LFP desarj alt gerilimi (referans)
+  birim: V
+  deger: 2.5
+  alt: 2
+  ust: 2.8
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: LFP'de pencere ~1.4:1; Na'da ~2:1.
+  dogrulama_deneyi: '-'
+- id: bat_cell_v_nom_lfp_V
+  ad: LFP nominal gerilim
+  birim: V
+  deger: 3.2
+  alt: 3.2
+  ust: 3.22
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_v_min_cutoff_V
+  ad: Tasarimda secilen hucre desarj kesimi (Na)
+  birim: V
+  deger: 2
+  alt: 1.5
+  ust: 2.5
+  kaynak: Pil tasarim onerisi; veri sayfasi alt siniri 1.50 V (Tycorun)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Discharge cut-off 1.50±0.05V'' (veri sayfasi siniri)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Elektronikle birlikte optimize edilir.
+  aciklama: Kesim arttikca kullanilabilir oran duser; P/V_min akimi da duser. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip. V_batt_min = 15 x 2.0 = 30 V (NFPP) / 14 x 2.0 = 28 V (LO) -> MPPT penceresi, azami akim
+    ve kullanilabilir oran (LO ~0.8, NFPP ~0.9) buna bagli. 1.5 V veri sayfasi siniri farkli kavram.
+  dogrulama_deneyi: 25/0/-10 C'de C/5 ve C/2 desarj egrileri.
+- id: bat_usable_fraction_lo
+  ad: LO kullanilabilir enerji / anma enerjisi (2.0 V kesimde)
+  birim: '-'
+  deger: 0.8
+  alt: 0.72
+  ust: 0.88
+  kaynak: https://arxiv.org/pdf/2403.13759 (Bolum 16.1, Natron CEO yorumu)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''NNM vs. HC cells ... to access more than about 80-85% of total cell energy, the cell voltage
+    must fall below ½ of the maximum charge voltage'''
+  kaynak_tarihi: 2024-2025
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 2.0 V = 0.506 x 3.95 V; alintiya gore ~%80-85. Kaynak rakip (PBA) bir ureticinin yorumu, yani
+    cikar catismasi olabilir.
+  aciklama: Eski 0.9 degeri kendi kaynagiyla celisiyordu. Ust SOC tamponunun Na-iyonda gerekliligi kanitlanmadi;
+    alt sinir 0.72 tamponlu durumu kapsiyor.
+  dogrulama_deneyi: Aday hucrede Wh(2.0 V)/Wh(1.5 V) olcumu.
+- id: bat_usable_fraction_nfpp
+  ad: NFPP kullanilabilir enerji orani (2.0 V kesimde)
+  birim: '-'
+  deger: 0.9
+  alt: 0.8
+  ust: 0.95
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: BILMIYORUZ.
+  aciklama: 'Dayanak: NFPP katot egrisi LO''dan daha az egimli (hafiza). Veri yok.'
+  dogrulama_deneyi: OCV egrisi.
+- id: bat_usable_fraction_lfp
+  ad: LFP kullanilabilir oran (rakip urunler ve LFP secenegi)
+  birim: '-'
+  deger: 0.92
+  alt: 0.88
+  ust: 0.96
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Rakiplerin nominal Wh degerini kullanilabilir Wh'e cevirmek icin.
+  aciklama: 'Dayanak: yaygin %5-10 SOC tamponu (hafiza).'
+  dogrulama_deneyi: Rakip urunde kullanilabilir enerji olcumu.
+- id: bat_cell_26700_capacity_Ah
+  ad: 26700 Na-iyon kapasite
+  birim: Ah
+  deger: 3.3
+  alt: 3.2
+  ust: 3.5
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 3300 mAh @ 0.50C (typical 3350); 82.0 ± 0.5 g; 127 Wh/kg
+  kaynak_tarihi: '2026'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun; 10.23 Wh/hucre.
+  aciklama: '-'
+  dogrulama_deneyi: C/2 kapasite.
+- id: bat_cell_prismatic_capacity_Ah
+  ad: Buyuk prizmatik kapasite (tasarim secimi)
+  birim: Ah
+  deger: 50
+  alt: 50
+  ust: 200
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'NFPP prizmatik satirlari: 10-28Ah, 50Ah, 100Ah, 200Ah'
+  kaynak_tarihi: '2026-09-24'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Tasarim secimi.
+  aciklama: 15S x 50 Ah x 2.85 V = 2138 Wh (en kucuk paket).
+  dogrulama_deneyi: '-'
+- id: bat_cell_pris_small_capacity_Ah
+  ad: Kucuk prizmatik kapasite (tasarim secimi)
+  birim: Ah
+  deger: 20
+  alt: 10
+  ust: 28
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''10-28Ah Prismatic (NFPP)'''
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Temsili 20 Ah x 2.9 V = 58 Wh; 15S'de en kucuk paket 870 Wh.
+  aciklama: Belirli bir hucre dogrulanmadi.
+  dogrulama_deneyi: RFQ ile veri sayfasi.
+- id: bat_cell_grav_lo_Wh_kg
+  ad: LO hucre ozgul enerjisi
+  birim: Wh/kg
+  deger: 127
+  alt: 110
+  ust: 175
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.catl.com/en/news/6720.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Tycorun '127 Wh/kg'; EVLithium 32140 '≥110 Wh/kg'; CATL 'up to 175 Wh/kg'
+  kaynak_tarihi: '2026'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 175 Wh/kg CATL'in EV hucresine ait; kucuk alici icin 110-130.
+  aciklama: '-'
+  dogrulama_deneyi: Tarti.
+- id: bat_cell_grav_nfpp_Wh_kg
+  ad: Polianyon hucre ozgul enerjisi
+  birim: Wh/kg
+  deger: 115
+  alt: 80
+  ust: 140
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 160Ah '3.0 V', '4.2 ±0.2 kg'; 18650 '~33 g', 900 mAh, 3.0 V; 210Ah '≥140Wh/Kg'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk formatta belirgin dusuk.
+  aciklama: '160x3.0/4.2 = 114; 18650: 2.7/0.033 = 82 Wh/kg.'
+  dogrulama_deneyi: Tarti.
+- id: bat_cell_grav_lfp_Wh_kg
+  ad: LFP hucre ozgul enerjisi (referans)
+  birim: Wh/kg
+  deger: 160
+  alt: 140
+  ust: 190
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Veri sayfasi.
+- id: bat_cycle_life_lo_cyl
+  ad: LO silindirik cevrim omru (%80, 25 C)
+  birim: cevrim
+  deger: 3000
+  alt: 2000
+  ust: 5000
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.evlithium.com/sodium-ion-battery/10ah-32140-sodium-ion-battery-for-sale.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Tycorun 'Over 2000 cycles' (%80); EVLithium 32140 '98% after 500 cycles' (0.5C), '3850 cycles
+    ... 96%' (%90 DOD, 2C)
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uretici iddialari; format ve hucre bagimli.
+  aciklama: Deger iki veri sayfasi arasinda secildi.
+  dogrulama_deneyi: 35/45 C hizlandirilmis cevrim.
+- id: bat_cycle_life_nfpp_pris
+  ad: NFPP prizmatik cevrim omru (%80, 25 C)
+  birim: cevrim
+  deger: 5000
+  alt: 2000
+  ust: 10000
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.highstar-sodium.com/technical-characteristics-of-prismatic-sodium-battery-cells/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 160Ah '≥6000 cycles' (%80, 0.5C); Highstar 160Ah '10,000 cycles' (0.5P), '3,000 cycles' (1P),
+    60 C'de '2,000'
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 160 Ah degeri 10-50 Ah hucreye aktarilamaz; deger bu nedenle dusuruldu.
+  aciklama: 'Örneklem denetimi (2026-09-27): 5000 çevrim kaynaklarda doğrudan yok; 0,5C''de 6000 ile 1C''de 3000
+    arasından seçilmiş. Highstar''ın 10 000 çevrimi %70 kapasite içindir (%80 değil).'
+  dogrulama_deneyi: Bagimsiz hizlandirilmis cevrim testi.
+- id: bat_cycle_life_nfpp_cyl
+  ad: Polianyon kucuk silindirik cevrim omru
+  birim: cevrim
+  deger: 1500
+  alt: 1000
+  ust: 4000
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '18650: ''≥1000 cycles to ≥85% capacity'' (1C, 3.7-1.5 V)'
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '%80''e ekstrapolasyon tahmin.'
+  aciklama: '-'
+  dogrulama_deneyi: Cevrim testi.
+- id: bat_cycle_life_lfp
+  ad: LFP cevrim omru (referans, %80)
+  birim: cevrim
+  deger: 6000
+  alt: 3000
+  ust: 8000
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Depolama sinifi prizmatik; kucuk formatta daha dusuk olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Veri sayfasi + test.
+- id: bat_cal_fade_k_per_sqrt_yr
+  ad: Takvim yaslanmasi katsayisi (25 C, orta SOC)
+  birim: 1/yil^0.5
+  deger: 0.02
+  alt: 0.01
+  ust: 0.04
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Na-iyon icin BILMIYORUZ.
+  aciklama: 'kayip = k*sqrt(yil)*AF; 10 yilda 25 C''de ~%6. Dayanak: Li-iyon icin sqrt(t) davranisi (hafiza).'
+  dogrulama_deneyi: '%100 ve %50 SOC''de 45/60 C depolama, 3-6 ay.'
+- id: bat_aging_accel_per_10C
+  ad: Yaslanma hizlanma carpani (her +10 C)
+  birim: '-'
+  deger: 1.58
+  alt: 1.3
+  ust: 2
+  kaynak: https://www.highstar-sodium.com/technical-characteristics-of-prismatic-sodium-battery-cells/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''80% energy retention at 10,000 cycles (0.5P, 25C)''; ''80% retention at 2,000 cycles at elevated
+    temperatures (60C)'''
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Cevrim verisinden tureterek takvim yaslanmasina da uygulandi (varsayim).
+  aciklama: (10000/2000)^(10/35) = 1.58.
+  dogrulama_deneyi: Iki sicaklikta takvim testi.
+- id: bat_eol_soh
+  ad: Garanti sonu vaat edilen SOH
+  birim: '-'
+  deger: 0.7
+  alt: 0.6
+  ust: 0.8
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Pazar vaadine bagli bir tasarim secimi.
+  aciklama: 'Dayanak: ev depolama garantilerinde yaygin %70 esigi (hafiza).'
+  dogrulama_deneyi: Rakip garanti taramasi.
+- id: bat_capacity_oversize
+  ad: Garanti icin nominal buyutme carpani
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 1.25
+  kaynak: tasarim secimi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 1.0 = vaat baslangic enerjisi uzerinden.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_charge_temp_min_C
+  ad: En dusuk sarj sicakligi
+  birim: C
+  deger: -10
+  alt: -20
+  ust: 0
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html
+    ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Tycorun ''-10℃: cannot charge | -10–0℃: <0.20C''; EVLithium ''-20~0°C ≤0.20C''; OGSolar 18650
+    ''Charge Temperature Range 0 °C to +60 °C'', 160Ah ''0 °C to +55 °C'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Hucreye bagli (-20 ile 0 C). Ilk ciktidaki 'Tycorun 0 C alti sarj etmiyor' ifadesi yanlisti;
+    ancak 0 C alti sarj etmeyen Na hucreler de var (OGSolar).
+  aciklama: Sifir alti sarj C-orani bat_charge_c_max_subzero ile sinirli.
+  dogrulama_deneyi: -10/-20 C'de 0.1/0.2C sarj; dV/dQ ve sokum ile Na kaplama kontrolu.
+- id: bat_charge_temp_max_C
+  ad: En yuksek sarj sicakligi
+  birim: C
+  deger: 45
+  alt: 45
+  ust: 60
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Tycorun ''>45℃: cannot charge''; OGSolar 18650 ''+60 °C'', 160Ah ''+55 °C'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yaz ogleden sonra kutu sicakligi 45 C'yi asarsa sarj durur; golgede kutu (K5) gerekli.
+  aciklama: '-'
+  dogrulama_deneyi: Kutu sicaklik kaydi.
+- id: bat_charge_c_max_cyl
+  ad: Silindirik surekli sarj C-orani (0-45 C)
+  birim: 1/h
+  deger: 1
+  alt: 0.5
+  ust: 1
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '0–45℃: ≤1.00C'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uygun.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris: 26700 (B varsayilani).'
+  dogrulama_deneyi: '-'
+- id: bat_charge_c_max_pris
+  ad: Prizmatik surekli sarj C-orani (0-45 C)
+  birim: 1/h
+  deger: 0.5
+  alt: 0.3
+  ust: 1
+  kaynak: EVLithium 210 Ah prizmatik veri sayfasi; 26700 icin bat_charge_c_max_cyl 1.0 (Tycorun); sifir alti 0.2C
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''0~45°C – ≤0.50C'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 210 Ah verisi; 50 Ah'te farkli olabilir.
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, formata ve sicakliga bagli: prizmatik 0.5C (A varsayilani),
+    26700 1.0C (B), -10..0 C 0.2C. E_nom >= P_box x bat_pv_peak_factor / C_max. 210 Ah verisi; 20 Ah hucrede farkli
+    olabilir (veri sayfasi).'
+  dogrulama_deneyi: Veri sayfasi.
+- id: bat_charge_c_max_subzero
+  ad: Sifir alti sarj C-orani
+  birim: 1/h
+  deger: 0.2
+  alt: 0.1
+  ust: 0.2
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''-10–0℃: <0.20C''; ''-20~0°C ≤0.20C'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: PV sarj orani (~0.85/r ≈ 0.43C) kisin bu siniri asar.
+  aciklama: A'da fazla PV sebekeye verilir, kayip olmaz; B'de kirpilir.
+  dogrulama_deneyi: Soguk sarj testi.
+- id: bat_discharge_c_max_subzero
+  ad: Sifir alti desarj C-orani siniri
+  birim: 1/h
+  deger: 0.2
+  alt: 0.2
+  ust: 1
+  kaynak: https://www.tycorun.com/products/sodium-ion-26700-battery ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Tycorun ''-30–0℃: ≤0.20C'' desarj; OGSolar 160Ah -20 C ''≥80% ... at 1C discharge'''
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'YENI BULGU: Tycorun 26700''de kista kutu gucu 0.2C x E ile sinirli. Elektronik ajani P_box_W''yi
+    kisin buna gore sinirlamali.'
+  aciklama: '-'
+  dogrulama_deneyi: -20 C'de 0.5C/1C desarj ve sicaklik artisi.
+- id: bat_discharge_retention_m20C
+  ad: -20 C desarj kapasite orani (dusuk akim)
+  birim: '-'
+  deger: 0.85
+  alt: 0.8
+  ust: 0.9
+  kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.catl.com/en/news/6720.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 18650 '≥85% ... at 0.5C'; 160Ah '≥80%' (1C); CATL 'over 90% capacity retention at –40 °C'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Soguk avantaji desarj tarafinda; guc siniri icin yukariya bakiniz.
+  aciklama: '-'
+  dogrulama_deneyi: Iklim kabini.
+- id: bat_pv_peak_factor
+  ad: PV en yuksek gucunun Wp'ye orani (sarj akimi icin)
+  birim: '-'
+  deger: 0.85
+  alt: 0.7
+  ust: 0.95
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Sicaklik ve egim kayiplari; dikey balkon montajinda daha dusuk.
+  aciklama: Kesin sinir degil; kirpma kaybi yillik simulasyonla hesaplanir.
+  dogrulama_deneyi: PVGIS saatlik simulasyon.
+- id: bat_roundtrip_eff
+  ad: Hucre DC gidis-donus verimi
+  birim: '-'
+  deger: 0.94
+  alt: 0.9
+  ust: 0.97
+  kaynak: https://www.highstar-sodium.com/technical-characteristics-of-prismatic-sodium-battery-cells/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''more than 96% under 0.5P rate ... @ 60C'' (96.82%)'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 60 C degeri ust sinir; 25 C icin 0.92-0.95 tahmin.
+  aciklama: '-'
+  dogrulama_deneyi: 25 C'de 0.5C cevrim.
+- id: bat_v_lim_margin
+  ad: SELV sinirina gore tasarim payi
+  birim: '-'
+  deger: 0.97
+  alt: 0.93
+  ust: 0.99
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: +0.05 V/hucre x 14 = 0.7 V ve BMS olcum hatasi; 60 x 0.97 = 58.2 V.
+  dogrulama_deneyi: 'Standart ajani: SELV tanimi.'
+- id: bat_cycles_per_year_A
+  ad: A yillik esdeger tam cevrim
+  birim: cevrim/yil
+  deger: 300
+  alt: 200
+  ust: 365
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 'Dayanak: gunluk cevrim; kisin %30-50 derinlik.'
+  dogrulama_deneyi: Wh/Wp simulasyonu.
+- id: bat_cycles_per_year_B
+  ad: B yillik esdeger tam cevrim
+  birim: cevrim/yil
+  deger: 60
+  alt: 20
+  ust: 150
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Sebeke disi kabinde A'ya yakin.
+  aciklama: '-'
+  dogrulama_deneyi: Anket/telemetri.
+- id: bat_design_life_years
+  ad: Hedef urun omru/garanti
+  birim: yil
+  deger: 10
+  alt: 5
+  ust: 15
+  kaynak: 'tahmin (pazar referansi: Anker 5 yil dogrulandi; Zendure 10 yil kaynak denetcisince dogrulandi)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: Anker SB3 '5-year warranty'
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Panel 25 yil yasar; pil 1-2 kez degisir (K5 ile uyumlu).
+  aciklama: Pazar konumlandirma karari.
+  dogrulama_deneyi: Garanti taramasi.
+- id: bat_mech_per_cell_cyl_usd
+  ad: Silindirik hucre basina paket PARCALARI (tutucu, serit, yalitim)
+  birim: USD/hucre
+  deger: 0.08
+  alt: 0.04
+  ust: 0.18
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kendi kalip ve enjeksiyon varsayildi. Istasyon zamani cikarildi (zaman sinifinda).
+  aciklama: 'Dayanak: Ni-celik serit 2-3 cent x 2 + plastik 1-2 cent.'
+  dogrulama_deneyi: DFM teklifleri.
+- id: bat_mech_per_cell_pris_usd
+  ad: Prizmatik hucre basina paket parcalari (bara, yalitim, sikistirma payi)
+  birim: USD/hucre
+  deger: 0.8
+  alt: 0.4
+  ust: 1.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kese hucrede baski cercevesi dahil ayni aralik.
+  aciklama: Kucuk prizmatik icin x0.5 alinir (tahmin).
+  dogrulama_deneyi: DFM teklifleri.
+- id: bat_enclosure_fixed_usd
+  ad: Kutu sabit parca maliyeti (conta, kapak, valf)
+  birim: USD/kutu
+  deger: 15
+  alt: 8
+  ust: 30
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: IP65 dis mekan kutusu, kendi kalip.
+  aciklama: H2.
+  dogrulama_deneyi: Parca teklifi (2-3 boyut).
+- id: bat_enclosure_ref_usd
+  ad: Kutu boyutla olceklenen maliyet (1 kWh referansta)
+  birim: USD/kutu
+  deger: 20
+  alt: 10
+  ust: 50
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Maliyet = ref x (E/1000)^bat_enclosure_exp.
+  dogrulama_deneyi: Iki boyut icin teklif.
+- id: bat_enclosure_exp
+  ad: Kutu maliyeti olcekleme ussu
+  birim: '-'
+  deger: 0.85
+  alt: 0.67
+  ust: 1
+  kaynak: hesap/tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'Geometriye bagli: 2/3 kup benzeri kutu; ~1 ise yuksekligi hucre boyuyla sabit duz kutu veya
+    Ns sabitken Np ile tek eksende uzayan kutu.'
+  aciklama: '-'
+  dogrulama_deneyi: Tasarim cizimleri.
+- id: bat_box_misc_usd
+  ad: Kutu basina diger parcalar (DC konnektor, sigorta, rakor, kablo)
+  birim: USD/kutu
+  deger: 12
+  alt: 6
+  ust: 25
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: BMS ve kontaktor elektronik ajaninda.
+  aciklama: '-'
+  dogrulama_deneyi: BOM teklifi.
+- id: bat_pack_mass_overhead_factor
+  ad: Paket kutlesi / hucre kutlesi
+  birim: '-'
+  deger: 1.35
+  alt: 1.2
+  ust: 1.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kucuk paketlerde daha yuksek.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip tartimi.
+- id: bat_pack_yield
+  ad: Paket montaj verimi
+  birim: '-'
+  deger: 0.99
+  alt: 0.97
+  ust: 0.998
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Pilot seri.
+- id: bat_eol_test_usd_per_box
+  ad: Pil tarafi hat sonu testi (OCV, IR, izolasyon, koruma kesme kontrolu)
+  birim: USD/kutu
+  deger: 1.5
+  alt: 0.5
+  ust: 4
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: H6'ya ragmen kalan zorunlu unite testi.
+  aciklama: Test istasyonu amortismani dahil. BMS koruma testi BURADA sayilir; elektronik ajani saymamali (arayuz).
+  dogrulama_deneyi: Cevrim suresi olcumu.
+- id: bat_incoming_insp_usd_per_cell
+  ad: Hucre giris muayenesi (yalniz satin alma yolunda)
+  birim: USD/hucre
+  deger: 0.02
+  alt: 0.005
+  ust: 0.05
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kendi hucrede formasyon verisi var; uygulanmaz.
+  aciklama: '-'
+  dogrulama_deneyi: Ilk 3 lotta %100, sonra numune.
+- id: bat_pack_line_capex_usd
+  ad: Paket montaj hatti yatirimi (ayiklama, kaynak, fikstur; EOL testi haric)
+  birim: USD/hat
+  deger: 250000
+  alt: 100000
+  ust: 600000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Satin alma yolunda 'pil hatti' budur; firma kendi makinesini yapabilir.
+  aciklama: 'Dayanak: yari otomatik direnc/lazer kaynak + OCV/IR ayiklayici + fiksturler.'
+  dogrulama_deneyi: Ic tasarim maliyeti ve 2 teklif.
+- id: bat_pack_cells_per_h_cyl
+  ad: Paket hatti hizi — silindirik
+  birim: hucre/saat
+  deger: 400
+  alt: 200
+  ust: 900
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: 'Dayanak: 2 kaynak/hucre, ~4-5 s/kaynak.'
+  dogrulama_deneyi: Pilot zaman etudu.
+- id: bat_pack_cells_per_h_pris
+  ad: Paket hatti hizi — prizmatik
+  birim: hucre/saat
+  deger: 60
+  alt: 30
+  ust: 120
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etudu.
+- id: bat_pack_min_per_box
+  ad: Kutu basina sabit montaj iscilik suresi (kapatma, kablaj, BMS baglantisi, etiket)
+  birim: dk/kutu
+  deger: 15
+  alt: 8
+  ust: 30
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Iscilik = (hucre/hiz + dk/60) x labor_cost_usd_fte_yr / bat_fte_hours_yr.
+  dogrulama_deneyi: Zaman etudu.
+- id: bat_pack_line_hours_yr
+  ad: Paket hatti yillik calisma saati
+  birim: saat/yil
+  deger: 3600
+  alt: 3000
+  ust: 5500
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '2 vardiya x 8 saat x 300 gun x OEE 0.75. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → el_hours_per_year_h:
+    2 x 8 x 300 gun x OEE 0.75: gun sayisi ve OEE gomulu; sayisal olarak 4000 x 0.9 ile ayni ama ayristirilmali.'
+  dogrulama_deneyi: '-'
+- id: bat_fte_hours_yr
+  ad: FTE basina yillik calisma saati
+  birim: saat/yil
+  deger: 1800
+  alt: 1700
+  ust: 2200
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Saha ajaniyla ortak olmali.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_productive_hours_fte_yr üzerinden okunur. Fark: Ayni kavram;
+    tahmin (40 h/hafta politikasina denk); birim ayni (saat/yil = h/yil). Senaryo olarak etiketlenmeli; bat_f43_pack_labor
+    paydasi kanonige baglanmali.'
+  dogrulama_deneyi: '-'
+  esdeger: eco_productive_hours_fte_yr
+  esdeger_carpan: 1.0
+- id: bat_tooling_fixed_usd
+  ad: Kutu ve tutucu kalip takimi — sabit kisim (tasarim basina)
+  birim: USD/tasarim
+  deger: 20000
+  alt: 8000
+  ust: 50000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Firmanin kendi kalip atolyesi (ic maliyet).
+  aciklama: 'H2: kalip boyutla artar.'
+  dogrulama_deneyi: Ic kalip atolyesi fiyatlamasi.
+- id: bat_tooling_ref_usd
+  ad: Kalip takimi boyut terimi (1 kWh referansta)
+  birim: USD/tasarim
+  deger: 15000
+  alt: 5000
+  ust: 40000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: x (E/1000)^bat_enclosure_exp.
+  dogrulama_deneyi: '-'
+- id: bat_warranty_reserve_frac
+  ad: Garanti karsiligi (hucre + mekanik maliyetine oran)
+  birim: '-'
+  deger: 0.03
+  alt: 0.01
+  ust: 0.08
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Omur belirsiz oldugu icin ust sinir genis.
+  aciklama: '-'
+  dogrulama_deneyi: Omur testleri + saha verisi.
+- id: bat_epr_fee_usd_per_kg
+  ad: Genisletilmis uretici sorumlulugu / atik pil ucreti
+  birim: USD/kg
+  deger: 1
+  alt: 0.3
+  ust: 3
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: AB (2023/1542 EPR) ve TR atik pil yonetmeligi; ulkeye bagli.
+  aciklama: BILMIYORUZ; mertebe tahmini.
+  dogrulama_deneyi: Hedef ulke EPR kuruluslarindan tarife.
+- id: bat_heater_usd_per_box
+  ad: Isitici film + kontrol (opsiyonel, B)
+  birim: USD/kutu
+  deger: 4
+  alt: 2
+  ust: 10
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Yalniz B'de ve T_site_min_C < bat_charge_temp_min_C ise.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: bat_line_cells_per_year
+  ad: Kendi hucre hatti montaj/formasyon kapasitesi (K9)
+  birim: hucre/yil
+  deger: 150000
+  alt: 100000
+  ust: 200000
+  kaynak: Kullanici karari K9
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''K9: hat basina ~150 bin hucre/yil'''
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kaplama alani ayrica sinirlar (bat_f30).
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Yalniz pil_kaynagi = ic_hat iken baglayici. Satin alinan hucrede
+    tavan paket hatti kapasitesi (26700 ~1.44 M, prizmatik ~216 bin hucre/yil). std_f_boxes_per_year_unit ve el_f_N_box_batt_yr
+    bu ayrimi yapmali. K9''un anlami kullaniciya sorulmali.'
+  dogrulama_deneyi: '-'
+- id: bat_line_capex_cyl_usd
+  ad: Kendi hucre hatti yatirimi — 26700 (0.25 m kaplama makinesi, kuru oda dahil)
+  birim: USD
+  deger: 2000000
+  alt: 1000000
+  ust: 4000000
+  kaynak: 'tahmin (olcek referansi: https://www.ess-news.com/2025/12/19/moll-batterien-garners-more-than-25-million-for-sodium-ion-battery-plant-in-germany/)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Moll: ''annual capacity of 1 GWh'', ''about €103 million'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: ~1400 $/(kWh/yil); GWh olcegin ~12 kati.
+  aciklama: 'Kalem bazli tahmin (bin $): karistirici 40-100; kaplama 150-400; kalender 50-150; sarma 80-250; montaj
+    150-500; dolum 50-150; formasyon 30-80; kuru oda 300-900; QC 100-300.'
+  dogrulama_deneyi: 3 anahtar teslim teklif.
+- id: bat_line_capex_pris_usd
+  ad: Kendi hucre hatti yatirimi — 50 Ah prizmatik (0.6 m kaplama makinesi)
+  birim: USD
+  deger: 5000000
+  alt: 2500000
+  ust: 10000000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 'Alt sinir 2.5 M$: makineleri firmanin kendisinin yapmasi.'
+  aciklama: 'Kaplama kapasitesi (bat_coat_area_pris_m2_yr) ile tutarli boyutlandirildi: ~144k hucre/yil.'
+  dogrulama_deneyi: Anahtar teslim teklif.
+- id: bat_coat_area_cyl_m2_yr
+  ad: Kaplama kapasitesi — 26700 hatti (tek yuz gecis alani)
+  birim: m2/yil
+  deger: 108000
+  alt: 50000
+  ust: 250000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: 0.25 m x 1.5 m/dk x 60 x 16 saat x 300 gun.
+  dogrulama_deneyi: Teklifteki genislik, hiz ve kurutma boyu.
+- id: bat_coat_area_pris_m2_yr
+  ad: Kaplama kapasitesi — prizmatik hat
+  birim: m2/yil
+  deger: 605000
+  alt: 300000
+  ust: 1200000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: 0.6 m x 3.5 m/dk x 4800 saat.
+  dogrulama_deneyi: Teklif.
+- id: bat_coat_side_factor
+  ad: Hucre basina kaplanan yuz alani / tek yuz esdeger katot alani
+  birim: '-'
+  deger: 2.1
+  alt: 2
+  ust: 2.3
+  kaynak: hesap
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Katot 1 + anot ~1.1 (N/P ve tasma). Eski '/4' iki yuzu cift sayiyordu.
+  dogrulama_deneyi: Sokum.
+- id: bat_line_life_years
+  ad: Hat ekonomik omru
+  birim: yil
+  deger: 7
+  alt: 5
+  ust: 10
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Teknolojik eskime.
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (hucre
+    ve paket hatti).'
+  dogrulama_deneyi: '-'
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
+- id: bat_line_maint_frac
+  ad: Yillik bakim / yatirim
+  birim: 1/yil
+  deger: 0.05
+  alt: 0.03
+  ust: 0.08
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: 'Paket hattina da uygulanir. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden
+    okunur. Fark: Ayni kavram; tahmin; hucre ve paket hatti.'
+  dogrulama_deneyi: '-'
+  esdeger: eco_maint_frac_capex_yr
+  esdeger_carpan: 1.0
+- id: bat_line_staff_fte_cyl
+  ad: Hucre hatti personeli — 26700
+  birim: FTE
+  deger: 12
+  alt: 8
+  ust: 20
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Tedarikci istasyon basina operator sayisi.
+- id: bat_line_staff_fte_pris
+  ad: Hucre hatti personeli — prizmatik
+  birim: FTE
+  deger: 16
+  alt: 10
+  ust: 24
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: Istifleme, lazer kaynak ve yuksek akimli formasyon.
+  dogrulama_deneyi: '-'
+- id: bat_line_overhead_cyl_usd_yr
+  ad: Hat genel giderleri — 26700
+  birim: USD/yil
+  deger: 130000
+  alt: 60000
+  ust: 250000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_line_overhead_pris_usd_yr
+  ad: Hat genel giderleri — prizmatik
+  birim: USD/yil
+  deger: 180000
+  alt: 90000
+  ust: 350000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_dryroom_power_cyl_kW
+  ad: Kuru ortam surekli gucu — 26700 hatti
+  birim: kW
+  deger: 60
+  alt: 30
+  ust: 120
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: 100-200 m2 oda, ciy noktasi -40 C. Mini-ortam secilirse 5-20 kW (tahmin).
+  aciklama: 526 MWh/yil.
+  dogrulama_deneyi: Kurutucu tedarikcisinden guc hesabi.
+- id: bat_dryroom_power_pris_kW
+  ad: Kuru ortam surekli gucu — prizmatik hat
+  birim: kW
+  deger: 90
+  alt: 45
+  ust: 180
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_prod_energy_kWh_per_kWh
+  ad: Hucre uretim enerjisi (GWh olcek, SIB, kWh_cell basina)
+  birim: kWh/kWh
+  deger: 23
+  alt: 15
+  ust: 30
+  kaynak: https://www.nature.com/articles/s41560-023-01355-z
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''SIB cells are likely to have an energy demand of 23.0 kWh_prod''; ''5.2 kWh_prod per m2_cell'';
+    oda -40 C icin besleme havasi -60 C'
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: GWh olcek. Kuru oda burada sabit yuk olarak ayri hesaplanir; cift sayimi onlemek icin (1 -
+    bat_degen_dryroom_share) ile carpilir.
+  aciklama: Alan tabani yerine kWh tabani kullanildi; ~3 katlik m2 tanim uyusmazligi giderildi. Sayfa curl ile acildi.
+  dogrulama_deneyi: Pilotta enerji olcumu.
+- id: bat_degen_dryroom_share
+  ad: Degen degerinde kuru odanin payi
+  birim: '-'
+  deger: 0.4
+  alt: 0.25
+  ust: 0.6
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Degen: ''dry rooms being the largest energy consumer'' (pay sayisi dogrulanmadi)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Degen ek verisi (Sekil 4).
+- id: bat_areal_capacity_Ah_m2
+  ad: Katot alan kapasitesi (tek yuz)
+  birim: Ah/m2
+  deger: 25
+  alt: 18
+  ust: 35
+  kaynak: hafiza (2-3.5 mAh/cm2)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '26700: 0.132 m2; 50 Ah: 2.0 m2 (tek yuz esdeger).'
+  dogrulama_deneyi: Sokum.
+- id: bat_material_cost_own_lo_usd_Wh
+  ad: Kendi uretimde malzeme — LO/sert karbon, 26700 (kucuk lot)
+  birim: USD/Wh
+  deger: 0.075
+  alt: 0.055
+  ust: 0.11
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery + tahmin
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: NNFM 111 ort. 6,641 USD/t; hard carbon (household ESS) 4,077; NaPF6 9,600 (Sep 24, 2026)
+  kaynak_tarihi: '2026-09-24'
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: unite
+  senaryoya_uygunluk: Toptan BOM ~48 $/kWh x 1.2-2 (kucuk lot).
+  aciklama: Katot 18.9 + sert karbon 4.9 + elektrolit 3.6 + ayirici 4.2 + Al 3.5 + kutu 9.8 + diger 3 $/kWh. Satin
+    alinan hucre (0.084) toptan BOM'un yalniz 1.75 kati.
+  dogrulama_deneyi: 1-5 t lot teklifleri.
+- id: bat_material_cost_own_nfpp_usd_Wh
+  ad: Kendi uretimde malzeme — NFPP/sert karbon, 50 Ah prizmatik
+  birim: USD/Wh
+  deger: 0.06
+  alt: 0.047
+  ust: 0.09
+  kaynak: hesap + SMM malzeme fiyatlari
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Cathode NFPP avg 3,649.34 USD/tonne (Sep 24, 2026)
+  kaynak_tarihi: '2026-09-24'
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: unite
+  senaryoya_uygunluk: Toptan ~39 $/kWh x 1.2-2.
+  aciklama: NFPP 3.65 kg x 3.65 = 13.3; HC 1.26 kg x 4.08 = 5.2; elektrolit 4.2; ayirici 4.4; Al 2.2; Al kutu 7;
+    diger 3 ($/kWh). NFPP ~105 mAh/g ve ICE icin %10 fazla katot varsayildi.
+  dogrulama_deneyi: Lot teklifleri.
+- id: bat_cathode_price_nfm_usd_kg
+  ad: NFM111 katot fiyati
+  birim: USD/kg
+  deger: 6.64
+  alt: 6.51
+  ust: 6.77
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Cathode NNFM 111: 6,509.64–6,772.65, avg 6,641.15 USD/tonne'
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: Ton fiyati.
+  aciklama: '-'
+  dogrulama_deneyi: Lot teklifi.
+- id: bat_cathode_price_nfpp_usd_kg
+  ad: NFPP katot fiyati
+  birim: USD/kg
+  deger: 3.65
+  alt: 3.42
+  ust: 3.88
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Cathode NFPP: 3,419.2–3,879.48, avg 3,649.34 USD/tonne'
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: Ton fiyati.
+  aciklama: '-'
+  dogrulama_deneyi: Lot teklifi.
+- id: bat_hard_carbon_price_usd_kg
+  ad: Sert karbon fiyati
+  birim: USD/kg
+  deger: 4.08
+  alt: 3.14
+  ust: 6.25
+  kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Hard Carbon Anode (household ESS) 3,826.88–4,326.61, avg 4,076.74 USD/tonne
+  kaynak_tarihi: '2026-09-24'
+  guven: orta
+  maliyet_sinifi: guc_enerji
+  olcek: genel
+  senaryoya_uygunluk: Ton fiyati.
+  aciklama: Siniflar 3.1-6.2 $/kg.
+  dogrulama_deneyi: Lot teklifi.
+- id: bat_hard_carbon_ice
+  ad: Sert karbon ilk cevrim kulombik verimi (ICE)
+  birim: '-'
+  deger: 0.85
+  alt: 0.8
+  ust: 0.92
+  kaynak: https://pmc.ncbi.nlm.nih.gov/articles/PMC9910041/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''the best commercial hard carbons achieve slightly more than 80%'' (grafit: ''can easily reach
+    90%'')'
+  kaynak_tarihi: '2023'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 2023 verisi; ust sinir 0.92 tahmin.
+  aciklama: Grafit alintisi duzeltildi.
+  dogrulama_deneyi: Yarim hucre testi.
+- id: bat_defect_density_per_m2
+  ad: Olumcul kusur yogunlugu (kendi hat, ilk yillar)
+  birim: 1/m2
+  deger: 0.05
+  alt: 0.005
+  ust: 0.3
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: H3'un pil karsiligi. Olgun hatlar ~10 m2 elektrotlu 280-314 Ah hucreleri yuksek verimle uretiyor;
+    bu, olgun hatlarda D'nin <~0.01/m2 oldugunu gosterir.
+  aciklama: 'Verim = exp(-D x A_cat) x bat_yield_other. 26700: 0.99; 50 Ah: 0.90.'
+  dogrulama_deneyi: Pilot hurda analizi.
+- id: bat_yield_other
+  ad: Alandan bagimsiz verim (formasyon, kacak, olcu)
+  birim: '-'
+  deger: 0.92
+  alt: 0.8
+  ust: 0.97
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Yeni kucuk hat.
+  aciklama: '-'
+  dogrulama_deneyi: Pilot.
+- id: bat_formation_grading_time_h
+  ad: Formasyon + derecelendirme kanal suresi
+  birim: saat
+  deger: 30
+  alt: 15
+  ust: 60
+  kaynak: hafiza (Li-iyon pratigi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Na-iyona ozgu deger dogrulanmadi.
+  aciklama: TOB 512 kanalli cihazin desarj alt siniri 2.0 V; Na-iyon icin 0-5 V cihaz gerekir.
+  dogrulama_deneyi: Formasyon protokolu gelistirme.
+- id: bat_aging_days
+  ad: Yaslandirma (K-degeri) bekleme suresi
+  birim: gun
+  deger: 7
+  alt: 3
+  ust: 21
+  kaynak: hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_channel_utilization
+  ad: Formasyon kanal doluluk orani
+  birim: '-'
+  deger: 0.8
+  alt: 0.6
+  ust: 0.9
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_own_cell_dev_usd
+  ad: Kendi hucre gelistirme ve kalifikasyonu (tasarim, protokol, hucre UN38.3, guvenlik)
+  birim: USD
+  deger: 1500000
+  alt: 500000
+  ust: 4000000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Yalniz kendi hucre yolunda; 5 yila (bat_own_dev_amort_years) yayilir.
+  aciklama: 'Ilk ciktida eksikti. Dayanak: 1-3 yil, 3-6 muhendis + test.'
+  dogrulama_deneyi: Gelistirme ortagi teklifi.
+- id: bat_own_dev_amort_years
+  ad: Gelistirme maliyeti itfa suresi
+  birim: yil
+  deger: 5
+  alt: 3
+  ust: 7
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Kendi hucre gelistirme
+    harcamasi hat yetkinligine yatirimdir, urun varyantina degil (onceki ciktida yanlislikla el_Y_product_life''a
+    baglanmisti). Omur makine/hat omru; vergide aninda gider (PV_dep = 1) -> yuk CRF(r_reel, 8) = 0.1836.'
+  dogrulama_deneyi: '-'
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
+- id: bat_un383_cost_usd_per_design
+  ad: UN 38.3 testi (pil tasarimi basina)
+  birim: USD/tasarim
+  deger: 10000
+  alt: 5000
+  ust: 25000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'IATA 2026: ''a test summary must be made available'' (Na-iyon dahil)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Satin alinan hucrede hucre testini tedarikci yapar.
+  aciklama: '-'
+  dogrulama_deneyi: TUV/SGS/Intertek teklifleri.
+- id: bat_safety_cert_cost_usd
+  ad: Guvenlik (IEC 62619 analogu / VDE-AR-E 2510-50 / UL 1973) + AB Md.12 Ek V dokumani
+  birim: USD/urun ailesi
+  deger: 40000
+  alt: 15000
+  ust: 100000
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: IEC 62619:2022 'secondary lithium cells' (kapsam yalniz lityum)
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Na-iyon icin uyumlastirilmis yol belirsiz.
+  aciklama: A'daki SBESS icin Md. 12 Ek V testleri kapasite esigi olmadan gerekli.
+  dogrulama_deneyi: Lab on gorusmesi.
+- id: bat_n_designs
+  ad: Ayri test ve kalip gerektiren kutu tasarimi sayisi
+  birim: adet
+  deger: 2
+  alt: 1
+  ust: 4
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Tasarim ailesi yaklasimi sayiyi azaltir.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_eu_passport_threshold_Wh
+  ad: AB 2 kWh esigi (pasaport Md.77, performans Md.10, karbon Md.7)
+  birim: Wh
+  deger: 2000
+  alt: 2000
+  ust: 2000
+  kaynak: https://publications.europa.eu/resource/celex/32023R1542 (EUR-Lex 32023R1542)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: 'Md.77: ''From 18 February 2027 each LMT battery, each industrial battery with a capacity greater
+    than 2 kWh ... shall have an electronic record''; Md.3(27): ''rated capacity as declared by the manufacturer'''
+  kaynak_tarihi: '2023-07-28'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uretici beyanina baglidir; tasarimda pay gerekir.
+  aciklama: Metin curl ile acildi.
+  dogrulama_deneyi: '-'
+- id: bat_eu_portable_mass_limit_kg
+  ad: AB tasinabilir pil kutle siniri
+  birim: kg
+  deger: 5
+  alt: 5
+  ust: 5
+  kaynak: https://publications.europa.eu/resource/celex/32023R1542
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: 'Md.3(9) ''weighs 5 kg or less, is not designed specifically for industrial use''; Resital 15:
+    ''Batteries used for energy storage in private or domestic environments, should be considered to be industrial
+    batteries'''
+  kaynak_tarihi: '2023-07-28'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: A kutleden bagimsiz olarak endustriyel.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: bat_eu_threshold_margin
+  ad: 2 kWh esigi icin tasarim payi
+  birim: '-'
+  deger: 0.9
+  alt: 0.85
+  ust: 0.95
+  kaynak: tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Hucre nominal gerilimi 2.85-3.1 V arasinda (%9 fark) degisiyor.
+  aciklama: <=1.8 kWh beyan.
+  dogrulama_deneyi: Standart ajani.

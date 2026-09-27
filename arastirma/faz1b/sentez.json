@@ -1,0 +1,1661 @@
+{
+ "gorev": "sentez",
+ "sonuc": {
+  "ana_bulgular": [
+   {
+    "baslik": "Talep ölçeği kendi hücre (ve kristal) hattını taşımıyor; ünite talepten tanımlanmalı",
+    "aciklama": "Talep tahmini varyant başına 3000 kutu/yıl (1000-20.000; tahmin). Bu, A-800 için 2.4 MW/yıl (0.8-16), B 200-300 W için 0.6-0.9 MW/yıl demek; iki platformla merkezde ~3 MW/yıl, üst uçta ~22 MW/yıl PV. En küçük makul HJT araç seti 40-50 MW/yıl kapasiteli (~3.1 M$ capex, aralık 2.0-6.5; üstüne ~2.5 M$ NRE; tahmin). Bu yüzden merkez talepte saha düzeyinde bile HJT kullanımı ~%6, hücre zaman sınıfı maliyeti ~40 c/W (2 MW'ta 61, 10 MW'ta 12, 45 MW'ta 2.7 c/W). Talebin üst ucunda kullanım ~%45, zaman maliyeti ~6 c/W. Araçları küçültmek (L=0.5 m) capex/(W/yıl)'ı 3.7 kat artırıyor. Modül hattı ≥3 MWp/yıl'da ~2.8 c/W'a iniyor; merkez talep ancak tek bir paylaşılan modül hattına yetiyor. 120 mm'lik tek fırın 27 kg/gün üretiyor. Önceki '0.1-46 MW/yıl ünite' aralığı, reddedilen K9 kendi hücre hattından türetilmişti (döngüsel); incelenen pil formatları ve kanonik Wh/Wp ile bu aralık ~0.1-10 MW/yıl. Sonuç: kristal/wafer ve HJT hücre satın alınmalı; ünite modül, pil paketi ve kutu montajı etrafında tanımlanmalı (KK1).",
+    "kanit": "elektronik: el_N_demand_per_yr (tahmin), el_ds_box_platform; hucre: f_hjt_required_W, f_hjt_capex, zaman maliyeti tablosu (capex tahmin); modul: mod_f_cost_equipment; kristal: xtal_utilization. ~3 ve ~22 MW/yıl değerleri ters orantıyla bu sentezde hesaplandı (hesap_turetilmis). Beş alan aynı K9 girdisinden tutarlı sonuç verdi; birbirinden bağımsız değil.",
+    "guven": "yuksek"
+   },
+   {
+    "baslik": "Tam ölçekte bile kendi wafer-hücre-modül zinciri ithal HJT modülün yaklaşık iki katı",
+    "aciklama": "Dosyalardaki bileşenlerle, en iyimser durumda (hücre hattı 45 MW/yıl ve dolu, olgun proses, a=105 mm, NRE hariç): satın alınan wafer 1.96 + hücre dönüşümü 8.4 (AgCu ile 6.2) + modül BOM 7.5 (500 W, GG) + modül zaman 2.8 + panel-kutu kablosu 0.9 = ~21.6 c/W (AgCu ile ~19.4). Kablo her iki yolda gerekli; çıkarılırsa 18.5-20.7 c/W. Saha payı (N=1, 182 mm, 5.3 c/W) dahil ~25-27 c/W. Kıyas: Çin'de hücre dahil 210 mm HJT modül 11.0 c/W (FOB). Başlangıç evresinde (Ag 5.8 c/W, verim %21.9-22.5) kendi zincir daha pahalı. Kıyas birebir değil: ithal olan standart büyük modül; TR gümrük ve ek vergileri doğrulanmadı; özel boyutlu ≤60 V OEM modül fiyatı bilinmiyor. Dosyalardaki N_s_max 65-72 sınırı, standart 54-66 seri hücreli ticari modüllerin (hücre sayıları hafızadan) tek modül/MPPT girişiyle ≤60 V SELV koşulunu sağlayabildiğini gösteriyor. Yani A'daki ≥~400 W panel için özel modül zorunlu görünmüyor. Kendi modül yapımının gerekçesi fiyat değil; küçük/hafif özel boyut (B), entegrasyon ve olası gümrük avantajı olabilir (O18).",
+    "kanit": "wafer: teslim 4.91 $/m²; hucre: toplam dönüşüm tablosu (olgun, NRE hariç; kalemlerin çoğu tahmin); modul: güç tablosu ve InfoLink 23.09.2026 0.110 $/W (dogrulanmis_url); altyapi: saha payı. Toplam bu sentezde yapıldı (hesap_turetilmis); standart modül hücre sayıları hafizadan_dogrulanmadi.",
+    "guven": "orta"
+   },
+   {
+    "baslik": "Polisilikondan wafer'a kendi üretim Çin zincirinde ekonomik değil; izlenebilir zincirde belirsiz",
+    "aciklama": "Satın alınan n-tipi M10 FOB 0.148 $/adet (~4.5 $/m², 0.019 $/W; OPIS 0.149 ile teyit); Türkiye teslim tahmini ~4.91 $/m². Tutarlı Çin zincirinde kendi üretim (Çin polisi ~2.10 $/m² + kristal ve wafer dönüşümü) en iyimser uçlarda bile ancak başa baş. Wafer dönüşümünün tek başına merkez tahmini (7.2 $/m², aralık 1.6-21) satın alınan wafer'ın tamamından yüksek. Yalnız Çin polisi + wafer dönüşümü ~9.3 $/m² (~0.31 $/adet M10) tutuyor; yani merkez tahminlerle başa baş için satın alma fiyatının en az ~2 katına çıkması gerekir (kristal dönüşümü hariç). İzlenebilir zincirde Çin dışı poli ~17.5 $/kg ama Çin dışı wafer fiyatı bilinmiyor. Kristal yolu seçilirse: 120 mm RCz fırın MC medyanı 27 [20-35] kg/gün ve 26 [18-37] USD/kg, öğrenme yılında kg/gün yarıya iniyor, sabit D'de wafer paketleme basamaklı (D=300'de kesit kullanımı 0.34-0.74). Fırın ünite değil saha varlığı olmalı. Stratejik gerekçeler (menşe, 2024/3015, tedarik) hiçbir alanda sayıya dökülmedi.",
+    "kanit": "kristal: InfoLink 2026-09-23; wafer: OPIS FOB 0.149 $/pc (pv-magazine 2026-09-11, dogrulanmis_url) ve iki tutarlı zincirli yap/al (hesap_turetilmis; dönüşüm girdileri tahmin). Başa baş alt sınırı bu sentezde hesaplandı (M10 ~0.033 m²). Kristal alanının '1.6-5.6 kat' kıyası Çin dışı poliyi Çin wafer'ıyla karşılaştırdığı için kanıt olarak kullanılmadı. Güven Çin zinciri için yüksek; izlenebilir zincir için belirsiz.",
+    "guven": "yuksek"
+   },
+   {
+    "baslik": "Kendi pil hücresi (K9) ekonomik değil; Faz 1'de hücre satın alınmalı",
+    "aciklama": "26700 formatında K9 (~1.4 MWh/yıl) 1.03 $/Wh'e çıkıyor; makineler bedava olsa bile 0.65 $/Wh. Bu, Gebze teslim satın alma tahmininin (Na 26700 0.129 $/Wh) 5-8 katı; başa baş için 29.6 MWh/yıl gerekiyor. 50 Ah prizmatik hat ~17 MWh/yıl ve 0.21 $/Wh (makineler firmada yapılırsa 0.165): Na satın almanın 1.27-1.6 katı, LFP'nin ~2.3 katı; aleyhte ama belirsizlik içinde. Hücre satın alınınca pil hattı paket hattına dönüşür ve 150 bin hücre/yıl sınırı kalkar; ölçek talepten gelir.",
+    "kanit": "pil: kendi hat modeli (girdiler çoğunlukla tahmin), bat_f31_demand_mwh, bat_f38_breakeven, bat_ds_sync; SMM 24.09.2026 fiyatları (dogrulanmis_url).",
+    "guven": "yuksek"
+   },
+   {
+    "baslik": "Na-iyon genel olarak LFP'den ucuz değil; soğukta mutlak sınırları var, LFP'ye üstünlüğü kanıtlanmadı",
+    "aciklama": "Aynı kaynağa (SMM) göre Na/LFP primi formata bağlı: 50-100 Ah'de +%50-59, 10-28 Ah'de +%1, kesede −%14. Katmanlı oksit Na hücrenin 2.0 V kesimde kullanılabilir oranı 0.80 (0.72-0.88; tahmin). Soğukta: bazı Na hücreler 0 °C altında hiç şarj edilmiyor, bazıları −10 ile 0 °C arasında en fazla 0.2C ile şarj ediliyor; sıfır altında deşarj ≤0.2C (430 Wh kutudan ~86 W). Dosyalarda aynı koşulda LFP soğuk verisi yok, yani göreli kıyas yapılamıyor. LFP 6000 çevrim ömrü hafızadan; LO silindirik için A'daki SOH 0.67 takvim katsayısı bilinmeden hesaplandı. Doğrulanmış Na avantajları: 0 V taşıma, düşük akımla soğuk deşarj ve Çin iç piyasasında Li vergisinden muafiyet.",
+    "kanit": "pil: SMM 24.09.2026; Tycorun, OGSolar, EVLithium veri sayfaları; Mysteel (dogrulanmis_url); arXiv 2403.13759 s.12. bat_usable_fraction_lo (tahmin), bat_cycle_life_lfp (hafizadan_dogrulanmadi); parametreler_tum.csv'de LFP sıfır altı parametresi yok. Teslim fiyatları tahmin.",
+    "guven": "orta"
+   },
+   {
+    "baslik": "Küçük güç ve düşük hacimde W başına maliyet her alanda yükseliyor; ürün önerisi senaryoya göre ayrılmalı",
+    "aciklama": "A'da kutu elektroniği 50 W'ta 1.84 $/W, 500 W'ta 0.25, 800 W'ta 0.19 $/W. Tek panelli kutuda pil 50 W'ta 1.31, 500 W'ta 0.45 $/W; kutu başına 4 panelle 50 W'lık pil 0.59 $/W. Hücre hariç modül BOM'u 50 W'ta 15.0, 500 W'ta 7.5 c/W; kablo bunlara 5.6 ve 0.9 c/W ekliyor. Varyant başına urun_sabit A'da ~0.57-0.62 M$, B'de ~0.29-0.34 M$ ve tip testini içeriyor (A-DE tip testi 75/225/596 kUSD alt/merkez/üst); ikisi toplanmamalı. Hücre boyutu başına ~230 k$ takım ve kalifikasyon. Zorunlu ünite başı testler 0.02-0.22 c/W ile küçük. Öneri: A'da P_panel ≥200 W, kutu başına 2-4 panel, 800 VA AC ve ≤960 Wp PV, kutu ≤1.8 kWh (LO kimyasıyla PV ≤~900 Wp). B'de değer taşınabilirlik: 200-300 W kutu, 50-150 W hafif paneller (GG panel 200 W'ta 11.1 kg) ve kütle kısıtı. 50-200 W aralığının A'da fiilen düşmesi ayrı bir kullanıcı kararı (KK14).",
+    "kanit": "elektronik, pil ve modul güç ölçekleme tabloları; standart ve elektronik urun_sabit hesapları (hesap_turetilmis; birim fiyatların çoğu tahmin, ×0.5-×2). Sertifika kalemleri üç alanda ayrı sayılmış (notlar).",
+    "guven": "orta"
+   },
+   {
+    "baslik": "60 V SELV, PV standardının sınırı; dokunma güvenliği ve Class III sağlamıyor (2017 baskısına göre)",
+    "aciklama": "IEC 60364-7-712:2017 madde 712.414.101, PV'nin DC tarafında soğuk hava dahil U_OC_MAX ≤60 V sınırı koyuyor; SELV'de anahtar/aletle ayırma şartı kalkıyor. Buna karşılık ıslak/dış ortamda dokunma sınırı 30 V DC (60364-4-41 madde 414.4.5) ve 35 V (IEC 62109-1 DVC-A). Class III için sınırlar 35 V / 8 A / 240 W olduğundan 60 V'luk modül Class II olmalı. Şebekeye bağlı üründe koruyucu ayırma gerekiyor. N_s tavanı en düşük sıcaklığa göre 65-72 (standart deneyinde 71-74); 500 W'ta tek dizide hücre boyutu ≥~168 mm. 712 metni lisanssız kopyadan okundu; 712:2025 ve 61730-1:2023 madde 5.4 doğrulanmadı. KK3 kararı Deney 5'e bağlı.",
+    "kanit": "modul ve standart: 712.414.101, 712.526.101 ve Ek B metinleri (lisanssız kopya uyarısıyla); IEC 61730-1:2016 madde 4.4.1 (resmi SIS önizlemesi); elektronik: IEC 62109-1 test raporu (dogrulanmis_url).",
+    "guven": "orta"
+   },
+   {
+    "baslik": "Doğrulanmış mevzuat eşikleri ürün mimarisini basamaklı biçimde belirliyor",
+    "aciklama": "AB 2023/1542: SBESS tanımında kWh eşiği yok; Md.12 + Ek V (11 güvenlik parametresi) ve Md.14 SOH SBESS'e eşiksiz uygulanıyor. ≤5 kg mühürlü paket taşınabilir pil; Md.11 değiştirilebilirlik 18.02.2027'den. 2 kWh üstü karbon ayak izi, performans belgesi ve pasaport (Md.7, 10, 77). Md.47 durum tespiti 40 M EUR ciro altında yok ve 2025/1561 ile 18.08.2027'ye ertelendi. DIN VDE V 0126-95:2025-12 depolamalı cihazları kapsamıyor; Almanya'da 800 VA, Schuko ile 960 Wp, özel fişle 2000 Wp. RoHS'un PV istisnası fişli ve taşınabilir panelleri kapsamıyor (Pb ≤%0.1). Makineyi kendi kullanımı için yapan firma da 'üretici' sayılıyor; Makine Tüzüğü 2023/1230 20.01.2027'den zorunlu. Türkiye'deki fişli PV rejimi bilinmiyor.",
+    "kanit": "standart ve pil: AB Yayın Ofisi metni; VDE ve pvplug sayfaları; legislation.gov.uk (RoHS, 2006/42) — dogrulanmis_url veya standart_metni_dogrulanmis. TR araması yapılamadı.",
+    "guven": "yuksek"
+   },
+   {
+    "baslik": "A kutusunun ve ≤5 kg paketlerin AB Pil Tüzüğü sınıfı belirsiz; model muhafazakâr olarak SBESS varsaymalı",
+    "aciklama": "İki alan aynı metni farklı okuyor. Pil alanı: Resital 15'e göre evde enerji depolayan piller kütleden bağımsız olarak endüstriyel pildir, A kutusu büyük olasılıkla SBESS'tir. Standart alanı: kutuda son kullanıcının değiştirebildiği ≤5 kg paket(ler) Ek V'den kaçınabilir, ama birden fazla paketin tek SBESS sayılma riski var ve bilinmiyor. Standart alanı da Resital 15'i aktarıyor; bu yüzden A için ≤5 kg yolu zayıf. Resitaller bağlayıcı madde değil, yorum aracı; son söz yetkili makamda. Çözüm: A'da varsayılan SBESS (Md.12 + Ek V, Md.14); ≤5 kg paket yolu Deney 6 sonucuna koşullu. B (ev depolaması değil) için ≤5 kg taşınabilir yol geçerli, ama pil alanına göre 300 W ve üstünde B paketi >5 kg.",
+    "kanit": "pil ve standart: 2023/1542 Resital 15, Md.3(15), Md.11, Md.12 (Yayın Ofisi metni); standart: std_ds_battery_size_regime ('bilmiyoruz'); pil: bat_f22_eu_industrial notu.",
+    "guven": "orta"
+   },
+   {
+    "baslik": "HJT korunabilir; küçük hücrede TOPCon'a üstünlüğü kenar j02 ölçülmeden kanıtlanmadı",
+    "aciklama": "Gettering amaçlı wafer ön tavlaması endüstriyel HJT hatlarının çoğunda standart; hat 550-950 °C aralığında bir adım içerebilir. HJT'nin doğal kenar kaybı j02 ≈2.4 nA/cm (w_eq 0.26 mm); 19 nA/cm ise TOPCon'un gerçek değeri değil, çıplak p-n kenarı için en kötü durum; TOPCon değeri bulunamadı. TOPCon lehine: Ag 10 mg/W (HJT 12), indiyum yok, termal adımlar firmanın ısıtma yetkinliğine uygun. Kendi hattın ilk 12 ay çekirdek verimi %22.5 (19-24.5; tahmin); endüstri ~%25.7. KK1 (d)'de K2, satın alınacak hücre teknolojisi seçimine dönüşür; o zaman kesim kenar kaybı, düşük sıcaklık ara bağlantısı ve fiyat belirleyici olur.",
+    "kanit": "hucre: TaiyangNews 2023 PDF; kristal: TaiyangNews 2026-06-05 (dogrulanmis_url); hucre: Wohler 2024, Fell; ITRPV 2025 Ag; başlangıç verimi tahmin.",
+    "guven": "orta"
+   },
+   {
+    "baslik": "Firma yetkinliklerinin ve kendi makine yapımının maliyet kaldıracı ölçülmedi ve küçük görünüyor",
+    "aciklama": "Güç katı, elektronik BOM'un 50 W'ta %35'i, 800 W'ta %59'u; manyetikler kutunun yalnız %4-6'sı. GaN bileşen maliyetini düşürmüyor (800 W'ta prim −0.5 ile +47 $ arası); ilk nesil için Si öneriliyor. İndüksiyon yetkinliği FZ'nin MHz RF'ine değil, ~1 atm indüksiyonlu susseptör Cz'ye uyuyor; bu bir deney hipotezi. Kalıp/enjeksiyon kasa, bağlantı kutusu, pil mekaniği ve tray'lerde değerli (küçük kutuda pil mekaniği hücreden pahalı); konnektör sertifika ve eşleşme kuralları nedeniyle satın alınmalı. Kendi makine capex ve NRE'lerinin tamamı tahmin (hücre araçları NRE 2.5 M$, çekici 0.6 M$, altyapı toplamı 5 M$); ilk nesil performansı düşük (testere alan hızı −%42, kesim kırılması 2.7 kat).",
+    "kanit": "elektronik: el_f_power_share (hesap_turetilmis), Ferroxcube ve EPC veri sayfaları; kristal: TI 1977; standart: 712.526.1; hucre, kristal ve altyapi NRE parametreleri (tahmin); wafer ilk nesil/olgun parametre çiftleri.",
+    "guven": "orta"
+   },
+   {
+    "baslik": "Parametrelerin üçte ikisi tahmin; ilk 10 deney Faz 2 kararlarının çoğunu ~25-100 kUSD ile açar",
+    "aciklama": "954 parametrenin 586'sı tahmin, 51'i hafızadan (toplam %67). 656'sı düşük güvenli; yalnız 195'i doğrulanmış URL veya standart metnine dayanıyor. Yeniden sıralanan ilk 10 deney masa başı iş, RFQ, mevzuat görüşmesi ve iki ucuz ölçümden (Na hücre testleri, modül malzemesi Pb taraması) oluşuyor. Toplam kabaca 23-98 kUSD (tahmin); çoğu 1-2 ayda bitiyor, Na 0 V depolama testi 1-3 ay. Hepsi KK1 sonucundan bağımsız ya da KK1'i açan deneyler. Ünite tanımı, wafer/hücre/modül yap/al, pil yap/al ve kimya, V_lim, pazar ve varyant kararlarını açıyorlar. Kenar kaybı ve ön tavlama deneyleri koşullu olarak ilk 10'un ardında.",
+    "kanit": "parametreler_tum.csv sayımı (kırmızı takımca doğrulandı); deney maliyetleri alan tahminlerinin bileşen toplamı (hesap_turetilmis).",
+    "guven": "orta"
+   }
+  ],
+  "itirazlar": [
+   {
+    "varsayim_kodu": "K1",
+    "varsayim": "K1: Kristal sürekli beslemeli CZ (RCz), n-tipi, fosfor katkılı; alternatif FZ (indüksiyon tecrübesi var).",
+    "hukum": "kismen",
+    "ozet": "Kristal yapılacaksa RCz + n-tipi P doğru teknik seçim. Scheil'e göre P (k≈0.35) ile 0.3-2.1 Ω·cm penceresi g≤0.95'e, 2.5 katlık dar pencere g≤0.76'ya izin veriyor; daha iyi bir n-katkısı yok. 'Sürekli beslemeli' ifadesi RCz'yi (ingotlar arası reşarj) CCz ile karıştırıyor; CCz yalnız 80 mm'de +%33-50, 120 mm'de +%12 kazandırıyor ve n-tipinde oksijen/metal cezası var. FZ alternatifi zayıf: K8 parçaları FZ'ye doğrudan giremez, ~3 MHz/~500 V bobin firmanın kHz yetkinliğine uymuyor; daha uygun hipotez ~1 atm'de indüksiyonlu susseptör Cz. Kalite hedefinde üç alan üç farklı tanım kullanıyor: wafer 1 ms (hafızadan), kristal etkin ömür/ρ ≥2000 µs/(Ω·cm), hücre tau_SRH ≥3.7 ms; 1 ms'de verim kaybı −1.27 puan. Satın alma varsayılan olduğundan (KK2) K1 bugün yalnız satın alma şartnamesini ve olası kristal Ar-Ge'sini etkiliyor.",
+    "kanitlar": [
+     "kristal: Scheil özdirenç oranı (1-g)^0.65 ve pencere hesabı (hesap_turetilmis; g=0.95 ve 0.76 kırmızı takımca yeniden hesaplandı); n-tipi CCz cezası TaiyangNews 2025-05-14 (dogrulanmis_url)",
+     "wafer: RCz'de g=0.9'da özdirenç oranı ~4.5 < 7; FZ'nin besleme çubuğu gerektirmesi (hafizadan_dogrulanmadi)",
+     "hucre: eta-tau yeniden fit (A=1.18, c=3.35 ms); 1 ms'de −1.27 puan; hjt_tau_srh_target_ms 3.7 ms (hesap_turetilmis)",
+     "ömür tutarsızlığı: wf_lifetime_min_ms 1 ms (hafizadan_dogrulanmadi), cz_tau_over_rho_min_us_per_ohmcm 2000 (etkin ömür/ρ, dogrulanmis_url), hjt_tau_srh_target_ms 3.7 ms (yalnız SRH)",
+     "kristal: FZ ~3 MHz ve ~500 V bobin (arXiv); TI 1977 RF ısıtmalı 1 atm çekicide dislokasyonsuz kristal (dogrulanmis_url)"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Terim RCz olarak düzeltilsin. RCz ana yol, yan besleyici seçenek; CCz ve indüksiyonlu Cz deney; FZ Faz 2 Ar-Ge'si ('K8 için besleme çubuğu adımı' kısıtıyla). Ortak girdilerde tek ömür tanımı (SRH, QSSPC protokolüyle) ve tek hedef olsun: hjt_tau_srh_target_ms = 3.7 ms (2.7-4.9), 0.5-2 Ω·cm. wf_lifetime_min_ms kaldırılsın ya da buna bağlansın. cz_frac_in_window wafer verimine çarpan olarak girsin. Etki düşük, çünkü kristal yolu varsayılan değil; o yol açılırsa orta."
+   },
+   {
+    "varsayim_kodu": "K2",
+    "varsayim": "K2: Hücre teknolojisi HJT (en az adım, tüm adımlar <250 °C); HJT wafer kalitesine çok duyarlı.",
+    "hukum": "kismen",
+    "ozet": "HJT korunabilir ama gerekçesi değişti ve üstünlüğü kanıtlanmadı. '<250 °C' yalnız hücre katmanları için doğru; gettering amaçlı ön tavlama (550-950 °C) endüstriyel HJT hatlarının çoğunda standart, kurtarma oranı bilinmiyor. Küçük hücrede HJT lehine kenar argümanı (doğal j02≈2.4 nA/cm, w_eq 0.26 mm) TOPCon'un gerçek değerine değil, çıplak p-n kenarının en kötü durumuna (~19 nA/cm) karşı kurulmuş; TOPCon değeri bulunamadı. TOPCon lehine Ag 10 mg/W (HJT 12), indiyum yok ve termal adımlar firmanın ısıtma yetkinliğine uygun; HJT aleyhine vakum araçlarının sabit capex'i var. 'Çok duyarlı' iddiası nüanslı: HJT yüksek oksijene toleranslı, asıl riskler metal ve karbon. KK1 (d) seçilirse K2 bir 'satın alınacak hücre teknolojisi' seçimine dönüşür (kesim kenar kaybı, düşük sıcaklık ara bağlantısı, fiyat).",
+    "kanitlar": [
+     "kristal: TaiyangNews 2026-06-05 'Annealing has become a standard step in the HJT process' ve 'HJT can better tolerate higher oxygen content' (dogrulanmis_url)",
+     "hucre: TaiyangNews 2023 raporu PDF'i; Wohler 2024 j02=2.41 nA/cm; Fell ~19 nA/cm (çıplak p-n, en kötü durum); hücre alanı 'TOPCon doğal kenarının gerçek değerini bulamadım' diyor",
+     "hucre: TOPCon lehine Ag 10 mg/W (ITRPV 2025; HJT 12) ve indiyum yok; hücre alanı 'TOPCon capex avantajı kendi yapımda geçersiz' iddiasını geri çekti (degisiklik_gunlugu)",
+     "wafer: TaiyangNews 2025-06-03 'HJT wafers have lower lifetime requirements compared to TOPCon wafers'",
+     "modul: SnBi (~139 °C) ile POE laminasyonu (145-155 °C) arasında yeniden erime riski"
+    ],
+    "etkisi": "orta",
+    "oneri": "HJT modelde korunsun; TOPCon kıyas senaryosu kenar j02 için 2-19 nA/cm aralığıyla tutulsun ve Deney 11'e TOPCon kenar kolu eklenerek karar kapısına bağlansın. Kendi hat seçilirse hjt_ts_preanneal varsayılan açık olsun, maliyeti (capex ~250 k$, 1.5 kWh/m²; tahmin) modelde yer alsın; ön tavlama split'i Deney 12. (d)'de hücre teklifleri HJT ve TOPCon için birlikte alınsın (Deney 3). Kristal alanındaki 'HJT gettering yapamaz' cümleleri güncellensin."
+   },
+   {
+    "varsayim_kodu": "K3",
+    "varsayim": "K3: Hücre hattı önce satın alınan n-tipi wafer ile geliştirilecek (sonra kendi wafer'a geçilecek).",
+    "hukum": "kismen",
+    "ozet": "Satın alınan wafer ile başlamaya katılıyorum; 'sonra kendi wafer'a geçilecek' kısmı kanıtla desteklenmiyor. Altı alan doğrudan (kristal, wafer, hücre, modül, altyapı, standart), pil analoji olarak katılıyor; elektronik değerlendirmedi. Kristal ve wafer alanları K3'ün geçici değil kalıcı bir yap/al anahtarı olmasını istiyor: satın alınan n-tipi M10 FOB 0.148 $/adet (~4.5 $/m²; OPIS 0.149 ile teyit), Türkiye teslim ~4.91 $/m², ve Çin zincirinde kendi üretim en iyimser uçta ancak başa baş (O2). K3 evresi kenar kaybı, CTM ve kırılma deneylerini kristal hattı olmadan yapmayı sağlıyor; saha Faz 0 capex'i ~2.16'dan ~1.8 MUSD'ye iniyor. Modül alanı hazır HJT hücre alımını da öneriyor; talep ölçeği (O1) bunu varsayılan yapıyor. Kendi wafer'a geçiş IEC TS 62915 kapsamında tekrar test (2-4 ay) doğurabilir.",
+    "kanitlar": [
+     "kristal: InfoLink 2026-09-23 n-tipi 182 mm/130 µm 0.148 USD/adet (dogrulanmis_url); itiraz: 'K3 geçici bir aşama olarak değil, kalıcı bir alternatif olarak modellenmeli'",
+     "wafer: pv-magazine 2026-09-11 OPIS FOB China M10 0.149 $/pc; iki tutarlı zincir hesabı (hesap_turetilmis)",
+     "hucre, modul, altyapi, standart: doğrudan katılım; pil: 'K3 (analoji)'; elektronik: K3 itirazı yok (itirazlar_tum.md)",
+     "altyapi: basamaklı altyapı hesabı, Faz 0 N=1 capex ~1.8 MUSD (tahmin ağırlıklı)",
+     "standart: IEC 61215-1:2021 → IEC TS 62915 madde 4.2.3 (eşikler doğrulanmadı)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "wafer_kaynagi='satin_alma' kalıcı varsayılan olsun. Zincir anahtarı (cn/izlenebilir) eklensin; poli ve wafer fiyatı aynı zincirden alınsın. KK1 (d) ile hücre de satın alınsın. Kristal/wafer yatırımı izlenebilir zincir teklifleri, gümrük/menşe statüsü ve kullanıcının sayısal stratejik değerine koşullu kalsın (KK2). İlk tam tip testi nihai hücre kaynağıyla planlansın."
+   },
+   {
+    "varsayim_kodu": "K4",
+    "varsayim": "K4: Temiz oda yalnızca wafer yolunu kapsayan mini-ortam.",
+    "hukum": "kismen",
+    "ozet": "Mini-ortam yaklaşımı tüm alanlarca doğru bulundu; IEC 61215/61730/62941'de temiz oda sınıfı şartı görülmedi. Ancak 'yalnız wafer yolu' eksik: kristalde besleme hazırlama ve reşarj beslemesi de kontaminasyon yolu (Trina: malzeme hazırlama ~ISO 5-6). HJT'de asıl kısıt zaman: HF-son ile PECVD arası ≤~30 dk (90 dk'da ~%5 bağıl kayıp); bu, parti boyutunu (a=105'te ~11.4 m²) ve son-HF modülünün PECVD kilidine bitişikliğini belirliyor. ISO 5-7 farkı mutlak tutarda küçük (60 m² örnekte ~5.4 kW, ~180 kUSD). KK1 (d)'de hücre hattı olmadığından K4 pasifleşir: modül montajı sınıflı ortam istemez, ama satın alınan HJT hücreler laminasyona kadar nem kontrollü dolapta tutulmalı.",
+    "kanitlar": [
+     "kristal: Trina 2023-03-15 malzeme hazırlama <10.000, atölye <100.000 partikül/m³ (dogrulanmis_url; Çince sınıf çevirisi olasılığı var)",
+     "hucre: Danel 2012 bekleme süresi etkisi; Ballif 2019 ilk hatlarda 'queue time' sorunu",
+     "altyapi: FFU 87-126 W/m² (dogrulanmis_url), kaplama 0.9; oda tipi kaplamanın mini-ortama aktarımı H1 hatasıydı (düzeltildi)",
+     "modul: HJT TCO/a-Si nem duyarlılığı (InfoLink); standart: 61215/61730/62941'de sınıf şartı görülmedi (kanıt yokluğu)"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Kendi hücre hattı seçilirse: mini-ortam = besleme hazırlama (ISO 5-6 laminer) + son HF → PECVD → PVD zinciri (+N2 dolap); testere, kare kesim ve geri dönüşüm dağlama dışarıda; hjt_queue_time_max_min parametre; sınıf Deney 18 ile seçilsin. (d)'de yalnız hücre deposunun nem kontrolü modellensin. Etki (d)'de düşük, kendi hücre hattında orta."
+   },
+   {
+    "varsayim_kodu": "K5",
+    "varsayim": "K5: Pil + elektronik panel arkasında değil, ayrı, gölgede, değiştirilebilir kutuda; bir kutu birden fazla paneli besler.",
+    "hukum": "katiliyorum",
+    "ozet": "Nicel olarak en iyi desteklenen kullanıcı kararı. 26700 pil A-50 W'ta tek panelli kutuda 1.31 $/W, kutu başına 4 panelle 0.59 $/W; tek panelli 50 W kutuda pil mekaniği (0.67 $/W) hücreyi (0.37) aşıyor; panel arkası serbest kaldığı için çift yüzlülük kullanılabilir. Eksik kalan maliyetler: panel-kutu kablosu (3 m) 50 W'ta 5.6, 500 W'ta 0.9 c/W; A-800'de ~63 W kayıp için ~0.35 m² yüzey; kasa hacminin ~%70'i pil. Platform kendi kısıtlarıyla çelişmemeli: kutu ≤1.8 kWh ve Schuko 960 Wp ile A platformu 800 VA/≤960 Wp olmalı; LO kimyasıyla (0.8) 1000 Wp 2.0 kWh nominal ister. C-oranı kuralında alanlar çelişiyor: elektronik E≥2·P'yi sert alıyor (el_C_charge_max_C 0.5), pil yumuşak kısıt sayıyor (A'da fazla PV şebekeye gider, B'de kırpılır). 'Değiştirilebilir' kısmının AB sınıflandırması belirsiz (ana bulgu 9).",
+    "kanitlar": [
+     "pil: kuantizasyonlu paket maliyeti (26700, 14S; hesap_turetilmis); bat_f18_charge_limited 'yumuşak kısıt'; bat_charge_c_max_cyl 1.0, bat_charge_c_max_pris 0.5 (dogrulanmis_url)",
+     "elektronik: el_f_A_thermal_req; el_f_E_batt_target 'tüm PV pile gidebilirse E ≥ P/C_max'; 50 W×16 panel, 400 W×2 panelden 0.085 $/W pahalı",
+     "modul: mod_f_cost_cable (fizik denetçisi bulgusu, hesap tekrarlandı)",
+     "standart ve pil: Regulation (EU) 2023/1542 Md.3(9), 7, 10, 11, 12, 14, 77 ve Resital 15 — Yayın Ofisi metni",
+     "bu sentez: 1000 Wp × 1.6 / 0.8 = 2.0 kWh > 1.8 kWh; E≥2·P ile P_box ≤900 W (hesap_turetilmis)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "A'da kutu başına 2-4 panel, P_panel ≥200 W, 800 VA AC ve ≤960 Wp PV. Kutu ≤1.8 kWh nominal (LO ile PV ≤~900 Wp, NFPP/LFP ile 960 Wp); aksi halde 2 kWh üstü yükümlülükler ya da ikinci kutu açıkça seçilsin. C-oranı A'da yumuşak, B'de sert kısıt olsun; formata göre bat_charge_c_max_* kullanılsın. Kutu panele ≤5 m. MPPT ters akımı engellesin; pil konnektörü parmak korumalı ve sigortalı olsun; Md.14 SOH verisi BMS'e eklensin. '≤5 kg değiştirilebilir paket' seçeneği Deney 6 sonucuna koşullu."
+   },
+   {
+    "varsayim_kodu": "K6",
+    "varsayim": "K6: DC taraf 60 V SELV sınırının altında (soğuk havada Voc dahil).",
+    "hukum": "kismen",
+    "ozet": "60 V gerçekten PV'ye özgü SELV/PELV sınırı: 712.414.101'e göre U_OC_MAX ≤60 V DC; U_OC_MAX = K_U·Voc_STC, K_U en düşük ortam sıcaklığıyla, beyan yoksa 1.2. SELV'de 712.526.101'deki anahtar/aletle ayırma şartı kalkar. Ancak 60 V dış ortamda dokunma sınırı değil (kuru olmayan koşulda 30 V DC; IEC 62109-1 DVC-A ıslak 35 V) ve Class III sağlamaz (35 V / 8 A / 240 W): 60 V'luk modül Class II olmalı. Şebeke ürününde koruyucu ayırma gerekir; 6.5-13 katlık yükseltme nedeniyle izolasyon zaten var, SELV'in ek bedeli ~1-2 $/kutu. N_s tavanı T_min'e göre 65-72 (standart deneyinde 71-74); fark Voc, β ve marj varsayımlarından. Hüküm 2017 metnine (lisanssız kopya) dayanıyor; 712:2025, 61730-1:2023 ve ≤60 V'ta yalıtım izleme doğrulanmadı; Avusturya sınırı 35 V.",
+    "kanitlar": [
+     "modul ve standart: IEC 60364-7-712:2017 712.414.101, 712.512.1.1.102.2 ve Ek B (standart_metni_dogrulanmis; lisanssız kopya uyarısıyla)",
+     "standart: IEC 61730-1:2016 madde 4.4.1 (resmi SIS önizlemesi); 60364-4-41 madde 414.4.5 ve 414.3.3",
+     "elektronik: IEC 62109-1 test raporu 'DVC A: 60Vdc (35Vdc for wet location)' (dogrulanmis_url)",
+     "hucre: f_hjt_a_min_selv, Voc TK −0.244 %/K; modul: MGM T_min İstanbul −9.0, Ankara −24.9, Erzurum −37.2 °C",
+     "pil: Na 14S/15S ile V_min 28-30 V, akım LFP'nin 1.4-1.9 katı"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "V_lim kategorik girdi olsun: {30, 35, 60}. A: 60 V + takviyeli izoleli dönüştürücü + Class II modül. B yalnız-DC: 35 V Class III, trafosuz. T_min pazara göre (−10/−25/−40 °C) seçilsin ya da tek ürün için −40 °C (N_s 67) alınsın. Tüm alanlarda tek N_s formülü kullanılsın. Buck-boost MPPT'de bağımsız OVP olsun. 712:2025 ve 61730-1:2023 satın alınıp doğrulansın (Deney 5)."
+   },
+   {
+    "varsayim_kodu": "K7",
+    "varsayim": "K7: Fırın pota ömrü boyunca sürekli çalışır; ingot vana/kilit odasından alınır.",
+    "hukum": "kismen",
+    "ozet": "Proses olarak kabul ediliyor; ancak kampanyayı pota ömrü değil min(pota ömrü, metal limiti, karbon limiti) sınırlar. 10N beslemeden gelen metal bağlayıcı değil (n=16'da kuyrukta Fe ~6.5e8 cm⁻³); doğal kuvars potadan gelen akı ise kampanya sonunda ~7e10 cm⁻³ (limit mertebesi, kaba hesap); karbon (k=0.07) sıcak bölgedeki CO akısına bağlı ve bilinmiyor. Kesintide 100 kg ergiyik 60 kW kayıpla ~0.5-2 dk'da donmaya başlar, tam donma ~50 dk sürer; altyapı alanı '10-15 s jeneratör' ve 'her kesinti kampanyayı bitirir' ifadelerini geri çekti. Kilit odası yüksekliği gövde boyunu ve uç kaybını belirler (D=250'de L 1500→750 mm: 0.94→0.89). Tek fırınlı ünitede pota değişimi (12-40 h) hattı durdurur; 24/7 işletme pozisyon başına ~4.2 FTE ister. Yalnız kendi kristal yolunda geçerli.",
+    "kanitlar": [
+     "kristal: Fe ve C kütle dengesi, kampanya formülü; Kayex reşarj süresinin ergitmeyi içermesi (dogrulanmis_url)",
+     "hucre: k<<1 metallerde C_L/C_besleme ~ 1 + büyütülen kütle/eriyik kütlesi",
+     "altyapi: enerji dengesi t=(m·cp+C_sb)·ΔT/P + f·m·L/P; Si L=1788 kJ/kg; geri çekilen iddialar (degisiklik_gunlugu)",
+     "wafer: eta_cone = L/(L+(h_taç+h_kuyruk)·D/3)"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Kristal yolu açılırsa: kampanya uzunluğu = min(pota ömrü, metal, karbon); sentetik iç katmanlı pota; her ingotta FTIR (C, O) ve QSSPC, kampanya sonunda ICP-MS; jeneratör kararı uzun kesinti, UPS/DVR kararı gerilim çökmesi sıklığına bağlansın; kilit odası yüksekliği eta_cone ile optimize edilsin; fırın ile hücre arasında tampon stok. Etki düşük, çünkü kristal yolu varsayılan değil; açılırsa orta."
+   },
+   {
+    "varsayim_kodu": "K8",
+    "varsayim": "K8: Kare kesim artıkları ve ingot uçları asitle temizlenip yeniden eritilir.",
+    "hukum": "kismen",
+    "ozet": "Endüstri standardı: ITRPV'ye göre 2022'de wafer başına kullanılan toplam Si, wafer'da kalan Si'nin ~1.4 katıydı (14 g / 10.1 g); kerf ve kare kesim kayıpları düşünülünce bu oran artık ve uçların zaten geri döndüğünü gösterir. Geri dönüş taze poliyi ~%33-40 azaltır ama iyi wafer m² başına kristalleşen kütleyi değiştirmez; kötü paketlemede eriyik/taze oranı 2.5'e çıkıp fırın kapasitesini tüketir. Alanlar arası çelişki çözüldü: dislokasyonsuz kuyruk katısında Fe için C_s/C0 ≈1.6e-4 (g=0.95), yani kuyruk metal açısından eriyiği seyreltir; metal son sıvıda, yani pota tortusunda toplanır (C_L/C0≈20). Kuyrukta karbon ~1.1×C0, fosfor ~2.5×C0 (özdirenç defteri gerekir). Pota tortusu ve yapısını kaybetmiş, damlacık hapsetmiş kuyruk konisi geri dönmemeli; yan dilim, omuz ve ZD kuyruk dönebilir. HF/HNO3 NOx üretir (kg Si başına ~4.27 kg HF, 8.3 kg CaF2); KOH NOx üretmez ama 1.6 L H2/g Si açığa çıkarır.",
+    "kanitlar": [
+     "wafer: ITRPV 2023 'A 160 µm ... wafer weighs about 10.1 g. That means 14 g or 140% of remaining Si in the wafer were necessary' (dogrulanmis_url); wf_poly_ratio_itrpv 1.42 ile uyumlu",
+     "hucre: K8 itirazının Scheil'e dayanarak geri çekilmesi (degisiklik_gunlugu)",
+     "hesap_turetilmis (kırmızı takımca doğrulandı): C_s/C0 = k(1−g)^(k−1) → Fe 1.6e-4, C 1.14, P 2.45 (g=0.95); pota tortusunda Fe C_L/C0≈20",
+     "kristal ve altyapi: pota artığı ve son kuyruk ucu geri dönmemeli; altyapi: Si + 2OH⁻ + H2O → SiO3²⁻ + 2H2",
+     "standart: izlenebilirlik (2024/3015, UFLPA) geri eritmede kütle dengesi kaydı ister (hafizadan)"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Yalnız kendi kristal yolunda geçerli. Geri dönüş = yan dilim + omuz + ZD kuyruk; pota tortusu ve yapı kaybı olan koni ayrı stoklansın. Önce kontaminasyonsuz kırma (WC/Si kaplı), sonra dağlama. KOH+HCl ile HF/HNO3, ICP-MS ve ömür ölçümüyle kıyaslansın. Modelde P ve C defteri ve xtal_poly_new_kg_day kütle dengesi olsun. Kristal ve altyapı metinlerindeki 'kuyruk metal biriktirir' ifadesi pota tortusuyla sınırlansın."
+   },
+   {
+    "varsayim_kodu": "K9",
+    "varsayim": "K9: Pil hattı başına ~150 bin hücre/yıl kendi hücre üretimi (format belirsiz).",
+    "hukum": "katilmiyorum",
+    "ozet": "Format belirtilmeden K9 anlamsız; kendi hücre hattı olarak da ekonomik değil. 26700 formatında 150 bin hücre ≈1.4 MWh/yıl ve 1.03 $/Wh (0.51-1.89); makineler bedava olsa bile 0.65 $/Wh, yani Gebze teslim satın alma tahmininin (Na 26700 0.129 $/Wh) 5-8 katı; başa baş için 29.6 MWh/yıl gerekiyor. 50 Ah prizmatik hatta ~17 MWh/yıl ve 0.21 $/Wh (makineler firmada yapılırsa 0.165): Na satın almanın 1.27-1.6 katı, LFP'nin ~2.3 katı. K9 yalnız kendi hücre hattı senaryosunda zincirin ölçeğini belirler (incelenen formatlar ve kanonik Wh/Wp ile ~0.1-10 MW/yıl PV); hücre satın alınırsa pil hattı paket hattına dönüşür ve ölçek talepten gelir. Önceki sentez ünite hacmini reddettiği K9'dan türetmişti; bu döngü düzeltildi. Kendi hücre ayrıca format başına UN 38.3, üretici QMS (hafızadan) ve İSG yükü (elektrolit, formasyon yangını, sprinkler, olası NMP) getiriyor.",
+    "kanitlar": [
+     "pil: kendi hat modeli (kaplama alanı, kuru oda, personel, exp(−D·A) verim; girdiler çoğunlukla tahmin); SMM 24.09.2026 (dogrulanmis_url); bat_f38_breakeven",
+     "pil: bat_ds_sync 'satın almada pil hattı = paket hattı'; Mauler 2021 'minimum viable plant sizes ... below 2 GWh year-1'",
+     "bu sentez: 50 Ah hat ~17 MWh/yıl ve NFPP 1.6/0.9 Wh/Wp ile üst uç ~9-10 MW/yıl; hücre alanındaki 46 MW, incelenmeyen 310 Wh hücre ve 1 Wh/W varsayımından geliyordu (hesap_turetilmis)",
+     "elektronik: kutu adedi = 150k/(14·N_p) = 714-10.714/yıl; standart: 600-22.500 kutu/yıl",
+     "altyapi: BYKHY md.96(2)e ve md.118/Ek-12/B (mevzuat.gov.tr metni okundu)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "K9 (format, hücre/yıl, kaplama m²/yıl) üçlüsüyle yeniden tanımlansın ve yalnız 'kendi hücre hattı' senaryosu olarak kalsın. Faz 1'de hücre satın alınsın; paket (kalıp, tutucu, kaynak, test) firmada yapılsın. Faz 2'de prizmatik hat yalnız üç koşul birlikte sağlanırsa yeniden hesaplansın: RFQ fiyatı ≥~0.2 $/Wh, talep ≥~17 MWh/yıl/hat ve LFP kabul edilmiyor. Başa baş fiyat, fiyat senaryolarıyla birlikte raporlansın (KK15). İsteğe bağlı 0.2-0.5 M$ glovebox Ar-Ge pilotu (tahmin)."
+   },
+   {
+    "varsayim_kodu": "H1",
+    "varsayim": "H1: Sektör sezgisinin senaryoya uygunluğu kontrol edilmeden aktarılması (önceki hata, tekrarlanmayacak).",
+    "hukum": "katiliyorum",
+    "ozet": "Sekiz alanın tümü katılıyor. İlk çıktılar H1'i çoğunlukla iyimser yönde tekrarlamış, revizyonda düzeltilmiş: kristal işçiliğinde GW değeri 0.15 h/h (→0.5); hücre capex alt sınırı Çin GW seviyesinin altında; wafer merkez değerleri olgun GW'den; oda tipi FFU kaplaması mini-ortama; LFP'nin Wh/Wp'si Na'ya kullanılabilir oran düzeltmesi olmadan; 1500 V saha kuralları ≤60 V balkon ürününe; '60 V SELV güvenlidir' ve 'sertifika hacimle ihmal edilir' sezgileri. İlk nesil ile olgun arasındaki fark (a=182'de kristalleşen kütle +%15, testere −%42, kesim kırılması 2.7 kat) wafer boyutu etkisinden büyük. Bu sentezin ilk sürümü de benzer bir yumuşatma yaptı: kendi hattın talep ölçeği ve ithal modül kıyası birleştirilmemişti; bu revizyonda düzeltildi (O1, O18).",
+    "kanitlar": [
+     "kristal: TI 'three pullers/operator', ESIA 5 vardiya; CPIA/IEA değerleri filo ortalaması",
+     "wafer: ilk nesil/olgun ayrı parametreler ve öğrenme eğrisi (wf_learn_half_m2)",
+     "hucre: senaryoya_uygunluk alanları; capex/(W/yıl) Çin 0.05-0.06, Avrupa 0.10-0.18",
+     "altyapi: su hesabında sabit taşma payı %38; FFU kaplama 0.5→0.9",
+     "kırmızı takım raporu: KK1 önerisinin talep verisiyle çelişmesi"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Modelde 'başlangıç' ve 'olgun' senaryoları ayrı tutulsun ve öğrenme eğrisiyle birleştirilsin. Sektör değerleri yalnız büyük ölçek uç kontrolü veya alt sınır olarak kullanılsın. capex/(W/yıl) ve her yap/al sonucu ithal ürün fiyatıyla (Çin ve Avrupa) yan yana raporlansın. senaryoya_uygunluk alanı zorunlu kalsın."
+   },
+   {
+    "varsayim_kodu": "H2",
+    "varsayim": "H2: Kasa/kalıp/plastik/potting maliyeti boyutla ölçeklenir (önceki hata, tekrarlanmayacak).",
+    "hukum": "kismen",
+    "ozet": "Boyutla ölçekleniyor, ama alt-doğrusal ve sabit terimli; bu yüzden küçük üründe W başına maliyet artıyor. Kasa kabuğu yüzeyle (V^(2/3)), kalıp takımı izdüşüm alanıyla (A-800 ~47 k$, A-50 ~22 k$), dolgu hacimle ölçekleniyor; pil parça ve takımı E^0.85 ile (0.67-1.0). A-800 kasası ~470 t pres ister; firmanın pres parkı bilinmiyor. Modülde GG 2+2 cam ≤3600 Pa'da 500 W'a kadar alanla doğrusal; doğrusallık yalnız 5400 Pa + çerçevesiz >~400 W'ta veya GB 2.0 HS'de >~200 W'ta bozuluyor. Ters yönde modül BOM + kablo + değişken işçilik toplamı 50 W'ta ≈27 c/W (15.0 + 5.6 + 6.0), 300 W'ta ≈10 c/W. Hücre boyutu başına ~230 k$ takım ve kalifikasyon (tahmin); çekicinin capex/(kg/gün)'ü 80 mm'de 9.9k, 210 mm'de 2.6k USD.",
+    "kanitlar": [
+     "elektronik: el_f_A_proj, el_f_press, el_f_mold_tooling (birim fiyatlar tahmin)",
+     "modul: Waaree 2+2 HS kalibrasyonu (dogrulanmis_url), plaka mekaniği boyut analizi; güç tablosu 50 W satırı",
+     "pil: bat_f45_pack_parts, bat_f47_product_fixed, üs 0.85 (0.67-1.0)",
+     "hucre: hjt_tooling_per_size_usd ve hjt_requal_cost_usd (tahmin); kristal: capex/(kg/gün) hesabı"
+    ],
+    "etkisi": "orta",
+    "oneri": "Her kalem f(geometri) + sabit terim olarak modellensin; varyant başı takım urun_sabit'e girsin. Küçük panelde çerçevesiz GG, kısa kablo ve konnektörsüz sabit bağlantı kullanılsın. Pil bölmesini ayrı modüler kasaya alma seçeneği incelensin. Pres parkı envanteri çıkarılsın (Deney 10)."
+   },
+   {
+    "varsayim_kodu": "H3",
+    "varsayim": "H3: Küçük wafer daha az kırılır (önceki hata: göz ardı edilmişti).",
+    "hukum": "kismen",
+    "ozet": "Doğru ama sınırlı ve tek başına yanlış yönlendirir. İlk nesilde kesim kırılması 182 mm/125 µm'de %2.23, 50 mm/115 µm'de %0.55 (4 kat azalma); n_a=3 ve taban payıyla en fazla ~6.7 kat, n_a=1 ise yalnız 1.2-1.5 kat; kalınlık üssü tek simülasyondan (düşük güven). Küçük boyutta karşı etkiler aynı anda büyüyor: kenar kaybı ~1/a (a=50'de %24.83, a=210'da %25.80), W başına adet işlemi ~1/a² (50 mm'de tekli tutucuyla ~0.9, 16'lı ile ~0.13 c/W), paketleme sınırı. Modülde ara bağlantı kaybı küçük hücre lehine (55 mm %1.8, 176 mm %4.5). Standartlar wafer boyutunu değil hücre alanını sınırlar; standart alanı 'Class III küçük wafer lehine' ifadesini geri çekti. KK1 (d)'de H3, satın alınan hücrelerin kesimi ve modül montajındaki kırılmaya iner.",
+    "kanitlar": [
+     "wafer: plak teorisi ve Weibull, adım bazlı kırılma (n_a ve taban payı tahmin, düşük güven)",
+     "hucre: Wohler/Giglia kenar modeli; f_hjt_adet_stations",
+     "modul: mod_f_loss_interconnect (parmak terimi eklendi)",
+     "standart: IEC 61730-1:2016 madde 4.4.1'de Isc ≤8 A → hücre alanı ≤~202 cm²"
+    ],
+    "etkisi": "orta",
+    "oneri": "Kırılma adım bazlı, taban bileşenli ve n_a/n_t (hücre için ayrı) parametreli modellensin. Kenar kaybı Deney 11 ile kalibre edilsin. 1-2 standart hücre boyutu seçilsin. Adet istasyonlarının kullanım oranı ve ceil() basamakları raporlansın. ≤80 mm için tray seçeneği tutulsun."
+   },
+   {
+    "varsayim_kodu": "H4",
+    "varsayim": "H4: Elektronik maliyetinin büyük kısmı güç katında; küçük güçte SMD/planar manyetik ve GaN ile düşer.",
+    "hukum": "katilmiyorum",
+    "ozet": "Varsayımın asıl iddiası küçük güç hakkında ve orada yanlış; büyük güçte yalnız ilk yarısı doğru. Güç katının elektronik BOM'daki payı (A, Si) 50 W'ta %35, 200 W'ta %40, 500 W'ta %50, 800 W'ta %59, 2000 W'ta %71; kutunun tamamına göre %22-51; invertersiz B'de ≤200 W'ta %16-21. GaN hiçbir güçte bileşen maliyetini düşürmüyor (800 W'ta prim −0.5/+21/+47 $); planar manyetik ~3 $ kazandırıyor ama FET'i pahalandırıyor; manyetikler kutunun %4-6'sı. Ayrık hüküm: ≤300 W kutu için katılmıyorum (sabit elektronik ~10-12 $ ve urun_sabit baskın); ≥500 W kutu için kısmen (güç katı elektronik BOM'un çoğunluğu, ama GaN/planar ile düşüş gösterilmedi). Standart alanının 'katılıyorum'u yalnız A'daki 60→350-400 V izoleli dönüşüm ve takviyeli yalıtımın minyatürleşmeye koyduğu alt sınır hakkında; küçük güç BOM payını değerlendirmiyor, bu yüzden çelişmiyor.",
+    "kanitlar": [
+     "elektronik: aşağıdan yukarı model el_f_power_share (hesap_turetilmis); Ferroxcube f·B ve EPC Qoss veri sayfaları (dogrulanmis_url)",
+     "elektronik: GaN verim kazancının iskontolu değeri DE 18 $, TR ~3 $",
+     "standart: 60 V'tan 350-400 V'a ~9-10 kat kazanç; takviyeli/temel yalıtım farkı (sayısal değerler doğrulanmadı)",
+     "pil: 14S LO 28-55 V; Tycorun sıfır altında ≤0.2C",
+     "modul: aktif MOSFET baypas 500 W'ta ~7 W diyot kaybını <1 W'a indirir"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "≤300 W'ta önce sabit elektronik ve urun_sabit, ≥500 W'ta güç katı ve termal ele alınsın. İlk nesil Si + sarımlı manyetik olsun; iskeletteki guc_kati varsayılanı 'si_sarimli' yapılsın. GaN, 10 bin adetlik teklif ve aynı kartta verim ölçümünden sonra, teslim edilen kWh başına değerlendirilsin (Deney 31). Trafo yalıtım sınıfına göre boyutlandırılsın."
+   },
+   {
+    "varsayim_kodu": "H5",
+    "varsayim": "H5: Fırında çıktı ~D²·v, kayıp ~sıcak bölge yüzeyi; büyük fırının avantajı sabit maliyet dağıtımı; enerji izolasyon/kalkan tasarımıyla belirlenir.",
+    "hukum": "kismen",
+    "ozet": "Ölçekleme ve sabit maliyet kısmı doğru; enerji/izolasyon kısmı doğrulanmadı. (i) v~D^-0.5 yalnız teoriden (Plummer); TI 1977 ve Kayex 1979 yalnız pratik oranı kalibre ediyor (f_v 0.36, ceketsiz), yani çıktının ~D^1.5 ölçeklenmesi bir model varsayımı. (ii) İdealize hesapta kWh/kg çaptan neredeyse bağımsız (4.9-8.8); gerçekçi ofsetlerle 80 mm'den 260 mm'ye 33.7'den 15.1 kWh/kg'a iniyor; küçük çap cezası ölü süre ve sabit yüklerden geliyor. (iii) 'Modern küçük sıcak bölge 2-3 kat az güç çeker' bir varsayım: TI 12 cm'de 45 kW ölçmüş, model 16.5 kW veriyor; etkin k'deki kalibrasyon çarpanı 3.8 (1.5-8). Sabit maliyet mantığı hücre hattında daha baskın: taşıyıcı L 1 m'den 0.5 m'ye inince kapasite 4 kat düşüyor, capex yalnız %15 azalıyor; O1'deki ölçek sonucu buna dayanıyor.",
+    "kanitlar": [
+     "kristal: H5 testi (idealize 4.9-8.8 kWh/kg); revize model 290 mm'de 15 [12-25] kWh/kg, IEA 13.5 ile CPIA 22.3 arasında",
+     "kristal: TI 1977 45/80 kW (dogrulanmis_url); SGL keçe k 0.10-0.14 W/mK (PDF vektör verisinden sayısallaştırıldı)",
+     "hucre: f_hjt_capex sabit + değişken yapı; 3.08 → 2.63 M$",
+     "wafer: sabit L/D'de uç kaybı çaptan bağımsız; testere alan hızı a'dan bağımsız",
+     "altyapi: soğutma, trafo ve jeneratör elektrik yüküyle ölçeklenir"
+    ],
+    "etkisi": "orta",
+    "oneri": "Model sabit + değişken yapıda kalsın. Küçük çap seçilirse önce ölü süre (yan besleyici) ve sabit kayıplar azaltılsın. Tutma gücü 2B ısıl simülasyon ve prototip ölçümüyle belirlensin (Deney 25). Hücrede araç küçültmek yerine hat paylaşımı ya da satın alma (KK1) tercih edilsin."
+   },
+   {
+    "varsayim_kodu": "H6",
+    "varsayim": "H6: Uçtan uca proses kontrolü test/servis maliyetini düşürür, ama zorunlu ünite başı testler kalır.",
+    "hukum": "kismen",
+    "ozet": "Yön doğru, ama kaldıraç test süresinde değil. Standardın zorunlu kıldığı testler (IEC 62109-1 7.5.2 dielektrik, Sınıf I ise topraklama, modülde fiilen etiket IV'si) işçilikte 0.02-0.22 c/W tutuyor. Zorunlu olmayan kalite testleri (EL, pil hat sonu, fonksiyon) 50-100 W'ta 1.3-2.6 c/W. Düşük hacimde boş test ekipmanının amortismanı baskın: A'da 7.5 $/kutu, işçilik 0.3 $; kurum içi EMC/iklim laboratuvarı 17-28 $/kutu, dış kaynak ~2 $/kutu. Proses kontrolünün asıl değeri ret/hurda, garanti (A-800 için 8.75 $) ve MOQ'da. Kendi pil hücresinde H6 tersine işler: formasyon, UN 38.3 ve geliştirme (0.5-4 M$) firmaya geçer.",
+    "kanitlar": [
+     "standart: IEC 62109-1 içindekiler doğrulandı; zorunlu/kalite test ayrımı",
+     "elektronik: el_f_test_station, el_f_site_lab, el_f_warranty (tahmin ağırlıklı)",
+     "hucre: 50 mm'de tekil test ve taşıma ~0.9 c/W, 16'lı tutucuyla ~0.13 c/W",
+     "pil: satın almada giriş muayenesi numuneye indirilebilir",
+     "altyapi: BYKHY md.100 periyodik kontrolleri hacimden bağımsız"
+    ],
+    "etkisi": "orta",
+    "oneri": "Dokunma süresi (adet) ile istasyon süresi (zaman) ayrı modellensin. Test istasyonu saha düzeyinde paylaşılsın; EMC ve HALT dış kaynaktan alınsın. Sınıf II kutu PE testini kaldırır. Palette çoklu %100 test yapılsın; Cpk>1.33 kanıtlanınca örneklemeye geçilsin."
+   },
+   {
+    "varsayim_kodu": "O1",
+    "varsayim": "Örtük: 'Ünite' = K9 pil hattıyla senkron çalışan, kendi kristal+wafer+hücre+modül+pil+elektronik hatlarını içeren kopyalanabilir blok.",
+    "hukum": "katilmiyorum",
+    "ozet": "Araştırmanın en güçlü yapısal bulgusu; önceki sentez ise bunu kendi talep verisiyle birleştirmemişti. Talep tahmini (3000 kutu/yıl/varyant, 1000-20.000; tahmin) iki platformla merkezde ~3, üst uçta ~22 MW/yıl PV demek; en küçük makul HJT araç seti 40-50 MW/yıl (~3.1 M$ + ~2.5 M$ NRE; tahmin). Merkezde saha düzeyinde bile HJT kullanımı ~%6 ve hücre zaman maliyeti ~40 c/W; üst uçta ~%45 ve ~6 c/W; araç küçültmek capex/(W/yıl)'ı 3.7 kat artırıyor. Tam ölçekte bile kendi wafer+hücre+modül ~19-22 c/W (saha hariç), ithal HJT modül 11 c/W FOB. Modül hattı ≥3 MWp/yıl'da 2.8 c/W; merkez talep tek paylaşılan modül hattına yetiyor. Anlık senkron da gereksiz; günlük ortalama eşleşme ve tampon stok yeterli.",
+    "kanitlar": [
+     "elektronik: el_N_demand_per_yr 3000 (1000-20.000; tahmin), el_ds_box_platform",
+     "hucre: f_hjt_required_W, f_hjt_capex, zaman maliyeti tablosu (2 MW 61.4, 10 MW 12.3, 45 MW 2.73 c/W; capex tahmin); ~3 MW'ta ~40 c/W ters orantıyla (hesap_turetilmis, bu sentez)",
+     "modul: mod_f_cost_equipment, mod_f_cost_labor_idle; InfoLink 23.09.2026 0.110 $/W (dogrulanmis_url)",
+     "kristal: xtal_utilization; kullanım %4-70, USD/kg 1.3-13 kat",
+     "pil: bat_f31_demand_mwh, bat_f32_k; yaşlandırma 3-21 gün tampon; anlık senkron gereksiz"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Varsayılan KK1 (d) olsun: wafer ve hücre satın alınır; modül (paylaşılan tek hat), pil paketi, kutu ve son montaj sahada. (e) (A'da standart modül satın alma) karşılaştırma tabanı olsun. (b) koşullu kalsın: toplam talep ≥~40 MW/yıl VE Deney 17 başarılı VE kendi hücre maliyeti ithal hücrenin altında. (a) yalnız referans. Senkron, günlük ortalama + tampon stok olarak modellensin."
+   },
+   {
+    "varsayim_kodu": "O2",
+    "varsayim": "Örtük: Satın alınan polisilikondan wafer'a kendi üretim ekonomiktir (projenin 'polisilikondan son ürüne' kapsamı).",
+    "hukum": "katilmiyorum",
+    "ozet": "Tutarlı Çin zincirinde kendi üretim (Çin polisi ~2.10 $/m² + kristal dönüşümü + wafer dönüşümü) en iyimser uçlarda bile ancak satın alınan M10 teslim fiyatına (~4.91 $/m², 1.96 c/W) eşit. Wafer dönüşümünün tek başına merkez tahmini (7.2 $/m², aralık 1.6-21) satın alınan wafer'ın tamamından yüksek; merkezde başa baş için satın alma fiyatının en az ~2 katına çıkması gerekir. Kristal alanının '1.6-5.6 kat' kıyası Çin dışı poliyi Çin wafer'ıyla karşılaştırdığı için kullanılmadı. İzlenebilir zincirde Çin dışı poli ~17.5 $/kg (8.4 $/m²) ama Çin dışı wafer fiyatı bilinmiyor (0.35 $/adet, tahmin); teklif alınmadan sonuç belirlenemez. Stratejik gerekçeler hiçbir alanda sayıya dökülmedi. Öğrenme yılında kristalde kg/gün yarıya iner; saha EHS yükü de eklenir (HF/NOx/CaF2, argon, 24/7 personel).",
+    "kanitlar": [
+     "wafer: iki tutarlı zincir; wf_wafering_conv, wf_make_minus_buy (girdiler tahmin)",
+     "wafer: OPIS FOB 0.149 $/pc (dogrulanmis_url); wf_price_traceable_m10_usd 0.35 (tahmin, düşük güven)",
+     "bu sentez: Çin polisi + wafer dönüşümü ~9.3 $/m² ≈ 0.31 $/adet M10 (kristal dönüşümü hariç; hesap_turetilmis)",
+     "wafer: AB 2024/3015 yürürlük 13.12.2024 (uygulama tarihi doğrulanmadı)",
+     "altyapi: K3 ile Faz 0 capex ~2.16 → ~1.8 MUSD; K8 EHS kalemleri"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Kristal+wafer adımı Faz 2 modelinde seçenek olarak kalsın, varsayılan satın alma olsun. Kullanıcı stratejik değeri USD/W olarak yazsın. İzlenebilir zincir teklifleri ve gümrük statüsü gelene kadar kristal yatırımı koşullu kalsın (Deney 3). Başa baş wafer fiyatı fiyat senaryolarıyla raporlansın (KK15). Orta yol: 1 prototip çekiciyle Ar-Ge (KK2 b)."
+   },
+   {
+    "varsayim_kodu": "O3",
+    "varsayim": "Örtük: Sodyum-iyon pil LFP'den ucuzdur.",
+    "hukum": "katilmiyorum",
+    "ozet": "Genelleme olarak tutmuyor; fiyat formata bağlı. Aynı kaynakta (SMM): 50 Ah NFPP, 50 Ah LFP'den +%50-59; 100 Ah'de +%54; 10-28 Ah'de +%1; 25 Ah NFS kesede −%14. Gebze teslim tahmini Na 26700 0.129 $/Wh, LFP 50 Ah 0.091 $/Wh. Katmanlı oksit Na'nın kullanılabilir oranı 0.80 (0.72-0.88; tahmin), yani aynı kullanılabilir enerji için %15-22 fazla nominal gerekebilir. Ömür: LO silindirik 3000 çevrim; LFP 6000 (hafızadan); A'da 30 °C'de LO silindirik SOH 0.67 (eşik 0.7) takvim katsayısı bilinmeden hesaplandı. arXiv 2403.13759'a göre Li ~10k $/t iken Na avantajı neredeyse yok; bugün Li 21-24k $/t. Çin iç piyasasında Na, Li tüketim vergisinden muaf (ihracatta uygulanması doğrulanmadı).",
+    "kanitlar": [
+     "pil: SMM 24.09.2026 Na ve LFP satırları (dogrulanmis_url)",
+     "pil: bat_usable_fraction_lo 0.8 (tahmin), bat_usable_fraction_nfpp 0.9 (tahmin), bat_usable_fraction_lfp 0.92 (tahmin)",
+     "pil: bat_cycle_life_lfp 6000 (hafizadan_dogrulanmadi)",
+     "pil: Mysteel Li tüketim vergisi %2→%4, Na muaf (dogrulanmis_url)",
+     "standart: tek başına Na pil (UN 3551) yolcu uçağında yasak; IEC 62619 yalnız Li"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Kimya modelde seçenek olsun (Na LO / NFPP / NFS / LFP), LFP referans alınsın. Na seçilirse 10-28 Ah NFPP veya kese sınıfına bakılsın. Na'nın pazarlama/strateji gerekçesi varsa kullanıcı açıkça yazsın (KK6). LFP ömrü veri sayfasıyla doğrulansın (Deney 4)."
+   },
+   {
+    "varsayim_kodu": "O4",
+    "varsayim": "Örtük: HJT prosesi tümüyle <250 °C'dir; hat yüksek sıcaklık adımı içermez.",
+    "hukum": "katilmiyorum",
+    "ozet": "Hücre katmanları (a-Si PECVD, ITO, ~200 °C kürleme) 250 °C'nin altında. Ancak endüstriyel HJT hatlarının çoğunda gettering amaçlı wafer ön tavlaması standart; hücre alanı deney aralığı olarak 550-950 °C veriyor. Kendi Cz wafer'ımızda termal donör giderme de gerekebilir. Ön tavlama capex'i ~250 k$ (100-600k), enerjisi ~1.5 kWh/m², kurtarma oranı r=0.5 (0-0.9); hepsi tahmin. Kesik kenarın 250 °C altında yeniden pasivasyonu (D seçeneği) kanıtlanmadı; Giglia verisi simülasyon. Modülde düşük sıcaklık ara bağlantısı (SnBi ~139 °C) ile POE laminasyonu (145-155 °C) çakışıyor; bu satın alınan HJT hücrede de geçerli.",
+    "kanitlar": [
+     "hucre: TaiyangNews 2023 raporu PDF (dogrulanmis_url); f_hjt_tau_anneal; hjt_preanneal_* (tahmin)",
+     "kristal: TaiyangNews 2026-06-05; Wikipedia HJT sayfası (düşük sıcaklık prosesi kendi başına gettering sağlamaz; ayrı ön tavlamayı dışlamaz)",
+     "hucre: Giglia değerleri simülasyon olarak etiketlendi",
+     "modul: SnBi ötektiği ve POE işleme sıcaklığı"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Kendi hücre hattı seçilirse hjt_ts_preanneal varsayılan açık olsun, maliyeti modelde yer alsın ve ön tavlama split'i yapılsın (Deney 12). SnBi/POE etkileşimi hücre kaynağından bağımsız olarak modül deneyinde (Deney 21) test edilsin. Etki (d)'de düşük, kendi hücre hattında orta."
+   },
+   {
+    "varsayim_kodu": "O5",
+    "varsayim": "Örtük: 50-500 W arasında sürekli (her güç için ayrı) panel varyantı üretmek ekonomiktir.",
+    "hukum": "katilmiyorum",
+    "ozet": "Varyant sayısı urun_sabit'in ana sürücüsü ve eşiklerde maliyet sıçrıyor. Her hücre boyutu ~230 k$ takım ve kalifikasyon (tahmin); kutu varyantı başına urun_sabit A'da ~0.57-0.62 M$, B'de ~0.29-0.34 M$; modül tip testi aile başına (IEC 61215-1:2021 bin sertifikasyonu, TS 62915 kısmi tekrar test). Mevzuat eşikleri: 800 VA, 960/2000 Wp, 5 kg, 2 kWh, 20/100 Wh, 35/60 V. SELV tavanıyla tek dizide en küçük hücre boyutu: 50 W→53, 100 W→75, 200 W→106, 500 W→168 mm; Class III ≤~198 W. Küçük güçte W başına maliyet yüksek: hücre hariç modül BOM'u 50 W'ta 15.0, 500 W'ta 7.5 c/W; elektronik 1.84'e karşı 0.25 $/W; pil 1.31'e karşı 0.45 $/W. Ayrıca B'de panel kütlesi ayrı bir kısıt (200 W GG 11.1 kg).",
+    "kanitlar": [
+     "hucre: hjt_ts_cell_sizes, f_hjt_a_min_selv",
+     "elektronik: el_ds_box_platform, urun_sabit için iki hacim rejimi",
+     "standart: std_ds_module_family_plan; eşik listesi (doğrulanmış kaynaklar)",
+     "wafer: sq_eta_cross paketleme tablosu (bağımsız python ile doğrulandı)",
+     "modul: güç tablosu (kütle 50 W 3.3, 200 W 11.1, 300 W 16.3 kg)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Ayrık varyant seti kullanılsın: 1-2 hücre boyutu, 2-3 modül boyut sınıfı, senaryo başına tek kutu platformu (A 800 VA/≤960 Wp, B 200-300 W). P_panel alt sınırı ayrı karar olsun (KK14). Model sürekli taramayı analiz için korusun ama maliyeti seçilen varyant setine (urun_sabit × n_varyant) bağlasın (KK9)."
+   },
+   {
+    "varsayim_kodu": "O6",
+    "varsayim": "Örtük: Makineleri kendimiz tasarlayıp yapmak ekipman maliyetini belirgin biçimde düşürür.",
+    "hukum": "belirsiz",
+    "ozet": "Hiçbir alanda kendi makine maliyeti ölçülmedi; capex ve NRE'lerin tamamı tahmin. Donanım ucuzlayabilir: pilde makineler firmada yapılırsa prizmatik hat 5'ten 2.5 M$'a, hücre maliyeti 0.21'den 0.165 $/Wh'e iniyor. Ama NRE büyük: hücre araçları 2.5 M$ (1.2-5); çekici tipi 0.6 M$ (0.25-1.5) + CE 40 k$; altyapı alanında ünite makineleri toplamı 5 M$ (2-15); FOAK aşımı %30 (10-100), kopya öğrenme oranı 0.9. İlk nesil performansı düşük: testere alan hızı −%42, kesim kırılması 2.7 kat, hücre başlangıç verimi %22.5'e karşı 25.7. Kendi kullanımı için makine yapan firma 'üretici' sayılıyor (2006/42 Md.2(i)); 2023/1230 20.01.2027'den zorunlu. Ucuz makine küçük ölçeğin cezasını kapatmıyor; KK1 (d)'de kendi makine kapsamı laminatör, dizgi, test ve pil paket hattına iner.",
+    "kanitlar": [
+     "pil: bat_line_capex_pris_usd ve 'makineler firmada' duyarlılığı (tahmin)",
+     "hucre: hjt_tool_nre_usd, f_hjt_capex (tahmin); kristal: xtal_puller_nre_usd, xtal_puller_ce_usd (tahmin)",
+     "altyapi: eco_nre_machine_design_usd, eco_foak_premium_frac, eco_learning_rate_unit_copy (tahmin)",
+     "standart: 2006/42 Md.2(i) ve 2023/1230 tarihi (dogrulanmis_url)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Makine bazında BOM ve iş paketi tahmini yapılsın; önce (d) yolundaki makineler, sonra kaba düzeyde çekici ve PECVD (Deney 8). NRE'ler tek yerde (tasarim_sabit) toplanıp çift sayım giderilsin. Varsayılan ilk nesil + öğrenme eğrisi olsun."
+   },
+   {
+    "varsayim_kodu": "O7",
+    "varsayim": "Örtük: Ortak altyapının (gaz kabini + yakma, saf su, HF arıtma) saha başına paylaşılması, ünite kopyalandıkça sürekli ölçek avantajı sağlar.",
+    "hukum": "kismen",
+    "ozet": "Avantaj var; ama büyüklüğü mimariye bağlı ve yakma-ıslak abatement üniteler arasında paylaşılamaz. N=1/2/4/8/16 için ünite başı saha payı: sabit modül istiflemesinde 706/370/247/194/165, hedef N için 0.6 kuralıyla boyutlamada 617/350/207/139/99 kUSD/yıl; büyük kazanç N=1'den 4'e geçişte. Abatement pompa çıkışına yakın POU olmalı; silan oksitleyicilerle asla karışmamalı. Paylaşılabilenler: gaz kabini/odası, merkezi izleme, asit egzoz yıkayıcı, UPW, AAT, laboratuvar. BEKRA/Seveso eşikleri ünite envanterinin çok üstünde; bağlayıcı olan BYKHY, ATEX ve deşarj limitleri (F⁻ 15 mg/L). KK1 (d) seçilirse gaz, UPW ve HF altyapısı gerekmez; saha payı modül/pil montajı, pil yangın bölmesi ve kira için yeniden hesaplanmalı.",
+    "kanitlar": [
+     "altyapi: basamaklı modül hesabı (python3), iki mimari; saha capex kalemleri çoğunlukla tahmin (×0.5-×2)",
+     "altyapi: SESHA silan dokümanı: 'Mixing with oxidizers must be avoided at all costs'",
+     "altyapi: BYKHY metni (mevzuat.gov.tr); SKKY Tablo 19",
+     "altyapi: 'N=4 sonrası ~116 kUSD taban' sonucu mimari tercihinden geldiği için geri çekildi (degisiklik_gunlugu)"
+    ],
+    "etkisi": "orta",
+    "oneri": "Abatement ünite ekipman listesine taşınsın (site_n_pou). saha_sabit 'sabit' ve 'saha_basamakli' olarak ayrılsın. Mimari model seçeneği, hedef N kullanıcı girdisi olsun (KK11). (d) için ayrı, hafif saha altyapısı senaryosu hesaplansın."
+   },
+   {
+    "varsayim_kodu": "O8",
+    "varsayim": "Örtük (model iskeleti): k_split ile wafer boyutu ingot çapından bağımsız seçilebilir; P_panel → a eşlemesi fırından ayrıdır.",
+    "hukum": "kismen",
+    "ozet": "Yalnız D her a için serbestçe seçilebiliyorsa doğru; o durumda kesit kullanımı her boyutta ~0.66-0.67. Tek fırın tasarımında sabit D'de kullanım a'nın basamaklı ve süreksiz bir fonksiyonu: D=250'de a=40 için 0.72, 80 için 0.52, 105 için 0.45, 182 için 0.67; D=300'de a=50 için 0.74, 156 için 0.34, 210 için 0.62. İyi wafer m² başına kristalleşen kütle aynı D'de 0.61 ile 1.40 kg/m² arasında (2.3 kat) değişebilir. Yan dilimden yarım tuğla çıkarma kaldıracı standart D/a oranlarında işe yaramıyor. Yalnız kendi kristal yolunda geçerli; satın alınan wafer/hücrede k_split, bölme ve kenar kaybı anlamına gelir.",
+    "kanitlar": [
+     "wafer: tamsayı paketleme hesabı (iki denetçi ve revizyonda bağımsız python ile doğrulandı)",
+     "wafer: TaiyangNews 'half-wafer processing' = yan dilimden yarım tuğla (WebFetch ile teyit edildi)",
+     "kristal: ingot çapı ayarlanabilirlik bandı bilinmiyor"
+    ],
+    "etkisi": "dusuk",
+    "oneri": "Kendi kristal yolunda a ve D birlikte optimize edilsin (sq_eta_cross); a 'tatlı noktalardan' seçilsin ya da ayarlanabilir D bandı kristal tasarım hedefi olsun. Satın alma yolunda k_split kenar kaybı deneyine (Deney 11) bağlansın."
+   },
+   {
+    "varsayim_kodu": "O9",
+    "varsayim": "Örtük: Senaryo A (AB balkon, şebekeye bağlı, entegre depolamalı fişli ürün) için yasal ve sertifika yolu açıktır.",
+    "hukum": "belirsiz",
+    "ozet": "Almanya'da invertör 800 VA, Schuko ile 960 Wp, özel fişle 2000 Wp sınırları doğrulandı. Ancak DIN VDE V 0126-95:2025-12 depolamalı cihazları kapsamıyor; VDE-AR-N 4105:2026-03 800 VA'e kadar depolamalı sistemin kullanıcı tarafından kurulmasına izin veriyor; EEG 2027'nin sızdırılmış taslağı basitleştirmeyi DC kuplaja bağlıyor. A kutusu muhtemelen SBESS (Resital 15; Ek V'de ısıl yayılım ve yangın dahil 11 parametre), ≤5 kg paketle kaçınma yolu belirsiz. Elektronik alanı 'şebekeden şarj izinli' iddiasını kaldırdı. Na-iyon + PV + invertör entegre fişli ürüne hangi güvenlik standardının uygulanacağı belirsiz (IEC 62619 yalnız Li; IEC 62933-5-2 hafızadan). Türkiye'deki fişli PV ve depolamalı ev sistemi rejimi bilinmiyor. Tip testi A-DE için 75/225/596 kUSD (tahmin).",
+    "kanitlar": [
+     "standart: VDE, pvplug, energiezukunft, pv magazine 2026-03 kaynakları (dogrulanmis_url)",
+     "standart ve pil: 2023/1542 resmi metni; std_f_batt_is_sbess; pil: Resital 15 okuması",
+     "elektronik: Solakon dayanaklı 'şebekeden şarj' iddiası kaldırıldı",
+     "standart: TR mevzuatı ve IEC 62933-5-2 aranamadı (arama bütçesi bitti)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "A ana senaryo yapılmadan önce mevzuat deneyi (Deney 6) tamamlansın. A-DE ve A-TR ayrı alt senaryolar olsun; A'da varsayılan SBESS. DKE'nin depolamalı fişli cihaz taslak takvimi izlensin."
+   },
+   {
+    "varsayim_kodu": "O10",
+    "varsayim": "Örtük: Kendi hücre (ve wafer) hattımız endüstriye yakın verim ve yield ile başlar.",
+    "hukum": "katilmiyorum",
+    "ozet": "Kendi hattın ilk 12 ay kenarsız çekirdek verimi %22.5 (19-24.5; tahmin, düşük güven); olgun değer 26.1, endüstri ~25.7. Kendi PECVD aracıyla ticari pasivasyon (iVoc ≥730 mV) gösterilmedi; PVD püskürtme hasarı (0-20 mV) bilinmiyor. Gümüş maliyeti başlangıçta 5.8-6.0, olgunlukta 3.5-3.7, AgCu ile 1.4 c/W. Wafer, saha ve NRE hariç toplam hücre dönüşümü a=105'te 45 MW/yıl'da ~8.4 c/W (saf Ag) veya ~6.2 c/W (AgCu) olgun değerlerdir; başlangıç evresinde (verim %21.9, hat verimi 0.9, Ag 5.8 c/W) daha yüksek; 10 MW/yıl'da ~18 c/W. NRE payı 1 hat × 10 MW × 7 yılda +3.6 c/W. Çin'de hücre dahil HJT modül 11 c/W.",
+    "kanitlar": [
+     "hucre: cell_eta_core_start_pct (tahmin), cell_eta_core_mature_pct; toplam dönüşüm tablosu (olgun; 'Başlangıç evresinde daha yüksek')",
+     "hucre: endüstri verimi (CPIA üst sınır 26.2); NRE 2.5 M$ payı",
+     "wafer: ilk nesil kırılma referansı; kristal: cz_zd_yield öğrenme senaryosu",
+     "modul: InfoLink 0.110 $/W"
+    ],
+    "etkisi": "orta",
+    "oneri": "Varsayılan 'başlangıç + öğrenme eğrisi' olsun; olgun değerler duyarlılık olarak kalsın (KK12). PECVD pasivasyon deneyi kendi hücre hattının go/no-go kapısı olsun (Deney 17). Modül ve ürün geliştirme satın alınan hücreyle yürüsün."
+   },
+   {
+    "varsayim_kodu": "O11",
+    "varsayim": "Örtük: Talep, varyant başına sabit maliyetleri (sertifika, NRE, kalıp) amortize edecek kadar büyüktür.",
+    "hukum": "belirsiz",
+    "ozet": "Hiçbir alan talep verisi bulamadı; el_N_demand_per_yr = 3000 kutu/yıl (1000-20.000, tahmin). Kutu adedi = min(talep, pil hattı). A-800'de urun_sabit talep sınırlı rejimde +0.050 $/W, pil hattı sınırlı rejimde (1 hat, 20 Wh hücre, 1786 kutu/yıl) +0.084 $/W; A-50'de 0.76 $/W. Tip testi merkez değeri tek ünitede ~4.5 c/W (10 Wh hücre, 1 kWh kutu), 4 ünitede ~1.1 c/W. Belirsizlik urun_sabit'te ~3 kat, toplamda ±%30-50. Talebin üst ucu bile (iki platform ~22 MW/yıl) asgari HJT ölçeğine ulaşmıyor; bu yüzden talep belirsizliği KK1 sonucunu değiştirmiyor, ama urun_sabit ve varyant sayısını değiştiriyor.",
+    "kanitlar": [
+     "elektronik: el_N_demand_per_yr (tahmin), el_f_N_box_yr",
+     "standart: std_f_typetest_per_w, std_f_boxes_per_year_unit",
+     "bu sentez: talep aralığının MW/yıl karşılığı (hesap_turetilmis)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Talep modelde senaryo girdisi olsun (düşük/orta/yüksek) ve ünite hacmi buradan türetilsin (Deney 1). Pazar çalışması yapılsın (Deney 2). Varyant sayısı talebe göre sınırlansın (KK9)."
+   },
+   {
+    "varsayim_kodu": "O12",
+    "varsayim": "Örtük: Maliyet sınıfları alan/adet/zaman (+ önerilen guc_enerji, urun_sabit, saha_sabit) maliyet yapısını doğru ayırmaya yeter.",
+    "hukum": "kismen",
+    "ozet": "Önerilen iki ek sınıf gerekli ama yeterli değil; yanlış yerde kullanılırsa yanıltıcı. guc_enerji elektronik güç katı, pil hücresi ve pil EPR'si için gerekli; hücre/modül/kristal/wafer'da ise yanıltıcı (Ag, ITO ve gaz alanla ölçeklenir). zaman sınıfı sabit ve değişken olarak ayrılmazsa bölünmezlik görünmez (120 mm'de 11.1 + 8.1 USD/h; kullanım 0.25'te maliyet 2.7 kat). saha_sabit sabit ve basamaklı olarak ayrılmazsa paylaşım avantajı abartılır. Kenar kalemleri m² başına ~1/a ile ölçeklenir; kırılma/verim maliyet kalemi değil, kümülatif çarpan. NRE için ayrı tasarim_sabit sınıfı gerekir; sertifika kalemleri de üç alanda ayrı sayıldığı için tek sahibe bağlanmalı. 954 parametrenin 636'sı 'teknik' sınıfında.",
+    "kanitlar": [
+     "kristal: cz_cost_fixed_usd_h ve cz_cost_var_usd_h ayrımı",
+     "wafer: kenar/alan = 4/a (50 mm'de 182 mm'nin 3.6 katı)",
+     "hucre ve modul: guc_enerji gereksiz; elektronik, pil ve standart: guc_enerji gerekli (EPR)",
+     "sertifika: el_un383_usd 15k / bat_un383_cost_usd_per_design 10k / std_tt_batt_un383_usd 12k; el_cert_cost_A_usd 150k / std_tt_* toplamı 82k",
+     "parametreler_tum.csv: 101 zaman, 76 adet, 61 alan, 47 urun_sabit, 21 guc_enerji, 12 saha_sabit, 636 teknik"
+    ],
+    "etkisi": "orta",
+    "oneri": "KK7'deki genişletilmiş sınıf şeması benimsensin. Kenar kalemleri formülde açık a⁻¹ ile ölçeklensin; verimler çarpan olarak uygulansın. Sertifika kalemleri standart alanının std_tt_* parametrelerinde toplansın; elektronik ve pil bunlara referans versin. Toplayıcı yalnız formül çıktılarını toplasın."
+   },
+   {
+    "varsayim_kodu": "O13",
+    "varsayim": "Örtük: Çin zinciri girdileri (poli, wafer, hücre, pil hücresi) AB/ABD pazarında kısıtsız kullanılabilir.",
+    "hukum": "belirsiz",
+    "ozet": "AB Zorla Çalıştırma Tüzüğü 2024/3015 13.12.2024'te yürürlüğe girdi; uygulama tarihi doğrulanmadı (hafızadan Aralık 2027). Soruşturma temelli, otomatik yasak değil; ama A senaryosunda izlenebilirlik riski getiriyor. ABD UFLPA polisilikon kökeni için izlenebilirlik istiyor (hafızadan). AB Pil Tüzüğü'nün durum tespiti yükümlülüğü 2025/1561 ile 18.08.2027'ye ertelendi ve 40 M EUR ciro eşiği var (Md.47, doğrulandı). Bu konu kendi kristal yolunun olası en güçlü stratejik gerekçesi; ama değeri sayıya dökülmedi ve izlenebilir wafer/hücre fiyatı bilinmiyor.",
+    "kanitlar": [
+     "wafer: EUR-Lex yürürlük tarihi (dogrulanmis_url); uygulama tarihi hafızadan",
+     "standart: 2024/3015 ve UFLPA ayrıntıları (hafizadan_dogrulanmadi); 2025/1561 ertelemesi (Yayın Ofisi, doğrulandı)",
+     "wafer: wf_price_traceable_m10_usd 0.35 (tahmin, düşük güven)"
+    ],
+    "etkisi": "orta",
+    "oneri": "Parti izlenebilirliği baştan sisteme konsun. Zincir anahtarı (cn/izlenebilir) tüm satın alma fiyatlarında kullanılsın. Deney 3'te izlenebilir zincir teklifleri (wafer, hücre, modül) alınsın. 2024/3015'in uygulama tarihi ve kapsamı hukuk görüşüyle doğrulansın."
+   },
+   {
+    "varsayim_kodu": "O14",
+    "varsayim": "Örtük: PV paneller RoHS'tan muaftır; kurşunlu şerit/lehim kullanılabilir.",
+    "hukum": "katilmiyorum",
+    "ozet": "2011/65/AB Md.2(4)(i)'deki PV istisnası yalnız profesyonellerce kurulan sabit sistemler için. Fişli ve taşınabilir panellerde homojen malzemede Pb ≤%0.1 olmalı; yani bağlantı kurşunsuz yapılmalı. Modül alanında doğrulanan Cu ara bağlantı fiyatı Cu+Sn+Pb ürününe ait (ürün uyuşmazlığı notu var). Satın alınan hücre ve şeritlerde de Pb doğrulanmalı. Türkiye AEEE yönetmeliğindeki kapsam doğrulanmadı. Maliyet etkisi küçük olabilir; ama düşük sıcaklıklı kurşunsuz alaşım (SnBi) laminasyonla etkileşiyor (O4).",
+    "kanitlar": [
+     "standart: legislation.gov.uk RoHS metni (dogrulanmis_url), std_f_rohs_pv_applies",
+     "modul: mod_cu_interconnect_price_usd_kg notu, düşük güven"
+    ],
+    "etkisi": "orta",
+    "oneri": "std_ds_interconnect_pb_free modülde kısıt olsun. Tedarikçi malzemesi XRF/ICP-OES ile doğrulansın (Deney 10). TR kapsamı için hukuk görüşü alınsın."
+   },
+   {
+    "varsayim_kodu": "O15",
+    "varsayim": "Örtük: Firmanın manyetik tasarım, indüksiyon ısıtma ve kalıp/enjeksiyon yetkinlikleri zincirin büyük maliyet kalemlerinde belirgin avantaj sağlar.",
+    "hukum": "kismen",
+    "ozet": "Yetkinlikler montaj ve mekanik tarafta değerli; büyük maliyet kalemlerinde kaldıraç küçük. Manyetikler firma içi maliyetle elektronik BOM'un %7-12'si, kutunun %4-6'sı; kristalde ısıtıcı güç kaynağı capex'in ~%7'si. FZ'nin ~3 MHz RF'i firmanın kHz yetkinliğine uymuyor; ~1 atm indüksiyonlu susseptör Cz daha uygun bir hipotez (TI 1977), ama 4-8 aylık, 50-150 k$'lık (tahmin) bir deney ister. Kalıp/enjeksiyon kasa, bağlantı kutusu, pil tutucu ve küçük wafer tray'lerinde değerli; küçük kutuda pil mekaniği hücreden pahalı olduğu için bu yetkinlik KK1 (d)'de de önemini korur. Kendi konnektör IEC 62852 sertifikası ister ve farklı üreticilerin konnektör eşleşmesi yasak. A-800 kasası ~470 t pres gerektiriyor.",
+    "kanitlar": [
+     "elektronik: manyetik payı hesabı (firma içi maliyet girdisi tahmin)",
+     "kristal: cz_capex_power_usd_per_kW; TI 1977 RF Cz (dogrulanmis_url)",
+     "standart: 712.526.1 konnektör kuralları (standart_metni_dogrulanmis); std_ds_components_make_or_buy",
+     "pil: 50 W A n=1'de mekanik 0.67 $/W > hücre 0.37 $/W"
+    ],
+    "etkisi": "orta",
+    "oneri": "İlk nesilde konnektör satın alınsın; kasa, bağlantı kutusu ve pil mekaniği firmada yapılsın. Firma içi manyetik maliyeti ve pres parkı ölçülsün (Deney 10). İndüksiyonlu Cz ve indüksiyonlu ön tavlama yalnız ilgili karar açılırsa ele alınsın."
+   },
+   {
+    "varsayim_kodu": "O16",
+    "varsayim": "Örtük: Sodyum-iyon pil soğukta LFP'den iyidir.",
+    "hukum": "belirsiz",
+    "ozet": "Dosyalarda Na'nın mutlak soğuk sınırları var ama aynı koşulda LFP verisi yok; göreli üstünlük ne doğrulandı ne çürütüldü. Na için: Tycorun 26700 −10 °C altında şarj edilmiyor, −10..0 °C'de <0.2C şarj, −30..0 °C'de ≤0.2C deşarj; OGSolar NFPP 0 °C altında hiç şarj edilmiyor; 430 Wh kutudan sıfır altında ~86 W. Doğrulanmış Na avantajları 0 V taşıma ve düşük akımla soğuk deşarj. Ürün açısından belirleyici olan kutu gücü: sıfır altında 0.2C sınırı küçük kutuda gücü ciddi biçimde kısıtlar. LFP'nin 0 °C altında şarj kısıtı yaygın bilinse de dosyalarda doğrulanmadı.",
+    "kanitlar": [
+     "pil ve elektronik: Tycorun 26700, OGSolar NFPP, EVLithium 210 Ah veri sayfaları (dogrulanmis_url)",
+     "parametreler_tum.csv: LFP için sıfır altı şarj/deşarj parametresi yok",
+     "pil: bat_charge_c_max_subzero 0.2 (dogrulanmis_url)"
+    ],
+    "etkisi": "orta",
+    "oneri": "Deney 9'a aynı koşulda LFP kontrol hücresi eklensin. Soğuk güç sınırı kimya bazında veri sayfasından bat_P_cold_max_W olarak elektroniğe verilsin. B için ısıtıcı değerlendirilsin."
+   },
+   {
+    "varsayim_kodu": "O17",
+    "varsayim": "Örtük: Çin girdi fiyatları (wafer, poli, hücre, pil hücresi) bugünkü dip seviyede kalır.",
+    "hukum": "belirsiz",
+    "ozet": "Tüm yap/al hükümleri (O2, K9, KK1, KK2, KK5) bugünkü spot fiyatlara koşullu. Kristal alanı 'Çin fiyatlarının geri dönmesi'ni olası stratejik gerekçe saydı ve Çin fiyatının maliyet altında olup olmadığının araştırılmasını istedi. Pilde ihracat KDV iadesinin kaldırılması tüm Çin hücrelerini pahalılaştırır; Li tüketim vergisi 2026'da %2, 2027'de %4 (Çin iç piyasası). Deney 3 ve 4 yalnız anlık teklif topluyor; fiyat senaryosu tanımlanmamış. Pilde başa baş hazır (~0.2-0.23 $/Wh); wafer'da merkez tahminle satın alma fiyatının en az ~2 katı gerekiyor. Fiyatlar iki katına çıksa bile kendi hücre hattının ölçek sorunu (O1) çözülmüyor.",
+    "kanitlar": [
+     "kristal: itiraz 'Çin fiyatının maliyet altında olup olmadığı' ve özet 'Çin fiyatlarının geri dönmesi'",
+     "pil: bat_cn_export_vat_cost_frac, bat_cn_li_consumption_tax_frac; Mysteel (dogrulanmis_url)",
+     "pil: bat_f38_breakeven; bu sentez: wafer başa baş alt sınırı (hesap_turetilmis)"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "Modele fiyat senaryoları konsun (bugün / maliyet+marj / ihracat vergisi-iade kaldırılmış / izlenebilir zincir) ve her yap/al için başa baş fiyat raporlansın (KK15). Deney 3 ve 4'te aylık fiyat takibi yapılsın."
+   },
+   {
+    "varsayim_kodu": "O18",
+    "varsayim": "Örtük: Ürün için kendi modül montajı gereklidir ve (satın alınan hücreyle) ithal modülden ekonomiktir.",
+    "hukum": "belirsiz",
+    "ozet": "Kendi montajla modülün hücre dışı maliyeti = hücre hariç BOM (500 W'ta 7.5, 200 W'ta 8.5 c/W) + zaman (≥3 MWp'de 2.8 c/W) ≈10-11 c/W; bu, hücre dahil ithal HJT modülün FOB fiyatına (11 c/W) şimdiden eşit, satın alınan hücre fiyatı ise dosyalarda yok. Dosyalardaki N_s_max 65-72 sınırı, standart 54-66 seri hücreli ticari modüllerin (hücre sayıları hafızadan) tek modül/MPPT girişiyle ≤60 V SELV koşulunu sağlayabildiğini gösteriyor; yani A'daki ≥~400 W panel için özel modül zorunlu görünmüyor. Kendi montajın olası gerekçeleri: küçük/hafif özel boyutlar (B, <~300 W), Class II/entegre bağlantı, TR ithalat vergileri (doğrulanmadı) ve ürün farklılaşması. Özel boyutlu OEM modül fiyatı ve TR teslim standart modül fiyatı bilinmiyor.",
+    "kanitlar": [
+     "modul: güç tablosu (BOM, kablo, işçilik; hesap_turetilmis) ve InfoLink 0.110 $/W (dogrulanmis_url)",
+     "modul, standart, hucre: N_s_max 65-72 (hesap_turetilmis)",
+     "standart ticari modüllerin seri hücre sayıları (hafizadan_dogrulanmadi)",
+     "parametreler_tum.csv: satın alınan HJT hücre ve modül fiyatı parametresi yok"
+    ],
+    "etkisi": "yuksek",
+    "oneri": "KK1'e (e) seçeneği eklensin ve modelde modül yap/al anahtarı olsun. Deney 3'te standart (≤72 seri hücreli) ve özel boyutlu OEM modül ile HJT/TOPCon hücre teklifleri alınsın. A-800 için 2 × 400-480 W standart modül ile kendi modül kıyaslansın; B için hafif özel modül kendi montaj adayı olarak kalsın."
+   }
+  ],
+  "deneyler": [
+   {
+    "sira": 1,
+    "ad": "Talep tabanlı hacim zinciri ve hat kullanımları",
+    "soru": "Varyant başına talep (kutu/yıl), platform gücü, kutu başına panel sayısı, P_panel ve kullanılabilir Wh/Wp'ye göre sahanın yıllık PV (MW/yıl), panel/gün, kutu/yıl ve pil (MWh/yıl) talebi nedir? Her hat (modül, pil paketi, test; kendi kristal/hücre senaryosunda fırın, testere, HJT) hangi kullanım oranında çalışır ve kaç üniteye hizmet etmeli?",
+    "neden_onemli": "Zaman sınıfı maliyet hacimle 2.7-61 c/W arasında değişiyor ve KK1 bu tabloya dayanıyor. Önceki çalışmada ünite hacmi reddedilen K9 kendi hücre hattından türetilmişti (döngüsel). Talep tahmini (3000 kutu/yıl/varyant) ile asgari HJT ölçeği (40-50 MW/yıl) hiçbir alanda yan yana konmamıştı.",
+    "yontem": "Masa başı çalışma. Alanların arayüz formülleri (el_f_N_box_yr, std_f_boxes_per_year_unit, bat_f31_demand_mwh, mod_f_panels_per_day_sync, f_hjt_required_W, xtal_utilization) tek Python zincirinde birleştirilir; tek Wh/Wp, tek N_s, tek kur kullanılır. Birincil girdi talep: el_N_demand_per_yr × platform gücü × varyant sayısı. K9 (150 bin hücre/yıl) yalnız 'kendi hücre hattı' senaryosu olarak ayrı satırda. Izgara: talep 1000-20.000 kutu/yıl × platform (A 800 VA/≤960 Wp, B 200-300 W) × kutu başına 1-4 panel × P_panel 50-500 W × Wh/Wp (A 0.9-2.6, B 1.8-5.5). Her hat için kullanım oranı, n_units_served = floor(1/kullanım) ve zaman sınıfı c/W.",
+    "olcum": "MW/yıl, panel/gün, kutu/yıl, MWh/yıl; hat bazında kullanım ve paylaşılacak ünite sayısı; zaman sınıfı c/W; kendi hücre hattı için başa baş talep.",
+    "sure": "1-2 hafta",
+    "maliyet_usd": "0 (iç iş gücü)",
+    "etkiledigi_parametreler": [
+     "el_N_demand_per_yr",
+     "el_E_cell_Wh",
+     "bat_wh_usable_per_wp_A",
+     "bat_wh_usable_per_wp_B",
+     "mod_crew_min",
+     "mod_lam_capex_usd",
+     "bat_line_cells_per_year",
+     "xtal_ingot_demand_kg_day"
+    ],
+    "actigi_karar": "KK1 ünite tanımı; KK8 kutu başına panel; KK11 hedef N; xtal_furnace_scope ve hjt_ts_line_sharing",
+    "once_bunlar": true,
+    "bagimliliklar": "Deney 2 (talep, Wh/Wp) ve Deney 4 (format) ile paralel başlar; aralıklarla çalışır, sonuçlar gelince güncellenir.",
+    "oncelik_gerekcesi": "Etkisi en büyük (tüm zaman sınıfı maliyet), belirsizlik yüksek, maliyet ~0; KK1'in karar kapısı. KK1'den bağımsız: evet (KK1'i açan deney)."
+   },
+   {
+    "sira": 2,
+    "ad": "Pazar: kullanılabilir Wh/Wp, varyant talebi ve taşınabilir panel kütlesi",
+    "soru": "A ve B pazarlarında kullanılabilir Wh/Wp'nin marjinal faydası nedir? Varyant başına yıllık talep (kutu/yıl) ve hedef fiyat nedir? B'de kullanıcı hangi panel gücü ve kütlesini kabul ediyor?",
+    "neden_onemli": "Pil maliyeti Wh/Wp ile doğrusal (~3 kat belirsizlik). urun_sabit/W talep ile ters orantılı ve talep tamamen tahmin (1000-20.000 kutu/yıl). B'de değer taşınabilirlik; 200 W GG panel 11.1 kg.",
+    "yontem": "PVGIS saatlik üretim + yük profili simülasyonu (Gebze, Berlin); 20+ rakip ürün taraması (kullanılabilir Wh, güç, panel kütlesi, fiyat); 5-10 distribütör/perakendeci görüşmesi ve ön sipariş yoklaması.",
+    "olcum": "Wh/Wp'ye karşı öz tüketim/fayda eğrisi; kutu/yıl talep aralığı; hedef satış fiyatı ($/W sistem); B'de kabul edilen panel kütlesi.",
+    "sure": "2-4 hafta",
+    "maliyet_usd": "0-5k (tahmin)",
+    "etkiledigi_parametreler": [
+     "bat_wh_usable_per_wp_A",
+     "bat_wh_usable_per_wp_B",
+     "bat_cycles_per_year_A",
+     "bat_pv_peak_factor",
+     "el_N_demand_per_yr",
+     "el_price_kWh_DE_usd",
+     "el_price_kWh_TR_usd",
+     "mod_mass_max_portable_kg"
+    ],
+    "actigi_karar": "KK4 pazar senaryosu; KK6 kimya ve pil boyutu; KK9 varyant sayısı; KK14 P_panel alt sınırı; O11",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Etkisi yüksek (pil boyutu, urun_sabit amortismanı, ünite hacmi), talep hiç ölçülmediği için belirsizlik yüksek; ucuz ve hızlı. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 3,
+    "ad": "Wafer, HJT hücre ve modül teslim fiyatları; gümrük, menşe ve izlenebilirlik teklif turu",
+    "soru": "Türkiye'ye teslim poli, n-tipi wafer, HJT ve TOPCon hücre (tam ve bölünmüş) ile modül (standart ≤72 seri hücreli ve özel boyutlu ≤60 V OEM) fiyatı zincire göre (Çin / izlenebilir) nedir? GTIP 3818 ve 8541 vergileri, ek mali yükümlülük ve anti-damping, menşe kuralları ve AB 2024/3015 kapsamında izlenebilirlik yükümlülüğü nedir?",
+    "neden_onemli": "KK1 (d/e) ve KK2 kararlarının tek sayısal dayanağı. Satın alınan hücre ve özel boyutlu modül fiyatı dosyalarda hiç yok; izlenebilir zincirde wafer fiyatı bilinmiyor (wf_price_traceable_m10_usd 0.35, tahmin); TR ithalat vergileri doğrulanmadı.",
+    "yontem": "4-5 poli, 3-5 wafer, 3-5 hücre ve 3-5 modül tedarikçisinden (Çin ve Çin dışı) CIF/DDP Türkiye teklifi (1k/10k/100k adet). Gümrük müşaviri görüşü; YEKA/yerli katkı mevzuatı; 2024/3015 uygulama tarihi ve kapsamı için hukuk görüşü. InfoLink/OPIS aylık fiyat takibi (fiyat senaryoları için). Satın alınan hücre ve modül fiyatı için modelde yeni parametre açılmalı (mevcut id yok).",
+    "olcum": "USD/kg poli, USD/adet wafer, USD/W hücre ve modül (teslim); vergi oranları, MOQ, menşe ve izlenebilirlik belgeleri; aylık fiyat serisi.",
+    "sure": "2-6 hafta",
+    "maliyet_usd": "0-5k",
+    "etkiledigi_parametreler": [
+     "wf_price_m10_usd",
+     "wf_price_traceable_m10_usd",
+     "wf_poly_price_nonchina_usd_kg",
+     "wf_poly_price_china_rmb_kg",
+     "wf_import_duty_frac",
+     "wf_import_logistics_usd_per_wafer",
+     "xtal_ref_wafer_price_usd_pc",
+     "xtal_ref_poly_price_usd_kg"
+    ],
+    "actigi_karar": "KK1 (d/e); KK2 wafer yap/al ve stratejik değer; KK13 satın alınacak hücre teknolojisi; KK15 fiyat senaryoları; O2, O13, O17, O18",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Milyonlarca USD'lik kristal/hücre yatırımını ve modül yap/al'ı açan en ucuz deney. KK1'den bağımsız: evet (KK1'i açan deney)."
+   },
+   {
+    "sira": 4,
+    "ad": "Pil hücresi teslim fiyatı, MOQ, gümrük ve fiyat takibi (RFQ)",
+    "soru": "Küçük alıcı için Na (LO, NFPP, kese) ve aynı formatta LFP hücrelerin Gebze DDP fiyatı, MOQ'su ve çevrim ömrü beyanı nedir? 2026/2027 fiyat farkı (ihracat KDV iadesi, Li vergisi) ve Na-iyonun GTIP/EGV durumu nedir?",
+    "neden_onemli": "En büyük ürün maliyet kalemi. Kendi hücre hattının eşiği (0.09-0.23 $/Wh aralığı) ve Na/LFP primi (−%14..+%59) buna bağlı. LFP 6000 çevrim hafızadan.",
+    "yontem": "5+ tedarikçiye RFQ: 26700/32140, 10-28 Ah, 50 Ah ve kese formatları; Na ve LFP; 1k/10k/50k adet; DDP; 2026 ve 2027 teslim; veri sayfası (çevrim ömrü, sıcaklık sınırları). Gümrük müşaviri teyidi. Aylık SMM/Mysteel fiyat takibi.",
+    "olcum": "$/Wh DDP, MOQ, teslim süresi, garanti, çevrim ömrü beyanı, vergi oranı; Deney 9 için numune hücreler.",
+    "sure": "3-6 hafta",
+    "maliyet_usd": "0-2.5k",
+    "etkiledigi_parametreler": [
+     "bat_cell_price_na_cyl_usd_Wh",
+     "bat_cell_price_na_prismatic_usd_Wh",
+     "bat_cell_price_na_pris_small_usd_Wh",
+     "bat_cell_price_lfp_50ah_usd_Wh",
+     "bat_cell_price_lfp_small_usd_Wh",
+     "bat_small_lot_markup",
+     "bat_moq_cells",
+     "bat_cn_export_vat_cost_frac",
+     "bat_cn_li_consumption_tax_frac",
+     "bat_import_logistics_usd_Wh",
+     "bat_cycle_life_lfp"
+    ],
+    "actigi_karar": "KK5 pil yap/al; KK6 kimya; KK15 fiyat senaryoları; K9 format tanımı",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Etkisi yüksek, satın alma fiyatında ~2.5 katlık belirsizlik; ucuz ve hızlı; K9 ve KK5'in kapısı. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 5,
+    "ad": "DC gerilim rejimi ve modül sınıfı doğrulaması",
+    "soru": "IEC 60364-7-712:2025 PV SELV sınırını 60 V'ta tuttu mu? Pil doğrudan bağlantısı/DC bara ve ≤60 V'ta yalıtım izleme için ne diyor? IEC 61730-1:2023 madde 5.4 Class III sınırlarını değiştirdi mi; 'seri/paralel kombinasyon' ifadesi panel başına ayrı MPPT girişini kapsıyor mu? IEC 62109-1 Ed.2 DVC tablosu değişiyor mu?",
+    "neden_onemli": "N_s_max, hücre boyutu, modül sınıfı, yalıtım, kablo kesiti ve test listesi V_lim'e bağlı. 60 V hükmü lisanssız kopyadan okunan 2017 metnine dayanıyor. 35 V tasarım kabloyu +0.8-1.2 c/W pahalandırıyor; Class III gücü ≤~198 W ile sınırlıyor.",
+    "yontem": "Standartlar satın alınır (712:2025 ~400-500 USD, 61730-1:2023, 62109-1 Ed.2 taslağı) ve ilgili maddeler okunur; TÜV/VDE/TSE'den yazılı ön değerlendirme alınır.",
+    "olcum": "Yazılı yorum: V_lim, modül sınıfı, SELV kaynak şartı, IMD kapsamı, zorunlu rutin testler.",
+    "sure": "1-6 hafta",
+    "maliyet_usd": "2-9k (bileşenler kısmen örtüşüyor)",
+    "etkiledigi_parametreler": [
+     "std_selv_pv_uocmax_limit_v",
+     "std_imd_mandatory_above_v",
+     "mod_classIII_voc_max_V",
+     "mod_classIII_isc_max_A",
+     "mod_classIII_p_max_W",
+     "mod_bifacial_isc_factor",
+     "mod_isc_max_factor",
+     "std_dvca_dc_wet_v",
+     "el_V_lim_dry_V"
+    ],
+    "actigi_karar": "KK3 V_lim",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Ürünün elektrik mimarisini belirleyen karar kapısı; 2025 baskısı doğrulanmadığı için belirsizlik gerçek; ucuz ve hızlı. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 6,
+    "ad": "Pazar erişim mevzuatı: AB Pil Tüzüğü sınıfı, DE depolamalı fişli cihaz, TR rejimi, Na güvenlik standardı, hava taşıması",
+    "soru": "Resital 15 ışığında K5 kutusu ve B ürünü 2023/1542'de nasıl sınıflanır (SBESS mi, taşınabilir mi; birden fazla ≤5 kg paket)? DIN VDE V 0126-95 ve DKE depolamalı fişli cihaz taslağı hangi sınırlarla, ne zaman gelecek? Türkiye'de fişli/balkon PV ve depolamalı ev sistemi yasal mı, uygunluk yolu ne? Na-iyon güvenliği hangi standartla belgelenir (IEC 62933-5-2?)? B hava taşımasında UN 3551 mi, 3552 mi?",
+    "neden_onemli": "Pil ve standart alanları A kutusunun sınıfını farklı okuyor; ≤5 kg paket önerisi buna bağlı. A-DE pazarı depolama kapsam dışı olduğu için belirsiz. Ek V testleri (~8-80 k$), Md.11 değiştirilebilirlik tasarımı ve TR iç pazarı bu sınıflandırmalara bağlı.",
+    "yontem": "Komisyon SSS ve kılavuzları (değiştirilebilirlik kılavuzu C/2025/214 dahil) + onaylanmış kuruluş/yetkili makam görüşü; DIN VDE V 0126-95 tam metni (~150 EUR) ve DKE/VDE görüşmesi; EPDK mevzuat taraması, SEDAŞ'a resmi yazı, Ticaret Bakanlığı/TSE; DGR danışmanı; karbon ayak izi delege tüzüğü taraması.",
+    "olcum": "Sınıflandırma kararları, test planı, izin prosedürü, güç ve sayaç şartları, takvim.",
+    "sure": "1-2 ay",
+    "maliyet_usd": "6-20k (bileşen toplamı; SBESS sorusu pil ve standartta ortak, birleştirilirse ~5-17k)",
+    "etkiledigi_parametreler": [
+     "std_f_batt_is_sbess",
+     "std_f_batt_is_portable",
+     "std_tt_batt_annexv_extra_usd",
+     "std_tt_plugin_system_incr_usd",
+     "std_plugin_ac_max_va",
+     "std_tr_plugin_pv_regime_known",
+     "std_tr_market_extra_usd",
+     "std_tt_batt_safety_usd",
+     "el_E_batt_reg_threshold_Wh",
+     "el_portable_batt_mass_kg",
+     "bat_safety_cert_cost_usd"
+    ],
+    "actigi_karar": "KK4 pazar senaryosu; O9; K5 paket mimarisi (≤5 kg paketler)",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Pazar seçimini belirleyen karar kapısı; alanlar arası çelişki ve TR bilinmezliği nedeniyle belirsizlik yüksek; maliyeti düşük. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 7,
+    "ad": "Tip testi, sertifika, elektronik NRE ve test ekipmanı teklifleri",
+    "soru": "Modül (IEC 61215/61730 + TS 62915 aile planı), kutu (IEC 62109-1/-2, VDE-AR-N 4105, EMC, RED/CRA; B için IEC 62368-1) ve pil (UN 38.3, güvenlik, Ek V) programlarının gerçek fiyatı, süresi ve numune sayısı nedir? Elektronik geliştirme eforu ve test istasyonu yatırımı ne kadar?",
+    "neden_onemli": "urun_sabit tamamen tahmin ve sertifika kalemleri üç alanda farklı değerlerle ayrı sayılmış (UN 38.3 10/12/15k; inverter 150k'ya karşı std_tt_* toplamı 82k). Tip testi tek ünitede 1.5-12 c/W, A-DE toplamı 75/225/596 kUSD; varyant stratejisini belirliyor.",
+    "yontem": "En az 3 akredite kuruluştan artımsal kapsamlı yazılı teklif; IEC TS 62915 satın alınır (~350 USD); iç proje planı; şebeke simülatörü/güvenlik test cihazı teklifleri ve EMS dış kaynak teklifi; modül için normatif üretim hattı testleri. Sonuçlar tek listede (std_tt_*) toplanır.",
+    "olcum": "USD/program, ay, numune sayısı, aile kapsamı; kişi-yıl; test capex.",
+    "sure": "4-6 hafta",
+    "maliyet_usd": "0-1k",
+    "etkiledigi_parametreler": [
+     "std_tt_module_iec_usd",
+     "std_tt_module_retest_usd",
+     "std_tt_inverter_62109_usd",
+     "std_tt_gridcode_per_country_usd",
+     "std_tt_emc_usd",
+     "std_tt_batt_un383_usd",
+     "el_cert_cost_A_usd",
+     "el_cert_cost_B_usd",
+     "el_py_A",
+     "el_py_B",
+     "el_test_station_capex_A_usd",
+     "el_site_lab_capex_usd"
+    ],
+    "actigi_karar": "KK9 sürekli/ayrık varyant; KK4; KK7 (sertifikanın tek sahibi); O5, O11",
+    "once_bunlar": true,
+    "bagimliliklar": "Teklif isteğine KK9 için taslak varyant listesi girer (1-2 hücre boyutu, 2-3 modül sınıfı, senaryo başına platform).",
+    "oncelik_gerekcesi": "Küçük güçte baskın olan urun_sabit'i ölçer; belirsizlik ~3 kat; maliyeti ~0. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 8,
+    "ad": "Kendi makine BOM/NRE ve makine mevzuatı yükü",
+    "soru": "Önce (d) yolundaki makineler (laminatör, dizgi, modül testi, pil paket hattı, kutu test istasyonu), sonra kaba düzeyde çekici, PECVD/PVD, ıslak tezgah ve testere için kendi yapım capex'i (sabit ve boyuta bağlı kısım), NRE, makine tipi sayısı ve 2006/42–2023/1230 uygunluk maliyeti nedir?",
+    "neden_onemli": "'Kendi makine ucuzdur' varsayımı (O6) hiç ölçülmedi. NRE'ler 0.6-5 M$ mertebesinde ve alanlar arası çift sayım riski var. Kopyalama ekonomisi öğrenme oranına bağlı.",
+    "yontem": "Makine bazında detay BOM ve iş paketi tahmini; kritik bileşen teklifleri (vakum pompası, RF jeneratör, MFC, robot, sıcak bölge grafiti, pota, laminatör ısıtıcı/membran); PECVD için L=0.5 ve 1.0 m iki boyut; makine emniyeti danışmanıyla Ek IV taraması; NRE'ler tek listede birleştirilir.",
+    "olcum": "USD/makine (sabit + boyuta bağlı), kişi-yıl NRE, makine tipi sayısı, CE/uygunluk maliyeti, tahmini öğrenme oranı; aynı makinenin satın alma teklifiyle kıyas.",
+    "sure": "1-2 ay",
+    "maliyet_usd": "5-30k (tahmin; iç mühendislik + danışman)",
+    "etkiledigi_parametreler": [
+     "mod_lam_capex_usd",
+     "bat_line_capex_pris_usd",
+     "xtal_puller_nre_usd",
+     "xtal_puller_ce_usd",
+     "cz_capex_fixed_usd",
+     "hjt_tool_nre_usd",
+     "hjt_capex_pecvd_base_usd",
+     "hjt_capex_pvd_base_usd",
+     "saw_capex_usd",
+     "sq_capex_usd",
+     "eco_nre_machine_design_usd",
+     "eco_learning_rate_unit_copy",
+     "eco_foak_premium_frac",
+     "std_mach_techfile_usd_per_machine_type",
+     "cz_hotzone_cost_usd_m2",
+     "cz_crucible_price_fixed_usd"
+    ],
+    "actigi_karar": "O6; KK1 (hangi hatlar sahada); KK5 (prizmatik hat eşiği)",
+    "once_bunlar": true,
+    "bagimliliklar": "Deney 1'in hacim sonuçları makinelerin tasarım ölçeğini belirler; paralel başlayabilir.",
+    "oncelik_gerekcesi": "Projenin temel önermesini (kendi makine) sayıya döken tek deney; maliyeti düşük, süresi orta. KK1'den bağımsız: kısmen ((d) makineleri her durumda, çekici/PECVD kısmı O6 testi için kaba düzeyde)."
+   },
+   {
+    "sira": 9,
+    "ad": "Na ve LFP hücrelerde kullanılabilir enerji, sıfır altı güç/şarj ve BMS uyumu",
+    "soru": "Aday Na hücrelerinde (LO, NFPP) ve aynı koşulda bir LFP kontrol hücresinde kesim gerilimine göre kullanılabilir enerji nedir? 0/−10/−20 °C'de izinli deşarj/şarj C-oranı, Na'da 0 V depolama kaybı ve 14S AFE eşik uyumu nedir?",
+    "neden_onemli": "LO'da 0.72-0.88'lik belirsizlik nominal Wh'yi ve maliyeti ~%20 değiştirir. Soğuk güç sınırı (0.2C) kutu gücünü ve B'de ısıtıcı ihtiyacını belirler. Na'nın LFP'ye göre soğuk üstünlüğü (O16) dosyalarda test edilmemiş; KK6'nın teknik ayağı.",
+    "yontem": "25/0/−10/−20 °C'de C/5, C/2, 1C deşarj; kesim 1.5/2.0/2.5 V (LFP için veri sayfası kesimi); −10/−20 °C'de 0.1/0.2C şarj ve söküm (kaplama kontrolü); Na'da 0 V'ta 30/90 gün (25/45 °C) depolama; XRD/ICP ile kimya doğrulaması; EVM'de 14S eşik testi.",
+    "olcum": "Wh(Vcut)/Wh(nominal); sıfır altında izinli C (Na ve LFP); kaplama belirtisi; 0 V sonrası kapasite/IR değişimi; AFE eşik hatası (mV).",
+    "sure": "2-4 hafta (şarj/söküm ve 0 V depolama 1-3 ay)",
+    "maliyet_usd": "9-22k (bileşen toplamı)",
+    "etkiledigi_parametreler": [
+     "bat_usable_fraction_lo",
+     "bat_usable_fraction_nfpp",
+     "bat_usable_fraction_lfp",
+     "bat_discharge_c_max_subzero",
+     "bat_v_min_cutoff_V",
+     "bat_charge_temp_min_C",
+     "bat_charge_c_max_subzero",
+     "el_Vcell_min_use_V",
+     "el_afe_usd",
+     "el_C_charge_max_C"
+    ],
+    "actigi_karar": "KK6 kimya; O3, O16; B senaryosunda ısıtıcı kararı",
+    "once_bunlar": true,
+    "bagimliliklar": "Deney 4'ten numune hücreler.",
+    "oncelik_gerekcesi": "Ucuz ve kısa; KK1'den bağımsız olarak KK6'yı açıyor. Önceki sıralamada 'numune hücreye bağlı' diye dışlanmıştı; oysa dış hizmete bağlı pahalı deneyler ilk 10'daydı. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 10,
+    "ad": "Modül BOM teslim fiyatları, Pb içeriği ve firma iç envanteri",
+    "soru": "Küçük hacimde cam (ön/arka), film, Al profil, SnBi tel, PV kablo, konnektör ve bağlantı kutusunun Türkiye teslim fiyatları nedir? Kullanılacak şerit/lehimde ve satın alınan hücrelerde Pb var mı? Firmanın manyetik maliyeti ve pres parkı (tonaj, tabla) nedir?",
+    "neden_onemli": "KK1 (d)'de modül BOM'u (500 W'ta 7.5, 50 W'ta 15 c/W) en büyük kendi-yapım kalemi ve kalem bazındaki teslim çarpanları (1.15-3.2) belirsiz. RoHS kurşunsuz bağlantı zorunlu. Firma avantajı (H2/H4) ve 470 t pres gereksinimi bu verilere bağlı.",
+    "yontem": "3-5 tedarikçiden RFQ; XRF tarama + ICP-OES; iç muhasebe ve pres/kalıphane envanteri.",
+    "olcum": "$/m², $/kg, $/m, MOQ, Pb ağırlık oranı; firma ferrit $/kg ve dk/parça; pres tonajı ve tabla ölçüsü.",
+    "sure": "1-4 hafta",
+    "maliyet_usd": "1-3k",
+    "etkiledigi_parametreler": [
+     "mod_landed_factor_glass",
+     "mod_landed_factor_film",
+     "mod_landed_factor_frame",
+     "mod_glass_rear_price_usd_m2_per_mm",
+     "mod_connector_pair_usd",
+     "mod_jbox_base_usd",
+     "mod_cu_interconnect_price_usd_kg",
+     "std_rohs_pb_max_frac",
+     "std_rohs_verification_usd_per_bom",
+     "el_ferrite_price_usd_kg",
+     "el_press_rate_a_usd_h",
+     "mod_mold_frame_base_usd"
+    ],
+    "actigi_karar": "O14, O15, O18; bileşen yap/al (std_ds_components_make_or_buy); modül yap/al (KK1 d/e)",
+    "once_bunlar": true,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Ölçmesi en ucuz belirsizliklerden; KK1 (d) varsayılanında etkisi orta-yüksek ve (e) kıyası için gerekli. Ölçüt (etki × belirsizlik)/(süre × maliyet) uygulanınca Deney 11'in önüne geçti. KK1'den bağımsız: evet."
+   },
+   {
+    "sira": 11,
+    "ad": "Kenar kaybı (w_eq) ve bölme kolları — satın alınan hücre/wafer ile",
+    "soru": "Satın alınan HJT (ve TOPCon) hücrelerin TLS ile bölünmesinde (C) kenar kaybı ne? Kendi hücre hattı olursa işlem öncesi kesim (B), kesim + düşük sıcaklıkta kenar pasivasyonu (D) ve ön/arka TCO dışlama kolları ne verir? Bölünmüş parçaların kenar dayanımı nedir?",
+    "neden_onemli": "Küçük hücre stratejisinin kilit belirsizliği: 50 mm hücrede kollar arasında 0.4-1.7 puan fark var. Hücre boyutu sayısı (KK9) ve K2'nin küçük hücredeki gerekçesi (TOPCon kenar j02 bulunamadı) buna bağlı.",
+    "yontem": "Aşama 1 (KK1'den bağımsız): satın alınan M10/G12 HJT ve TOPCon hücreler 2/3/4 parçaya TLS ile bölünür; IV, Suns-Voc, karanlık IV, PL; Wohler P/A analizi; 4-nokta eğme ile kenar Weibull. Aşama 2 (kendi hücre hattı seçilirse): satın alınan wafer'la B ve D kolları ve TCO dışlama kolları pilot hat/üniversite HJT hizmetinde.",
+    "olcum": "eta ve Voc'nin P/A'ya göre eğimi → w_eq; kenar j02 (HJT ve TOPCon); TCO dışlama etkin ölü oranı; sarma şöntü; Weibull m ve sigma0.",
+    "sure": "Aşama 1: 1-2 ay; tam program 2-4 ay",
+    "maliyet_usd": "Aşama 1: 10-30k (tahmin); tam program 25-80k (tahmin)",
+    "etkiledigi_parametreler": [
+     "hjt_edge_weq_native_mm",
+     "hjt_edge_weq_tls_mm",
+     "hjt_edge_weq_repass_mm",
+     "hjt_tco_dead_frac_rear",
+     "hjt_tco_dead_frac_front",
+     "hjt_tco_wrap_weq_mm",
+     "hjt_tco_excl_mm",
+     "wf_split_edge_loss_rel",
+     "wf_weibull_m",
+     "wf_weibull_sigma0_MPa"
+    ],
+    "actigi_karar": "KK9 (1-2 standart hücre boyutu); KK13 (HJT/TOPCon); H3; k_split stratejisi",
+    "once_bunlar": false,
+    "bagimliliklar": "Deney 3'ten numune hücreler; aşama 2 için HJT pilot hat hizmeti ve Deney 12 ile ortak parti.",
+    "oncelik_gerekcesi": "Bilgi değeri yüksek ama 25-80k ve 2-4 ay; aşama 1 KK1'den bağımsız ve ilk 10'un hemen ardında başlatılmalı."
+   },
+   {
+    "sira": 12,
+    "ad": "Ön tavlama (gettering) ve wafer spesifikasyonu split'i (koşullu)",
+    "soru": "Ön tavlama (yok / basit tav / PDG / tabula rasa + PDG; 550-950 °C) satın alınan wafer'da ve farklı sınıf/tedarikçi wafer'larında tau_SRH'yi ve hücre verimini ne kadar değiştiriyor? Hangi wafer spesifikasyonu (SRH ömrü, Oi, özdirenç) yeterli?",
+    "neden_onemli": "Kendi HJT hattına >550 °C'lik bir adımın (capex ~250 k$, tahmin) eklenip eklenmeyeceğini ve tek ömür şartnamesini (3.7 ms SRH) belirler. Yalnız kendi hücre hattı varsa anlamlı.",
+    "yontem": "2-3 sınıf/tedarikçiden n-tipi wafer ile kardeş wafer split'i; üniversite tüp fırını veya indüksiyonlu prototip fırın; hücre öncesi ve sonrası QSSPC (Richter intrinsik + J0s çıkarımıyla tau_SRH), FTIR Oi, özdirenç; hücreler Deney 11 aşama 2 ile aynı hizmette işlenir.",
+    "olcum": "Δtau_SRH, Δeta, kurtarma oranı r, enerji/m²; spesifikasyon–verim korelasyonu.",
+    "sure": "2-3 ay",
+    "maliyet_usd": "10-40k (tahmin)",
+    "etkiledigi_parametreler": [
+     "hjt_preanneal_recovery_frac",
+     "hjt_preanneal_capex_usd",
+     "hjt_preanneal_kWh_per_m2",
+     "tau_bulk_ms",
+     "hjt_tau_srh_target_ms",
+     "wf_lifetime_min_ms",
+     "wf_oxygen_cm3",
+     "wf_resistivity_ohm_cm",
+     "cz_oxygen_interstitial_ppma"
+    ],
+    "actigi_karar": "KK13 (ön tavlama varsayılanı); K2/O4; wafer satın alma şartnamesi",
+    "once_bunlar": false,
+    "bagimliliklar": "KK1'de kendi hücre hattı seçimi; tüp fırın ve HJT işleme hizmetine erişim; Deney 11 aşama 2 ile ortak parti.",
+    "oncelik_gerekcesi": "Koşullu: yalnız KK1 (b) seçilirse anlamlı. Önceki sıralamada ilk 10'daydı; aynı bağımlılığı taşıyan Deney 16 dışarıda bırakıldığı için tutarlılık gereği indirildi."
+   },
+   {
+    "sira": 13,
+    "ad": "Sabit elektronik BOM ve bekleme tüketimi",
+    "soru": "AC arayüzü, DC çıkışlar, yardımcı güç ve MCU/iletişim için gerçek BOM nedir? Gece bekleme tüketimi kaç W?",
+    "neden_onemli": "Küçük güçte (≤300 W) en büyük elektronik kalemi; yalnız MCU ve AFE doğrulanmış. Bekleme tüketimi küçük kutuda yıllık enerjinin %5-10'u.",
+    "yontem": "Prototip BOM; LCSC/Mouser + 3 tedarikçiden 5k adet teklif; gece modu prototipi ve 24 saat güç analizörü ölçümü.",
+    "olcum": "USD/kutu (kalem bazında); bekleme gücü (W).",
+    "sure": "2-8 hafta",
+    "maliyet_usd": "2-5k",
+    "etkiledigi_parametreler": [
+     "el_ac_interface_usd",
+     "el_fixed_common_usd",
+     "el_fixed_B_extra_usd",
+     "el_comm_monitor_A_usd",
+     "el_P_standby_A_W",
+     "el_P_standby_B_W"
+    ],
+    "actigi_karar": "H4 küçük güç önceliği; KK8/KK9 platform gücü",
+    "once_bunlar": false,
+    "bagimliliklar": "Bekleme ölçümü için ilk prototip kart gerekir.",
+    "oncelik_gerekcesi": "Ucuz ve KK1'den bağımsız; ama tek başına karar açmıyor."
+   },
+   {
+    "sira": 14,
+    "ad": "Elektrik rejimi ve fiyatı",
+    "soru": "2026-2027 SKTT limiti ve katsayısı nedir? Son 12 ayın PTF ve YEKDEM ortalaması ne? İkili anlaşma teklifleri kaç USD/kWh?",
+    "neden_onemli": "Elektrik 0.084-0.14 USD/kWh aralığında; kristal ve hücre taban yükünün en büyük opex kalemi. Alanlar farklı fiyat kullanıyor (kristal yer tutucu 0.10, altyapı 0.105).",
+    "yontem": "EPDK SKTT kararı birincil kaynaktan; EPİAŞ 12 aylık PTF/YEKDEM verisi; 2-3 tedarikçiden teklif.",
+    "olcum": "kWh limiti, K katsayısı, PTF ortalaması, teklif USD/kWh.",
+    "sure": "1-2 hafta",
+    "maliyet_usd": "0",
+    "etkiledigi_parametreler": [
+     "eco_elec_sktt_limit_kwh_yr",
+     "eco_elec_ptf_try_mwh",
+     "eco_elec_supplier_margin_frac",
+     "eco_elec_price_usd_kwh",
+     "xtal_price_electricity_usd_kwh"
+    ],
+    "actigi_karar": "Tüm alanlar için tek elektrik fiyatı",
+    "once_bunlar": false,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Bedava ve hızlı, ama KK1 (d)'de enerji yoğun adım kalmadığı için etkisi düşük-orta."
+   },
+   {
+    "sira": 15,
+    "ad": "Saha yeri ön görüşleri: OSB, atıksu, izin, yangın, sigorta, bina",
+    "soru": "Aday OSB'nin kabul kriterleri (F⁻, NO3⁻, K⁺) ve atıksu tarifesi nedir? Silan/fosfin/H2 depolama ve ÇED/BEKRA durumu ne? İtfaiye ve sigortacı hangi yangın önlemlerini (sprinkler, gaz odası, pil yangın bölmesi) bekliyor? Deprem tasarım ivmesi ve uygun kiralık bina stoku nedir? Kerf/CaF2 çamuru hangi atık koduyla nereye verilebilir?",
+    "neden_onemli": "Saha sabit capex'i (~0.86 MUSD) ve kira (~195 kUSD/yıl/ünite) tahmin. KK1 (d)'de gaz ve HF kalemleri düşer, ama pil stoku yangın gereksinimi ve kira kalır.",
+    "yontem": "OSB müdürlüğü, İl Çevre Müdürlüğü ve itfaiye ile yazılı ön görüşme; yangın danışmanı + 2 sigortacı teknik incelemesi; TDTH sorgusu; emlak/OSB taraması (5+ bina); çamur için içerik/liç analizi ve kabul teklifi (yalnız kendi kristal/hücre yolunda).",
+    "olcum": "Yazılı limitler, tarife, izin listesi, zorunlu sistemler, prim, PGA/SDS, USD/m²/ay.",
+    "sure": "1-2 ay",
+    "maliyet_usd": "12-48k (bileşen toplamı; (d)'de çamur ve BEKRA kalemleri düşer)",
+    "etkiledigi_parametreler": [
+     "site_f_discharge_limit_mg_l",
+     "eco_osb_wastewater_fee_usd_m3",
+     "site_fixed_capex_usd",
+     "site_sprinkler_capex_usd_m2",
+     "site_batt_fire_capex_usd_per_unit",
+     "eco_insurance_frac_capex_yr",
+     "std_atex_gascode_compliance_usd_per_site",
+     "std_env_permit_usd_per_site"
+    ],
+    "actigi_karar": "KK11 saha büyüme mimarisi; saha yeri",
+    "once_bunlar": false,
+    "bagimliliklar": "KK1 (sahada hangi prosesler olacak) netleşmeli.",
+    "oncelik_gerekcesi": "Etkisi orta-yüksek ama kapsamı KK1'e bağlı ve görece pahalı."
+   },
+   {
+    "sira": 16,
+    "ad": "Özel/kriyojenik gaz ve çok girişli POU abatement teklifleri",
+    "soru": "SiH4, PH3/B karışımları, NF3, H2, sıvı Ar ve N2'nin fiyatı ve lojistiği (silindir kirası, raf ömrü, MOQ) nedir? Çok girişli yakma-ıslak POU, HJT PECVD akışlarıyla nasıl paylaşılır ve fiyatı ne?",
+    "neden_onemli": "Gaz fiyatlarının çoğu tahmin (argon primi 0.2-3.0). Ünite abatement capex'i 0.24-0.5 MUSD.",
+    "yontem": "4-5 gaz tedarikçisinden RFQ; 2-3 abatement tedarikçisinden teknik teklif ve bağımsız güvenlik değerlendirmesi.",
+    "olcum": "USD/kg, kira, raf ömrü; giriş sayısı, giriş başına debi sınırı, capex, işletme maliyeti.",
+    "sure": "2-4 hafta",
+    "maliyet_usd": "0-5k",
+    "etkiledigi_parametreler": [
+     "eco_price_sih4_usd_kg",
+     "eco_price_nf3_usd_kg",
+     "eco_price_h2_usd_kg",
+     "eco_price_dopant_mix_usd_per_cyl",
+     "eco_argon_small_user_premium_frac",
+     "eco_cyl_rent_usd_day",
+     "site_pou_abatement_capex_usd",
+     "site_pou_inlets_per_unit"
+    ],
+    "actigi_karar": "O7 abatement mimarisi; hücre sarf maliyeti",
+    "once_bunlar": false,
+    "bagimliliklar": "KK1'de kendi hücre (veya kristal) hattı seçimi.",
+    "oncelik_gerekcesi": "Ucuz; ama yalnız kendi hücre/kristal hattı olursa anlamlı."
+   },
+   {
+    "sira": 17,
+    "ad": "Kendi PECVD pasivasyon kabiliyeti ve PVD hasarı",
+    "soru": "Kendi PECVD aracımız ticari seviyede pasivasyon (iVoc ≥730 mV) sağlıyor mu? Seyreltik silan (%1.4 Ar/H2) i-katman için uygun mu? Kendi PVD'mizde püskürtme hasarı ne kadar, kürlemeyle ne kadarı geri geliyor?",
+    "neden_onemli": "Kendi hattın başlangıç verimi (%19-24.5) ve silan altyapısı kararı buna bağlı. KK1 (b)'nin teknik go/no-go kapısı.",
+    "yontem": "Prototip odada simetrik i-a-Si:H/c-Si/i-a-Si:H numuneler; sıcaklık, H2 seyreltme, ön plazma ve silan kaynağı matrisi (opsiyonel HWCVD kolu); ITO öncesi, sonrası ve kürleme sonrası iVoc; katot gücü ve basınç taraması.",
+    "olcum": "iVoc, J0s, homojenlik haritası; püskürtme hasarı ΔiVoc (mV).",
+    "sure": "Araç yapımı 6-12 ay + deney 1-3 ay",
+    "maliyet_usd": "Bilinmiyor; prototip oda capex'i (hjt_capex_pecvd_base_usd tahmini 300k USD sabit kısım) + ölçüm",
+    "etkiledigi_parametreler": [
+     "cell_eta_core_start_pct",
+     "hjt_pecvd_takt_s",
+     "hjt_sih4_g_per_m2",
+     "hjt_sputter_damage_dVoc_mV",
+     "hjt_capex_pecvd_base_usd"
+    ],
+    "actigi_karar": "KK1 (b) go/no-go; O10",
+    "once_bunlar": false,
+    "bagimliliklar": "KK1'de kendi hücre hattına yönelme (talep ≥~40 MW/yıl beklentisi); Deney 8 (araç BOM).",
+    "oncelik_gerekcesi": "Etkisi çok yüksek, ama süresi ve maliyeti büyük ve KK1'e bağlı."
+   },
+   {
+    "sira": 18,
+    "ad": "Mini-ortam sınıfı ve HF-son → PECVD bekleme süresi",
+    "soru": "HJT pasivasyonu mini-ortam sınıfına (ISO 5/6/7/8) ve bekleme süresine (5-120 dk; 24 h) ne kadar duyarlı? N2 dolabı ne kazandırıyor?",
+    "neden_onemli": "Kendi hücre hattında mini-ortam alanını, parti boyutunu, son-HF modülünün yerini ve otomasyon/N2 dolap yatırımını belirler.",
+    "yontem": "Satın alınan n-wafer ile bölünmüş lotlar; ortam × bekleme süresi matrisi; simetrik ömür numuneleri ve a-Si pasivasyonu.",
+    "olcum": "QSSPC tau_eff ve iVoc'nin süreye ve ortama bağlı düşüşü.",
+    "sure": "1-2 ay",
+    "maliyet_usd": "10-30k",
+    "etkiledigi_parametreler": [
+     "hjt_queue_time_max_min",
+     "hjt_queue_penalty_rel_per_min",
+     "site_minienv_iso_class",
+     "site_minienv_capex_usd_m2"
+    ],
+    "actigi_karar": "K4 mini-ortam kapsamı ve sınıfı",
+    "once_bunlar": false,
+    "bagimliliklar": "PECVD erişimi (Deney 17 aracı veya pilot hat hizmeti); KK1 (b).",
+    "oncelik_gerekcesi": "Etkisi ve maliyeti orta; yalnız kendi hücre hattı tasarımında gerekli."
+   },
+   {
+    "sira": 19,
+    "ad": "Hücre Voc dağılımı, β_Voc, ters kırılma ve pazar T_min",
+    "soru": "Satın alınan (ileride kendi) HJT hücrelerin Voc P50/P99, dVoc/dT, ters kırılma ve sıcak nokta davranışı nedir? Hedef pazarlarda kabul edilen T_min nedir?",
+    "neden_onemli": "60 V'ta N_s_max 65-74 arasında (alanlar arası fark var); diyot başına hücre sayısını ve SELV marjını belirler.",
+    "yontem": "İklim odasında −25..+75 °C'de 50 hücre IV; 30 hücrede −20 V'a kadar ters IV; 2 mini modülde MQT 09; iklim verisi + onaylı kuruluşun T_min kabulü.",
+    "olcum": "Voc P50/P99, β_Voc, kırılma gerilimi, sıcak nokta sıcaklığı; T_min (°C).",
+    "sure": "3-6 hafta",
+    "maliyet_usd": "6-16k (bileşen toplamı)",
+    "etkiledigi_parametreler": [
+     "mod_voc_cell_stc_V",
+     "mod_beta_voc_per_K",
+     "mod_cells_per_bypass_max",
+     "mod_voc_margin",
+     "std_tmin_site_c"
+    ],
+    "actigi_karar": "KK3 (N_s kuralı); K6",
+    "once_bunlar": false,
+    "bagimliliklar": "Satın alınan hücreler (Deney 3); Deney 5 sonucu.",
+    "oncelik_gerekcesi": "Etkisi orta (1-3 hücre), maliyeti düşük."
+   },
+   {
+    "sira": 20,
+    "ad": "Balkon rüzgâr yükü ve montaj mevzuatı",
+    "soru": "Modülün beyan tasarım yükü EN 1990 tasarım etkisiyle mi (γQ·γM = 2.25) karşılaştırılır? Korkuluk panelinin cp_net'i ve bölgeleri nedir? Almanya'da (abZ/aBG/ZiE, DIN 18008) ve Türkiye'de kalıcı balkon montajı için hangi belgeler gerekir? Tipik balkonda kutu nereye konur, kablo ne uzunlukta olur?",
+    "neden_onemli": "Gereken test yükü 1.2-11 kPa aralığında. 2400/3600 Pa sınıfı, cam yapısı ve montaj kısıtları buna bağlı. Küçük panelde kablo 5.6 c/W'a kadar çıkıyor.",
+    "yontem": "Yapı mühendisi + onaylı kuruluş görüşü; EN 1991-1-4 7.4.1 + CFD (gerekirse ölçekli rüzgâr tüneli); DIBt görüşü; 3 tipik balkon için kurulum çizimi.",
+    "olcum": "γ kombinasyonu; cp_net haritası; belge listesi; kablo uzunluğu dağılımı.",
+    "sure": "1-3 ay",
+    "maliyet_usd": "5-40k",
+    "etkiledigi_parametreler": [
+     "mod_gamma_Q",
+     "mod_wind_cp_net",
+     "mod_wind_qp_Pa",
+     "mod_q_test_Pa",
+     "mod_railing_height_m",
+     "mod_cable_length_m"
+    ],
+    "actigi_karar": "A senaryosunda cam/çerçeve sınıfı ve montaj kısıtları",
+    "once_bunlar": false,
+    "bagimliliklar": "KK4'te A seçilirse öncelik kazanır.",
+    "oncelik_gerekcesi": "A'ya özgü; etkisi ve maliyeti orta."
+   },
+   {
+    "sira": 21,
+    "ad": "Mini modül güvenilirliği, cam ve CTM matrisi",
+    "soru": "GG 2+2 / 1.6+1.6 ve GB 2.0 HS yapılarının gerçek dayanımı nedir? ≤60 V'ta EVA/EPE/POE ve SnBi/0BB ara bağlantı DH1000/TC200/UV sonrası nasıl davranıyor? AgCu ve HJT UV bozunması ne kadar? Hücre boyutu ve tel sayısına göre CTM nedir?",
+    "neden_onemli": "Enkapsülan seçimi ~1.8 $/m² fark yaratıyor. Cam katsayıları tek bir modülden kalibre edildi. Garanti riski ile N_s ve yarım hücre kararı bu verilere bağlı; B'nin hafif yapısı da burada test edilir.",
+    "yontem": "Satın alınan hücrelerden 3 boyut × yapı mini modül; hava yastıklı düzenekte 2400/3600/5400 Pa + EL + gerinim; MQT 17 dolu testi; DH1000, TC200, uzatılmış UV (15→60-120 kWh/m²), HF10; laminasyon öncesi/sonrası soyulma ve IV/Rs.",
+    "olcum": "Kırılma yükü, cam gerilimi, Pmax/FF kaybı, EL, soyulma dayanımı, CTM(a, n_w).",
+    "sure": "3-6 ay",
+    "maliyet_usd": "55-150k (bileşen toplamı; ortak numunelerle azalabilir; tahmin)",
+    "etkiledigi_parametreler": [
+     "mod_glass_ct_GG_mm_per_m",
+     "mod_glass_mount_factor_frameless",
+     "mod_encap_price_usd_m2",
+     "mod_interconnect_fixed_usd_per_cell",
+     "mod_ctm_optical",
+     "mod_finger_k_ohm",
+     "hjt_ag_g_per_m2_agcu",
+     "hjt_bifaciality"
+    ],
+    "actigi_karar": "Modül yapısı ve enkapsülan seçimi; KK9 hücre boyutu; KK14 B hafif panel",
+    "once_bunlar": false,
+    "bagimliliklar": "Satın alınan hücreler; laminatör (prototip veya hizmet); Deney 19.",
+    "oncelik_gerekcesi": "Etkisi orta; maliyeti ve süresi orta-yüksek."
+   },
+   {
+    "sira": 22,
+    "ad": "Saha prototipi: kutu sıcaklığı, pil ömrü, dolgusuz kutu ve MPPT gruplaması",
+    "soru": "Gölgedeki kutu sıcaklıkları ne kadar? Aday hücrelerin (LFP dahil) 25/35/45 °C'de çevrim ve 45/60 °C'de takvim yaşlanması nasıl? Dolgusuz kutu nem ve yoğuşmaya dayanıyor mu? Panel başına MPPT ile paralel grup arasında enerji farkı ne?",
+    "neden_onemli": "45 °C şarj sınırı ve ömür belirsiz (A'da LO silindirik SOH 0.67, eşik 0.7; takvim katsayısı bilinmiyor). Dolgu A'da 5-14 $ tutuyor. Küçük panelde MPPT kararı 0.02-0.06 $/W.",
+    "yontem": "Isıtıcılı sahte kutu Gebze ve Antalya'da kuzey duvarında (Temmuz-Ağustos); 3-6 ay hücre çevrim ve depolama testleri; 85/85 1000 h ve termal çevrim; balkon gölge senaryosunda karşılaştırmalı ölçüm.",
+    "olcum": "°C; kapasite ve IR'nin zamanla değişimi; izolasyon direnci; kWh farkı.",
+    "sure": "3-6 ay",
+    "maliyet_usd": "20-58k (bileşen toplamı; tahmin)",
+    "etkiledigi_parametreler": [
+     "el_h_conv_rad_W_m2K",
+     "el_dT_box_allow_K",
+     "bat_cycle_life_lo_cyl",
+     "bat_cycle_life_nfpp_pris",
+     "bat_cal_fade_k_per_sqrt_yr",
+     "bat_aging_accel_per_10C",
+     "el_n_panel_per_mppt"
+    ],
+    "actigi_karar": "KK6 kimya; KK8 kutu başına panel sayısı ve MPPT kanal kuralı; garanti karşılığı",
+    "once_bunlar": false,
+    "bagimliliklar": "Deney 4 numune hücreleri; Deney 13 prototip kart.",
+    "oncelik_gerekcesi": "Etkisi orta-yüksek (ömür ve garanti) ama uzun sürüyor."
+   },
+   {
+    "sira": 23,
+    "ad": "Pil paketi DFM ve montaj zaman etüdü",
+    "soru": "İki format × iki boyut için paket parça maliyeti, kalıp takımı ve montaj süresi nedir?",
+    "neden_onemli": "Küçük kutuda mekanik pay hücreyi aşıyor (50 W A'da 0.67'ye karşı 0.37 $/W); KK1 (d)'de paket hattı ünitenin çekirdeği.",
+    "yontem": "DFM çalışması; kendi kalıphanesinden teklif; 50-100 kutuluk pilotta zaman etüdü.",
+    "olcum": "$/hücre, dk/kutu, takım maliyeti (USD).",
+    "sure": "1-2 ay",
+    "maliyet_usd": "5-20k",
+    "etkiledigi_parametreler": [
+     "bat_mech_per_cell_cyl_usd",
+     "bat_mech_per_cell_pris_usd",
+     "bat_enclosure_fixed_usd",
+     "bat_pack_min_per_box",
+     "bat_tooling_fixed_usd"
+    ],
+    "actigi_karar": "KK8 kutu başına panel sayısı; kutu platformu",
+    "once_bunlar": false,
+    "bagimliliklar": "Deney 4'te format seçimi.",
+    "oncelik_gerekcesi": "Etkisi orta, maliyeti düşük; firmanın kalıp yetkinliğine uygun; format kararından sonra."
+   },
+   {
+    "sira": 24,
+    "ad": "Yatırım teşvikleri, vergi, amortisman ve ücretler",
+    "soru": "Hangi yatırım teşvikleri mevcut? %12.5 imalat kurumlar vergisinin koşulları ve VUK amortisman süreleri nedir? Vakum/plazma deneyimli teknisyen ve mühendisin piyasa ücreti ne?",
+    "neden_onemli": "CRF_tax ve WACC (%9-20) sermaye yükünü doğrudan etkiliyor; işçiliğin üst bandını belirliyor.",
+    "yontem": "Sanayi ve Teknoloji Bakanlığı / mali müşavir ile uygunluk analizi; ilan taraması + 5-10 aday görüşmesi.",
+    "olcum": "Destek kalemleri, vergi oranı, amortisman süreleri, net ücret beklentisi.",
+    "sure": "1 ay",
+    "maliyet_usd": "2-5k",
+    "etkiledigi_parametreler": [
+     "eco_wacc_usd",
+     "eco_corporate_tax_rate",
+     "eco_dep_life_tax_machine_yr",
+     "eco_dep_life_tax_infra_yr",
+     "eco_labor_technician_usd_h",
+     "eco_labor_engineer_usd_h"
+    ],
+    "actigi_karar": "Finansal çerçeve (tüm capex yoğun kararlar)",
+    "once_bunlar": false,
+    "bagimliliklar": "Yok",
+    "oncelik_gerekcesi": "Ucuz; sermaye yükünü ölçekler ama kararları tek başına değiştirmez."
+   },
+   {
+    "sira": 25,
+    "ad": "Küçük sıcak bölge tutma gücü, çap bandı ve ceket hız kazancı",
+    "soru": "80-160 mm'lik modern küçük sıcak bölgenin gerçek tutma gücü nedir? Aynı fırında ingot çapı hangi bantta ayarlanabilir? Su soğutmalı ceket gövde hızını ne kadar artırır?",
+    "neden_onemli": "Küçük çapta enerjinin %60-70'i tutma gücünden geliyor (model 16-24 kW, TI ölçümü 45 kW). Ceket kazancı 1.0-2.0 kat arasında bilinmiyor. Sabit D'de wafer paketleme basamaklı.",
+    "yontem": "2B eksenel simetrik ısıl simülasyon (CGSim/COMSOL), 2 izolasyon × 2 kalkan varyantı; prototipte boş eriyik tutma gücü ölçümü; çıkarılabilir ceketle ve ceketsiz, 2 çapta hız rampası; farklı çaplarda çekim.",
+    "olcum": "kW; soğutma suyu ΔT × debi; ZD'yi bozmayan azami gövde hızı; D_min–D_max.",
+    "sure": "Simülasyon 1-2 ay; ölçüm prototiple 2-4 hafta",
+    "maliyet_usd": "15-45k (simülasyon 10-30k + ceket 5-15k; prototip hariç)",
+    "etkiledigi_parametreler": [
+     "cz_ins_loss_mult",
+     "xtal_ins_k_mat_W_mK",
+     "cz_P_parasitic_fixed_kW",
+     "cz_jacket_speed_gain",
+     "cz_fv_nojacket",
+     "sq_grind_margin_mm"
+    ],
+    "actigi_karar": "Kendi kristal yolunun maliyet eğrisi (KK2 b/c); D politikası",
+    "once_bunlar": false,
+    "bagimliliklar": "KK2'de kristal Ar-Ge kararı (Deney 3 sonrası).",
+    "oncelik_gerekcesi": "Yalnız kristal yolu açılırsa anlamlı; simülasyon kısmı görece ucuz."
+   },
+   {
+    "sira": 26,
+    "ad": "Kesinti/gerilim çökmesi sıklığı ve ergiyik donma eşiği",
+    "soru": "Aday OSB'de uzun kesinti ve gerilim çökmesi sıklığı ve süre dağılımı nedir? Ergiyik hangi katılaşma oranında pota geri dönüşsüz kaybedilir?",
+    "neden_onemli": "Jeneratör (uzun kesinti) ve UPS/DVR (çökme) kararları buna bağlı. Kampanya kaybı eşiği dakikalar mertebesinde ve bilinmiyor.",
+    "yontem": "SEDAŞ/OSB'den 3-5 yıllık kesinti kaydı + 3 ay EN 50160 güç kalitesi analizörü; kristal termal-mekanik modeli + planlı kapatmalarda sıcaklık kaydı + küçük potada kontrollü donma deneyi.",
+    "olcum": "Olay/yıl, süre dağılımı, çökme derinliği; t_onset, katılaşma oranı-zaman eğrisi, çatlama eşiği.",
+    "sure": "1-3 ay (donma deneyi prototiple)",
+    "maliyet_usd": "7-25k",
+    "etkiledigi_parametreler": [
+     "site_grid_outage_events_yr",
+     "site_voltage_sag_events_yr",
+     "site_melt_t_onset_s",
+     "site_melt_frac_solid_crit",
+     "xtal_outage_events_per_yr",
+     "site_genset_capex_usd_kva",
+     "site_ups_capex_usd_kva"
+    ],
+    "actigi_karar": "Yedek güç mimarisi (yalnız kendi kristal yolunda)",
+    "once_bunlar": false,
+    "bagimliliklar": "KK2 ve saha seçimi (Deney 15).",
+    "oncelik_gerekcesi": "Koşullu; kesinti verisi kısmı ucuz."
+   },
+   {
+    "sira": 27,
+    "ad": "Prototip çekici kampanyaları: metal/karbon akısı, SRH ömrü, ölü süre, ZD öğrenmesi, argon",
+    "soru": "Doğal ve sentetik iç katmanlı potayla 5-10 ingotluk kampanyalarda C, Fe ve tau_SRH ingot sırasına ve konumuna göre nasıl değişiyor? Ingot başı ölü süre, ZD öğrenme eğrisi ve asgari argon debisi nedir?",
+    "neden_onemli": "Kampanya uzunluğu = min(pota, metal, karbon) ve HJT kalitesi bu verilere bağlı. 120 mm'de çevrimin %40'ı gövde dışında geçiyor; öğrenme yılı kg/günü yarıya indiriyor.",
+    "yontem": "Her ingotta tohum/orta/kuyrukta FTIR (C, O), QSSPC (tau_SRH) ve özdirenç; kampanya sonunda pota artığında ICP-MS; zaman etüdü (kablolu ve yan besleyicili); 3 argon debisi; yapı kaybı kök neden kaydı.",
+    "olcum": "C ve Fe trendi, çalışma saatine göre tau_SRH, pota duvar kaybı; faz süreleri; ZD kütle oranının zamanla değişimi; Oi, C, SiO birikimi.",
+    "sure": "3-12 ay",
+    "maliyet_usd": "65-140k (ölçüm hizmetleri 15-40k + QSSPC 50-100k, tahmin; prototip çekici ve yan besleyici 10-40k hariç)",
+    "etkiledigi_parametreler": [
+     "cz_metal_flux_rel_per_ingot",
+     "cz_C_flux_rel_per_ingot",
+     "cz_crucible_life_h",
+     "xtal_Fe_lim_crystal_cm3",
+     "xtal_C_lim_crystal_ppma",
+     "hjt_eta_tau_A_pctabs",
+     "hjt_eta_tau_c_ms",
+     "cz_zd_yield",
+     "cz_availability_unplanned",
+     "cz_argon_slpm_ref_36in"
+    ],
+    "actigi_karar": "K7 kampanya kuralı; K1 kalite hedefi; KK2 (c) yatırım kararı",
+    "once_bunlar": false,
+    "bagimliliklar": "Prototip çekici (KK2 b); Deney 25.",
+    "oncelik_gerekcesi": "Bilgi değeri yüksek ama pahalı, uzun ve kristal kararına bağlı."
+   },
+   {
+    "sira": 28,
+    "ad": "Kendi testere prototipi, wafer dönüşüm maliyeti ve kırılma üsleri",
+    "soru": "Kendi testeremizde kerf, besleme, TTV, kırılma ve tel tüketimi nedir; öğrenme ne kadar hızlı? Kırılmanın boyut/kalınlık üsleri ve taban payı nedir? Tel fiyatları ne? Küçük wafer tray tabanlı ayrılabilir mi?",
+    "neden_onemli": "Wafer dönüşümünün merkez tahmini 7.2 $/m² (1.6-21). H3 faydası 1.2-6.7 kat arasında. Yap/al kararının ikinci yarısı.",
+    "yontem": "Kısa tel ağlı (100-200 mm) prototip veya tek tel standı; 36 µm çelik ve 30 µm tungsten tel; besleme ve gerginlik taraması; bölünmüş parçalar ve 95/110/130 µm wafer'larla adım başına ~10 bin parça kırılma istatistiği; tel teklifleri; 50-105 mm tuğlaların tray'e ayrılması.",
+    "olcum": "Kerf, TTV, kırılma, km tel/m²; adım bazlı P(a,t); çevrim süresi.",
+    "sure": "3-6 ay",
+    "maliyet_usd": "55-170k (tahmin)",
+    "etkiledigi_parametreler": [
+     "saw_kerf_firstgen_um",
+     "saw_feed_firstgen_mm_min",
+     "wf_break_wafering_ref_firstgen",
+     "wf_learn_half_m2",
+     "wf_break_exp_size",
+     "wf_break_floor_frac",
+     "saw_capex_usd"
+    ],
+    "actigi_karar": "KK2 (c); H3 kalibrasyonu",
+    "once_bunlar": false,
+    "bagimliliklar": "KK2'de kendi wafer yoluna karar; Deney 3.",
+    "oncelik_gerekcesi": "Koşullu ve pahalı."
+   },
+   {
+    "sira": 29,
+    "ad": "Hat devreye alma ölçümleri (hücre, modül, altyapı)",
+    "soru": "Kendi hat kurulursa: Ag pasta kütlesi ve AgCu, ITO hedef kullanımı, gaz/kimyasal/UPW tüketimi (sabit + değişken), kampanya modu başlangıç kaybı, taşıyıcı ömrü, %100 IV ile inline ölçüm korelasyonu (Cpk), laminatör çevrim ve bekleme gücü, işçilik ve rutin test süreleri, çok şeritli kasette dokulama nasıl?",
+    "neden_onemli": "Sarf ve zaman sınıfı kalemlerinin çoğu tahmin: Ag 1.4-6 c/W, ITO 1.25-1.6 c/W; su maliyetinin ~%38'i sabit taşmadan geliyor.",
+    "yontem": "Tartım, TGA, TLM; hedef ağırlık kaybı; MFC, banyo ve debimetre logları; 1-7 gün bekleme sonrası yeniden başlatma; zaman etüdü; Cpk analizi.",
+    "olcum": "g/m²; hedef kullanımı; L/m² ve boşta L/h; başlangıç saati; çevrim ömrü; Cpk; dk/panel; s/ünite.",
+    "sure": "Hat devreye alındıktan sonra 1-12 ay",
+    "maliyet_usd": "30-105k (bileşen toplamı; tahmin; çoğu üretimle birlikte)",
+    "etkiledigi_parametreler": [
+     "hjt_paste_laydown_start_g_per_m2",
+     "hjt_paste_ag_frac",
+     "hjt_ito_target_util",
+     "hjt_ito_transfer_frac",
+     "hjt_nf3_g_per_m2",
+     "site_upw_l_per_m2",
+     "site_upw_fixed_lph_per_unit",
+     "hjt_campaign_startup_h",
+     "hjt_carrier_life_cycles",
+     "hjt_iv_test_s_per_cell",
+     "mod_lam_standby_kW"
+    ],
+    "actigi_karar": "Başlangıç ve olgun parametrelerin kalibrasyonu; H6 test stratejisi",
+    "once_bunlar": false,
+    "bagimliliklar": "Kendi hat (KK1, Deney 17); modül kısmı (d)'de de geçerli.",
+    "oncelik_gerekcesi": "Karar açmaz, kalibre eder; hat olmadan yapılamaz."
+   },
+   {
+    "sira": 30,
+    "ad": "İndüksiyonlu susseptör Cz ön denemesi",
+    "soru": "kHz indüksiyon + grafit susseptör ve ~1 atm Ar ile 2-3 inç dislokasyonsuz Cz çekilebilir mi? O, C, ark ve Ar tüketimi nasıl olur?",
+    "neden_onemli": "Firmanın yetkinliğine en uygun kristal yöntemi olabilir; vakum pompası ve Ar maliyetini düşürebilir.",
+    "yontem": "2-3 inç prototip; kuplaj verimi ölçümü; FTIR Oi/C; CISPR 11 ön ölçümü ve alan ölçümü.",
+    "olcum": "ZD, Oi, C, Ar tüketimi, kuplaj verimi, dBµV/m, A/m.",
+    "sure": "4-8 ay",
+    "maliyet_usd": "50-150k (tahmin)",
+    "etkiledigi_parametreler": [
+     "cz_argon_slpm_ref_36in",
+     "cz_P_aux_per_m2_kW",
+     "cz_oxygen_interstitial_ppma"
+    ],
+    "actigi_karar": "xtal_heater_type; O15",
+    "once_bunlar": false,
+    "bagimliliklar": "KK2 (b) kristal Ar-Ge kararı.",
+    "oncelik_gerekcesi": "Stratejik Ar-Ge; kısa vadede ekonomik kararı değiştirmez."
+   },
+   {
+    "sira": 31,
+    "ad": "GaN ve Si aynı kartta; güç yoğunluğu ve verim",
+    "soru": "10 bin adette GaN fiyatı ($·mΩ) nedir? 800 W A kartında 100-400 kHz'de Si ile GaN arasında verim ve sıcaklık farkı ne? İlk prototipin gerçek güç yoğunluğu ve verimi nedir?",
+    "neden_onemli": "GaN primi −0.5 ile +47 $ arasında; verim kazancının değeri Almanya'da 18 $, Türkiye'de ~3 $.",
+    "yontem": "Innoscience/EPC/Infineon/Navitas teklifleri; aynı kartta karşılaştırmalı ölçüm.",
+    "olcum": "$·mΩ; verim farkı; sıcaklık farkı; W/L.",
+    "sure": "3-4 ay",
+    "maliyet_usd": "15-30k",
+    "etkiledigi_parametreler": [
+     "el_K_R_gan100_usd_mohm",
+     "el_gan_eta_gain_pts",
+     "el_fsw_gan_kHz"
+    ],
+    "actigi_karar": "Güç katı seçimi (guc_kati: si_sarimli / gan_planar)",
+    "once_bunlar": false,
+    "bagimliliklar": "İlk nesil Si kartı (Deney 13).",
+    "oncelik_gerekcesi": "Etkisi küçük; ilk nesil Si ile ertelenebilir."
+   },
+   {
+    "sira": 32,
+    "ad": "Uzun vadeli kristal/wafer Ar-Ge seçenekleri",
+    "soru": "FZ (2-3 MHz jeneratör ve bobinle), CCz (weir potası + yan besleyici), elmas tel kerf geri kazanımı ve altıgen wafer uygulanabilir mi?",
+    "neden_onemli": "Potasız/oksijensiz kristal, küçük çapta CCz kazancı, kerfteki %31-35 kütle kaybı ve altıgen wafer ile kesit kullanımının 0.67'den 0.80'e çıkması potansiyeli var; ama hiçbiri K3'ü kısa vadede değiştirmiyor.",
+    "yontem": "Ayrı prototipler: FZ (12-24 ay, 200-500k), CCz (6-9 ay, 30-80k), kerf geri kazanımı (6-12 ay, 30-80k), altıgen modül maketi (1-2 ay, 5-15k).",
+    "olcum": "ZD, hız, kWh/kg, ömür; kg/gün, özdirenç profili; O/C/metal; modül doluluğu.",
+    "sure": "1-24 ay",
+    "maliyet_usd": "265-675k (toplam, tahmin)",
+    "etkiledigi_parametreler": [
+     "fz_pull_rate_ref_mm_min",
+     "fz_capex_fixed_usd",
+     "cz_ccz_zd_mult",
+     "wf_kerf_recovery_frac",
+     "sq_D_over_a_pseudo"
+    ],
+    "actigi_karar": "Faz 2 sonrası kristal teknolojisi",
+    "once_bunlar": false,
+    "bagimliliklar": "Deney 27-28 ve KK2 (c).",
+    "oncelik_gerekcesi": "En düşük öncelik: pahalı, uzun ve kısa vadede karar açmıyor."
+   }
+  ],
+  "acik_kararlar": [
+   {
+    "kod": "KK1",
+    "soru": "Faz 2 modelinde 'ünite' neyi kapsıyor? Hangi adımlar kendi üretim, hangileri satın alma; hangi hatlar ünitede, hangileri saha düzeyinde paylaşılacak?",
+    "secenekler": [
+     "(a) K9 ile senkron tam dikey ünite: her ünitede fırın, wafer, HJT, modül, pil ve elektronik hattı",
+     "(b) Bölünmüş mimari: kristal/wafer ve HJT hücre saha düzeyinde N üniteye paylaşılır; ünite = modül + pil paketi + elektronik kutu + son montaj",
+     "(c) Ünite HJT hat kapasitesi (~40-50 MW/yıl) etrafında tanımlanır",
+     "(d) Wafer ve hücre satın alınır; saha = modül montajı (tek, paylaşılan hat) + pil paketi + elektronik kutu + son montaj/test; kristal ve hücre yalnız Ar-Ge",
+     "(e) (d) + A'da standart ticari modül satın alınır; kendi modül montajı yalnız özel/hafif paneller (B, küçük güç) için"
+    ],
+    "arastirmanin_onerisi": "(d) Faz 2 varsayılanı; A için (e) karşılaştırma tabanı olarak modelde. (b) yalnız koşullu: toplam talep ≥~40 MW/yıl VE Deney 17 (PECVD go/no-go) başarılı VE kendi hücre maliyeti ithal hücrenin altında. (a) ve (c) yalnız referans senaryo. Her hat için n_units_served = floor(1/kullanım); senkron günlük ortalama + tampon stok.",
+    "gerekce": "Merkez talep ~3 MW/yıl (el_N_demand_per_yr 3000 kutu/yıl/varyant, iki platform; tahmin); saha düzeyinde HJT kullanımı ~%6, hücre zaman maliyeti ~40 c/W. Talebin üst ucunda (~22 MW/yıl) bile kullanım ~%45. Tam ölçekte (45 MW/yıl, olgun) bile kendi wafer+hücre+modül ~19-22 c/W (saha hariç), ithal HJT modül 11 c/W FOB. Modül hattı ≥3 MWp/yıl'da 2.8 c/W; merkez talep tek paylaşılan modül hattına yetiyor. (d)'de silan, HF, UPW altyapısı ve 24/7 kristal işletmesi gerekmez. Standart ≤72 seri hücreli modüller ≤60 V SELV'e uyabildiği için (hafızadan) A'da (e) ciddi bir aday.",
+    "etkisi": "Tüm zaman sınıfı maliyet; HJT capex (~3.1 M$ + NRE 2.5 M$), kristal/wafer capex ve saha altyapısı (ünite-içi ~0.9 MUSD, N=1'de saha payı 617-706 kUSD/yıl) büyük ölçüde modelden çıkar ve (d) için yeniden hesaplanmalı. K1, K4, K7, K8, O4, O7, O8 pasifleşir. 'Ünite kopyalama' kavramı talep büyüyene kadar tek sahaya iner.",
+    "eksik_bilgi": "Talep ve varyant sayısı (Deney 1, 2); satın alınan HJT/TOPCon hücre ile standart ve özel boyutlu modül teslim fiyatları, TR gümrük ve anti-damping (Deney 3); 'ünite'nin stratejik amacı (ihraç edilebilir fabrika paketi mi, iç kapasite mi); kullanıcının dikey entegrasyon için sayısal stratejik değeri."
+   },
+   {
+    "kod": "KK2",
+    "soru": "Polisilikon → wafer adımı modelde hangi statüde olacak ve kullanıcı için stratejik değeri (USD/W) nedir?",
+    "secenekler": [
+     "(a) K3 kalıcı: n-tipi wafer (ya da KK1 d ile hücre) satın al",
+     "(b) (a) + kristal Ar-Ge: 1 prototip çekici, indüksiyonlu Cz ön denemesi",
+     "(c) Kendi kristal+wafer, saha düzeyinde fırın grubu (RCz, 120-210 mm)",
+     "(d) İzlenebilir (Çin dışı) wafer/hücre satın al"
+    ],
+    "arastirmanin_onerisi": "(a) varsayılan, (b) opsiyon. (c) yalnız kullanıcı stratejik değeri sayıyla yazarsa ve Deney 3'teki izlenebilir zincir fiyatları bunu doğrularsa. (d) A pazarında izlenebilirlik fiilen zorunlu hale gelirse.",
+    "gerekce": "Çin zincirinde kendi üretim en iyimser uçlarda bile ancak başa baş. Wafer dönüşümünün merkez tahmini (7.2 $/m²) tek başına satın alınan wafer'dan (4.91 $/m² ≈ 1.96 c/W) yüksek; merkezde başa baş için satın alma fiyatının en az ~2 katına çıkması gerekir (kristal dönüşümü hariç). Kristal 120 mm MC medyanı 26 [18-37] USD/kg ve öğrenme yılında ~2 katı. Fiyatlar iki katına çıksa bile KK1'deki ölçek sorunu sürer. Stratejik gerekçelerin hiçbiri sayısal değil.",
+    "etkisi": "Milyonlarca USD'lik kristal/wafer capex ve NRE; saha EHS yükü (HF/NOx, argon, 24/7); K1, K7, K8 ve O8'in modelde aktif olup olmayacağı.",
+    "eksik_bilgi": "Deney 3 (teslim fiyatları, gümrük/menşe, 2024/3015); kullanıcının stratejik değer beyanı; Deney 8 (çekici ve testere capex/NRE); fiyat senaryoları (KK15)."
+   },
+   {
+    "kod": "KK3",
+    "soru": "DC tarafın gerilim rejimi (V_lim) ne olacak: 60 V SELV mi, 35 V mu, yoksa senaryoya göre iki rejim mi?",
+    "secenekler": [
+     "(a) 60 V U_OC_MAX SELV/PELV + Class II modül + takviyeli izoleli dönüştürücü",
+     "(b) 35 V U_OC_MAX: Class III (≤~198-208 W) + DVC-A ıslak; yalnız-DC üründe trafosuz",
+     "(c) İki rejim: A = 60 V, B yalnız-DC = 35 V",
+     "(d) 60-120 V Class II, SELV değil (karşılaştırma için)"
+    ],
+    "arastirmanin_onerisi": "(c) — modül, standart ve elektronik alanlarının ortak önerisi; Deney 5 sonucuna koşullu. T_min pazara göre (−10/−25/−40 °C) seçilsin ya da tek ürün için −40 °C (N_s 67) alınsın.",
+    "gerekce": "60 V, 712.414.101'deki PV SELV sınırı (2017 metni, lisanssız kopyadan) ve SELV'de anahtar/aletle ayırma şartı kalkıyor; ama dokunma güvenliği (30/35 V) ve Class III sağlamıyor. 35 V kablo kesitini ve kaybını artırıyor (+0.8-1.2 c/W, 200-400 W) ve gücü ~200 W ile sınırlıyor. B yalnız-DC'de pil SELV kaynağı olduğu için trafo gerekmiyor. Na 14S ile bara 28-55 V, akım LFP'nin 1.4-1.9 katı.",
+    "etkisi": "N_s_max (65-74'e karşı 40-42); a_min(P) (500 W'ta ≥168 mm veya N_p ≥2); modül sınıfı; standart modül satın alma olanağı (KK1 e); konnektör şartları; kablo kesiti; izolasyon ve test listesi.",
+    "eksik_bilgi": "IEC 60364-7-712:2025 ve 61730-1:2023 metinleri, ≤60 V'ta IMD şartı, pazarın T_min kabulü (Deney 5, 19); A/B seçimi (KK4)."
+   },
+   {
+    "kod": "KK4",
+    "soru": "Faz 2 modeli ve ilk ürün hangi pazar senaryosu için kurulacak: A (balkon/şebeke), B (taşınabilir/şebeke dışı) veya ikisi?",
+    "secenekler": [
+     "(a) Yalnız A (Almanya ağırlıklı)",
+     "(b) Yalnız B",
+     "(c) İkisi, ayrı platformlarla (A 800 VA/≤960 Wp, B 200-300 W)",
+     "(d) (c) + A-TR iç pazar alt senaryosu"
+    ],
+    "arastirmanin_onerisi": "Modelde (c): iki senaryo ayrı parametre setleriyle. İlk ürün kararı Deney 2 ve 6'dan sonra verilsin. Araştırma tek bir senaryoyu kanıtla öne çıkarmıyor.",
+    "gerekce": "A: enerji değeri yüksek (Almanya hane elektriği ~0.42 $/kWh); ama kutu muhtemelen SBESS (Ek V), DIN VDE V 0126-95 depolamayı kapsamıyor, varyant başına urun_sabit ~0.57-0.62 M$ ve izoleli inverter şart. B: urun_sabit ~0.29-0.34 M$, yalnız-DC'de trafosuz 35 V mümkün; ama Wh/Wp 3.2 (A'nın iki katı pil), ≤5 kg paket Md.11 kapsamında değiştirilebilir olmalı, 300 W üstünde paket >5 kg ve tek başına Na pil yolcu uçağında yasak; panel kütlesi değer önermesinin parçası. TR fişli PV rejimi bilinmiyor.",
+    "etkisi": "Pil boyutu (Wh/Wp 1.6'ya karşı 3.2), elektronik mimarisi (inverter var/yok), V_lim, sertifika programı, rüzgâr/cam sınıfı, soğuk gereksinimi, panel gücü aralığı (KK14), talep.",
+    "eksik_bilgi": "Talep ve fiyat (Deney 2); mevzuat sınıflandırmaları ve TR rejimi (Deney 6)."
+   },
+   {
+    "kod": "KK5",
+    "soru": "Pil hücresi kendi hattımızda mı üretilecek (K9), yoksa satın alınıp paket mi kurulacak?",
+    "secenekler": [
+     "(a) Hücre satın al, paketi kendin yap",
+     "(b) Kendi hat, 26700 (K9)",
+     "(c) Kendi hat, 50 Ah prizmatik (geniş kaplama makinesi, ~17 MWh/yıl)",
+     "(d) Satın al + 0.2-0.5 M$ glovebox Ar-Ge pilotu",
+     "(e) Hazır modül satın al"
+    ],
+    "arastirmanin_onerisi": "Faz 1'de (a), isteğe bağlı (d). Faz 2'de (c) yalnız üç koşul birlikte sağlanırsa yeniden hesaplansın: RFQ fiyatı ≥~0.2 $/Wh, hat tam dolu (≥~17 MWh/yıl) ve LFP kabul edilmiyor. (b) modelde kalsın ama 'ekonomik değil' olarak işaretlensin.",
+    "gerekce": "26700: 1.03 $/Wh; makineler bedava olsa bile 0.65 $/Wh, yani satın almanın 5-8 katı. Başa baş 29.6 MWh/yıl gerektiriyor, hat 1.4 MWh/yıl üretiyor. 50 Ah: 0.21 $/Wh (kendi makinelerle 0.165); Na satın almanın 1.27-1.6 katı, LFP'nin ~2.3 katı. Başa baş fiyat (bat_f38_breakeven) ~0.2-0.23 $/Wh ve fiyat senaryolarına bağlı (KK15).",
+    "etkisi": "Pil maliyeti (0.09-1.03 $/Wh), 2-5 M$ capex, İSG yükü (elektrolit, formasyon, NMP), UN 38.3 ve QMS; ünite hacminin K9'dan mı talepten mi türetileceği.",
+    "eksik_bilgi": "RFQ fiyatları ve MOQ (Deney 4); talep MWh/yıl (Deney 1-2); prizmatik hat teklifleri ve iç makine maliyeti (Deney 8)."
+   },
+   {
+    "kod": "KK6",
+    "soru": "Na-iyon ürünün sabit bir özelliği mi, yoksa modelde LFP (ve Na alt kimyaları) seçenek olarak mı yer alacak?",
+    "secenekler": [
+     "(a) Yalnız Na-iyon (LO veya NFPP)",
+     "(b) Kimya model seçeneği (Na LO / NFPP / NFS kese / LFP), LFP referans",
+     "(c) Senaryoya göre: A için NFPP prizmatik veya LFP, B için LO silindirik veya LFP"
+    ],
+    "arastirmanin_onerisi": "(b) — model kimyadan bağımsız kurulsun; seçim Deney 4 ve 9'dan sonra yapılsın. Na'nın pazarlama/strateji değeri varsa kullanıcı bunu açıkça yazsın.",
+    "gerekce": "Na/LFP primi formata göre −%14 ile +%59 arasında (SMM, aynı kaynak). Na'nın soğuk sınırları doğrulandı ama aynı koşulda LFP verisi yok. LO'nun kullanılabilir oranı ~0.80 (tahmin). Ömür: LO silindirik 3000; LFP 6000 çevrim (hafızadan). Doğrulanmış Na avantajları: 0 V taşıma, düşük akımda soğuk deşarj, Çin iç piyasasında Li vergisinden muafiyet.",
+    "etkisi": "Pil hücre maliyeti ve boyutu, soğuk güç sınırı (elektronik), ömür/garanti, taşıma ve güvenlik standardı yolu (IEC 62619 yalnız Li için), A kutusunun 1.8 kWh sınırında izinli PV gücü (LO ile ≤~900 Wp).",
+    "eksik_bilgi": "RFQ (Deney 4), kullanılabilir enerji ve LFP kontrollü soğuk test (Deney 9), kutu sıcaklığında ömür (Deney 22), kullanıcının Na için stratejik gerekçesi."
+   },
+   {
+    "kod": "KK7",
+    "soru": "Maliyet sınıfı şeması nasıl genişletilecek?",
+    "secenekler": [
+     "(a) Kullanıcının üç sınıfı + saha_sabit (mevcut)",
+     "(b) (a) + guc_enerji + urun_sabit (iskeletteki öneri)",
+     "(c) (b) + zaman_sabit/zaman_degisken ayrımı + saha_basamakli + tasarim_sabit (NRE) + teknik; kenar kalemleri formülde açık a⁻¹ ile; verim/kırılma kümülatif çarpan olarak; sertifika kalemleri tek sahipte"
+    ],
+    "arastirmanin_onerisi": "(c). guc_enerji yalnız elektronik güç katı, pil hücresi ve pil EPR'si için kullanılsın. Sertifika kalemlerinin sahibi standart alanının std_tt_* parametreleri olsun.",
+    "gerekce": "Kristalde sabit (11.1 USD/h) ve değişken (8.1 USD/h) zaman ayrılmazsa kullanım 0.25'te maliyetin 2.7 kat artması görünmez. Altyapıda basamaklı modüller ayrılmazsa paylaşım avantajı abartılır. Wafer'da kenar/alan oranı 4/a. Hücre ve modülde guc_enerji Ag/ITO için yanıltıcı. NRE ve sertifika kalemleri birden çok alanda farklı değerlerle sayılmış (UN 38.3 10/12/15k; inverter sertifikası 150k'ya karşı 82k); tek sınıf/sahip çift sayımı önler.",
+    "etkisi": "Bölünmezliğin, saha paylaşımının ve küçük güç cezasının modelde doğru görünmesi; toplayıcı mimarisi (pvbat/costs.py SINIFLAR).",
+    "eksik_bilgi": "Kullanıcı onayı; sınıfların Excel raporunda nasıl gösterileceği (KK10)."
+   },
+   {
+    "kod": "KK8",
+    "soru": "Bir kutunun kaç paneli besleyeceği (n_panel_per_box) ve C-oranı kısıtı hangi kuralla belirlenecek?",
+    "secenekler": [
+     "(a) Sabit n (ör. 1, 2, 4)",
+     "(b) Hedef kutu gücü/platform: kısıtlarla n = floor(P_box/P_panel)",
+     "(c) Model optimizasyonu (maliyet minimumu)"
+    ],
+    "arastirmanin_onerisi": "(b): senaryo başına platform. A: 800 VA AC, PV ≤960 Wp (Schuko), kutu ≤1.8 kWh nominal (LO ile PV ≤~900 Wp, NFPP/LFP ile 960 Wp), n=2-4, P_panel ≥200 W, MPPT kanalı başına 300-500 W. B: 200-300 W kutu, 50-150 W hafif paneller, n=2-4, panel kütlesi ≤mod_mass_max_portable_kg. Kablo ≤5 m. C-oranı A'da yumuşak (kırpma kaybı yıllık simülasyonla), B'de sert; formata göre bat_charge_c_max_*. (c) duyarlılık analizi için kalsın.",
+    "gerekce": "Pil (26700, A) 50 W'ta n=1 ile 1.31 $/W, n=4 ile 0.59 $/W. Elektronikte 50 W × 16 panel, 400 W × 2 panelden 0.085 $/W pahalı. Kablo 50 W'ta 5.6 c/W. Önceki '800-1000 W' platformu hem ≤1.8 kWh hem E≥2·P kuralını hem de 960 Wp'yi aşıyordu. Elektronik E≥2·P'yi sert, pil yumuşak kısıt sayıyor; A'da fazla PV şebekeye gider, B'de kırpılır.",
+    "etkisi": "Kutu ve pil $/W, kablo maliyeti, varyant sayısı, SBESS ve 2 kWh eşikleri, kırpma kaybı.",
+    "eksik_bilgi": "Talep ve tipik kurulum (Deney 2, 20), pil formatı (Deney 4), MPPT gruplamasının enerji farkı (Deney 22), 2 kWh eşiğinin nominal mi kullanılabilir enerjiye mi uygulandığı (Deney 6)."
+   },
+   {
+    "kod": "KK9",
+    "soru": "50-500 W sürekli bir güç aralığı mı, yoksa ayrık bir varyant seti mi modellenecek ve üretilecek?",
+    "secenekler": [
+     "(a) Sürekli: her P_panel için ayrı hücre boyutu ve modül",
+     "(b) Ayrık: 1-2 hücre boyutu + 2-3 modül boyut sınıfı (aile içi güç bin'leri) + senaryo başına tek kutu platformu",
+     "(c) Tek hücre boyutu, farklı hücre sayıları"
+    ],
+    "arastirmanin_onerisi": "(b). Model sürekli taramayı analiz aracı olarak tutsun, ama maliyeti seçilen varyant setine (urun_sabit × n_varyant) bağlasın.",
+    "gerekce": "Hücre boyutu başına ~230 k$ takım + kalifikasyon; kutu varyantı başına 0.29-0.62 M$; modül ailesi başına tip testi. SELV a_min(P) ve Class III eşikleri; sabit D'de paketleme basamakları. Küçük güçte her alanda W başına maliyet yüksek.",
+    "etkisi": "Toplam urun_sabit, hücre boyutu seçimi, sertifikasyon takvimi, varyant başına talep.",
+    "eksik_bilgi": "Talep dağılımı (Deney 2), kenar kaybı (Deney 11), tip testi teklifleri (Deney 7), P_panel aralığı (KK14)."
+   },
+   {
+    "kod": "KK10",
+    "soru": "Faz 2 Excel çıktısı canlı formül mü, hesaplanmış değer mi olacak?",
+    "secenekler": [
+     "(a) Değer: Python tek doğruluk kaynağı; Excel formül metni ve parametre id'leriyle izlenebilir bir rapor",
+     "(b) Tam canlı formül: tüm zincir Excel formülleriyle",
+     "(c) Hibrit: Varsayımlar + ana zincirin sade bir 'oyun alanı' sayfası canlı; ayrıntılı alt modeller (yineleme, paketleme, MC) değer"
+    ],
+    "arastirmanin_onerisi": "(a) veya (c); (b) önerilmez.",
+    "gerekce": "Formül envanteri büyük (docs/formul_envanteri.md ~550 satır) ve Excel'e taşınması zor yapılar içeriyor: sabit nokta yinelemesi (eta_cell ↔ a; mod_f_design_loop), tamsayı paketleme ve max(yerleşim), ceil() istasyon basamakları, format/kimya sözlükleri, Monte Carlo. Canlı Excel ile Python'un sessizce ayrışma riski yüksek. İskeletteki pvbat/export.py zaten değer yazıyor.",
+    "etkisi": "Kullanıcının kendi başına senaryo oynayabilmesi; doğrulama ve bakım yükü.",
+    "eksik_bilgi": "Excel'i kim, ne için kullanacak (senaryo oyunu mu, yatırımcı sunumu mu); Excel sürümü (LAMBDA ve yinelemeli hesap desteği)."
+   },
+   {
+    "kod": "KK11",
+    "soru": "Sahada hedef ünite sayısı (N) ve altyapı büyüme mimarisi ne olacak?",
+    "secenekler": [
+     "(a) Sabit boyutlu modüllerin aşamalı istiflenmesi",
+     "(b) Hedef N için baştan boyutlama (0.6 kuralı)",
+     "(c) Karma: çekirdek altyapı hedef N'e göre, basamaklı modüller aşamalı"
+    ],
+    "arastirmanin_onerisi": "Model iki mimariyi de tutsun (site_module_architecture); varsayılan (c). Kullanıcı hedef N ve takvimi versin. KK1 (d) seçilirse gaz/UPW/HF modülleri düşer; saha altyapısı pil yangın bölmesi, modül/paket montajı ve kira için yeniden hesaplansın.",
+    "gerekce": "Ünite başı saha payı N=1/4/16 için: (a) 706/247/165, (b) 617/207/99 kUSD/yıl; büyük kazanç N=1'den 4'e geçişte. (b) hedef N'in baştan bilindiğini varsayıyor. Bu rakamlar kendi hücre/kristal hattı altyapısı içindir.",
+    "etkisi": "Ünite başı saha payı (N=1'de 182 mm için 0.053, 100 mm için 0.177 $/W); ilk yatırımın büyüklüğü.",
+    "eksik_bilgi": "Talep ve büyüme planı; KK1 (sahada hangi prosesler olacak); saha yeri (Deney 15)."
+   },
+   {
+    "kod": "KK12",
+    "soru": "Model varsayılanı 'ilk nesil + öğrenme eğrisi' mi, 'olgun' mu olacak?",
+    "secenekler": [
+     "(a) Olgun değerler",
+     "(b) İlk nesil + öğrenme eğrisi (varsayılan), olgun değerler duyarlılık",
+     "(c) İkisi yan yana raporlanır"
+    ],
+    "arastirmanin_onerisi": "(b), raporlamada (c).",
+    "gerekce": "İlk nesil ile olgun arasındaki fark wafer boyutu etkisinden büyük (a=182'de kristalleşen kütle +%15, testere −%42). Hücre başlangıç verimi %22.5, olgun 26.1; hücre dönüşüm maliyetinin 8.4 c/W'lık değeri olgundur. Kristalde öğrenme yılında kg/gün yarıya iniyor. H1 dersi.",
+    "etkisi": "Tüm alanların $/W sonucu; özellikle ilk 1-3 yılın nakit akışı.",
+    "eksik_bilgi": "Öğrenme eğrisinin biçimi (ilk 12 ayın verisi); wf_learn_half_m2 ve benzeri parametreler."
+   },
+   {
+    "kod": "KK13",
+    "soru": "Hücre teknolojisi: kendi hat olursa HJT ön tavlaması varsayılan mı; satın alınacak hücre HJT mi TOPCon mu; TOPCon kıyas senaryosu tutulacak mı?",
+    "secenekler": [
+     "(a) Kendi hat: ön tavlama yok ('tümüyle <250 °C')",
+     "(b) Kendi hat: ön tavlama varsayılan açık (maliyeti modelde), deneyle kapatılabilir",
+     "(c) Kendi hat: tedarikçiden tavlanmış wafer istenir",
+     "(d) Satın alma (KK1 d/e): HJT ve TOPCon hücre/modül birlikte değerlendirilir",
+     "TOPCon: kıyas senaryosu olarak tutulur / modelden çıkarılır"
+    ],
+    "arastirmanin_onerisi": "Kendi hat için (b); (d) yolunda HJT ve TOPCon satın alma kıyası (fiyat, kesim kenar kaybı, düşük sıcaklık ara bağlantısı). TOPCon kıyas senaryosu kenar j02 için 2-19 nA/cm aralığıyla tutulsun ve Deney 11'in TOPCon koluna bağlansın.",
+    "gerekce": "Endüstride ön tavlama standart, kurtarma oranı bilinmiyor. TOPCon'un kenar j02'si bulunamadı; HJT'nin küçük hücre üstünlüğü kanıtlanmadı. TOPCon Ag 10 mg/W (HJT 12), indiyum yok, termal ağırlıklı ve firmanın ısıtma yetkinliğine uygun; ama 10-12 adım ve 850-1050 °C adımları içeriyor.",
+    "etkisi": "Kendi hatta ~250 k$ capex (tahmin), 1.5 kWh/m² enerji; tau kaybı (2 ms'de −0.70 puan, r=0.5 ile −0.40); satın almada hücre fiyatı ve modül montaj prosesi (SnBi/ECA).",
+    "eksik_bilgi": "Deney 12 (ön tavlama split'i, koşullu), Deney 11 (kenar kaybı, TOPCon kolu), Deney 3 (HJT ve TOPCon hücre fiyatları)."
+   },
+   {
+    "kod": "KK14",
+    "soru": "Kullanıcının tanımladığı 50-500 W panel aralığı hangi senaryoda ne kadar korunacak (P_panel alt sınırı)?",
+    "secenekler": [
+     "(a) 50-500 W tümü, her iki senaryoda",
+     "(b) Senaryoya göre ayrık: A'da P_panel ≥200 W; B'de 50-150 W hafif paneller ve kütle kısıtı",
+     "(c) Yalnız ≥200 W (B'de taşınabilirlik düşer)"
+    ],
+    "arastirmanin_onerisi": "(b).",
+    "gerekce": "50 W'ta W başına maliyet her alanda yüksek (elektronik 1.84 $/W, pil 1.31 $/W, modül BOM 15 c/W + kablo 5.6 c/W); A'da küçük panelin değer önermesi yok. B'de değer taşınabilirlik: GG panel 50 W 3.3 kg, 200 W 11.1 kg, 300 W 16.3 kg; mod_mass_max_portable_kg 12 kg (tahmin). Önceki 'P_panel ≥200 W' önerisi B platformu (200-300 W) ile birlikte kutu başına 1 panel demekti ve 2-4 panel önerisiyle çelişiyordu.",
+    "etkisi": "Kullanıcı tanımındaki aralığın yarısı A'da fiilen düşer; varyant sayısı; hücre boyutu (50 W → a ~53-73 mm); B'de hafif modül yapısı (GB, cam-arka tabaka).",
+    "eksik_bilgi": "Deney 2 (B'de kabul edilen kütle ve güç), Deney 21 (hafif yapının dayanımı)."
+   },
+   {
+    "kod": "KK15",
+    "soru": "Satın alma fiyatları (wafer, hücre, modül, pil hücresi) modelde tek değer mi, senaryo mu olacak?",
+    "secenekler": [
+     "(a) Bugünkü spot fiyat, tek değer",
+     "(b) Senaryo seti: bugün / maliyet+marj / ihracat vergisi ve KDV iadesi değişikliği / izlenebilir zincir",
+     "(c) (b) + her yap/al kararı için başa baş fiyat raporu"
+    ],
+    "arastirmanin_onerisi": "(c).",
+    "gerekce": "Tüm yap/al hükümleri (O2, K9, KK1, KK2, KK5) bugünkü dip fiyatlara koşullu (O17). Kristal alanı 'Çin fiyatlarının geri dönmesi'ni olası stratejik gerekçe saydı. Pilde Li vergisi 2026'da %2, 2027'de %4; ihracat KDV iadesinin kaldırılması tüm Çin hücrelerini pahalılaştırır. Pilde başa baş hazır (~0.2-0.23 $/Wh); wafer'da merkezde satın alma fiyatının en az ~2 katı.",
+    "etkisi": "Yap/al kararlarının sağlamlığı; stratejik değer tartışmasının sayıya dökülmesi.",
+    "eksik_bilgi": "Senaryo tanımları ve olasılıkları; Deney 3-4 fiyat serileri."
+   }
+  ],
+  "notlar": "Yöntem: 8 alanın revize çıktıları (itirazlar, deneyler, reddedilen_bulgular, degisiklik_gunlugu, tasarım seçimleri) ve parametreler_tum.csv okundu. Bu sentez yeni URL açmadı; kanıtlar alanların kaynak türleriyle aktarıldı. Bu sentezde yapılan yeni hesaplar (hesap_turetilmis): K8 Scheil oranları; talep aralığının MW/yıl karşılığı ve ters orantıyla hücre zaman maliyeti (~3 MW'ta ~40 c/W, ~22 MW'ta ~6 c/W); kendi zincir toplamı (19.4-21.6 c/W saha hariç); wafer başa baş alt sınırı (~0.31 $/adet M10); A platformu enerji kontrolü (1000 Wp × 1.6 / 0.8 = 2.0 kWh). Deney maliyetleri alan tahminlerinin bileşen toplamıdır.\n\nKırmızı takım raporunun değerlendirmesi. 19 bulgunun hepsi dosyalarla kontrol edildi ve kabul edildi:\n- Kabul ve uygulama: KK1 önerisi (d)'ye çevrildi; yeni ana bulgu (kendi zincir ~2× ithal modül) eklendi; SBESS çelişkisi ayrı bulgu yapıldı ve A için Resital 15 okuması esas alındı; K3 'kısmen' oldu; A platformu 800 VA/≤960 Wp ile sınırlandı; B için hafif panel ve KK14 eklendi; ünite hacmi talepten türetildi (döngü kaldırıldı); O3 bölündü (fiyat: katılmıyorum; soğuk: O16 belirsiz); sertifika çift sayımı ve eksik tutarsızlıklar listeye eklendi; HJT başlığı yumuşatıldı; Deney 11 (Na) ilk 10'a alındı, Deney 10 (ön tavlama) koşullu olarak indirildi; O17 (Çin fiyatları) eklendi; H5 'kısmen' oldu; 60 V bulgusunun güveni 'orta' yapıldı; poli→wafer bulgusundan uyumsuz kıyas çıkarıldı; ITRPV alıntısı, 27 c/W bileşimi, kablo farkı ve id'ler düzeltildi; birleştirilmiş deney maliyetleri toplandı.\n- Kısmi uyarlama (şema kısıtı): H4 için istenen ayrık hüküm tek enum'a sığmadığı için 'katılmıyorum' seçildi, ayrım özete yazıldı (≤300 W katılmıyorum, ≥500 W kısmen). 60 V için 'orta-yüksek' seçeneği olmadığından 'orta' kullanıldı.\n- Kırmızı takımın ötesinde yapılan düzeltmeler: (1) Deney 5, 19, 21, 22 ve 29'un maliyetleri de bileşen toplamının altındaydı; düzeltildi (21: 30-100k → 55-150k; 29: 20-70k → 30-105k). (2) Sıralama ölçütü tutarlı uygulanınca modül BOM/Pb/envanter deneyi (eski 15) ilk 10'a girdi, kenar kaybı deneyi (eski 9) 11. sıraya indi ve iki aşamaya bölündü (aşama 1 KK1'den bağımsız). (3) Deney numaraları buna göre yeniden verildi: eski 9→11, 10→12, 11→9, 12→13, 13→14, 14→15, 15→10; itiraz ve kararlardaki atıflar güncellendi. (4) Dosyalardaki N_s_max 65-72 sınırı, standart ≤72 seri hücreli ticari modüllerin 60 V SELV'e uyabildiğini gösteriyor (hücre sayıları hafızadan); bu yüzden KK1'e (e) seçeneği ve O18 eklendi. (5) KK1 (d)'de silan/HF/UPW altyapısı gerekmediği için K1, K4, K7, K8, O4, O8'in etkisi 'düşük'e indirildi (kendi hat seçilirse orta). (6) Satın alınan HJT hücre ve modül fiyatı için dosyalarda parametre yok; Deney 3'e eklendi ve yeni parametre gerektiği not edildi.\n\nÇözülen alanlar arası çelişkiler:\n(1) K8 — kuyruk ucunda metal birikimi: metal pota tortusunda ve yapısını kaybetmiş kuyruk konisinde toplanır; ZD kuyruk katısında toplanmaz.\n(2) Gettering: kristal ve hücre alanları ön tavlamanın standart olduğunu kabul etti; kristal alanının K4 ve H6 itirazlarındaki 'HJT gettering yapamaz' cümleleri güncellenmeli.\n(3) Pil alanının '30-35 V ıslak sınır doğrulanmadı' notu, standart ve elektronik alanlarının doğrulamasıyla geçersiz.\n(4) Elektronik alanının 'AB Pil Tüzüğü eşikleri hafızadan' notu, standart ve pil alanlarının resmi metin doğrulamasıyla geçersiz; el_E_batt_reg_threshold_Wh ve el_portable_batt_mass_kg etiketleri güncellenmeli.\n(5) Altyapının geri çektiği '10-15 s jeneratör' ve 'N=4 sonrası 116 kUSD taban' iddialarını başka alan sürdürmüyor.\n(6) Poli→wafer kıyasında kristal alanı Çin dışı poliyi Çin wafer'ıyla karşılaştırmış; wafer alanının iki tutarlı zincirli kıyası esas alındı.\n(7) A kutusunun sınıfı: pil (Resital 15 → kütleden bağımsız endüstriyel, büyük olasılıkla SBESS) ile standart (≤5 kg paketlerle Ek V'den kaçınma, riskli) çelişiyordu. Çözüm: A'da varsayılan SBESS; ≤5 kg yolu Deney 6'ya koşullu; B için ≤5 kg taşınabilir yol geçerli.\n(8) C-oranı: elektronik E≥2·P'yi sert, pil yumuşak kısıt sayıyordu. Çözüm: A'da yumuşak (fazla PV şebekeye), B'de sert; formata göre bat_charge_c_max_*.\n\nFaz 2 öncesi giderilmesi gereken tutarsızlıklar:\n- Kur: TRY/USD 48.92 ve 49.0; CNY/USD 6.7, 6.72 ve 6.8; EUR/USD 1.139 ve 1.15.\n- Elektrik: kristal yer tutucu 0.10, altyapı 0.105 USD/kWh.\n- N_s_max: modül 70, hücre 72 (−20 °C), standart deneyi 71-74; Voc/hücre, β ve marj varsayımları farklı.\n- Class III P_max: modül ~198 W (%3 marjla), standart ~214-228 W (yalnız STC) ve 195-208 W (ıslak DVC-A).\n- Wh/Wp: pil kullanılabilir Wh/Wp ile A 1.6, B 3.2; kristal 2-5 Wh/W; hücre 1-5 Wh/W ve incelenmeyen 310 Wh hücre; standart 1 kWh kutu örneği.\n- Wafer ömür şartnamesi: wf_lifetime_min_ms 1 ms (hafızadan), cz_tau_over_rho_min_us_per_ohmcm 2000 (etkin ömür/ρ), hjt_tau_srh_target_ms 3.7 ms (SRH). Tek tanım (SRH, QSSPC protokolü) ve tek hedef (3.7 ms) olmalı.\n- Poli fiyatı (Çin dışı): xtal_ref_poly_price_usd_kg 18.5 (InfoLink), wf_poly_price_nonchina_usd_kg 17.5 (TrendForce); zincire göre tek değer.\n- NRE çift sayımı: eco_nre_machine_design_usd (5 M$) ile hjt_tool_nre_usd (2.5 M$), xtal_puller_nre_usd (0.6 M$) ve elektronik NRE'leri.\n- Sertifika çift/üçlü sayımı: UN 38.3 için el_un383_usd 15k, bat_un383_cost_usd_per_design 10k, std_tt_batt_un383_usd 12k; inverter sertifikası el_cert_cost_A_usd 150k'ya karşı std_tt_inverter_62109_usd + gridcode + emc + radio_cyber = 82k; pil güvenliği bat_safety_cert_cost_usd 40k'ya karşı std_tt_batt_safety_usd + std_tt_batt_annexv_extra_usd = 55k. Tek sahip: standart alanı (std_tt_*).\n- C-oranı kuralı (yukarıda, çözüm 8).\nTek bir 'ortak girdiler' dosyası ve talep tabanlı tek zincir önerilir (Deney 1).\n\nModel iskeletine (pvbat/secimler.py, costs.py) etkiler:\n- Varsayılanlar araştırmayla çelişiyor: wafer_kaynagi='ic' → 'satin_alma'; guc_kati='gan_planar' → 'si_sarimli'.\n- Eksik seçimler: hücre kaynağı (satın alma/kendi), modül kaynağı (kendi montaj/standart satın alma), pil kimyası (Na LO / NFPP / NFS / LFP), V_lim kategorisi, ünite/saha kapsamı, zincir (cn/izlenebilir), fiyat senaryosu, ön tavlama, performans senaryosu (ilk nesil/olgun), saha mimarisi, P_panel aralığı (senaryoya göre).\n- Yeni parametre gerekir: satın alınan HJT/TOPCon hücre fiyatı ve standart/özel boyut modül teslim fiyatı (mevcut id yok).\n- Ünite hacmi el_N_demand_per_yr'den türetilmeli; bat_line_cells_per_year yalnız kendi hücre hattı senaryosunda.\n- costs.py SINIFLAR KK7'ye göre genişletilmeli.\n\nKanıt düzeyi: 954 parametrenin 586'sı tahmin, 51'i hafızadan, 656'sı düşük güvenli; 195'i doğrulanmış URL veya standart metnine dayanıyor. Talep (el_N_demand_per_yr) tamamen tahmin; ancak ölçek sonucu (O1) talep aralığının tamamında geçerli. Birkaç alan WebSearch bütçesini tüketti; Türkiye fişli PV mevzuatı, IEC 62933-5-2 kapsamı ve TR PV ithalat vergileri aranamadı.\n\nHüküm dağılımı: K ve H maddelerinde katılıyorum 2 (K5, H1), kısmen 11 (K1, K2, K3, K4, K6, K7, K8, H2, H3, H5, H6), katılmıyorum 2 (K9, H4). Örtük varsayımlarda (O1-O18) katılmıyorum 7 (O1, O2, O3, O4, O5, O10, O14), kısmen 4 (O7, O8, O12, O15), belirsiz 7 (O6, O9, O11, O13, O16, O17, O18). En yüksek etkili düzeltmeler: O1 ve KK1 (ünite tanımı ve satın alma varsayılanı), kendi zincirin ithal modülle kıyası (ana bulgu 2, O18), O2 (poli→wafer), K9 (pil hücresi), O5/KK14 (varyant ve güç aralığı) ve O3/O16 (Na-iyon genellemesi)."
+ },
+ "revize_edildi": true,
+ "denetim": {
+  "genel_degerlendirme": "Sentez büyük ölçüde sadık. Yaklaşık 60 sayıyı dosyalarla tek tek karşılaştırdım ve çoğu doğru aktarılmış. Doğru bulunanlar:\n- Parametre istatistikleri: 954 parametrenin 586'sı tahmin, 51'i hafızadan, 656'sı düşük güvenli, 168+27=195'i doğrulanmış. Sınıf sayımları (101/76/61/47/21/12/636) da doğru.\n- Hesaplar python ile yeniden yapıldı ve tuttu:\n  - K8 Scheil oranları: Fe 1.6e-4, C 1.14, P 2.45, C_L/C0 20.\n  - HF 4.27 ve CaF2 8.34 kg/kg Si; H2 1.6 L/g.\n  - P penceresi: g=0.95 ve 0.76.\n  - tau kayıpları: −0.70, −1.27 ve r=0.5 ile −0.40; 3.7 ms'de −0.30.\n  - İlk 10 deneyin maliyeti 43.5-183.5 kUSD.\n- Hüküm dağılımı ve iskelet iddiaları doğru: secimler.py'de wafer_kaynagi='ic' ve guc_kati='gan_planar'; formul_envanteri.md 550 satır; export.py değer yazıyor.\n- Uydurma kaynak bulunmadı. Deneylerdeki parametre id'lerinin hepsi parametre ya da arayüz olarak var; yalnız bat_f31/f45/f47 kısaltılmış yazılmış.\n- K8'deki alanlar arası çelişkinin fiziksel çözümü (kuyruk metal açısından seyreltir, tortu ise geri dönmemeli) doğru.\n\nAsıl zayıflıklar yorum ve bütünleştirme katmanında:\n(1) Sentez kendi kanıtının ekonomik sonucunu çekmiyor. KK1'de varsayılan olarak saha düzeyinde kendi HJT hattını öneriyor. Oysa talep tahmini (varyant başına 3000 kutu/yıl, yani ~2-3 MW/yıl) 40-50 MW/yıl'lık asgari HJT ölçeğinin ~%5-7'si. Ölçek sorunu çözülse bile kendi hücre+modül maliyeti ≈19-27 c/W, Çin HJT modülü 11 c/W; bu karşılaştırma ana bulgulara hiç girmemiş.\n(2) Birkaç alanlar arası çelişki çözülmüş gibi, yüksek güvenle sunulmuş:\n  - SBESS / taşınabilir pil sınıflaması\n  - C-oranı kısıtının sert mi yumuşak mı olduğu\n  - wafer ömür şartnamesi\n  - sertifika maliyetinin çift/üçlü sayımı\n(3) Kullanıcı kararlarına dönük yumuşatmalar var:\n  - K3 'katiliyorum' ama özet ve O2 tersini söylüyor.\n  - Ana bulgu başlığı 'HJT doğru seçim' diyor ama TOPCon kenar değeri bulunamadı.\n  - H4 ve H5'te hüküm, kendi özetinden yumuşak.\n(4) Ürün önerileri kendi kısıtlarıyla çelişiyor:\n  - A 1000 W platformu hem ≤1.8 kWh sınırını hem E≥2·P kuralını ihlal ediyor.\n  - P_panel ≥200 W kuralı B'nin taşınabilirliğiyle çelişiyor.\n(5) Deney sıralamasında tutarsızlık var; ayrıca birkaç küçük aktarım hatası bulundu (ITRPV alıntısı, 27 c/W, kablo farkı, birleştirilmiş deney maliyetleri).\n\nDüzeltmelerle çıktı Faz 2 için kullanılabilir. Ancak KK1 önerisi ile ana bulgular (1) ve (7) yeniden yazılmalı.",
+  "bulgular": [
+   {
+    "hedef": "acik_kararlar KK1 (arastirmanin_onerisi) ve itirazlar O1 (oneri)",
+    "sorun": "Varsayılan olarak (b) seçilmiş: saha düzeyinde kendi HJT (+kristal) hattı. Bu, sentezin kendi talep verisiyle çelişiyor. Talep tahmini ile asgari HJT ölçeği hiç yan yana konmamış; kanıt (d)'yi (wafer ve hücre satın al, ünite = modül+pil paketi+kutu) destekliyor. Sonuç, kullanıcının dikey entegrasyon vizyonunu koruyacak yönde yumuşatılmış.",
+    "kanit": "Talep ve üretim karşılaştırması:\n- elektronik el_N_demand_per_yr = 3000 kutu/yıl/varyant (1000-20000, tahmin).\n- A-800 için bu 2.4 MW/yıl (0.8-16); B 200-300 W için 0.6-0.9 MW/yıl. İki platformla merkez değer ~3 MW/yıl.\n- hücre: asgari araç seti 40-50 MW/yıl → saha düzeyinde bile kullanım ~%6-7.\n\nBu hacimde maliyet:\n- hücre zaman sınıfı maliyeti: 2 MW'ta 61 c/W, 10 MW'ta 12 c/W, 45 MW'ta 2.7 c/W. ~3 MW/yıl'da ~40 c/W (ters orantı, hesap_turetilmis).\n- Toplam hücre dönüşümü 10 MW'ta ~18 c/W.\n- modul: Çin'de hücre dahil HJT modül 0.110 $/W (InfoLink, dogrulanmis_url).\n\nModül tarafı farklı: modul 'modül montajı ≥3 MWp/yıl'da ~2.8 c/W'. Yani merkez talep modül için yeterli, hücre için değil.\n\nSentez O11'de talebin bilinmediğini söylüyor ama KK1 önerisinde bunu kullanmıyor.",
+    "onerilen_duzeltme": "KK1 önerisi şöyle yeniden yazılsın:\n- Varsayılan (d): wafer ve hücre satın alınır; modül, paket ve kutu sahada yapılır.\n- (b) koşullu olsun: toplam talep ≥~40 MW/yıl VE Deney 17 (PECVD go/no-go) başarılı VE kendi hücre maliyeti ithalatın altında.\n- (a) yalnız referans kalsın.\n- Gerekçeye 'talep merkez ~3 MW/yıl → saha HJT kullanımı ~%7' satırı eklensin.\n- O1 önerisi de buna göre güncellensin.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "ana_bulgular (eksik madde) ve itirazlar O10",
+    "sorun": "En önemli ekonomik sonuç ana bulgularda yok. Ölçek sorunu tamamen çözülse bile, kendi wafer→hücre→modül zinciri ithal HJT modülün ~2 katı. Sentezde tüm bileşenler var ama toplanmamış. O10'daki 8.4 c/W ise olgun (mature) duruma ait; başlangıç evresi daha yüksek, bu belirtilmemiş.",
+    "kanit": "Dosyalardaki bileşenler (hesap_turetilmis toplam):\n- satın alınan wafer: 1.96 c/W (wafer)\n- hücre dönüşümü, 45 MW/yıl, olgun, a=105: 8.4 c/W (saf Ag) veya 6.2 (AgCu) (hucre)\n- modül BOM, GG çerçevesiz, 500 W: 7.5 c/W; kablo 0.9 (modul)\n- modül zaman maliyeti, ≥3 MWp: 2.8 c/W (modul)\n- saha payı, N=1, 182 mm: 5.3 c/W (altyapi)\n\nToplam: saha hariç en iyimser 19.4 c/W (AgCu), 21.6 c/W (saf Ag); saha dahil ~25-27 c/W.\n\nKıyas: Çin HJT modülü 11.0 c/W FOB (InfoLink). Hücre alanı da bunu söylüyor: 'Cin GW hatlarinin cok ustunde'. Başlangıç verimi %21.9-22.5 ve Ag 5.8 c/W ile kendi zincir daha da pahalı.",
+    "onerilen_duzeltme": "Yeni bir ana bulgu eklensin: 'Tam ölçekte bile kendi hücre+modül ≈19-27 c/W, ithal HJT modül ≈11 c/W FOB; TR gümrük ve ek vergileri doğrulanmadı.' Güven: orta.\n\nNotlar:\n- Kendi modül yapımının asıl gerekçesi fiyat değil, özel boyut, 60 V ve Class II gereksinimi olabilir. Bu ayrıca yazılsın.\n- O10'daki 8.4 c/W'ın olgun duruma ait olduğu belirtilsin.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "ana_bulgular[6] 'Mevzuat ürün ve üretim mimarisini fiilen belirliyor' (guven yuksek) ve itirazlar K5 (oneri: birden fazla ≤5 kg paket)",
+    "sorun": "Alanlar arası bir çelişki çözülmemiş, ama ana bulguda 'yüksek' güvenle kesin gibi yazılmış. Aynı ana bulgu hem 'evde enerji depolayan kutu SBESS' hem '≤5 kg paket taşınabilir' diyor. İkisi ≤5 kg'lık bir ev depolama paketinde çatışıyor. K5 önerisi standart alanının okumasına dayanıyor ve pil alanının okumasını yok sayıyor.",
+    "kanit": "İki alanın okuması:\n- pil: 'Resital 15'e göre evde enerji depolayan piller, kütleden bağımsız olarak endüstriyel pildir; A senaryosundaki kutu büyük olasılıkla SBESS'tir'. Bu okumaya göre ≤5 kg paket taşınabilir sayılamaz.\n- standart (std_ds_battery_size_regime): '≤5 kg paket(ler)… Bu yol Ek V'den kaçınır… birden fazla paketin tek SBESS sayılması riski var… bilmiyoruz'.\n\nSentezin kendisi Deney 6'da bu sınıflandırmayı açık soru olarak listeliyor. Ayrıca pildeki hedge ('büyük olasılıkla') ana bulguda kesin ifadeye dönüşmüş.",
+    "onerilen_duzeltme": "Ana bulgu ikiye ayrılsın:\n- Metinden doğrulanmış eşikler (5 kg, 2 kWh, Md.11 tarihi, RoHS istisnası): 'yuksek'.\n- A kutusunun ve ≤5 kg paketlerin sınıflandırması: 'belirsiz/orta'.\n\nÇelişki açıkça yazılsın. K5'teki '≤5 kg paket' önerisi 'Deney 6 sonucuna koşullu' diye işaretlensin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "itirazlar K3 (hukum, ozet)",
+    "sorun": "Hüküm 'katılıyorum', ama gerekçe ve O2 varsayımın ikinci yarısını ('sonra kendi wafer'a geçilecek') reddediyor. Bu, kullanıcı kararını olduğundan güçlü onaylayan bir hüküm. Ayrıca 'sekiz alanın tümü katılıyor' ifadesi yanlış.",
+    "kanit": "Özet ve O2 ile çelişki:\n- K3 özeti: 'kanıt K3'ün geçici evre olmasını desteklemiyor, kalıcı bir yap/al anahtarı olmalı'.\n- O2 hükmü 'katılmıyorum': Çin zincirinde kendi üretim en iyimser uçta ancak başa baş.\n\nAlanların fiili durumu (itirazlar_tum.md):\n- elektronik alanının K3 itirazı yok.\n- pil alanınınki yalnız analoji ('K3 (analoji)').\n- standart alanı K2 ve K3'ü birlikte ele almış.",
+    "onerilen_duzeltme": "Hüküm 'kısmen' olsun: 'Satın alınan wafer ile başlamaya katılıyorum; kendi wafer'a geçiş kanıtla desteklenmiyor.'\n\n'Sekiz alanın tümü' ifadesi '6 alan doğrudan, pil analoji olarak' diye düzeltilsin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "acik_kararlar KK8 ve KK4; ana_bulgular[4]; itirazlar K5 (A 800-1000 W platformu)",
+    "sorun": "A platformunun üst ucu (1000 W), KK8'in kendi kısıtlarıyla çelişiyor: kutu ≤1.8 kWh ve E_batt ≥2·P_box. Ayrıca E≥2·P kuralının sert mi yumuşak mı olduğu konusunda alanlar arası bir çelişki gözden kaçmış.",
+    "kanit": "Kısıtlarla hesap:\n- E_batt ≥ 2·P_box ile 1000 W → ≥2.0 kWh > 1.8 kWh. İki kısıt birlikte P_box ≤900 W demek.\n- pil bat_f07 ve bat_wh_usable_per_wp_A=1.6 ile 1000 W: LO (0.8) → 2.0 kWh nominal; NFPP (0.9) → 1.78 kWh (sınırda).\n- 1000 W, Schuko'nun 960 Wp sınırını da aşıyor.\n\nAlanlar arası çelişki:\n- elektronik: el_C_charge_max_C = 0.5 (yuksek), E≥2·P sert kural.\n- pil: bat_charge_c_max_cyl = 1.0. bat_f18 'yumuşak kısıt; A'da fazla PV şebekeye verilir (kayıp değil)'.",
+    "onerilen_duzeltme": "A platformu 800 W (≤900 W) ile sınırlansın, ya da 1000 W için '2 kWh üstü yükümlülükler kabul' veya 'ikinci kutu' seçeneği açıkça yazılsın.\n\nC-oranı kısıtı için:\n- A'da yumuşak, B'de sert olsun.\n- Formata göre bat_charge_c_max_* kullanılsın.\n- Bu çelişki 'Faz 2 öncesi tutarsızlıklar' listesine eklensin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "ana_bulgular[4] ('P_panel ≥200 W, kutu başına 2-4 panel') ve KK8/KK9 önerileri",
+    "sorun": "Öneri üç açıdan sorunlu:\n- Kendi içinde tutarsız: B platformu 200-300 W ve P_panel ≥200 W ise kutu başına 1 panel olur, 2-4 değil.\n- B'nin taşınabilirlik kısıtı (kütle) hiç hesaba katılmamış.\n- Kullanıcının tanımladığı 50-500 W aralığının yarısı fiilen düşürülüyor, ama bu açık bir karar maddesi olarak sunulmuyor.",
+    "kanit": "Panel kütlesi (modul güç tablosu, GG):\n- 50 W: 3.3 kg\n- 200 W: 11.1 kg\n- 300 W: 16.3 kg\n\npil: '300 W ve üstünde B taşınabilir değil: >5 kg'. elektronik el_ds_box_platform: 'B 200-300 W'. Sentezin öneri gerekçesi yalnız $/W; B'de değer önermesi taşınabilirlik.",
+    "onerilen_duzeltme": "Öneri senaryoya göre ayrılsın:\n- A: P_panel ≥200 W, kutu başına 2-4 panel.\n- B: 50-150 W'lık hafif paneller (cam-arka tabaka veya GB) ve kütle kısıtı eklensin.\n\n'P_panel alt sınırı / 50-200 W aralığından vazgeçme' ayrı bir açık karar olarak (KK9'a ek) kullanıcıya sorulsun.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "deneyler sira 1; ana_bulgular[0]; itirazlar O1; KK1 gerekcesi (0.1-46 MW/yıl)",
+    "sorun": "Ünite hacmi, sentezin reddettiği K9 kendi hücre hattından türetiliyor; bu döngüsel bir akıl yürütme. KK5 'hücre satın al' dediğine göre ölçek 150 bin hücre/yıl'dan değil, talepten gelmeli. Üst uç (46 MW/yıl) gerçekçi değil. 'Beş alan birbirinden bağımsız hesapladı' ifadesi de güveni şişiriyor.",
+    "kanit": "Deney 1'in dayanağı:\n- Parametre listesinin başında bat_line_cells_per_year var.\n- pil bat_ds_sync: 'Satın almada pil hattı = paket hattı' (150 bin hücre sınırı kalkar).\n\n46 MW üst ucunun kaynağı (hücre):\n- '150e3 × 310 Wh = 46.5 MWh; 1-5 Wh/W ile 0.12-46.5 MW'.\n- 310 Wh'lik hücre pilin incelediği formatlarda (26700, 10-28 Ah, 50 Ah) yok.\n- 1 Wh/W, kanonik A değerinin (1.6 kullanılabilir, ~1.8-2.0 nominal) altında.\n- 50 Ah hat (~17 MWh/yıl) ve kanonik Wh/Wp ile üst uç ≈9-10 MW/yıl.\n\nBağımsızlık iddiası: beş alan da aynı K9 girdisini ve benzer Wh/W varsayımlarını kullanıyor.",
+    "onerilen_duzeltme": "Deney 1'in dayanağı talep olsun: el_N_demand_per_yr, platform gücü, varyant sayısı. K9 yalnız 'kendi hücre hattı' senaryosu olarak kalsın.\n\n'0.1-46' aralığı iki şekilde verilsin:\n- kanonik Wh/Wp ve incelenen formatlarla: ~0.1-10 MW/yıl\n- merkez talep ile: ~3 MW/yıl\n\n'Bağımsız' yerine 'aynı K9 girdisinden beş alanda tutarlı' yazılsın.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "itirazlar O3 (hukum) ve ana_bulgular[3]; KK6 gerekcesi",
+    "sorun": "'LFP'ye göre soğukta üstün' kısmı reddedilmiş, ama dosyalarda hiç LFP soğuk verisi yok. Kanıt yalnız Na'nın mutlak sınırlarını gösteriyor; bu bir mutlak-göreli karışıklığı. Ayrıca düşük güvenli değerler olgu gibi sunulmuş ve 'hepsi doğrulanmış_url' denmiş.",
+    "kanit": "- parametreler_tum.csv'de LFP için sıfır altı şarj veya deşarj parametresi yok.\n- bat_cycle_life_lfp = 6000 'hafizadan_dogrulanmadi / dusuk'; O3 ve KK6'da olgu gibi kullanılmış.\n- bat_usable_fraction_lo = 0.8 (0.72-0.88) 'tahmin / dusuk'. Ana bulgu 4 bunu 'nominal enerjinin ~%80'ini veriyor' diye yazıyor ve kanıtında '(hepsi dogrulanmis_url)' diyor.\n- SOH 0.67 değeri, pile göre bilinmeyen takvim katsayısına dayanıyor.",
+    "onerilen_duzeltme": "- O3'ün soğuk kısmı 'belirsiz (aynı koşulda LFP verisi yok)' olsun; fiyat kısmı 'formata bağlı' olarak kalsın.\n- Ana bulgu 4'te %80 için 'tahmin, 0.72-0.88' yazılsın.\n- LFP 6000 çevrim 'hafızadan' diye etiketlensin.\n- SOH 0.67 'takvim katsayısı bilinmiyor' notuyla verilsin.\n- Deney 11'e aynı koşulda LFP kontrol hücresi eklensin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "notlar ('Faz 2 öncesi giderilmesi gereken tutarsızlıklar' — NRE) ve ana_bulgular[9]",
+    "sorun": "Yalnız makine NRE'sinin çift sayımı işaretlenmiş. Sertifika kalemleri üç alanda ayrı ayrı sayılmış ve değerler farklı. Ana bulgu 10 urun_sabit ile tip testini yan yana veriyor; okuyucu bunları toplayabilir.",
+    "kanit": "Aynı kalemin birden çok alanda sayılması:\n- UN 38.3: el_un383_usd 15k, bat_un383_cost_usd_per_design 10k, std_tt_batt_un383_usd 12k.\n- İnverter sertifikası: el_cert_cost_A_usd 150k; standart tarafında std_tt_inverter_62109_usd 30k + gridcode 25k + emc 12k + radio_cyber 15k.\n- Pil güvenliği: bat_safety_cert_cost_usd 40k; std_tt_batt_safety_usd 30k + std_tt_batt_annexv_extra_usd 25k.\n\nAna bulgu 10: 'urun_sabit A ~0.57-0.62 M$' ile 'Tip testi A-DE 75/225/596 kUSD' yan yana; urun_sabit sertifikayı zaten içeriyor.",
+    "onerilen_duzeltme": "Sertifika kalemleri tek sahipte toplansın: standart alanı, std_tt_*. Elektronik ve pil bu kalemlere referans versin, ayrı değer tutmasın.\n\nAna bulgu 10'da ikisinin örtüştüğü belirtilsin. Tutarsızlık listesine 'sertifika çift/üçlü sayım' eklensin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "notlar (tutarsızlık listesi) ve itirazlar K1 (oneri: tau hedefi)",
+    "sorun": "Önemli birkaç alanlar arası tutarsızlık listede yok. En kritiği wafer ömür şartnamesi: üç alan üç farklı hedef ve tanım kullanıyor. Yanlışı satın alma şartnamesine girerse verim kaybı büyük olur.",
+    "kanit": "Ömür hedefleri:\n- wf_lifetime_min_ms = 1 ms (hafizadan)\n- cz_tau_over_rho_min_us_per_ohmcm = 2000 (etkin ömür/ρ)\n- hjt_tau_srh_target_ms = 3.7 ms (yalnız SRH)\n- 1 ms'de verim kaybı −1.27 puan (hjt_eta_tau fit).\n\nDiğer eksik tutarsızlıklar:\n- Poli fiyatı: xtal_ref_poly_price_usd_kg 18.5 (yuksek), wf_poly_price_nonchina_usd_kg 17.5 (orta).\n- N_s_max: standart deneyinde '71-74'.\n- el_E_batt_reg_threshold_Wh ve el_portable_batt_mass_kg hâlâ 'hafizadan'; pil ve standart bunları doğrulamış.",
+    "onerilen_duzeltme": "Listeye eklensin. Ortak girdiler dosyasında şunlar tek yerde tanımlansın:\n- tek ömür tanımı: SRH, QSSPC protokolüyle\n- tek hedef: 3.7 ms\n- tek poli fiyatı: zincire göre\n- tek AB eşiği kaynağı\n\nwf_lifetime_min_ms kaldırılsın ya da hjt_tau_srh_target_ms'ye bağlansın.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "ana_bulgular[7] başlığı 'HJT doğru seçim…' ve itirazlar K2",
+    "sorun": "Başlık kanıttan güçlü ve kullanıcı kararını onaylayıcı bir dille yazılmış. HJT'nin küçük hücredeki kenar üstünlüğü, TOPCon'un ölçülmemiş en kötü durum değerine karşı kurulmuş.",
+    "kanit": "TOPCon kenar değeri bilinmiyor:\n- hucre: 'TOPCon dogal kenarinin gercek degerini bulamadim'.\n- 19 nA/cm, Fell'in çıplak p-n kenarı için en kötü durumu.\n\nHücre alanı ayrıca 'TOPCon capex avantajı kendi yapımda geçersiz' iddiasını geri çekti (degisiklik_gunlugu).\n\nTOPCon lehine: Ag 10 mg/W (HJT 12), indiyum yok, termal adımlar firmanın ısıtma yetkinliğine uygun. HJT aleyhine: vakum araçlarının sabit capex'i.",
+    "onerilen_duzeltme": "Başlık şöyle değiştirilsin: 'HJT korunabilir; küçük hücrede TOPCon'a üstünlüğü kenar j02 ölçülmeden kanıtlanmadı.'\n\nKK13'teki TOPCon kıyas senaryosu, Deney 9'a bir TOPCon kenar kolu eklenerek karar kapısına bağlansın.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "deneyler sira 10, 11, 16 ve once_bunlar",
+    "sorun": "Sıralama ölçütü tutarsız uygulanmış. Deney 16 'anlamı KK1'e bağlı' denerek dışarıda bırakılmış. Aynı bağımlılığı taşıyan Deney 10 (ön tavlama; yalnız kendi HJT hattı varsa anlamlı) ilk 10'da. Daha ucuz ve kısa olup KK6'yı açan Deney 11 ise dışarıda.",
+    "kanit": "- Deney 10: 10-40 kUSD, 2-3 ay; açtığı karar KK13 (yalnız kendi HJT hattı).\n- Deney 11: 6-16 kUSD, 2-4 hafta; açtığı karar KK6 (Na/LFP; KK1'den bağımsız).\n- Deney 11'in dışlanma gerekçesi 'numune hücreye bağlı'. Deney 9 ve 10 da dış hizmete bağlı ('HJT pilot hat hizmetine erişim').\n- Beyan edilen ölçüt: (etki×belirsizlik)/(süre×maliyet).",
+    "onerilen_duzeltme": "Deney 11 ilk 10'a alınsın. Deney 10 'koşullu: KK1'de kendi hücre hattı seçilirse' olarak 11-12. sıraya insin.\n\nİlk 10'daki her deney için 'KK1 sonucundan bağımsız mı' sütunu eklensin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "itirazlar (örtük varsayımlar listesi O1-O15)",
+    "sorun": "Bir örtük varsayım eksik: bugünkü Çin fiyatlarının (wafer, poli, pil hücresi) kalıcı olduğu. Sentezin tüm yap/al hükümleri (O2, K9, KK2, KK5) bu varsayıma koşullu. Kristal alanı bunu açıkça araştırma maddesi yapmıştı.",
+    "kanit": "- kristal itirazı: 'Cin fiyatinin maliyet altinda olup olmadigi' araştırılsın; özet 'Cin fiyatlarinin geri donmesi' diyor.\n- pil: ihracat KDV iadesinin kaldırılması 'tüm Çin hücrelerini pahalılaştırır'; Li vergisi 2026'da %2, 2027'de %4.\n- Deney 3 ve 4 yalnız anlık teklif topluyor; fiyat senaryosu tanımlanmamış.",
+    "onerilen_duzeltme": "O16 eklensin: 'Çin girdi fiyatları bugünkü dip seviyede kalır.' Hüküm: belirsiz.\n\nModele fiyat senaryoları konsun (bugün / maliyet+marj / ihracat vergisi). O2 ve KK2 için başa baş fiyat yazılsın (wafer $/adet, hücre $/Wh). Pilde bu hazır: ~0.2-0.23 $/Wh.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "itirazlar H4 ve H5 (hukum)",
+    "sorun": "Hükümler sentezin kendi özetinden yumuşak.",
+    "kanit": "H4:\n- Varsayım özellikle 'küçük güçte düşer' diyor.\n- Sentez güç katı payını 50 W'ta %35, kutuya göre %22 buluyor ve GaN'ın hiçbir güçte bileşen maliyetini düşürmediğini söylüyor (−0.5/+21/+47 $).\n- Ana bulgu 11 'H4 küçük güçte yanlış' diyor; hüküm ise 'kısmen'.\n- Standart alanının H4'e 'katılıyorum' demesi uzlaştırılmamış.\n\nH5:\n- Hüküm 'katılıyorum', ama özetin kendisi 'Enerji kısmı doğrulanmadı' diyor.\n- Kanıt: TI 45 kW ölçmüş, model 16.5 kW veriyor; kalibrasyon çarpanı 3.8 (1.5-8).",
+    "onerilen_duzeltme": "H4: '≤300 W için katılmıyorum, ≥500 W için kısmen' şeklinde ayrık hüküm verilsin; standart alanının itirazının kapsamı belirtilsin.\n\nH5: 'kısmen (ölçekleme ve sabit maliyet kısmı doğru; enerji/izolasyon kısmı doğrulanmadı)' olsun.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "ana_bulgular[5] (60 V SELV, guven yuksek)",
+    "sorun": "Tasarımı belirleyen standartların güncel baskıları doğrulanmadığı halde güven 'yüksek' verilmiş. 2017 metni de lisanssız kopyadan okunmuş.",
+    "kanit": "- Metinde '2025 baskısı doğrulanmadı' yazıyor.\n- modul: 61730-1:2023 madde 5.4 'metni doğrulanmadı'.\n- standart reddedilen_bulgular: lsp.global ve erlerdesign 'lisanssız kopya'.\n- Deney 5, tam olarak bu doğrulama için ilk 10'a konmuş.",
+    "onerilen_duzeltme": "Güven 'orta-yüksek' yapılsın ya da bulgu '2017 baskısına göre' diye kapsamlansın. Kararın (KK3) Deney 5'e bağlı olduğu ana bulguda da yazılsın.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "ana_bulgular[1] (poli→wafer, guven yuksek)",
+    "sorun": "Destekleyici kanıt olarak kristal alanının '1.6-5.6 kat' kıyası kullanılmış. Sentezin kendi notu (6) ve O2, bu kıyası 'Çin dışı poli ile Çin wafer'ı karşılaştırıyor' diye geçersiz sayıyor. Başlık ve güven de izlenebilir zinciri kapsamıyor.",
+    "kanit": "- Ana bulgu 2: 'Kristal alanı ingot+poli maliyetini satın almanın 1.6-5.6 katı buldu'.\n- Notlar (6): 'wafer alanının iki tutarlı zincirli kıyası esas alınmalı'.\n- O2: 'İzlenebilir zincirde … Çin dışı wafer fiyatı bilinmiyor; teklif alınmadan sonuç belirlenemez' (wf_price_traceable_m10_usd 0.35, tahmin).",
+    "onerilen_duzeltme": "1.6-5.6× cümlesi çıkarılsın ya da 'uyumsuz zincir' notuyla verilsin. Başlık 'Çin zincirinde bugünkü fiyatlarla ekonomik değil (yüksek); izlenebilir zincirde belirsiz' olsun.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "itirazlar K8 (ozet: ITRPV cümlesi)",
+    "sorun": "ITRPV alıntısı yanlış aktarılmış. 'Ek' kelimesi anlamı değiştiriyor ve çıkarımı çelişkili hale getiriyor. Ek %140 Si gerekseydi toplam oran 2.4 olurdu; bu, artıkların geri döndüğünü değil, dönmediğini gösterirdi.",
+    "kanit": "- Sentez: 'wafer'da kalan Si'nin %140'ı kadar ek Si gerekiyordu, yani artıklar zaten dönüyor'.\n- Kaynak (wafer.json kaynak_denetimi): 'A 160 µm … wafer weighs about 10.1 g. That means 14 g or 140% of remaining Si in the wafer were necessary'. Yani toplam 14 g, oran 1.4.\n- Dosyalardaki kalibrasyonla uyumlu: wf_poly_ratio_itrpv 1.42; M10 1.39-1.44.",
+    "onerilen_duzeltme": "Şöyle düzeltilsin: 'ITRPV: 2022'de wafer başına toplam Si, wafer'da kalan Si'nin ~1.4 katıydı (14 g / 10.1 g). Kerf ve kare kesim kayıpları düşünülünce bu oran, artık ve uçların geri döndüğünü gösterir.'",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "itirazlar H2 (ozet), KK3 gerekcesi ve deneyler sira 5, ana_bulgular[0] kanıtı",
+    "sorun": "Küçük aktarım hataları var.",
+    "kanit": "(1) 27 c/W:\n- Sentez: 'panel başı sabitler (kutu, kablo, konnektör, ambalaj, işçilik) 50 W'ta ≈27 c/W'.\n- modul: '50 W'ta BOM + kablo + işçilik ≈ 27 ¢/W' = 15.0 + 5.6 + 6.0.\n\n(2) 35 V kablo farkı:\n- Sentez: '+1-1.2 c/W'.\n- modul tabloları, 35 V'a karşı 60 V: 200 W 2.2 / 1.4, 300 W 1.9 / 1.1, 400 W 2.1 / 0.9 → fark +0.8-1.2 c/W.\n\n(3) Kısaltılmış id'ler:\n- Sentez: 'bat_f31', 'bat_f45', 'bat_f47'.\n- Gerçek id'ler: bat_f31_demand_mwh, bat_f45_pack_parts, bat_f47_product_fixed.",
+    "onerilen_duzeltme": "- 27 c/W 'BOM+kablo+işçilik toplamı' diye düzeltilsin.\n- Kablo farkı '+0.8-1.2 c/W' yazılsın.\n- id'ler tam haliyle yazılsın.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "deneyler sira 6, 11, 14 (maliyet_usd)",
+    "sorun": "Birleştirilen deneylerin maliyet aralıkları, alt deneylerin toplamından düşük. İlk 10'un toplam maliyeti bu yüzden olduğundan düşük görünüyor.",
+    "kanit": "(deneyler_tum.md)\n- Deney 6:\n  - Bileşenler: standart SBESS 2-5k, DIN VDE <0.5k, Na standardı 2-6k, TR 1-5k, hava <1k, pil AB 1-3k.\n  - Toplam ≈6-20k; sentez 3-12k.\n- Deney 11:\n  - Bileşenler: pil 3-6k + 3-8k + 2-5k, elektronik BQ76952 1-2k.\n  - Toplam ≈9-21k; sentez 6-16k.\n- Deney 14:\n  - Bileşenler: OSB 0-5k, yangın 3-10k, deprem 5-20k, CaF2 1-3k, BEKRA/ÇED 3-10k.\n  - Toplam ≈12-48k; sentez 5-30k.",
+    "onerilen_duzeltme": "Birleştirilen deneylerde maliyet, bileşenlerin toplamı olarak verilsin (paylaşılan iş varsa gerekçesiyle azaltılsın). Ana bulgu 12'deki ilk 10 toplamı (45-185 kUSD) buna göre yeniden hesaplansın.",
+    "ciddiyet": "dusuk"
+   }
+  ]
+ }
+}

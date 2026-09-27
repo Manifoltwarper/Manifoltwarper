@@ -25,7 +25,7 @@ def tornado(p: ParamSet, s: Secimler, P_panel_W: float, metrik: Metrik = sistem_
             parametreler: Iterable[str] | None = None) -> pd.DataFrame:
     taban = metrik(degerlendir(p, s, P_panel_W))
     satirlar = []
-    for pid in (parametreler or list(p)):
+    for pid in (parametreler or p.sahipler()):
         m = p.meta(pid)
         if m.alt == m.ust:
             continue

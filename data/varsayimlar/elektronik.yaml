@@ -1,0 +1,3004 @@
+alan: elektronik
+ozet: "Elektronik kutunun uretim maliyeti asagidan yukari yeniden modellendi. Kutu su bilesenlerden olusur: MPPT,\
+  \ BMS elektronigi, A'da izoleli sebeke inverteri, B'de DC cikislar ve istege bagli inverter, dis kasa. Fiyatlar\
+  \ Eylul 2026 (1 USD = 48.92 TRY; 1 EUR = 1.139 USD, EURTRY/USDTRY'den turetildi).\nKapsam: pil hucreleri ve pil\
+  \ mekanigi (tutucu, bara, isil bariyer) pil ajanindadir. Dis kasa icindeki pil bolmesinin hacmi burada.\nToplayici\
+  \ yalnizca formul ciktilarini (el_f_*) toplar. Parametrelerdeki maliyet_sinifi yalnizca etikettir; birim fiyatlar\
+  \ 'teknik' olarak isaretlendi.\n\nRevizyonda degisenler:\n- Inverter topolojisi: 2 fazli flyback birakildi. Yerine\
+  \ izoleli DC-DC + 400 V ara devre + PWM H koprusu.\n- Olcekleme P_panel x n_panel_per_box ile yapiliyor.\n- urun_sabit\
+  \ iki hacim rejiminde veriliyor.\n- Dusuk hacimde test istasyonu amortismani (zaman sinifi) eklendi.\n- Garanti\
+  \ ve eksik adet kalemleri (ambalaj, AC kablo, hurda, MOQ, SMT kurulum, WEEE, bulut) toplama girdi.\n- Yeni fiziksel\
+  \ sinirlar: C-rate, SELV tek ariza kosulu, 30-35 V islak ortam siniri.\n\nSONUC — kutu uretim maliyeti, Si + sarimli\
+  \ manyetik, urun_sabit haric, talep 3,000 kutu/yil:\n- A (Almanya, 800 VA): 50 W 1.84 $/W (92 $); 200 W 0.51;\
+  \ 500 W 0.25; 800 W 0.19 (151 $); 2000 W 0.105 $/W.\n- B, inverterli: 200 W 0.43 $/W; 800 W 0.15 $/W.\n- B, inverter\
+  \ yok: 200 W 0.34 $/W (67 $); 800 W 0.12 $/W.\n- urun_sabit (NRE + sertifika + kalip + CRA + UN 38.3) varyant\
+  \ basina A'da ~0.57-0.62 M$, B'de ~0.29-0.34 M$. Kutuya etkisi A-800 icin:\n  - talep sinirli (15 bin kutu/5 yil):\
+  \ +0.050 $/W\n  - pil hatti sinirli (1 hat, 20 Wh hucre, 1,786 kutu/yil): +0.084 $/W\n  - gecerli olan, ikisinden\
+  \ buyuk olandir.\n\nBULGULAR\n1) H4'un dogrulugu guce gore degisir. Guc katinin elektronik BOM icindeki payi (A,\
+  \ Si): 50 W'ta %35, 200 W'ta %40, 500 W'ta %50, 800 W'ta %59, 2000 W'ta %71. Termal ve dolgu dahil edilip tum\
+  \ kutuya bolununce: %22, %27, %35, %43, %51. Inverteri olmayan B'de ≤200 W icin %16-21.\n   - Hukum: H4, ≤200-300\
+  \ W'ta yanlis; platform gucunde (≥500-800 W) elektronik icin buyuk olcude dogru.\n   - Manyetiklerin payi, firma\
+  \ ici maliyetle, elektronik BOM'un %7-12'si, kutunun %4-6'si. GaN + planar ile bu pay %1-6'ya iner.\n2) GaN karari\
+  \ belirsiz.\n   - 800 W'ta GaN primi, K_R'ye gore -0.5 / +21 / +47 $ (K_R = 3 / 8 / 14 $·mΩ).\n   - 0.8 puanlik\
+  \ verim kazancinin iskontolu (%8, 10 yil) degeri Almanya fiyatiyla (BDEW 37.0 ct/kWh) 18 $, Turkiye'de ~3 $.\n\
+  \   - Sert anahtarlamada 400 kHz GaN, 100 kHz Si'den verimli olmayabilir: Qoss·V·f kaybi GaN'da 0.92 W, Si'de\
+  \ 0.45 W.\n   - Ilk nesil icin Si oneriliyor. GaN, 10 bin adetlik teklif alinip ayni kartta verim olculdukten\
+  \ sonra degerlendirilmeli.\n3) Hacim ve urun_sabit:\n   - 14s zorunlulugu en kucuk paketi 14·E_cell yapar. Bu\
+  \ yuzden kucuk kutuda pil hattinin kutu adedi 10.7 bin/yil'da doyar.\n   - Kutu adedi = min(talep, pil hatti).\
+  \ Kucuk kutuda urun_sabit baskin: A-50'de 0.76 $/W.\n4) Panel boyutu: 800 W kutuda 50 W'lik 16 panel kullanilirsa\
+  \ panel basina MPPT ile maliyet 0.27 $/W, 400 W'lik 2 panelle 0.19 $/W. Kucuk panelde panel basina konnektor ve\
+  \ kanal maliyeti baskin. Kanal basina 300-500 W gruplanmali; en iyisi P_panel ≥ 200 W.\n5) SELV:\n   - DVC-A siniri\
+  \ kuru ortamda 60 V, islak ortamda 35 V (IEC 62109-1 Tablo 6; test raporu ve IEC TS 62257-9-8 dogruladi).\n  \
+  \ - Kurulum tarafinda IEC 60364-4-41 414.4.5'e gore kuru olmayan kosulda 30 V DC.\n   - 28-55 V'tan 230 V sebekeye\
+  \ 6.5-13 katlik yukseltme gerekir; izolasyon bu oran yuzunden zaten sart. SELV'in ek bedeli yalnizca guclendirilmis\
+  \ yalitim, ~1-2 $/kutu.\n   - Buck-boost MPPT'de tek ariza durumunda baranin 60 V'u gecmemesi icin bagimsiz OVP\
+  \ gerekir.\n6) Termal ve pil:\n   - A-800'de ~63 W kayip atilmali; bunun icin ~0.35 m² yuzey gerekir.\n   - Na-ion\
+  \ hucre 0-45 °C'de en fazla 0.5C, -10 ile 0 °C arasinda en fazla 0.2C ile sarj edilebilir (datasheet). Bu durumda\
+  \ E_batt ≥ 2·P_box olmali, yoksa PV kirpilir.\n7) H6: Dusuk hacimde test maliyetini test suresi degil bos ekipmanin\
+  \ amortismani belirler. A'da bu 7.5 $/kutu, test iscilligi 0.3 $. Kurum ici EMC/iklim laboratuvari 17-28 $/kutu\
+  \ eder; dis kaynak ~2 $/kutu.\n8) Bekleme tuketimi yalnizca gece icin sayildi (~%55 pay): A 2 W / 200 W'ta yillik\
+  \ uretimin %4.8'i.\n\nEN BUYUK BELIRSIZLIKLER (hepsi 'tahmin'):\n- Sertifika ve NRE\n- Sabit elektronik: AC arayuzu\
+  \ 10 $, DC cikislar 12 $\n- GaN hacim fiyati\n- Test ekipmani yatirimi (capex)\n- Talep\n- AB Pil Tuzugu esikleri\
+  \ (hafizadan)\nToplamlarda belirsizlik ±%30-50, urun_sabit'te 3 kat."
+parametreler:
+- id: el_fx_usd_try
+  ad: USD/TRY kuru
+  birim: TRY/USD
+  deger: 48.92
+  alt: 47
+  ust: 56
+  kaynak: https://tradingeconomics.com/turkey/currency
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 48.9163 as of September 25, 2026; 12 ayda %18.28 deger kaybi
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: TRY iscilik/ekipman donusumu. Ust sinir kontrollu deger kaybi (2027).
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak
+    (TradingEconomics 25.09.2026); fark %0.16; aralik 47-56.'
+  dogrulama_deneyi: Her calistirmada guncelle.
+  esdeger: eco_fx_try_per_usd
+  esdeger_carpan: 1.0
+- id: el_fx_eur_usd
+  ad: EUR/USD
+  birim: USD/EUR
+  deger: 1.139
+  alt: 1.05
+  ust: 1.25
+  kaynak: https://www.tcmb.gov.tr/kurlar/today.xml ; https://tradingeconomics.com/turkey/currency
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: TCMB 25.09.2026 EUR CrossRateOther 1.1393 (onceki turda ve kirmizi takimca acildi); TE EURTRY
+    55.7352 / USDTRY 48.9163 = 1.1394 (elektronik alaninda).
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: EUR fiyatlarinin donusumu.
+  aciklama: '55.7352/48.9163 = 1.1394 | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsiligi yok. Sahip
+    kaydi hesap_turetilmis/orta idi, cunku TE degeri iki kurdan bolunerek bulunmustu (elektronik kaynak denetimi
+    bu yuzden hesap_turetilmis istemisti). TCMB capraz kuru 1.1393''u dogrudan yayimliyor, deger kaynakta goruldugu
+    icin dogrulanmis_url/yuksek''e yukseltildi (degisiklik gunlugunde). Aralik birlesimi: elektronik 1.08-1.2, standart
+    1.05-1.25 -> 1.05-1.25.'
+  dogrulama_deneyi: '-'
+- id: el_discount_rate
+  ad: Iskonto orani (USD, reel)
+  birim: '-'
+  deger: 0.08
+  alt: 0.04
+  ust: 0.12
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: CRF, garanti/bulut bugunku degeri ve GaN deger hesabi.
+  aciklama: 'Dayanak: USD bazli imalat yatirimi icin kaba sermaye maliyeti varsayimi. | Uzlaştırma: yalnız müşteri
+    iskonto oranı olarak kalır (GaN/verim değeri); şirket WACC''ı değil.'
+  dogrulama_deneyi: Finans ajaninin WACC degeri.
+- id: el_n_amort_yr
+  ad: Ekipman amortisman suresi
+  birim: yil
+  deger: 5
+  alt: 3
+  ust: 8
+  kaynak: 'Kaynak yok (elektronik); dayanak: elektronik test ekipmani muhasebe pratigi (hafiza)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Test istasyonu, saha laboratuvari.
+  aciklama: Elektronik test ekipmani icin yaygin muhasebe pratigi (hafiza). | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Altyapida ayri test ekipmani omru yok; yeni eco_ id zorunlu degil, mevcut tek degerli id secildi. Standart
+    alaninin degersiz capex_life_years (zorunlu test istasyonlari) ve hucrenin IV istasyonlari buna baglanmali.
+  dogrulama_deneyi: Finans ajani.
+- id: el_price_kWh_DE_usd
+  ad: Almanya hane elektrik fiyati
+  birim: USD/kWh
+  deger: 0.42
+  alt: 0.34
+  ust: 0.46
+  kaynak: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: beträgt bisher durchschnittlich 37,0 ct/kWh (2026, 21.08.2026)
+  kaynak_tarihi: '2026-08-21'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: A (Almanya) verim kazancinin musteri degeri; uretici maliyeti degil, fiyatlama/pazar argumani.
+  aciklama: 0.370 x 1.139 = 0.421. Alt sinir dinamik tarifede ogle saatleri.
+  dogrulama_deneyi: '-'
+- id: el_price_kWh_TR_usd
+  ad: Turkiye mesken elektrik fiyati
+  birim: USD/kWh
+  deger: 0.07
+  alt: 0.04
+  ust: 0.12
+  kaynak: EPDK tarife sayfasi acildi, tablo gorulmedi; deger hafizadan (2025 mesken ~2.5-3 TL/kWh)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2025'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: A-Turkiye varyanti ve GaN karari.
+  aciklama: '-'
+  dogrulama_deneyi: EPDK guncel tarife tablosu (vergiler dahil).
+- id: el_value_kWh_B_usd
+  ad: Sebeke disi enerjinin ikame degeri (B)
+  birim: USD/kWh
+  deger: 0.3
+  alt: 0.1
+  ust: 1
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: B'de GaN/verim degeri.
+  aciklama: Jenerator yakiti ile sebeke fiyati arasinda genis aralik.
+  dogrulama_deneyi: Pazar arastirmasi.
+- id: el_warranty_years_A
+  ad: A garanti suresi
+  birim: yil
+  deger: 10
+  alt: 5
+  ust: 12
+  kaynak: https://balkon-kraft-werke.de/magazin/hoymiles-hms-800w-2t-test-daten-check/ (pazar referansi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Hoymiles: 12-year warranty (WebFetch ozeti)'
+  kaynak_tarihi: 2026-06
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Pazar 12 yil veriyor; kendi saha verimiz yok.
+  aciklama: Ayrica urun omru ve bulut maliyeti suresi olarak kullanilir.
+  dogrulama_deneyi: Pazar/is plani.
+- id: el_warranty_years_B
+  ad: B garanti suresi
+  birim: yil
+  deger: 3
+  alt: 2
+  ust: 5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Tasinabilir urun pratigi (hafiza, dogrulanmadi).
+  aciklama: '-'
+  dogrulama_deneyi: Pazar.
+- id: el_years_life_B
+  ad: B enerji degeri hesap suresi
+  birim: yil
+  deger: 5
+  alt: 3
+  ust: 8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: B GaN deger hesabi. A icin el_warranty_years_A (10) kullanilir.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_cu_price_usd_kg
+  ad: LME bakir nakit
+  birim: USD/kg
+  deger: 14.74
+  alt: 11
+  ust: 16.5
+  kaynak: https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Cu_cash
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''25. September 2026 14,740.00'' USD/t (onceki turda ve kirmizi takimca acildi)'
+  kaynak_tarihi: '2026-09-25'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sargi ve kablo.
+  aciklama: 'Alt sinir 2024 seviyesi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik yok; en iyi
+    kaynakli ve en guncel id. Urun fiyatlari LME x urune ozgu carpan: kablo (panel-kutu) YALNIZ modulde fiyatlanir
+    (mod_f_cost_cable; bakir disi bilesen mod_cable_core_fixed_usd_per_m ayri); elektronigin el_f_cable_cost''u
+    (x el_cable_price_factor 2.5) sistem toplamina girmez, yalniz kesit/kutle arayuzu kalir (celiskiler: kablo cift
+    sayimi). Emaye/TIW tel el_enamel_premium/el_tiw_premium ile. Modulun 2025 LME''sinden turetilmis 12 USD/kg''i
+    eski oldugu icin birlesime alinmadi.'
+  dogrulama_deneyi: Firma emaye tel faturalari.
+- id: el_enamel_premium
+  ad: Emaye tel / LME bakir fiyat orani
+  birim: '-'
+  deger: 1.25
+  alt: 1.1
+  ust: 1.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Induktor sargilari.
+  aciklama: Isleme primi kaba varsayim.
+  dogrulama_deneyi: Firma alim faturasi / LME.
+- id: el_tiw_premium
+  ad: Uc kat yalitimli tel (TIW) / LME bakir orani
+  birim: '-'
+  deger: 2
+  alt: 1.5
+  ust: 3.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: SELV-sebeke guclendirilmis yalitimli trafo.
+  aciklama: TIW'in emaye tele gore birkac kat pahali oldugu hafizadan.
+  dogrulama_deneyi: TIW tedarikci teklifi.
+- id: el_ferrite_price_usd_kg
+  ad: MnZn guc ferriti
+  birim: USD/kg
+  deger: 6
+  alt: 3
+  ust: 12
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Firma alim fiyati mevcut; yer tutucu.
+  aciklama: PQ35/35 73 g x 6 $/kg = 0.44 $.
+  dogrulama_deneyi: Firma 12 aylik ferrit alim kaydi.
+- id: el_mag_ref_Ap_m4
+  ad: Referans cekirdek alan carpimi (PQ35/35)
+  birim: m^4
+  deger: 1.9e-08
+  alt: 1.6e-08
+  ust: 2.2e-08
+  kaynak: https://www.ferroxcube.com/upload/media/product/file/Pr_ds/PQ35_35.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Ae 190 mm²; Ve 16300 mm³
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Geometrik benzerlik olceklemesi icin referans.
+  aciklama: Ap = Ae(190 mm²) x Aw(~100 mm², hafizadan) = 1.9e-8 m^4.
+  dogrulama_deneyi: Bobin veri sayfasindan Aw.
+- id: el_mag_ref_mass_kg
+  ad: Referans manyetik kutlesi (PQ35/35 ferrit + bakir)
+  birim: kg
+  deger: 0.1
+  alt: 0.09
+  ust: 0.12
+  kaynak: https://www.ferroxcube.com/upload/media/product/file/Pr_ds/PQ35_35.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: m PQ35/35 ≈ 73 g/set
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 73 g ferrit (dogrulanmis) + ~27 g Cu (tahmin). Kutle ∝ Ap^0.75.
+  dogrulama_deneyi: Firma induktor tartimi.
+- id: el_mag_fe_frac
+  ad: Manyetik kutlesinde ferrit payi
+  birim: '-'
+  deger: 0.73
+  alt: 0.6
+  ust: 0.8
+  kaynak: PQ35/35 73 g / 100 g
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: ≈ 73 g/set
+  kaynak_tarihi: '2016'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 73/(73+27).
+  dogrulama_deneyi: '-'
+- id: el_mag_labor_usd_per_piece
+  ad: Sarimli induktor iscilik + bobin
+  birim: USD/adet
+  deger: 0.65
+  alt: 0.35
+  ust: 1.4
+  kaynak: https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'İmalat (5 puan indirim): 39.223,13 TL'
+  kaynak_tarihi: '2025-12-23'
+  guven: orta
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Firma ici maliyet, piyasa fiyati degil (H4).
+  aciklama: 5 dk x 6.17 $/h = 0.51 + bobin/klips 0.15 (tahmin).
+  dogrulama_deneyi: Zaman etudu.
+- id: el_xfmr_labor_usd
+  ad: Guclendirilmis yalitimli trafo iscilik + bobin (TIW, bant, hipot)
+  birim: USD/adet
+  deger: 1.15
+  alt: 0.6
+  ust: 2.2
+  kaynak: Iscilik saat maliyetinden
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Planar trafoda da ayni alindi (yalitim isleri baskin).
+  aciklama: 10 dk x 6.17 $/h + 0.15 $.
+  dogrulama_deneyi: Zaman etudu.
+- id: el_planar_core_premium
+  ad: Planar cekirdek fiyat primi
+  birim: '-'
+  deger: 1.3
+  alt: 1.1
+  ust: 1.8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: GaN + planar secenegi.
+  aciklama: Dusuk profilli cekirdek, daha az standart.
+  dogrulama_deneyi: Cekirdek teklifi.
+- id: el_planar_winding_usd_per_m2
+  ad: Planar sargi maliyeti (sqrt(Ap) basina etkin PCB)
+  birim: USD/m^2
+  deger: 1350
+  alt: 700
+  ust: 2500
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 3 x sqrt(Ap) PCB alani x ~450 $/m² cok katmanli kalin bakir PCB (tahmin).
+  dogrulama_deneyi: PCB teklifi.
+- id: el_planar_labor_usd
+  ad: Planar induktor montaj iscilik
+  birim: USD/adet
+  deger: 0.25
+  alt: 0.1
+  ust: 0.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Sarim yok; cekirdek yapistirma/klips ~2 dk.
+  dogrulama_deneyi: '-'
+- id: el_mag_market_markup
+  ad: Manyetik piyasa fiyati / firma ici maliyet
+  birim: '-'
+  deger: 2
+  alt: 1.4
+  ust: 3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: H4 firma avantaji.
+  aciklama: A-800'de manyetikler 9.5 $ -> tasarruf ~5-19 $.
+  dogrulama_deneyi: Firma satis/maliyet kayitlari.
+- id: el_K_R_si100_usd_mohm
+  ad: Si 100 V MOSFET fiyat x Rds(on,maks)
+  birim: USD·mΩ
+  deger: 2.18
+  alt: 1.5
+  ust: 3.5
+  kaynak: https://www.lcsc.com/product-detail/MOSFET_Infineon-Technologies-BSC070N10NS5_C534364.html
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '1,000+: $0.3117; 100+: $0.3396; 7mΩ@10V; Qg 38nC; Coss 340pF'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Distributor 1k; 10k ve Cin muadilinde daha dusuk olabilir.
+  aciklama: 0.3117 x 7 = 2.18 (100+ kademede 2.38).
+  dogrulama_deneyi: 3 tedarikciden 10k teklif.
+- id: el_K_R_gan100_usd_mohm
+  ad: GaN 100 V FET fiyat x Rds(on)
+  birim: USD·mΩ
+  deger: 8
+  alt: 3
+  ust: 14
+  kaynak: https://www.lcsc.com/product-detail/MOSFETs_EPC-EPC2218_C3288335.html (ust referans)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'EPC2218 100+: $4.27; Rds 2.4 mΩ tipik / 3.2 mΩ maks (EPC datasheet)'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Ust referans tek premium uretici ve 100+ kademe: 10.2 (tipik) / 13.7 (maks). Hacimli Cin
+    GaN fiyati gorulmedi.'
+  aciklama: Merkez 8, dogrulanmamis hacim indirimi varsayimi. Karar bu parametreye cok duyarli.
+  dogrulama_deneyi: Innoscience/EPC/Infineon/Navitas 10k teklif.
+- id: el_fet_floor_si_usd
+  ad: Si FET paket taban fiyati
+  birim: USD/adet
+  deger: 0.18
+  alt: 0.08
+  ust: 0.3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Kucuk gucte FET maliyetini belirler.
+  aciklama: BSC070N10NS5 0.31 $'in altinda kucuk 5x6/3x3 paket varsayimi.
+  dogrulama_deneyi: Teklif.
+- id: el_fet_floor_gan_usd
+  ad: GaN FET taban fiyati
+  birim: USD/adet
+  deger: 0.7
+  alt: 0.4
+  ust: 1.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 'Kaba benzetme: kucuk GaN''in Si''nin 3-5 kati.'
+  dogrulama_deneyi: Teklif.
+- id: el_k_T_rdson
+  ad: Rds(on) sicak/25 °C orani
+  birim: '-'
+  deger: 1.6
+  alt: 1.4
+  ust: 1.9
+  kaynak: Hafiza (Si ve GaN veri sayfalarinda 100-125 °C'de 1.5-1.8x)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tum FET boyutlamasi (MPPT dahil).
+  aciklama: R25_max = R_hot_max / k_T.
+  dogrulama_deneyi: Secilen FET veri sayfasi egrisi.
+- id: el_alpha_cond_per_switch
+  ad: Anahtar basina iletim kaybi butcesi (gucun orani)
+  birim: '-'
+  deger: 0.0025
+  alt: 0.0015
+  ust: 0.005
+  kaynak: Tasarim butcesi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Silisyum maliyeti ile verim arasindaki odunlesim.
+  aciklama: Toplam iletim butcesi kat basina ~%1.
+  dogrulama_deneyi: Model optimizasyonu (maliyet + enerji degeri).
+- id: el_K_R_hv650_usd_mohm
+  ad: 600/650 V SJ MOSFET fiyat x Rds(on)
+  birim: USD·mΩ
+  deger: 242
+  alt: 80
+  ust: 300
+  kaynak: https://www.lcsc.com/product-detail/MOSFET_Infineon-Technologies-IPB65R125C7_C536638.html
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '1,000+: $1.94; 650V; 125mΩ @ 10V'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: H koprusu ve cift yonlu HV koprusu. Alt sinir Cin SJ muadilleri (fiyat gorulmedi).
+  aciklama: 1.94 x 125 = 242.
+  dogrulama_deneyi: Cin SJ 10k teklifi.
+- id: el_fet_floor_hv_usd
+  ad: 650 V FET taban fiyati
+  birim: USD/adet
+  deger: 0.8
+  alt: 0.4
+  ust: 1.9
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: Kucuk inverterde baskin.
+  aciklama: Ust sinir dogrulanmis IPB65R125C7 1k fiyati.
+  dogrulama_deneyi: Teklif.
+- id: el_drv_si_usd
+  ad: Si yarim kopru surucusu
+  birim: USD/adet
+  deger: 0.45
+  alt: 0.25
+  ust: 0.8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_drv_gan_usd
+  ad: GaN yarim kopru surucusu
+  birim: USD/adet
+  deger: 0.8
+  alt: 0.4
+  ust: 1.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_drv_iso_usd
+  ad: Izoleli yarim kopru surucusu (HV)
+  birim: USD/adet
+  deger: 1
+  alt: 0.6
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: H koprusu.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_Qoss_gan_nC
+  ad: GaN 100 V cikis yuku (EPC2218, 50 V)
+  birim: nC
+  deger: 46
+  alt: 46
+  ust: 69
+  kaynak: https://epc-co.com/epc/Portals/0/epc/documents/datasheets/EPC2218_datasheet.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: QOSS Output Charge VGS = 0 V, VDS = 50 V 46 69; QRR 0; QG 10.5
+  kaynak_tarihi: 2026-09 (erisim)
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sert anahtarlama kaybi karsilastirmasi.
+  aciklama: Qrr = 0.
+  dogrulama_deneyi: '-'
+- id: el_Qoss_si_nC
+  ad: Si 100 V cikis yuku (BSC070N10NS5 sinifi, 50 V)
+  birim: nC
+  deger: 40
+  alt: 25
+  ust: 60
+  kaynak: 'LCSC: Coss 340 pF'
+  kaynak_turu: tahmin
+  kaynak_alintisi: Coss 340pF (olcum gerilimi belirtilmemis)
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Kapasite dogrusal olmadigi icin Qoss(50 V) ≈ 2-3 x Coss(50V)·50 V varsayimi.
+  dogrulama_deneyi: Datasheet Qoss tablosu (LCSC PDF okunamadi).
+- id: el_Qrr_si_nC
+  ad: Si 100 V govde diyodu ters toparlanma yuku
+  birim: nC
+  deger: 50
+  alt: 20
+  ust: 150
+  kaynak: Hafiza
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sert anahtarlamada Si'nin GaN'a karsi dezavantaji.
+  aciklama: '-'
+  dogrulama_deneyi: Datasheet / cift darbe testi.
+- id: el_fsw_si_kHz
+  ad: Si secenegi anahtarlama frekansi (MPPT ve LV DC-DC)
+  birim: kHz
+  deger: 100
+  alt: 50
+  ust: 150
+  kaynak: Muhendislik pratigi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Prototip verim-frekans taramasi.
+- id: el_fsw_gan_kHz
+  ad: GaN secenegi anahtarlama frekansi
+  birim: kHz
+  deger: 400
+  alt: 200
+  ust: 1000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Sert anahtarlamada 400 kHz'te Qoss kaybi Si 100 kHz'in ~2 kati; optimum daha dusuk olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip frekans taramasi.
+- id: el_fsw_grid_kHz
+  ad: H koprusu PWM frekansi (Si SJ)
+  birim: kHz
+  deger: 20
+  alt: 16
+  ust: 50
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Duyulabilir bant ustu; sebeke filtre induktorunu belirler.
+  aciklama: GaN seceneginde de HV kopru Si SJ kabul edildi.
+  dogrulama_deneyi: Prototip.
+- id: el_Bac_xfmr_si_T
+  ad: Trafo tepe AC aki, 100 kHz (3C95)
+  birim: T
+  deger: 0.12
+  alt: 0.08
+  ust: 0.15
+  kaynak: https://www.ferroxcube.com/upload/media/product/file/Pr_ds/PQ35_35.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '3C95: 100 kHz W/set 7.800 200 mT 100 ºC'
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 200 mT'de 478 kW/m³; dogal sogutmada ~0.12 T'ye dusurulur (β≈2.5 ile 133 kW/m³).
+  aciklama: Ornek hesap ve tablo bu degerle.
+  dogrulama_deneyi: Prototip trafo sicaklik artisi.
+- id: el_Bac_xfmr_gan_T
+  ad: Trafo tepe AC aki, 400-500 kHz (3F36/3C96)
+  birim: T
+  deger: 0.05
+  alt: 0.03
+  ust: 0.08
+  kaynak: https://www.ferroxcube.com/upload/media/product/file/Pr_ds/PQ35_35.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '3F36: 500 kHz 2.500 W/set 50 mT; 19.000 W/set 100 mT; 3C96: 400 kHz 3.300 W/set 50 mT'
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: f·B 12'den 20-25 kT/s'ye; trafo kutlesi yalnizca ~%30-40 kuculur.
+  aciklama: '-'
+  dogrulama_deneyi: Planar trafo prototipi.
+- id: el_Bpk_L_si_T
+  ad: Induktor tepe aki (DC ongerilimli, 100 kHz)
+  birim: T
+  deger: 0.3
+  alt: 0.25
+  ust: 0.33
+  kaynak: https://www.ferroxcube.com/upload/media/product/file/Pr_ds/PQ35_35.pdf
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Bsat 3C95: 330 mT (25 kHz, 250 A/m, 100 ºC)'
+  kaynak_tarihi: '2016'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Induktorde AC bileseni kucuk oldugundan frekans artisi Ap'yi trafodan daha cok kucultur.
+  aciklama: Doyma payi ~%10.
+  dogrulama_deneyi: '-'
+- id: el_Bpk_L_gan_T
+  ad: Induktor tepe aki, 400 kHz
+  birim: T
+  deger: 0.25
+  alt: 0.2
+  ust: 0.3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: AC kaybi siniri.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: el_B_grid_L_T
+  ad: Sebeke filtre induktoru tepe aki
+  birim: T
+  deger: 0.3
+  alt: 0.2
+  ust: 0.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Aralikli ferrit 0.3, toz cekirdek ~0.5 T.
+  aciklama: En buyuk manyetik; firma yetkinligi burada.
+  dogrulama_deneyi: Prototip.
+- id: el_J_A_m2
+  ad: Sargi akim yogunlugu
+  birim: A/m^2
+  deger: 4500000
+  alt: 3000000
+  ust: 6000000
+  kaynak: Muhendislik pratigi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Dogal sogutmali dolgulu kutu.
+  aciklama: '-'
+  dogrulama_deneyi: Sargi sicaklik olcumu.
+- id: el_Ku_L
+  ad: Induktor pencere doluluk
+  birim: '-'
+  deger: 0.35
+  alt: 0.25
+  ust: 0.45
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Firma tasarim verisi.
+- id: el_Ku_xfmr_reinforced
+  ad: Guclendirilmis yalitimli trafo doluluk
+  birim: '-'
+  deger: 0.2
+  alt: 0.15
+  ust: 0.3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'SELV bedeli: normal trafoda 0.3.'
+  aciklama: '-'
+  dogrulama_deneyi: Firma verisi.
+- id: el_ripple_L
+  ad: Induktor dalgacik orani
+  birim: '-'
+  deger: 0.3
+  alt: 0.2
+  ust: 0.4
+  kaynak: Pratik
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_ripple_grid
+  ad: Sebeke induktoru dalgacik orani
+  birim: '-'
+  deger: 0.3
+  alt: 0.2
+  ust: 0.4
+  kaynak: Pratik
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_V_mp_min_V
+  ad: Panel Vmp alt (sicak) — modul arayuzu
+  birim: V
+  deger: 30
+  alt: 26
+  ust: 34
+  kaynak: Kaynak yok (HJT N_s≈66 varsayimi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Modul ajaninin N_s'i gelince degistirilir.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Sicak Vmp tahmini; kanonik cikti
+    34.1 V (baypasla 22.4 V).'
+  dogrulama_deneyi: Modul ajani.
+- id: el_V_mp_max_V
+  ad: Panel Vmp ust (soguk)
+  birim: V
+  deger: 46
+  alt: 40
+  ust: 52
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Soguk Vmp tahmini; kanonik 48.4
+    V (N_s 64, -40 C).'
+  dogrulama_deneyi: Modul ajani.
+- id: el_V_mp_nom_V
+  ad: Panel Vmp nominal
+  birim: V
+  deger: 40
+  alt: 35
+  ust: 45
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kablo ve I_sc hesabi.
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Nominal; kanonik 64 x 0.64 = 41.0
+    V.'
+  dogrulama_deneyi: Modul ajani.
+- id: el_n_panel_per_mppt
+  ad: MPPT kanali basina paralel panel sayisi
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 8
+  kaynak: Tasarim secimi el_ds_mppt_grouping
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'P_panel ≥200 W: 1; kucuk panel: kanal basina 300-500 W.'
+  aciklama: PV tarafindaki N_p arayuzuyle ayni anlam.
+  dogrulama_deneyi: Golge deneyi.
+- id: el_P_ch_max_W
+  ad: MPPT kanal azami gucu
+  birim: W
+  deger: 500
+  alt: 400
+  ust: 800
+  kaynak: Tasarim
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: SELV'de 500 W / 30 V ≈ 17 A.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_I_rev_module_A
+  ad: Modul azami seri sigorta degeri (ters akim)
+  birim: A
+  deger: 15
+  alt: 5
+  ust: 25
+  kaynak: IEC 62548 ters akim kurali (N-1)·1.25·Isc (hafiza)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kucuk panelde Isc dusuk; daha fazla paralel sigortasiz olabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Standart ve modul ajani.
+- id: el_cap_base_usd
+  ad: MPPT kanal kondansator tabani
+  birim: USD/kanal
+  deger: 0.5
+  alt: 0.3
+  ust: 1
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM teklifi.
+- id: el_cap_per_W_usd
+  ad: MPPT kondansator egimi
+  birim: USD/W
+  deger: 0.003
+  alt: 0.0015
+  ust: 0.006
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM.
+- id: el_isense_usd
+  ad: Kanal akim olcumu
+  birim: USD/kanal
+  deger: 0.4
+  alt: 0.2
+  ust: 0.8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: BOM.
+- id: el_pv_conn_pair_usd
+  ad: Panel basina PV giris konnektor cifti (kutu)
+  birim: USD/panel
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kucuk panelde baskin kalem; disarida Y-kablo ile paralellenirse BOS'a gecer.
+  aciklama: '-'
+  dogrulama_deneyi: Konnektor teklifi.
+- id: el_str_fuse_usd
+  ad: Dizi sigortasi
+  birim: USD/panel
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Yalnizca el_f_fuse_needed True ise.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_ovp_usd
+  ad: Bagimsiz donanim asiri gerilim korumasi (SELV tek ariza)
+  birim: USD/kutu
+  deger: 1
+  alt: 0.5
+  ust: 1.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Buck-boost veya boost MPPT'de zorunlu kabul edildi.
+  aciklama: Karsilastirici + kesme/klemp.
+  dogrulama_deneyi: Tek ariza analizi (tip testi).
+- id: el_N_batt_series
+  ad: Na-ion seri hucre sayisi
+  birim: '-'
+  deger: 14
+  alt: 14
+  ust: 15
+  kaynak: floor(60/3.95) = 15; 14 onerilen
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: En kucuk paket 14·E_cell Wh.
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_ns_cells üzerinden okunur. Fark: LO varsayimi; marjsiz floor(60/3.95)
+    = 15''ten ''onerilen'' 14.'
+  dogrulama_deneyi: '-'
+  esdeger: bat_ns_cells
+  esdeger_carpan: 1.0
+- id: el_Vcell_max_na_V
+  ad: Na-ion sarj ust gerilimi
+  birim: V
+  deger: 3.95
+  alt: 3.9
+  ust: 4.1
+  kaynak: https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Charge Voltage 3.95±0.05V; Discharge cut-off 1.50±0.05V; Nominal 3.10V
+  kaynak_tarihi: 2024-01
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Pil ajaninin hucresine gore guncellenir.
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_cell_v_max_V üzerinden okunur. Fark: LO degeri tum kimyalar
+    icin sabit.'
+  dogrulama_deneyi: '-'
+  esdeger: bat_cell_v_max_V
+  esdeger_carpan: 1.0
+- id: el_Vcell_min_use_V
+  ad: Kullanilan alt hucre gerilimi
+  birim: V
+  deger: 2
+  alt: 1.5
+  ust: 2.5
+  kaynak: Datasheet 1.50 V + tasarim
+  kaynak_turu: tahmin
+  kaynak_alintisi: Discharge cut-off 1.50±0.05V
+  kaynak_tarihi: 2024-01
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: V_batt_min = 28 V (14s).
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_v_min_cutoff_V üzerinden okunur. Fark: Ayni.'
+  dogrulama_deneyi: 1.5-2.0 V kapasite payi olcumu.
+  esdeger: bat_v_min_cutoff_V
+  esdeger_carpan: 1.0
+- id: el_T_charge_max_C
+  ad: Na-ion sarj ust sicakligi
+  birim: °C
+  deger: 45
+  alt: 40
+  ust: 55
+  kaynak: https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '≥45°C: cannot charging temperature; charge -10~45°C'
+  kaynak_tarihi: 2024-01
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_C_charge_max_C
+  ad: Azami surekli sarj hizi (0-45 °C)
+  birim: 1/h
+  deger: 0.5
+  alt: 0.5
+  ust: 3
+  kaynak: https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Maximum Continuous Charging Rate: -10~0°C: ≤0.20C; 0~45°C: ≤0.50C'
+  kaynak_tarihi: 2024-01
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Buyuk prizmatik hucre; kucuk/guc hucrelerinde 1-3C olabilir (pil ajani).
+  aciklama: 'E_batt ≥ P_box/C_max = 2·P_box. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris:
+    Farkli hucre (ecoteardown); A varsayilaniyla sayisal olarak ayni ama format secimine baglanmali.'
+  dogrulama_deneyi: Pil ajani hucre secimi.
+- id: el_C_charge_cold_C
+  ad: Azami sarj hizi (-10 ile 0 °C)
+  birim: 1/h
+  deger: 0.2
+  alt: 0.1
+  ust: 1
+  kaynak: https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '-10~0°C: ≤0.20C'
+  kaynak_tarihi: 2024-01
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kis sabahi 800 W kutu (1.68 kWh) en fazla ~340 W sarj eder.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_E_cell_Wh
+  ad: Hucre enerjisi (pil arayuzu)
+  birim: Wh
+  deger: 20
+  alt: 10
+  ust: 71
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 71 Wh = 1 kWh kutuda 14s1p.
+  aciklama: 'Kutu adedi ve en kucuk paket (14·E_cell) buna bagli. | [Uzlaştırma/zincir] Eşdeğer: değer bat_E_cell_Wh
+    üzerinden okunur. Fark: Kaynaksiz tahmin; en kucuk paketi (280 Wh) ve kutu adedini (1786/yil) yanlis kuantize
+    ediyor.'
+  dogrulama_deneyi: Pil ajani hucre formati.
+  esdeger: bat_E_cell_Wh
+  esdeger_carpan: 1.0
+- id: el_h_store_h
+  ad: Istenen depolama suresi E_batt/P_box
+  birim: h
+  deger: 1.5
+  alt: 0.5
+  ust: 4
+  kaynak: 'Referans: Solarbank 3 E2700 Pro 2.68 kWh / 800-1200 W'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 899,00€; 2,68kWh; 4 MPPT; 16-60 V DC; 32 A
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Etkin deger max(h_store, 1/C_max) = 2 h.
+  aciklama: 'E_batt pil/sistem ajanindan gelirse o kullanilir. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) →
+    bat_wh_usable_per_wp_A: E_batt/P_box (nominal); kanonik nominal 1.78-2.0 ile celisik. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → bat_wh_usable_per_wp_B: Senaryodan bagimsiz tek deger.'
+  dogrulama_deneyi: Sistem ajani.
+- id: el_rhoE_pack_Wh_L
+  ad: Pil bolmesi hacimsel enerji yogunlugu
+  birim: Wh/L
+  deger: 150
+  alt: 100
+  ust: 250
+  kaynak: 'Datasheet hucre: 682 Wh / 2.52 L'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 220Ah; 3.10V; 173.6 x 71.25 x 203.7 mm
+  kaynak_tarihi: 2024-01
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Hucre 271 Wh/L x paketleme 0.55. Kucuk silindirikte daha dusuk.
+  aciklama: Kasa maliyetine en duyarli girdi.
+  dogrulama_deneyi: Pil ajani paket CAD.
+- id: el_eta_batt_rt
+  ad: Na-ion DC cevrim verimi
+  birim: '-'
+  deger: 0.92
+  alt: 0.88
+  ust: 0.95
+  kaynak: https://en.wikipedia.org/wiki/Sodium-ion_battery
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: The (round trip) energy efficiency of sodium-ion batteries is 92% at a discharge time of 5 hours.
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Faradion verisi; kendi hucremizde olculmeli.
+  aciklama: Solarbank 3 Pro AC-AC %82.1 (800 W), %71.6 (150 W).
+  dogrulama_deneyi: Pil ajani.
+- id: el_grid_limit_VA
+  ad: Almanya fis-tak besleme siniri
+  birim: VA
+  deger: 800
+  alt: 600
+  ust: 800
+  kaynak: https://www.dke.de/de/arbeitsfelder/energy/normenhinweise/faq-zur-dinvdev012695
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: Die maximal zulässige Einspeiseleistung des Wechselrichters beträgt 800 VA.; Nein, diese Norm
+    deckt Steckersolargeräte mit Energiespeicher nicht ab.
+  kaynak_tarihi: '2025-12-17'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'Yalnizca A. Solakon: 1.3.2026''dan beri 800 VA VDE-AR-N 4105''te.'
+  aciklama: 'P_inv = min(P_box, 800). | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp:
+    AC invertor siniri; PV DC siniri degil.'
+  dogrulama_deneyi: Standart ajani.
+- id: el_V_grid_V
+  ad: Sebeke nominal gerilimi
+  birim: V
+  deger: 230
+  alt: 220
+  ust: 240
+  kaynak: IEC 60038 (hafiza)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_V_dc_link_V
+  ad: HV DC ara devre gerilimi
+  birim: V
+  deger: 400
+  alt: 380
+  ust: 420
+  kaynak: 230 V tepe 325 V + pay
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 230·√2·1.1 ≈ 358 V + dalgacik.
+  dogrulama_deneyi: '-'
+- id: el_dV_dc_link_V
+  ad: DC ara devre 100 Hz tepe-tepe dalgacik
+  birim: V
+  deger: 40
+  alt: 20
+  ust: 60
+  kaynak: Tasarim
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_capJ_hv_usd_per_J
+  ad: 450 V elektrolitik fiyat / depolanan enerji
+  birim: USD/J
+  deger: 0.08
+  alt: 0.04
+  ust: 0.2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '800 W: 159 µF, 12.7 J -> ~1 $.'
+  aciklama: 'Dayanak: 450 V ~150 µF snap-in ~1 $ (hafiza).'
+  dogrulama_deneyi: Kondansator teklifi.
+- id: el_hv_diode_usd
+  ad: 600 V hizli diyot (tek yonlu HV dogrultucu)
+  birim: USD/adet
+  deger: 0.15
+  alt: 0.08
+  ust: 0.4
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_inv_misc_usd
+  ad: Inverter diger (rezonans L, izoleli geri besleme, HV kond. tabani)
+  birim: USD/kutu
+  deger: 1.6
+  alt: 1
+  ust: 3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 0.3 + 1.0 + 0.3.
+  dogrulama_deneyi: BOM.
+- id: el_bidir_sense_usd
+  ad: Cift yonlu ek olcum/koruma
+  birim: USD/kutu
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_P_inv_B_max_W
+  ad: B inverter ust gucu
+  birim: W
+  deger: 600
+  alt: 300
+  ust: 1000
+  kaynak: Tasarim
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Pazar.
+- id: el_pcb_m2_per_W
+  ad: Guc kati PCB alani
+  birim: m^2/W
+  deger: 1.5e-05
+  alt: 1.0e-05
+  ust: 2.5e-05
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 800 W + 800 VA -> 240 cm².
+  dogrulama_deneyi: CAD.
+- id: el_pcb_usd_m2
+  ad: 2 oz 4 katman PCB fiyati
+  birim: USD/m^2
+  deger: 110
+  alt: 70
+  ust: 160
+  kaynak: https://jlcpcb.com/blog/special-discount-on-quality-4-layers-pcbs
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: reducing ... from $75.1/m² to $70.6/m² (Mar 06, 2024)
+  kaynak_tarihi: 2024-03
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kaynak 2024 ve 1 oz; 2 oz primi tahmin.
+  aciklama: '-'
+  dogrulama_deneyi: 2026 teklif (2 oz, 4-6 katman).
+- id: el_asm_per_W_usd
+  ad: Guc kati montaj egimi
+  birim: USD/W
+  deger: 0.002
+  alt: 0.001
+  ust: 0.004
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: THT/manyetik montaji.
+  dogrulama_deneyi: '-'
+- id: el_bms_bar_per_W_usd
+  ad: BMS bara/sigorta egimi
+  birim: USD/W
+  deger: 0.002
+  alt: 0.001
+  ust: 0.004
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_mcu_usd
+  ad: MCU (STM32G474, inverterli)
+  birim: USD/kutu
+  deger: 3.01
+  alt: 2.5
+  ust: 4.3
+  kaynak: https://www.lcsc.com/product-detail/C730123.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: STM32G474CBT6 1,000+ $3.0078
+  kaynak_tarihi: 2026-09
+  guven: yuksek
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_mcu_B_usd
+  ad: MCU (B, inverter yok)
+  birim: USD/kutu
+  deger: 1.5
+  alt: 0.8
+  ust: 3
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_fixed_common_usd
+  ad: Ortak sabit elektronik (yardimci guc, olcum/koruma, PCB tabani, SMT tabani, etiket)
+  birim: USD/kutu
+  deger: 9.9
+  alt: 6.5
+  ust: 15
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Kucuk seri (Turkiye EMS).
+  aciklama: 2.5 + 3.0 + 0.9 (80 cm² x 110 $/m²) + 3.0 + 0.5.
+  dogrulama_deneyi: Prototip BOM 5k teklif.
+- id: el_ac_interface_usd
+  ad: A AC arayuzu (4 NA-koruma rolesi, EMI filtre, X/Y, varistor, sigorta, AC konnektor)
+  birim: USD/kutu
+  deger: 10
+  alt: 6
+  ust: 16
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: ≤800 VA'da taban fiyatli. CM bobini firma ici.
+  aciklama: Roleler ~4 x 1-1.5 $, konnektor 2-4 $ (hafiza).
+  dogrulama_deneyi: LCSC/Mouser BOM (oncelik 1).
+- id: el_comm_monitor_A_usd
+  ad: A WiFi + yedekli sebeke izleme
+  birim: USD/kutu
+  deger: 4
+  alt: 2.5
+  ust: 6
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 2.0 + 2.0.
+  dogrulama_deneyi: BOM.
+- id: el_fixed_B_extra_usd
+  ad: B ek sabit (BLE, 2x USB-PD 100 W, 12 V cikis, ekran/tus)
+  birim: USD/kutu
+  deger: 16
+  alt: 9
+  ust: 24
+  kaynak: https://www.lcsc.com/product-detail/C20415848.html (kismi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: IP2366 1,000+ $0.85; 2-6 series lithium/LiFePO4
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: IP2366 yalnizca 2-6s; 28-55 V baradan USB-PD icin 60 V+ buck + PD denetleyici gerekir.
+  aciklama: 1 + 12 + 3.
+  dogrulama_deneyi: B prototip BOM.
+- id: el_afe_usd
+  ad: BMS AFE (BQ76952)
+  birim: USD/kutu
+  deger: 2.01
+  alt: 1.8
+  ust: 3.3
+  kaynak: https://www.lcsc.com/product-detail/C2862742.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'BQ76952PFBR 1,000+: $2.01; 3S to 16S; lithium-ion, LiFePO4'
+  kaynak_tarihi: 2026-09
+  guven: yuksek
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: 'Na-ion anilmiyor; datasheet: hucre olcumu -0.2 ile 5.5 V, 85 V tolerans, DEEPSLEEP 9-10 µA.'
+  aciklama: '-'
+  dogrulama_deneyi: EVM'de 14s Na-ion esik testi.
+- id: el_bms_support_usd
+  ad: BMS destek + sigorta/on-sarj
+  birim: USD/kutu
+  deger: 4.5
+  alt: 3
+  ust: 8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 3.0 + 1.5.
+  dogrulama_deneyi: BOM.
+- id: el_rho_stage_si_W_per_L
+  ad: Kat basina guc yogunlugu (Si, dolgulu, dogal sogutma)
+  birim: W/L
+  deger: 500
+  alt: 300
+  ust: 800
+  kaynak: https://www.chargerlab.com/teardown-of-enphase-iq8p-480w-microinverter-iq8p-72-2-int/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: ~26 cm x 187 mm x 34 mm; 1466 g; 480 VA; filled with potting compound
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 'H1: IQ8P ASIC''li, yuksek hacim. Tek kat sayimiyla 290 W/L, 2 kat varsayimiyla ~690. Ilk
+    nesil icin 500.'
+  aciklama: '-'
+  dogrulama_deneyi: Prototip hacmi.
+- id: el_rho_stage_gan_W_per_L
+  ad: Kat basina guc yogunlugu (GaN + planar)
+  birim: W/L
+  deger: 800
+  alt: 500
+  ust: 1400
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Dogal sogutmada yuzey siniri kazanci kismen geri alir.
+  aciklama: Si x 1.6 kaba oran.
+  dogrulama_deneyi: Prototip.
+- id: el_V0_box_A_L
+  ad: Gucten bagimsiz hacim (A)
+  birim: L
+  deger: 0.25
+  alt: 0.15
+  ust: 0.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Kontrol karti + konnektorler.
+  dogrulama_deneyi: CAD.
+- id: el_V0_box_B_L
+  ad: Gucten bagimsiz hacim (B)
+  birim: L
+  deger: 0.35
+  alt: 0.2
+  ust: 0.6
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Port ve ekran.
+  aciklama: '-'
+  dogrulama_deneyi: CAD.
+- id: el_box_void_factor
+  ad: Kutu bosluk katsayisi
+  birim: '-'
+  deger: 1.1
+  alt: 1.05
+  ust: 1.25
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: CAD.
+- id: el_resin_price_usd_kg
+  ad: UV kararli FR PC/ASA recine
+  birim: USD/kg
+  deger: 4.5
+  alt: 3.4
+  ust: 8
+  kaynak: https://www.intratec.us/solutions/primary-commodity-prices/commodity/polycarbonate-prices
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Europe: 3,410 USD per metric ton (Nov 2025)'
+  kaynak_tarihi: 2025-11
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Baz PC + UV/FR primi (tahmin).
+  aciklama: '-'
+  dogrulama_deneyi: Recine teklifi.
+- id: el_wall_thickness_mm
+  ad: Kasa et kalinligi
+  birim: mm
+  deger: 3
+  alt: 2.2
+  ust: 4
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Buyuk kutuda IK/5VA icin artar.
+  aciklama: '-'
+  dogrulama_deneyi: Akis analizi + darbe.
+- id: el_resin_density_kg_m3
+  ad: PC yogunlugu
+  birim: kg/m^3
+  deger: 1200
+  alt: 1150
+  ust: 1250
+  kaynak: Malzeme ozelligi (hafiza)
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_rib_factor
+  ad: Nervur/bosluk malzeme katsayisi
+  birim: '-'
+  deger: 1.3
+  alt: 1.1
+  ust: 1.5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: CAD.
+- id: el_k_shape
+  ad: Yuzey/hacim^(2/3) (1:0.75:0.35)
+  birim: '-'
+  deger: 6.6
+  alt: 6
+  ust: 8
+  kaynak: Geometri
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 2(0.75+0.35+0.2625)/0.2625^(2/3) = 6.6.
+  dogrulama_deneyi: '-'
+- id: el_gasket_usd_per_m2
+  ad: Conta/cevre maliyeti
+  birim: USD/m^2
+  deger: 8
+  alt: 4
+  ust: 15
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_enclosure_fixed_usd
+  ad: Kasa sabit (vida, valf, rakor)
+  birim: USD/kutu
+  deger: 3.1
+  alt: 2
+  ust: 6
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Firma muhasebesi.
+- id: el_n_mold_parts
+  ad: Enjeksiyon parca sayisi (govde + kapak)
+  birim: '-'
+  deger: 2
+  alt: 2
+  ust: 3
+  kaynak: Tasarim
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_t_cycle_s
+  ad: Enjeksiyon cevrim suresi
+  birim: s
+  deger: 60
+  alt: 40
+  ust: 90
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Sogutma suresi ~et^2.
+  aciklama: '-'
+  dogrulama_deneyi: Firma kalip deneyimi.
+- id: el_press_rate_a_usd_h
+  ad: Pres saat ucreti sabit kismi
+  birim: USD/h
+  deger: 15
+  alt: 8
+  ust: 30
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Firma pres maliyet muhasebesi.
+- id: el_press_rate_b_usd_h_per_t
+  ad: Pres saat ucreti tonaj egimi
+  birim: USD/(h·t)
+  deger: 0.06
+  alt: 0.03
+  ust: 0.12
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: urun
+  senaryoya_uygunluk: 400 t pres ~39 $/h varsayimi.
+  aciklama: '-'
+  dogrulama_deneyi: Firma verisi.
+- id: el_clamp_t_per_cm2
+  ad: Kapama kuvveti / izdusum alani
+  birim: t/cm^2
+  deger: 0.4
+  alt: 0.3
+  ust: 0.5
+  kaynak: 'Denetci: 3-5 kN/cm²'
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'A-800: 1167 cm² -> ~470 t; firma pres parki bilinmiyor.'
+  aciklama: '-'
+  dogrulama_deneyi: Kalip akis analizi.
+- id: el_mold_c0_usd
+  ad: Kalip takimi sabit
+  birim: USD/varyant
+  deger: 12000
+  alt: 6000
+  ust: 25000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Kalip atolyesi.
+- id: el_mold_c1_usd_per_cm2
+  ad: Kalip takimi izdusum egimi
+  birim: USD/cm^2
+  deger: 30
+  alt: 15
+  ust: 60
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: 'H2: A-800 ~47 k$, A-50 ~22 k$.'
+  aciklama: '-'
+  dogrulama_deneyi: Kalip atolyesi.
+- id: el_potting_price_usd_kg
+  ad: Dolgu recinesi (PU/silikon, dolgulu)
+  birim: USD/kg
+  deger: 8
+  alt: 5
+  ust: 15
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Iki bilesenli PU dolgulu tipin hafizadaki fiyat bandi.
+  dogrulama_deneyi: 200 kg teklifi.
+- id: el_potting_fill_frac
+  ad: Elektronik bolmesi dolgu orani
+  birim: '-'
+  deger: 0.35
+  alt: 0.2
+  ust: 0.6
+  kaynak: https://www.chargerlab.com/teardown-of-enphase-iq8p-480w-microinverter-iq8p-72-2-int/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 1466 g; interior is filled with potting compound
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_potting_density_kg_L
+  ad: Dolgu yogunlugu
+  birim: kg/L
+  deger: 1.5
+  alt: 1.3
+  ust: 1.8
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: TDS.
+- id: el_hv_volume_frac
+  ad: HV/sebeke bolumu hacim payi (kismi dolgu)
+  birim: '-'
+  deger: 0.4
+  alt: 0.25
+  ust: 0.6
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: A varsayilani kismi dolgu.
+  aciklama: '-'
+  dogrulama_deneyi: CAD.
+- id: el_varnish_usd
+  ad: Vernik (dolgusuz)
+  birim: USD/kutu
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: B varsayilani.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_h_conv_rad_W_m2K
+  ad: Dogal tasinim + isinim katsayisi
+  birim: W/(m^2·K)
+  deger: 9
+  alt: 6
+  ust: 12
+  kaynak: h_rad = 4εσT³
+  kaynak_turu: fizik_ders_kitabi
+  kaynak_alintisi: ε 0.9, 313-333 K -> 6.3-7.5 + tasinim 2-5
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Duvara yakin montajda azalir.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip ΔT olcumu.
+- id: el_dT_box_allow_K
+  ad: Elektronik yuzey - ortam ΔT
+  birim: K
+  deger: 20
+  alt: 10
+  ust: 30
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 40 °C golge + 20 K.
+  aciklama: '-'
+  dogrulama_deneyi: Yaz saha olcumu.
+- id: el_fin_cost_usd_per_m2
+  ad: Ek Al kanatcik (etkin alan basina)
+  birim: USD/m^2
+  deger: 35
+  alt: 20
+  ust: 60
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 0.3 m² ≈ 0.8 kg Al x ~7 $/kg (hafiza).
+  dogrulama_deneyi: Profil teklifi.
+- id: el_fin_base_usd
+  ad: Termal arayuz tabani
+  birim: USD/kutu
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_pad_usd_per_W
+  ad: Termal ped egimi
+  birim: USD/W
+  deger: 0.0015
+  alt: 0.0008
+  ust: 0.003
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: guc_enerji
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_P_aux_W
+  ad: Gunduz yardimci tuketim
+  birim: W
+  deger: 3
+  alt: 1.5
+  ust: 5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Verimde ve P_loss'ta sayilir; bekleme orani yalniz gece.
+  aciklama: '-'
+  dogrulama_deneyi: Prototip.
+- id: el_eta_mppt
+  ad: MPPT agirlikli verimi (Si, 4 anahtarli buck-boost)
+  birim: '-'
+  deger: 0.975
+  alt: 0.96
+  ust: 0.98
+  kaynak: https://www.victronenergy.com/solar-charge-controllers/smartsolar-mppt-75-10-75-15-100-15-100-20
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 98% efficiency with natural cooling
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kaynak buck, tepe; buck-boost ve agirlikli icin -0.5 puan.
+  aciklama: '-'
+  dogrulama_deneyi: '%10-100 yuk verim egrisi.'
+- id: el_eta_inv
+  ad: Izoleli DC-DC + H koprusu agirlikli verim (Si)
+  birim: '-'
+  deger: 0.95
+  alt: 0.93
+  ust: 0.965
+  kaynak: https://balkon-kraft-werke.de/magazin/hoymiles-hms-800w-2t-test-daten-check/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: bis 96,7 Prozent (tipik 95-97)
+  kaynak_tarihi: 2026-06
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Referans farkli topoloji ve MPPT dahil tepe; 28 V giris ve ilk nesil icin 0.95.
+  aciklama: '-'
+  dogrulama_deneyi: EN 50530 benzeri olcum.
+- id: el_gan_eta_gain_pts
+  ad: GaN'in zincir verimine katkisi
+  birim: puan
+  deger: 0.8
+  alt: 0
+  ust: 1.5
+  kaynak: Kaynak yok (IQ9N %97.5 tepe/agirlikli belirsiz, Si karsilastirmasi yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 97.5% conversion efficiency
+  kaynak_tarihi: '2025-09-16'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: 400 kHz sert anahtarlamada kazanc sifir olabilir (el_f_P_sw_node).
+  aciklama: Formulde MPPT ve inverter arasinda esit bolunur.
+  dogrulama_deneyi: Ayni kartta Si/GaN (oncelik 2).
+- id: el_eta_dc_out_B
+  ad: B DC cikis verimi
+  birim: '-'
+  deger: 0.95
+  alt: 0.92
+  ust: 0.97
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_P_standby_A_W
+  ad: A gece oz tuketimi
+  birim: W
+  deger: 2
+  alt: 0.5
+  ust: 10
+  kaynak: https://reduco.ai/blog/solar/anker-solix-solarbank-3-test (ust referans)
+  kaynak_turu: tahmin
+  kaynak_alintisi: Standby ca. 9,5 W; Schlafmodus 0 W; grob 80 kWh/Jahr
+  kaynak_tarihi: '2026-07-07'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Gece olcumu (oncelik 1).
+- id: el_P_standby_B_W
+  ad: B bekleme tuketimi
+  birim: W
+  deger: 0.5
+  alt: 0.1
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: AFE DEEPSLEEP 9-10 µA (datasheet); baskin olan yardimci guc.
+  aciklama: '-'
+  dogrulama_deneyi: Olcum.
+- id: el_night_frac
+  ad: Yil icinde PV'siz saat payi
+  birim: '-'
+  deger: 0.55
+  alt: 0.45
+  ust: 0.65
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Gunduz yardimci tuketim ayrica sayildigi icin bekleme yalniz gece.
+  aciklama: Orta enlemde yillik ortalama gece ~%50 + dusuk isik.
+  dogrulama_deneyi: '-'
+- id: el_Y_spec_kWh_per_kWp
+  ad: Ozgul yillik uretim
+  birim: kWh/kWp/yil
+  deger: 1000
+  alt: 600
+  ust: 1500
+  kaynak: Kaynak yok (sistem arayuzu)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: PVGIS.
+- id: el_cap_L0_h
+  ad: Elektrolitik anma omru (105 °C)
+  birim: h
+  deger: 5000
+  alt: 2000
+  ust: 10000
+  kaynak: https://www.chemi-con.co.jp/en/faq/detail.php?id=alLifetime (formul)
+  kaynak_turu: tahmin
+  kaynak_alintisi: lifetime is approximately halved for every 10°C rise; Bt approximately 2 (60-95°C); 15 years
+    at the longest
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: A'da DC ara devre elektrolitigi 24 saat calisabilir.
+  aciklama: L0 secim degeri.
+  dogrulama_deneyi: Cekirdek sicakligi olcumu.
+- id: el_V_lim_dry_V
+  ad: DVC-A / SELV DC siniri, kuru
+  birim: V
+  deger: 60
+  alt: 60
+  ust: 60
+  kaynak: http://erlerdesign.com/download/ESD/old_iec60364-4-41_protection_shock_inst_buildings.pdf ; https://en.eastups.com/u/cms/en/202012/221419145mtw.pdf
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '414.4.5: Basic protection is generally unnecessary in normal dry conditions for SELV circuits
+    where the nominal voltage does not exceed 25 V a.c. or 60 V d.c.; test raporu: DVC A: 60Vdc (35Vdc for wet location)'
+  kaynak_tarihi: 2005-12 / 2020-12
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kutu ici bara ve pil.
+  aciklama: '60364-4-41 5. baski (2005); 2017 baskisi teyit edilmeli. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil)
+    → std_selv_pv_uocmax_limit_v: Ayni sayi; dayanak 414.4.5 ve DVC-A kuru.'
+  dogrulama_deneyi: Standart ajani guncel baski.
+- id: el_V_lim_wet_V
+  ad: Islak ortam siniri (urun DVC-A 35 V / tesisat 30 V)
+  birim: V
+  deger: 35
+  alt: 30
+  ust: 35
+  kaynak: https://cdn.standards.iteh.ai/samples/101797/42a8cc90b5da400b94a3684c1c75b0a0/IEC-TS-62257-9-8-2020.pdf
+    ; IEC 60364-4-41 (yukarida); eastups test raporu
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: 'This voltage limit corresponds to the definition of DVC-A for wet locations in Table 6 of IEC
+    62109-1:2010; 60364-4-41: In all other cases ... does not exceed 12 V a.c. or 30 V d.c.'
+  kaynak_tarihi: 2020-06 / 2005-12
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 60 V PV tarafi dis mekanda DVC-B; dokunmaya karsi korumali konnektor ve Class II panel.
+  aciklama: 'IEC 61730-1 Class III: ≤240 W, Voc ≤35 V, Isc ≤8 A (STC) (sis.se onizleme 4.4.1). | [Uzlaştırma/zincir]
+    Eşdeğer: değer std_dvca_dc_wet_v üzerinden okunur. Fark: Alt sinir 30 V ile urun (35) ve tesisat (30) kurallarini
+    tek parametrede karistiriyor; ikiye ayrildi.'
+  dogrulama_deneyi: Onayli kurulus gorusu.
+  esdeger: std_dvca_dc_wet_v
+  esdeger_carpan: 1.0
+- id: el_labor_usd_h
+  ad: Teknisyen saat maliyeti (isveren)
+  birim: USD/h
+  deger: 6.17
+  alt: 4.1
+  ust: 10
+  kaynak: https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'İmalat (5 puan indirim): 39.223,13 TL'
+  kaynak_tarihi: '2025-12-23'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '39,223/48.92/195 h = 4.11 x 1.5 (teknisyen, tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h
+    üzerinden okunur. Fark: Etiket ''teknisyen'' ama turetim 1.5 x asgari ucret ve kullanim son montaj/test/yeniden
+    isleme (operator isi). Taban 195 h/ay odenen saat, ek yuk yok; kanonik tabanda 8.70 USD/h. Gercekten teknisyen
+    isi ise eco_labor_technician_usd_h.'
+  dogrulama_deneyi: Bordro.
+  esdeger: eco_labor_operator_usd_h
+  esdeger_carpan: 1.0
+- id: el_test_time_A_s
+  ad: A unite testi suresi (hipot, fonksiyon, NA-koruma, kalibrasyon)
+  birim: s
+  deger: 180
+  alt: 90
+  ust: 400
+  kaynak: https://cdn.standards.iteh.ai/samples/9666/8b57d360961d4b7bb89ff9cbd04db3a6/IEC-62109-1-2010.pdf (zorunluluk)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 7.5.2 Voltage test (dielectric strength test) (type test and routine test)
+  kaynak_tarihi: 2010-04
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Sure tahmin; hipot zorunlulugu dogrulanmis.
+  aciklama: '-'
+  dogrulama_deneyi: Pilot zaman etudu + FPC listesi.
+- id: el_test_time_B_s
+  ad: B unite testi suresi
+  birim: s
+  deger: 90
+  alt: 45
+  ust: 240
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Pilot.
+- id: el_final_asm_A_min
+  ad: A son montaj
+  birim: dk
+  deger: 12
+  alt: 6
+  ust: 25
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etudu.
+- id: el_final_asm_B_min
+  ad: B son montaj
+  birim: dk
+  deger: 10
+  alt: 5
+  ust: 20
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Zaman etudu.
+- id: el_test_station_capex_A_usd
+  ad: A test istasyonu yatirimi (sebeke simulatoru, PV/DC kaynak, guvenlik test cihazi, fikstur)
+  birim: USD
+  deger: 90000
+  alt: 50000
+  ust: 150000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Baska urunlerle/unitelerle paylasilirsa saha_sabit.
+  aciklama: '-'
+  dogrulama_deneyi: Ekipman teklifi.
+- id: el_test_station_capex_B_usd
+  ad: B test istasyonu yatirimi
+  birim: USD
+  deger: 35000
+  alt: 15000
+  ust: 60000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_hours_per_year_h
+  ad: Yillik vardiya saati
+  birim: h/yil
+  deger: 4000
+  alt: 2000
+  ust: 6000
+  kaynak: 2 vardiya x 8 h x 250 gun; altyapi eco_shift_pattern onerisi (firin ve HJT 24/7, modul/pil/kutu 2 vardiya
+    + ara stok)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Elektronik: ''2 vardiya x 8 h x 250 gun'''
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Firin ve HJT 8760 h; modul, pil paketi ve kutu hatlari bu
+    cizelgeyle ve ustune A_teknik (0.9) -> etkin 3600 h. Bu revizyonda laminator (4.3-7.2 MWp) ve paket hatti (26700
+    1.44 M, prizmatik 216 bin hucre/yil) bu tanimla yeniden hesaplandi.'
+  dogrulama_deneyi: '-'
+- id: el_station_util_max
+  ad: Istasyon azami kullanim
+  birim: '-'
+  deger: 0.7
+  alt: 0.5
+  ust: 0.85
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kapasite siniri; gercek kullanim dusuk hacimde %2-6.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_site_lab_capex_usd
+  ad: Saha laboratuvari (EMC on-uyum, iklim kabini, HALT)
+  birim: USD/saha
+  deger: 200000
+  alt: 80000
+  ust: 400000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: 'Varsayilan: dis kaynak (NRE icinde). Kurum ici secenekte kullanilir.'
+  aciklama: '-'
+  dogrulama_deneyi: Ekipman teklifi.
+- id: el_n_units_site
+  ad: Sahadaki unite sayisi (paylasim)
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 5
+  kaynak: Proje tanimi
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_packaging_A_usd
+  ad: A ambalaj + kilavuz
+  birim: USD/kutu
+  deger: 4
+  alt: 2.5
+  ust: 7
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: Pil icerdigi icin UN3551 ambalaji gerekebilir.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_packaging_B_usd
+  ad: B ambalaj + kilavuz
+  birim: USD/kutu
+  deger: 3.5
+  alt: 2
+  ust: 6
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_ac_cable_plug_usd
+  ad: A AC cikis kablosu + fis
+  birim: USD/kutu
+  deger: 5
+  alt: 3
+  ust: 9
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: el_scrap_frac
+  ad: Hurda orani (malzeme)
+  birim: '-'
+  deger: 0.015
+  alt: 0.005
+  ust: 0.04
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'H6: proses kontroluyle duser.'
+  aciklama: '-'
+  dogrulama_deneyi: Pilot.
+- id: el_fpy
+  ad: Ilk gecis verimi
+  birim: '-'
+  deger: 0.95
+  alt: 0.85
+  ust: 0.99
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Pilot.
+- id: el_rework_min
+  ad: Yeniden isleme suresi
+  birim: dk/ariza
+  deger: 20
+  alt: 10
+  ust: 40
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_moq_attrition_frac
+  ad: Dusuk hacimde MOQ/makara firesi
+  birim: '-'
+  deger: 0.03
+  alt: 0.01
+  ust: 0.08
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: EMS verisi.
+- id: el_smt_setup_usd_per_lot
+  ad: SMT kurulum maliyeti (lot basina)
+  birim: USD/lot
+  deger: 300
+  alt: 150
+  ust: 800
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: EMS teklifi.
+- id: el_lot_size
+  ad: Lot buyuklugu
+  birim: adet
+  deger: 500
+  alt: 200
+  ust: 2000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_weee_usd_per_kg
+  ad: WEEE/EPR ucreti (elektronik + kasa)
+  birim: USD/kg
+  deger: 0.3
+  alt: 0.1
+  ust: 1
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Pil EPR'si pil ajaninda.
+  aciklama: '-'
+  dogrulama_deneyi: AB ulke sistemleri.
+- id: el_elec_density_kg_L
+  ad: Elektronik bolmesi kutle yogunlugu (dolgusuz)
+  birim: kg/L
+  deger: 0.5
+  alt: 0.3
+  ust: 0.9
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: WEEE kutlesi.
+  aciklama: '-'
+  dogrulama_deneyi: Tartim.
+- id: el_cloud_usd_per_box_yr
+  ad: Bulut/uygulama isletimi (A)
+  birim: USD/kutu/yil
+  deger: 0.5
+  alt: 0.2
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: Bugunku deger ile kutuya yuklenir.
+  dogrulama_deneyi: Bulut teklifi.
+- id: el_field_fail_rate_pct_yr
+  ad: Saha ariza orani
+  birim: '%/yil'
+  deger: 0.5
+  alt: 0.1
+  ust: 2
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: H6'nin asil etkisi.
+  aciklama: '-'
+  dogrulama_deneyi: HALT/HASS + saha takibi.
+- id: el_logistics_swap_usd
+  ad: Ariza basina degisim lojistigi
+  birim: USD/ariza
+  deger: 40
+  alt: 20
+  ust: 80
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: adet
+  olcek: urun
+  senaryoya_uygunluk: K5 degistirilebilir kutu.
+  aciklama: '-'
+  dogrulama_deneyi: Kargo teklifi.
+- id: el_eng_cost_usd_per_py
+  ad: Muhendis isveren maliyeti (Gebze)
+  birim: USD/kisi-yil
+  deger: 40000
+  alt: 25000
+  ust: 60000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Bati degil Turkiye maliyeti.
+  aciklama: '-'
+  dogrulama_deneyi: Firma bordrosu.
+- id: el_py_A
+  ad: A gelistirme eforu
+  birim: kisi-yil
+  deger: 6
+  alt: 4
+  ust: 10
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Donanim, yazilim, sebeke kodu, uygulama.
+  aciklama: '-'
+  dogrulama_deneyi: Proje plani.
+- id: el_py_B
+  ad: B gelistirme eforu
+  birim: kisi-yil
+  deger: 3
+  alt: 2
+  ust: 5
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Proje plani.
+- id: el_nre_other_A_usd
+  ad: A diger NRE (fikstur, prototip, dis kaynak on-uyum)
+  birim: USD/varyant
+  deger: 85000
+  alt: 50000
+  ust: 150000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 30k + 25k + 30k.
+  dogrulama_deneyi: Teklifler.
+- id: el_nre_other_B_usd
+  ad: B diger NRE
+  birim: USD/varyant
+  deger: 45000
+  alt: 25000
+  ust: 80000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: 15k x 3.
+  dogrulama_deneyi: '-'
+- id: el_cert_cost_A_usd
+  ad: A sertifikasyon (IEC 62109-1/-2, VDE-AR-N 4105, EMC, RED)
+  birim: USD/varyant
+  deger: 150000
+  alt: 80000
+  ust: 300000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Buna dayanan bulgular kosullu.
+  aciklama: '-'
+  dogrulama_deneyi: TUV/VDE/SGS teklifi (oncelik 1).
+- id: el_cert_cost_B_usd
+  ad: B sertifikasyon (IEC 62368-1, EMC, RED)
+  birim: USD/varyant
+  deger: 60000
+  alt: 25000
+  ust: 120000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Lab teklifi.
+- id: el_un383_usd
+  ad: UN 38.3 tip testleri (Na-ion, UN 3551)
+  birim: USD/paket tasarimi
+  deger: 15000
+  alt: 8000
+  ust: 30000
+  kaynak: https://www.iata.org/contentassets/05e6d8742b0047259bf3a700bc9d42b9/lithium-battery-guidance-document.pdf
+    (gereklilik)
+  kaynak_turu: tahmin
+  kaynak_alintisi: sodium ion battery ... meet the testing and classification criteria for UN 3551 ... sub-section
+    38.3
+  kaynak_tarihi: '2026-01-01'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Gereklilik dogrulanmis, maliyet tahmin. Pil ajani saymamali.
+  aciklama: '-'
+  dogrulama_deneyi: Lab teklifi.
+- id: el_cra_usd_per_yr_A
+  ad: Siber guvenlik/zafiyet yonetimi (A, WiFi)
+  birim: USD/yil
+  deger: 12000
+  alt: 5000
+  ust: 30000
+  kaynak: AB Siber Dayaniklilik Tuzugu (hafiza)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: ~0.2-0.5 FTE.
+  aciklama: '-'
+  dogrulama_deneyi: Standart ajani.
+- id: el_cra_usd_per_yr_B
+  ad: Siber guvenlik (B, BLE)
+  birim: USD/yil
+  deger: 6000
+  alt: 2000
+  ust: 15000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_cra_support_years
+  ad: Guvenlik destek suresi
+  birim: yil
+  deger: 5
+  alt: 5
+  ust: 10
+  kaynak: CRA en az 5 yil (hafiza)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Standart ajani.
+- id: el_N_demand_per_yr
+  ad: Varyant basina yillik talep
+  birim: kutu/yil
+  deger: 3000
+  alt: 1000
+  ust: 20000
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Gercek hacim min(talep, pil hatti).
+  aciklama: '-'
+  dogrulama_deneyi: Pazar/is plani.
+- id: el_Y_product_life
+  ad: Varyant pazar omru
+  birim: yil
+  deger: 5
+  alt: 3
+  ust: 8
+  kaynak: tahmin (elektronik)
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id; altyapida karsilik yok. urun_sabit CRF(r_reel,
+    bu sure) = 0.2600 ile yilliklastirilir. Standartin years_amort serbest degiskeni buna baglanir. modul N_panels_variant_life
+    bir ADET oldugundan yil parametresine baglanmaz; N_panels_variant_life = el_Y_product_life x yillik varyant
+    adedi olarak turetilir. bat_own_dev_amort_years takma ad degildir (makine omrune tasindi).'
+  dogrulama_deneyi: '-'
+- id: el_N_cell_per_year
+  ad: Pil hatti hucre kapasitesi (K9)
+  birim: hucre/yil
+  deger: 150000
+  alt: 100000
+  ust: 200000
+  kaynak: Kullanici karari K9
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_line_cells_per_year üzerinden okunur. Fark: Her durumda kutu
+    adedine tavan yapiliyor.'
+  dogrulama_deneyi: Pil ajani.
+  esdeger: bat_line_cells_per_year
+  esdeger_carpan: 1.0
+- id: el_n_batt_lines
+  ad: Pil hatti sayisi
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 3
+  kaynak: Proje
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_cable_len_m
+  ad: Panel-kutu kablo uzunlugu
+  birim: m
+  deger: 5
+  alt: 2
+  ust: 15
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: K5 golge kutusu uzatir.
+  aciklama: '-'
+  dogrulama_deneyi: Kurulum senaryolari.
+- id: el_cable_loss_frac
+  ad: Izin verilen kablo kaybi
+  birim: '-'
+  deger: 0.01
+  alt: 0.005
+  ust: 0.02
+  kaynak: https://www.staubli.com/content/dam/ecs/technical-documentation/assembly-instructions/RE/PV_SOL-LVDC-en.pdf
+    (akim siniri baglami)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'MC4 rated current (30 °C): 4.0 mm²: 51 A; 6.0 mm²: 65 A; derating 4 mm² 50 °C: 47 A'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Konnektor darbogaz degil; I²R ve bakir belirleyici.
+  aciklama: '-'
+  dogrulama_deneyi: '-'
+- id: el_cable_price_factor
+  ad: Kablo fiyati / bakir metal degeri
+  birim: '-'
+  deger: 2.5
+  alt: 1.8
+  ust: 4
+  kaynak: Kaynak yok
+  kaynak_turu: tahmin
+  kaynak_alintisi: '-'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Solar kablo teklifi.
+- id: el_ref_microinv_retail_usd_per_W
+  ad: 'Referans: 800 W balkon mikroinverteri perakende'
+  birim: USD/W
+  deger: 0.157
+  alt: 0.128
+  ust: 0.185
+  kaynak: https://balkon-kraft-werke.de/magazin/hoymiles-hms-800w-2t-test-daten-check/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: rund 90 bis 130 Euro
+  kaynak_tarihi: 2026-06
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'H1: yalnizca ust referans.'
+  aciklama: x 1.139.
+  dogrulama_deneyi: '-'
+- id: el_ref_pps_retail_usd_per_Wh
+  ad: 'Referans: tasinabilir guc istasyonu medyan'
+  birim: USD/Wh
+  deger: 0.6
+  alt: 0.44
+  ust: 0.89
+  kaynak: https://www.solarwaypoint.com/portable-power-station-price-index/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: median ~$0.60/Wh; ≤450Wh $0.89/Wh; 1.6-3.2kWh $0.44/Wh; 114 observations
+  kaynak_tarihi: '2026-08-28'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sabit maliyet baskinligini dogrular.
+  aciklama: 'River 3: 245 Wh, 300 W, 196 $ (liste 239 $).'
+  dogrulama_deneyi: '-'
+- id: el_E_batt_reg_threshold_Wh
+  ad: AB Pil Tuzugu 2 kWh esigi (karbon ayak izi, pasaport)
+  birim: Wh
+  deger: 2000
+  alt: 2000
+  ust: 2000
+  kaynak: Tuzuk 2023/1542 (hafiza); EUR-Lex bu gorevde bos dondu
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2023'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: E_batt = 2·P_box ile ~1000 W'ta asiliyor.
+  aciklama: '-'
+  dogrulama_deneyi: Standart ajani tuzuk metni.
+- id: el_portable_batt_mass_kg
+  ad: Tasinabilir pil kutle siniri
+  birim: kg
+  deger: 5
+  alt: 5
+  ust: 5
+  kaynak: https://environment.ec.europa.eu/topics/waste-and-recycling/batteries_en (kismi) + hafiza
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: Article 11(2) ... derogations from the removability and replaceability requirements for portable
+    batteries
+  kaynak_tarihi: '2025'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 5 kg ≈ 500-600 Wh Na-ion paket; B ≤~250-300 W. 2027 tarihi dogrulanmadi.
+  aciklama: '-'
+  dogrulama_deneyi: Tuzuk metni.

@@ -1,0 +1,2660 @@
+alan: altyapi
+ozet: 'Bu alan iki sey saglar: (1) tum alanlarin kullanacagi ortak ekonomik girdiler, (2) saha altyapisinin unite
+  sayisina (N) gore unitelere dagitilmasi. ORTAK GIRDILER (revize): Kur 49.0 TRY/USD (TCMB 25.09.2026: 48.79-48.88).
+  USD bazli vergi sonrasi WACC %12 (aralik %9-20). Sermaye yuku artik vergi etkisiyle duzeltilmis CRF ile hesaplaniyor:
+  CRF_tax = CRF*(1-t*PV_amortisman)/(1-t). t=%12.5 (2027''den imalat kazanci, sanayi sicil belgesi kosulu) ile makine
+  (8 yil) 0.2122, altyapi (12 yil) 0.1726; bakim+sigorta ile yillik yuk faktoru 0.258 / 0.219. Elektrik iki rejimli:
+  duzenlenmis OG tarifesi 0.084 USD/kWh yalnizca son kaynak tedarik tarifesi (SKTT) limitinin altinda gecerli; ustunde
+  piyasa bazli (PTF+YEKDEM)*(1+marj)+dagitim = 0.107-0.114 USD/kWh. Baz 0.105 (aralik 0.084-0.14). SKTT limiti dogrulanamadi:
+  kaynak sayfada ''15.000 kWh'' yaziyor, milyon kWh olabilir. Su: baz ortak aritmali OSB (ISU 4.22 USD/m3 + OSB
+  atiksu bedeli ~1.0, tahmin) = 5.2 USD/m3; OSB disi 6.33. Iscilik (imalat 5 puan SGK tesvikiyle): operator 8.4,
+  teknisyen 13.4, muhendis 12-35 USD/h. 24/7 bir pozisyonun maliyeti ~4.2 FTE esdegeri. Kira ~6.5 USD/m2/ay (tek
+  ilan; guven dusuk). BULGU 1 (revize): Saha payi modul mimarisine bagli. (a) Sabit boyutlu modulleri asamali istiflemede
+  unite basina yillik saha payi N=1/2/4/8/16 icin 706/370/247/194/165 kUSD. (b) Modulleri hedef N icin 0.6 kuraliyla
+  bastan boyutlamada 617/350/207/139/99 kUSD. Ilk ciktidaki ''N=4 sonrasi ~116 kUSD taban'' sonucu fizikten degil
+  mimari tercihinden geliyordu. Gercek buyume yolu (a) ile (b) arasinda kalir. Saha payina ek olarak unite-ici altyapi
+  (VMB, gaz izleme, UPS, POU abatement, mini-ortam, sprinkler, HVAC, pil yangin bolmesi) ~0.9 MUSD capex / ~218
+  kUSD/yil, unite kirasi da ~195 kUSD/yil. Ilk ciktidaki ''130 kUSD / 27 kUSD/yil'' eksikti. BULGU 2 (kosullu, guven
+  orta): Yakma-islak abatement uniteler arasinda (saha basina) paylasilmamali; nedenleri SiO2 tozu, uzun hat ve
+  yanici karisimin kanala girmemesi gerekliligi. SESHA''ya gore silan diger hidrurlerle tepkimez; yasak olan, oksitleyicilerle
+  (NF3/F2, N2O, O2) karismasidir. NF3 kullanilirsa akislar kesin ayri tutulur. NF3''suz temizlikte ayni unitedeki
+  yakin pompalar cok girisli bir POU''yu paylasabilir. BULGU 3: BEKRA/Seveso esikleri unite envanterinin cok ustunde:
+  fosfin 0.2/1 t, P2 yanici gaz 10/50 t, H2 5/50 t. Baglayici olan kurallar: Binalarin Yangindan Korunmasi Yonetmeligi
+  (md.105: tupler 120 dk yangina dayanikli ayri bina veya bolmede; md.96: parlayici madde bulunan ve 1000 m2''yi
+  asan yapida sprinkler zorunlu; md.118 ve Ek-12/B: fabrika icinde yanici sivi en fazla 50 m2 tecritli alanda ve
+  350 L/m2), ayrica ATEX, ISG ve desarj (SKKY Tablo 19: F- 15 mg/L). Turk yonetmeliginde IBC/IFC tipi ''kontrol
+  alani azami miktari'' tablosu yok. BULGU 4: Su maliyeti ~0.046 USD/wafer (182 mm, 5000 wafer/gun, ortak aritmali
+  OSB); OSB disinda 0.055. Bunun ~%38''i sabit tank tasmasindan gelir. BULGU 5 (revize): Ergiyigin kesintiye dayanma
+  suresi (100 kg ergiyik, 60 kW kayip): donma baslangici ~0.5-2 dk, %20 katilasma ~10-12 dk, tam donma ~50 dk. ''10-15
+  s jenerator'' bir dogal sinir degil; kampanya kaybi esigi dakikalar mertebesinde ve bilinmiyor. Daha sik ve pahali
+  olabilecek kayip, gerilim cokmesinde ingotun yapisini kaybetmesi (hafizadan, dogrulanmadi). Bu yuzden UPS/DVR
+  karari gerilim cokmesi sikligina, jenerator karari uzun kesinti sikligina baglandi. YENI KALEMLER: pil hatti ISG
+  (elektrolit, formasyon yangini, NMP); tel testere ve alkali asindirma atiksuyu ile H2 uretimi (1 g Si -> 1.6 L
+  H2); silan+H2 icin Le Chatelier seyreltmesi (1 slm SiH4 + 10 slm H2 icin ~1400 slm N2; bu yuzden seyreltme yerine
+  yakma-islak); makine NRE''si, ogrenme egrisi, rampa ve isletme sermayesi. Saha payinin USD/W karsiligi artik wafer
+  alanina bagli: 5000 wafer/gun ve N=1 (a) icin a=100 mm''de 0.177, 182 mm''de 0.053, 210 mm''de 0.040 USD/W. EN
+  BUYUK BELIRSIZLIKLER: saha capex kalemlerinin cogu tahmin (x0.5-x2); elektrik rejimi ve PTF yillik ortalamasi;
+  kucuk debide su ve atiksu hacmi; sebeke kesintisi ve gerilim cokmesi sikligi; kampanya kaybi esigi (kristal ajani).
+  Not: fiyat, oran ve katsayi parametreleri ''teknik'' sinifinda; maliyet sinifi onlari kullanan formulde ataniyor.'
+parametreler:
+- id: eco_fx_try_per_usd
+  ad: TRY/USD kuru (model baz)
+  birim: TRY/USD
+  deger: 49
+  alt: 45
+  ust: 60
+  kaynak: https://www.tcmb.gov.tr/kurlar/today.xml ; https://finans.mynet.com/haber/detay/doviz/26-eylul-2026-dolar-bugun-kac-tl-serbest-piyasa-dolar-kuru-dolar-tl-gunluk-sinirli-yukselis-haftalik-yukselis/577072/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'TCMB bulten 2026/181 (25.09.2026): USD ForexBuying 48.7901, ForexSelling 48.8780 (onceki turda
+    ve kirmizi takim denetiminde acildi). Mynet 26.09.2026: ''Serbest piyasa satis fiyati 49,01 TL'' (altyapi alaninda).'
+  kaynak_tarihi: 2026-09-25/26
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Spot kur. Tum TL kalemleri (iscilik, kira, su, elektrik) bununla USD'ye cevrilir. Ust sinir
+    12-24 aylik nominal deger kaybini kapsar. USD maliyet reel kura baglidir (bkz. eco_try_cost_real_drift_frac_yr).
+  aciklama: '1 USD = 49.0 TRY. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Uc kaynak (TCMB 48.79-48.88,
+    TradingEconomics 48.92, serbest piyasa 49.01) %0.5 icinde; baz 49.0 korunur. Aralik birlesimi: alt 45 hucre
+    araligindan (cell_fx_usd_try 45-60, bagimsiz tahmin), ust 60 altyapi. KULLANIM KURALI (kirmizi takim bulgusu
+    kabul): (1) TL kalemleri (ucret, EPDK tarifesi, ISU su, kira) USD''ye spot 49 ile NOKTA deger olarak cevrilir.
+    (2) TL''de enflasyonla guncellenen kalemlerin USD belirsizligi yalniz eco_try_cost_real_drift_frac_yr (reel
+    kayma) ile verilir; levelize carpan L(g) = sum((1+g)^(k-1) v^k)/sum(v^k), v = 1/(1+r_reel): 8 yilda g = 0.03
+    icin 1.096 (g = -0.05...0.10 icin 0.862-1.367). (3) 45-60 araligi yalnizca nominal TL''de sabit sozlesmeli kalemlere
+    (orn. yillik sabit kira) ve TL cinsinden vergisel amortisman kalkanina uygulanir. (4) Tornado''da eco_fx_try_per_usd
+    TL-endeksli kalemlerle birlikte hareket ettirilmez; iscilik USD araliklari kurdan degil TL ucret dagilimi ve
+    ek yuk carpanindan gelir.'
+  dogrulama_deneyi: Yatirim karari tarihinde TCMB gosterge kuruyla guncelle.
+- id: eco_try_cost_real_drift_frac_yr
+  ad: TL bazli maliyetlerin USD cinsinden yillik reel kaymasi
+  birim: 1/yil
+  deger: 0.03
+  alt: -0.05
+  ust: 0.1
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk unitede iscilik ve kira payi yuksek; TL reel degerlenirse USD maliyet artar. Duyarlilik
+    analizine girmeli.
+  aciklama: 'Dayanak: TL maliyetler enflasyonla, kur ise farkli hizla hareket eder. Sayisal dayanak yok.'
+  dogrulama_deneyi: TCMB reel efektif kur endeksi ve asgari ucretin USD karsiliginin son 5 yillik serisinden ortalama
+    ve varyans.
+- id: eco_rf_usd
+  ad: Risksiz USD faizi (ABD 10 yillik hazine, kisa donem ortalamasi)
+  birim: 1/yil
+  deger: 0.05
+  alt: 0.045
+  ust: 0.055
+  kaynak: https://tradingeconomics.com/united-states/government-bond-yield ; https://hibya.com/eurobond-getirilerinde-yukselis-goruldu-1027379
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''eased to 5.17% on September 25, 2026'' (tradingeconomics); ''ABD''nin 10 yillik tahvil faizi
+    yuzde 4,78'' (hibya, 11.09.2026). Iki sayfa da bu is akisinda acildi ve denetcilerce dogrulandi.'
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: USD sermaye maliyetinin tabani; senaryodan bagimsiz.
+  aciklama: 'Tek gunluk spot deger yerine iki gozlemin ortalamasi alindi: (4.78+5.17)/2 = 4.98%. Ayda ~40 baz puan
+    oynuyor.'
+  dogrulama_deneyi: Karar tarihinde 1-3 aylik ortalama ile guncelle.
+- id: eco_tr_erp
+  ad: Turkiye hisse risk primi (Damodaran)
+  birim: 1/yil
+  deger: 0.0889
+  alt: 0.07
+  ust: 0.11
+  kaynak: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Turkey: Ba3, adjusted default spread 3.06%, CRP 4.66%, ERP 8.89% (updated February 2026)'
+  kaynak_tarihi: 2026-02
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Likit piyasadaki buyuk sirketler icin. Kucuk, kanitlanmamis teknolojili girisim icin ek prim
+    gerekir; bu, WACC ust sinirina yansitildi.
+  aciklama: Olgun piyasa primi 4.23% + ulke risk primi 4.66%.
+  dogrulama_deneyi: '-'
+- id: eco_tr_eurobond_usd_10y
+  ad: Turkiye USD Eurobond getirisi (2036 vade)
+  birim: 1/yil
+  deger: 0.071
+  alt: 0.065
+  ust: 0.08
+  kaynak: https://hibya.com/eurobond-getirilerinde-yukselis-goruldu-1027379
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''2036 vadeli Eurobond getirisi yuzde 7,10 oldu''; 2034: %6,73; 2047: %7,82'
+  kaynak_tarihi: '2026-09-11'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Devletin borclanma maliyeti; KOBI USD/EUR kredisi bunun ustunde olur (bkz. eco_kd_spread).
+  aciklama: Borc maliyeti (kd) tabani.
+  dogrulama_deneyi: 2-3 bankadan USD/EUR yatirim kredisi teklifi al.
+- id: eco_kd_spread
+  ad: Sirket borcunun Eurobond ustu marji
+  birim: 1/yil
+  deger: 0.02
+  alt: 0.015
+  ust: 0.04
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tesvikli kredi (faiz destegi) alt siniri dusurebilir.
+  aciklama: kd = eco_tr_eurobond_usd_10y + eco_kd_spread = ~0.091.
+  dogrulama_deneyi: Banka teklifleri.
+- id: eco_beta_equity
+  ad: Oz kaynak betasi
+  birim: '-'
+  deger: 1.15
+  alt: 1
+  ust: 1.3
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kaldiracli imalat girisimi; teknoloji riski WACC ust sinirinda ayrica tasiniyor.
+  aciklama: '-'
+  dogrulama_deneyi: Karsilastirilabilir halka acik PV/elektronik ureticilerinin kaldiracsiz betasi.
+- id: eco_equity_frac
+  ad: Oz kaynak orani (E/(D+E))
+  birim: '-'
+  deger: 0.6
+  alt: 0.5
+  ust: 0.7
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ilk unitede banka kredisi sinirli olabilir; oz kaynak orani yuksek kalir.
+  aciklama: '-'
+  dogrulama_deneyi: Finansman plani.
+- id: eco_wacc_usd
+  ad: USD bazli vergi sonrasi agirlikli sermaye maliyeti (iskonto orani)
+  birim: 1/yil
+  deger: 0.12
+  alt: 0.09
+  ust: 0.2
+  kaynak: 'altyapi: eco_rf_usd, eco_tr_erp (Damodaran), eco_tr_eurobond_usd_10y, eco_kd_spread, eco_beta_equity,
+    eco_equity_frac, eco_corporate_tax_rate''ten turetildi'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'ke = 0.050 + 1.15 x 0.0889 = 0.152; kd = 0.071 + 0.02 = 0.091; E = 0.6, t = 0.125: 0.6 x 0.152
+    + 0.4 x 0.091 x 0.875 = 0.123 (yeniden hesaplandi).'
+  kaynak_tarihi: '2026-09-27'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Ust sinir %20: kanitlanmamis kendi tasarim teknoloji ve kucuk olcek icin girisim primi. Tesvik
+    faiz destegi alt siniri dusurebilir. Vergi SONRASI orandir; vergi oncesi maliyet modelinde dogrudan CRF''ye
+    konmaz, eco_crf_tax_* kullanilir.'
+  aciklama: 'ke = 0.050 + 1.15*0.0889 = 0.152. kd = 0.091. t=0.125 icin: E=0.5 -> 0.116; E=0.6 -> 0.123; E=0.7 ->
+    0.131. t=0.25 icin: 0.110-0.127. Karsilastirma: basit vergi oncesi WACC (E*ke/(1-t) + (1-E)*kd) 0.13-0.17. |
+    [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi ve tek turetilmis deger; kristal (0.10) ve elektronik
+    (0.08) kaynaksiz tahmin. Alt 0.09 korunur; kristalin 0.06 alt siniri kendini YER TUTUCU diye tanimladigi icin
+    ve Turkiye USD Eurobond (0.071) + sirket marji tabaninin altinda kaldigi icin birlesime alinmadi. Oran NOMINALDIR;
+    sermaye yukune dogrudan degil r_reel = 1.12/1.0234 - 1 = 0.0944 (aralik 0.066-0.173) uzerinden girer (sermaye_yuku_yontemi).'
+  dogrulama_deneyi: Finansman ve tesvik teklifleriyle kd ve oz kaynak oranini netlestir.
+- id: eco_corporate_tax_rate
+  ad: Kurumlar vergisi orani (imalat kazanci, 2027 sonrasi)
+  birim: '-'
+  deger: 0.125
+  alt: 0.125
+  ust: 0.25
+  kaynak: https://taxsummaries.pwc.com/turkey/corporate/taxes-on-corporate-income
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''The corporate income tax rate is 25%'' ... ''Starting from year 2027, the corporate income
+    tax rate will be applied as 12.5% on earnings from manufacturing activity'' (altyapi alaninda; last reviewed
+    09.09.2026)'
+  kaynak_tarihi: '2026-09-09'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Uretim 2027 ve sonrasinda baslayacagi icin baz %12.5 alindi (revize). Kosullar saglanmazsa
+    %25 (ust sinir). Ihracat kazancinda ayrica 5 puan indirim var.
+  aciklama: 'eco_crf_tax_* ve WACC''teki borc vergi kalkaninda kullanilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Tek kaynak (altyapi). %12.5 sanayi sicil belgesi kosullu; saglanmazsa 0.25 (makine CRF_tax_reel 0.1936 -> 0.2068).
+    Zaman tabani: tum mevzuat kurallari 2027 (ilk tam uretim yili varsayimi) itibariyla alinir; Cin pil ihracat
+    KDV iadesi de 2027 kuralina cekildi.'
+  dogrulama_deneyi: Mali musavirle imalat kazanci tanimini, sanayi sicil kosulunu ve urunun (PV+pil+elektronik)
+    kapsamini teyit et.
+- id: eco_dep_life_tax_machine_yr
+  ad: Vergisel amortisman suresi, makine
+  birim: yil
+  deger: 8
+  alt: 5
+  ust: 10
+  kaynak: tahmin (altyapi; VUK amortisman listesi dogrulanmadi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Vergi kalkaninin bugunku degeri icin; ekonomik omurden farkli olabilir.
+  aciklama: Dogrusal amortisman varsayildi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; yalniz CRF_tax'taki
+    PV_dep icin (nominal USD oranla iskontolanir). Ekonomik omru daha kisa varlikta Nv = min(N, 8) (elden cikarista
+    kalan defter degeri gider yazilir varsayimi); daha uzun omurde Nv = 8.
+  dogrulama_deneyi: VUK amortisman oranlari listesinden ilgili makine siniflarini kontrol et.
+- id: eco_dep_life_tax_infra_yr
+  ad: Vergisel amortisman suresi, tesisat/altyapi
+  birim: yil
+  deger: 12
+  alt: 10
+  ust: 25
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kiralik binada ozel maliyet bedelleri kira suresine gore itfa edilebilir (hafizadan, dogrulanmadi).
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; CRF_tax''taki PV_dep icin.'
+  dogrulama_deneyi: Mali musavir.
+- id: eco_life_machine_yr
+  ad: Makine ekonomik omru
+  birim: yil
+  deger: 8
+  alt: 5
+  ust: 12
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Baz ve aralik icin kaynak yok. Dayanak (altyapi notu): ''PV''de teknoloji nesli 3-5 yilda degisir.
+    Kendi tasarim makineler yukseltilebilir; yukseltme maliyeti bakim oranina eklenmeli.'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: PV'de teknoloji nesli 3-5 yilda degisir. Kendi tasarim makineler yukseltilebilir; yukseltme
+    maliyeti bakim oranina eklenmeli.
+  aciklama: 'CRF(0.12; 8) = 0.2013. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; alanlar 5-8 yil
+    (hucre 5, kristal/modul/pil 7, wafer/altyapi 8), hicbiri kaynakli degil; sahip degeri ve araligi (5-12) korunur.
+    ONCEKI CIKTIDAKI 2-15 GERI ALINDI (kirmizi takim kabul): alt 2 yil ESIA''nin Cin GW olcegindeki cekici eskimesidir
+    (H1 aktarimi); ayri ''teknoloji eskimesi'' senaryosu olarak tutulur ve tornadoya parametre ucu olarak girmez
+    (N = 2''de CRF_tax_reel 0.5845, bazin 3.0 kati). Ust 15 (kristal fiziksel omur tahmini) de kaynaksiz, alinmadi.
+    Makineye ozgu omur gerekceli override olarak girilir.'
+  dogrulama_deneyi: Ilk nesil makinelerin revizyon gecmisiyle 3 yil sonra yeniden kalibre et.
+- id: eco_life_infra_yr
+  ad: Saha altyapisi ekonomik omru
+  birim: yil
+  deger: 12
+  alt: 8
+  ust: 20
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'yok; dayanak: gaz kabini, gaz izleme ve UPW 10-15 yil, trafo daha uzun (altyapi notu)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Gaz kabini, gaz izleme ve UPW 10-15 yil; trafo daha uzun. Kira suresi ust siniri belirleyebilir.
+  aciklama: CRF(0.12; 12) = 0.1614. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak. Bina kiralik (eco_rent_usd_m2_month),
+    bu omur tesisat/altyapi icindir. Standart alanindaki degersiz site_amort_years buna baglanmali.
+  dogrulama_deneyi: Kira sozlesmesi suresi ve tedarikci omur verileri.
+- id: eco_maint_frac_capex_yr
+  ad: Yillik bakim (capex orani)
+  birim: 1/yil
+  deger: 0.04
+  alt: 0.02
+  ust: 0.08
+  kaynak: tahmin (altyapi; kristal, hucre, modul, pil degerleri de tahmin)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'yok; altyapi notu: ''Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi
+    beklenir.'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.
+  aciklama: 'Yedek parca + dis servis; kendi personelin iscilik maliyeti haric. Sinif formulde (zaman) atanir. |
+    [Uzlaştırma/ekonomi] Kanonik (tek sahip). ONCEKI CIKTIDAKI 0.04 -> 0.05 DEGISIKLIGI GERI ALINDI (kirmizi takim
+    kabul): tum adaylar tahmin, daha iyi kaynak yok; cogunluk oyu gorev kuralinda secim olcutu degil ve hucre/modul/pil
+    kapsamlarinin (RF, conta, tank, flas lambasi) altyapi tanimiyla ayni oldugu gosterilmemis. Sahibin ''ilk nesilde
+    ust banda yakin'' notu ayri parametreyle (eco_maint_first_gen_extra_frac_yr) yalniz kendi tasarim makinelere
+    uygulanir; boylece altyapi/tesisat ve satin alinan makineler bu artistan etkilenmez. Proses sarflari (sicak
+    bolge, pota, tasiyici, testere teli/makara kaplamasi) bu orana DAHIL DEGIL. Altyapi/tesisat bakim oraninin makineyle
+    ayni olmasi acik karar (sahip ayni oran kullaniyor; ayri kaynak yok).'
+  dogrulama_deneyi: Ilk yil CMMS kayitlarindan gercek orani hesapla.
+- id: eco_insurance_frac_capex_yr
+  ad: Yillik sigorta (deprem teminati dahil)
+  birim: 1/yil
+  deger: 0.006
+  alt: 0.003
+  ust: 0.012
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'yok; dayanak: 1. derece deprem bolgesi, yanici/toksik gaz ve pil stogu (altyapi notu)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '1. derece deprem bolgesi, yanici/toksik gaz ve Li/Na pil stogu: prim ve muafiyet yuksek olabilir.'
+  aciklama: Is durmasi (BI) teminati haric. Ornek hesapta artik 0.005 degil, bu deger (0.006) kullanildi. | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Tek kaynak; diger alanlarda sigorta hic yok, kanonik yuk formulu ile tum capex'e eklenir.
+  dogrulama_deneyi: 2 sigorta brokerindan kimyasal + deprem + pil stogu teminatli teklif.
+- id: eco_hours_calendar_yr
+  ad: Takvim saati
+  birim: h/yil
+  deger: 8760
+  alt: 8760
+  ust: 8760
+  kaynak: 365 x 24
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '2026-09-27'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Surekli calisan firin (K7) icin esas alinan sure.
+  aciklama: Planli durus eco_uptime_frac_default icinde dusulur. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Surekli
+    hatlarin (K7 firin, 24/7 HJT) paydasi. Vardiyali hatlarin yillik saati (elektronik 4000, pil paket 3600, modul
+    8 h x 250 gun) hat tasarim secimidir, bu parametrenin takma adi degildir (celiskilere bakiniz).
+  dogrulama_deneyi: '-'
+- id: eco_uptime_frac_default
+  ad: Varsayilan zaman kullanilabilirligi
+  birim: '-'
+  deger: 0.9
+  alt: 0.8
+  ust: 0.95
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Altyapi tanimi: performans ve kalite kayiplari ayri tutulur; OEE''nin kalite bileseni burada
+    kullanilmaz.'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Proses ajanlari kendi degerleriyle ezer (pota degisimi, PECVD temizligi vb.).
+  aciklama: 'Tanim: (takvim - planli durus - plansiz durus) / takvim. Performans ve kalite kayiplari ayri tutulur;
+    OEE''nin kalite bileseni burada kullanilmaz (cift sayim olmasin). wafer_per_day arayuzu bu kullanilabilirlik
+    dahil ortalama deger olarak tanimlandi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tanim altyapidan kanonik.
+    Ekipmana ozgu degerler (cz_availability_unplanned 0.9, saw_uptime 0.85, wf_inspect_uptime 0.9, hjt_line_uptime
+    0.85) takma ad degil gerekceli override''dir; ayni tanimla ve yalniz bir kez (kapasite/cikti formulunde) uygulanmali.'
+  dogrulama_deneyi: Pilot hatta zaman damgali durus kaydi (MES).
+- id: eco_scale_exponent
+  ad: Kapasite-maliyet olcek ussu (0.6 kurali)
+  birim: '-'
+  deger: 0.6
+  alt: 0.4
+  ust: 0.8
+  kaynak: Muhendislik maliyet tahmininde 0.6 kurali
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: C2 = C1*(S2/S1)^0.6
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk olcekte kontrol ve guvenlik bileseni baskin oldugundan us 0.3-0.5 olabilir. Mimari (b)
+    ile (site_step_capex_sized_usd) ve modul boyutu optimizasyonunda kullanilir.
+  aciklama: Referans kapasitenin cok altinda gecerliligi zayif; formulde asgari modul boyutu = 0.25*cap_ref.
+  dogrulama_deneyi: Ayni tedarikciden iki farkli kapasite icin teklif alip ussu hesapla.
+- id: eco_elec_energy_kr_kwh
+  ad: Duzenlenmis sanayi tek zamanli aktif enerji bedeli (AG ve OG)
+  birim: kurus/kWh
+  deger: 290.9687
+  alt: 285
+  ust: 330
+  kaynak: https://www.aa.com.tr/tr/enerjiterminali/elektrik/epdk-2026-yekdem-maliyetlerini-revize-etti/56138
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Alcak gerilim icin sanayi aboneleri: 290,9687''; ''Orta gerilim icin sanayi aboneleri: 290,9687''
+    (sayfada birim TL/kWh yaziyor; gercek birim kurus/kWh)'
+  kaynak_tarihi: 2026-04
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Yalnizca SKTT limiti altindaki tuketiciye uygulanir (bkz. eco_elec_sktt_limit_kwh_yr). Piyasa
+    maliyetinin (~400 kurus/kWh) altinda; buyuk tuketici icin temsil edici degil.
+  aciklama: Ekim 2026'da tarife guncellemesi beklenir.
+  dogrulama_deneyi: EPDK tarife tablosunu guncelleme sonrasi kontrol et.
+- id: eco_elec_dist_og_kr_kwh
+  ad: Sanayi OG tek terimli dagitim bedeli
+  birim: kurus/kWh
+  deger: 118.2457
+  alt: 108.27
+  ust: 125
+  kaynak: https://www.hakedis.org/endeksler/epdk-elektrik-farturasi-vergi-ve-tarifeler
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'OG Sanayi Tek dagitim: ''Ocak-Mart 2026: 89,5372''; ''Nisan-Haziran 2026: 118,2457''; ''Temmuz-Aralik
+    2026: 118,2457''. AG: 138,5324 / 182,9503 / 182,9503. Vergi, fon ve pay haric.'
+  kaynak_tarihi: 2026-04 ile 2026-12 arasi
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: OG bagli OSB tesisi. Hem duzenlenmis tarifede hem piyasa bazli fiyatta dagitim bedeli ayrica
+    odenir.
+  aciklama: Donem etiketleri duzeltildi. AA haberi OG dagitim icin 108,2655 veriyor; celiski cozulemedi, alt sinira
+    yansitildi. 89.54 -> 118.25 (+%32.06), apollo.eco'daki '%32,06' artisla tutarli.
+  dogrulama_deneyi: SEDAS/OSB faturasi veya EPDK tarife PDF'i.
+- id: eco_elec_ptf_try_mwh
+  ad: Piyasa takas fiyati (PTF), yillik ortalama vekili
+  birim: TL/MWh
+  deger: 3634.98
+  alt: 2700
+  ust: 4500
+  kaynak: https://www.enerjigunlugu.net/spot-elektrik-fiyati-26-08-2026-icin-3634-98-tl-69541h.htm
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '26.08.2026: ''Aritmetik Ortalama: 3634.98 TL/MWh''; en yuksek 4500; en dusuk 2699.99'
+  kaynak_tarihi: '2026-08-26'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sayi dogru ama tek bir yaz gunune ait; yillik ortalamayi temsil ettigi bilinmiyor. Alt ve
+    ust sinir o gunun saatlik min/max degerleridir, yillik belirsizlik icin kaba zarf.
+  aciklama: Web arama kotasi dolu oldugu icin aylik ortalama bulunamadi.
+  dogrulama_deneyi: EPIAS seffaflik platformundan son 12 ayin PTF ortalamasi ve 2027 vadeli (VIOP) fiyatlari.
+- id: eco_elec_yekdem_try_mwh
+  ad: YEKDEM birim maliyeti (ortalama)
+  birim: TL/MWh
+  deger: 372.4
+  alt: 189.15
+  ust: 602.51
+  kaynak: https://www.aa.com.tr/tr/enerjiterminali/elektrik/epdk-2026-yekdem-maliyetlerini-revize-etti/56138
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: Nisan 574,54; Mayis 602,51; Haziran 580,99; Temmuz 189,15; Agustos 213,89; Eylul 330,66; Ekim
+    332,82; Kasim 302,57; Aralik 224,02 TL/MWh
+  kaynak_tarihi: 2026-04
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Piyasa bazli (SKTT/ikili anlasma) fiyatin bilesenidir.
+  aciklama: Nisan-Aralik 9 ayin aritmetik ortalamasi; Ocak-Mart degerleri eksik.
+  dogrulama_deneyi: EPDK aylik YEKDEM aciklamalari.
+- id: eco_elec_supplier_margin_frac
+  ad: SKTT katsayisi veya ikili anlasma tedarikci marji
+  birim: '-'
+  deger: 0.05
+  alt: 0
+  ust: 0.1
+  kaynak: hafizadan (SKTT formulu (PTF+YEKDEM)*(1+K); K degeri dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: 'apollo.eco: SKTT bilesenleri ''PTF (Piyasa Takas Fiyati) + YEKDEM + tedarik marji'' (katsayi
+    degeri sayfada yok)'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ikili anlasmada marj pazarlikla dusurulebilir; SKTT katsayisi EPDK kararina baglidir.
+  aciklama: '-'
+  dogrulama_deneyi: EPDK SKTT karari + 2-3 tedarikciden ikili anlasma teklifi.
+- id: eco_elec_tax_frac
+  ad: Elektrik tuketim vergisi (BTV) ve fon orani, sanayi
+  birim: '-'
+  deger: 0.01
+  alt: 0.01
+  ust: 0.02
+  kaynak: hafizadan (sanayi BTV %1; enerji fonu durumu dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: KDV indirilebilir oldugu icin haric.
+  aciklama: 'Kontrol: 290.97*1.01 + 182.95 = 476.8 kurus/kWh; piagrid AG 4,81 TL/kWh ile tutarli.'
+  dogrulama_deneyi: Ornek sanayi faturasi.
+- id: eco_elec_sktt_limit_kwh_yr
+  ad: Son kaynak tedarik tarifesi (SKTT) tuketim limiti, mesken disi
+  birim: kWh/yil
+  deger: 15000
+  alt: 15000
+  ust: 15000000
+  kaynak: https://apollo.eco/tr/nisan-2026-guncellenen-elektrik-tarifesi-analizi/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Yillik tuketimi 15.000 kWh uzerindeki sanayi ve ticarethaneler... zaten elektrigi EPDK tarifesi
+    uzerinden degil, piyasa dinamikleriyle satin aliyor''; mesken icin ''4.000 kWh'''
+  kaynak_tarihi: 2026-04
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Sayfadaki sayi baz alindi. Hafizaya gore mesken disi limit milyon kWh mertebesinde olabilir;
+    bu ust sinira yazildi. Limit 15 GWh olsa bile N>=3'te (~19 GWh/yil) saha limitin ustunde kalir.
+  aciklama: Sayfanin kendisi bir danismanlik firmasi analizi; birincil kaynak (EPDK karari) acilamadi.
+  dogrulama_deneyi: EPDK'nin 2026 SKTT limit kararini birincil kaynaktan oku.
+- id: eco_elec_price_usd_kwh
+  ad: 'Sanayi elektrik fiyati (OG, baz: piyasa bazli; vergiler dahil, KDV haric)'
+  birim: USD/kWh
+  deger: 0.105
+  alt: 0.084
+  ust: 0.14
+  kaynak: 'altyapi: eco_elec_ptf_try_mwh (enerjigunlugu 26.08.2026), eco_elec_yekdem_try_mwh, eco_elec_dist_og_kr_kwh
+    (hakedis.org), eco_elec_energy_kr_kwh (AA/EPDK), eco_fx_try_per_usd'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Piyasa rejimi formulu: ((3634.98 + 372.4)/10 x 1.05 x 1.01 + 118.25)/100/49 = 0.1109; duzenlenmis:
+    (290.97 x 1.01 + 118.25)/100/49 = 0.0841; ust: PTF 4500 + YEKDEM 603 + %9 marj = 0.14 (altyapi). Sahip notu:
+    ''Baz 0.105 secildi, cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir
+    (dogrulanmadi).'''
+  kaynak_tarihi: '2026-09-27'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Buyuk ve surekli yuklu tesis piyasa bazli fiyata tabidir. Alt sinir 0.084: duzenlenmis tarife,
+    yalnizca SKTT limiti altindaysa. Ust sinir 0.14: PTF 4500 + YEKDEM 603 + %9 marj. Ilk ciktidaki ''serbest piyasa
+    ile benzer duzey'' ifadesi yanlisti; kaldirildi.'
+  aciklama: 'Piyasa: ((3635+372.4)/10*1.05*1.01 + 118.25)/100/49 = 0.1109; marj 0 ile 0.1067. Baz 0.105 secildi,
+    cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir (dogrulanmadi). Duzenlenmis:
+    (290.97*1.01 + 118.25)/100/49 = 0.0841. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Sinirlar
+    kaynakli bilesenlerden turetilmis; BAZ 0.105 ise formul ciktisi degil YARGIDIR (piyasa formulu 0.1109; ''yaz
+    PTF''si yillik ortalamanin ustunde'' varsayimiyla asagi cekilmis, dogrulanmadi) - bu yuzden kaynak_turu tahmin/orta
+    olarak etiketlendi. ONCEKI CIKTIDAKI 0.07-0.16 ARALIGI 0.084-0.14''E GERI ALINDI: genisletme, kendi notu ''altyapi
+    degeri gecerlidir'' diyen kristal YER TUTUCU''sundan geliyordu. Rejim (duzenlenmis/piyasa) SKTT limitine ve
+    yillik tuketime bagli; dogrulama: EPIAS 12 aylik PTF ortalamasi.'
+  dogrulama_deneyi: EPIAS 12 aylik PTF ortalamasi + tedarikci ikili anlasma teklifi + EPDK SKTT limiti.
+- id: eco_water_isu_sanayi_usd_m3
+  ad: ISU sanayi su + atiksu bedeli (OSB disi)
+  birim: USD/m3
+  deger: 6.33
+  alt: 6.33
+  ust: 7
+  kaynak: https://www.isu.gov.tr/sufiyatlari
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''SANAYI: 206.697 + 103.3485 = 310.05'' TL/m3 (2026/9)'
+  kaynak_tarihi: 2026-09
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: OSB disi sanayi tesisi. KDV durumu sayfada belirtilmemis.
+  aciklama: 310.05/49 = 6.33.
+  dogrulama_deneyi: ISU'dan KDV durumunu teyit et.
+- id: eco_water_isu_osb_usd_m3
+  ad: ISU su bedeli, ortak aritma tesisi olan OSB kategorisi
+  birim: USD/m3
+  deger: 4.22
+  alt: 4.22
+  ust: 4.6
+  kaynak: https://www.isu.gov.tr/sufiyatlari
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''SANAYI (ORTAK ARITMA TESISI OLAN OSB): 206.697 + 0.0000 = 206.70'' TL/m3 (2026/9)'
+  kaynak_tarihi: 2026-09
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Onerilen saha tipi (merkezi aritmali OSB) icin gecerli. Atiksu bedelini OSB ayrica alir (bkz.
+    eco_osb_wastewater_fee_usd_m3).
+  aciklama: 206.70/49 = 4.22. Ilk ciktida 'dogrulanmadi' denmisti; sayfada acikca var.
+  dogrulama_deneyi: Secilen OSB'nin kendi su kaynagi/tarifesi olup olmadigini sor.
+- id: eco_osb_wastewater_fee_usd_m3
+  ad: OSB ortak aritma (atiksu) bedeli
+  birim: USD/m3
+  deger: 1
+  alt: 0.3
+  ust: 3
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: OSB'ye ve atiksu kirlilik yukune (KOI, F-, iletkenlik) gore degisir; kirlilik yukune bagli
+    ek bedel olabilir.
+  aciklama: 'Dayanak: ISU sanayi atiksu bedelinin (103 TL/m3 = 2.1 USD/m3) yarisi mertebesi varsayildi.'
+  dogrulama_deneyi: OSB mudurlugunden yazili atiksu tarifesi.
+- id: eco_water_price_usd_m3
+  ad: 'Sanayi su + atiksu toplam bedeli (baz: ortak aritmali OSB)'
+  birim: USD/m3
+  deger: 5.22
+  alt: 3
+  ust: 6.33
+  kaynak: https://www.isu.gov.tr/sufiyatlari + eco_osb_wastewater_fee_usd_m3 (tahmin)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'ISU: ''SANAYI (ORTAK ARITMA TESISI OLAN OSB): 206.697 + 0.0000 = 206.70'' TL/m3 (2026/9, altyapi
+    alaninda; onceki turda sayfa bos yanit verdi). 206.70/49 = 4.22 + OSB atiksu 1.0 (tahmin).'
+  kaynak_tarihi: '2026-09-27'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Ust sinir OSB disi (ISU sanayi). Alt sinir: OSB''nin kendi daha ucuz su kaynagi olmasi (dogrulanmadi).'
+  aciklama: 4.22 + 1.0 = 5.22. Geri kazanimin kucuk unitede ekonomik olup olmadigi olculen debi ve modul teklifiyle
+    ayrica degerlendirilmeli (Fraunhofer %79 tasarruf rakami 5 GW tesis icindir; H1). | [Uzlaştırma/ekonomi] Kanonik
+    (tek sahip). Tek kaynak (altyapi). Ham su + atiksu bedelidir. UPW birim maliyeti bir formul ciktisidir (site_upw_unit_cost
+    -> site_upw_cost_usd_m3 = bu parametre/site_ro_recovery_frac + site_upw_kwh_per_m3 x eco_elec_price_usd_kwh;
+    baz 5.22/0.75 + 2 x 0.105 = 7.17 USD/m3) ve kanonik parametre olarak DONDURULMADI (kirmizi takim kabul); hucrenin
+    upw_price_usd_per_m3'u bu formul ciktisina baglanir. OSB disi eco_water_isu_sanayi_usd_m3 (6.33) rejim alternatifidir,
+    takma ad degil.
+  dogrulama_deneyi: OSB yazili tarifesi.
+- id: eco_rent_usd_m2_month
+  ad: Gebze/Dilovasi OSB fabrika kira bedeli
+  birim: USD/m2/ay
+  deger: 6.5
+  alt: 4
+  ust: 10
+  kaynak: https://www.century21.com.tr/gebze-kiralik/fabrika-imalathane
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Dilovasi OSB 2000 m2 Factory TL 690,000'' -> 690,000/2,000/49 = 7.0 (altyapi)'
+  kaynak_tarihi: 2026-09
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Orneklem tek dogrulanmis ilan. 690,000/2,000/49 = 7.0. Yuksek tavanli, gaz/kimyasal izinli,
+    deprem performansi iyi bina ust banda yakin olur.
+  aciklama: kaynak_turu 'dogrulanmis_url'den 'hesap_turetilmis'e dusuruldu; guven dusuk. Vergi durumu eco_rent_tax_factor'da.
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (tek ilan); diger alanlarda kira yok (alan maliyeti yalniz
+    altyapida site_share_per_unit_usd_yr ile). Sozlesme TL'de yillik sabitse kur araligi (45-60) bu kaleme uygulanabilecek
+    tek yerlerdendir.
+  dogrulama_deneyi: 5+ ilan veya emlakci/OSB teklifi.
+- id: eco_rent_tax_factor
+  ad: Kira vergi carpani (stopaj vb.)
+  birim: '-'
+  deger: 1
+  alt: 1
+  ust: 1.25
+  kaynak: hafizadan (sahis mulkunde %20 stopaj brut kirayi netin 1/0.8 katina cikarir; dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Sirket mulkunde KDV indirilebilir (carpan 1.0).
+  aciklama: '-'
+  dogrulama_deneyi: Mali musavir.
+- id: eco_min_wage_employer_cost_try_month
+  ad: 2026 asgari ucret isveren maliyeti (imalat 5 puan tesvikli)
+  birim: TRY/ay
+  deger: 39223.13
+  alt: 37953.13
+  ust: 40874.63
+  kaynak: https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: Brut 33.030 TL; net 28.075,50; isveren maliyeti tesviksiz 40.874,63; 'Imalat (5 puan indirim)
+    39.223,13'; asgari ucret destegi (1.270 TL) ile 37.953,13
+  kaynak_tarihi: 2025-12-23 (2026 yili)
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Firma imalatci oldugu icin baz tesvikli deger; tesviksiz deger ust sinir.
+  aciklama: = 800 USD/ay.
+  dogrulama_deneyi: Ocak 2027 asgari ucretiyle guncelle.
+- id: eco_sgk_employer_factor
+  ad: Isveren SGK + issizlik carpani (brut uzerine)
+  birim: '-'
+  deger: 1.1875
+  alt: 1.1875
+  ust: 1.2375
+  kaynak: https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'SGK isveren oranlari: ''Tesviksiz %23,75''; ''Imalat (5 puan) %18,75''; ''Imalat disi (2 puan)
+    %21,75'''
+  kaynak_tarihi: '2025-12-23'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tesvik kosullari (borcsuzluk vb.) saglanirsa 1.1875; aksi halde 1.2375.
+  aciklama: Ilk ciktida tesviksiz oran kullanilmisti (~%4 yuksek).
+  dogrulama_deneyi: Firma bordrosu.
+- id: eco_labor_overhead_factor
+  ad: Isveren maliyeti uzerine ek yuk carpani
+  birim: '-'
+  deger: 1.25
+  alt: 1.15
+  ust: 1.45
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Gebze'de servis ve yemek yaygin. Kidem tazminati karsiligi ~1/12 (hafizadan).
+  aciklama: 'Icerik: kidem + yemek + servis + KKD + egitim + ikramiye. Resmi tatil primi BU CARPANDA YOK; resmi
+    tatil eco_productive_hours_fte_yr icinde dusuldugu icin (cift sayim giderildi).'
+  dogrulama_deneyi: Firmanin mevcut bordro ve yan hak verisi.
+- id: eco_productive_hours_fte_yr
+  ad: Tam zamanli calisan basina yillik verimli saat
+  birim: h/yil
+  deger: 2070
+  alt: 1950
+  ust: 2200
+  kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'md. 63: ''Genel bakimdan calisma suresi haftada en cok kirkbes saattir.''; 45 x 52 = 2340 -
+    yillik izin 105-126 h - resmi tatil ~110 h - hastalik ~50 h = ~2060-2075 (altyapi).'
+  kaynak_tarihi: 4857 s. Kanun (guncel metin)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Turk is hukuku; dogrudan uygulanir.
+  aciklama: '45*52 = 2340 - yillik izin 105-126 h - resmi tatil ~110 h (hafizadan, ~15.5 gun) - hastalik ~50 h =
+    ~2060-2075. Tek deger 2070 (ilk ciktida ucrette 2100, FTE''de 2070 kullanilmisti). | [Uzlaştırma/ekonomi] Kanonik
+    (tek sahip). Is Kanunundan turetilmis, altyapi sahibi; sahip araligi 1950-2200 korunur. ONCEKI CIKTIDAKI ALT
+    1700 GERI ALINDI: pilin 1800''u kaynaksiz ve ''40 h/hafta sirket politikasi'' SENARYOSUDUR (ayri senaryo; bu
+    durumda saat ucretleri 2070/1800 = 1.15 kat artar), ornekleme araligina girmez. Tum saat ucretleri (operator/teknisyen/muhendis)
+    bu parametreyle turetilmistir; model icinde ucret = aylik isveren maliyeti x 12 x eco_labor_overhead_factor
+    / eco_productive_hours_fte_yr / eco_fx_try_per_usd olarak baglanmali ki tornado tutarli kalsin. Elektronigin
+    195 h/ay (2340 h/yil) tabani odenen saattir, verimli saat degil.'
+  dogrulama_deneyi: Firma bordrosundaki gerceklesen saat.
+- id: eco_fte_per_24x7_position
+  ad: 24/7 pozisyon basina FTE maliyet esdegeri
+  birim: FTE
+  deger: 4.23
+  alt: 3.98
+  ust: 4.49
+  kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53, 41, 69)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 8760 / 2070 = 4.23; 8760/2200 = 3.98; 8760/1950 = 4.49 (bu gorevde hesaplandi).
+  kaynak_tarihi: 4857 s. Kanun (guncel metin)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Surekli firin (K7) ve 24/7 HJT icin.
+  aciklama: 'FTE sayisini md. 63 (45 h/hafta) ve izinler belirler; md. 69 yalnizca vardiya duzenini (3x8, 4 ekip)
+    belirler (gerekce duzeltildi). 8760/2070 = 4.23. Esdeger: tatilde calisilir ve prim odenirse 8760/2165 = 4.05
+    FTE + ~%4 tatil primi = ~4.2. Alt sinir: gunduz vardiyasinda yasal fazla mesai kullanimi. | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Kirmizi takim bulgusu kabul: bagimsiz aralik (onceki 3.7-4.7, sahip 3.9-4.7) tanim geregi
+    verimli saat araligiyla celisiyordu. Parametre formul yapilir, aralik verimli saatten turer. Hucrenin alt 3.7''si
+    kisi basina ~2370 verimli saat demek; bu md. 63''un 2340 odenen saat tavaninin ustunde ve ancak %150 ucretli
+    fazla mesaiyle mumkun, maliyet dusurmez. Sahibin ''yasal fazla mesai'' alt siniri da ayni nedenle maliyet esdegerini
+    dusurmez.'
+  dogrulama_deneyi: '-'
+- id: eco_labor_operator_usd_h
+  ad: Operator tam yuklu saat maliyeti (Kocaeli)
+  birim: USD/h
+  deger: 8.4
+  alt: 5.8
+  ust: 11.5
+  kaynak: https://www.eleman.net/meslek/operator/maas ; https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Kocaeli icin 37.500 TL'' (net) -> brut 47,806 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 8.4 USD/h
+    (altyapi). Yasal taban ayni tabanda: asgari ucret isveren maliyeti 39,223.13 TL x 12 x 1.25 / 2070 / 49 = 5.80
+    USD/h (bu gorevde hesaplandi).'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Genel fabrika operatoru. Temiz oda ve kimyasal egitimli operator icin +%10-30.
+  aciklama: 'Net 37,500 -> brut 47,806 -> isveren 47,806*1.1875 = 56,770 TL/ay -> *12*1.25/2070/49 = 8.4 USD/h.
+    Tesviksiz 8.75. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; kaynakli ve verimli saat tabanli
+    tek deger. TEK TABAN TANIMI (kirmizi takim kabul): tum ucretler ek yuklu (eco_labor_overhead_factor 1.25) ve
+    verimli saat (2070) bazinda. Alt 5.80 = bu tabanda yasal asgari ucret; sahip alti 6.0''a yakin. Onceki ciktinin
+    5-12 araligi geri alindi: alt 5 (modul) ve 4.1 (elektronik) odenen saat/ek yuksuz tabandadir, ayni tabana cevrilince
+    asgarinin altinda degil ustundedir (elektronik 6.17 -> 8.70). Ust 11.5 sahip; temiz oda/kimyasal egitimli operator
+    primi (+%10-30) bu banda dahil. Aralik kuru degil TL ucret dagilimini temsil eder.'
+  dogrulama_deneyi: Firmanin kendi operator bordrosu.
+- id: eco_labor_technician_usd_h
+  ad: Teknisyen tam yuklu saat maliyeti (Kocaeli)
+  birim: USD/h
+  deger: 13.4
+  alt: 10
+  ust: 18
+  kaynak: https://www.eleman.net/meslek/teknisyen/maas
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''Kocaeli icin 55.100 TL'' (net) -> brut 76,522 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 13.4 USD/h
+    (altyapi).'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Vakum/plazma/gaz deneyimli teknisyen az; ust bant olasi.
+  aciklama: 'Net 55,100 -> brut 76,522 -> *1.1875*12*1.25/2070/49 = 13.4 USD/h (tesviksiz 14.0). | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Altyapi sahibi; sahip araligi 10-18 korunur. Onceki ciktinin 8-20 genislemesi geri alindi:
+    kaynaklar kristal ve standartin tahminleri (kristalinki YER TUTUCU) ve genisleme kurdan bagimsiz ikinci bir
+    belirsizlik temsili yaratiyordu.'
+  dogrulama_deneyi: 5-10 aday gorusmesi.
+- id: eco_labor_engineer_usd_h
+  ad: Muhendis tam yuklu saat maliyeti
+  birim: USD/h
+  deger: 22
+  alt: 12
+  ust: 35
+  kaynak: https://www.eleman.net/meslek/muhendis/maas + tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Kocaeli icin 51.400 TL'' ortalama (12.4 USD/h); deneyimli proses muhendisi net 100-150 bin
+    TL tahmini -> 27-43 USD/h; sahip notu: ''Baz 22 bir karisim tahminidir.'''
+  kaynak_tarihi: '2026'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ortalama muhendis ucreti PV/yariiletken proses muhendisini temsil etmez; deneyimli proses
+    muhendisi icin net 100-150 bin TL tahmini.
+  aciklama: 'Ortalama: 12.4 USD/h (tesvikli). Net 100k -> ~27, 150k -> ~43 USD/h. Baz 22 bir karisim tahminidir.
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (altyapi). Kaynak_turu hesap_turetilmis''ten TAHMIN''e
+    duzeltildi (kirmizi takim kabul): kaynak ortalamasi 12.4 USD/h, baz 22 ise ortalama ile proses muhendisi tahmini
+    arasinda yargi. Baska alanda ayri muhendis ucreti yok (hucre ve pilin harmanli FTE maliyetleri celiskilerde).'
+  dogrulama_deneyi: Hedef profil icin ilan ve aday taramasi.
+- id: eco_price_argon_bulk_usd_kg
+  ad: Argon toptan/endeks fiyati
+  birim: USD/kg
+  deger: 0.68
+  alt: 0.55
+  ust: 0.9
+  kaynak: https://www.imarcgroup.com/argon-pricing-report ; https://businessanalytiq.com/procurementanalytics/index/argon-price-index/
+    ; https://www.indexbox.io/search/argon-price-turkey/
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'IMARC: ''Europe: 0.64 USD/KG'' (Eylul 2026); businessanalytiq: ''Europe: US$0.62/KG, 8.8% up''
+    (Eylul 2026); IndexBox: ''average argon import price amounted to $1.3 per cubic meter'' (Mart 2025, Turkiye)'
+  kaynak_tarihi: 2026-09 / 2025-03
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Toptan duzey; kucuk kullaniciya teslim fiyati degil (bkz. prim).
+  aciklama: 'TR ithalat: 1.3/1.782 kg/Nm3 = 0.73 USD/kg (Nm3 varsayimi; eco_argon_cost_usd_h ile ayni referans).
+    Ortalama ~0.68.'
+  dogrulama_deneyi: '-'
+- id: eco_argon_small_user_premium_frac
+  ad: Kucuk kullanici teslim primi (argon)
+  birim: '-'
+  deger: 0.6
+  alt: 0.2
+  ust: 3
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Dusuk hacimde lojistik ve dagitici marji baskin. Satici sayfasi Cin spot piyasasinda >%270
+    artis iddia ediyor (dusuk guvenilirlik; Avrupa endeksleriyle uyusmuyor).
+  aciklama: '-'
+  dogrulama_deneyi: 3-4 gaz sirketinden USD/kg teklifi.
+- id: eco_price_argon_usd_kg
+  ad: Sivi argon teslim fiyati (kucuk kullanici)
+  birim: USD/kg
+  deger: 1.1
+  alt: 0.66
+  ust: 3
+  kaynak: eco_price_argon_bulk_usd_kg (https://www.imarcgroup.com/argon-pricing-report ; https://businessanalytiq.com/procurementanalytics/index/argon-price-index/)
+    x (1 + eco_argon_small_user_premium_frac)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'IMARC ''Europe: 0.64 USD/KG'' (Eylul 2026); businessanalytiq ''Europe: US$0.62/KG''; 0.68 x
+    1.6 = 1.09 (altyapi). Alt: 0.55 x (1 + 0.2) = 0.66 (bu gorevde hesaplandi).'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tank kirasi haric (eco_argon_tank_rent_usd_month). Guven 'orta'dan 'dusuk'e indirildi.
+  aciklama: '0.68*1.6 = 1.09. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Alt sinir tutarli olcutle
+    yeniden kuruldu (kirmizi takim kabul): toptan alt 0.55 x (1 + prim alt 0.2) = 0.66 (sahip 0.7). Onceki ciktinin
+    primsiz 0.55''i kucuk kullanici teslim fiyati icin tutarsizdi. Kristalin 0.8 USD/Nm3 (= 0.45 USD/kg) yer tutucusu
+    ve 0.3 USD/Nm3 (= 0.17 USD/kg) alti Avrupa toptan endeksinin altinda; alinmadi. Birim donusumu: USD/Nm3 = USD/kg
+    x 1.782 (0 C, 1 atm; 39.948/22.414); 1.1 USD/kg = 1.96 USD/Nm3.'
+  dogrulama_deneyi: RFQ.
+- id: eco_argon_tank_rent_usd_month
+  ad: Sivi argon tanki + evaporator kirasi
+  birim: USD/ay
+  deger: 1200
+  alt: 400
+  ust: 3000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Saha basina bir tank; firin sayisi artinca daha buyuk tank (basamakli).
+  aciklama: '-'
+  dogrulama_deneyi: RFQ.
+- id: eco_price_ln2_usd_nm3
+  ad: Dokme sivi azot fiyati
+  birim: USD/Nm3
+  deger: 0.15
+  alt: 0.07
+  ust: 0.35
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'yok; dayanak: kucuk tuketici; yerinde PSA 0.2-0.4 kWh/Nm3 (hafizadan)'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk tuketici. Yerinde PSA 0.2-0.4 kWh/Nm3 (hafizadan) ile ~0.02-0.04 USD/Nm3 enerji + capex.
+  aciklama: Pompa purge'u N2 tuketimini buyutur (site_n2_purge_burnwet_slm). | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Tek degerli id. Hucrenin degersiz n2_price_usd_per_Nm3 serbest degiskeni buna baglanmali.
+  dogrulama_deneyi: RFQ + PSA teklifi.
+- id: eco_price_sih4_usd_kg
+  ad: Monosilan fiyati (silindir, Turkiye'ye teslim)
+  birim: USD/kg
+  deger: 60
+  alt: 25
+  ust: 300
+  kaynak: tahmin (altyapi, hucre)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (businessanalytiq silan endeksi 404 verdi; altyapi)
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Buyuk hacimli Cin fiyatlari cok daha dusuk olabilir. Kucuk alimda silindir kirasi ve piroforik
+    gaz lojistigi baskin.
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; iki deger de tahmin, sahip degeri korunur.
+    Ust 300 hucreden (bagimsiz gerekce: on-karisim primi) birlesime alindi; sahip ust 150 (degisiklik gunlugunde).
+    On-karisim secilirse (hjt_ts_silane_supply) karisim silindiri icin ayri fiyat parametresi gerekir (bilinmiyor,
+    teklif).'
+  dogrulama_deneyi: 3-5 ozel gaz tedarikcisinden RFQ.
+- id: eco_price_nf3_usd_kg
+  ad: NF3 fiyati
+  birim: USD/kg
+  deger: 40
+  alt: 20
+  ust: 100
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: 'Yalnizca hazne temizligi NF3 ile yapilirsa. Oksitleyici gaz: ayri kabin, SiH4''ten ayri egzoz.'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id. Hucre NF3 tuketimi veriyor (hjt_nf3_g_per_m2
+    3 g/m2) ama f_hjt_gas_cost NF3''u icermiyor; altyapinin eco_gas_cost_var_usd_per_m2 formulu iceriyor.'
+  dogrulama_deneyi: RFQ.
+- id: eco_price_h2_usd_kg
+  ad: Hidrojen fiyati (5.0, silindir/demet)
+  birim: USD/kg
+  deger: 25
+  alt: 4
+  ust: 60
+  kaynak: tahmin (altyapi, hucre)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk tuketim; demet kirasi eco_cyl_rent_usd_day ile.
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Sahip degeri korunur (iki tahmin, daha iyi kaynak yok). ONCEKI
+    GEREKCE DUZELTILDI (kirmizi takim kabul): hucre parametresi de ''tup/demet'' fiyatidir; iki deger arasindaki
+    fark olcek degil varsayim farkidir. Unite tuketimi hjt_h2_g_per_m2 10 g/m2 (2.5-40) ile kirmizi takim hesabina
+    gore ~1.8 t/yil (0.45-7 t/yil); bu, demet ile tup trailer arasi olcektir ve saha ortak tedarikinde trailer daha
+    olasi. Fiyat tedarik bicimi karari (altyapi: demet / trailer / elektrolizor) ve RFQ ile belirlenmeli; 4-60 araligi
+    (alt 4 hucreden, birlesime alindi) korunur.'
+  dogrulama_deneyi: RFQ.
+- id: eco_price_dopant_mix_usd_per_cyl
+  ad: Katki gazi karisim silindiri (PH3 veya B2H6/TMB, %0.5-2, H2 icinde)
+  birim: USD/silindir
+  deger: 3000
+  alt: 1000
+  ust: 8000
+  kaynak: tahmin (altyapi)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok; ~40-50 L silindir (altyapi notu)
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Seyreltik karisim toksik envanteri azaltir.
+  aciklama: ~40-50 L silindir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek fiyat parametresi. Hucrenin hjt_dopant_gas_usd_per_m2
+    (0.03 USD/m2) degeri fiyat degil turetilmis maliyet ve silindir raf omru tabanini (eco_dopant_cyl_shelf_life_months)
+    icermiyor; takma ad degil, celiskilerde.
+  dogrulama_deneyi: RFQ.
+- id: eco_cyl_rent_usd_day
+  ad: Gaz silindiri/demet kirasi
+  birim: USD/gun/silindir
+  deger: 2
+  alt: 0.5
+  ust: 5
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Otomatik gecisli kabinde gaz basina en az 2 silindir surekli sahada; tuketimden bagimsiz zaman
+    maliyeti.
+  aciklama: '-'
+  dogrulama_deneyi: RFQ.
+- id: eco_dopant_cyl_shelf_life_months
+  ad: Katki gazi karisiminin raf omru
+  birim: ay
+  deger: 12
+  alt: 6
+  ust: 24
+  kaynak: hafizadan (B2H6 karisimlari zamanla bozunur; sure dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kucuk tuketimde silindir, bitmeden raf omru yuzunden degisebilir; o zaman maliyet wafer'a
+    degil zamana baglidir (H1).
+  aciklama: '-'
+  dogrulama_deneyi: Tedarikci sertifikasi (stabilite suresi).
+- id: eco_price_lime_usd_kg
+  ad: Sonmus kirec Ca(OH)2 fiyati
+  birim: USD/kg
+  deger: 0.2
+  alt: 0.1
+  ust: 0.4
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Etkisi kucuk.
+  aciklama: '-'
+  dogrulama_deneyi: Yerel tedarikci.
+- id: eco_nre_machine_design_usd
+  ad: Unite makinelerinin tasarim + prototip NRE'si
+  birim: USD
+  deger: 5000000
+  alt: 2000000
+  ust: 15000000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: urun_sabit
+  olcek: urun
+  senaryoya_uygunluk: Kendi tasarim makine stratejisinin ana sabit maliyeti; kopya unite sayisina bolunur. urun_sabit
+    sinifi 'tasarim_sabit' anlaminda kullanildi.
+  aciklama: 'Dayanak: ~30 muhendis x 2 yil x 2070 h x 22 USD/h = 2.7 MUSD + prototipler 2-5 MUSD. Gercek deger bilinmiyor.'
+  dogrulama_deneyi: Makine bazinda is paketi ve saat tahmini; ilk prototipin gerceklesen maliyeti.
+- id: eco_learning_rate_unit_copy
+  ad: Kopya unitede capex ogrenme orani (her iki katina cikista maliyet carpani)
+  birim: '-'
+  deger: 0.9
+  alt: 0.8
+  ust: 0.97
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Kopyalama stratejisinin avantaji; saha paylasimindan ayri bir etkidir.
+  aciklama: C_k = C_1*k**log2(LR).
+  dogrulama_deneyi: 2. ve 3. unitenin gercek capex ve devreye alma suresi.
+- id: eco_foak_premium_frac
+  ad: Ilk unite (FOAK) capex asimi
+  birim: '-'
+  deger: 0.3
+  alt: 0.1
+  ust: 1
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: urun
+  senaryoya_uygunluk: Ilk nesil kendi tasarim makinelerde yeniden yapim ve degisiklik beklenir.
+  aciklama: '-'
+  dogrulama_deneyi: Ilk unite butce gerceklesmesi.
+- id: eco_rampup_months
+  ad: Unite rampa suresi
+  birim: ay
+  deger: 12
+  alt: 6
+  ust: 24
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kopya unitelerde ogrenmeyle kisalir.
+  aciklama: '-'
+  dogrulama_deneyi: Ilk unitenin cikti egrisi.
+- id: eco_rampup_avg_output_frac
+  ad: Rampa suresince ortalama cikti orani
+  birim: '-'
+  deger: 0.5
+  alt: 0.3
+  ust: 0.7
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Ilk unitenin cikti egrisi.
+- id: eco_working_capital_days
+  ad: Isletme sermayesi (stok + alacak - borc) gun sayisi
+  birim: gun
+  deger: 90
+  alt: 45
+  ust: 180
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Polisilisyum, pil hucresi malzemesi ve mamul stogu; ithal girdilerde tedarik suresi uzun.
+  aciklama: Finansman maliyeti = yillik degisken maliyet*gun/365*eco_wacc_usd.
+  dogrulama_deneyi: Tedarik ve satis vadeleri.
+- id: site_pga_dd2_g
+  ad: Gebze tasarim depremi (DD-2, 475 yil) en buyuk yer ivmesi
+  birim: g
+  deger: 0.45
+  alt: 0.35
+  ust: 0.6
+  kaynak: https://dergipark.org.tr/tr/download/article-file/208599 + arama ozeti (Kocaeli Gazetesi; sayfa 403, acilamadi)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''1. derece deprem bolgesinde yer almasindan dolayi etkin yer ivme katsayisi Ao = 0.40g ...
+    kuzey anadolu fayina yaklasik 3 km'' (DBYBHY-2007, belirli bir Gebze sahasi). Arama ozeti (dogrulanmadi): Gebze
+    TOKI projesi PGA 0.537 g'
+  kaynak_tarihi: 2010 (makale); arama ozeti 2025-2026
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Konuma baglidir; TDTH'de koordinatla sorgulanmali. Zemin sinifi (ZC/ZD) tasarim ivmesini (SDS)
+    belirler.
+  aciklama: Deger eski yonetmelikteki 0.40 ile TDTH ornegindeki 0.537 (dogrulanmadi) arasinda bir muhendislik tercihi.
+  dogrulama_deneyi: e-Devlet TDTH sorgusu (1 gun) + zemin etudu.
+- id: site_seismic_capex_frac
+  ad: Sismik onlemler ek capex orani
+  birim: '-'
+  deger: 0.03
+  alt: 0.01
+  ust: 0.08
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ust agirlikli firin ankraji, ergiyik dokulme kabi, esnek gaz/su baglantilari, sismik gaz kesme
+    valfi, silindir zincirleme. Bina guclendirme haric.
+  aciklama: 'Ekipman + kurulum capex''iyle carpilir (formul: zaman).'
+  dogrulama_deneyi: Yapi muhendisinin TBDY-2018 yapisal olmayan eleman/ekipman ankraj hesabi.
+- id: site_area_per_unit_m2
+  ad: Unite basina kapali alan
+  birim: m2
+  deger: 2500
+  alt: 1500
+  ust: 5000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: zaman
+  olcek: unite
+  senaryoya_uygunluk: Firinlar, tel testere, HJT, modul, pil hatti (kuru oda dahil), kutu montaji ve ara stok. Proses
+    ajanlarinin ayak izleriyle degistirilmeli. >1000 m2 ve parlayici madde varsa sprinkler zorunlu (BYKHY md. 96(2)e).
+  aciklama: Kira ve sprinkler ile carpilir.
+  dogrulama_deneyi: Yerlesim plani (layout).
+- id: site_area_shared_fixed_m2
+  ad: Saha paylasilan alani, sabit kisim (gaz odasi, kimyasal depo, lab, ofis)
+  birim: m2
+  deger: 600
+  alt: 300
+  ust: 1500
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Gaz tupleri 120 dk yangina dayanikli ayri bina/bolmede (BYKHY md. 105(5)b); bir kismi dis
+    mekan olabilir.
+  aciklama: Ilk ciktidaki tek 800 m2 kalemi sabit + unite basina olarak ikiye ayrildi.
+  dogrulama_deneyi: Yerlesim plani.
+- id: site_area_shared_per_unit_m2
+  ad: Saha paylasilan alani, unite basina artan kisim (UPW, AAT, sogutma)
+  birim: m2/unite
+  deger: 100
+  alt: 50
+  ust: 300
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Basamakli (v*N) kisim.
+  aciklama: '-'
+  dogrulama_deneyi: Yerlesim plani.
+- id: site_clear_height_min_m
+  ad: Gerekli net tavan yuksekligi (firin bolumu)
+  birim: m
+  deger: 9
+  alt: 7
+  ust: 14
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ingot boyu (kristal ajani) dogrudan belirler; kucuk cap ve kisa ingot ihtiyaci dusurur.
+  aciklama: Kiralik bina secimini kisitlar.
+  dogrulama_deneyi: Kristal ajanindan H_furnace_total_m.
+- id: site_floor_load_req_kN_m2
+  ad: Firin bolgesi gerekli doseme tasima kapasitesi
+  birim: kN/m2
+  deger: 30
+  alt: 15
+  ust: 60
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 5-15 t firin, 3-6 m2 taban (tahmin); lokal temel ve ankraj blogu gerekebilir.
+  aciklama: '-'
+  dogrulama_deneyi: Firin kutlesi + bina statik raporu.
+- id: site_upw_resistivity_min_Mohm_cm
+  ad: UPW ozdirenc gereksinimi (HJT temizlik/dokulama)
+  birim: MOhm.cm
+  deger: 17
+  alt: 15
+  ust: 18.18
+  kaynak: https://en.wikipedia.org/wiki/Ultrapure_water (fiziksel ust sinir) + tahmin
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''a resistivity of 18.18 MΩ⋅cm at 25 °C'' (fiziksel limit)'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: HJT on-temizlikte metal/organik kontaminasyon kritik. Yariiletken UPW spesifikasyonu (TOC
+    <1 ug/L) gerekmeyebilir.
+  aciklama: Gereksinim tahmindir, guven 'orta'dan 'dusuk'e indirildi.
+  dogrulama_deneyi: 15 / 18 MOhm ve farkli TOC ile temizlenen wafer'da tau_eff.
+- id: site_upw_l_per_m2
+  ad: Wafer alanina bagli degisken UPW tuketimi
+  birim: L/m2
+  deger: 120
+  alt: 30
+  ust: 400
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok (Fraunhofer/pv-magazine yalniz yuzde tasarruf veriyor)
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: GW olcekli degerler kucuk uniteye aktarilamaz; sabit tasma ayrica modellenir.
+  aciklama: '182 mm (0.0331 m2) icin ~4 L/wafer. Formul sinifi: alan.'
+  dogrulama_deneyi: Prototip islak tezgahta debimetreyle olcum.
+- id: site_upw_fixed_lph_per_unit
+  ad: Unite basina sabit UPW debisi (tank tasmasi/bekleme)
+  birim: L/h
+  deger: 500
+  alt: 150
+  ust: 2000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kucuk unitede L/wafer'i belirleyen asil terim (H1). Beklemede tasmayi kesen tasarimla dusurulebilir.
+  aciklama: 'Formul sinifi: zaman.'
+  dogrulama_deneyi: Prototip tezgahta bosta ve yukte debi.
+- id: site_ro_recovery_frac
+  ad: Ters ozmoz (RO) geri kazanim orani
+  birim: '-'
+  deger: 0.75
+  alt: 0.6
+  ust: 0.85
+  kaynak: hafizadan
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Sebeke suyu kalitesine (silika, sertlik) baglidir.
+  aciklama: Besleme = UPW / geri kazanim.
+  dogrulama_deneyi: Sebeke suyu analizi + tedarikci tasarimi.
+- id: site_upw_kwh_per_m3
+  ad: UPW uretim + dagitim ozgul enerjisi
+  birim: kWh/m3
+  deger: 2
+  alt: 1
+  ust: 4
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Kucuk sistemde surekli sirkulasyon pompasi baskin.
+  aciklama: '-'
+  dogrulama_deneyi: Sayac.
+- id: site_upw_module_cap_m3h
+  ad: UPW referans modul kapasitesi
+  birim: m3/h
+  deger: 3
+  alt: 1
+  ust: 6
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Modul boyutu bir tasarim secimidir (site_module_architecture).
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_upw_module_capex_usd
+  ad: UPW referans modul capex (RO+EDI+parlatma dongusu)
+  birim: USD/modul
+  deger: 250000
+  alt: 120000
+  ust: 450000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Kendi imalatla dusurulebilir; kalite dogrulamasi gerekir.
+  aciklama: Ilk ciktidaki 80k USD/(m3/h) kalemi yerine modul cifti (cap, C).
+  dogrulama_deneyi: 2 teklif (1 ve 3 m3/h).
+- id: site_wwt_module_cap_m3h
+  ad: AAT referans modul kapasitesi
+  birim: m3/h
+  deger: 4
+  alt: 1
+  ust: 8
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_wwt_module_capex_usd
+  ad: HF/CaF2 + notralizasyon + filtre pres AAT modul capex
+  birim: USD/modul
+  deger: 200000
+  alt: 100000
+  ust: 450000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Kendi imalatla (PP tanklar, dozaj, pH/F-ISE) dusurulebilir.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif + jar testi.
+- id: site_wwt_frac_of_upw
+  ad: AAT'ye giden atiksu / UPW tuketimi
+  birim: '-'
+  deger: 0.95
+  alt: 0.8
+  ust: 1
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Temiz son durulamalar geri kazanilirsa dusur.
+  aciklama: RO konsantresi ayri desarj edilir.
+  dogrulama_deneyi: Olcum.
+- id: site_kerf_ww_l_per_wafer
+  ad: Tel testere ve kesim sonrasi temizlik atiksuyu
+  birim: L/wafer
+  deger: 1
+  alt: 0.3
+  ust: 5
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ince Si tozu iceren ayri hat (filtrasyon/cokturme); HF hattina karistirilmamali.
+  aciklama: Yeni kalem (fizik denetcisi).
+  dogrulama_deneyi: Prototip testerede olcum.
+- id: site_si_sludge_disposal_usd_t
+  ad: Si kerf camuru bertaraf/geri kazanim bedeli
+  birim: USD/t yas
+  deger: 100
+  alt: 0
+  ust: 300
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Ince Si tozu su/alkali ortamda H2 uretebilir; kapali olmayan, havalandirilan konteyner gerekir.
+  aciklama: 'Alt sinir 0: geri kazanim veya degerlendirme.'
+  dogrulama_deneyi: Camur analizi + lisansli firma teklifi.
+- id: site_trafo_module_kva
+  ad: Trafo + OG hucre referans modul
+  birim: kVA
+  deger: 2000
+  alt: 1000
+  ust: 3150
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif + OSB baglanti proje.
+- id: site_trafo_module_capex_usd
+  ad: Trafo + OG hucre modul capex
+  birim: USD/modul
+  deger: 120000
+  alt: 60000
+  ust: 200000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Yerli uretim mevcut.
+  aciklama: Elektrik guvence bedeli 746 TL/kW (=15 USD/kW, iade edilir; bigpara) haric.
+  dogrulama_deneyi: Teklif.
+- id: site_kva_per_kw_avg
+  ad: Ortalama yuk basina kurulu trafo gucu
+  birim: kVA/kW
+  deger: 1.6
+  alt: 1.3
+  ust: 2.2
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tepe/ortalama orani (firin eritme, PECVD) ve guc faktoru.
+  aciklama: '-'
+  dogrulama_deneyi: Yuk profili (proses ajanlari).
+- id: site_genset_module_kva
+  ad: Jenerator referans modul
+  birim: kVA
+  deger: 1000
+  alt: 500
+  ust: 2000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_genset_capex_usd_kva
+  ad: Dizel jenerator + ATS kurulu maliyeti
+  birim: USD/kVA
+  deger: 200
+  alt: 120
+  ust: 350
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Yerli ureticiler var; fiyat dogrulanmadi.
+  aciklama: '-'
+  dogrulama_deneyi: 2 teklif.
+- id: site_cooling_module_mwth
+  ad: Kuru sogutucu referans modul
+  birim: MWth
+  deger: 1
+  alt: 0.5
+  ust: 2
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_cooling_module_capex_usd
+  ad: Kuru sogutucu + pompa + tampon tank modul capex
+  birim: USD/modul
+  deger: 120000
+  alt: 60000
+  ust: 250000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Yedekli pompa ve acil sogutma (gravite tanki) dahil varsayildi.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_heat_to_water_frac
+  ad: Unite isisinin sogutma suyuna giden orani
+  birim: '-'
+  deger: 0.6
+  alt: 0.4
+  ust: 0.8
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'Enerji korunumu: P_elec = su + oda havasi + egzoz. Firin ceketi baskin.'
+  aciklama: 'Kalan: site_heat_to_air_frac (oda) + egzoz (1 - ikisi).'
+  dogrulama_deneyi: Proses ajanlarindan isi dagilim verisi.
+- id: site_heat_to_air_frac
+  ad: Unite isisinin oda havasina giden orani (HVAC yuku)
+  birim: '-'
+  deger: 0.3
+  alt: 0.15
+  ust: 0.5
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Pil kuru odasi ve mini-ortam fanlari oda isisini artirir.
+  aciklama: '-'
+  dogrulama_deneyi: Proses ajanlari.
+- id: site_cda_nm3_min_per_unit
+  ad: Unite basina basincli hava talebi
+  birim: Nm3/dk
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Pnomatik valfler, otomasyon, kuru oda.
+  aciklama: '-'
+  dogrulama_deneyi: Proses ajanlarinin pnomatik listesi.
+- id: site_cda_module_nm3_min
+  ad: Kompresor + kurutucu referans modul
+  birim: Nm3/dk
+  deger: 10
+  alt: 5
+  ust: 20
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_cda_module_capex_usd
+  ad: Kompresor + kurutucu modul capex
+  birim: USD/modul
+  deger: 60000
+  alt: 30000
+  ust: 120000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_scrubber_module_m3h
+  ad: Merkezi asit/alkali egzoz yikayici referans modul
+  birim: m3/h
+  deger: 15000
+  alt: 5000
+  ust: 30000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Islak tezgah ve kimyasal depo egzozu; saha basina paylasilabilir.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_acid_scrubber_capex_usd_per_1000m3h
+  ad: Merkezi yikayici birim capex
+  birim: USD/(1000 m3/h)
+  deger: 8000
+  alt: 4000
+  ust: 15000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: Referans modul 15,000 m3/h = 120 kUSD.
+  dogrulama_deneyi: Teklif.
+- id: site_gas_set_units_per_set
+  ad: Bir gaz kabini setinin besleyebildigi unite sayisi
+  birim: unite/set
+  deger: 4
+  alt: 2
+  ust: 8
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Kabin debisi ve silindir degisim sikligi sinirlar.
+  aciklama: '-'
+  dogrulama_deneyi: Hucre ajaninin tepe debileri + kabin tasarimi.
+- id: site_f_discharge_limit_mg_l
+  ad: Florur desarj siniri (tasarim hedefi)
+  birim: mg/L
+  deger: 15
+  alt: 5
+  ust: 20
+  kaynak: https://web.deu.edu.tr/atiksu/ana39/skkypdf.pdf (Su Kirliligi Kontrolu Yonetmeligi)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: 'TABLO 19 (OSB karisik endustriyel atiksu) FLORUR 15 mg/l; Tablo 15.4 Daglama 20; Tablo 18.2:
+    5; Tablo 25''te florur yok; ''Bu yonetmelikte yer almayan endustri tipleri icin desarj standartlari Tablo 19
+    esas alinarak Bakanlik tarafindan tespit edilir'''
+  kaynak_tarihi: SKKY 2004 metni (sonraki degisiklikler kontrol edilmeli)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: OSB kanalina desarjda Tablo 25 florur sinirlamiyor; ancak OSB kendi baglanti kriterini koyabilir.
+  aciklama: Tek kademe CaF2 ile 15 mg/L sinirda; 5 mg/L icin parlatma kademesi gerekir.
+  dogrulama_deneyi: OSB'den yazili baglanti kriteri.
+- id: site_caf2_kg_per_kg_hf
+  ad: HF basina CaF2 camuru (kuru)
+  birim: kg/kg
+  deger: 1.951
+  alt: 1.951
+  ust: 1.951
+  kaynak: 'Stokiyometri: 2HF + Ca(OH)2 -> CaF2 + 2H2O'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Senaryodan bagimsiz kimya.
+  aciklama: 78.07/(2*20.01) = 1.951. Sinif 'alan'dan 'teknik'e alindi (oran).
+  dogrulama_deneyi: '-'
+- id: site_lime_kg_per_kg_hf
+  ad: HF basina kirec tuketimi
+  birim: kg/kg
+  deger: 2.4
+  alt: 1.9
+  ust: 2.8
+  kaynak: Stokiyometri + fazlalik (tahmin)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: Stokiyometrik 74.09/40.01 = 1.85; %10-50 Ca fazlasi F-'yi dusurur. HNO3/HCl notralizasyonu ayrica tuketir.
+  dogrulama_deneyi: Jar testi.
+- id: site_sludge_solids_frac
+  ad: Filtre pres keki kuru madde orani
+  birim: '-'
+  deger: 0.4
+  alt: 0.25
+  ust: 0.6
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: '-'
+  aciklama: Yas kek = kuru / oran.
+  dogrulama_deneyi: Pilot filtre pres.
+- id: site_sludge_disposal_usd_t
+  ad: CaF2 camuru bertaraf/degerlendirme bedeli
+  birim: USD/t yas
+  deger: 150
+  alt: 50
+  ust: 400
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Tehlikeli / tehlikesiz ayna kod siniflandirmasina baglidir; cimento/celikte flux olarak degerlendirilebilir
+    (hafizadan).
+  aciklama: '-'
+  dogrulama_deneyi: Camur analizi + lisansli firma teklifi.
+- id: site_h2_l_per_g_si_etched
+  ad: Alkali ortamda asindirilan Si basina H2
+  birim: L(0 C, 1 atm)/g Si
+  deger: 1.596
+  alt: 1.596
+  ust: 1.596
+  kaynak: 'Stokiyometri: Si + 2OH- + H2O -> SiO3(2-) + 2H2'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: KOH dokulama, K8 alkali temizlik ve kerf tozu icin gecerli.
+  aciklama: 2/28.0855*22.414 = 1.596 L/g.
+  dogrulama_deneyi: '-'
+- id: site_sih4_lfl_frac
+  ad: Silan alt yanicilik siniri (havada, tasarim degeri)
+  birim: hacim orani
+  deger: 0.01
+  alt: 0.01
+  ust: 0.014
+  kaynak: https://sesha.org/wp-content/uploads/2019/11/Silane-Abatement-Considerations.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Lower flammable limit (LFL) 1.0% (UFL 96%)''; ''Lower explosive limit (LEL) 1.4%''; ''Pyrophoric
+    – burns in air > 1% concentrations''; PECVD ornegi: ''SiH4 is explosive (LFL=1%)'''
+  kaynak_tarihi: '2008-04-22'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Guvenlik tasarimi dusuk degeri (%1.0) esas alir. Wikipedia 1.37 veriyor (denetci).
+  aciklama: id site_sih4_lel_frac'tan yeniden adlandirildi. Deger 0.014'ten 0.010'a indi. Silan piroforiktir; seyreltme
+    hava sizintisinda tutusmayi onlemez.
+  dogrulama_deneyi: '-'
+- id: site_h2_lfl_frac
+  ad: Hidrojen alt yanicilik siniri (havada)
+  birim: hacim orani
+  deger: 0.04
+  alt: 0.04
+  ust: 0.04
+  kaynak: https://sesha.org/wp-content/uploads/2019/11/Silane-Abatement-Considerations.pdf
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '''Flammable, LFL 4% in air''; ''Hydrogen is explosively flammable (LFL 4%)'''
+  kaynak_tarihi: '2008-04-22'
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: HJT PECVD'de H2 akisi silanin katlari olabilir; alkali banyolarda da H2 olusur.
+  aciklama: Yeni.
+  dogrulama_deneyi: '-'
+- id: site_dilution_lfl_target_frac
+  ad: Egzozda hedef yanici konsantrasyon (LFL orani)
+  birim: '-'
+  deger: 0.25
+  alt: 0.1
+  ust: 0.25
+  kaynak: Yaygin endustri uygulamasi (hafizadan)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: 'SESHA ozet: ''Must not allow flammable mixtures into ductwork''; ''Mixing with air is seldom
+    the best solution'''
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Bazi sigortacilar %10 ister. Yalnizca seyreltme mimarisinde ve H2 ureten acik banyolarda kullanilir.
+  aciklama: id site_dilution_lel_frac'tan yeniden adlandirildi.
+  dogrulama_deneyi: Sigortaci ve abatement tedarikcisi sartnamesi.
+- id: site_n_gas_cabinets
+  ad: Saha gaz kabini sayisi (HJT)
+  birim: adet
+  deger: 5
+  alt: 4
+  ust: 7
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: SiH4, H2, PH3-karisim, B-karisim, NF3 (NF3'suz temizlikte 4). Ar/O2 icin panel yeterli.
+  aciklama: Guven 'orta'dan 'dusuk'e indirildi.
+  dogrulama_deneyi: Hucre ajaninin gaz listesi.
+- id: site_gas_cabinet_capex_usd
+  ad: Otomatik gaz kabini (2 silindirli, purge, asiri akis, alev dedektoru)
+  birim: USD/adet
+  deger: 45000
+  alt: 15000
+  ust: 120000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Kendi imalatta komponentler ~10-25 kUSD + ucuncu taraf dogrulamasi.
+  aciklama: '-'
+  dogrulama_deneyi: 2 teklif + kendi BOM.
+- id: site_vmb_capex_usd
+  ad: Valf manifold kutusu (VMB) + hat, gaz basina unite dagitimi
+  birim: USD/gaz/unite
+  deger: 15000
+  alt: 6000
+  ust: 30000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Unite basina paylasilmayan kisim.
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_tgm_fixed_capex_usd
+  ad: Merkezi gaz izleme, alarm, acil durdurma (EMO), guvenlik yukleri acil gucu
+  birim: USD
+  deger: 120000
+  alt: 50000
+  ust: 250000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: N'den bagimsiz gercek sabit maliyet.
+  aciklama: site_fixed_capex_usd icinde.
+  dogrulama_deneyi: Teklif.
+- id: site_tgm_point_capex_usd
+  ad: Gaz dedektor noktasi (unite ici)
+  birim: USD/nokta
+  deger: 5000
+  alt: 2000
+  ust: 10000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Unite basina ~6 nokta (SiH4, PH3, B2H6, H2 x2, elektrolit/HF).
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_pou_abatement_capex_usd
+  ad: Yakma-islak (burn-wet) POU abatement, tek girisli
+  birim: USD/cihaz
+  deger: 120000
+  alt: 40000
+  ust: 250000
+  kaynak: 'tahmin (fiyat); teknik gerekce: https://sesha.org/wp-content/uploads/2019/11/Silane-Abatement-Considerations.pdf'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Teknik: ''Mixing with oxidizers must be avoided at all costs''; ''Silane is nonreactive towards
+    other hydrides (PH3, NH3, GeH4, etc.)''; ''PH3, B2H6 readily burned, do not wet scrub at all'''
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Uniteler arasi (saha) paylasilmaz; unite icinde yakin pompalar cok girisli cihazi paylasabilir
+    (NF3 akislari ayri tutulursa). Kendi tasarim mumkun, ama bagimsiz guvenlik dogrulamasi sart.
+  aciklama: 'Fiyat dogrulanmadi. Adet: site_n_pou formulu.'
+  dogrulama_deneyi: 2-3 tedarikci teklifi + kendi tasarim BOM.
+- id: site_pou_inlets_per_unit
+  ad: POU cihazi basina giris sayisi
+  birim: giris/cihaz
+  deger: 2
+  alt: 1
+  ust: 4
+  kaynak: hafizadan (cok girisli yakma-islak cihazlar ticari olarak mevcut; dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Her giris ayri yakma nozuluna gider. Oksitleyici (NF3) akisi hidrur akisiyla ayni girise baglanmaz.
+  aciklama: Yeni.
+  dogrulama_deneyi: Tedarikci verisi.
+- id: site_pou_capex_per_extra_inlet_frac
+  ad: Ek giris basina POU capex artisi
+  birim: '-'
+  deger: 0.25
+  alt: 0.1
+  ust: 0.5
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: '-'
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_pou_abatement_opex_usd_yr
+  ad: POU abatement isletme maliyeti
+  birim: USD/yil/cihaz
+  deger: 20000
+  alt: 8000
+  ust: 50000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Yakit (CH4/H2), su, N2, elektrik, SiO2 tozu temizligi.
+  aciklama: '-'
+  dogrulama_deneyi: Tedarikci CoO verisi.
+- id: site_exhaust_fan_kw_per_1000m3h
+  ad: Egzoz fan gucu
+  birim: kW/(1000 m3/h)
+  deger: 0.7
+  alt: 0.4
+  ust: 1.5
+  kaynak: P = Q*dp/eta
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: (1000/3600)*1500 Pa/0.6 = 0.69 kW.
+  dogrulama_deneyi: '-'
+- id: site_makeup_air_kwh_e_per_m3h_yr
+  ad: Egzozla atilan havanin yerine taze hava sartlandirma enerjisi
+  birim: kWh_e/((m3/h).yil)
+  deger: 10
+  alt: 5
+  ust: 20
+  kaynak: Isi dengesi + Gebze isitma derece-gun ~1900 (hafizadan)
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: '-'
+  aciklama: 1.2*1.005*1900*24/3600 = 15.3 kWh_th; isi pompasi COP 3 ile ~5 kWh_e + yaz sogutma/nem alma.
+  dogrulama_deneyi: HVAC tasarim hesabi.
+- id: site_minienv_iso_class
+  ad: Wafer yolu mini-ortam ISO sinifi
+  birim: ISO 14644-1 sinif
+  deger: 6
+  alt: 5
+  ust: 7
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: HJT'de metal/organik kontaminasyon ve bekleme suresi kritik.
+  aciklama: Mini-ortamda sinif farkinin mutlak maliyeti kucuk (tum kapali alan tek yonlu akisla kaplanir); pahali
+    olan tum oda.
+  dogrulama_deneyi: Bolunmus lot deneyi.
+- id: site_ffu_w_per_m2
+  ad: FFU gucu, FFU yuzeyi basina (0.45 m/s)
+  birim: W/m2
+  deger: 100
+  alt: 85
+  ust: 130
+  kaynak: https://www.hepacleanroomfilter.com/product/en/equipment-fan-filter-unit.html
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '1175x1175: 2000 m3/h; 145 W (EBM EC), 120 W (EBM DC), 135 W (Gebhardt EC). 1175x575: 1000 m3/h;
+    85 / 70 / 75 W. ''All measurements ... at 0.45 m/s'''
+  kaynak_tarihi: 2026-09
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: EC motorlu FFU; filtre tikandikca guc artar.
+  aciklama: 'Duzeltildi: 120/1.381 = 87; 145/1.381 = 105; 70/0.676 = 104; 85/0.676 = 126 W/m2. Ilk ciktida 70 W
+    yanlislikla tam boy uniteye atanmisti. 0.3 m/s yuz hizinda guc ~(0.3/0.45)^2-3 = 0.3-0.44 kat (tahmin).'
+  dogrulama_deneyi: Kurulumda guc olcumu.
+- id: site_ffu_coverage_frac
+  ad: Mini-ortam tavaninda FFU kaplama orani
+  birim: '-'
+  deger: 0.9
+  alt: 0.8
+  ust: 1
+  kaynak: hafizadan (mini-ortamlar tek yonlu akisla calisir); oda referansi https://terrapincg.com/news/cleanroom-construction-cost-per-square-foot-2026
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: 'terrapincg (oda tipi): ''ISO 5: 80-100% HEPA ceiling with unidirectional laminar flow''; ISO
+    6 %40-60; ISO 7 %15-30'
+  kaynak_tarihi: '2026'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Oda tipi karisik akis oranlari kucuk kapali mini-ortama aktarilamaz (ilk ciktida H1 hatasi).
+    Mini-ortamda seyreltme yetersiz oldugu icin tam kaplama gerekir.
+  aciklama: 0.5'ten 0.9'a cikti; FFU gucu ve capex'i ~1.8 kat artar.
+  dogrulama_deneyi: Parcacik sayimi ile devreye alma.
+- id: site_minienv_capex_usd_m2
+  ad: Mini-ortam capex (FFU + kabin + kontrol), taban alani basina
+  birim: USD/m2
+  deger: 3000
+  alt: 1200
+  ust: 7000
+  kaynak: tahmin; ust referans https://terrapincg.com/news/cleanroom-construction-cost-per-square-foot-2026
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Referans (ABD tam oda): ISO 6 $600-950/SF; ISO 5 $1,000-1,800/SF'
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: ABD tam oda degerleri (ISO 6 icin 6,460-10,230 USD/m2); kendi imalat mini-ortam cok daha ucuz
+    olmali.
+  aciklama: Kaplama 0.9'a cikinca 2500'den 3000'e yukseltildi.
+  dogrulama_deneyi: Kendi BOM + 1 teklif.
+- id: site_cda_kwh_per_nm3
+  ad: Basincli hava ozgul enerjisi (7 bar, kurutulmus)
+  birim: kWh/Nm3
+  deger: 0.12
+  alt: 0.1
+  ust: 0.16
+  kaynak: hafizadan
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: -40 C ciy noktasinda +%10-20.
+  aciklama: '-'
+  dogrulama_deneyi: Kompresor sayaci.
+- id: site_cooling_kwe_per_kwth
+  ad: Suya atilan isi basina sogutma elektrigi (kuru sogutucu/kule)
+  birim: kWe/kWth
+  deger: 0.04
+  alt: 0.02
+  ust: 0.25
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kuru sogutucu 0.02-0.05; chiller gerekirse 0.17-0.25.
+  aciklama: Artik yalnizca suya giden isiya uygulanir (cift sayim giderildi).
+  dogrulama_deneyi: Ceket suyu giris sicakligi siniri (kristal ajani).
+- id: site_hvac_kwe_per_kwth
+  ad: Oda havasina giden isi basina HVAC elektrigi
+  birim: kWe/kWth
+  deger: 0.25
+  alt: 0.17
+  ust: 0.35
+  kaynak: COP 3-6 (hafizadan)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: Kuru oda nem alma ayri (pil ajani).
+  aciklama: Yeni.
+  dogrulama_deneyi: HVAC tasarimi.
+- id: site_hvac_capex_usd_per_kwth
+  ad: HVAC (chiller + klima santrali) capex, oda isi yuku basina
+  birim: USD/kWth
+  deger: 500
+  alt: 250
+  ust: 1000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Ilk ciktida HVAC capex'i hic yoktu.
+  aciklama: Yeni.
+  dogrulama_deneyi: HVAC teklif.
+- id: site_ups_capex_usd_kva
+  ad: UPS (kontrol/PLC/vakum/cekme ve rotasyon suruculeri, 10-15 dk)
+  birim: USD/kVA
+  deger: 400
+  alt: 250
+  ust: 700
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Isitici UPS'e baglanmaz (ergiyik tamponu dakikalar). Surucu ve kontrol surekliligi yapi kaybini
+    azaltabilir (hafizadan).
+  aciklama: '-'
+  dogrulama_deneyi: Teklif.
+- id: site_melt_t_onset_s
+  ad: Isitici kesildiginde ergiyikte donmanin baslamasina kadar gecen sure
+  birim: s
+  deger: 60
+  alt: 30
+  ust: 120
+  kaynak: https://en.wikipedia.org/wiki/Silicon + enerji dengesi
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: heat of fusion 50.21 kJ/mol; liquid density 2.57 g/cm3; solid 2.329 g/cm3
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Kucuk ergiyik ve yuksek isi kaybi sureyi kisaltir.
+  aciklama: id site_melt_ridethrough_s'ten yeniden adlandirildi. t = (m*cp_sivi + C_sicak_bolge)*dT/P_kayip. 100
+    kg*0.97 kJ/kgK (cp sivi hafizadan) + 0-250 kJ/K (tahmin), 20 K, 60 kW -> 32-116 s. Bu KAMPANYA KAYBI DEGIL;
+    bkz. site_melt_frac_solid_crit.
+  dogrulama_deneyi: Planli kapatmada sicaklik kaydi + termal model (kristal ajani).
+- id: site_melt_frac_solid_crit
+  ad: Geri donussuz kampanya kaybina yol acan katilasma orani
+  birim: '-'
+  deger: 0.2
+  alt: 0.05
+  ust: 0.5
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: 'Bilinmiyor. Mekanizma: yuzey kabugu ile cidar arasinda hapsolan sivi donarken ~%10 genlesir
+    ve kuvars potayi catlatir.'
+  aciklama: '100 kg ve 60 kW ile: %10 -> 330-414 s; %20 -> 628-712 s; tam donma ~50 dk.'
+  dogrulama_deneyi: Kristal ajaninin termal-mekanik modeli + kucuk potada kontrollu donma deneyi.
+- id: site_grid_outage_events_yr
+  ad: Kampanya kaybi esigini asan uzun sebeke kesintisi sayisi
+  birim: 1/yil
+  deger: 2
+  alt: 0.5
+  ust: 10
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: OSB sebekesi genelde daha guvenilir kabul edilir (dogrulanmadi).
+  aciklama: Jenerator yatiriminin degerini belirler.
+  dogrulama_deneyi: SEDAS/OSB'den 3-5 yillik kesinti kaydi (sure dagilimi).
+- id: site_voltage_sag_events_yr
+  ad: Gerilim cokmesi ve kisa kesinti sayisi
+  birim: 1/yil
+  deger: 15
+  alt: 3
+  ust: 50
+  kaynak: hafizadan (OG sanayi sebekelerinde yilda onlarca cokme tipik; dogrulanmadi)
+  kaynak_turu: hafizadan_dogrulanmadi
+  kaynak_alintisi: '-'
+  kaynak_tarihi: '-'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Buyume sirasinda ingot yapisini bozabilir (hafizadan); UPS/DVR kararini belirler.
+  aciklama: Yeni.
+  dogrulama_deneyi: 3 ay guc kalitesi analizoru (EN 50160 olcumu).
+- id: site_p_structure_loss_per_sag
+  ad: Govde buyumesi sirasinda bir cokmenin yapi kaybina yol acma olasiligi
+  birim: '-'
+  deger: 0.3
+  alt: 0.05
+  ust: 1
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Surucu ve kontrol UPS'te ise dusuk, degilse yuksek (hafizadan).
+  aciklama: Yeni.
+  dogrulama_deneyi: Pilot firinda olay kaydi.
+- id: site_seveso_ph3_lower_t
+  ad: BEKRA/Seveso III fosfin alt esigi
+  birim: t
+  deger: 0.2
+  alt: 0.2
+  ust: 0.2
+  kaynak: 'https://www.legislation.gov.uk/uksi/2015/483/schedule/1 ; TR: https://www.resmigazete.gov.tr/eskiler/2019/03/20190302-1.htm'
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'Phosphine: 0.2 (lower tier) and 1 (upper tier) tonnes. TR RG: alt seviye ''Sutun 2'', ust seviye
+    ''Sutun 3'' esikleri'
+  kaynak_tarihi: 2015 (UK) / 2019-03-02 (TR)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: TR yonetmeligi Seveso III uyumlu; Ek-1 taranmis PDF oldugu icin TR sayilari okunamadi. Unite
+    envanteri binlerce kat altinda.
+  aciklama: Ust seviye 1 t.
+  dogrulama_deneyi: CSB BEKRA birimine kapsam teyidi.
+- id: site_seveso_flam_gas_lower_t
+  ad: BEKRA/Seveso III P2 yanici gaz alt esigi (silan, TMB)
+  birim: t
+  deger: 10
+  alt: 10
+  ust: 10
+  kaynak: https://www.legislation.gov.uk/uksi/2015/483/schedule/1
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'P2 FLAMMABLE GASES: 10 and 50; Hydrogen: 5 and 50; H1: 5 and 20; H2: 50 and 200; P4 OXIDISING
+    GASES: 50 and 200'
+  kaynak_tarihi: 2015 (UK)
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Silan adiyla listelenmemis; P2'ye girer. N=8'de bile toplam q/Q << 1.
+  aciklama: '-'
+  dogrulama_deneyi: Envanter tablosuyla toplama kurali hesabi.
+- id: site_sprinkler_area_threshold_m2
+  ad: Parlayici madde bulunan yapida sprinkler zorunluluk esigi
+  birim: m2
+  deger: 1000
+  alt: 1000
+  ust: 1000
+  kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/21.5.200712937.pdf (Binalarin Yangindan Korunmasi Hakkinda Yonetmelik,
+    md. 96(2)e)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: '''Asagida belirtilen yerlerde otomatik yagmurlama sistemi kurulmasi mecburidir: ... e) Toplam
+    alani 1000 m2''den fazla olan, kolay alevlenici ve parlayici madde uretilen veya bulundurulan yapilarda.'''
+  kaynak_tarihi: RG 19.12.2007/26735, 2020 degisiklikleri dahil metin
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: saha
+  senaryoya_uygunluk: Silan, H2 ve pil elektroliti bulunan 2500 m2 unite alaninda sprinkler zorunlu. Suyla tepkimeye
+    giren malzeme alanlarinda (md. 96(4)) baska sistem gerekir.
+  aciklama: Yeni.
+  dogrulama_deneyi: Yangin danismani + itfaiye gorusu.
+- id: site_sprinkler_capex_usd_m2
+  ad: Sprinkler sistemi capex (unite alani basina)
+  birim: USD/m2
+  deger: 35
+  alt: 20
+  ust: 60
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Yangin suyu deposu ve pompa saha sabitinde.
+  aciklama: Yeni.
+  dogrulama_deneyi: Teklif.
+- id: site_flam_liquid_max_l_per_m2
+  ad: Fabrika binasinda tecritli yanici sivi depolama yogunlugu (en fazla 50 m2 alan)
+  birim: L/m2
+  deger: 350
+  alt: 70
+  ust: 350
+  kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/21.5.200712937.pdf (md. 118(3), Ek-12/B)
+  kaynak_turu: standart_metni_dogrulanmis
+  kaynak_alintisi: 'Ek-12/B: en fazla alan 15 m2: 70 L/m2 (60 dk, korumasiz) / 175 (korumali); 50 m2: 140 L/m2 (120
+    dk, korumasiz) / 350 (120 dk, korumali). ''Sinif IA Sinif IB sivi toplam miktari Ek-12/A''daki degerini asmaz''
+    (IA 2,500 L; IB 5,000 L)'
+  kaynak_tarihi: RG 19.12.2007/26735, 2020 degisiklikleri dahil metin
+  guven: yuksek
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Na-iyon elektroliti (karbonat cozuculer) ve IPA/aseton icin. 150 bin hucre/yil icin yillik
+    elektrolit hacmi bu sinirin cok altinda (hucre formatina bagli).
+  aciklama: Yeni. Tecritli alan 120 dk yangina dayanikli ve sondurme sistemli ise 350 L/m2.
+  dogrulama_deneyi: Pil ajanindan elektrolit hacmi ve parlama noktasi sinifi.
+- id: site_batt_fire_capex_usd_per_unit
+  ad: Pil formasyon/yaslandirma yangin bolmesi, algilama, sondurme; elektrolit dolum ATEX
+  birim: USD/unite
+  deger: 80000
+  alt: 30000
+  ust: 250000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Termal kacak riski; bina/yangin kalemi sahada, proses ekipmani pil ajaninda.
+  aciklama: Yeni (fizik denetcisi).
+  dogrulama_deneyi: Yangin danismani + sigortaci gorusu.
+- id: site_batt_nmp_recovery_capex_usd
+  ad: NMP geri kazanimi ve maruziyet kontrolu (yalniz PVDF/NMP secilirse)
+  birim: USD/unite
+  deger: 150000
+  alt: 60000
+  ust: 400000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Su bazli baglayici secilirse sifir. NMP ureme toksigidir (hafizadan).
+  aciklama: 'Yeni. Tasarim secimi: site_batt_binder.'
+  dogrulama_deneyi: Pil ajaninin baglayici secimi.
+- id: site_chem_dist_capex_usd_per_unit
+  ad: Unite ici kimyasal dagitim (HF, KOH, H2O2, HCl vb.)
+  birim: USD/unite
+  deger: 40000
+  alt: 15000
+  ust: 100000
+  kaynak: tahmin (kaynak yok)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: unite
+  senaryoya_uygunluk: Metinde vardi ama formulde yoktu; eklendi.
+  aciklama: Yeni.
+  dogrulama_deneyi: Teklif.
+- id: site_fixed_capex_usd
+  ad: Saha gercek sabit capex (N'den bagimsiz)
+  birim: USD
+  deger: 860000
+  alt: 450000
+  ust: 1900000
+  kaynak: tahmin (kalem toplami)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Kucuk olcekte baskin kalem. OSB altyapisi bazi kalemleri dusurur.
+  aciklama: 'Kalemler (kUSD): izin/muhendislik/CED/patlamadan korunma dokumani 150 + gaz odasi (120 dk yangin dayanimli,
+    BYKHY md. 105) 120 + gaz izleme/EMO 120 + NOx yikayici (K8, Faz 1) 80 + kimyasal ve yanici sivi deposu (Ek-12/B
+    tecritli alan) 100 + N2/LAr tank temeli (Faz 1) 50 + OSB baglanti 50 + acil dus/HF kiti 30 + saha lab 80 + yangin
+    suyu deposu ve pompa 80 = 860. Guvence bedeli (15 USD/kW, iade edilir) haric.'
+  dogrulama_deneyi: Kalem kalem teklif ve danismanlik.
+- id: site_fixed_opex_usd_yr
+  ad: Saha sabit isletme gideri (personel, OSGB, analiz, kalibrasyon, izin)
+  birim: USD/yil
+  deger: 180000
+  alt: 90000
+  ust: 350000
+  kaynak: tahmin + eco_labor_* uzerinden kaba hesap
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Her vardiyada gaz/kimyasal acil mudahaleye egitimli personel gerekir.
+  aciklama: '24/7 yardimci tesis/gaz teknisyeni: 4.2*2070*13.4 = 116 kUSD + cevre/ISG muhendisi (kismi) + OSGB +
+    desarj analizleri + dedektor kalibrasyonu.'
+  dogrulama_deneyi: Organizasyon semasi + OSGB teklifi.
+- id: site_fixed_opex_step_usd_yr
+  ad: Her 4 ek unite icin ek saha personeli
+  birim: USD/yil/adim
+  deger: 29000
+  alt: 20000
+  ust: 45000
+  kaynak: tahmin (1 FTE teknisyen)
+  kaynak_turu: tahmin
+  kaynak_alintisi: yok
+  kaynak_tarihi: '2026-09-27'
+  guven: dusuk
+  maliyet_sinifi: saha_sabit
+  olcek: saha
+  senaryoya_uygunluk: Basamakli kisim.
+  aciklama: Ilk ciktida formulde kullaniliyordu ama tanimsizdi. 1 FTE * 2070 h * 13.4 = 27.7 kUSD.
+  dogrulama_deneyi: Organizasyon semasi.
+- id: eco_usd_inflation_frac_yr
+  ad: USD enflasyonu (reel/nominal donusum)
+  birim: 1/yil
+  deger: 0.0234
+  alt: 0.015
+  ust: 0.035
+  kaynak: https://fred.stlouisfed.org/series/T10YIE (fredgraph.csv) ; https://fred.stlouisfed.org/series/T5YIFR
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'T10YIE: ''2026-09-25,2.34''; T5YIFR (5 yil sonrasi 5 yillik): ''2026-09-25,2.34'' (ikisi de
+    bu gorevde acildi).'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, zorunlu: eco_wacc_usd nominal, opex ve kiyas
+    fiyatlari (InfoLink, TrendForce, SMM, iscilik, elektrik) 2026-Q3 fiyatlariyla giriliyor; tutarli levelize yuk
+    icin r_reel = (1 + eco_wacc_usd)/(1 + bu parametre) - 1 = 1.12/1.0234 - 1 = 0.0944 gerekli. Girdilerde karsiligi
+    yok. Basabas orani enflasyon risk primi ve likidite primi icerir; aralik 0.015-0.035 bu primlerin ve gerceklesme
+    sapmasinin tahmini payidir (tahmin).'
+  dogrulama_deneyi: ''
+- id: eco_maint_first_gen_extra_frac_yr
+  ad: Ilk nesil kendi tasarim makinelerde ek bakim
+  birim: 1/yil
+  deger: 0.035
+  alt: 0
+  ust: 0.04
+  kaynak: tahmin; dayanak altyapi eco_maint_frac_capex_yr notu
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Altyapi: ''Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.''
+    Ust bant 0.08; ''yakin'' = 0.07-0.08 -> ek 0.03-0.04.'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, sahip notunu levelize modelde uygulamak icin
+    zorunlu (tek duz oran ya altyapiyi sisirir ya ilk nesil makineyi eksik sayar). Seviyelenmis karsiligi: dm x
+    AF(r_reel, 3)/AF(r_reel, N) = 0.035 x 2.52/5.44 = 0.0161/yil (N = 8; 2 yil kabul edilirse 0.0112). Alt 0: kendi
+    tasarim makine satin alinan kadar olgun. Yalniz kendi tasarim ilk nesil proses makinelerine uygulanir; kopya
+    unitelerde (ogrenme sonrasi) 0 alinabilir.'
+  dogrulama_deneyi: ''
+- id: eta_cell
+  ad: Hucre verimi eta_cell (hucre / modul / wafer / altyapi / kristal)
+  birim: '-'
+  deger: 0.22
+  alt: 0.19
+  ust: 0.26
+  kaynak: 'Hucre f_eta_cell ve Tablo 1: baslangic (eta_core 22.5, w_eq 0.75) a=50-210 mm''de %21.2-22.2; olgun B-arka
+    %24.8-25.8, D %25.6-26.0; cell_eta_core_start_pct 22.5 [19-24.5], cell_eta_core_mature_pct 26.1'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''improvement in average cell efficiency from 20.5% to 22.8% in 10 months during 2017/18'';
+    ''It places HJT efficiency at around 25.7% in 2025'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). eta_cell parametre degil, zincir adim 2''nin ciktisidir (a,
+    edge_mode, tau_SRH, wf_learn_weight). Baz 0.22 varsayilan ilk nesil (w = 1) icin; olgun (w = 0) ~0.25-0.26.
+    Alanlarin sabit 0.23/0.24/0.25 degerleri kaldirilir. Bu revizyonda zincirdeki tum turetilmis kontrol degerleri
+    (a ornekleri, Class III gucu, unite hacimleri, testere MW, M10 c/W) ilk nesil eta ile yeniden hesaplandi, olgun
+    degerler ayri verildi.'
+  dogrulama_deneyi: ''
+- id: mod_ctm_power_calc
+  ad: Hucreden module guc orani CTM
+  birim: '-'
+  deger: 0.974
+  alt: 0.956
+  ust: 0.992
+  kaynak: 'Modul mod_f_ctm_calc / mod_f_design_loop: 60 V dalinda 50 W 0.992 ... 300 W 0.974 ... 500 W 0.964; 35
+    V dalinda 0.956-0.988; optik bilesen 1.01 (tahmin)'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Modul ornek hesap: ''CTM = 1.01 x 0.9645 = 0.974 -> a = 135.4 mm'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). CTM a''ya baglidir; modul sahip. Hucre''nin a_min ve f_hjt_required_W''deki
+    sabit 0.97 bu ciktiyla degistirilir. W_unit_yr (panel Wp) hesabinda zorunlu carpan. Guven, optik bilesen tahmin
+    oldugu icin dusuk.'
+  dogrulama_deneyi: ''
+- id: N_s_max
+  ad: Seri hucre tavani N_s_max (60 V SELV)
+  birim: adet
+  deger: 64
+  alt: 64
+  ust: 72
+  kaynak: 'IEC 60364-7-712:2017 712.414.101 ve Ek B.1; hesap: min(floor(60 / (1.2 x 0.745 x 1.03)) = 65, floor(60
+    / (1.2 x 0.77)) = 64) = 64'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall
+    not exceed 60 V DC.''; Ek B.1: ''...UOC MAX shall be chosen equal to 1,2 UOC STC.'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). K6 sert sinir. Kendi hucremizin alfa ve Voc P99 olcumu yokken
+    K_U = 1.2 (Ek B) ve Voc_sinir = 0.77: 64 (cift, varsayilan N_s 64). Olcum/beyan sonrasi (beyan_alfa): tek urun/DE-AT
+    T_min -40 C ile tasarim tavani 67 (N_s 66); -20 C pazarinda 70; -9 C 72. Onceki kanonik 70, nominal degerlerle
+    -36.7 C altinda 60 V''u asiyordu (-37.8 C''de 60.1 V) ve aralik ucunda (0.77 V, -0.28 %/K) -20 C''de bile 60.7
+    V veriyordu. 35 V dvca35: 36; Class III STC: 44.'
+  dogrulama_deneyi: ''
+- id: wf_break_cell_ref
+  ad: Kirilma orani (hucre hatti referansi)
+  birim: '-'
+  deger: 0.02
+  alt: 0.001
+  ust: 0.1
+  kaynak: 'wf_break_cell_blend: ilk nesil wf_break_cell_ref_firstgen 0.02 [0.005-0.1] (tahmin), olgun wf_break_cell_ref_mature
+    0.0025 (Risen, PRNewswire 2026)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Olgun capa: ''yield rate consistently above 99.5% with a fragment rate below 0.25%'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik olgun uctu (0.0025); varsayilan senaryo
+    ilk nesil oldugundan harmanli referans (w = 1 -> 0.02) kanonik yapildi. Tek kirilma modeli wf_P_break_cell:
+    ref x [taban + (1 - taban)(sqrt(A)/182)^n_a (110/t)^n_t]; f_hjt_yield bunu kullanir, f_hjt_break emekli. Ilk
+    nesil hucre kirilmasi 182 mm/125 um %1.42, 50 mm %0.53. Risen verisi 210-yarim hucre (sqrt(A) ~148 mm); 182
+    mm''ye tasinmasi n_a''ya bagli ve bilinmiyor.'
+  dogrulama_deneyi: ''
+- id: wf_learn_weight
+  ad: Ogrenme durumu (ilk nesil / olgun agirligi)
+  birim: '-'
+  deger: 1
+  alt: 0
+  ust: 1
+  kaynak: Wafer wf_learn_weight = 0.5^(Q_cum_m2 / wf_learn_half_m2); wf_learning_scenario onerisi
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'wf_learning_scenario: ''ONERILEN: Ilk nesil + ogrenme egrisi; olgun senaryo yalnizca duyarlilik
+    icin.'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik varsayilan ilk nesil olmasina ragmen
+    unite sayilari olgun degerlerle verilmisti; tek anahtar (ogrenme_durumu) ile tum alanlar ayni w''yu okur: cz_zd_yield
+    ve cz_availability_unplanned (kristalin ''ogrenme yili'' varyanti = w 1; ayri id yok, eklenmeli), cell_eta_core_start/mature,
+    hjt_line_yield_start/mature, hjt_w_eq_start/B, saw_*, wf_break_*, wf_t_ascut_*. Karar kullanicinin (wf_learning_scenario
+    KARAR: kullanici).'
+  dogrulama_deneyi: ''
+- id: bat_E_cell_Wh
+  ad: Pil hucre enerjisi E_cell
+  birim: Wh
+  deger: 58
+  alt: 57
+  ust: 62
+  kaynak: 'Pil: 20 Ah x 2.9 V (bat_cell_pris_small_capacity_Ah, bat_cell_v_nom_nfpp_V 2.85-3.1); 26700 LO 3.10 V
+    x 3.3 Ah = 10.23 Wh (Tycorun); 50 Ah NFPP 142.5 Wh'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'bat_ds_cell_format: ''Minimum paket = Ns x E_cell: 143 Wh (26700), 870 Wh (20 Ah), 2138 Wh (50
+    Ah)''; SMM ''10-28Ah Prismatic (NFPP)'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; format secimine bagli cikti (pil_formati; format
+    bir kategorik secimdir, belirsizlik araligina konmaz). Aralik yalniz 20 Ah hucrenin nominal gerilim belirsizligi
+    (2.85-3.1 V). Diger formatlar: 26700 LO 10.23 Wh [9.6-10.85] (B ve < 0.8 kWh kutular), 50 Ah NFPP ~142.5-145
+    Wh (> 2 kWh). Belirli bir 20 Ah hucre dogrulanmadi (RFQ). Elektronik''in 20 Wh''i hicbir formata karsilik gelmiyor.'
+  dogrulama_deneyi: ''
+- id: bat_cell_v_max_V
+  ad: Na hucre gerilim penceresi ust ucu
+  birim: V
+  deger: 3.8
+  alt: 3.7
+  ust: 3.95
+  kaynak: Pil bat_cell_v_max_nfpp_V (OGSolar 160 Ah 3.8 V; 18650 3.7 V; EVLithium 210 Ah 3.95 V); LO bat_cell_v_max_lo_V
+    3.95 (Tycorun)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '160Ah ''Max Charge Voltage 3.8 V''; 18650 ''3.7 V''; EVLithium 210Ah NFPP ''3.95 ±0.05 V'';
+    Tycorun 26700 ''Charge Voltage: 3.95 ± 0.05V'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; kimyaya gore (NFPP 3.8, LO 3.95, LFP 3.65). Seri
+    sayiyi ve V_batt_max''i belirler; NFPP etiketleri tutarsiz, 3.95 V''luk hucre gelirse 15S yerine 14S. SELV kontrolunde
+    secilen hucrenin veri sayfasi ust ucu kullanilir.'
+  dogrulama_deneyi: ''
+- id: bat_ns_cells
+  ad: Pil seri hucre sayisi (14S/15S)
+  birim: adet
+  deger: 15
+  alt: 14
+  ust: 15
+  kaynak: 'bat_f08: min(bat_ns_design, floor(V_lim x 0.97 / V_cell_max)); NFPP 15 (57.0 V), LO 14 (55.3 V), LFP
+    15; 35 V rejiminde LO 8'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Pil ornegi: ''Ns = floor(60 x 0.97 / Vmax). LO: 14 (55.3 V) ... NFPP: 15 (57.0 V / 30 V)'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, marjli formul. A varsayilani (NFPP) 15, B (LO)
+    14; aralik yalniz kimya/veri sayfasi (NFPP 3.95 V gelirse 14). dvca35''te erisilebilir pil portu <= 35 V ->
+    8S (rejim secimi, belirsizlik degil). PV ile pil galvanik ayrik degilse V_batt_max <= 60 V (std_f_selv_ok).'
+  dogrulama_deneyi: ''
+- id: D_ingot_mm
+  ad: Ingot capi D ve aralik
+  birim: mm
+  deger: 250
+  alt: 80
+  ust: 300
+  kaynak: Kristal model 80-260 mm (+290 kalibrasyon), oneri kucuk talepte 120, saha duzeyinde 160-210; wafer eta(a|D)
+    tablolari D=250/300 (D=250'de a=182 psodo 0.672, M10 uyumlu); FZ <= 200 mm
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'FZ: ''The diameters of float-zone wafers are generally not greater than 200 mm due to the surface
+    tension limitations during growth.'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). D sabit bir baz degil; kristal sahipliginde karar degiskeni.
+    Ornek referansi 250 mm: (i) a=182 tek parca psodo ile satin alinan M10 (K3) ayni hucre/tasiyici boyutunu kullanir,
+    (ii) wafer tablosu mevcut (tatli noktalar 40, 50, 90, 182), (iii) kristal modeli icinde (210 ile 260 arasi ara
+    degerleme; L_body_max baglayici). 210 mm tek parca a ~152 mm (ozel boyut, serbest-D esdegeri ~0.67) verir, M10/G12
+    tasimaz ve eta(a|D) tablosu yok. Bant 80-300: 260-300 UYARI, >300 ve FZ''de >200 ELEME. Ayni sicak bolgede ayarlanabilir
+    bant bilinmiyor.'
+  dogrulama_deneyi: ''
