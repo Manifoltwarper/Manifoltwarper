@@ -1,6 +1,6 @@
 """Faz 1 onay dosyasını (tek sayfa HTML) üretir.
 
-Kullanım: python tools/onay_sayfasi.py <cikti.html>
+Kullanım: python tools/onay_sayfasi.py <cikti.html> [--tek-basina]
 Girdiler: arastirma/faz1/*.json, arastirma/faz1b/*.json, arastirma/kaynak_orneklem_denetimi.json,
           tools/onay_sablon.html
 """
@@ -186,7 +186,7 @@ def kaynak_html(R, K) -> str:
 <p class="small muted">Tablonun %67'si ‘tahmin’ veya ‘hafızadan’. Bunlar uydurma değil, kaynağı olmayan ya da doğrulanamayan değerler; her birinin dayanağı ve doğrulama yolu satır ayrıntısında yazılı.</p>"""
 
 
-def uret(cikti: Path) -> None:
+def uret(cikti: Path, tek_basina: bool = False) -> None:
     R, B, K = yukle()
     s = B["sentez"]["sonuc"]
     duz = json.loads((AR / "duzeltmeler.json").read_text(encoding="utf-8")) if (AR / "duzeltmeler.json").exists() else {}
@@ -217,10 +217,17 @@ def uret(cikti: Path) -> None:
     }
     sablon = (KOK / "tools" / "onay_sablon.html").read_text(encoding="utf-8")
     veri = json.dumps(V, ensure_ascii=False).replace("</", "<\\/")
+    sayfa = sablon.replace("/*__VERI__*/", veri, 1)
+    if tek_basina:  # yerelde çift tıklayarak açılabilen tam belge (yayın sürümünü iskeleti platform ekler)
+        sayfa = ('<!doctype html>\n<html lang="tr">\n<head>\n<meta charset="utf-8">\n'
+                 '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+                 '<style>body{margin:0}[hidden]{display:none!important}</style>\n</head>\n<body>\n'
+                 + sayfa + "\n</body>\n</html>\n")
     cikti.parent.mkdir(parents=True, exist_ok=True)
-    cikti.write_text(sablon.replace("/*__VERI__*/", veri, 1), encoding="utf-8")
+    cikti.write_text(sayfa, encoding="utf-8")
     print(f"{cikti} yazıldı ({cikti.stat().st_size // 1024} KB, {len(P)} parametre)")
 
 
 if __name__ == "__main__":
-    uret(Path(sys.argv[1]))
+    # --tek-basina: yerelde açmak için <!doctype>, <meta charset> vb. ile tam HTML belgesi yazar
+    uret(Path(sys.argv[1]), tek_basina="--tek-basina" in sys.argv[2:])
