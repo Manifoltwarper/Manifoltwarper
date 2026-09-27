@@ -28,6 +28,27 @@ ESDEGER_DISI = {
 # Birim dönüşümü gereken eşdeğerler: takma = kanonik × çarpan
 CARPAN = {
     ("xtal_price_argon_usd_nm3", "eco_price_argon_usd_kg"): (1.784, "1 Nm3 Ar = 1,784 kg (0 °C, 1 atm)"),
+    ("mod_cu_price_usd_kg", "el_cu_price_usd_kg"): (1.1, "LME × 1,1 örgü/kablolama payı (tahmin)"),
+    ("mod_beta_voc_per_K", "hjt_tc_voc_pct_per_K"): (0.01, "%/K → 1/K"),
+}
+# Teknik zincir görevi 'takma_adlar' listesine ilişkili ama farklı büyüklükleri de (olgun/ilk nesil uçları,
+# hücre ve dizi gerilimleri, farklı model biçimleri) koymuş. Bu yüzden zincirde yalnız elle doğrulanmış,
+# gerçekten aynı büyüklük olan eşleşmeler eşdeğer yapılır; diğerleri 'ilişkili' notu olarak kalır.
+ZINCIR_ESDEGER = {
+    "mod_voc_cell_stc_V": "hjt_voc_cell_V",
+    "mod_beta_voc_per_K": "hjt_tc_voc_pct_per_K",
+    "mod_T_min_design_C": "std_tmin_site_c",
+    "el_V_lim_wet_V": "std_dvca_dc_wet_v",
+    "mod_classIII_voc_max_V": "std_class3_voc_stc_max_v",
+    "mod_classIII_isc_max_A": "std_class3_isc_max_a",
+    "wf_texture_removal_um": "hjt_si_etch_removal_um",
+    "el_E_cell_Wh": "bat_E_cell_Wh",
+    "el_Vcell_max_na_V": "bat_cell_v_max_V",
+    "el_Vcell_min_use_V": "bat_v_min_cutoff_V",
+    "el_N_batt_series": "bat_ns_cells",
+    "el_N_cell_per_year": "bat_line_cells_per_year",
+    "wf_tail_h_over_D": "cz_tail_length_ratio",
+    "wf_crown_h_over_D": "cz_shoulder_height_ratio",
 }
 KAYNAK_ORNEKLEM = {
     "saw_wire_price_steel_usd_km": ("hesap_turetilmis", "kaynak 17 RMB/km veriyor (2024, çelik ve tungsten karışık ortalama); 2024 kuruyla ~2,36–2,40 USD/km. 2,5 USD/km bundan %5–6 yüksek; çelik çekirdek için ayrı fiyat kaynakta yok."),
@@ -84,6 +105,11 @@ def uygula() -> dict:
 
     # 3) kanonik parametreler (ekonomi, zincir)
     sahip_kaynagi: dict[str, str] = {}
+    tum_kanonik = set()
+    for gorev in ("ekonomi", "zincir"):
+        yol = AR / "faz1b" / f"{gorev}.json"
+        if yol.exists():
+            tum_kanonik |= {k["kanonik_id"] for k in json.loads(yol.read_text(encoding="utf-8"))["sonuc"]["kanonik_parametreler"]}
     for gorev in ("ekonomi", "zincir"):
         yol = AR / "faz1b" / f"{gorev}.json"
         if not yol.exists():
@@ -115,6 +141,14 @@ def uygula() -> dict:
                 if tid not in P:
                     formul_deg[tid] = kid
                     continue
+                if tid in tum_kanonik:  # ayrı rol: kendisi de kanonik, eşdeğer yapılmaz
+                    duz(tid)["aciklama"] = _ekle(aciklama(tid), f"[Uzlaştırma/{gorev}] {kid} ile ilişkili ama ayrı kanonik: {t['fark_aciklamasi']}")
+                    continue
+                if gorev == "zincir" and ZINCIR_ESDEGER.get(tid) != kid:
+                    if tid in ZINCIR_ESDEGER:  # doğru sahibine ayrıca bağlanacak
+                        continue
+                    duz(tid)["aciklama"] = _ekle(aciklama(tid), f"[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → {kid}: {t['fark_aciklamasi']}")
+                    continue
                 if tid in ESDEGER_DISI:
                     duz(tid)["aciklama"] = _ekle(aciklama(tid), ESDEGER_DISI[tid])
                     continue
@@ -123,6 +157,12 @@ def uygula() -> dict:
                                  "aciklama": _ekle(aciklama(tid), f"[Uzlaştırma/{gorev}] Eşdeğer: değer {kid}"
                                                    f"{' × ' + str(carpan) + ' (' + cnot + ')' if carpan != 1.0 else ''}"
                                                    f" üzerinden okunur. Fark: {t['fark_aciklamasi']}")})
+    # zincir listesinde yanlış kanonik altında duran doğrulanmış eşleşmeler
+    for tid, kid in ZINCIR_ESDEGER.items():
+        if tid in P and not D.get(tid, {}).get("esdeger") and (kid in P or any(y["id"] == kid for y in yeni)):
+            carpan, cnot = CARPAN.get((tid, kid), (1.0, ""))
+            duz(tid).update({"esdeger": kid, "esdeger_carpan": carpan,
+                             "aciklama": _ekle(aciklama(tid), f"[Uzlaştırma/zincir, elle doğrulandı] Eşdeğer: değer {kid} üzerinden okunur.")})
     # eşdeğer hedefinin kendisi başka yerde eşdeğer yapıldıysa zinciri kır
     for pid, d in D.items():
         hedef = d.get("esdeger")

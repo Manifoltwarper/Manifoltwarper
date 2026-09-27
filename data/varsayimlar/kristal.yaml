@@ -584,7 +584,13 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Dusuk hacimli kucuk potalarda birim fiyat goreli yuksek olabilir.
-  aciklama: ''
+  aciklama: 'Dayanak yok; kaynak ya da teklif yok, muhendislik yargisi. Mantik: kucuk ve dusuk hacimli potada kalip/erime
+    hazirligi, kalite kontrol, ambalaj ve siparis basi islemler alandan bagimsiz bir taban fiyat olusturur. Formul:
+    fiyat = sabit + (918 - sabit)*(D_cr/0.914)^2 + navlun*(D_cr/0.914)^3. Sabit kisim 150 USD secildi; bu, 36 inc
+    pota fiyatinin (918 USD; arama_ozeti, Cin ici teslim, %13 KDV dahil) ~%16''si. Bu oranin da dayanagi yok. Etki
+    (hesap_turetilmis, ornek_hesap 120 mm, D_cr 0.36 m): pota 306 USD, bunun ~%49''u sabit kisim. 80-400 araliginda
+    pota 247-517 USD eder; bu 0.71-1.49 USD/firin-saat ve 0.55-1.15 USD/kg demek (toplam 14.9 USD/kg''in %4-8''i).
+    Ogrenme yolu: 12-24 inc pota icin en az 3 ureticiden RFQ (bilinmeyenler #8).'
   dogrulama_deneyi: RFQ.
 - id: cz_crucible_freight_36in_usd
   ad: 36 inc pota navlunu (hacimle olceklenir)
@@ -636,7 +642,15 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Kaba malzeme hesabi yalnizca alt siniri sinamak icin yapildi. Formulde
+    carpan, ayni D_cr''deki RCz potasinin fiyatina (sabit + alan + navlun) uygulaniyor; yani karsilastirma tabani
+    RCz potasi. Bu gorevdeki kaba hesap (hesap_turetilmis; geometri varsayimlari tahmin): RCz pota duvari 0.6-0.7
+    D; CCz sig pota duvari 0.35-0.45 D (eriyik 0.25 D + serbest pay; cz_ccz_hotzone_height_ratio ile ayni varsayim);
+    weir capi 0.6-0.7 D, yuksekligi CCz duvari kadar. Bu varsayimlarla kuvars yuzey alani (yan duvar + taban + weir)
+    RCz potasinin ~0.85-1.2 kati cikar. Demek ki salt malzeme alt sinir olan 1.3''u bile aciklamiyor. 1.3-3 araligi
+    agirlikla uc varsayima dayaniyor: weir kaynagi/birlestirme isciligi, dusuk hacimli ozel siparis primi ve ust
+    sinirda iki ayri pota. Referans fiyat ya da teklif yok. CCz''de pota omrunun RCz''den farkli olabilecegi bu
+    carpana dahil degil.'
   dogrulama_deneyi: RFQ.
 - id: cz_radial_gap_m
   ad: Pota duvari ile izolasyon ic yuzu arasi radyal bosluk (susseptor + isitici + bosluklar)
@@ -688,7 +702,15 @@ parametreler:
   olcek: unite
   senaryoya_uygunluk: PVA'da 32 inc icin hazne ic yuksekligi / pota capi ~2.6 (izolasyon dahil). Model 36 inc icin
     1.5*0.914 + 0.3 + 2*0.12 = 1.91 m veriyor (tutarli).
-  aciklama: ''
+  aciklama: 'Dayanak: geometrik ayrisim ve PVA brosuruyle tutarlilik kontrolu; kalibrasyon degil. Bilesenler (tahmin):
+    pota duvar yuksekligi ~0.6-0.7 D_cr (eriyik derinligi 0.55 D_cr + serbest pay). Formuldeki etkin eriyik yuksekligi,
+    silindir esdegeri olarak 0.55 x 0.85 = 0.4675 D_cr. RCz''de bir ingot boyunca eriyik seviyesi bunun g_pull (0.8)
+    katı kadar, yani ~0.37 D_cr duser; pota da bu kadar yukari surulur. Isitici pota ve hareket boyunu kapsamali:
+    ~0.97-1.07 D_cr. 1.5 degeri bunun ustune isitici uzantisi ve kalkan boslugu icin ~0.43-0.53 D_cr pay birakir;
+    0.3 m sabit ofset ayri. Kontrol: PVA CGS1218''de hazne ic yuksekligi ~2120 mm (32 inc, en fazla 36 inc pota).
+    Model izolasyon dahil 36 inc icin 1.91 m, 32 inc icin 1.76 m veriyor, yani haznenin %83-90''i; kalan bosluk
+    kalkan ve kaldirma icin yeterli. Alt sinir 1.1, pota + hareket boyuna karsilik gelir (pay yok). Ust sinir 2,
+    PVA hazne/pota oranindan (2.6) izolasyon ve sabit ofset dusulmus halidir. Kucuk capta referans yok.'
   dogrulama_deneyi: CAD.
 - id: cz_ccz_hotzone_height_ratio
   ad: Sicak bolge ic yuksekligi / pota capi (CCz, sig eriyik)
@@ -704,7 +726,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: RCz degerinden geometrik cikarma; kaynak yok. CCz''de eriyik seviyesi surekli beslemeyle sabit
+    tutulur; bu yuzden RCz''deki pota kaldirma hareketi (~0.37 D_cr) gerekmez. Eriyik sig (0.25 D_cr); pota duvari
+    ~0.35-0.45 D_cr (tahmin; cz_ccz_crucible_cost_mult ile ayni varsayim). Bu gorevdeki kaba hesap: RCz''nin 1.5''indeki
+    isitici/kalkan payi (~0.43-0.53 D_cr) aynen korunursa CCz icin ~0.78-0.98 bulunur. 1.1 degeri; weir, besleyici
+    borusu ve besleme parcalarinin erime bolgesi icin ~0.1-0.3 D_cr ek pay birakir. Referans olcum yok.'
   dogrulama_deneyi: CAD.
 - id: cz_hotzone_height_fixed_m
   ad: Sicak bolge sabit yukseklik ofseti
@@ -720,7 +746,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Sabit ofset kucuk capi cezalandirir.
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi (bilesen ayrisimi). Capla olceklenmeyen yukseklik iki parcadan olusur,
+    ikisi de tahmin: (a) pota altinda susseptor tabani, pota mili ve alt izolasyon destegi (~0.1-0.15 m); (b) eriyik
+    ustunde isi kalkaninin alt ucu, gaz akisi ve gorus acikligi icin bosluk (~0.1-0.2 m). Etki (hesap_turetilmis):
+    120 mm''de H = 0.84 m''nin %36''si bu ofset; 9.0 kW''lik yan kaybin ~3.2 kW''i buna bagli (P_tutma''nin ~%13''u).
+    290 mm''de payi ~%19''a duser. Bu, H5 testindeki ''kucuk cap cezasi sabit yuklerden geliyor'' sonucunun bir
+    parcasi. Ogrenme yolu: sicak bolge CAD kesiti (pota mili, kalkan, izolasyon destegi) ve 2B isil simulasyon.'
   dogrulama_deneyi: CAD.
 - id: xtal_ins_k_mat_W_mK
   ad: Temiz grafit kecenin malzeme isil iletkenligi (sicak yuz 1600 C ile soguk yuz 330-450 C arasi integral ortalama,
@@ -776,7 +807,14 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Isitici eriyikten 100-250 K daha sicak calisir.
-  aciklama: ''
+  aciklama: 'Dayanak: isil direnc zinciriyle kaba hesap (bu gorevde, hesap_turetilmis); kaynak yok. Izolasyonun
+    sicak yuzu isiticiyi gorur. 120 mm''de ic yuzeyden gecen aki ~6.3 kW/m2; isinim katsayisiyla (eps ~0.8) isitici-kece
+    farki ~5 K, yani sicak yuz sicakligi isitici sicakligina yakin. Isitici-eriyik farki: eriyige giren 4-8 kW islak
+    pota yuzeyinden (~0.33 m2) gecer; 10 mm kuvarsta (k ~2 W/mK, varsayim) 60-120 K, isinim boslugunda 15-30 K dusum
+    olur. Buna gore isitici ~1770-1870 K. 1873 K (1600 C = T_m + 186 K) bu bandin ust ucunda, yani muhafazakar.
+    Formul ayni sicak yuz sicakligini tum yan yuzeye ve ust/alt izolasyona uyguluyor; kalkan civari ve taban daha
+    soguk oldugu icin alan ortalamasi daha dusuk olmali. Ust sinir 1950 K, ergitme sirasindaki yuksek guclu isitici
+    sicakligi.'
   dogrulama_deneyi: Pirometre ve termokupl.
 - id: cz_T_cold_face_K
   ad: Izolasyon soguk yuz sicakligi
@@ -792,7 +830,14 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: isinim dengesiyle kaba hesap (bu gorevde, hesap_turetilmis); kaynak yok. Soguk yuz, su sogutmali
+    celik hazneye (~310 K) isinimla isi verir. 120 mm baz durumunda yan kayip 9.0 kW, dis yuzey 2.06 m2, yani ~4.4
+    kW/m2. Grafit kece ile hazne ic yuzeyi arasindaki etkin emisivite 0.4-0.6 alinirsa soguk yuz 610-670 K cikar.
+    Bu emisivite tahmindir (oksitli/kirli ya da kaplamali celik yuzey varsayimi; olcum yok). Argon tasinimi ihmal
+    edildi; eklenirse sicaklik biraz duser. Hazne ic yuzeyi parlak paslanmaz ise etkin emisivite ~0.2-0.3 olabilir
+    (tahmin); o zaman soguk yuz ~720-790 K olur. 600 K, kirli/kaplamali yuzey varsayimiyla uyumlu ve hafif dusuk
+    tarafta. Aralik kontrolu (eps 0.4-0.6): k_eff alt ucunda yan kayip 2.7 kW, soguk yuz 470-510 K; ust ucta 29
+    kW, 810-890 K.'
   dogrulama_deneyi: Termokupl.
 - id: cz_topbottom_penetration_factor
   ad: Ust/alt izolasyonda gecis kayip carpani
@@ -808,7 +853,15 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Ust/alt izolasyondaki gecisler: pota mili, egzoz agizlari, pirometre/kamera
+    gorus delikleri, kalkan askilari. Elektrotlar cz_P_electrode_kW''de, eriyik acikligi cz_q_open''da ayri sayiliyor.
+    120 mm''de ust/alt kayip 4.7 kW (carpan 1.3 dahil); carpanin 1 birimi ~3.6 kW, 0.3''luk katkisi ~1.1 kW. Kaba
+    kontrol (bu gorevde, hesap_turetilmis): 120 mm izolasyondan duz gecen 4 adet 50 mm delik (L/D 2.4) kara cisim
+    agzi gibi davransaydi 1850 K''de ~5.2 kW kaybettirirdi. Ancak sicak uc ile soguk uc arasindaki gorus faktoru
+    (es eksenli iki disk) ~0.04; delik duvarlarinin isinimi geri yaymasiyla etkin gecis en fazla ~0.3 (tahmin).
+    Buna gore dogrudan gorus hatli dort delik ~0.2-1.6 kW kaybettirir, yani carpana +0.05-0.45 ekler. Egzoz gaziyla
+    tasinan isi bu hesapta yok. Deger, labirentli ama optimize edilmemis ilk nesil tasarimi varsayar. TI 1977 eski
+    sicak bolgesi geri uretilirken 1.8 kullanildi.'
   dogrulama_deneyi: Simulasyon.
 - id: cz_q_open_W_m2
   ad: Eriyik serbest yuzeyinden isi kalkani acikligi uzerinden kacan etkin aki (kalkanli)
@@ -825,7 +878,13 @@ parametreler:
   olcek: unite
   senaryoya_uygunluk: Isi kalkani tasarimina cok duyarli. Kalkansiz eski sicak bolge icin ~150 kW/m2 (TI kontrolunde
     kullanildi).
-  aciklama: ''
+  aciklama: 'Dayanak: isinimla kaba hesap (bu gorevde, hesap_turetilmis) ve TI kontrolu. Kara cisim siniri sigma*T_m^4
+    = 459 kW/m2. Sivi Si emisivitesi ~0.2-0.3 alinirsa (hafizadan, dogrulanmadi) kalkansiz eriyikten soguk cevreye
+    net aki 92-138 kW/m2 olur. Modelin TI 1977 (kalkansiz) geri uretiminde kullandigi 150 kW/m2 ayni mertebede.
+    Kalkanli durumda eriyik, kalkanin sicak ic yuzunu gorur: q = eps*sigma*(T_m^4 - T_kalkan^4). eps 0.25-0.3 icin
+    30 kW/m2 ~1565-1590 K etkin kalkan sicakligi demek; 15 kW/m2 ~1630-1640 K''e, 60 kW/m2 ~1400-1460 K''e karsilik
+    gelir. Formul akiyi tum serbest eriyik yuzeyine (pota alani eksi kristal) uyguluyor. 120 mm''de bu 2.7 kW eder
+    (P_tutma''nin %11''i).'
   dogrulama_deneyi: Simulasyon ve kalkan varyantlariyla tutma gucu olcumu.
 - id: cz_q_melt_to_crystal_W_m2
   ad: Eriyikten kristale iletilen isi akisi
@@ -956,7 +1015,16 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Tanim: tutma gucunun ustune eklenen gucun eriyige (beslemeyi isitma
+    + erime) gecen payi. Geri kalani, isitici sicakligi arttikca buyuyen izolasyon ve aciklik kayiplarina gider.
+    Tek capraz kontrol (bu gorevde, hesap_turetilmis; kaba ve zayif) TI 1977''nin uc farkli yerinden gelen degerleri
+    birlestiriyor: (a) ''Load and Melt (14.82 kg) 1.3'' h: 18 kg''lik potali ekonomi modelinin plan tablosundan;
+    planlanmis sure, olcum degil. (b) ''Increase puller power to 80 kW'': 12 kg''lik potali deney firininin coklu
+    sarj prosedurunden. (c) 45 kW nominal calisma gucu: Ek G''de 12 cm kosularinda olculen deger. Bunlar ayni duzen
+    icin olculmus bir guc-sure cifti degil. Hesap: 14.82 kg x 0.852 kWh/kg = 12.6 kWh. 35 kW''lik fazla guc 1.0-1.3
+    h uygulandiysa verim 0.28-0.36 cikar. Veri eski, kalkansiz sicak bolgeden. 1.3 h yukleme suresini de iceriyor
+    olabilir; bu durumda verim daha yuksek olur. Modern kalkanli sicak bolgede daha yuksek verim beklenir ama olcum
+    yok.'
   dogrulama_deneyi: Resarj suresi ve guc kaydindan geri hesap.
 - id: cz_heater_voltage_V
   ad: Grafit isitici calisma gerilimi (dusuk basinc Ar'da ark siniri)
@@ -989,7 +1057,18 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: TI 1977 kucuk pota verisiyle capraz kontrol (bu gorevde, hesap_turetilmis); ayrik deger icin
+    kaynak yok. Formulde sarj kutlesi rho_l*pi/4*D_cr^2*(0.55*D_cr)*0.85, burada rho_l = 2570 kg/m3 (sivi yogunluk).
+    Veriyle yalnizca carpim sinanabiliyor: 0.55 x 0.85 = 0.4675. TI''da capi bilinen tek pota 12 kg''lik Varian
+    potasi (''Varian 12-kg crucible has a radius of 12.3 cm''). D_cr = 0.246 m icin nominal 12 kg, carpim 0.40 demek.
+    Ayni potayla yapilan tek sarjli kosularda (Tablo 1) sarj 10-12 kg, Ek G idealize guc egrisinde 11.6 kg; bunlar
+    0.33-0.40 carpimina karsilik gelir. Model carpimi (0.4675) TI nominalinin %17, fiili alt ucun ~%40 ustunde.
+    Ilk ciktida kullanilan 14.82 kg, TI''nin 18 kg''lik potali ekonomi planina ait; o potanin capi raporda verilmiyor
+    ve bu pota icin gecerli degil. Dolayisiyla ''TI 0.40-0.49 bandini destekliyor'' iddiasi geri cekildi. Carpimin
+    0.55 ile 0.85''e bolunusu yargi: gunes potalarinda yukseklik/cap ~0.6-0.7 (hafizadan, dogrulanmadi). TI potasinin
+    yukseklik/capi bilinmiyor; modern potalar daha derinse carpim daha yuksek olabilir, ama bunun verisi yok. Kaynak
+    denetcisinin bu parametre icin denedigi MDPI Crystals 11(3):264 sayfasi erisilemedi (403); deger oradan alinmis
+    sayilamaz.'
   dogrulama_deneyi: CAD.
 - id: cz_ccz_melt_depth_ratio
   ad: Eriyik derinligi / pota capi (CCz)
@@ -1005,7 +1084,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. CCz''de sig eriyik uc seyi kucultmek icin secilir: eriyik hacmi (ve
+    onunla konveksiyon), pota cozunmesi (O) ve bekleme suresi. Besleme surekli oldugundan sarj kutlesi uretimi sinirlamaz.
+    120 mm''de 0.25 ile eriyik ~20 kg (RCz''nin 0.55''inde 44 kg). Referans olcum ya da kaynak yok. Alt sinir 0.15,
+    weir ve besleme parcalarinin erime mesafesi icin yargi; ust sinir 0.35, RCz''ye yaklasma. Ogrenme yolu: CCz
+    deneyi (bilinmeyenler #11: weir potasi ve yan besleyiciyle, 6-9 ay, 30-80 kUSD tahmin), Oi ve omur olcumu.'
   dogrulama_deneyi: CAD.
 - id: cz_crucible_fill
   ad: Pota doluluk orani
@@ -1021,7 +1104,13 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: TI capraz kontrolu yalnizca carpim icin gecerli (bkz. cz_melt_depth_ratio): modelde 0.55 x
+    0.85 = 0.4675; TI''nin 24.6 cm''lik potasinda nominal 12 kg = 0.40, fiili 10-12 kg = 0.33-0.40. Ayrik deger
+    muhendislik yargisi. Formulde silindir hacmini kucultucu carpan olarak girdigi icin fiziksel anlami: kavisli
+    pota tabaninin hacim eksigi + serbest pay (eriyik ust kotu ile pota agzi arasi). ''Doluluk'' adi yaniltici.
+    Parca poly''nin yigin yogunlugu kati Si''nin yaklasik yarisi mertebesinde (hafizadan, dogrulanmadi); bu yuzden
+    ilk sarjda bu seviyeye ancak ergitme sirasinda ust besleme (hot fill) ile ulasilir. Kayex 1979 resarj tanimi
+    da ''Hot fill'' iceriyor.'
   dogrulama_deneyi: '-'
 - id: cz_g_pull
   ad: RCz'de ingot basina cekilen eriyik orani g
@@ -1071,7 +1160,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: muhendislik yargisi; bina ve makine yuksekligi kisiti. CCz''de ingot boyu sarjla sinirli degil.
+    Formulde min(cz_ccz_L_ingot_mm, cz_L_body_max_mm) ile govde boyu tavanina baglaniyor (baz 2500 mm; PVA ''removable
+    length up to approx. 2,800 mm''). 2000 mm bu tavanin %80''i. 120 mm''de 52.7 kg eder (RCz 120 mm ingotu 1337
+    mm / 35.2 kg). Gerekli cekici yuksekligi (xtal_puller_height_m formulu): (2000 + 1.0*120)/1000 + 0.70 + 2.5
+    = 5.3 m (RCz 120 mm icin 4.8 m). Kaynak ya da olcum yok.'
   dogrulama_deneyi: '-'
 - id: cz_t_stabilize_h
   ad: Ilk ergitme sonrasi eriyik sabitleme suresi
@@ -1137,7 +1230,13 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: geometri yargisi ve patent hizi. TI yalnizca toplam sureyi sinirliyor. Omuz, boyundan tam
+    capa genisleyen bir konidir. h/D = 0.4, koni yuzeyinin eksenle ~51 derece (yataydan ~39 derece) yaptigi bir
+    omza karsilik gelir; 0.2 duz omuz (~68 derece), 0.6 dik omuz (~40 derece). Sure: 0.4*120 mm / (1 mm/dk) = 0.8
+    h (omuz hizi patent US11708643B2''den). TI 12 cm planinda ''Seed and Top 2.0'' h var; bu tohum + boyun + omuz
+    toplami. cz_t_seed_neck_h (1.0 h) bu toplamdan omuz payi dusulerek belirlendi. Bu yuzden ''tohum+boyun 1.0 +
+    omuz 0.8 = 1.8 h'' karsilastirmasi yalnizca toplamin uyumlu oldugunu gosterir; h/D = 0.4''u bagimsiz olarak
+    dogrulamaz (dairesel). Duz omuz kutle ve zaman kazandirir ama yapi kaybi (ZD) riskini artirir (hafizadan, dogrulanmadi).'
   dogrulama_deneyi: Prototip.
 - id: cz_tail_speed_mm_min
   ad: Kuyruk konisi hizi
@@ -1161,15 +1260,16 @@ parametreler:
   deger: 0.6
   alt: 0.4
   ust: 1
-  kaynak: Kaynak yok
+  kaynak: Kristal tahmini; wafer tahmini 0.8
   kaynak_turu: tahmin
-  kaynak_alintisi: ''
+  kaynak_alintisi: Kaynak yok (her iki alanda tahmin)
   kaynak_tarihi: '-'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: Ilk ciktida 0.7 idi.
+  aciklama: 'Ilk ciktida 0.7 idi. | [Uzlaştırma/zincir] Kanonik (tek sahip). Kristal sahip: ayni geometri cevrim
+    suresini (cz_t_cycle_h) ve koni kutlesini belirler; wafer wf_eta_cone ayni parametreleri okur. Prototiple olculecek.'
   dogrulama_deneyi: Prototip.
 - id: cz_t_cool_base_h
   ad: Ingot sogutma suresi, sabit kisim
@@ -1201,7 +1301,18 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak: toplu (lumped) isinim sogumasi kaba hesabi (bu gorevde, hesap_turetilmis) ve TI 1977''nin
+    tek olcumu. Olcum bu dayanakla celisiyor. TI olcumu: 12 cm kristalin ust haznede sogumasi ''averaged 1.9 h for
+    crystals 12-32(A) and 12-32(B)''; argon jeti yok, rapor argon jetleriyle kisaltilabilecegini yaziyor. Model:
+    0.5 (cz_t_cool_base_h) + 0.005*120 = 1.1 h, olcumun %42 altinda. Bu fark, argon jeti ya da su sogutmali alma
+    odasiyla iyilesme VARSAYIMIDIR; dogrulanmadi. Toplu model: uzun silindir icin t = rho*cp*D/(4*eps*sigma) * (1/T2^3
+    - 1/T1^3)/3, yani sure D ile dogrusal (rho 2329; cp ~900 J/kgK, ortalama tahmin; eps 0.6 tahmin; T1 1600 K).
+    120 mm''de 1.1 h ~530-540 K''de, 1.9 h ~445-460 K''de almaya denk gelir (cevre 0-310 K). Baz surenin (0.5 h)
+    kapsami tanimli degil. Yalnizca vana/kaldirma/basinclandirma ise isinim sogumasi 0.6 h surer (~645 K''de alma).
+    Sogumanin parcasi ise toplam 1.1 h (~535 K). TI''nin kendi yari-surekli ekonomi plani da kristal basina ayri
+    soguma yazmadan ''Unload 1.0'' h varsaymis (plan, olcum degil). Fizik denetcisinin ''120 mm icin ideal ~0.9
+    h'' tahmini bagimsiz bir kontrol degil, cunku cz_t_cool_base_h ondan turetildi. Uyari: 1400 K''de Bi = h_rad*r/k
+    ~0.9; toplu varsayim yuksek sicaklikta kaba. Buyuk capta isil gerilme sogutma hizini sinirlayabilir.'
   dogrulama_deneyi: Prototip.
 - id: cz_t_unload_load_h
   ad: Kristali vanadan alma ve besleyiciyi yukleme (ergitme haric)
@@ -1299,7 +1410,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: 36 inc icin 36-48 kisi.h; kucuk sicak bolge icin daha az varsayildi.
-  aciklama: ''
+  aciklama: 'Dayanak: ESIA 2024''ten olcek kucultme (tahmin). ESIA: ''there is a crew of 3-4 people who work on
+    hotzone cleaning and maintenance between runs''; Cin''de turnaround ''about 12 hours''. Bu, 36 inc sicak bolge
+    icin en fazla 3-4 kisi x 12 h = 36-48 kisi.h demek (ekip tum sure calisiyorsa); ust sinir 48 buradan geliyor.
+    Kucuk sicak bolgede grafit parca kutlesi ve sayisi az. Ancak kirik pota sokumu, temizlik, sizdirmazlik ve kacak
+    testi gibi adimlar sabit. 2 kisi x 8 h = 16 kisi.h varsayildi. Turnaround''in geri kalani (soguma, pompalama,
+    isinma; cz_t_turnaround_h 24 h) ekip gerektirmez. Etki: 16*12/347.7 = 0.55 USD/h (120 mm firin saatinin %3''u).'
   dogrulama_deneyi: Prototip.
 - id: cz_availability_unplanned
   ad: Plansiz durus sonrasi kullanilabilirlik
@@ -1335,7 +1451,9 @@ parametreler:
   senaryoya_uygunluk: Olgun deger icin kaynak yok. Ogrenme yili ayri bir senaryo (ZD 0.3-0.7). TI'nin %93.5 'grow
     yield' degeri ZD verimi degildir; ilk ciktida yanlis kullanilmisti.
   aciklama: 'Sinifi ''alan''dan ''teknik''e alindi. Etkisi kg/gun ve kWh/kg uzerinden maliyete girer. Melt-back
-    maliyeti de bunun icinde (TI: ''Melt-backs can increase the total power requirements by 20-30%'').'
+    maliyeti de bunun icinde (TI: ''Melt-backs can increase the total power requirements by 20-30%''). | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → wf_learn_weight: Yalniz olgun; kristal baz sayilari olgun (ogrenme yili ZD 0.3-0.7
+    varyant).'
   dogrulama_deneyi: Pilot uretimde ingot basina yapi kaybi kaydi.
 - id: cz_ccz_zd_mult
   ad: CCz'de ZD verim carpani (besleme sicramasi, partikul)
@@ -1486,7 +1604,13 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok (BOM ya da teklif yok); muhendislik yargisi. Capex uc parcaya ayrildi: (a) sabit kisim
+    (pompa, kontrol, cekme kafasi; cz_capex_fixed_usd 120k); (b) D_cr^2 ile olceklenen kisim (cift cidarli su sogutmali
+    hazne, pota kaldirma/dondurme mekanizmasi, izolasyon destekleri); (c) guc kaynagi. Hazne kabugu alani ~D x H
+    ve H ~ D_cr oldugundan D_cr^2 olceklemesi geometrik olarak makul. 120 mm''de (D_cr 0.36 m) 19.4k USD (capex''in
+    %12''si), 290 mm''de (0.87 m) 114k USD. Kaba kutle kontrolu (bu gorevde): 120 mm icin ~0.9 m ic capli, ~1.3
+    m yuksek, 8+5 mm cift cidarli hazne ~0.5 t paslanmaz eder. Mekanizma eklenince ima edilen birim maliyet ~30-40
+    USD/kg; bu birim fiyat dogrulanmadi, yalnizca tutarlilik icin.'
   dogrulama_deneyi: BOM.
 - id: cz_capex_power_usd_per_kW
   ad: Isitici guc kaynagi capex'i
@@ -1503,7 +1627,11 @@ parametreler:
   olcek: unite
   senaryoya_uygunluk: Firmanin guc elektronigi yetkinligi bunu dusurebilir. Alcak gerilim ve yuksek akim nedeniyle
     bara ve elektrot maliyeti de bu kaleme dahil.
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Kalem: alcak gerilim/yuksek akim isitici kaynagi (trafo, tristor/IGBT
+    dogrultucu, bara, su sogutmali kablo, elektrot gecisi). 120 mm''de kaynak 46 kW, 60 V''ta ~770 A; 250 USD/kW
+    ile 11.5k USD (capex''in %7''si). Etki (hesap_turetilmis): CRF 0.205 + bakim 0.04 ile 0.32 USD/firin-saat, ~0.25
+    USD/kg; aralik uclarinda 0.15-0.5 USD/kg. Firmanin guc elektronigi ve manyetik tasarim yetkinligi (kendi trafo/induktoru)
+    degeri alt uca cekebilir (itiraz 14). Referans fiyat ya da teklif yok.'
   dogrulama_deneyi: Ic tasarim maliyet analizi.
 - id: cz_ccz_feeder_capex_usd
   ad: CCz surekli besleyici ek capex'i
@@ -1618,9 +1746,14 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: 2 yil, Cin'deki teknolojik eskimeyi yansitir. Cap sabitse fiziksel omur 10+ yil olabilir.
-  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici);
-    TI 1977 muhasebe omru; aralik 2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: ''Cap sabitse fiziksel omur 10+
-    yil olabilir'').'
+  aciklama: 'Dayanak: iki kaynak noktasi arasinda yargi. TI 1977: ''Seven-year, straight line depreciation'' (1977
+    maliyet varsayimi, fiziksel omur olcumu degil). ESIA 2024: ''Cz pullers need to be replaced approximately every
+    two years'' (Cin''de format/cap degisimine bagli teknolojik eskime). Bizim unitede cap sabit bir tasarim degiskeni;
+    vakum haznesi ve mekanigin fiziksel omru 10+ yil olabilir (tahmin). Ote yandan ilk nesil kendi tasarimin, ogrenmeden
+    sonra 2. nesille degistirilme olasiligi yuksek. 7 yil bu ikisinin ortasi. Etki: CRF(%10) 2/7/15 yil icin 0.576/0.205/0.131;
+    120 mm''de capex yuku 11.1/4.44/3.1 USD/h. Bu, firin saatinin 19.3 USD/h''lik toplamina gore buyuk. | [Uzlaştırma/ekonomi]
+    Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici); TI 1977 muhasebe omru; aralik
+    2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: ''Cap sabitse fiziksel omur 10+ yil olabilir'').'
   dogrulama_deneyi: '-'
   esdeger: eco_life_machine_yr
   esdeger_carpan: 1.0
@@ -1676,7 +1809,15 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: BILMIYORUZ.
-  aciklama: ''
+  aciklama: 'Dayanak yok; BILMIYORUZ (tahmin). Yalnizca eriyik/pota kaybina yol acan uzun kesintiler sayilir. Kisa
+    kesinti ve gerilim cokmesi buyuyen kristali bozar (ZD kaybi) ama eriyigi dondurmaz. Esik icin kaba hesap (bu
+    gorevde): 120 mm''de 44 kg eriyigin gizli isisi 78.6 MJ. Kayip P_tutma (24.4 kW) duzeyinde sabit kalsaydi bu
+    isi ~55 dk''da atilirdi. Guc kesilince kayip hizi sicak bolge sogudukca duser; grafit parcalarin depoladigi
+    isi de atilmak zorunda. Bu yuzden tam donma muhtemelen daha uzun surer; 55 dk kaba bir alt tahmindir, ust sinir
+    degil. Kismi donma (pota duvarinda kabuk) ve pota catlamasi riski daha erken baslar (sivi 2570, kati 2329 kg/m3:
+    donarken ~%10 hacim artisi). Kayip esigi on dakikalar mertebesinde olabilir; olculmedi. Maliyet: 2*3000/8760
+    = 0.68 USD/h (120 mm firin saatinin %3.5''i). Altyapi alaninda ayni buyukluk site_grid_outage_events_yr = 2
+    (0.5-10) olarak ayrica tanimli.'
   dogrulama_deneyi: Dagitim sirketinden SAIDI/SAIFI verisi.
 - id: xtal_outage_loss_usd_per_event
   ad: Kesinti basina kayip (pota, eriyik hurdasi, kirik susseptor, durus)
@@ -1727,9 +1868,13 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm))
-    üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3). 0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU,
-    kaynak yok; aralik 0.3-2 USD/Nm3.'
+  aciklama: 'Dayanak yok; ilk ciktida yer tutucu olarak kaynaksiz girildi. Altyapi alaninda sonradan turetilen degerlerle
+    karsilastirma (hesap_turetilmis): toptan fiyat eco_price_argon_bulk_usd_kg 0.68 USD/kg (IMARC ve businessanalytiq
+    Avrupa 0.62-0.64 USD/kg; IndexBox Turkiye ithalat 1.3 USD/m3). Kucuk kullaniciya teslim fiyati eco_price_argon_usd_kg
+    1.1 (0.7-3) USD/kg. Yogunluk 1.784 kg/Nm3 ile bunlar 1.21 USD/Nm3 (toptan) ve 1.96 (1.25-5.35) USD/Nm3 (teslim)
+    eder. Mevcut 0.8 USD/Nm3 = 0.45 USD/kg; toptan endeksin bile altinda. | [Uzlaştırma/ekonomi] Eşdeğer: değer
+    eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm)) üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3).
+    0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU, kaynak yok; aralik 0.3-2 USD/Nm3.'
   dogrulama_deneyi: Altyapi ajani.
   esdeger: eco_price_argon_usd_kg
   esdeger_carpan: 1.784
@@ -1747,13 +1892,19 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_fixed_usd_h
-    = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd''deki ayni operator terimi
-    bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider. | [Uzlaştırma/ekonomi]
-    Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h = cz_turnaround_crew_person_h
-    x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir; operator terimi operator kanonigine.
-    Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik ayrimla 0.5 x 8.4 + 16 x 13.4/347.7
-    = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin ~%13''u fark).'
+  aciklama: 'Dayanak yok; ilk ciktida yer tutucu olarak girildi. Altyapi alaninda sonradan turetilen Kocaeli degerleriyle
+    karsilastirma: eco_labor_technician_usd_h 13.4 (10-18), eco_labor_operator_usd_h 8.4 (6-11.5). Ikisi de eleman.net
+    maas verisinden; SGK carpani 1.1875, ek yuk 1.25 ve 49 TRY/USD ile turetildi. Cekici operatoru vakum/yuksek
+    sicaklik prosesi yuruttugu icin teknisyen duzeyine yakin; 12 USD/h ~%75 teknisyen + %25 operator karisimina
+    denk geliyor. Diger alanlardaki degerler: modul 7, elektronik 6.17, standart 10, hucre ~9.7 USD/h (20k USD/FTE-yil
+    / 2070 h). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI:
+    cz_cost_labor_fixed_usd_h = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd''deki
+    ayni operator terimi bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider.
+    | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h
+    = cz_turnaround_crew_person_h x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir;
+    operator terimi operator kanonigine. Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik
+    ayrimla 0.5 x 8.4 + 16 x 13.4/347.7 = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin
+    ~%13''u fark).'
   dogrulama_deneyi: Ekonomi ajani.
   esdeger: eco_labor_technician_usd_h
   esdeger_carpan: 1.0
@@ -1771,9 +1922,13 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin; vergi duzeltmesi
-    yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd''de kullaniliyor; kanonik makine katsayisiyla
-    degistirilmeli.'
+  aciklama: 'Dayanak yok; ilk ciktida yer tutucu olarak girildi. Altyapi alaninda sonradan turetilen deger: eco_wacc_usd
+    = 0.12 (0.09-0.20; vergi sonrasi, USD bazli; CAPM ile ke 0.152, kd 0.091). 0.10 bunun altinda; alt sinir 0.06
+    da altyapi alt sinirinin (0.09) altinda. Altyapi notu: vergi sonrasi oran CRF''ye dogrudan konmamali; basit
+    vergi oncesi WACC 0.13-0.17. Etki: 7 yillik CRF %10''da 0.205, %12''de 0.219; 120 mm''de capex yuku 4.44''ten
+    4.69 USD/h''e cikar. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin;
+    vergi duzeltmesi yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd''de kullaniliyor; kanonik
+    makine katsayisiyla degistirilmeli.'
   dogrulama_deneyi: Ekonomi ajani.
   esdeger: eco_wacc_usd
   esdeger_carpan: 1.0
@@ -1791,7 +1946,13 @@ parametreler:
   maliyet_sinifi: alan
   olcek: unite
   senaryoya_uygunluk: Pota artigi ve son kuyruk ucu haric.
-  aciklama: ''
+  aciklama: 'Dayanak: wafer alaninin geometrik hesabiyla capraz kontrol (hesap_turetilmis); ayrica kaynak yok. Parametre,
+    formulde (1 - wafer_brick_yield) kutlesinin tekrar eritilebilir payi; daglama kaybi ayri parametrede (xtal_recycle_etch_loss_frac).
+    Wafer alaninda dilimlerin geri kazanilabilir payi wf_slab_recovery_frac = 0.886 (taslama payi ve kare kesim
+    kerfi dusulmus, M10 geometrisi); tac ve kuyrugun ise ~tamami. Wafer ornek hesabindaki kutlelerle (dilim 0.221,
+    tac/kuyruk 0.053, tugla ucu 0.0045 kg/m2) agirlikli pay ~0.91 cikiyor. 0.85, kontamine yuzey ve parcalar icin
+    ~%6 ek ret payi birakan muhafazakar bir deger. Alt sinir 0.6, derin metal kontaminasyonu (serit testere/taslama
+    izi) senaryosu. Son kuyruk ucu ve pota artigi haric.'
   dogrulama_deneyi: Dagli slablarda ICP-MS ve eritilen partiden ingot omru.
 - id: xtal_recycle_etch_loss_frac
   ad: Geri donusum dagliamada kutle kaybi
@@ -1877,7 +2038,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 80-160 mm araligimiz icinde; 210-260 mm FZ ile yapilamaz.
-  aciklama: Gerekce yuzey gerilimi olarak duzeltildi; bobin ark riski ek bir muhendislik siniri (hafizadan).
+  aciklama: 'Gerekce yuzey gerilimi olarak duzeltildi; bobin ark riski ek bir muhendislik siniri (hafizadan). |
+    [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → D_ingot_mm: FZ ust siniri.'
   dogrulama_deneyi: '-'
 - id: fz_pull_rate_ref_mm_min
   ad: FZ govde hizi @100 mm
@@ -1958,7 +2120,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: 'Dayanak yok (FZ kaynagi yok); Cz bilesen surelerinden benzetme ve yargi. Kristal basina ek sure su
+    adimlari kapsar: besleme cubugunu yukleme, pompalama/argon doldurma, on-isitma, tohumlama + Dash boyun + koni,
+    son koni, soguma ve alma. On-isitma grafit halkayla yapilir, cunku oda sicakliginda Si RF''e zayif kuplajlanir
+    (hafizadan, dogrulanmadi). Bu modelin Cz degerleri: tohum+boyun 1.0 h, omuz 0.8 h, soguma 1.1 h, alma/yukleme
+    1.0 h; toplam 3.9 h. FZ''ye ozgu on-isitma ve basinclandirma icin ~1 h eklenerek 5 h bulundu. Etki (hesap_turetilmis):
+    120 mm''de cevrim 8.3 + 5 = 13.3 h; ek sure 3/5/8 h icin 56.6/48.1/39.3 kg/gun.'
   dogrulama_deneyi: FZ prototipi.
 - id: fz_standby_power_frac
   ad: FZ ek sure boyunca ortalama guc / buyutme gucu
@@ -1990,7 +2157,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: FZ proses bilgisi az sayida firmada; ogrenme egrisi uzun.
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Referans Cz''nin olgun degeri (cz_zd_yield 0.8; o da tahmin). FZ''nin
+    dar proses penceresi ve bilginin az sayida firmada toplanmasi nedeniyle biraz dusuk secildi. Formulde verim
+    kutle kaybi olarak degil, zaman ve enerji kaybi olarak giriyor (iyi kg/gun ve kWh/kg paydasinda). Bu, dislokasyonlanmis
+    FZ kristalinin yeniden besleme cubugu olarak kullanilabilecegi varsayimiyla tutarli (hafizadan, dogrulanmadi).
+    Etki (120 mm, hesap_turetilmis): ZD 0.5/0.75/0.9 icin 32/48/58 kg/gun; 0.3''te 19 kg/gun.'
   dogrulama_deneyi: FZ prototipi.
 - id: fz_crystal_length_mm
   ad: FZ kristal boyu
@@ -2006,7 +2177,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: Dayanak yok; muhendislik yargisi. FZ kristal boyunu besleme cubugunun kutlesi ve makine stroku sinirlar.
+    Cubuk ve kristal ust uste durur; makine yuksekligi ~2 x boy + ~1.5 m (tahmin). 120 mm'de 1.5 m = 39.5 kg. Referans
+    olarak Cz govde tavani alindi (cz_L_body_max_mm 2500; PVA ~2800 mm).
   dogrulama_deneyi: '-'
 - id: fz_oxygen_cm3
   ad: FZ Si oksijen ve karbon konsantrasyonu (ust sinir)

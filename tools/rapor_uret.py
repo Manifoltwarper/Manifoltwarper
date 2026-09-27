@@ -58,14 +58,17 @@ def formul_envanteri(R: dict) -> str:
 
 
 def varsayim_df(R: dict) -> pd.DataFrame:
-    rows = []
-    for a, r in R.items():
-        for p in r["parametreler"]:
-            rows.append({"alan": a, **{k: p.get(k, "") for k in (
-                "id", "ad", "birim", "deger", "alt", "ust", "guven", "kaynak_turu", "kaynak",
-                "kaynak_alintisi", "kaynak_tarihi", "maliyet_sinifi", "olcek", "senaryoya_uygunluk")},
-                "aciklama": p.get("not", ""), "dogrulama_deneyi": p.get("dogrulama_deneyi", "")})
-    return pd.DataFrame(rows)
+    """Uzlaştırılmış varsayımlar (data/varsayimlar/*.yaml; düzeltmeler ve eşdeğerler uygulanmış)."""
+    sys.path.insert(0, str(KOK))
+    from pvbat.params import ParamSet
+    ps = ParamSet.load(KOK / "data" / "varsayimlar")
+    sira = {a: i for i, a in enumerate(ALANLAR)}
+    df = pd.DataFrame(ps.kayitlar())
+    df["esdeger_carpan"] = df["esdeger_carpan"].where(df["esdeger"] != "", "")
+    cols = ["alan", "id", "ad", "birim", "deger", "alt", "ust", "guven", "kaynak_turu", "kaynak", "kaynak_alintisi",
+            "kaynak_tarihi", "maliyet_sinifi", "olcek", "esdeger", "esdeger_carpan", "senaryoya_uygunluk",
+            "aciklama", "dogrulama_deneyi"]
+    return df[cols].sort_values(by="alan", key=lambda s: s.map(sira), kind="stable").reset_index(drop=True)
 
 
 def varsayim_md(df: pd.DataFrame, R: dict) -> str:
@@ -90,11 +93,12 @@ def varsayim_md(df: pd.DataFrame, R: dict) -> str:
          "`docs/faz1_varsayimlar.xlsx`.", ""]
     for a, g in df.groupby("alan", sort=False):
         L += [f"## {ALAN_ADI[a]} (`{a}`) — {len(g)} parametre", "",
-              "| id | ad | değer | aralık | birim | güven | kaynak türü | sınıf | kaynak |",
-              "|---|---|---|---|---|---|---|---|---|"]
+              "| id | ad | değer | aralık | birim | güven | kaynak türü | sınıf | eşdeğer | kaynak |",
+              "|---|---|---|---|---|---|---|---|---|---|"]
         for _, p in g.iterrows():
+            esd = f"→ `{p['esdeger']}`" + (f" × {p['esdeger_carpan']:g}" if p["esdeger"] and p["esdeger_carpan"] != 1 else "") if p["esdeger"] else ""
             L.append(f"| {_h(p['id'])} | {_h(p['ad'])} | {p['deger']:g} | {p['alt']:g} – {p['ust']:g} | {_h(p['birim'])} "
-                     f"| {p['guven']} | {p['kaynak_turu']} | {p['maliyet_sinifi']} | {_h(str(p['kaynak'])[:140])} |")
+                     f"| {p['guven']} | {p['kaynak_turu']} | {p['maliyet_sinifi']} | {esd} | {_h(str(p['kaynak'])[:140])} |")
         L.append("")
     return "\n".join(L)
 

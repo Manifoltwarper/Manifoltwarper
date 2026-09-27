@@ -2479,3 +2479,182 @@ parametreler:
     tasarim makine satin alinan kadar olgun. Yalniz kendi tasarim ilk nesil proses makinelerine uygulanir; kopya
     unitelerde (ogrenme sonrasi) 0 alinabilir.'
   dogrulama_deneyi: ''
+- id: eta_cell
+  ad: Hucre verimi eta_cell (hucre / modul / wafer / altyapi / kristal)
+  birim: '-'
+  deger: 0.22
+  alt: 0.19
+  ust: 0.26
+  kaynak: 'Hucre f_eta_cell ve Tablo 1: baslangic (eta_core 22.5, w_eq 0.75) a=50-210 mm''de %21.2-22.2; olgun B-arka
+    %24.8-25.8, D %25.6-26.0; cell_eta_core_start_pct 22.5 [19-24.5], cell_eta_core_mature_pct 26.1'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''improvement in average cell efficiency from 20.5% to 22.8% in 10 months during 2017/18'';
+    ''It places HJT efficiency at around 25.7% in 2025'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). eta_cell parametre degil, zincir adim 2''nin ciktisidir (a,
+    edge_mode, tau_SRH, wf_learn_weight). Baz 0.22 varsayilan ilk nesil (w = 1) icin; olgun (w = 0) ~0.25-0.26.
+    Alanlarin sabit 0.23/0.24/0.25 degerleri kaldirilir. Bu revizyonda zincirdeki tum turetilmis kontrol degerleri
+    (a ornekleri, Class III gucu, unite hacimleri, testere MW, M10 c/W) ilk nesil eta ile yeniden hesaplandi, olgun
+    degerler ayri verildi.'
+  dogrulama_deneyi: ''
+- id: mod_ctm_power_calc
+  ad: Hucreden module guc orani CTM
+  birim: '-'
+  deger: 0.974
+  alt: 0.956
+  ust: 0.992
+  kaynak: 'Modul mod_f_ctm_calc / mod_f_design_loop: 60 V dalinda 50 W 0.992 ... 300 W 0.974 ... 500 W 0.964; 35
+    V dalinda 0.956-0.988; optik bilesen 1.01 (tahmin)'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Modul ornek hesap: ''CTM = 1.01 x 0.9645 = 0.974 -> a = 135.4 mm'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). CTM a''ya baglidir; modul sahip. Hucre''nin a_min ve f_hjt_required_W''deki
+    sabit 0.97 bu ciktiyla degistirilir. W_unit_yr (panel Wp) hesabinda zorunlu carpan. Guven, optik bilesen tahmin
+    oldugu icin dusuk.'
+  dogrulama_deneyi: ''
+- id: N_s_max
+  ad: Seri hucre tavani N_s_max (60 V SELV)
+  birim: adet
+  deger: 64
+  alt: 64
+  ust: 72
+  kaynak: 'IEC 60364-7-712:2017 712.414.101 ve Ek B.1; hesap: min(floor(60 / (1.2 x 0.745 x 1.03)) = 65, floor(60
+    / (1.2 x 0.77)) = 64) = 64'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall
+    not exceed 60 V DC.''; Ek B.1: ''...UOC MAX shall be chosen equal to 1,2 UOC STC.'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). K6 sert sinir. Kendi hucremizin alfa ve Voc P99 olcumu yokken
+    K_U = 1.2 (Ek B) ve Voc_sinir = 0.77: 64 (cift, varsayilan N_s 64). Olcum/beyan sonrasi (beyan_alfa): tek urun/DE-AT
+    T_min -40 C ile tasarim tavani 67 (N_s 66); -20 C pazarinda 70; -9 C 72. Onceki kanonik 70, nominal degerlerle
+    -36.7 C altinda 60 V''u asiyordu (-37.8 C''de 60.1 V) ve aralik ucunda (0.77 V, -0.28 %/K) -20 C''de bile 60.7
+    V veriyordu. 35 V dvca35: 36; Class III STC: 44.'
+  dogrulama_deneyi: ''
+- id: wf_break_cell_ref
+  ad: Kirilma orani (hucre hatti referansi)
+  birim: '-'
+  deger: 0.02
+  alt: 0.001
+  ust: 0.1
+  kaynak: 'wf_break_cell_blend: ilk nesil wf_break_cell_ref_firstgen 0.02 [0.005-0.1] (tahmin), olgun wf_break_cell_ref_mature
+    0.0025 (Risen, PRNewswire 2026)'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Olgun capa: ''yield rate consistently above 99.5% with a fragment rate below 0.25%'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik olgun uctu (0.0025); varsayilan senaryo
+    ilk nesil oldugundan harmanli referans (w = 1 -> 0.02) kanonik yapildi. Tek kirilma modeli wf_P_break_cell:
+    ref x [taban + (1 - taban)(sqrt(A)/182)^n_a (110/t)^n_t]; f_hjt_yield bunu kullanir, f_hjt_break emekli. Ilk
+    nesil hucre kirilmasi 182 mm/125 um %1.42, 50 mm %0.53. Risen verisi 210-yarim hucre (sqrt(A) ~148 mm); 182
+    mm''ye tasinmasi n_a''ya bagli ve bilinmiyor.'
+  dogrulama_deneyi: ''
+- id: wf_learn_weight
+  ad: Ogrenme durumu (ilk nesil / olgun agirligi)
+  birim: '-'
+  deger: 1
+  alt: 0
+  ust: 1
+  kaynak: Wafer wf_learn_weight = 0.5^(Q_cum_m2 / wf_learn_half_m2); wf_learning_scenario onerisi
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'wf_learning_scenario: ''ONERILEN: Ilk nesil + ogrenme egrisi; olgun senaryo yalnizca duyarlilik
+    icin.'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik varsayilan ilk nesil olmasina ragmen
+    unite sayilari olgun degerlerle verilmisti; tek anahtar (ogrenme_durumu) ile tum alanlar ayni w''yu okur: cz_zd_yield
+    ve cz_availability_unplanned (kristalin ''ogrenme yili'' varyanti = w 1; ayri id yok, eklenmeli), cell_eta_core_start/mature,
+    hjt_line_yield_start/mature, hjt_w_eq_start/B, saw_*, wf_break_*, wf_t_ascut_*. Karar kullanicinin (wf_learning_scenario
+    KARAR: kullanici).'
+  dogrulama_deneyi: ''
+- id: bat_E_cell_Wh
+  ad: Pil hucre enerjisi E_cell
+  birim: Wh
+  deger: 58
+  alt: 57
+  ust: 62
+  kaynak: 'Pil: 20 Ah x 2.9 V (bat_cell_pris_small_capacity_Ah, bat_cell_v_nom_nfpp_V 2.85-3.1); 26700 LO 3.10 V
+    x 3.3 Ah = 10.23 Wh (Tycorun); 50 Ah NFPP 142.5 Wh'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'bat_ds_cell_format: ''Minimum paket = Ns x E_cell: 143 Wh (26700), 870 Wh (20 Ah), 2138 Wh (50
+    Ah)''; SMM ''10-28Ah Prismatic (NFPP)'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; format secimine bagli cikti (pil_formati; format
+    bir kategorik secimdir, belirsizlik araligina konmaz). Aralik yalniz 20 Ah hucrenin nominal gerilim belirsizligi
+    (2.85-3.1 V). Diger formatlar: 26700 LO 10.23 Wh [9.6-10.85] (B ve < 0.8 kWh kutular), 50 Ah NFPP ~142.5-145
+    Wh (> 2 kWh). Belirli bir 20 Ah hucre dogrulanmadi (RFQ). Elektronik''in 20 Wh''i hicbir formata karsilik gelmiyor.'
+  dogrulama_deneyi: ''
+- id: bat_cell_v_max_V
+  ad: Na hucre gerilim penceresi ust ucu
+  birim: V
+  deger: 3.8
+  alt: 3.7
+  ust: 3.95
+  kaynak: Pil bat_cell_v_max_nfpp_V (OGSolar 160 Ah 3.8 V; 18650 3.7 V; EVLithium 210 Ah 3.95 V); LO bat_cell_v_max_lo_V
+    3.95 (Tycorun)
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: '160Ah ''Max Charge Voltage 3.8 V''; 18650 ''3.7 V''; EVLithium 210Ah NFPP ''3.95 ±0.05 V'';
+    Tycorun 26700 ''Charge Voltage: 3.95 ± 0.05V'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; kimyaya gore (NFPP 3.8, LO 3.95, LFP 3.65). Seri
+    sayiyi ve V_batt_max''i belirler; NFPP etiketleri tutarsiz, 3.95 V''luk hucre gelirse 15S yerine 14S. SELV kontrolunde
+    secilen hucrenin veri sayfasi ust ucu kullanilir.'
+  dogrulama_deneyi: ''
+- id: bat_ns_cells
+  ad: Pil seri hucre sayisi (14S/15S)
+  birim: adet
+  deger: 15
+  alt: 14
+  ust: 15
+  kaynak: 'bat_f08: min(bat_ns_design, floor(V_lim x 0.97 / V_cell_max)); NFPP 15 (57.0 V), LO 14 (55.3 V), LFP
+    15; 35 V rejiminde LO 8'
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: 'Pil ornegi: ''Ns = floor(60 x 0.97 / Vmax). LO: 14 (55.3 V) ... NFPP: 15 (57.0 V / 30 V)'''
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, marjli formul. A varsayilani (NFPP) 15, B (LO)
+    14; aralik yalniz kimya/veri sayfasi (NFPP 3.95 V gelirse 14). dvca35''te erisilebilir pil portu <= 35 V ->
+    8S (rejim secimi, belirsizlik degil). PV ile pil galvanik ayrik degilse V_batt_max <= 60 V (std_f_selv_ok).'
+  dogrulama_deneyi: ''
+- id: D_ingot_mm
+  ad: Ingot capi D ve aralik
+  birim: mm
+  deger: 250
+  alt: 80
+  ust: 300
+  kaynak: Kristal model 80-260 mm (+290 kalibrasyon), oneri kucuk talepte 120, saha duzeyinde 160-210; wafer eta(a|D)
+    tablolari D=250/300 (D=250'de a=182 psodo 0.672, M10 uyumlu); FZ <= 200 mm
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'FZ: ''The diameters of float-zone wafers are generally not greater than 200 mm due to the surface
+    tension limitations during growth.'''
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). D sabit bir baz degil; kristal sahipliginde karar degiskeni.
+    Ornek referansi 250 mm: (i) a=182 tek parca psodo ile satin alinan M10 (K3) ayni hucre/tasiyici boyutunu kullanir,
+    (ii) wafer tablosu mevcut (tatli noktalar 40, 50, 90, 182), (iii) kristal modeli icinde (210 ile 260 arasi ara
+    degerleme; L_body_max baglayici). 210 mm tek parca a ~152 mm (ozel boyut, serbest-D esdegeri ~0.67) verir, M10/G12
+    tasimaz ve eta(a|D) tablosu yok. Bant 80-300: 260-300 UYARI, >300 ve FZ''de >200 ELEME. Ayni sicak bolgede ayarlanabilir
+    bant bilinmiyor.'
+  dogrulama_deneyi: ''

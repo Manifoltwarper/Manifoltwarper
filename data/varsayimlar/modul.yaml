@@ -93,8 +93,11 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Olgun, GW ölçekli hattın üst segmenti. Yeni ve küçük hat 0.72-0.75 V verir. Gerilim sınırı
     için nominal değil, üretim dağılımının P99'u kullanılmalı.
-  aciklama: 50.62/66 = 0.767 V. Hücre ajanının ölçümü gelince yerine geçer.
+  aciklama: '50.62/66 = 0.767 V. Hücre ajanının ölçümü gelince yerine geçer. | [Uzlaştırma/zincir] Eşdeğer: değer
+    hjt_voc_cell_V üzerinden okunur. Fark: Ayni deger; aralik 0.72-0.77. Modul bundan sonra hucre ciktisini okur.'
   dogrulama_deneyi: 50+ hücrede 25 °C IV ölçümü; Voc P50/P99.
+  esdeger: hjt_voc_cell_V
+  esdeger_carpan: 1.0
 - id: mod_beta_voc_per_K
   ad: Voc bağıl sıcaklık katsayısı
   birim: 1/K
@@ -111,23 +114,32 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kendi hücrelerimizin Voc'si düşükse büyüklükçe daha yüksek çıkar; N_s 1-2 hücre düşebilir.
-  aciklama: Önceki 'dogrulanmis_url' etiketi yanlıştı (sayfada -0.22 var); türetilmiş olarak düzeltildi.
+  aciklama: 'Önceki ''dogrulanmis_url'' etiketi yanlıştı (sayfada -0.22 var); türetilmiş olarak düzeltildi. | [Uzlaştırma/zincir]
+    Eşdeğer: değer hjt_tc_voc_pct_per_K × 0.01 (%/K → 1/K) üzerinden okunur. Fark: Birim farki (1/K = %/K / 100)
+    ve yuvarlama; soguk uclarda N_s_max''i 1 artiriyor (guvensiz yon).'
   dogrulama_deneyi: İklim odasında -25..+75 °C, 10 hücrede Voc(T).
+  esdeger: hjt_tc_voc_pct_per_K
+  esdeger_carpan: 0.01
 - id: mod_vmp_cell_stc_V
   ad: HJT hücre Vmp (STC)
   birim: V
   deger: 0.64
   alt: 0.62
   ust: 0.66
-  kaynak: 'Waaree BiH-11-730: Vmp 42.52 V / 66 = 0.644 V'
+  kaynak: 'Waaree BiH-11-730 veri sayfasi: Vmp 42.52 V / 66 = 0.644 V; beta_Vmp = gamma_Pmax (-0.24) - alfa_Isc
+    (0.04)'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: Vmp (V) STC 42.52
+  kaynak_alintisi: '''Vmp (V) STC 42.52''; ''Power (Pm), γ (%/ºC) -0.24''; ''Current (Isc), α (%/ºC) 0.04'''
   kaynak_tarihi: '2025-01-10'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Üst segment değeri; kendi hücrelerimizde 0.62-0.64 V beklenir.
-  aciklama: MPPT alt gerilimi ve akım/kablo boyutlandırması.
+  aciklama: 'MPPT alt gerilimi ve akım/kablo boyutlandırması. | [Uzlaştırma/zincir] Kanonik (tek sahip). Yalniz
+    modul tanimliyor; MPPT penceresi (mod_f_vmp_hot, mod_f_vmp_hot_bypass) ve soguk Vmp buradan turer. Elektronik''in
+    panel gerilim tahminleri (N_s~66 varsayimli, kaynaksiz) kaldirilir. Varsayilan N_s 64 (n_bypass 3): Vmp_sicak
+    34.1 V, baypasla 22.4 V, Vmp_soguk (-40 C) 48.4 V, U_OC_MAX (K_U 1.2) 57.2 V. N_s 70 (-20 C, yalniz olcum sonrasi):
+    37.3 / 24.5 / 50.4 / 57.9 V (turetilmis).'
   dogrulama_deneyi: Hücre IV ölçümü.
 - id: mod_beta_vmp_per_K
   ad: Vmp sıcaklık katsayısı
@@ -151,15 +163,19 @@ parametreler:
   deger: 0.0413
   alt: 0.038
   ust: 0.042
-  kaynak: 'Waaree: Isc 18.22 A (iki paralel yarım G12 dizisi = bir tam G12 eşdeğeri) / 441 cm² (G12 = 210 mm, hafızadan)'
+  kaynak: Waaree BiH-11-730 veri sayfasi Isc 18.22 A / 441 cm2 (G12)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: Isc (A) STC 18.22; G12 Bifacial HJT cells
+  kaynak_alintisi: '''Isc (A) STC 18.22'''
   kaynak_tarihi: '2025-01-10'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kendi hücrelerimizde 0.038-0.040 beklenir; Class III 8 A sınırında hücre kenarını belirler.
-  aciklama: 18.22/441 = 0.0413
+  aciklama: '18.22/441 = 0.0413 | [Uzlaştırma/zincir] hjt_jsc_mA_cm2 ile ilişkili ama ayrı kanonik: Farkli rol:
+    sinir kontrol Jsc''si (ayri kanonik). | [Uzlaştırma/zincir] Kanonik (tek sahip). Guvenlik yonu yuksek akim;
+    ticari ust segment modulden turetilen 41.3 mA/cm2 mod_isc_margin 1.03 ile birlikte kullanilir -> N_p = 1''de
+    a <= ~137 mm. Kendi hucremizin olculen Isc dagiliminin ust ucu gelince yerine gecer. Nominal performans icin
+    kullanilmaz.'
   dogrulama_deneyi: Hücre IV ve aktif alan ölçümü.
 - id: mod_T_min_design_C
   ad: En düşük tasarım sıcaklığı (UOC MAX için sahanın en düşük ortam sıcaklığı)
@@ -182,25 +198,30 @@ parametreler:
     -10 °C (N_s 72). Sıcaklık bilgisi yoksa standart KU = 1.2 ister (N_s 65).
   aciklama: 'Pazar ve standart ajanının kararıdır. | Örneklem denetimi (2026-09-27): MGM rekorları doğru (İstanbul
     −9,0; Ankara −24,9; Erzurum −37,2 °C); −20 °C bir tasarım seçimi, sayfalarda yok. Ankara ve Erzurum için muhafazakâr
-    değil; pazara göre seçilmeli (KK3).'
+    değil; pazara göre seçilmeli (KK3). | [Uzlaştırma/zincir] Eşdeğer: değer std_tmin_site_c üzerinden okunur. Fark:
+    Ayni kavram; aralik -40..-9 (kanonik bu araligi benimsedi, deger -40''a kaydi).'
   dogrulama_deneyi: Hedef pazarlar için MGM/DWD rekor listeleri. Işınım koşullu yaklaşımın kabulü onaylı kuruluşa
     sorulmalı.
+  esdeger: std_tmin_site_c
+  esdeger_carpan: 1.0
 - id: mod_voc_margin
   ad: Voc tasarım marjı (ölçüm belirsizliği, 1000 W/m² üstü ışınım, binleme)
   birim: '-'
   deger: 1.03
   alt: 1
   ust: 1.08
-  kaynak: 'Tahmin. Dayanak: Waaree''deki ±%3 değeri güç ölçüm belirsizliğidir (Voc belirsizliği tipik olarak daha
-    küçük). 1.2 kW/m² ışınımda Voc ≈ +n·kT/q·ln(1.2) ≈ +%0.6.'
+  kaynak: Modul tahmini; Waaree veri sayfasi +-%3 guc olcum belirsizligi; 1.2 kW/m2'de Voc ~+%0.6
   kaynak_turu: tahmin
-  kaynak_alintisi: Measuring Uncertainty ± 3% (güç için)
+  kaynak_alintisi: '''Measuring Uncertainty ± 3%'' (guc icin)'
   kaynak_tarihi: '2025-01-10'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kendi flaş test cihazımızın Voc belirsizlik bütçesi bilinmiyor.
-  aciklama: Marj 1.00 alınırsa 60 V'ta N_s 72. Dayanak adı düzeltildi (güç belirsizliği, Voc değil).
+  aciklama: Marj 1.00 alınırsa 60 V'ta N_s 72. Dayanak adı düzeltildi (güç belirsizliği, Voc değil). | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Nominal Voc ile tasarim tavaninda (mod_f_ns_max) tek marj; hucre'nin +6 mV payi bunun alt
+    bileseni. Sinir kontrolunde (std_f_ns_max) Voc_sinir (P99) marjin yerine gecer, ikisi ust uste eklenmez. K_U
+    1.2 ile tasarim tavani 65; sinir tavani (0.77 V) 64 -> baglayici olan sinir.
   dogrulama_deneyi: Flaş simülatörü ile referans modül korelasyonu; üretim Voc P99.
 - id: mod_T_cell_max_C
   ad: MPPT penceresi için en yüksek hücre sıcaklığı
@@ -273,8 +294,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Sınır STC içindir; soğuk koşuldaki üst sınır ayrıca 712.414.101'den (UOC MAX ≤ 60 V) gelir.
-  aciklama: 'Güven ''yuksek''ten ''orta''ya indirildi: 2023 metni doğrulanmadı.'
+  aciklama: 'Güven ''yuksek''ten ''orta''ya indirildi: 2023 metni doğrulanmadı. | [Uzlaştırma/zincir] Eşdeğer: değer
+    std_class3_voc_stc_max_v üzerinden okunur. Fark: Ayni (modulde guven orta).'
   dogrulama_deneyi: Standart ajanı IEC 61730-1:2023 madde 5.4.1 metnini doğrulamalı.
+  esdeger: std_class3_voc_stc_max_v
+  esdeger_carpan: 1.0
 - id: mod_classIII_isc_max_A
   ad: 'Class III modül: STC''de en yüksek Isc'
   birim: A
@@ -291,8 +315,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: HJT'de bağlayıcı sınır. Marjla a ≤ 137 mm; şeffaf arka yüzde (bifacial) daha küçük.
-  aciklama: mod_isc_margin ve mod_bifacial_isc_factor ile birlikte kullanılır.
+  aciklama: 'mod_isc_margin ve mod_bifacial_isc_factor ile birlikte kullanılır. | [Uzlaştırma/zincir] Eşdeğer: değer
+    std_class3_isc_max_a üzerinden okunur. Fark: Ayni.'
   dogrulama_deneyi: 'Standart ajanı: bifacial akım tanımı Class III''e nasıl uygulanıyor?'
+  esdeger: std_class3_isc_max_a
+  esdeger_carpan: 1.0
 - id: mod_classIII_p_max_W
   ad: 'Class III modül: en yüksek güç'
   birim: W
@@ -1356,12 +1383,12 @@ parametreler:
   maliyet_sinifi: adet
   olcek: genel
   senaryoya_uygunluk: '-'
-  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer el_cu_price_usd_kg üzerinden okunur. Fark: Kavram ''LME x 1.1 (orgu/kablolama
-    payi)''; 2025 LME ~9.5-10 k$/t hafizadan. Formule baglanmali: el_cu_price_usd_kg x 1.1 (1.1 tahmin) = 16.2 USD/kg;
-    bakir disi maliyet ayrica 0.2 USD/m.'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer el_cu_price_usd_kg × 1.1 (LME × 1,1 örgü/kablolama payı (tahmin))
+    üzerinden okunur. Fark: Kavram ''LME x 1.1 (orgu/kablolama payi)''; 2025 LME ~9.5-10 k$/t hafizadan. Formule
+    baglanmali: el_cu_price_usd_kg x 1.1 (1.1 tahmin) = 16.2 USD/kg; bakir disi maliyet ayrica 0.2 USD/m.'
   dogrulama_deneyi: LME günlük veri.
   esdeger: el_cu_price_usd_kg
-  esdeger_carpan: 1.0
+  esdeger_carpan: 1.1
 - id: mod_connector_pair_usd
   ad: PV konnektör çifti (MC4 uyumlu, IEC 62852)
   birim: USD/adet
@@ -1712,7 +1739,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: saha
   senaryoya_uygunluk: Küçük hücre daha az kırılır (H3) ama hücre sayısı fazladır.
-  aciklama: BOM/W formülünde ve örnekte artık tutarlı biçimde uygulanıyor.
+  aciklama: 'BOM/W formülünde ve örnekte artık tutarlı biçimde uygulanıyor. | [Uzlaştırma/zincir] İlişkili (eşdeğer
+    değil) → wf_learn_weight: Tek deger, ilk nesil/olgun ayrimi yok.'
   dogrulama_deneyi: Pilot üretim istatistiği.
 - id: mod_mold_small_parts_usd
   ad: Küçük plastik parça kalıp seti (kutu, köşe takozu, kenar koruyucu ucu), varyant başına

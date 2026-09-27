@@ -87,7 +87,7 @@ parametreler:
     (TaiyangNews 2026-09-07) 2026 icin HJT'de 120 um veriyor; ust sinir buna gore.
   aciklama: 'Ayni sayfa: ''expected to decline steadily from ~110-118 μm toward ~95-100 μm''. Olgun t(a) onerisi:
     50-80 mm icin 95, 105 mm icin 100, 156-182 mm icin 110, 210 mm icin 115 um. Hepsi wf_t_final_min_um + wf_texture_removal_um
-    = 95 um siniri ustunde.'
+    = 95 um siniri ustunde. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_t_ascut_firstgen_um: Olgun uc.'
   dogrulama_deneyi: Kendi testeremizde 130/110/95 um kesim; her kalinlikta kirilma, TTV ve testere izi.
 - id: wf_t_ascut_firstgen_um
   ad: HJT as-cut wafer kalinligi, ilk nesil (varsayilan)
@@ -95,9 +95,11 @@ parametreler:
   deger: 125
   alt: 115
   ust: 135
-  kaynak: tahmin
+  kaynak: 'Wafer: ilk nesil tahmin (satin alinan n-tipi 130 um''den TTV payi); olgun 110 um TaiyangNews; nihai alt
+    sinir 80 um'
   kaynak_turu: tahmin
-  kaynak_alintisi: yok (tahmin)
+  kaynak_alintisi: 'Olgun capa: ''mainstream wafer thickness for HJT is about 110 μm, which is expected to narrow
+    to 100 μm between 2026 and 2028'''
   kaynak_tarihi: 2026-09 (bu calisma)
   guven: dusuk
   maliyet_sinifi: teknik
@@ -105,7 +107,9 @@ parametreler:
   senaryoya_uygunluk: Ilk nesil testere (TTV 15-25 um) ve yari otomatik tasima icin. Kucuk wafer (<=105 mm) kirilma
     yuku a^2/t ile dustugu icin 115 um ile baslayabilir (ornekte boyle alindi).
   aciklama: 'Dayanak: satin alinan standart n-tipi wafer 130 um (InfoLink/TrendForce satirlari ''130µm''). Olgun
-    degerin ~15 um ustu TTV payi olarak birakildi.'
+    degerin ~15 um ustu TTV payi olarak birakildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer sahip: ilk nesil
+    a <= 105 mm 115, a >= 156 mm 125 um; olgun 95-115; wf_learn_weight ile harmanlanir. Kisit t >= 80 + 12 = 92
+    um. K3 dalinda t = satin alinan kalinlik (130 um). Hucre, modul ve kristal bu degeri okur.'
   dogrulama_deneyi: Ilk 20-50 kesimde kalinliga gore kirilma ve TTV dagilimi.
 - id: wf_t_final_min_um
   ad: Nihai (dokulama sonrasi) HJT wafer kalinligi alt siniri
@@ -143,8 +147,11 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Hucre ajaninin degeri esas alinir.
   aciklama: 'Alt capa: Ge 2025, kalinti gerilmenin ''~5 μm of material removal via etching'' ile buyuk olcude kalktigini
-    soyluyor (yuz basina).'
+    soyluyor (yuz basina). | [Uzlaştırma/zincir] Eşdeğer: değer hjt_si_etch_removal_um üzerinden okunur. Fark: Hafizadan;
+    ayni buyukluk.'
   dogrulama_deneyi: Dokulama oncesi ve sonrasi tartim ile kalinlik kaybi.
+  esdeger: hjt_si_etch_removal_um
+  esdeger_carpan: 1.0
 - id: saw_wire_core_um
   ad: 'Elmas tel cekirdek capi (ilk nesil: karbon celik)'
   birim: um
@@ -205,15 +212,17 @@ parametreler:
   deger: 57
   alt: 48
   ust: 65
-  kaynak: 'saw_kerf_calc (36 + 15 + 6); capa: https://cdn.qualenergia.it/wp-content/uploads/2023/05/itrpv_2023.pdf'
+  kaynak: 'Wafer: tel geometrisi 36 + 15 + 6 = 57 um (saw_kerf_calc); capa qualenergia/ITRPV 2023'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: A kerf width of 55 µm is standard in 2023 with DWS.
+  kaynak_alintisi: '''A kerf width of 55 µm is standard in 2023 with DWS.'''
   kaynak_tarihi: 2023-05 (capa) / 2026-09
   guven: orta
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Celik telli ilk nesil kendi testeremiz; ITRPV 2023'teki celik tel donemi degeriyle uyumlu.
-  aciklama: saw_wire_core_um + saw_wire_coating_add_um + saw_kerf_excess_um = 36 + 15 + 6 = 57.
+  aciklama: saw_wire_core_um + saw_wire_coating_add_um + saw_kerf_excess_um = 36 + 15 + 6 = 57. | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Wafer sahip; kullanilan deger saw_kerf_blend. Kristalin 60 um'lik yap/al ornegi ve xtal_kg_ingot_per_m2_wafer
+    kaldirilir. Kare kesim kerfi (sq_kerf_mm 0.4 mm) farkli kavram.
   dogrulama_deneyi: Ilk kesimlerde tugla boyu / wafer sayisi ve olculen t'den kerf.
 - id: saw_kerf_mature_um
   ad: Kerf, olgun testere + ~30 um tungsten tel
@@ -230,8 +239,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: GW endustri trendi (H1); yalnizca ogrenme egrisinin sonunda gecerli.
-  aciklama: 55'ten 43'e (2023-2033) dogrusal interpolasyon 2026 icin ~51 veriyor; tel geometrisi 30 + 15 + 5 = 50.
-    2030 sonrasi <25 um cekirdekle 35-42 um mumkun; bu uzun vade degeri araliga katilmadi.
+  aciklama: '55''ten 43''e (2023-2033) dogrusal interpolasyon 2026 icin ~51 veriyor; tel geometrisi 30 + 15 + 5
+    = 50. 2030 sonrasi <25 um cekirdekle 35-42 um mumkun; bu uzun vade degeri araliga katilmadi. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → saw_kerf_firstgen_um: Olgun uc.'
   dogrulama_deneyi: Tungsten telle ikinci nesil testerede kerf olcumu.
 - id: wf_ttv_um
   ad: Toplam kalinlik degiskenligi (TTV), ilk nesil
@@ -383,7 +393,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: 50 mm'de kesim derinliginin ~%6'si.
-  aciklama: ''
+  aciklama: 'Dayanak yok; geometrik yargi. Tum wafer''larin ayrildigindan emin olmak icin tel agi tuglayi tamamen
+    kesip tutkal/recine plakaya birkac mm girmeli. Ustte temas oncesindeki yaklasma mesafesi de ayni beslemeyle
+    gecilirse sureye eklenir. Varsayim (tahmin): plakaya giris ~1-2 mm, yaklasma ve tugla ust yuzey toleransi ~1-2
+    mm. Etki: cevrim = (a + 3)/besleme + ek sure; kesim suresine katkisi 182 mm''de %1.6, 105 mm''de %2.8, 50 mm''de
+    %5.7.'
   dogrulama_deneyi: Prototipte olcum.
 - id: saw_t_overhead_h
   ad: Kesim disi cevrim suresi (yukleme, bosaltma, tel agi, temizlik), ilk nesil
@@ -585,7 +599,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Onceki ciktida eksikti.
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Kalem asinmaya dayali: oluklu makaralarin PU kaplama yenilemesi,
+    rulman, filtre (tel ve sogutma sivisi ayri kalemler). Olcut (bu gorevde, hesap_turetilmis): testere + filtrasyon
+    capex''i 250k USD''nin yillik %4''u (altyapi eco_maint_frac_capex_yr) 10k USD/yil eder. Bu, ornekteki kullanimda
+    (~2400 calisma saati/yil) 4.2 USD/h, tam kullanimda (~7400 h) 1.3 USD/h demek. 8 USD/h ise ornek kullanimda
+    capex''in yilda %8''i, tam kullanimda %24''u. Makara kaplamasinin kesim saatiyle asindigi varsayimiyla yuksek
+    tutuldu. Makara kaplama fiyati ve omru bilinmiyor. Ornek: 8/25.3 = 0.32 USD/m2 (donusum maliyetinin %4''u).'
   dogrulama_deneyi: Ilk yil bakim kaydi.
 - id: saw_life_yr
   ad: Wafer ekipmanlari amortisman omru
@@ -719,7 +738,12 @@ parametreler:
   olcek: unite
   senaryoya_uygunluk: Onceki ciktida eksikti. Kullanim cok dusuk (kesim yuzeyi 0.003-0.009 m2 / m2 wafer); saha
     paylasimi adayi.
-  aciklama: ''
+  aciklama: 'Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Uc islev: kare kesim (tek ya da dort telli
+    elmas tel), silindirik taslama, tugla bolme (k_split). Model icindeki tek karsilastirma noktasi 200k USD''lik
+    cok telli ana testere (o da tahmin); kare kesim ve taslama makineleri daha basit kabul edildi. Alt sinir 60k
+    kendi imalat, ust sinir 400k ticari hat. Kullanim cok dusuk: kesim yuzeyi 0.003-0.009 m2 / m2 wafer, kapasite
+    2 m2/h (tahmin); ornekte gunde ~0.3 saat (~%1). Etki (ornek, fin_crf 0.17, 60,955 m2/yil): 0.42 USD/m2 (0.17-1.12),
+    donusum maliyetinin ~%6''si.'
   dogrulama_deneyi: BOM veya teklif.
 - id: sq_cut_rate_m2_h
   ad: Kare kesim / bolme makinesi kesim yuzeyi hizi
@@ -767,8 +791,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kristal ajaniyla ortak; kristal ajaninin degeri esas.
-  aciklama: Koni hacmi pi/12*D^2*h, yani govdeye esdeger uzunluk h/3.
+  aciklama: 'Koni hacmi pi/12*D^2*h, yani govdeye esdeger uzunluk h/3. | [Uzlaştırma/zincir, elle doğrulandı] Eşdeğer:
+    değer cz_shoulder_height_ratio üzerinden okunur.'
   dogrulama_deneyi: Ilk ingotlarin agirlik ve profili.
+  esdeger: cz_shoulder_height_ratio
+  esdeger_carpan: 1.0
 - id: wf_tail_h_over_D
   ad: Kuyruk konisi yuksekligi / ingot capi
   birim: '-'
@@ -783,9 +810,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kristal ajaniyla ortak.
-  aciklama: Kuyruk, ayrilma anindaki termal sokla olusan dislokasyonlarin govdeye kaymasini sinirlamak icin yavasca
-    daraltilir (hafizadan).
+  aciklama: 'Kuyruk, ayrilma anindaki termal sokla olusan dislokasyonlarin govdeye kaymasini sinirlamak icin yavasca
+    daraltilir (hafizadan). | [Uzlaştırma/zincir] Eşdeğer: değer cz_tail_length_ratio üzerinden okunur. Fark: Wafer
+    tahmini; kanonikle degistirilir.'
   dogrulama_deneyi: Kuyruk bolgesinde dislokasyon ve omur haritasi.
+  esdeger: cz_tail_length_ratio
+  esdeger_carpan: 1.0
 - id: wf_crop_mm
   ad: Govdeden kesilen uc ve test dilimleri
   birim: mm/ingot
@@ -816,7 +846,10 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kisa tuglada oransal olarak buyur (K7).
-  aciklama: ''
+  aciklama: 'Dayanak yok; geometrik yargi. Tugla ucundaki ilk ve son wafer''lar tutkal tasmasi, uc yuzey dikligi
+    ve kenar kirilmasi nedeniyle kaybolur. Bu gorevdeki kaba hesap: 182 mm tuglada 0.5 derecelik uc yuzey egikligi
+    1.6 mm, 1 derecelik egiklik 3.2 mm kama olusturur. 3 mm, ~1 derece egiklige ya da 0.5 derece + 1-2 feda wafer''a
+    karsilik gelir. Formul: verim = 1 - 2*uc/min(L_govde - crop, L_yuk); 600 mm yukte kayip %1, 300 mm tuglada %2.'
   dogrulama_deneyi: Ilk kesimlerde olcum.
 - id: wf_break_wafering_ref_firstgen
   ad: Kesim + tutkal cozme + on temizlik kirilma orani, ilk nesil (182 mm, 130 um referansi)
@@ -866,7 +899,8 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Olgun, stres azaltilmis GW HJT hatti; format ve olcum adimlari belirtilmemis, baglamda 110
     um. Ilk hatta aktarilamaz (H1).
-  aciklama: Hucre ajanina arayuz.
+  aciklama: 'Hucre ajanina arayuz. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Olgun uc
+    (w = 0).'
   dogrulama_deneyi: Hucre hattinda adim bazli kirik sayimi.
 - id: wf_break_cell_ref_firstgen
   ad: HJT hucre hatti kirilma orani, ilk nesil (110 um referansi)
@@ -884,7 +918,8 @@ parametreler:
   senaryoya_uygunluk: Ilk nesil hucre hatti (varsayilan).
   aciklama: 'PMC11076549 (dogrulandi): CEA-INES SHJ pilotu ''from about 10% at 100 μm thickness to a terrible ~96%
     at 70 μm'' (2016). Hanwha''nin %4.5 degeri ''high-temperature diffused junction cells'' icin, HJT degil. arXiv
-    1906.06770: HIT hattinda ~90 um''ye kadar ~%93 verim, el ile tasima.'
+    1906.06770: HIT hattinda ~90 um''ye kadar ~%93 verim, el ile tasima. | [Uzlaştırma/zincir] İlişkili (eşdeğer
+    değil) → wf_break_cell_ref: Ilk nesil uc (w = 1) = varsayilan.'
   dogrulama_deneyi: Pilot hucre hattinda adim bazli kirik sayimi.
 - id: wf_break_exp_thickness
   ad: 'Kesim kirilmasinin kalinlik ussu n_t: P ~ (t_ref/t)^n_t'
@@ -927,16 +962,19 @@ parametreler:
   deger: 3
   alt: 1
   ust: 8
-  kaynak: tahmin (Weibull + plak teorisi sinirlari)
+  kaynak: Wafer tahmini (Weibull + plak teorisi sinirlari); hucre tahmini us 1 (0.5-2)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok (tahmin)
+  kaynak_alintisi: 'Wafer notu: ''Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1
+    = 8'''
   kaynak_tarihi: 2026-09 (bu calisma)
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: H3'un nicellestirilmesi.
   aciklama: 'Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1 = 8: atalet/titresim
-    yuklerinde sigma ~ a^2/t. Sabit egrilik yuklerinde (lehim/CTE) boyut etkisi yok.'
+    yuklerinde sigma ~ a^2/t. Sabit egrilik yuklerinde (lehim/CTE) boyut etkisi yok. | [Uzlaştırma/zincir] Kanonik
+    (tek sahip). Tek (taban payli) form secildi; hucre''nin us 1''i alt uca denk. H3 kazanci bu usse cok duyarli;
+    deneyle olculmeli.'
   dogrulama_deneyi: M10'lari 1/2/4/9 parcaya bolup ayni adimlardan gecirme; parca boyuna gore kirilma regresyonu.
 - id: wf_weibull_m
   ad: As-cut wafer Weibull modulu
@@ -1069,7 +1107,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Kucuk partilerde banyo tukenmeden atilir.
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi. Kesikli (parti) HF/HNO3 banyosu, asit tukenmeden atilir: Si yuku
+    belli bir g/L esigine ulasip daglama hizi dustugunde ya da kirlilik biriktiginde. Banyo atildiginda asidin ~1/3''unun
+    tepkimeye girdigi kabul edildi (carpan 3). Kucuk partilerde (ornekte gunde ~42 kg geri donusum) banyo doluluk
+    orani dusuk kalir; ust sinir 6 buradan. Alt sinir 1.5, besleme/tazeleme (feed-and-bleed) isletimi. Etki kucuk
+    (hesap_turetilmis): 0.0023 kg Si/m2 daglamayla kimyasal + atik 0.05/0.095/0.18 USD/m2 (carpan 1.5/3/6).'
   dogrulama_deneyi: Banyo omru boyunca Si yuku (g/L).
 - id: wf_hf_stoich_kg_per_kg
   ad: Daglanan kg Si basina HF (100% baz)
@@ -1119,7 +1161,10 @@ parametreler:
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: Kaynak bulunamadi; m2 basina etkisi sentler mertebesinde.
-  aciklama: ''
+  aciklama: 'Dayanak yok; kaynak bulunamadi, muhendislik yargisi (%100 HF bazinda, teslim). Hucre alaninda ayni
+    kimyasal icin hjt_hf_price_usd_per_kg = 4 (2-8) USD/kg kullaniliyor (%49 elektronik sinif; o da tahmin). Wafer
+    degerinin daha dusuk olmasi, geri donusum daglamasinin teknik sinif asitle yapilabilecegi ortuk varsayimina
+    dayaniyor. Etki kucuk: HF 1/2.5/4/6 USD/kg icin daglama kimyasali + atik 0.05/0.095/0.14/0.20 USD/m2.'
   dogrulama_deneyi: Yerel kimyasal tedarikci teklifi.
 - id: wf_hno3_price_usd_kg
   ad: HNO3 fiyati (100% baz, teslim)
@@ -1135,7 +1180,10 @@ parametreler:
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: Kaynak bulunamadi.
-  aciklama: ''
+  aciklama: 'Dayanak yok; kaynak bulunamadi, muhendislik yargisi (%100 HNO3 bazinda, teslim). Nitrik asit amonyaktan
+    uretilen bir emtia kimyasali; teknik sinif icin dusuk, elektronik sinif icin cok daha yuksek fiyat beklenir
+    (hafizadan, dogrulanmadi). Stokiyometri NO yolunda 2.99, NO2 yolunda 8.97 kg HNO3/kg Si; yani tuketimin kendisi
+    de 3 kat belirsiz. Etki kucuk: ornekte HNO3 payi 0.0023*3*2.99*0.6 = 0.012 USD/m2.'
   dogrulama_deneyi: Teklif.
 - id: wf_waste_treat_usd_per_kg_si
   ad: Daglama atigi notralizasyon ve bertarafi (daglanan kg Si basina)
@@ -1167,7 +1215,10 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Onceki ciktida eksikti.
-  aciklama: ''
+  aciklama: 'Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Kalem: Si''ye metal bulastirmayan kirici (WC
+    ya da Si kaplamali cene/tokmak) + eleme. Kapasite ihtiyaci cok kucuk: ornekte gunde ~42 kg geri donusum (0.251
+    kg/m2 x 167 m2/gun). Alt sinir 20k, basit kendi yapim (WC plakali cene/tokmak); ust sinir 200k, ticari otomatik
+    poly kirma sistemi. Etki (ornek, fin_crf 0.17): 0.17 USD/m2 (0.06-0.56).'
   dogrulama_deneyi: BOM veya teklif.
 - id: wf_etch_station_capex_usd
   ad: Geri donusum daglama tezgahi + lokal gaz yikayici yatirimi
@@ -1183,7 +1234,10 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: HF atik aritma ve NOx yakma saha_sabit (saha ajani).
-  aciklama: ''
+  aciklama: 'Dayanak yok (teklif yok); muhendislik yargisi. Kalem: PP/PVDF asit tezgahi (HF/HNO3 daglama, durulama,
+    kurutma) ve lokal gaz yikayici (NOx, HF buhari). Firmanin plastik enjeksiyon ve kalip yetkinligi PP/PVDF imalatini
+    ucuzlatabilir. Alt sinir 40k kendi yapim, ust sinir 400k ticari otomatik islak tezgah. HF atik aritma ve merkezi
+    NOx yakma saha_sabit (altyapi). Etki (ornek, fin_crf 0.17): 0.34 USD/m2 (0.11-1.12).'
   dogrulama_deneyi: Teklif.
 - id: wf_slab_recovery_frac
   ad: Kare kesim artiginin geri kazanilabilir payi (taslama tozu ve kerf haric)
@@ -1376,7 +1430,11 @@ parametreler:
   maliyet_sinifi: adet
   olcek: genel
   senaryoya_uygunluk: 'H6: satin alinan wafer''da gecmis bilinmedigi icin gerekli.'
-  aciklama: ''
+  aciklama: 'Dayanak: iscilige dayali kaba hesap (bu gorevde, hesap_turetilmis). Ornekleme ile giris kontrolu: kalinlik/TTV,
+    ozdirenc, omur, gorsel. Ornek hacimde gunde 5,060 wafer icin 0.002 USD/adet = ~10 USD/gun = ~0.8 teknisyen-saat/gun
+    (12 USD/h). 0.0005-0.006 araligi gunde 0.2-2.5 teknisyen-saatine karsilik gelir. m2 basina 0.06 USD (M10, 0.0331
+    m2/adet); satin alma fiyatinin %1.4''u. Olcum cihazlarinin (ozdirenc ve omur test cihazi) yatirimi bu degere
+    dahil degil. H6: satin alinan wafer''in gecmisi bilinmedigi icin bu kontrol zorunlu kalir.'
   dogrulama_deneyi: Giris kontrol prosedurunun zaman etudu.
 - id: wf_poly_price_nonchina_usd_kg
   ad: Poli-Si fiyati, Cin disi mense
@@ -1547,7 +1605,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Tray uzerinde toplu goruntuleme ile kapasite k^2 kat artar.
-  aciklama: ''
+  aciklama: 'Dayanak: tasima geometrisiyle kaba hesap (bu gorevde, hesap_turetilmis); ticari kaynak yok. 3600 wph
+    = saniyede 1 wafer. Bantli tasimada 182 mm wafer + ~100 mm aralik = 0.28 m adim; 0.28 m/s bant hiziyla 3600
+    wph. Goruntuleme (hat tarama kamerasi, IR gecirim, kapasitif kalinlik) bu hizda sinirlayici kabul edilmedi.
+    Alt sinir 1500, ilk nesil kendi yapim (yavas ayirma mekanigi); ust sinir 8000, yuksek hizli ticari siniflandirici
+    (hafizadan, dogrulanmadi). Etki: yalnizca N_inspect = ceil(...) basamagini belirler; ornekte kullanim M10''da
+    %7, 50 mm''de %51.'
   dogrulama_deneyi: Prototipte cevrim suresi.
 - id: wf_inspect_uptime
   ad: Muayene ve ayirma istasyonu kullanilabilirligi
@@ -1563,7 +1626,10 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Onceki formul testere kullanilabilirligini kullaniyordu (duzeltildi).
-  aciklama: ''
+  aciklama: 'Dayanak yok; muhendislik yargisi ve model ici tutarlilik. Altyapi eco_uptime_frac_default 0.9 (0.8-0.95,
+    tahmin) ile ayni; Cz (cz_availability_unplanned 0.9) ile ayni mertebe. Muayene istasyonunda tel kopmasi ve makara
+    kaplama degisimi gibi ariza kaynaklari olmadigindan testereden (saw_uptime 0.85) biraz yuksek secildi. Etki:
+    yalnizca N_inspect tamsayi basamagini etkiler; ornek kullanimlarda (%7-51) sonucu degistirmez.'
   dogrulama_deneyi: OEE kaydi.
 - id: wf_handling_capex_usd
   ad: Tutkal cozme + ayirma + on temizlik hatti yatirimi
@@ -1595,7 +1661,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: H6 stratejisinin yatirimi (onceki ciktida eksikti).
-  aciklama: ''
+  aciklama: 'Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Kalem uc olcumden olusur: tugla seviyesinde
+    temassiz girdap akimi ozdirenc taramasi; PL/omur haritasi (Si PL ~1.1 um; sogutmali Si ya da InGaAs kamera +
+    lazer/LED uyarim); IR gecirimle inkluzyon/catlak taramasi. Firmanin kendi tasarim kabiliyetiyle alt sinir 30k;
+    ticari tugla muayene istasyonu icin ust sinir 250k. H6 stratejisinin yatirimi: ozdirenc/omur olcumunu wafer
+    basindan tugla basina indirir. Etki (ornek, fin_crf 0.17): 0.22 USD/m2 (0.08-0.70).'
   dogrulama_deneyi: BOM veya teklif.
 - id: wf_preclean_chem_usd_m2
   ad: On temizlik kimyasal + su maliyeti
@@ -1611,7 +1681,11 @@ parametreler:
   maliyet_sinifi: alan
   olcek: unite
   senaryoya_uygunluk: Saf su saha altyapisindan (saha_sabit).
-  aciklama: ''
+  aciklama: 'Dayanak: model ici oransal karsilastirma (hesap_turetilmis); kaynak yok. Kesim sonrasi on temizlik:
+    tutkal cozme (sicak su/asit), deterjan veya alkali yikama, durulama; saf su saha altyapisindan gelir. Hucre
+    alaninin ''diger alan kalemleri'' (kimya, gaz, tasiyici yenileme, marjinal elektrik, UPW) toplami ~0.7 c/W,
+    yani %25 verimde ~1.75 USD/m2. 0.2 USD/m2 bunun ~%11''i; tek ve basit bir islak adim icin makul mertebe. Ornekte
+    donusum maliyetinin ~%3''u.'
   dogrulama_deneyi: Prototipte tuketim.
 - id: wf_split_tls_wph
   ad: Termal lazer ayirma (TLS) kapasitesi
@@ -1644,7 +1718,13 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Alt sinir kendi yapim, ust sinir ticari TLS.
-  aciklama: ''
+  aciklama: 'Dayanak yok (teklif yok); aralik uclari ve baz yargi. Wafer alaninin tanimi: alt sinir (60k) kendi
+    yapim lazer cizme + mekanik yarma (fiber lazer, XY tabla, yarma aparati); ust sinir (1M) ticari TLS istasyonu
+    (3D-Micromac microCELL tipi); baz (400k) bu ikisi arasinda bir yargi. Hicbir fiyat dogrulanmadi. TLS kapasitesi
+    ''up to 6,000 wph'' (dogrulanmis) hucre ayirma icin verilmis; ciplak wafer''a uygunlugu dogrulanmadi. Kullanim
+    cok dusuk: ornekte gunde 5,060 wafer, 6,000 wph''de gunde ~0.8 saat (%3.5). Etki (ornek, fin_crf 0.17, 60,955
+    m2/yil): baz 1.12 USD/m2 (aralik 0.17-2.79); 150k''da 0.42 USD/m2. K3 yolunda baz, satin alinan wafer maliyetinin
+    (4.91 USD/m2) ~%23''u kadar ek maliyet demek.'
   dogrulama_deneyi: Teklif veya BOM.
 - id: wf_split_edge_loss_rel
   ad: Hucre oncesi bolunmus HJT parcasinda kenar kaynakli goreli verim kaybi (91 mm ceyrek)

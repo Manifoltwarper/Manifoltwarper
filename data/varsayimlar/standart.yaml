@@ -50,10 +50,10 @@ parametreler:
   deger: 60
   alt: 60
   ust: 60
-  kaynak: IEC 60364-7-712:2017 madde 712.414.101 (metin cevrimici lisanssiz kopyadan okundu; lisansli kopya alinmali)
+  kaynak: IEC 60364-7-712:2017 madde 712.414.101
   kaynak_turu: standart_metni_dogrulanmis
-  kaynak_alintisi: 712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not
-    exceed 60 V DC.
+  kaynak_alintisi: '''712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall
+    not exceed 60 V DC.'''
   kaynak_tarihi: IEC 60364-7-712 Ed.2.0 2017-04; revizyonda yeniden okundu 2026-09-27
   guven: yuksek
   maliyet_sinifi: teknik
@@ -61,7 +61,10 @@ parametreler:
   senaryoya_uygunluk: Kurulum standardi; A ve B icin gecerli. Kategorik rejim degeridir, surekli belirsizlik araligi
     DEGILDIR (Monte Carlo'da orneklenmemeli).
   aciklama: 'Revizyon: alt deger 35 -> 60 yapildi; Avusturya 35 V ayri pazar bayragi (std_austria_selv_pv_v). Ed.3.0
-    2025-10 yayimlandi; onizlemede 712.414 basligi var, 60 V degerinin korunup korunmadigi dogrulanmadi.'
+    2025-10 yayimlandi; onizlemede 712.414 basligi var, 60 V degerinin korunup korunmadigi dogrulanmadi. | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Sinir soguk U_OC_MAX''a uygulanir (K6). Deger okunan baskinin (2017) metninden; guncel
+    baskida korundugu ayrica dogrulanacak (Class III ile ayni kural). SELV icin kutunun PV-sebeke arasi guvenli
+    ayirmasi sart.'
   dogrulama_deneyi: IEC 60364-7-712:2025'i satin al (~400 CHF); 712.414 ve yeni DC bara/pil maddelerini oku.
 - id: std_austria_selv_pv_v
   ad: 'Avusturya ulusal sapmasi: PV DC SELV siniri (pazar bayragi)'
@@ -77,7 +80,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Avusturya pazari hedeflenirse V_lim=35 secilmeli; 60 V mimarisi orada SELV sayilmaz.
-  aciklama: Kategorik pazar degeri.
+  aciklama: 'Kategorik pazar degeri. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_dvca_dc_wet_v: AT PV SELV
+    siniri; ayni sayi, farkli dayanak.'
   dogrulama_deneyi: OVE E 8101 guncel metninin kontrolu (AT pazari icin).
 - id: std_selv_dry_no_basic_protection_dc_v
   ad: 'SELV/PELV: normal KURU kosulda temel korumanin gerekmedigi DC sinir'
@@ -138,9 +142,9 @@ parametreler:
   deger: 35
   alt: 35
   ust: 35
-  kaynak: DEKRA test raporu 6067599.50A, TRF IEC62109_1B (IEC 62109-1:2010)
+  kaynak: DEKRA test raporu 6067599.50A (TRF IEC62109_1B); IEC TS 62257-9-8:2020 onizlemesi
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'DVC A: 60Vdc (35Vdc for wet location); 35,4Vpeak, 25Vrms (22,6Vpeak, 16Vrms for wet location)'
+  kaynak_alintisi: '''DVC A: 60Vdc (35Vdc for wet location)'''
   kaynak_tarihi: Rapor 2020-01-22; revizyonda yeniden indirildi 2026-09-27
   guven: yuksek
   maliyet_sinifi: teknik
@@ -148,7 +152,9 @@ parametreler:
   senaryoya_uygunluk: Dis ortam kutusu (K5) islak konumdur; PV ve pil portlari ancak U <= 35 V ise probe ile dokunulabilir
     olabilir.
   aciklama: IEC TS 62257-9-8:2020 onizlemesi de 35 V'un 'DVC-A for wet locations in Table 6 of IEC 62109-1:2010'
-    oldugunu teyit ediyor. IEC 62109-1 Ed.2 hazirlaniyor (dogrulanmadi).
+    oldugunu teyit ediyor. IEC 62109-1 Ed.2 hazirlaniyor (dogrulanmadi). | [Uzlaştırma/zincir] Kanonik (tek sahip).
+    dvca35 rejiminde soguk U_OC_MAX'a uygulanir (varsayilan N_s 36). 414.4.5'in islak temel korumasiz 30 V'u ayri
+    kategori (elv30); Class III 35 V STC'dir ve ayri kanonik.
   dogrulama_deneyi: IEC 62109-1 Ed.2 yayimlaninca Tablo 6 kontrolu.
 - id: std_dvca_dc_dry_v
   ad: IEC 62109-1 DVC-A siniri, kuru konum
@@ -164,7 +170,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: Yalniz ic mekan (B ev ici).
-  aciklama: DVC-B sinirlarini dogrulayamadim.
+  aciklama: 'DVC-B sinirlarini dogrulayamadim. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_selv_pv_uocmax_limit_v:
+    Urun DVC-A kuru siniri; ayri kontrol.'
   dogrulama_deneyi: Standart Tablo 6.
 - id: std_class3_voc_stc_max_v
   ad: 'IEC 61730-1:2016 Class III modul: azami Voc (STC)'
@@ -172,12 +179,11 @@ parametreler:
   deger: 35
   alt: 35
   ust: 35
-  kaynak: IEC 61730-1:2016 madde 4.4.1 (SIS resmi onizlemesi); UL beyaz kitap (seri/paralel kombinasyon ve paralel
-    kullanim kosulu)
+  kaynak: IEC 61730-1:2016 madde 4.4.1 (SIS resmi onizlemesi)
   kaynak_turu: standart_metni_dogrulanmis
-  kaynak_alintisi: '4.4.1: ''Class III PV modules shall not have electrical ratings greater than 240 W where the
-    open-circuit voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under
-    standard test conditions.'' UL: ''Representative modules and series/parallel connections thereof ...'''
+  kaynak_alintisi: '''Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit
+    voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard
+    test conditions.'''
   kaynak_tarihi: Standart 2016-08; onizleme 2026-09-27
   guven: yuksek
   maliyet_sinifi: teknik
@@ -185,7 +191,11 @@ parametreler:
   senaryoya_uygunluk: B senaryosunda tek dizili kucuk urunde mumkun; A (cok panel, 300-500 W) icin mumkun degil.
   aciklama: 'Standart metni (4.4.1) modul basina sinir veriyor; ''seri/paralel kombinasyonlara uygulanir'' ifadesi
     UL ozetinden geliyor (4.4.3 onizlemede yok). Eski 2004 baskisi Application Class C: ''<50 V DC and 240 W''.
-    2023 baskisinda Class III icin DTI sarti kaldirildi.'
+    2023 baskisinda Class III icin DTI sarti kaldirildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). STC degeridir
+    (soguk degil). Guven 60 V SELV ile ayni kuralla yuksek (okunan baskinin metni); 2023 baskisinda (madde 5.4)
+    korundugu ayrica dogrulanacak. Belirsiz olan deger degil, ''kutu toplami'' yorumu (UL ozeti; 4.4.3 goruntulenmedi).
+    Formul standart''in, marjlar modul''un: N_s <= 45 (cift 44), ilk nesil eta ile P ~161-181 W, olgun ~187-210
+    W.'
   dogrulama_deneyi: IEC 61730-1:2023 madde 5.4 ve 4.4.3 esdegeri metnin satin alinmasi.
 - id: std_class3_pmax_w
   ad: Class III modul azami gucu (STC)
@@ -210,9 +220,9 @@ parametreler:
   deger: 8
   alt: 8
   ust: 8
-  kaynak: IEC 61730-1:2016 madde 4.4.1; IEC TS 62257-9-8:2020 onizlemesi
+  kaynak: IEC 61730-1:2016 madde 4.4.1
   kaynak_turu: standart_metni_dogrulanmis
-  kaynak_alintisi: '...the short-circuit current does not exceed 8 A when tested under standard test conditions.'
+  kaynak_alintisi: '''...the short-circuit current does not exceed 8 A when tested under standard test conditions.'''
   kaynak_tarihi: 2016-08 / 2020-06; 2026-09-27
   guven: yuksek
   maliyet_sinifi: teknik
@@ -220,7 +230,9 @@ parametreler:
   senaryoya_uygunluk: 'HJT Jsc ~39,5 mA/cm2 ile HUCRE alani <= ~202 cm2. Wafer boyutunu sinirlamaz: 182 mm yarim
     hucre (165,6 cm2, 6,5 A) ve 210 mm ucte bir (147 cm2, 5,8 A) uyar.'
   aciklama: 'Revizyon: ilk ciktidaki ''a_wafer <= 141 mm, kucuk wafer lehine'' yorumu yanlisti; kisit A_cell_m2
-    uzerinden yazildi. Kesim kenari rekombinasyon kaybi bilinmiyor (hucre alani).'
+    uzerinden yazildi. Kesim kenari rekombinasyon kaybi bilinmiyor (hucre alani). | [Uzlaştırma/zincir] Kanonik
+    (tek sahip). Hucre ALANINI sinirlar: sinir Jsc 41.3, marj 1.03, N_p = 1 ile a <= ~137 mm (mod_f_a_max_class3).
+    182-210 mm wafer n_cut/k_split ile uyar.'
   dogrulama_deneyi: '-'
 - id: std_uocmax_default_factor
   ad: U_OC_MAX / U_OC_STC geri dusus katsayisi (alfa veya T_min bilinmiyorsa)
@@ -260,19 +272,24 @@ parametreler:
 - id: std_tmin_site_c
   ad: U_OC_MAX hesabinda kullanilan en dusuk saha sicakligi
   birim: C
-  deger: -20
-  alt: -30
-  ust: -5
-  kaynak: Tahmin (Marmara ~-5..-10, Almanya ~-20, Alpler/Iskandinavya ~-30)
+  deger: -40
+  alt: -40
+  ust: -9
+  kaynak: 'Tasarim secimi; dayanak MGM rekorlari (modul revizyonunda acildi): Istanbul -9.0, Ankara -24.9, Erzurum
+    -37.2 C; modul kaynaginda Almanya Hull -37.8 C'
   kaynak_turu: tahmin
-  kaynak_alintisi: '-'
+  kaynak_alintisi: '''En Düşük Sıcaklık (°C): İstanbul -9,0 (Şubat); Ankara -24,9 (Ocak); Erzurum -37,2 (Aralık)'''
   kaynak_tarihi: 2026-09
-  guven: dusuk
+  guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 'Tek urunu tum AB''de satmak icin en kotu pazar alinmali. alfa=-0,24 %/K ile K_U: -30 C 1,132;
     -20 C 1,108; -10 C 1,084; -5 C 1,072.'
-  aciklama: 60 V'ta N_s_max 71-74 arasinda degisir.
+  aciklama: '60 V''ta N_s_max 71-74 arasinda degisir. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pazar/saha kavrami
+    -> standart sahip. Deger bir tasarim secimidir (istasyon rekorlari dayanak, -40 degil); bu yuzden kaynak_turu
+    tahmin. Pazar anahtari: TR_marmara -10, TR_ic -25, DE_AT -40, tek_urun -40 (varsayilan; A''nin ana pazari Almanya,
+    rekor -37.8 C). Modulun guveni yuksek itirazi (''tek urun icin -40 C'') uygulandi. ku_yontemi = varsayilan_1.2
+    iken T_min N_s_max''i baglamaz (K_U 1.2 > 1.159); beyan_alfa''da baglar.'
   dogrulama_deneyi: Hedef pazar iklim kayitlari (MGM, DWD) ve sertifika kurulusunun kabul ettigi T_min.
 - id: std_ocpr_to_isc_ratio
   ad: Modul azami asiri akim koruma degeri / Isc
@@ -446,14 +463,19 @@ parametreler:
   ust: 960
   kaynak: VDE basin bildirisi (DIN VDE V 0126-95:2025-12)
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'With household plug (Schuko): ''800 Wp + 20% (i.e., 960 Wp)'''
+  kaynak_alintisi: '''800 Wp + 20% (i.e., 960 Wp)'''
   kaynak_tarihi: 2025-12; 2026-09-27
   guven: yuksek
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: n_panel_per_box*P_panel_W <= 960. 500 W panelde Schuko ile yalniz n=1; n=4 x 500 W yalniz
     ozel fisle.
-  aciklama: 'Schuko icin fis temas korumasi: korumali fis, dahili kesici veya invertorde galvanik ayirma (+ek sartlar).'
+  aciklama: 'Schuko icin fis temas korumasi: korumali fis, dahili kesici veya invertorde galvanik ayirma (+ek sartlar).
+    | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida ust uc 2000 idi (ozel fis); iki mevzuat secenegi bir
+    belirsizlik araligina konmustu, duzeltildi. Ozel enerji fisi ayri id std_plugin_special_plug_pv_max_wp (2000
+    Wp) ve fis_tipi anahtariyla secilir. A''da n_panel_per_box = min(kutu_kurali n, floor(960 / P_panel)); P_box
+    = n x P, P_inv = min(P_box, 800 VA). B''de fis siniri yok; class3''te kutu toplami <= 240 W; kutu_enerji_siniri
+    ve (B) 5 kg n''yi ayrica kisar.'
   dogrulama_deneyi: DIN VDE V 0126-95 tam metni (~150 EUR).
 - id: std_plugin_special_plug_pv_max_wp
   ad: 'Almanya fisli PV: ozel enerji fisiyle azami modul gucu / basit kayit siniri'
@@ -469,7 +491,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: A, ozel priz kurulumu kullaniciya kalir.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp: Ayri mevzuat secenegi (fis_tipi
+    = ozel_enerji_fisi).'
   dogrulama_deneyi: '-'
 - id: std_rfg_type_a_min_w
   ad: AB RfG 2016/631 Tip A uretim modulu alt esigi

@@ -330,18 +330,20 @@ parametreler:
   deger: 1.6
   alt: 0.9
   ust: 2.6
-  kaynak: https://solarfantasie.de/en/blogs/news/anker-solix-solarbank-3-e2700-pro-alles-was-du-wissen-musst ; https://zendure.com/products/solarflow-800-pro
-    ; https://www.homeandsmart.de/din-vde-0126-95-balkonsolar-norm-erklaert-0048-651569
+  kaynak: 'Pil: rakip urunlerin nominal 0.96-2.8 Wh/Wp orani x LFP kullanilabilir 0.92'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: 'Anker SB3 ''2,700 Wh'', ''3,600 Watts''; Zendure ''1,920 Wh'', ''2640W''; VDE: 800 W, Schuko
-    ''bis zu 960 Wp'', Wieland ''2.000 Wp'''
+  kaynak_alintisi: 'Anker SB3 ''2,700 Wh'', ''3,600 Watts''; Zendure ''1,920 Wh'', ''2640W''; VDE: Schuko ''bis
+    zu 960 Wp'', Wieland ''2.000 Wp'''
   kaynak_tarihi: 2025-2026
   guven: orta
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: AB (DE) balkon pazari (LFP urunler). Turkiye icin ayri dogrulanmali.
   aciklama: 'Rakiplerin nominal oranlari 0.96-2.8 Wh/Wp. Bunlar LFP kullanilabilir orani (0.92) ile carpildi: 0.9-2.6,
-    orta 1.75 x 0.92 = 1.6. Nominal kutu enerjisi = r x P / bat_usable_fraction.'
+    orta 1.75 x 0.92 = 1.6. Nominal kutu enerjisi = r x P / bat_usable_fraction. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip; kullanilabilir enerji tanimi. Nominal = oran / usable: A varsayilan NFPP 1.78, LO 2.0 Wh/Wp.
+    Tek kural: E_nom = max(hedef, P_box x bat_pv_peak_factor / C_max(format, T)), sonra N_s x E_cell kuantizasyonu.
+    Elektronik''in 1.5 h depolama suresi kaldirilir.'
   dogrulama_deneyi: PVGIS saatlik uretim + yuk profiliyle 1 yillik simulasyon; 20+ SKU taramasi.
 - id: bat_wh_usable_per_wp_B
   ad: 'Senaryo B: KULLANILABILIR Wh / panel Wp'
@@ -349,16 +351,17 @@ parametreler:
   deger: 3.2
   alt: 1.8
   ust: 5.5
-  kaynak: https://batterygroup.co.uk/solar/electronics-other-components/other-solar-products/17181/ecoflow-river-3-245wh-power-station-with-110w-portable-solar-panel-bundle
-    ; https://gizmodo.com/jackery-explorer-1000-v2-with-200w-solar-panel-drops-nearly-50-turning-a-power-station-into-a-full-solar-generator-setup-for-less-2000784442
+  kaynak: 'Pil: EcoFlow River 3 245 Wh + 110 W; Jackery 1000 v2 1070 Wh + 200 W; nominal 2.2-5.35 x 0.92'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: EcoFlow River 3 '245Wh' + '110W'; Jackery 1000 v2 '1,070Wh' + '200W' (LFP)
+  kaynak_alintisi: EcoFlow River 3 '245Wh' + '110W'; Jackery 1000 v2 '1,070Wh' + '200W'
   kaynak_tarihi: '2026'
   guven: orta
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: 100-200 W paneller tasinabilir; 300-500 W sabit sebeke disi kabin senaryosu.
-  aciklama: Nominal oranlar 2.2-5.35 x 0.92 -> ~2-4.9; ortasi 3.5 x 0.92 = 3.2.
+  aciklama: Nominal oranlar 2.2-5.35 x 0.92 -> ~2-4.9; ortasi 3.5 x 0.92 = 3.2. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip; nominal LO 4.0, NFPP 3.56 Wh/Wp. B'de 5 kg (tasinabilir pil) ve hava tasimasi sinirlari E_batt'i
+    ayrica kisar.
   dogrulama_deneyi: Kullanim anketi ve SKU taramasi.
 - id: bat_cell_v_max_lo_V
   ad: LO hucre sarj ust gerilimi
@@ -374,7 +377,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Uygun.
-  aciklama: SELV'e gore seri sayiyi belirler.
+  aciklama: 'SELV''e gore seri sayiyi belirler. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_cell_v_max_V:
+    LO (B varsayilani).'
   dogrulama_deneyi: Giris muayenesinde CV sonu gerilimi.
 - id: bat_cell_v_min_lo_V
   ad: LO veri sayfasi desarj alt gerilimi
@@ -391,7 +395,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Uygun.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_v_min_cutoff_V: Veri sayfasi siniri; tasarim kesimi
+    degil.'
   dogrulama_deneyi: OCV-kapasite egrisi.
 - id: bat_cell_v_nom_lo_V
   ad: LO nominal gerilim
@@ -513,15 +518,17 @@ parametreler:
   deger: 2
   alt: 1.5
   ust: 2.5
-  kaynak: tasarim onerisi
+  kaynak: Pil tasarim onerisi; veri sayfasi alt siniri 1.50 V (Tycorun)
   kaynak_turu: tahmin
-  kaynak_alintisi: '-'
+  kaynak_alintisi: '''Discharge cut-off 1.50±0.05V'' (veri sayfasi siniri)'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: Elektronikle birlikte optimize edilir.
-  aciklama: Kesim arttikca kullanilabilir oran duser; P/V_min akimi da duser.
+  aciklama: Kesim arttikca kullanilabilir oran duser; P/V_min akimi da duser. | [Uzlaştırma/zincir] Kanonik (tek
+    sahip). Pil sahip. V_batt_min = 15 x 2.0 = 30 V (NFPP) / 14 x 2.0 = 28 V (LO) -> MPPT penceresi, azami akim
+    ve kullanilabilir oran (LO ~0.8, NFPP ~0.9) buna bagli. 1.5 V veri sayfasi siniri farkli kavram.
   dogrulama_deneyi: 25/0/-10 C'de C/5 ve C/2 desarj egrileri.
 - id: bat_usable_fraction_lo
   ad: LO kullanilabilir enerji / anma enerjisi (2.0 V kesimde)
@@ -851,7 +858,7 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Uygun.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris: 26700 (B varsayilani).'
   dogrulama_deneyi: '-'
 - id: bat_charge_c_max_pris
   ad: Prizmatik surekli sarj C-orani (0-45 C)
@@ -859,7 +866,7 @@ parametreler:
   deger: 0.5
   alt: 0.3
   ust: 1
-  kaynak: https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html
+  kaynak: EVLithium 210 Ah prizmatik veri sayfasi; 26700 icin bat_charge_c_max_cyl 1.0 (Tycorun); sifir alti 0.2C
   kaynak_turu: dogrulanmis_url
   kaynak_alintisi: '''0~45°C – ≤0.50C'''
   kaynak_tarihi: '2026'
@@ -867,7 +874,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 210 Ah verisi; 50 Ah'te farkli olabilir.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, formata ve sicakliga bagli: prizmatik 0.5C (A varsayilani),
+    26700 1.0C (B), -10..0 C 0.2C. E_nom >= P_box x bat_pv_peak_factor / C_max. 210 Ah verisi; 20 Ah hucrede farkli
+    olabilir (veri sayfasi).'
   dogrulama_deneyi: Veri sayfasi.
 - id: bat_charge_c_max_subzero
   ad: Sifir alti sarj C-orani
@@ -1253,7 +1262,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: 2 vardiya x 8 saat x 300 gun x OEE 0.75.
+  aciklama: '2 vardiya x 8 saat x 300 gun x OEE 0.75. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → el_hours_per_year_h:
+    2 x 8 x 300 gun x OEE 0.75: gun sayisi ve OEE gomulu; sayisal olarak 4000 x 0.9 ile ayni ama ayristirilmali.'
   dogrulama_deneyi: '-'
 - id: bat_fte_hours_yr
   ad: FTE basina yillik calisma saati
@@ -1361,15 +1371,17 @@ parametreler:
   deger: 150000
   alt: 100000
   ust: 200000
-  kaynak: kullanici K9
+  kaynak: Kullanici karari K9
   kaynak_turu: tahmin
-  kaynak_alintisi: 'K9: hat basina ~150 bin hucre/yil'
+  kaynak_alintisi: '''K9: hat basina ~150 bin hucre/yil'''
   kaynak_tarihi: 2026-09
   guven: orta
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: Kaplama alani ayrica sinirlar (bat_f30).
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Yalniz pil_kaynagi = ic_hat iken baglayici. Satin alinan hucrede
+    tavan paket hatti kapasitesi (26700 ~1.44 M, prizmatik ~216 bin hucre/yil). std_f_boxes_per_year_unit ve el_f_N_box_batt_yr
+    bu ayrimi yapmali. K9''un anlami kullaniciya sorulmali.'
   dogrulama_deneyi: '-'
 - id: bat_line_capex_cyl_usd
   ad: Kendi hucre hatti yatirimi — 26700 (0.25 m kaplama makinesi, kuru oda dahil)

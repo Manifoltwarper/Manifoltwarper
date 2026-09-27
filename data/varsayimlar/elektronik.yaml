@@ -872,7 +872,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: Modul ajaninin N_s'i gelince degistirilir.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Sicak Vmp tahmini; kanonik cikti
+    34.1 V (baypasla 22.4 V).'
   dogrulama_deneyi: Modul ajani.
 - id: el_V_mp_max_V
   ad: Panel Vmp ust (soguk)
@@ -888,7 +889,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Soguk Vmp tahmini; kanonik 48.4
+    V (N_s 64, -40 C).'
   dogrulama_deneyi: Modul ajani.
 - id: el_V_mp_nom_V
   ad: Panel Vmp nominal
@@ -904,7 +906,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: Kablo ve I_sc hesabi.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Nominal; kanonik 64 x 0.64 = 41.0
+    V.'
   dogrulama_deneyi: Modul ajani.
 - id: el_n_panel_per_mppt
   ad: MPPT kanali basina paralel panel sayisi
@@ -1064,8 +1067,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: En kucuk paket 14·E_cell Wh.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_ns_cells üzerinden okunur. Fark: LO varsayimi; marjsiz floor(60/3.95)
+    = 15''ten ''onerilen'' 14.'
   dogrulama_deneyi: '-'
+  esdeger: bat_ns_cells
+  esdeger_carpan: 1.0
 - id: el_Vcell_max_na_V
   ad: Na-ion sarj ust gerilimi
   birim: V
@@ -1080,8 +1086,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Pil ajaninin hucresine gore guncellenir.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_cell_v_max_V üzerinden okunur. Fark: LO degeri tum kimyalar
+    icin sabit.'
   dogrulama_deneyi: '-'
+  esdeger: bat_cell_v_max_V
+  esdeger_carpan: 1.0
 - id: el_Vcell_min_use_V
   ad: Kullanilan alt hucre gerilimi
   birim: V
@@ -1096,8 +1105,10 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: V_batt_min = 28 V (14s).
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_v_min_cutoff_V üzerinden okunur. Fark: Ayni.'
   dogrulama_deneyi: 1.5-2.0 V kapasite payi olcumu.
+  esdeger: bat_v_min_cutoff_V
+  esdeger_carpan: 1.0
 - id: el_T_charge_max_C
   ad: Na-ion sarj ust sicakligi
   birim: °C
@@ -1128,7 +1139,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Buyuk prizmatik hucre; kucuk/guc hucrelerinde 1-3C olabilir (pil ajani).
-  aciklama: E_batt ≥ P_box/C_max = 2·P_box.
+  aciklama: 'E_batt ≥ P_box/C_max = 2·P_box. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris:
+    Farkli hucre (ecoteardown); A varsayilaniyla sayisal olarak ayni ama format secimine baglanmali.'
   dogrulama_deneyi: Pil ajani hucre secimi.
 - id: el_C_charge_cold_C
   ad: Azami sarj hizi (-10 ile 0 °C)
@@ -1160,8 +1172,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: 71 Wh = 1 kWh kutuda 14s1p.
-  aciklama: Kutu adedi ve en kucuk paket (14·E_cell) buna bagli.
+  aciklama: 'Kutu adedi ve en kucuk paket (14·E_cell) buna bagli. | [Uzlaştırma/zincir] Eşdeğer: değer bat_E_cell_Wh
+    üzerinden okunur. Fark: Kaynaksiz tahmin; en kucuk paketi (280 Wh) ve kutu adedini (1786/yil) yanlis kuantize
+    ediyor.'
   dogrulama_deneyi: Pil ajani hucre formati.
+  esdeger: bat_E_cell_Wh
+  esdeger_carpan: 1.0
 - id: el_h_store_h
   ad: Istenen depolama suresi E_batt/P_box
   birim: h
@@ -1176,7 +1192,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: Etkin deger max(h_store, 1/C_max) = 2 h.
-  aciklama: E_batt pil/sistem ajanindan gelirse o kullanilir.
+  aciklama: 'E_batt pil/sistem ajanindan gelirse o kullanilir. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) →
+    bat_wh_usable_per_wp_A: E_batt/P_box (nominal); kanonik nominal 1.78-2.0 ile celisik. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → bat_wh_usable_per_wp_B: Senaryodan bagimsiz tek deger.'
   dogrulama_deneyi: Sistem ajani.
 - id: el_rhoE_pack_Wh_L
   ad: Pil bolmesi hacimsel enerji yogunlugu
@@ -1225,7 +1243,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: 'Yalnizca A. Solakon: 1.3.2026''dan beri 800 VA VDE-AR-N 4105''te.'
-  aciklama: P_inv = min(P_box, 800).
+  aciklama: 'P_inv = min(P_box, 800). | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp:
+    AC invertor siniri; PV DC siniri degil.'
   dogrulama_deneyi: Standart ajani.
 - id: el_V_grid_V
   ad: Sebeke nominal gerilimi
@@ -2188,7 +2207,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kutu ici bara ve pil.
-  aciklama: 60364-4-41 5. baski (2005); 2017 baskisi teyit edilmeli.
+  aciklama: '60364-4-41 5. baski (2005); 2017 baskisi teyit edilmeli. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil)
+    → std_selv_pv_uocmax_limit_v: Ayni sayi; dayanak 414.4.5 ve DVC-A kuru.'
   dogrulama_deneyi: Standart ajani guncel baski.
 - id: el_V_lim_wet_V
   ad: Islak ortam siniri (urun DVC-A 35 V / tesisat 30 V)
@@ -2206,8 +2226,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 60 V PV tarafi dis mekanda DVC-B; dokunmaya karsi korumali konnektor ve Class II panel.
-  aciklama: 'IEC 61730-1 Class III: ≤240 W, Voc ≤35 V, Isc ≤8 A (STC) (sis.se onizleme 4.4.1).'
+  aciklama: 'IEC 61730-1 Class III: ≤240 W, Voc ≤35 V, Isc ≤8 A (STC) (sis.se onizleme 4.4.1). | [Uzlaştırma/zincir]
+    Eşdeğer: değer std_dvca_dc_wet_v üzerinden okunur. Fark: Alt sinir 30 V ile urun (35) ve tesisat (30) kurallarini
+    tek parametrede karistiriyor; ikiye ayrildi.'
   dogrulama_deneyi: Onayli kurulus gorusu.
+  esdeger: std_dvca_dc_wet_v
+  esdeger_carpan: 1.0
 - id: el_labor_usd_h
   ad: Teknisyen saat maliyeti (isveren)
   birim: USD/h
@@ -2331,15 +2355,18 @@ parametreler:
   deger: 4000
   alt: 2000
   ust: 6000
-  kaynak: 2 vardiya x 8 h x 250 gun
+  kaynak: 2 vardiya x 8 h x 250 gun; altyapi eco_shift_pattern onerisi (firin ve HJT 24/7, modul/pil/kutu 2 vardiya
+    + ara stok)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '-'
+  kaynak_alintisi: 'Elektronik: ''2 vardiya x 8 h x 250 gun'''
   kaynak_tarihi: '-'
   guven: orta
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Firin ve HJT 8760 h; modul, pil paketi ve kutu hatlari bu
+    cizelgeyle ve ustune A_teknik (0.9) -> etkin 3600 h. Bu revizyonda laminator (4.3-7.2 MWp) ve paket hatti (26700
+    1.44 M, prizmatik 216 bin hucre/yil) bu tanimla yeniden hesaplandi.'
   dogrulama_deneyi: '-'
 - id: el_station_util_max
   ad: Istasyon azami kullanim
@@ -2840,8 +2867,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Eşdeğer: değer bat_line_cells_per_year üzerinden okunur. Fark: Her durumda kutu
+    adedine tavan yapiliyor.'
   dogrulama_deneyi: Pil ajani.
+  esdeger: bat_line_cells_per_year
+  esdeger_carpan: 1.0
 - id: el_n_batt_lines
   ad: Pil hatti sayisi
   birim: '-'

@@ -12,7 +12,9 @@
  "mod_T_min_design_C": {
   "kaynak_turu": "hesap_turetilmis",
   "guven": "orta",
-  "aciklama": "Pazar ve standart ajanının kararıdır. | Örneklem denetimi (2026-09-27): MGM rekorları doğru (İstanbul −9,0; Ankara −24,9; Erzurum −37,2 °C); −20 °C bir tasarım seçimi, sayfalarda yok. Ankara ve Erzurum için muhafazakâr değil; pazara göre seçilmeli (KK3)."
+  "aciklama": "Pazar ve standart ajanının kararıdır. | Örneklem denetimi (2026-09-27): MGM rekorları doğru (İstanbul −9,0; Ankara −24,9; Erzurum −37,2 °C); −20 °C bir tasarım seçimi, sayfalarda yok. Ankara ve Erzurum için muhafazakâr değil; pazara göre seçilmeli (KK3). | [Uzlaştırma/zincir] Eşdeğer: değer std_tmin_site_c üzerinden okunur. Fark: Ayni kavram; aralik -40..-9 (kanonik bu araligi benimsedi, deger -40'a kaydi).",
+  "esdeger": "std_tmin_site_c",
+  "esdeger_carpan": 1.0
  },
  "bat_cell_v_nom_nfpp_V": {
   "kaynak_turu": "hesap_turetilmis",
@@ -23,6 +25,143 @@
   "kaynak_turu": "hesap_turetilmis",
   "guven": "dusuk",
   "aciklama": "Örneklem denetimi (2026-09-27): 5000 çevrim kaynaklarda doğrudan yok; 0,5C'de 6000 ile 1C'de 3000 arasından seçilmiş. Highstar'ın 10 000 çevrimi %70 kapasite içindir (%80 değil)."
+ },
+ "cz_crucible_price_fixed_usd": {
+  "aciklama": "Dayanak yok; kaynak ya da teklif yok, muhendislik yargisi. Mantik: kucuk ve dusuk hacimli potada kalip/erime hazirligi, kalite kontrol, ambalaj ve siparis basi islemler alandan bagimsiz bir taban fiyat olusturur. Formul: fiyat = sabit + (918 - sabit)*(D_cr/0.914)^2 + navlun*(D_cr/0.914)^3. Sabit kisim 150 USD secildi; bu, 36 inc pota fiyatinin (918 USD; arama_ozeti, Cin ici teslim, %13 KDV dahil) ~%16'si. Bu oranin da dayanagi yok. Etki (hesap_turetilmis, ornek_hesap 120 mm, D_cr 0.36 m): pota 306 USD, bunun ~%49'u sabit kisim. 80-400 araliginda pota 247-517 USD eder; bu 0.71-1.49 USD/firin-saat ve 0.55-1.15 USD/kg demek (toplam 14.9 USD/kg'in %4-8'i). Ogrenme yolu: 12-24 inc pota icin en az 3 ureticiden RFQ (bilinmeyenler #8)."
+ },
+ "cz_ccz_crucible_cost_mult": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Kaba malzeme hesabi yalnizca alt siniri sinamak icin yapildi. Formulde carpan, ayni D_cr'deki RCz potasinin fiyatina (sabit + alan + navlun) uygulaniyor; yani karsilastirma tabani RCz potasi. Bu gorevdeki kaba hesap (hesap_turetilmis; geometri varsayimlari tahmin): RCz pota duvari 0.6-0.7 D; CCz sig pota duvari 0.35-0.45 D (eriyik 0.25 D + serbest pay; cz_ccz_hotzone_height_ratio ile ayni varsayim); weir capi 0.6-0.7 D, yuksekligi CCz duvari kadar. Bu varsayimlarla kuvars yuzey alani (yan duvar + taban + weir) RCz potasinin ~0.85-1.2 kati cikar. Demek ki salt malzeme alt sinir olan 1.3'u bile aciklamiyor. 1.3-3 araligi agirlikla uc varsayima dayaniyor: weir kaynagi/birlestirme isciligi, dusuk hacimli ozel siparis primi ve ust sinirda iki ayri pota. Referans fiyat ya da teklif yok. CCz'de pota omrunun RCz'den farkli olabilecegi bu carpana dahil degil."
+ },
+ "cz_hotzone_height_ratio": {
+  "aciklama": "Dayanak: geometrik ayrisim ve PVA brosuruyle tutarlilik kontrolu; kalibrasyon degil. Bilesenler (tahmin): pota duvar yuksekligi ~0.6-0.7 D_cr (eriyik derinligi 0.55 D_cr + serbest pay). Formuldeki etkin eriyik yuksekligi, silindir esdegeri olarak 0.55 x 0.85 = 0.4675 D_cr. RCz'de bir ingot boyunca eriyik seviyesi bunun g_pull (0.8) katı kadar, yani ~0.37 D_cr duser; pota da bu kadar yukari surulur. Isitici pota ve hareket boyunu kapsamali: ~0.97-1.07 D_cr. 1.5 degeri bunun ustune isitici uzantisi ve kalkan boslugu icin ~0.43-0.53 D_cr pay birakir; 0.3 m sabit ofset ayri. Kontrol: PVA CGS1218'de hazne ic yuksekligi ~2120 mm (32 inc, en fazla 36 inc pota). Model izolasyon dahil 36 inc icin 1.91 m, 32 inc icin 1.76 m veriyor, yani haznenin %83-90'i; kalan bosluk kalkan ve kaldirma icin yeterli. Alt sinir 1.1, pota + hareket boyuna karsilik gelir (pay yok). Ust sinir 2, PVA hazne/pota oranindan (2.6) izolasyon ve sabit ofset dusulmus halidir. Kucuk capta referans yok."
+ },
+ "cz_ccz_hotzone_height_ratio": {
+  "aciklama": "Dayanak: RCz degerinden geometrik cikarma; kaynak yok. CCz'de eriyik seviyesi surekli beslemeyle sabit tutulur; bu yuzden RCz'deki pota kaldirma hareketi (~0.37 D_cr) gerekmez. Eriyik sig (0.25 D_cr); pota duvari ~0.35-0.45 D_cr (tahmin; cz_ccz_crucible_cost_mult ile ayni varsayim). Bu gorevdeki kaba hesap: RCz'nin 1.5'indeki isitici/kalkan payi (~0.43-0.53 D_cr) aynen korunursa CCz icin ~0.78-0.98 bulunur. 1.1 degeri; weir, besleyici borusu ve besleme parcalarinin erime bolgesi icin ~0.1-0.3 D_cr ek pay birakir. Referans olcum yok."
+ },
+ "cz_hotzone_height_fixed_m": {
+  "aciklama": "Dayanak yok; muhendislik yargisi (bilesen ayrisimi). Capla olceklenmeyen yukseklik iki parcadan olusur, ikisi de tahmin: (a) pota altinda susseptor tabani, pota mili ve alt izolasyon destegi (~0.1-0.15 m); (b) eriyik ustunde isi kalkaninin alt ucu, gaz akisi ve gorus acikligi icin bosluk (~0.1-0.2 m). Etki (hesap_turetilmis): 120 mm'de H = 0.84 m'nin %36'si bu ofset; 9.0 kW'lik yan kaybin ~3.2 kW'i buna bagli (P_tutma'nin ~%13'u). 290 mm'de payi ~%19'a duser. Bu, H5 testindeki 'kucuk cap cezasi sabit yuklerden geliyor' sonucunun bir parcasi. Ogrenme yolu: sicak bolge CAD kesiti (pota mili, kalkan, izolasyon destegi) ve 2B isil simulasyon."
+ },
+ "cz_T_hot_face_K": {
+  "aciklama": "Dayanak: isil direnc zinciriyle kaba hesap (bu gorevde, hesap_turetilmis); kaynak yok. Izolasyonun sicak yuzu isiticiyi gorur. 120 mm'de ic yuzeyden gecen aki ~6.3 kW/m2; isinim katsayisiyla (eps ~0.8) isitici-kece farki ~5 K, yani sicak yuz sicakligi isitici sicakligina yakin. Isitici-eriyik farki: eriyige giren 4-8 kW islak pota yuzeyinden (~0.33 m2) gecer; 10 mm kuvarsta (k ~2 W/mK, varsayim) 60-120 K, isinim boslugunda 15-30 K dusum olur. Buna gore isitici ~1770-1870 K. 1873 K (1600 C = T_m + 186 K) bu bandin ust ucunda, yani muhafazakar. Formul ayni sicak yuz sicakligini tum yan yuzeye ve ust/alt izolasyona uyguluyor; kalkan civari ve taban daha soguk oldugu icin alan ortalamasi daha dusuk olmali. Ust sinir 1950 K, ergitme sirasindaki yuksek guclu isitici sicakligi."
+ },
+ "cz_T_cold_face_K": {
+  "aciklama": "Dayanak: isinim dengesiyle kaba hesap (bu gorevde, hesap_turetilmis); kaynak yok. Soguk yuz, su sogutmali celik hazneye (~310 K) isinimla isi verir. 120 mm baz durumunda yan kayip 9.0 kW, dis yuzey 2.06 m2, yani ~4.4 kW/m2. Grafit kece ile hazne ic yuzeyi arasindaki etkin emisivite 0.4-0.6 alinirsa soguk yuz 610-670 K cikar. Bu emisivite tahmindir (oksitli/kirli ya da kaplamali celik yuzey varsayimi; olcum yok). Argon tasinimi ihmal edildi; eklenirse sicaklik biraz duser. Hazne ic yuzeyi parlak paslanmaz ise etkin emisivite ~0.2-0.3 olabilir (tahmin); o zaman soguk yuz ~720-790 K olur. 600 K, kirli/kaplamali yuzey varsayimiyla uyumlu ve hafif dusuk tarafta. Aralik kontrolu (eps 0.4-0.6): k_eff alt ucunda yan kayip 2.7 kW, soguk yuz 470-510 K; ust ucta 29 kW, 810-890 K."
+ },
+ "cz_topbottom_penetration_factor": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Ust/alt izolasyondaki gecisler: pota mili, egzoz agizlari, pirometre/kamera gorus delikleri, kalkan askilari. Elektrotlar cz_P_electrode_kW'de, eriyik acikligi cz_q_open'da ayri sayiliyor. 120 mm'de ust/alt kayip 4.7 kW (carpan 1.3 dahil); carpanin 1 birimi ~3.6 kW, 0.3'luk katkisi ~1.1 kW. Kaba kontrol (bu gorevde, hesap_turetilmis): 120 mm izolasyondan duz gecen 4 adet 50 mm delik (L/D 2.4) kara cisim agzi gibi davransaydi 1850 K'de ~5.2 kW kaybettirirdi. Ancak sicak uc ile soguk uc arasindaki gorus faktoru (es eksenli iki disk) ~0.04; delik duvarlarinin isinimi geri yaymasiyla etkin gecis en fazla ~0.3 (tahmin). Buna gore dogrudan gorus hatli dort delik ~0.2-1.6 kW kaybettirir, yani carpana +0.05-0.45 ekler. Egzoz gaziyla tasinan isi bu hesapta yok. Deger, labirentli ama optimize edilmemis ilk nesil tasarimi varsayar. TI 1977 eski sicak bolgesi geri uretilirken 1.8 kullanildi."
+ },
+ "cz_q_open_W_m2": {
+  "aciklama": "Dayanak: isinimla kaba hesap (bu gorevde, hesap_turetilmis) ve TI kontrolu. Kara cisim siniri sigma*T_m^4 = 459 kW/m2. Sivi Si emisivitesi ~0.2-0.3 alinirsa (hafizadan, dogrulanmadi) kalkansiz eriyikten soguk cevreye net aki 92-138 kW/m2 olur. Modelin TI 1977 (kalkansiz) geri uretiminde kullandigi 150 kW/m2 ayni mertebede. Kalkanli durumda eriyik, kalkanin sicak ic yuzunu gorur: q = eps*sigma*(T_m^4 - T_kalkan^4). eps 0.25-0.3 icin 30 kW/m2 ~1565-1590 K etkin kalkan sicakligi demek; 15 kW/m2 ~1630-1640 K'e, 60 kW/m2 ~1400-1460 K'e karsilik gelir. Formul akiyi tum serbest eriyik yuzeyine (pota alani eksi kristal) uyguluyor. 120 mm'de bu 2.7 kW eder (P_tutma'nin %11'i)."
+ },
+ "cz_melt_efficiency": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Tanim: tutma gucunun ustune eklenen gucun eriyige (beslemeyi isitma + erime) gecen payi. Geri kalani, isitici sicakligi arttikca buyuyen izolasyon ve aciklik kayiplarina gider. Tek capraz kontrol (bu gorevde, hesap_turetilmis; kaba ve zayif) TI 1977'nin uc farkli yerinden gelen degerleri birlestiriyor: (a) 'Load and Melt (14.82 kg) 1.3' h: 18 kg'lik potali ekonomi modelinin plan tablosundan; planlanmis sure, olcum degil. (b) 'Increase puller power to 80 kW': 12 kg'lik potali deney firininin coklu sarj prosedurunden. (c) 45 kW nominal calisma gucu: Ek G'de 12 cm kosularinda olculen deger. Bunlar ayni duzen icin olculmus bir guc-sure cifti degil. Hesap: 14.82 kg x 0.852 kWh/kg = 12.6 kWh. 35 kW'lik fazla guc 1.0-1.3 h uygulandiysa verim 0.28-0.36 cikar. Veri eski, kalkansiz sicak bolgeden. 1.3 h yukleme suresini de iceriyor olabilir; bu durumda verim daha yuksek olur. Modern kalkanli sicak bolgede daha yuksek verim beklenir ama olcum yok."
+ },
+ "cz_melt_depth_ratio": {
+  "aciklama": "Dayanak: TI 1977 kucuk pota verisiyle capraz kontrol (bu gorevde, hesap_turetilmis); ayrik deger icin kaynak yok. Formulde sarj kutlesi rho_l*pi/4*D_cr^2*(0.55*D_cr)*0.85, burada rho_l = 2570 kg/m3 (sivi yogunluk). Veriyle yalnizca carpim sinanabiliyor: 0.55 x 0.85 = 0.4675. TI'da capi bilinen tek pota 12 kg'lik Varian potasi ('Varian 12-kg crucible has a radius of 12.3 cm'). D_cr = 0.246 m icin nominal 12 kg, carpim 0.40 demek. Ayni potayla yapilan tek sarjli kosularda (Tablo 1) sarj 10-12 kg, Ek G idealize guc egrisinde 11.6 kg; bunlar 0.33-0.40 carpimina karsilik gelir. Model carpimi (0.4675) TI nominalinin %17, fiili alt ucun ~%40 ustunde. Ilk ciktida kullanilan 14.82 kg, TI'nin 18 kg'lik potali ekonomi planina ait; o potanin capi raporda verilmiyor ve bu pota icin gecerli degil. Dolayisiyla 'TI 0.40-0.49 bandini destekliyor' iddiasi geri cekildi. Carpimin 0.55 ile 0.85'e bolunusu yargi: gunes potalarinda yukseklik/cap ~0.6-0.7 (hafizadan, dogrulanmadi). TI potasinin yukseklik/capi bilinmiyor; modern potalar daha derinse carpim daha yuksek olabilir, ama bunun verisi yok. Kaynak denetcisinin bu parametre icin denedigi MDPI Crystals 11(3):264 sayfasi erisilemedi (403); deger oradan alinmis sayilamaz."
+ },
+ "cz_ccz_melt_depth_ratio": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. CCz'de sig eriyik uc seyi kucultmek icin secilir: eriyik hacmi (ve onunla konveksiyon), pota cozunmesi (O) ve bekleme suresi. Besleme surekli oldugundan sarj kutlesi uretimi sinirlamaz. 120 mm'de 0.25 ile eriyik ~20 kg (RCz'nin 0.55'inde 44 kg). Referans olcum ya da kaynak yok. Alt sinir 0.15, weir ve besleme parcalarinin erime mesafesi icin yargi; ust sinir 0.35, RCz'ye yaklasma. Ogrenme yolu: CCz deneyi (bilinmeyenler #11: weir potasi ve yan besleyiciyle, 6-9 ay, 30-80 kUSD tahmin), Oi ve omur olcumu."
+ },
+ "cz_crucible_fill": {
+  "aciklama": "Dayanak: TI capraz kontrolu yalnizca carpim icin gecerli (bkz. cz_melt_depth_ratio): modelde 0.55 x 0.85 = 0.4675; TI'nin 24.6 cm'lik potasinda nominal 12 kg = 0.40, fiili 10-12 kg = 0.33-0.40. Ayrik deger muhendislik yargisi. Formulde silindir hacmini kucultucu carpan olarak girdigi icin fiziksel anlami: kavisli pota tabaninin hacim eksigi + serbest pay (eriyik ust kotu ile pota agzi arasi). 'Doluluk' adi yaniltici. Parca poly'nin yigin yogunlugu kati Si'nin yaklasik yarisi mertebesinde (hafizadan, dogrulanmadi); bu yuzden ilk sarjda bu seviyeye ancak ergitme sirasinda ust besleme (hot fill) ile ulasilir. Kayex 1979 resarj tanimi da 'Hot fill' iceriyor."
+ },
+ "cz_ccz_L_ingot_mm": {
+  "aciklama": "Dayanak: muhendislik yargisi; bina ve makine yuksekligi kisiti. CCz'de ingot boyu sarjla sinirli degil. Formulde min(cz_ccz_L_ingot_mm, cz_L_body_max_mm) ile govde boyu tavanina baglaniyor (baz 2500 mm; PVA 'removable length up to approx. 2,800 mm'). 2000 mm bu tavanin %80'i. 120 mm'de 52.7 kg eder (RCz 120 mm ingotu 1337 mm / 35.2 kg). Gerekli cekici yuksekligi (xtal_puller_height_m formulu): (2000 + 1.0*120)/1000 + 0.70 + 2.5 = 5.3 m (RCz 120 mm icin 4.8 m). Kaynak ya da olcum yok."
+ },
+ "cz_shoulder_height_ratio": {
+  "aciklama": "Dayanak: geometri yargisi ve patent hizi. TI yalnizca toplam sureyi sinirliyor. Omuz, boyundan tam capa genisleyen bir konidir. h/D = 0.4, koni yuzeyinin eksenle ~51 derece (yataydan ~39 derece) yaptigi bir omza karsilik gelir; 0.2 duz omuz (~68 derece), 0.6 dik omuz (~40 derece). Sure: 0.4*120 mm / (1 mm/dk) = 0.8 h (omuz hizi patent US11708643B2'den). TI 12 cm planinda 'Seed and Top 2.0' h var; bu tohum + boyun + omuz toplami. cz_t_seed_neck_h (1.0 h) bu toplamdan omuz payi dusulerek belirlendi. Bu yuzden 'tohum+boyun 1.0 + omuz 0.8 = 1.8 h' karsilastirmasi yalnizca toplamin uyumlu oldugunu gosterir; h/D = 0.4'u bagimsiz olarak dogrulamaz (dairesel). Duz omuz kutle ve zaman kazandirir ama yapi kaybi (ZD) riskini artirir (hafizadan, dogrulanmadi)."
+ },
+ "cz_t_cool_per_mm_h": {
+  "aciklama": "Dayanak: toplu (lumped) isinim sogumasi kaba hesabi (bu gorevde, hesap_turetilmis) ve TI 1977'nin tek olcumu. Olcum bu dayanakla celisiyor. TI olcumu: 12 cm kristalin ust haznede sogumasi 'averaged 1.9 h for crystals 12-32(A) and 12-32(B)'; argon jeti yok, rapor argon jetleriyle kisaltilabilecegini yaziyor. Model: 0.5 (cz_t_cool_base_h) + 0.005*120 = 1.1 h, olcumun %42 altinda. Bu fark, argon jeti ya da su sogutmali alma odasiyla iyilesme VARSAYIMIDIR; dogrulanmadi. Toplu model: uzun silindir icin t = rho*cp*D/(4*eps*sigma) * (1/T2^3 - 1/T1^3)/3, yani sure D ile dogrusal (rho 2329; cp ~900 J/kgK, ortalama tahmin; eps 0.6 tahmin; T1 1600 K). 120 mm'de 1.1 h ~530-540 K'de, 1.9 h ~445-460 K'de almaya denk gelir (cevre 0-310 K). Baz surenin (0.5 h) kapsami tanimli degil. Yalnizca vana/kaldirma/basinclandirma ise isinim sogumasi 0.6 h surer (~645 K'de alma). Sogumanin parcasi ise toplam 1.1 h (~535 K). TI'nin kendi yari-surekli ekonomi plani da kristal basina ayri soguma yazmadan 'Unload 1.0' h varsaymis (plan, olcum degil). Fizik denetcisinin '120 mm icin ideal ~0.9 h' tahmini bagimsiz bir kontrol degil, cunku cz_t_cool_base_h ondan turetildi. Uyari: 1400 K'de Bi = h_rad*r/k ~0.9; toplu varsayim yuksek sicaklikta kaba. Buyuk capta isil gerilme sogutma hizini sinirlayabilir."
+ },
+ "cz_turnaround_crew_person_h": {
+  "aciklama": "Dayanak: ESIA 2024'ten olcek kucultme (tahmin). ESIA: 'there is a crew of 3-4 people who work on hotzone cleaning and maintenance between runs'; Cin'de turnaround 'about 12 hours'. Bu, 36 inc sicak bolge icin en fazla 3-4 kisi x 12 h = 36-48 kisi.h demek (ekip tum sure calisiyorsa); ust sinir 48 buradan geliyor. Kucuk sicak bolgede grafit parca kutlesi ve sayisi az. Ancak kirik pota sokumu, temizlik, sizdirmazlik ve kacak testi gibi adimlar sabit. 2 kisi x 8 h = 16 kisi.h varsayildi. Turnaround'in geri kalani (soguma, pompalama, isinma; cz_t_turnaround_h 24 h) ekip gerektirmez. Etki: 16*12/347.7 = 0.55 USD/h (120 mm firin saatinin %3'u)."
+ },
+ "cz_capex_per_crucible_area_usd_m2": {
+  "aciklama": "Dayanak yok (BOM ya da teklif yok); muhendislik yargisi. Capex uc parcaya ayrildi: (a) sabit kisim (pompa, kontrol, cekme kafasi; cz_capex_fixed_usd 120k); (b) D_cr^2 ile olceklenen kisim (cift cidarli su sogutmali hazne, pota kaldirma/dondurme mekanizmasi, izolasyon destekleri); (c) guc kaynagi. Hazne kabugu alani ~D x H ve H ~ D_cr oldugundan D_cr^2 olceklemesi geometrik olarak makul. 120 mm'de (D_cr 0.36 m) 19.4k USD (capex'in %12'si), 290 mm'de (0.87 m) 114k USD. Kaba kutle kontrolu (bu gorevde): 120 mm icin ~0.9 m ic capli, ~1.3 m yuksek, 8+5 mm cift cidarli hazne ~0.5 t paslanmaz eder. Mekanizma eklenince ima edilen birim maliyet ~30-40 USD/kg; bu birim fiyat dogrulanmadi, yalnizca tutarlilik icin."
+ },
+ "cz_capex_power_usd_per_kW": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Kalem: alcak gerilim/yuksek akim isitici kaynagi (trafo, tristor/IGBT dogrultucu, bara, su sogutmali kablo, elektrot gecisi). 120 mm'de kaynak 46 kW, 60 V'ta ~770 A; 250 USD/kW ile 11.5k USD (capex'in %7'si). Etki (hesap_turetilmis): CRF 0.205 + bakim 0.04 ile 0.32 USD/firin-saat, ~0.25 USD/kg; aralik uclarinda 0.15-0.5 USD/kg. Firmanin guc elektronigi ve manyetik tasarim yetkinligi (kendi trafo/induktoru) degeri alt uca cekebilir (itiraz 14). Referans fiyat ya da teklif yok."
+ },
+ "cz_puller_life_yr": {
+  "aciklama": "Dayanak: iki kaynak noktasi arasinda yargi. TI 1977: 'Seven-year, straight line depreciation' (1977 maliyet varsayimi, fiziksel omur olcumu degil). ESIA 2024: 'Cz pullers need to be replaced approximately every two years' (Cin'de format/cap degisimine bagli teknolojik eskime). Bizim unitede cap sabit bir tasarim degiskeni; vakum haznesi ve mekanigin fiziksel omru 10+ yil olabilir (tahmin). Ote yandan ilk nesil kendi tasarimin, ogrenmeden sonra 2. nesille degistirilme olasiligi yuksek. 7 yil bu ikisinin ortasi. Etki: CRF(%10) 2/7/15 yil icin 0.576/0.205/0.131; 120 mm'de capex yuku 11.1/4.44/3.1 USD/h. Bu, firin saatinin 19.3 USD/h'lik toplamina gore buyuk. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici); TI 1977 muhasebe omru; aralik 2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: 'Cap sabitse fiziksel omur 10+ yil olabilir').",
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0
+ },
+ "xtal_outage_events_per_yr": {
+  "aciklama": "Dayanak yok; BILMIYORUZ (tahmin). Yalnizca eriyik/pota kaybina yol acan uzun kesintiler sayilir. Kisa kesinti ve gerilim cokmesi buyuyen kristali bozar (ZD kaybi) ama eriyigi dondurmaz. Esik icin kaba hesap (bu gorevde): 120 mm'de 44 kg eriyigin gizli isisi 78.6 MJ. Kayip P_tutma (24.4 kW) duzeyinde sabit kalsaydi bu isi ~55 dk'da atilirdi. Guc kesilince kayip hizi sicak bolge sogudukca duser; grafit parcalarin depoladigi isi de atilmak zorunda. Bu yuzden tam donma muhtemelen daha uzun surer; 55 dk kaba bir alt tahmindir, ust sinir degil. Kismi donma (pota duvarinda kabuk) ve pota catlamasi riski daha erken baslar (sivi 2570, kati 2329 kg/m3: donarken ~%10 hacim artisi). Kayip esigi on dakikalar mertebesinde olabilir; olculmedi. Maliyet: 2*3000/8760 = 0.68 USD/h (120 mm firin saatinin %3.5'i). Altyapi alaninda ayni buyukluk site_grid_outage_events_yr = 2 (0.5-10) olarak ayrica tanimli."
+ },
+ "xtal_price_argon_usd_nm3": {
+  "aciklama": "Dayanak yok; ilk ciktida yer tutucu olarak kaynaksiz girildi. Altyapi alaninda sonradan turetilen degerlerle karsilastirma (hesap_turetilmis): toptan fiyat eco_price_argon_bulk_usd_kg 0.68 USD/kg (IMARC ve businessanalytiq Avrupa 0.62-0.64 USD/kg; IndexBox Turkiye ithalat 1.3 USD/m3). Kucuk kullaniciya teslim fiyati eco_price_argon_usd_kg 1.1 (0.7-3) USD/kg. Yogunluk 1.784 kg/Nm3 ile bunlar 1.21 USD/Nm3 (toptan) ve 1.96 (1.25-5.35) USD/Nm3 (teslim) eder. Mevcut 0.8 USD/Nm3 = 0.45 USD/kg; toptan endeksin bile altinda. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm)) üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3). 0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU, kaynak yok; aralik 0.3-2 USD/Nm3.",
+  "esdeger": "eco_price_argon_usd_kg",
+  "esdeger_carpan": 1.784
+ },
+ "xtal_wage_usd_h": {
+  "aciklama": "Dayanak yok; ilk ciktida yer tutucu olarak girildi. Altyapi alaninda sonradan turetilen Kocaeli degerleriyle karsilastirma: eco_labor_technician_usd_h 13.4 (10-18), eco_labor_operator_usd_h 8.4 (6-11.5). Ikisi de eleman.net maas verisinden; SGK carpani 1.1875, ek yuk 1.25 ve 49 TRY/USD ile turetildi. Cekici operatoru vakum/yuksek sicaklik prosesi yuruttugu icin teknisyen duzeyine yakin; 12 USD/h ~%75 teknisyen + %25 operator karisimina denk geliyor. Diger alanlardaki degerler: modul 7, elektronik 6.17, standart 10, hucre ~9.7 USD/h (20k USD/FTE-yil / 2070 h). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_fixed_usd_h = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd'deki ayni operator terimi bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h = cz_turnaround_crew_person_h x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir; operator terimi operator kanonigine. Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik ayrimla 0.5 x 8.4 + 16 x 13.4/347.7 = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin ~%13'u fark).",
+  "esdeger": "eco_labor_technician_usd_h",
+  "esdeger_carpan": 1.0
+ },
+ "xtal_wacc": {
+  "aciklama": "Dayanak yok; ilk ciktida yer tutucu olarak girildi. Altyapi alaninda sonradan turetilen deger: eco_wacc_usd = 0.12 (0.09-0.20; vergi sonrasi, USD bazli; CAPM ile ke 0.152, kd 0.091). 0.10 bunun altinda; alt sinir 0.06 da altyapi alt sinirinin (0.09) altinda. Altyapi notu: vergi sonrasi oran CRF'ye dogrudan konmamali; basit vergi oncesi WACC 0.13-0.17. Etki: 7 yillik CRF %10'da 0.205, %12'de 0.219; 120 mm'de capex yuku 4.44'ten 4.69 USD/h'e cikar. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin; vergi duzeltmesi yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd'de kullaniliyor; kanonik makine katsayisiyla degistirilmeli.",
+  "esdeger": "eco_wacc_usd",
+  "esdeger_carpan": 1.0
+ },
+ "xtal_recycle_remelt_frac": {
+  "aciklama": "Dayanak: wafer alaninin geometrik hesabiyla capraz kontrol (hesap_turetilmis); ayrica kaynak yok. Parametre, formulde (1 - wafer_brick_yield) kutlesinin tekrar eritilebilir payi; daglama kaybi ayri parametrede (xtal_recycle_etch_loss_frac). Wafer alaninda dilimlerin geri kazanilabilir payi wf_slab_recovery_frac = 0.886 (taslama payi ve kare kesim kerfi dusulmus, M10 geometrisi); tac ve kuyrugun ise ~tamami. Wafer ornek hesabindaki kutlelerle (dilim 0.221, tac/kuyruk 0.053, tugla ucu 0.0045 kg/m2) agirlikli pay ~0.91 cikiyor. 0.85, kontamine yuzey ve parcalar icin ~%6 ek ret payi birakan muhafazakar bir deger. Alt sinir 0.6, derin metal kontaminasyonu (serit testere/taslama izi) senaryosu. Son kuyruk ucu ve pota artigi haric."
+ },
+ "fz_overhead_per_crystal_h": {
+  "aciklama": "Dayanak yok (FZ kaynagi yok); Cz bilesen surelerinden benzetme ve yargi. Kristal basina ek sure su adimlari kapsar: besleme cubugunu yukleme, pompalama/argon doldurma, on-isitma, tohumlama + Dash boyun + koni, son koni, soguma ve alma. On-isitma grafit halkayla yapilir, cunku oda sicakliginda Si RF'e zayif kuplajlanir (hafizadan, dogrulanmadi). Bu modelin Cz degerleri: tohum+boyun 1.0 h, omuz 0.8 h, soguma 1.1 h, alma/yukleme 1.0 h; toplam 3.9 h. FZ'ye ozgu on-isitma ve basinclandirma icin ~1 h eklenerek 5 h bulundu. Etki (hesap_turetilmis): 120 mm'de cevrim 8.3 + 5 = 13.3 h; ek sure 3/5/8 h icin 56.6/48.1/39.3 kg/gun."
+ },
+ "fz_zd_yield": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Referans Cz'nin olgun degeri (cz_zd_yield 0.8; o da tahmin). FZ'nin dar proses penceresi ve bilginin az sayida firmada toplanmasi nedeniyle biraz dusuk secildi. Formulde verim kutle kaybi olarak degil, zaman ve enerji kaybi olarak giriyor (iyi kg/gun ve kWh/kg paydasinda). Bu, dislokasyonlanmis FZ kristalinin yeniden besleme cubugu olarak kullanilabilecegi varsayimiyla tutarli (hafizadan, dogrulanmadi). Etki (120 mm, hesap_turetilmis): ZD 0.5/0.75/0.9 icin 32/48/58 kg/gun; 0.3'te 19 kg/gun."
+ },
+ "fz_crystal_length_mm": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. FZ kristal boyunu besleme cubugunun kutlesi ve makine stroku sinirlar. Cubuk ve kristal ust uste durur; makine yuksekligi ~2 x boy + ~1.5 m (tahmin). 120 mm'de 1.5 m = 39.5 kg. Referans olarak Cz govde tavani alindi (cz_L_body_max_mm 2500; PVA ~2800 mm)."
+ },
+ "saw_overcut_mm": {
+  "aciklama": "Dayanak yok; geometrik yargi. Tum wafer'larin ayrildigindan emin olmak icin tel agi tuglayi tamamen kesip tutkal/recine plakaya birkac mm girmeli. Ustte temas oncesindeki yaklasma mesafesi de ayni beslemeyle gecilirse sureye eklenir. Varsayim (tahmin): plakaya giris ~1-2 mm, yaklasma ve tugla ust yuzey toleransi ~1-2 mm. Etki: cevrim = (a + 3)/besleme + ek sure; kesim suresine katkisi 182 mm'de %1.6, 105 mm'de %2.8, 50 mm'de %5.7."
+ },
+ "saw_maint_usd_per_h": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Kalem asinmaya dayali: oluklu makaralarin PU kaplama yenilemesi, rulman, filtre (tel ve sogutma sivisi ayri kalemler). Olcut (bu gorevde, hesap_turetilmis): testere + filtrasyon capex'i 250k USD'nin yillik %4'u (altyapi eco_maint_frac_capex_yr) 10k USD/yil eder. Bu, ornekteki kullanimda (~2400 calisma saati/yil) 4.2 USD/h, tam kullanimda (~7400 h) 1.3 USD/h demek. 8 USD/h ise ornek kullanimda capex'in yilda %8'i, tam kullanimda %24'u. Makara kaplamasinin kesim saatiyle asindigi varsayimiyla yuksek tutuldu. Makara kaplama fiyati ve omru bilinmiyor. Ornek: 8/25.3 = 0.32 USD/m2 (donusum maliyetinin %4'u)."
+ },
+ "sq_capex_usd": {
+  "aciklama": "Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Uc islev: kare kesim (tek ya da dort telli elmas tel), silindirik taslama, tugla bolme (k_split). Model icindeki tek karsilastirma noktasi 200k USD'lik cok telli ana testere (o da tahmin); kare kesim ve taslama makineleri daha basit kabul edildi. Alt sinir 60k kendi imalat, ust sinir 400k ticari hat. Kullanim cok dusuk: kesim yuzeyi 0.003-0.009 m2 / m2 wafer, kapasite 2 m2/h (tahmin); ornekte gunde ~0.3 saat (~%1). Etki (ornek, fin_crf 0.17, 60,955 m2/yil): 0.42 USD/m2 (0.17-1.12), donusum maliyetinin ~%6'si."
+ },
+ "wf_brick_end_mm": {
+  "aciklama": "Dayanak yok; geometrik yargi. Tugla ucundaki ilk ve son wafer'lar tutkal tasmasi, uc yuzey dikligi ve kenar kirilmasi nedeniyle kaybolur. Bu gorevdeki kaba hesap: 182 mm tuglada 0.5 derecelik uc yuzey egikligi 1.6 mm, 1 derecelik egiklik 3.2 mm kama olusturur. 3 mm, ~1 derece egiklige ya da 0.5 derece + 1-2 feda wafer'a karsilik gelir. Formul: verim = 1 - 2*uc/min(L_govde - crop, L_yuk); 600 mm yukte kayip %1, 300 mm tuglada %2."
+ },
+ "wf_etch_util_factor": {
+  "aciklama": "Dayanak yok; muhendislik yargisi. Kesikli (parti) HF/HNO3 banyosu, asit tukenmeden atilir: Si yuku belli bir g/L esigine ulasip daglama hizi dustugunde ya da kirlilik biriktiginde. Banyo atildiginda asidin ~1/3'unun tepkimeye girdigi kabul edildi (carpan 3). Kucuk partilerde (ornekte gunde ~42 kg geri donusum) banyo doluluk orani dusuk kalir; ust sinir 6 buradan. Alt sinir 1.5, besleme/tazeleme (feed-and-bleed) isletimi. Etki kucuk (hesap_turetilmis): 0.0023 kg Si/m2 daglamayla kimyasal + atik 0.05/0.095/0.18 USD/m2 (carpan 1.5/3/6)."
+ },
+ "wf_hf_price_usd_kg": {
+  "aciklama": "Dayanak yok; kaynak bulunamadi, muhendislik yargisi (%100 HF bazinda, teslim). Hucre alaninda ayni kimyasal icin hjt_hf_price_usd_per_kg = 4 (2-8) USD/kg kullaniliyor (%49 elektronik sinif; o da tahmin). Wafer degerinin daha dusuk olmasi, geri donusum daglamasinin teknik sinif asitle yapilabilecegi ortuk varsayimina dayaniyor. Etki kucuk: HF 1/2.5/4/6 USD/kg icin daglama kimyasali + atik 0.05/0.095/0.14/0.20 USD/m2."
+ },
+ "wf_hno3_price_usd_kg": {
+  "aciklama": "Dayanak yok; kaynak bulunamadi, muhendislik yargisi (%100 HNO3 bazinda, teslim). Nitrik asit amonyaktan uretilen bir emtia kimyasali; teknik sinif icin dusuk, elektronik sinif icin cok daha yuksek fiyat beklenir (hafizadan, dogrulanmadi). Stokiyometri NO yolunda 2.99, NO2 yolunda 8.97 kg HNO3/kg Si; yani tuketimin kendisi de 3 kat belirsiz. Etki kucuk: ornekte HNO3 payi 0.0023*3*2.99*0.6 = 0.012 USD/m2."
+ },
+ "wf_crusher_capex_usd": {
+  "aciklama": "Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Kalem: Si'ye metal bulastirmayan kirici (WC ya da Si kaplamali cene/tokmak) + eleme. Kapasite ihtiyaci cok kucuk: ornekte gunde ~42 kg geri donusum (0.251 kg/m2 x 167 m2/gun). Alt sinir 20k, basit kendi yapim (WC plakali cene/tokmak); ust sinir 200k, ticari otomatik poly kirma sistemi. Etki (ornek, fin_crf 0.17): 0.17 USD/m2 (0.06-0.56)."
+ },
+ "wf_etch_station_capex_usd": {
+  "aciklama": "Dayanak yok (teklif yok); muhendislik yargisi. Kalem: PP/PVDF asit tezgahi (HF/HNO3 daglama, durulama, kurutma) ve lokal gaz yikayici (NOx, HF buhari). Firmanin plastik enjeksiyon ve kalip yetkinligi PP/PVDF imalatini ucuzlatabilir. Alt sinir 40k kendi yapim, ust sinir 400k ticari otomatik islak tezgah. HF atik aritma ve merkezi NOx yakma saha_sabit (altyapi). Etki (ornek, fin_crf 0.17): 0.34 USD/m2 (0.11-1.12)."
+ },
+ "wf_incoming_qc_usd_per_wafer": {
+  "aciklama": "Dayanak: iscilige dayali kaba hesap (bu gorevde, hesap_turetilmis). Ornekleme ile giris kontrolu: kalinlik/TTV, ozdirenc, omur, gorsel. Ornek hacimde gunde 5,060 wafer icin 0.002 USD/adet = ~10 USD/gun = ~0.8 teknisyen-saat/gun (12 USD/h). 0.0005-0.006 araligi gunde 0.2-2.5 teknisyen-saatine karsilik gelir. m2 basina 0.06 USD (M10, 0.0331 m2/adet); satin alma fiyatinin %1.4'u. Olcum cihazlarinin (ozdirenc ve omur test cihazi) yatirimi bu degere dahil degil. H6: satin alinan wafer'in gecmisi bilinmedigi icin bu kontrol zorunlu kalir."
+ },
+ "wf_inspect_wph": {
+  "aciklama": "Dayanak: tasima geometrisiyle kaba hesap (bu gorevde, hesap_turetilmis); ticari kaynak yok. 3600 wph = saniyede 1 wafer. Bantli tasimada 182 mm wafer + ~100 mm aralik = 0.28 m adim; 0.28 m/s bant hiziyla 3600 wph. Goruntuleme (hat tarama kamerasi, IR gecirim, kapasitif kalinlik) bu hizda sinirlayici kabul edilmedi. Alt sinir 1500, ilk nesil kendi yapim (yavas ayirma mekanigi); ust sinir 8000, yuksek hizli ticari siniflandirici (hafizadan, dogrulanmadi). Etki: yalnizca N_inspect = ceil(...) basamagini belirler; ornekte kullanim M10'da %7, 50 mm'de %51."
+ },
+ "wf_inspect_uptime": {
+  "aciklama": "Dayanak yok; muhendislik yargisi ve model ici tutarlilik. Altyapi eco_uptime_frac_default 0.9 (0.8-0.95, tahmin) ile ayni; Cz (cz_availability_unplanned 0.9) ile ayni mertebe. Muayene istasyonunda tel kopmasi ve makara kaplama degisimi gibi ariza kaynaklari olmadigindan testereden (saw_uptime 0.85) biraz yuksek secildi. Etki: yalnizca N_inspect tamsayi basamagini etkiler; ornek kullanimlarda (%7-51) sonucu degistirmez."
+ },
+ "wf_brick_metrology_capex_usd": {
+  "aciklama": "Dayanak yok (teklif ya da BOM yok); muhendislik yargisi. Kalem uc olcumden olusur: tugla seviyesinde temassiz girdap akimi ozdirenc taramasi; PL/omur haritasi (Si PL ~1.1 um; sogutmali Si ya da InGaAs kamera + lazer/LED uyarim); IR gecirimle inkluzyon/catlak taramasi. Firmanin kendi tasarim kabiliyetiyle alt sinir 30k; ticari tugla muayene istasyonu icin ust sinir 250k. H6 stratejisinin yatirimi: ozdirenc/omur olcumunu wafer basindan tugla basina indirir. Etki (ornek, fin_crf 0.17): 0.22 USD/m2 (0.08-0.70)."
+ },
+ "wf_preclean_chem_usd_m2": {
+  "aciklama": "Dayanak: model ici oransal karsilastirma (hesap_turetilmis); kaynak yok. Kesim sonrasi on temizlik: tutkal cozme (sicak su/asit), deterjan veya alkali yikama, durulama; saf su saha altyapisindan gelir. Hucre alaninin 'diger alan kalemleri' (kimya, gaz, tasiyici yenileme, marjinal elektrik, UPW) toplami ~0.7 c/W, yani %25 verimde ~1.75 USD/m2. 0.2 USD/m2 bunun ~%11'i; tek ve basit bir islak adim icin makul mertebe. Ornekte donusum maliyetinin ~%3'u."
+ },
+ "wf_split_capex_usd": {
+  "aciklama": "Dayanak yok (teklif yok); aralik uclari ve baz yargi. Wafer alaninin tanimi: alt sinir (60k) kendi yapim lazer cizme + mekanik yarma (fiber lazer, XY tabla, yarma aparati); ust sinir (1M) ticari TLS istasyonu (3D-Micromac microCELL tipi); baz (400k) bu ikisi arasinda bir yargi. Hicbir fiyat dogrulanmadi. TLS kapasitesi 'up to 6,000 wph' (dogrulanmis) hucre ayirma icin verilmis; ciplak wafer'a uygunlugu dogrulanmadi. Kullanim cok dusuk: ornekte gunde 5,060 wafer, 6,000 wph'de gunde ~0.8 saat (%3.5). Etki (ornek, fin_crf 0.17, 60,955 m2/yil): baz 1.12 USD/m2 (aralik 0.17-2.79); 150k'da 0.42 USD/m2. K3 yolunda baz, satin alinan wafer maliyetinin (4.91 USD/m2) ~%23'u kadar ek maliyet demek."
  },
  "eco_fx_try_per_usd": {
   "deger": 49,
@@ -94,11 +233,6 @@
   "guven": "orta",
   "aciklama": "ke = 0.050 + 1.15*0.0889 = 0.152. kd = 0.091. t=0.125 icin: E=0.5 -> 0.116; E=0.6 -> 0.123; E=0.7 -> 0.131. t=0.25 icin: 0.110-0.127. Karsilastirma: basit vergi oncesi WACC (E*ke/(1-t) + (1-E)*kd) 0.13-0.17. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi ve tek turetilmis deger; kristal (0.10) ve elektronik (0.08) kaynaksiz tahmin. Alt 0.09 korunur; kristalin 0.06 alt siniri kendini YER TUTUCU diye tanimladigi icin ve Turkiye USD Eurobond (0.071) + sirket marji tabaninin altinda kaldigi icin birlesime alinmadi. Oran NOMINALDIR; sermaye yukune dogrudan degil r_reel = 1.12/1.0234 - 1 = 0.0944 (aralik 0.066-0.173) uzerinden girer (sermaye_yuku_yontemi)."
  },
- "xtal_wacc": {
-  "esdeger": "eco_wacc_usd",
-  "esdeger_carpan": 1.0,
-  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin; vergi duzeltmesi yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd'de kullaniliyor; kanonik makine katsayisiyla degistirilmeli."
- },
  "el_discount_rate": {
   "aciklama": "Dayanak: USD bazli imalat yatirimi icin kaba sermaye maliyeti varsayimi. | Uzlaştırma: yalnız müşteri iskonto oranı olarak kalır (GaN/verim değeri); şirket WACC'ı değil."
  },
@@ -121,11 +255,6 @@
   "kaynak_alintisi": "Baz ve aralik icin kaynak yok. Dayanak (altyapi notu): 'PV'de teknoloji nesli 3-5 yilda degisir. Kendi tasarim makineler yukseltilebilir; yukseltme maliyeti bakim oranina eklenmeli.'",
   "guven": "dusuk",
   "aciklama": "CRF(0.12; 8) = 0.2013. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; alanlar 5-8 yil (hucre 5, kristal/modul/pil 7, wafer/altyapi 8), hicbiri kaynakli degil; sahip degeri ve araligi (5-12) korunur. ONCEKI CIKTIDAKI 2-15 GERI ALINDI (kirmizi takim kabul): alt 2 yil ESIA'nin Cin GW olcegindeki cekici eskimesidir (H1 aktarimi); ayri 'teknoloji eskimesi' senaryosu olarak tutulur ve tornadoya parametre ucu olarak girmez (N = 2'de CRF_tax_reel 0.5845, bazin 3.0 kati). Ust 15 (kristal fiziksel omur tahmini) de kaynaksiz, alinmadi. Makineye ozgu omur gerekceli override olarak girilir."
- },
- "cz_puller_life_yr": {
-  "esdeger": "eco_life_machine_yr",
-  "esdeger_carpan": 1.0,
-  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici); TI 1977 muhasebe omru; aralik 2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: 'Cap sabitse fiziksel omur 10+ yil olabilir')."
  },
  "saw_life_yr": {
   "esdeger": "eco_life_machine_yr",
@@ -332,11 +461,6 @@
   "esdeger_carpan": 1.0,
   "aciklama": "39,223/48.92/195 h = 4.11 x 1.5 (teknisyen, tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: Etiket 'teknisyen' ama turetim 1.5 x asgari ucret ve kullanim son montaj/test/yeniden isleme (operator isi). Taban 195 h/ay odenen saat, ek yuk yok; kanonik tabanda 8.70 USD/h. Gercekten teknisyen isi ise eco_labor_technician_usd_h."
  },
- "xtal_wage_usd_h": {
-  "esdeger": "eco_labor_technician_usd_h",
-  "esdeger_carpan": 1.0,
-  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_fixed_usd_h = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd'deki ayni operator terimi bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h = cz_turnaround_crew_person_h x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir; operator terimi operator kanonigine. Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik ayrimla 0.5 x 8.4 + 16 x 13.4/347.7 = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin ~%13'u fark)."
- },
  "eco_labor_technician_usd_h": {
   "deger": 13.4,
   "alt": 10,
@@ -381,11 +505,6 @@
   "kaynak_alintisi": "IMARC 'Europe: 0.64 USD/KG' (Eylul 2026); businessanalytiq 'Europe: US$0.62/KG'; 0.68 x 1.6 = 1.09 (altyapi). Alt: 0.55 x (1 + 0.2) = 0.66 (bu gorevde hesaplandi).",
   "guven": "dusuk",
   "aciklama": "0.68*1.6 = 1.09. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Alt sinir tutarli olcutle yeniden kuruldu (kirmizi takim kabul): toptan alt 0.55 x (1 + prim alt 0.2) = 0.66 (sahip 0.7). Onceki ciktinin primsiz 0.55'i kucuk kullanici teslim fiyati icin tutarsizdi. Kristalin 0.8 USD/Nm3 (= 0.45 USD/kg) yer tutucusu ve 0.3 USD/Nm3 (= 0.17 USD/kg) alti Avrupa toptan endeksinin altinda; alinmadi. Birim donusumu: USD/Nm3 = USD/kg x 1.782 (0 C, 1 atm; 39.948/22.414); 1.1 USD/kg = 1.96 USD/Nm3."
- },
- "xtal_price_argon_usd_nm3": {
-  "esdeger": "eco_price_argon_usd_kg",
-  "esdeger_carpan": 1.784,
-  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm)) üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3). 0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU, kaynak yok; aralik 0.3-2 USD/Nm3."
  },
  "eco_price_ln2_usd_nm3": {
   "deger": 0.15,
@@ -479,8 +598,8 @@
  },
  "mod_cu_price_usd_kg": {
   "esdeger": "el_cu_price_usd_kg",
-  "esdeger_carpan": 1.0,
-  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer el_cu_price_usd_kg üzerinden okunur. Fark: Kavram 'LME x 1.1 (orgu/kablolama payi)'; 2025 LME ~9.5-10 k$/t hafizadan. Formule baglanmali: el_cu_price_usd_kg x 1.1 (1.1 tahmin) = 16.2 USD/kg; bakir disi maliyet ayrica 0.2 USD/m."
+  "esdeger_carpan": 1.1,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer el_cu_price_usd_kg × 1.1 (LME × 1,1 örgü/kablolama payı (tahmin)) üzerinden okunur. Fark: Kavram 'LME x 1.1 (orgu/kablolama payi)'; 2025 LME ~9.5-10 k$/t hafizadan. Formule baglanmali: el_cu_price_usd_kg x 1.1 (1.1 tahmin) = 16.2 USD/kg; bakir disi maliyet ayrica 0.2 USD/m."
  },
  "mod_al_lme_usd_kg": {
   "deger": 3.254,
@@ -612,6 +731,389 @@
   "guven": "orta",
   "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok."
  },
+ "hjt_voc_cell_V": {
+  "deger": 0.745,
+  "alt": 0.72,
+  "ust": 0.77,
+  "kaynak": "Hucre: Wohler 2024 endustriyel M6 olcumu 739-740 mV; LONGi sampiyon 749-755 mV. Modul: Waaree Plexus BiH-11-730 veri sayfasi 50.62 V / 66 seri pozisyon = 0.767 V",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'open-circuit voltages between Voc=(739 to 740) mV'; 'Voc: 749.2 mV / 755.0 mV'; Waaree BiH-11-730: Voc 50.62 V (132 yarim G12, 11x6||11x6)",
+  "guven": "orta",
+  "aciklama": "Giglia'nin 743.1 mV degeri SIMULASYON oldugu icin olcum dayanagi olarak kullanilmiyor. | [Uzlaştırma/zincir] Kanonik (tek sahip). Olculen buyuklugun sahibi hucre; iki alan ayni degeri (0.745) kullaniyor. Ust sinir (hucre CSV'de 0.755) modul veri sayfasi turetmesini (0.767) kapsasin diye 0.77. Nominal deger tasarim tavaninda (mod_f_ns_max, marjla) kullanilir; gerilim SINIR kontrolunde (std_f_ns_max, std_f_uoc_max; ELEME) kendi hucremizin olculen P99'u, olcum yokken 0.77 kullanilir. Modulun kendi notu da 'gerilim siniri icin nominal degil, uretim dagiliminin P99'u' diyor."
+ },
+ "mod_voc_cell_stc_V": {
+  "esdeger": "hjt_voc_cell_V",
+  "esdeger_carpan": 1.0,
+  "aciklama": "50.62/66 = 0.767 V. Hücre ajanının ölçümü gelince yerine geçer. | [Uzlaştırma/zincir] Eşdeğer: değer hjt_voc_cell_V üzerinden okunur. Fark: Ayni deger; aralik 0.72-0.77. Modul bundan sonra hucre ciktisini okur."
+ },
+ "hjt_tc_voc_pct_per_K": {
+  "deger": -0.244,
+  "alt": -0.28,
+  "ust": -0.2,
+  "kaynak": "Hucre: PVEducation 'Effect of Temperature' formulu; Modul: Waaree veri sayfasi beta_Voc -0.22 %/C ve fizik tahmini -0.22..-0.24",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'dVoc/dT = -0.0043 + Voc1/300' -> -1.817 mV/K = -0.244 %/K; Waaree: 'Temperature coefficient of Voltage (Voc), ß (%/ºC) -0.22'",
+  "guven": "orta",
+  "aciklama": "Ilk ciktida hafizadan (dogrulanmadi) idi; simdi fizik formuluyle turetildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). IEC 60364-7-712 Ek B K_U formulu %/K kullanir (std_f_ku); tek birim %/K. Modulun -0.0024 1/K degeri ayni buyuklugun yuvarlanmisi; -20 C'de N_s_max'i degistirmez (70) ama soguk uclarda 1 hucre fark eder (-37.2 C: kanonikle 67, -0.0024 ile 68). Beyan edilecek alfa kendi hucremizin olcumunden gelir; olcum ve beyan yokken std_f_ku K_U = 1.2 kullanir (ku_yontemi = varsayilan_1.2), beyan sonrasi sinir kontrolunde alfa_sinir = olcumun guvensiz ucu (olcum yokken -0.28)."
+ },
+ "mod_beta_voc_per_K": {
+  "esdeger": "hjt_tc_voc_pct_per_K",
+  "esdeger_carpan": 0.01,
+  "aciklama": "Önceki 'dogrulanmis_url' etiketi yanlıştı (sayfada -0.22 var); türetilmiş olarak düzeltildi. | [Uzlaştırma/zincir] Eşdeğer: değer hjt_tc_voc_pct_per_K × 0.01 (%/K → 1/K) üzerinden okunur. Fark: Birim farki (1/K = %/K / 100) ve yuvarlama; soguk uclarda N_s_max'i 1 artiriyor (guvensiz yon)."
+ },
+ "mod_vmp_cell_stc_V": {
+  "deger": 0.64,
+  "alt": 0.62,
+  "ust": 0.66,
+  "kaynak": "Waaree BiH-11-730 veri sayfasi: Vmp 42.52 V / 66 = 0.644 V; beta_Vmp = gamma_Pmax (-0.24) - alfa_Isc (0.04)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'Vmp (V) STC 42.52'; 'Power (Pm), γ (%/ºC) -0.24'; 'Current (Isc), α (%/ºC) 0.04'",
+  "guven": "orta",
+  "aciklama": "MPPT alt gerilimi ve akım/kablo boyutlandırması. | [Uzlaştırma/zincir] Kanonik (tek sahip). Yalniz modul tanimliyor; MPPT penceresi (mod_f_vmp_hot, mod_f_vmp_hot_bypass) ve soguk Vmp buradan turer. Elektronik'in panel gerilim tahminleri (N_s~66 varsayimli, kaynaksiz) kaldirilir. Varsayilan N_s 64 (n_bypass 3): Vmp_sicak 34.1 V, baypasla 22.4 V, Vmp_soguk (-40 C) 48.4 V, U_OC_MAX (K_U 1.2) 57.2 V. N_s 70 (-20 C, yalniz olcum sonrasi): 37.3 / 24.5 / 50.4 / 57.9 V (turetilmis)."
+ },
+ "el_V_mp_min_V": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Sicak Vmp tahmini; kanonik cikti 34.1 V (baypasla 22.4 V)."
+ },
+ "el_V_mp_max_V": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Soguk Vmp tahmini; kanonik 48.4 V (N_s 64, -40 C)."
+ },
+ "el_V_mp_nom_V": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_vmp_cell_stc_V: Nominal; kanonik 64 x 0.64 = 41.0 V."
+ },
+ "hjt_jsc_mA_cm2": {
+  "deger": 40,
+  "alt": 38,
+  "ust": 41.4,
+  "kaynak": "Hucre: Wohler 2024 endustriyel M6 olcumu 38.02-38.05; LONGi sampiyon 41.4",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'Jsc=(38.02 to 38.05) mA/cm2'; 'Jsc: 41.4 mA/cm2'",
+  "guven": "orta",
+  "aciklama": "Giglia 38.12 simulasyon. | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida tek parametre iki rol icin kullanilmisti; ikiye ayrildi. Nominal Jsc hucre sahipli ve yalniz performans/kayip hesaplarina girer (verim ayrica eta_core'dan). Tutarlilik: 0.745 V x 40 mA/cm2 ile ilk nesil eta 0.22 FF ~0.74 (ilk nesilde dusuk Voc/FF ile tutarli), olgun eta 0.257 FF ~0.86 ima eder. Guvenlik kontrolleri ayri kanonik mod_jsc_A_per_cm2'yi kullanir. | [Uzlaştırma/zincir] mod_jsc_A_per_cm2 ile ilişkili ama ayrı kanonik: Nominal (ayri kanonik); sinir kontrolunde kullanilmaz."
+ },
+ "mod_jsc_A_per_cm2": {
+  "aciklama": "18.22/441 = 0.0413 | [Uzlaştırma/zincir] hjt_jsc_mA_cm2 ile ilişkili ama ayrı kanonik: Farkli rol: sinir kontrol Jsc'si (ayri kanonik). | [Uzlaştırma/zincir] Kanonik (tek sahip). Guvenlik yonu yuksek akim; ticari ust segment modulden turetilen 41.3 mA/cm2 mod_isc_margin 1.03 ile birlikte kullanilir -> N_p = 1'de a <= ~137 mm. Kendi hucremizin olculen Isc dagiliminin ust ucu gelince yerine gecer. Nominal performans icin kullanilmaz.",
+  "deger": 0.0413,
+  "alt": 0.038,
+  "ust": 0.042,
+  "kaynak": "Waaree BiH-11-730 veri sayfasi Isc 18.22 A / 441 cm2 (G12)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'Isc (A) STC 18.22'",
+  "guven": "orta"
+ },
+ "cell_eta_industry_2025_pct": {
+  "aciklama": "Ust sinir CPIA ~26.2 ile sinirlandi. Risen %26.61 (pv-tech 2025-07-04) olcen kurum belirtilmemis firma beyani; Maxwell %26.92 ISFH sertifikali laboratuvar hucresi - ikisi de ust sinira alinmadi. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → eta_cell: GW endustri referansi (H1); yalniz kalibrasyon."
+ },
+ "mod_voc_margin": {
+  "deger": 1.03,
+  "alt": 1,
+  "ust": 1.08,
+  "kaynak": "Modul tahmini; Waaree veri sayfasi +-%3 guc olcum belirsizligi; 1.2 kW/m2'de Voc ~+%0.6",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'Measuring Uncertainty ± 3%' (guc icin)",
+  "guven": "dusuk",
+  "aciklama": "Marj 1.00 alınırsa 60 V'ta N_s 72. Dayanak adı düzeltildi (güç belirsizliği, Voc değil). | [Uzlaştırma/zincir] Kanonik (tek sahip). Nominal Voc ile tasarim tavaninda (mod_f_ns_max) tek marj; hucre'nin +6 mV payi bunun alt bileseni. Sinir kontrolunde (std_f_ns_max) Voc_sinir (P99) marjin yerine gecer, ikisi ust uste eklenmez. K_U 1.2 ile tasarim tavani 65; sinir tavani (0.77 V) 64 -> baglayici olan sinir."
+ },
+ "hjt_voc_irr_margin_mV": {
+  "aciklama": "-20 C: 0.8255 + 0.006 = 0.8315 V -> N_s <= 72; -25 C -> 71; -30 C -> 70. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → mod_voc_margin: Yalniz isinim + arka yuz; mutlak mV."
+ },
+ "std_tmin_site_c": {
+  "deger": -40,
+  "alt": -40,
+  "ust": -9,
+  "kaynak": "Tasarim secimi; dayanak MGM rekorlari (modul revizyonunda acildi): Istanbul -9.0, Ankara -24.9, Erzurum -37.2 C; modul kaynaginda Almanya Hull -37.8 C",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'En Düşük Sıcaklık (°C): İstanbul -9,0 (Şubat); Ankara -24,9 (Ocak); Erzurum -37,2 (Aralık)'",
+  "guven": "orta",
+  "aciklama": "60 V'ta N_s_max 71-74 arasinda degisir. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pazar/saha kavrami -> standart sahip. Deger bir tasarim secimidir (istasyon rekorlari dayanak, -40 degil); bu yuzden kaynak_turu tahmin. Pazar anahtari: TR_marmara -10, TR_ic -25, DE_AT -40, tek_urun -40 (varsayilan; A'nin ana pazari Almanya, rekor -37.8 C). Modulun guveni yuksek itirazi ('tek urun icin -40 C') uygulandi. ku_yontemi = varsayilan_1.2 iken T_min N_s_max'i baglamaz (K_U 1.2 > 1.159); beyan_alfa'da baglar."
+ },
+ "std_selv_pv_uocmax_limit_v": {
+  "deger": 60,
+  "alt": 60,
+  "ust": 60,
+  "kaynak": "IEC 60364-7-712:2017 madde 712.414.101",
+  "kaynak_turu": "standart_metni_dogrulanmis",
+  "kaynak_alintisi": "'712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not exceed 60 V DC.'",
+  "guven": "yuksek",
+  "aciklama": "Revizyon: alt deger 35 -> 60 yapildi; Avusturya 35 V ayri pazar bayragi (std_austria_selv_pv_v). Ed.3.0 2025-10 yayimlandi; onizlemede 712.414 basligi var, 60 V degerinin korunup korunmadigi dogrulanmadi. | [Uzlaştırma/zincir] Kanonik (tek sahip). Sinir soguk U_OC_MAX'a uygulanir (K6). Deger okunan baskinin (2017) metninden; guncel baskida korundugu ayrica dogrulanacak (Class III ile ayni kural). SELV icin kutunun PV-sebeke arasi guvenli ayirmasi sart."
+ },
+ "el_V_lim_dry_V": {
+  "aciklama": "60364-4-41 5. baski (2005); 2017 baskisi teyit edilmeli. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_selv_pv_uocmax_limit_v: Ayni sayi; dayanak 414.4.5 ve DVC-A kuru."
+ },
+ "std_dvca_dc_dry_v": {
+  "aciklama": "DVC-B sinirlarini dogrulayamadim. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_selv_pv_uocmax_limit_v: Urun DVC-A kuru siniri; ayri kontrol."
+ },
+ "std_dvca_dc_wet_v": {
+  "deger": 35,
+  "alt": 35,
+  "ust": 35,
+  "kaynak": "DEKRA test raporu 6067599.50A (TRF IEC62109_1B); IEC TS 62257-9-8:2020 onizlemesi",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'DVC A: 60Vdc (35Vdc for wet location)'",
+  "guven": "yuksek",
+  "aciklama": "IEC TS 62257-9-8:2020 onizlemesi de 35 V'un 'DVC-A for wet locations in Table 6 of IEC 62109-1:2010' oldugunu teyit ediyor. IEC 62109-1 Ed.2 hazirlaniyor (dogrulanmadi). | [Uzlaştırma/zincir] Kanonik (tek sahip). dvca35 rejiminde soguk U_OC_MAX'a uygulanir (varsayilan N_s 36). 414.4.5'in islak temel korumasiz 30 V'u ayri kategori (elv30); Class III 35 V STC'dir ve ayri kanonik."
+ },
+ "el_V_lim_wet_V": {
+  "esdeger": "std_dvca_dc_wet_v",
+  "esdeger_carpan": 1.0,
+  "aciklama": "IEC 61730-1 Class III: ≤240 W, Voc ≤35 V, Isc ≤8 A (STC) (sis.se onizleme 4.4.1). | [Uzlaştırma/zincir] Eşdeğer: değer std_dvca_dc_wet_v üzerinden okunur. Fark: Alt sinir 30 V ile urun (35) ve tesisat (30) kurallarini tek parametrede karistiriyor; ikiye ayrildi."
+ },
+ "std_austria_selv_pv_v": {
+  "aciklama": "Kategorik pazar degeri. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_dvca_dc_wet_v: AT PV SELV siniri; ayni sayi, farkli dayanak."
+ },
+ "std_class3_voc_stc_max_v": {
+  "deger": 35,
+  "alt": 35,
+  "ust": 35,
+  "kaynak": "IEC 61730-1:2016 madde 4.4.1 (SIS resmi onizlemesi)",
+  "kaynak_turu": "standart_metni_dogrulanmis",
+  "kaynak_alintisi": "'Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard test conditions.'",
+  "guven": "yuksek",
+  "aciklama": "Standart metni (4.4.1) modul basina sinir veriyor; 'seri/paralel kombinasyonlara uygulanir' ifadesi UL ozetinden geliyor (4.4.3 onizlemede yok). Eski 2004 baskisi Application Class C: '<50 V DC and 240 W'. 2023 baskisinda Class III icin DTI sarti kaldirildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). STC degeridir (soguk degil). Guven 60 V SELV ile ayni kuralla yuksek (okunan baskinin metni); 2023 baskisinda (madde 5.4) korundugu ayrica dogrulanacak. Belirsiz olan deger degil, 'kutu toplami' yorumu (UL ozeti; 4.4.3 goruntulenmedi). Formul standart'in, marjlar modul'un: N_s <= 45 (cift 44), ilk nesil eta ile P ~161-181 W, olgun ~187-210 W."
+ },
+ "mod_classIII_voc_max_V": {
+  "esdeger": "std_class3_voc_stc_max_v",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Güven 'yuksek'ten 'orta'ya indirildi: 2023 metni doğrulanmadı. | [Uzlaştırma/zincir] Eşdeğer: değer std_class3_voc_stc_max_v üzerinden okunur. Fark: Ayni (modulde guven orta)."
+ },
+ "std_class3_isc_max_a": {
+  "deger": 8,
+  "alt": 8,
+  "ust": 8,
+  "kaynak": "IEC 61730-1:2016 madde 4.4.1",
+  "kaynak_turu": "standart_metni_dogrulanmis",
+  "kaynak_alintisi": "'...the short-circuit current does not exceed 8 A when tested under standard test conditions.'",
+  "guven": "yuksek",
+  "aciklama": "Revizyon: ilk ciktidaki 'a_wafer <= 141 mm, kucuk wafer lehine' yorumu yanlisti; kisit A_cell_m2 uzerinden yazildi. Kesim kenari rekombinasyon kaybi bilinmiyor (hucre alani). | [Uzlaştırma/zincir] Kanonik (tek sahip). Hucre ALANINI sinirlar: sinir Jsc 41.3, marj 1.03, N_p = 1 ile a <= ~137 mm (mod_f_a_max_class3). 182-210 mm wafer n_cut/k_split ile uyar."
+ },
+ "mod_classIII_isc_max_A": {
+  "esdeger": "std_class3_isc_max_a",
+  "esdeger_carpan": 1.0,
+  "aciklama": "mod_isc_margin ve mod_bifacial_isc_factor ile birlikte kullanılır. | [Uzlaştırma/zincir] Eşdeğer: değer std_class3_isc_max_a üzerinden okunur. Fark: Ayni."
+ },
+ "wf_t_ascut_firstgen_um": {
+  "deger": 125,
+  "alt": 115,
+  "ust": 135,
+  "kaynak": "Wafer: ilk nesil tahmin (satin alinan n-tipi 130 um'den TTV payi); olgun 110 um TaiyangNews; nihai alt sinir 80 um",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Olgun capa: 'mainstream wafer thickness for HJT is about 110 μm, which is expected to narrow to 100 μm between 2026 and 2028'",
+  "guven": "dusuk",
+  "aciklama": "Dayanak: satin alinan standart n-tipi wafer 130 um (InfoLink/TrendForce satirlari '130µm'). Olgun degerin ~15 um ustu TTV payi olarak birakildi. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer sahip: ilk nesil a <= 105 mm 115, a >= 156 mm 125 um; olgun 95-115; wf_learn_weight ile harmanlanir. Kisit t >= 80 + 12 = 92 um. K3 dalinda t = satin alinan kalinlik (130 um). Hucre, modul ve kristal bu degeri okur."
+ },
+ "wf_t_ascut_mature_um": {
+  "aciklama": "Ayni sayfa: 'expected to decline steadily from ~110-118 μm toward ~95-100 μm'. Olgun t(a) onerisi: 50-80 mm icin 95, 105 mm icin 100, 156-182 mm icin 110, 210 mm icin 115 um. Hepsi wf_t_final_min_um + wf_texture_removal_um = 95 um siniri ustunde. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_t_ascut_firstgen_um: Olgun uc."
+ },
+ "hjt_si_etch_removal_um": {
+  "deger": 12,
+  "alt": 8,
+  "ust": 25,
+  "kaynak": "Hucre tahmini (piramit 2-5 um + hasar giderme); wafer hafizadan 15 um; alt capa Ge 2025",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Ge 2025 (wafer notu): '~5 μm of material removal via etching' (yuz basina)",
+  "guven": "dusuk",
+  "aciklama": "t_cell = t_wafer - removal. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer arayuzu 'hucre ajaninin degeri esas' diyor; hucre sahip. Aralik wafer'in 8-25'ine genisletildi. t_cell, KOH ve H2 ayni degeri kullanir."
+ },
+ "wf_texture_removal_um": {
+  "esdeger": "hjt_si_etch_removal_um",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Alt capa: Ge 2025, kalinti gerilmenin '~5 μm of material removal via etching' ile buyuk olcude kalktigini soyluyor (yuz basina). | [Uzlaştırma/zincir] Eşdeğer: değer hjt_si_etch_removal_um üzerinden okunur. Fark: Hafizadan; ayni buyukluk."
+ },
+ "saw_kerf_firstgen_um": {
+  "deger": 57,
+  "alt": 48,
+  "ust": 65,
+  "kaynak": "Wafer: tel geometrisi 36 + 15 + 6 = 57 um (saw_kerf_calc); capa qualenergia/ITRPV 2023",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'A kerf width of 55 µm is standard in 2023 with DWS.'",
+  "guven": "orta",
+  "aciklama": "saw_wire_core_um + saw_wire_coating_add_um + saw_kerf_excess_um = 36 + 15 + 6 = 57. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer sahip; kullanilan deger saw_kerf_blend. Kristalin 60 um'lik yap/al ornegi ve xtal_kg_ingot_per_m2_wafer kaldirilir. Kare kesim kerfi (sq_kerf_mm 0.4 mm) farkli kavram."
+ },
+ "saw_kerf_mature_um": {
+  "aciklama": "55'ten 43'e (2023-2033) dogrusal interpolasyon 2026 icin ~51 veriyor; tel geometrisi 30 + 15 + 5 = 50. 2030 sonrasi <25 um cekirdekle 35-42 um mumkun; bu uzun vade degeri araliga katilmadi. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → saw_kerf_firstgen_um: Olgun uc."
+ },
+ "hjt_breakage_ref": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Olgun kaynak; referans 210-yarim, kalinlik terimi ve taban yok, baslangicta x3 (0.0075)."
+ },
+ "wf_break_cell_ref_mature": {
+  "aciklama": "Hucre ajanina arayuz. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Olgun uc (w = 0)."
+ },
+ "wf_break_cell_ref_firstgen": {
+  "aciklama": "PMC11076549 (dogrulandi): CEA-INES SHJ pilotu 'from about 10% at 100 μm thickness to a terrible ~96% at 70 μm' (2016). Hanwha'nin %4.5 degeri 'high-temperature diffused junction cells' icin, HJT degil. arXiv 1906.06770: HIT hattinda ~90 um'ye kadar ~%93 verim, el ile tasima. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Ilk nesil uc (w = 1) = varsayilan."
+ },
+ "wf_break_exp_size": {
+  "deger": 3,
+  "alt": 1,
+  "ust": 8,
+  "kaynak": "Wafer tahmini (Weibull + plak teorisi sinirlari); hucre tahmini us 1 (0.5-2)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Wafer notu: 'Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1 = 8'",
+  "guven": "dusuk",
+  "aciklama": "Alt sinir 1: yalnizca kenar uzunlugu etkisi. Ust sinir alpha*m + e = 2*3.5 + 1 = 8: atalet/titresim yuklerinde sigma ~ a^2/t. Sabit egrilik yuklerinde (lehim/CTE) boyut etkisi yok. | [Uzlaştırma/zincir] Kanonik (tek sahip). Tek (taban payli) form secildi; hucre'nin us 1'i alt uca denk. H3 kazanci bu usse cok duyarli; deneyle olculmeli."
+ },
+ "hjt_breakage_size_exp": {
+  "aciklama": "Dayanak: kenar kusuru kaynakli kirilma kenar uzunlugu ~a ile (us 1); tasima/vakum egilme gerilmesi ~a^2/t^2 ile (us 2); termal soku ~kucuk bagimlilik (us <1). p_break = ref x (a/210)^us. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_exp_size: (a/210)^1 formu, taban payi yok."
+ },
+ "hjt_line_yield_start": {
+  "deger": 0.9,
+  "alt": 0.75,
+  "ust": 0.96,
+  "kaynak": "Hucre tahmini; Ballif 2019 (ilk hatlarda tasima/bekleme sorunlari); olgun 0.985 (Risen)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'many first lines having suffered from issues linked to wafer handling, queue time and sometimes low process control'",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Varsayilan ilk nesil. hjt_yield_total = hat verimi x (1 - wf_P_break_cell): ilk nesil ~0.883-0.895, olgun ~0.98; modul verimi (mod_module_yield 0.98) ve CTM ayri carpan. Altyapinin sabit Y_line 0.95'i bu carpimla degistirilir."
+ },
+ "hjt_line_yield_mature": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → hjt_line_yield_start: Olgun uc."
+ },
+ "cz_zd_yield": {
+  "aciklama": "Sinifi 'alan'dan 'teknik'e alindi. Etkisi kg/gun ve kWh/kg uzerinden maliyete girer. Melt-back maliyeti de bunun icinde (TI: 'Melt-backs can increase the total power requirements by 20-30%'). | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_learn_weight: Yalniz olgun; kristal baz sayilari olgun (ogrenme yili ZD 0.3-0.7 varyant)."
+ },
+ "mod_module_yield": {
+  "aciklama": "BOM/W formülünde ve örnekte artık tutarlı biçimde uygulanıyor. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_learn_weight: Tek deger, ilk nesil/olgun ayrimi yok."
+ },
+ "bat_wh_usable_per_wp_A": {
+  "deger": 1.6,
+  "alt": 0.9,
+  "ust": 2.6,
+  "kaynak": "Pil: rakip urunlerin nominal 0.96-2.8 Wh/Wp orani x LFP kullanilabilir 0.92",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "Anker SB3 '2,700 Wh', '3,600 Watts'; Zendure '1,920 Wh', '2640W'; VDE: Schuko 'bis zu 960 Wp', Wieland '2.000 Wp'",
+  "guven": "orta",
+  "aciklama": "Rakiplerin nominal oranlari 0.96-2.8 Wh/Wp. Bunlar LFP kullanilabilir orani (0.92) ile carpildi: 0.9-2.6, orta 1.75 x 0.92 = 1.6. Nominal kutu enerjisi = r x P / bat_usable_fraction. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; kullanilabilir enerji tanimi. Nominal = oran / usable: A varsayilan NFPP 1.78, LO 2.0 Wh/Wp. Tek kural: E_nom = max(hedef, P_box x bat_pv_peak_factor / C_max(format, T)), sonra N_s x E_cell kuantizasyonu. Elektronik'in 1.5 h depolama suresi kaldirilir."
+ },
+ "el_h_store_h": {
+  "aciklama": "E_batt pil/sistem ajanindan gelirse o kullanilir. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_wh_usable_per_wp_A: E_batt/P_box (nominal); kanonik nominal 1.78-2.0 ile celisik. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_wh_usable_per_wp_B: Senaryodan bagimsiz tek deger."
+ },
+ "bat_wh_usable_per_wp_B": {
+  "deger": 3.2,
+  "alt": 1.8,
+  "ust": 5.5,
+  "kaynak": "Pil: EcoFlow River 3 245 Wh + 110 W; Jackery 1000 v2 1070 Wh + 200 W; nominal 2.2-5.35 x 0.92",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "EcoFlow River 3 '245Wh' + '110W'; Jackery 1000 v2 '1,070Wh' + '200W'",
+  "guven": "orta",
+  "aciklama": "Nominal oranlar 2.2-5.35 x 0.92 -> ~2-4.9; ortasi 3.5 x 0.92 = 3.2. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; nominal LO 4.0, NFPP 3.56 Wh/Wp. B'de 5 kg (tasinabilir pil) ve hava tasimasi sinirlari E_batt'i ayrica kisar."
+ },
+ "el_E_cell_Wh": {
+  "esdeger": "bat_E_cell_Wh",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Kutu adedi ve en kucuk paket (14·E_cell) buna bagli. | [Uzlaştırma/zincir] Eşdeğer: değer bat_E_cell_Wh üzerinden okunur. Fark: Kaynaksiz tahmin; en kucuk paketi (280 Wh) ve kutu adedini (1786/yil) yanlis kuantize ediyor."
+ },
+ "el_Vcell_max_na_V": {
+  "esdeger": "bat_cell_v_max_V",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/zincir] Eşdeğer: değer bat_cell_v_max_V üzerinden okunur. Fark: LO degeri tum kimyalar icin sabit."
+ },
+ "bat_cell_v_max_lo_V": {
+  "aciklama": "SELV'e gore seri sayiyi belirler. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_cell_v_max_V: LO (B varsayilani)."
+ },
+ "bat_v_min_cutoff_V": {
+  "deger": 2,
+  "alt": 1.5,
+  "ust": 2.5,
+  "kaynak": "Pil tasarim onerisi; veri sayfasi alt siniri 1.50 V (Tycorun)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'Discharge cut-off 1.50±0.05V' (veri sayfasi siniri)",
+  "guven": "dusuk",
+  "aciklama": "Kesim arttikca kullanilabilir oran duser; P/V_min akimi da duser. | [Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip. V_batt_min = 15 x 2.0 = 30 V (NFPP) / 14 x 2.0 = 28 V (LO) -> MPPT penceresi, azami akim ve kullanilabilir oran (LO ~0.8, NFPP ~0.9) buna bagli. 1.5 V veri sayfasi siniri farkli kavram."
+ },
+ "el_Vcell_min_use_V": {
+  "esdeger": "bat_v_min_cutoff_V",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/zincir] Eşdeğer: değer bat_v_min_cutoff_V üzerinden okunur. Fark: Ayni."
+ },
+ "bat_cell_v_min_lo_V": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_v_min_cutoff_V: Veri sayfasi siniri; tasarim kesimi degil."
+ },
+ "el_N_batt_series": {
+  "esdeger": "bat_ns_cells",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/zincir] Eşdeğer: değer bat_ns_cells üzerinden okunur. Fark: LO varsayimi; marjsiz floor(60/3.95) = 15'ten 'onerilen' 14."
+ },
+ "bat_charge_c_max_pris": {
+  "deger": 0.5,
+  "alt": 0.3,
+  "ust": 1,
+  "kaynak": "EVLithium 210 Ah prizmatik veri sayfasi; 26700 icin bat_charge_c_max_cyl 1.0 (Tycorun); sifir alti 0.2C",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'0~45°C – ≤0.50C'",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, formata ve sicakliga bagli: prizmatik 0.5C (A varsayilani), 26700 1.0C (B), -10..0 C 0.2C. E_nom >= P_box x bat_pv_peak_factor / C_max. 210 Ah verisi; 20 Ah hucrede farkli olabilir (veri sayfasi)."
+ },
+ "el_C_charge_max_C": {
+  "aciklama": "E_batt ≥ P_box/C_max = 2·P_box. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris: Farkli hucre (ecoteardown); A varsayilaniyla sayisal olarak ayni ama format secimine baglanmali."
+ },
+ "bat_charge_c_max_cyl": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → bat_charge_c_max_pris: 26700 (B varsayilani)."
+ },
+ "std_plugin_schuko_pv_max_wp": {
+  "deger": 960,
+  "alt": 960,
+  "ust": 960,
+  "kaynak": "VDE basin bildirisi (DIN VDE V 0126-95:2025-12)",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'800 Wp + 20% (i.e., 960 Wp)'",
+  "guven": "yuksek",
+  "aciklama": "Schuko icin fis temas korumasi: korumali fis, dahili kesici veya invertorde galvanik ayirma (+ek sartlar). | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida ust uc 2000 idi (ozel fis); iki mevzuat secenegi bir belirsizlik araligina konmustu, duzeltildi. Ozel enerji fisi ayri id std_plugin_special_plug_pv_max_wp (2000 Wp) ve fis_tipi anahtariyla secilir. A'da n_panel_per_box = min(kutu_kurali n, floor(960 / P_panel)); P_box = n x P, P_inv = min(P_box, 800 VA). B'de fis siniri yok; class3'te kutu toplami <= 240 W; kutu_enerji_siniri ve (B) 5 kg n'yi ayrica kisar."
+ },
+ "std_plugin_special_plug_pv_max_wp": {
+  "aciklama": "[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp: Ayri mevzuat secenegi (fis_tipi = ozel_enerji_fisi)."
+ },
+ "el_grid_limit_VA": {
+  "aciklama": "P_inv = min(P_box, 800). | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → std_plugin_schuko_pv_max_wp: AC invertor siniri; PV DC siniri degil."
+ },
+ "fz_diameter_max_mm": {
+  "aciklama": "Gerekce yuzey gerilimi olarak duzeltildi; bobin ark riski ek bir muhendislik siniri (hafizadan). | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → D_ingot_mm: FZ ust siniri."
+ },
+ "el_hours_per_year_h": {
+  "deger": 4000,
+  "alt": 2000,
+  "ust": 6000,
+  "kaynak": "2 vardiya x 8 h x 250 gun; altyapi eco_shift_pattern onerisi (firin ve HJT 24/7, modul/pil/kutu 2 vardiya + ara stok)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "Elektronik: '2 vardiya x 8 h x 250 gun'",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Firin ve HJT 8760 h; modul, pil paketi ve kutu hatlari bu cizelgeyle ve ustune A_teknik (0.9) -> etkin 3600 h. Bu revizyonda laminator (4.3-7.2 MWp) ve paket hatti (26700 1.44 M, prizmatik 216 bin hucre/yil) bu tanimla yeniden hesaplandi."
+ },
+ "bat_pack_line_hours_yr": {
+  "aciklama": "2 vardiya x 8 saat x 300 gun x OEE 0.75. | [Uzlaştırma/zincir] İlişkili (eşdeğer değil) → el_hours_per_year_h: 2 x 8 x 300 gun x OEE 0.75: gun sayisi ve OEE gomulu; sayisal olarak 4000 x 0.9 ile ayni ama ayristirilmali."
+ },
+ "bat_line_cells_per_year": {
+  "deger": 150000,
+  "alt": 100000,
+  "ust": 200000,
+  "kaynak": "Kullanici karari K9",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'K9: hat basina ~150 bin hucre/yil'",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Yalniz pil_kaynagi = ic_hat iken baglayici. Satin alinan hucrede tavan paket hatti kapasitesi (26700 ~1.44 M, prizmatik ~216 bin hucre/yil). std_f_boxes_per_year_unit ve el_f_N_box_batt_yr bu ayrimi yapmali. K9'un anlami kullaniciya sorulmali."
+ },
+ "el_N_cell_per_year": {
+  "esdeger": "bat_line_cells_per_year",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/zincir] Eşdeğer: değer bat_line_cells_per_year üzerinden okunur. Fark: Her durumda kutu adedine tavan yapiliyor."
+ },
+ "cz_tail_length_ratio": {
+  "deger": 0.6,
+  "alt": 0.4,
+  "ust": 1,
+  "kaynak": "Kristal tahmini; wafer tahmini 0.8",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Kaynak yok (her iki alanda tahmin)",
+  "guven": "dusuk",
+  "aciklama": "Ilk ciktida 0.7 idi. | [Uzlaştırma/zincir] Kanonik (tek sahip). Kristal sahip: ayni geometri cevrim suresini (cz_t_cycle_h) ve koni kutlesini belirler; wafer wf_eta_cone ayni parametreleri okur. Prototiple olculecek."
+ },
+ "wf_tail_h_over_D": {
+  "esdeger": "cz_tail_length_ratio",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Kuyruk, ayrilma anindaki termal sokla olusan dislokasyonlarin govdeye kaymasini sinirlamak icin yavasca daraltilir (hafizadan). | [Uzlaştırma/zincir] Eşdeğer: değer cz_tail_length_ratio üzerinden okunur. Fark: Wafer tahmini; kanonikle degistirilir."
+ },
+ "wf_crown_h_over_D": {
+  "esdeger": "cz_shoulder_height_ratio",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Koni hacmi pi/12*D^2*h, yani govdeye esdeger uzunluk h/3. | [Uzlaştırma/zincir, elle doğrulandı] Eşdeğer: değer cz_shoulder_height_ratio üzerinden okunur."
+ },
  "_yeni": [
   {
    "id": "eco_usd_inflation_frac_yr",
@@ -648,6 +1150,168 @@
    "senaryoya_uygunluk": "",
    "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, sahip notunu levelize modelde uygulamak icin zorunlu (tek duz oran ya altyapiyi sisirir ya ilk nesil makineyi eksik sayar). Seviyelenmis karsiligi: dm x AF(r_reel, 3)/AF(r_reel, N) = 0.035 x 2.52/5.44 = 0.0161/yil (N = 8; 2 yil kabul edilirse 0.0112). Alt 0: kendi tasarim makine satin alinan kadar olgun. Yalniz kendi tasarim ilk nesil proses makinelerine uygulanir; kopya unitelerde (ogrenme sonrasi) 0 alinabilir.",
    "dogrulama_deneyi": ""
+  },
+  {
+   "id": "eta_cell",
+   "ad": "Hucre verimi eta_cell (hucre / modul / wafer / altyapi / kristal)",
+   "birim": "-",
+   "deger": 0.22,
+   "alt": 0.19,
+   "ust": 0.26,
+   "kaynak": "Hucre f_eta_cell ve Tablo 1: baslangic (eta_core 22.5, w_eq 0.75) a=50-210 mm'de %21.2-22.2; olgun B-arka %24.8-25.8, D %25.6-26.0; cell_eta_core_start_pct 22.5 [19-24.5], cell_eta_core_mature_pct 26.1",
+   "kaynak_turu": "hesap_turetilmis",
+   "kaynak_alintisi": "'improvement in average cell efficiency from 20.5% to 22.8% in 10 months during 2017/18'; 'It places HJT efficiency at around 25.7% in 2025'",
+   "guven": "dusuk",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). eta_cell parametre degil, zincir adim 2'nin ciktisidir (a, edge_mode, tau_SRH, wf_learn_weight). Baz 0.22 varsayilan ilk nesil (w = 1) icin; olgun (w = 0) ~0.25-0.26. Alanlarin sabit 0.23/0.24/0.25 degerleri kaldirilir. Bu revizyonda zincirdeki tum turetilmis kontrol degerleri (a ornekleri, Class III gucu, unite hacimleri, testere MW, M10 c/W) ilk nesil eta ile yeniden hesaplandi, olgun degerler ayri verildi.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "mod_ctm_power_calc",
+   "ad": "Hucreden module guc orani CTM",
+   "birim": "-",
+   "deger": 0.974,
+   "alt": 0.956,
+   "ust": 0.992,
+   "kaynak": "Modul mod_f_ctm_calc / mod_f_design_loop: 60 V dalinda 50 W 0.992 ... 300 W 0.974 ... 500 W 0.964; 35 V dalinda 0.956-0.988; optik bilesen 1.01 (tahmin)",
+   "kaynak_turu": "hesap_turetilmis",
+   "kaynak_alintisi": "Modul ornek hesap: 'CTM = 1.01 x 0.9645 = 0.974 -> a = 135.4 mm'",
+   "guven": "dusuk",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). CTM a'ya baglidir; modul sahip. Hucre'nin a_min ve f_hjt_required_W'deki sabit 0.97 bu ciktiyla degistirilir. W_unit_yr (panel Wp) hesabinda zorunlu carpan. Guven, optik bilesen tahmin oldugu icin dusuk.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "N_s_max",
+   "ad": "Seri hucre tavani N_s_max (60 V SELV)",
+   "birim": "adet",
+   "deger": 64,
+   "alt": 64,
+   "ust": 72,
+   "kaynak": "IEC 60364-7-712:2017 712.414.101 ve Ek B.1; hesap: min(floor(60 / (1.2 x 0.745 x 1.03)) = 65, floor(60 / (1.2 x 0.77)) = 64) = 64",
+   "kaynak_turu": "hesap_turetilmis",
+   "kaynak_alintisi": "'712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not exceed 60 V DC.'; Ek B.1: '...UOC MAX shall be chosen equal to 1,2 UOC STC.'",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). K6 sert sinir. Kendi hucremizin alfa ve Voc P99 olcumu yokken K_U = 1.2 (Ek B) ve Voc_sinir = 0.77: 64 (cift, varsayilan N_s 64). Olcum/beyan sonrasi (beyan_alfa): tek urun/DE-AT T_min -40 C ile tasarim tavani 67 (N_s 66); -20 C pazarinda 70; -9 C 72. Onceki kanonik 70, nominal degerlerle -36.7 C altinda 60 V'u asiyordu (-37.8 C'de 60.1 V) ve aralik ucunda (0.77 V, -0.28 %/K) -20 C'de bile 60.7 V veriyordu. 35 V dvca35: 36; Class III STC: 44.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "wf_break_cell_ref",
+   "ad": "Kirilma orani (hucre hatti referansi)",
+   "birim": "-",
+   "deger": 0.02,
+   "alt": 0.001,
+   "ust": 0.1,
+   "kaynak": "wf_break_cell_blend: ilk nesil wf_break_cell_ref_firstgen 0.02 [0.005-0.1] (tahmin), olgun wf_break_cell_ref_mature 0.0025 (Risen, PRNewswire 2026)",
+   "kaynak_turu": "tahmin",
+   "kaynak_alintisi": "Olgun capa: 'yield rate consistently above 99.5% with a fragment rate below 0.25%'",
+   "guven": "dusuk",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik olgun uctu (0.0025); varsayilan senaryo ilk nesil oldugundan harmanli referans (w = 1 -> 0.02) kanonik yapildi. Tek kirilma modeli wf_P_break_cell: ref x [taban + (1 - taban)(sqrt(A)/182)^n_a (110/t)^n_t]; f_hjt_yield bunu kullanir, f_hjt_break emekli. Ilk nesil hucre kirilmasi 182 mm/125 um %1.42, 50 mm %0.53. Risen verisi 210-yarim hucre (sqrt(A) ~148 mm); 182 mm'ye tasinmasi n_a'ya bagli ve bilinmiyor.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "wf_learn_weight",
+   "ad": "Ogrenme durumu (ilk nesil / olgun agirligi)",
+   "birim": "-",
+   "deger": 1,
+   "alt": 0,
+   "ust": 1,
+   "kaynak": "Wafer wf_learn_weight = 0.5^(Q_cum_m2 / wf_learn_half_m2); wf_learning_scenario onerisi",
+   "kaynak_turu": "tahmin",
+   "kaynak_alintisi": "wf_learning_scenario: 'ONERILEN: Ilk nesil + ogrenme egrisi; olgun senaryo yalnizca duyarlilik icin.'",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida kanonik varsayilan ilk nesil olmasina ragmen unite sayilari olgun degerlerle verilmisti; tek anahtar (ogrenme_durumu) ile tum alanlar ayni w'yu okur: cz_zd_yield ve cz_availability_unplanned (kristalin 'ogrenme yili' varyanti = w 1; ayri id yok, eklenmeli), cell_eta_core_start/mature, hjt_line_yield_start/mature, hjt_w_eq_start/B, saw_*, wf_break_*, wf_t_ascut_*. Karar kullanicinin (wf_learning_scenario KARAR: kullanici).",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "bat_E_cell_Wh",
+   "ad": "Pil hucre enerjisi E_cell",
+   "birim": "Wh",
+   "deger": 58,
+   "alt": 57,
+   "ust": 62,
+   "kaynak": "Pil: 20 Ah x 2.9 V (bat_cell_pris_small_capacity_Ah, bat_cell_v_nom_nfpp_V 2.85-3.1); 26700 LO 3.10 V x 3.3 Ah = 10.23 Wh (Tycorun); 50 Ah NFPP 142.5 Wh",
+   "kaynak_turu": "hesap_turetilmis",
+   "kaynak_alintisi": "bat_ds_cell_format: 'Minimum paket = Ns x E_cell: 143 Wh (26700), 870 Wh (20 Ah), 2138 Wh (50 Ah)'; SMM '10-28Ah Prismatic (NFPP)'",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; format secimine bagli cikti (pil_formati; format bir kategorik secimdir, belirsizlik araligina konmaz). Aralik yalniz 20 Ah hucrenin nominal gerilim belirsizligi (2.85-3.1 V). Diger formatlar: 26700 LO 10.23 Wh [9.6-10.85] (B ve < 0.8 kWh kutular), 50 Ah NFPP ~142.5-145 Wh (> 2 kWh). Belirli bir 20 Ah hucre dogrulanmadi (RFQ). Elektronik'in 20 Wh'i hicbir formata karsilik gelmiyor.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "bat_cell_v_max_V",
+   "ad": "Na hucre gerilim penceresi ust ucu",
+   "birim": "V",
+   "deger": 3.8,
+   "alt": 3.7,
+   "ust": 3.95,
+   "kaynak": "Pil bat_cell_v_max_nfpp_V (OGSolar 160 Ah 3.8 V; 18650 3.7 V; EVLithium 210 Ah 3.95 V); LO bat_cell_v_max_lo_V 3.95 (Tycorun)",
+   "kaynak_turu": "dogrulanmis_url",
+   "kaynak_alintisi": "160Ah 'Max Charge Voltage 3.8 V'; 18650 '3.7 V'; EVLithium 210Ah NFPP '3.95 ±0.05 V'; Tycorun 26700 'Charge Voltage: 3.95 ± 0.05V'",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip; kimyaya gore (NFPP 3.8, LO 3.95, LFP 3.65). Seri sayiyi ve V_batt_max'i belirler; NFPP etiketleri tutarsiz, 3.95 V'luk hucre gelirse 15S yerine 14S. SELV kontrolunde secilen hucrenin veri sayfasi ust ucu kullanilir.",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "bat_ns_cells",
+   "ad": "Pil seri hucre sayisi (14S/15S)",
+   "birim": "adet",
+   "deger": 15,
+   "alt": 14,
+   "ust": 15,
+   "kaynak": "bat_f08: min(bat_ns_design, floor(V_lim x 0.97 / V_cell_max)); NFPP 15 (57.0 V), LO 14 (55.3 V), LFP 15; 35 V rejiminde LO 8",
+   "kaynak_turu": "hesap_turetilmis",
+   "kaynak_alintisi": "Pil ornegi: 'Ns = floor(60 x 0.97 / Vmax). LO: 14 (55.3 V) ... NFPP: 15 (57.0 V / 30 V)'",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). Pil sahip, marjli formul. A varsayilani (NFPP) 15, B (LO) 14; aralik yalniz kimya/veri sayfasi (NFPP 3.95 V gelirse 14). dvca35'te erisilebilir pil portu <= 35 V -> 8S (rejim secimi, belirsizlik degil). PV ile pil galvanik ayrik degilse V_batt_max <= 60 V (std_f_selv_ok).",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "D_ingot_mm",
+   "ad": "Ingot capi D ve aralik",
+   "birim": "mm",
+   "deger": 250,
+   "alt": 80,
+   "ust": 300,
+   "kaynak": "Kristal model 80-260 mm (+290 kalibrasyon), oneri kucuk talepte 120, saha duzeyinde 160-210; wafer eta(a|D) tablolari D=250/300 (D=250'de a=182 psodo 0.672, M10 uyumlu); FZ <= 200 mm",
+   "kaynak_turu": "tahmin",
+   "kaynak_alintisi": "FZ: 'The diameters of float-zone wafers are generally not greater than 200 mm due to the surface tension limitations during growth.'",
+   "guven": "dusuk",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/zincir] Kanonik (tek sahip). D sabit bir baz degil; kristal sahipliginde karar degiskeni. Ornek referansi 250 mm: (i) a=182 tek parca psodo ile satin alinan M10 (K3) ayni hucre/tasiyici boyutunu kullanir, (ii) wafer tablosu mevcut (tatli noktalar 40, 50, 90, 182), (iii) kristal modeli icinde (210 ile 260 arasi ara degerleme; L_body_max baglayici). 210 mm tek parca a ~152 mm (ozel boyut, serbest-D esdegeri ~0.67) verir, M10/G12 tasimaz ve eta(a|D) tablosu yok. Bant 80-300: 260-300 UYARI, >300 ve FZ'de >200 ELEME. Ayni sicak bolgede ayarlanabilir bant bilinmiyor.",
+   "dogrulama_deneyi": ""
   }
  ],
  "_formul_degiskenleri": {
@@ -656,10 +1320,101 @@
   "elec_price_usd_kWh": "eco_elec_price_usd_kwh",
   "elec_price_usd_per_kWh": "eco_elec_price_usd_kwh",
   "labor_usd_h": "eco_labor_operator_usd_h",
-  "labor_usd_per_h": "eco_labor_operator_usd_h"
+  "labor_usd_per_h": "eco_labor_operator_usd_h",
+  "Voc_cell_V": "hjt_voc_cell_V",
+  "alpha_Voc_pct_K": "hjt_tc_voc_pct_per_K",
+  "Vmp_cell_V": "mod_vmp_cell_stc_V",
+  "A_cell <= ~202 cm2 (8 A yorumu)": "mod_jsc_A_per_cm2",
+  "eta_cell (saw_MW_per_yr)": "eta_cell",
+  "eta_cell (varsayilan)": "eta_cell",
+  "eta (eco_unit_output_W_yr ornegi)": "eta_cell",
+  "eta (0.019 USD/W @%24)": "eta_cell",
+  "mod_eta_module": "eta_cell",
+  "CTM (f_hjt_a_min_selv, f_hjt_required_W)": "mod_ctm_power_calc",
+  "N_s_max (f_hjt_voc_cold)": "N_s_max",
+  "std_f_ns_max (K_U 1.2, marjsiz, nominal Voc)": "N_s_max",
+  "mod_f_ns_max (-20 C, marj 1.03)": "N_s_max",
+  "N_s~66 (el_V_mp_* dayanagi)": "N_s_max",
+  "std_tmin_site_c (onceki)": "std_tmin_site_c",
+  "T_min_C": "std_tmin_site_c",
+  "T_site_min_C": "std_tmin_site_c",
+  "V_lim": "std_selv_pv_uocmax_limit_v",
+  "V_lim = 35 V dali": "std_dvca_dc_wet_v",
+  "t (yap/al ornegi)": "wf_t_ascut_firstgen_um",
+  "t_wafer_um": "wf_t_ascut_firstgen_um",
+  "wafer_kerf_um": "saw_kerf_firstgen_um",
+  "Y_line": "hjt_line_yield_start",
+  "Y_line / eta 0.23": "wf_learn_weight",
+  "E_batt/(n x P_panel)": "bat_wh_usable_per_wp_A",
+  "E_cell_Wh (ornek)": "bat_E_cell_Wh",
+  "E_batt_cell_Wh": "bat_E_cell_Wh",
+  "V_cell_max (ornek)": "bat_cell_v_max_V",
+  "N_batt_series (ornek)": "bat_ns_cells",
+  "bat_ds_n_panel_per_box (orneklerde n=4)": "std_plugin_schuko_pv_max_wp",
+  "xtal_D_ingot (oneri)": "D_ingot_mm",
+  "D (eta(a|D) tablolari)": "D_ingot_mm",
+  "sq_D_required (a=182, k=1)": "D_ingot_mm",
+  "mod_shift_h_per_day x 250": "el_hours_per_year_h",
+  "cells_per_year_line": "bat_line_cells_per_year",
+  "batt_cells_per_yr": "bat_line_cells_per_year"
  },
  "_rapor": [
+  "dayanak/cz_crucible_price_fixed_usd: öneri — Aralik dayanaksiz ama etkisi kucuk (USD/kg'in %8'inden az); degisiklik onerilmez. RFQ'da en az iki cap (orn. 14 ve 22 inc) istenirse sabit ve alan bilesenleri dogrudan ayrilir. 918 USD referansi Cin ici ve KDV dahil; Turkiye teslimi icin KDV dusulmeli, gumruk eklenmeli (kaynak denetcisi bulgusu).",
+  "dayanak/cz_ccz_crucible_cost_mult: öneri — Aralik malzeme hesabiyla degil, ozel imalat primi varsayimiyla savunuluyor; teklif gelene kadar korunabilir. CCz yalnizca deney yolu oldugundan RFQ onceligi dusuk. Modelde CCz icin ayri pota omru parametresi yok (cz_crucible_life_h ortak); weir'li pota teklifinde omur de sorulmali. Carpan navlun terimini de carpiyor; sig CCz potasinin hacmi RCz'ninkinden buyuk degilse navlun carpilmamali (etkisi kucuk).",
+  "dayanak/cz_hotzone_height_ratio: öneri — Aralik dayanakla tutarli. Alt sinir 1.1, duzeltilmis 0.97-1.07 bandini pay birakmadan karsiliyor. Yan kayip H ile dogrusal artar (120 mm'de yan kayip 9.0 kW, P_tutma'nin %37'si); bu parametre CAD sonrasi ilk guncellenecekler arasinda olmali.",
+  "dayanak/cz_ccz_hotzone_height_ratio: öneri — Duzeltilmis kaba geometri (0.78-0.98) mevcut alt sinir 0.9 ile buyuk olcude uyumlu. Ilk ciktidaki 'alt sinir 0.7'ye genisletilsin' onerisi hatali seviye dusumune (0.44 D_cr) dayaniyordu; geri cekildi. En fazla 0.8'e genisletme dusunulebilir: 120 mm'de H 0.70'ten 0.59 m'ye iner, P_tutma ~%5 ve USD/kg ~%1.5 azalir (xtal_rev.py). CCz yalnizca deney yolu oldugundan oncelik dusuk.",
+  "dayanak/cz_hotzone_height_fixed_m: öneri — Aralik tutarli. Kucuk capta hassas oldugu icin CAD'den sonra gercek kesitle degistirilmeli.",
+  "dayanak/cz_T_hot_face_K: öneri — Kaba hesap 1770-1870 K veriyor; alt sinir 1750 K'e genisletilebilir. Etkisi ihmal edilebilir: 120 mm'de USD/kg ~%0.5 duser. Onemli: cz_ins_loss_mult 290 mm'de bu baz sicakliklarla kalibre edildi. MC'de bagimsiz orneklenirse belirsizlik iki kez sayilir; ya ortak orneklenmeli ya da her ornekte carpan yeniden kalibre edilmeli.",
+  "dayanak/cz_T_cold_face_K: öneri — Bu fiziksel olarak bagimsiz bir parametre degil: soguk yuz sicakligi kayip akisinin ve hazne ic yuzey emisivitesinin sonucu, k_eff ile pozitif iliskili. MC'de bagimsiz orneklenirse yanlis korelasyon uretir. Ornegin formulde T_soguk 800 K alinca USD/kg %0.8 duser, oysa fiziksel olarak yuksek T_soguk yuksek kayip demek. Oneri: T_soguk, isinim dengesiyle (eps_eff ve hazne sicakligi parametreleri) ic cozumle hesaplansin; ya da en azindan k_eff ile birlikte orneklensin. Ust sinir 800 K, ust uc kayiplarda (~850-890 K) ve parlak hazne durumunda dar kaliyor. Hazne ic yuzey durumu (parlak, kumlanmis ya da kaplamali) tasarim karari olarak yazilmali.",
+  "dayanak/cz_topbottom_penetration_factor: öneri — Aralik (1.1-1.8) kaba gecis hesabiyla tutarli. Ilk ciktidaki 'labirentsiz agizlarda carpan 1.8'i rahatca asar' ifadesi gorus faktorunu ihmal ediyordu; geri cekildi. Cift sayim riski var: cz_ins_loss_mult (3.8) notu 'derz, gecisler' kayiplarini zaten topluyor ve 290 mm kalibrasyonu bu carpan 1.3 iken yapildi. MC'de ikisi bagimsiz orneklenirse gecis belirsizligi iki kez sayilir; bu carpan kalibrasyonla ortak orneklenmeli ya da sabit tutulmali.",
+  "dayanak/cz_q_open_W_m2: öneri — Aralik, 1400-1640 K etkin kalkan sicakligi bandina karsilik geliyor; makul. Ancak kalkanin kendisi de yukariya ve kristale isi kaybeder; bu enerji ust izolasyon/kristal terimlerinde yer almali. Kalkan tasarimi 2B isil simulasyonla (oncelik 1 deneyi) belirlenince q_open yerine kalkan sicakligi ve emisivite parametreleri kullanilmali.",
+  "dayanak/cz_melt_efficiency: öneri — TI turevi (0.28-0.36) araligin (0.5-0.85) disinda kaliyor. Ancak olculmus bir cift olmadigi icin zayif bir isaret. Alt sinirin 0.3-0.4'e genisletilmesi onerilir; amac belirsizligi temsil etmek, yeni bir deger koymak degil. Etki iki sekilde okunmali (xtal_rev.py, 120 mm, verim 0.35): (1) Guc kaynagi baz degere gore boyutlanmis ve sabitse resarj ergitmesi 1.99 h'den ~4 h'e cikar, kg/gun 31.1'den 27.9'a iner, USD/kg +%12.6. (2) Guc kaynagi gercek verime gore buyutulurse (~46 kW'tan ~60 kW'a) USD/kg yalnizca +%3.6. Ergitme enerjisi +1.5 kWh/kg artar. Guc kaynagina tasarim payi birakmak bu riski ucuza kapatir. Ogrenme: prototipte resarj sirasinda guc ve eriyik sicakligi kaydi.",
+  "dayanak/cz_melt_depth_ratio: öneri — Deger, TI'nin tek dogrudan veri noktasinin ustunde ve etkisi buyuk (xtal_rev.py, 120 mm): carpim 0.40'ta sarj 44.0 kg'dan 37.7 kg'a iner, USD/kg +%4.6-5.5; 0.33'te +%11-13.5. Oneri: tek parametreye indirilsin (etkin eriyik derinligi/cap, sivi yogunlukla); baz ~0.40 (TI nominal), aralik ~0.33-0.50. Alt sinir TI fiili sarjlarindan, ust sinir daha derin modern pota ve hot fill varsayimindan (yargi). 0.4675 korunacaksa gerekcesi (modern pota geometrisi) yazili olmali. Bu carpim FZ besleme cubugu kutlesini (fz_crystal_length_mm) da belirler. Ogrenme: secilen pota tedarikcisinden cizim (yukseklik, taban kavisi) ve nominal sarj kutlesi; CAD hacim hesabi.",
+  "dayanak/cz_ccz_melt_depth_ratio: öneri — Aralik yargiya dayaniyor; degisiklik onerilmez. CCz deneyiyle belirlenmeli. RCz tarafinda carpim TI verisiyle asagi cekilirse (bkz. cz_melt_depth_ratio), CCz formulu de ayni cz_crucible_fill'i kullandigi icin tanim birlikte guncellenmeli.",
+  "dayanak/cz_crucible_fill: öneri — Tanim netlestirilmeli ('kavisli taban hacim carpani'). cz_melt_depth_ratio ile tek parametreye indirilmeli ya da ortak orneklenmeli: ayri orneklenince carpim 0.30-0.63'e yayiliyor, TI ise 0.33-0.40'i gosteriyor. Ilk sarjda ust besleme gerekiyorsa ilk ergitme suresi buna gore uzamali.",
+  "dayanak/cz_ccz_L_ingot_mm: öneri — Tornado analizinde (diger parametreler bazda, L_body_max 2500) 2500-3000 kismi fiilen kirpiliyor ve etkisiz kaliyor. MC'de ise cz_L_body_max_mm'nin kendi araligi (1200-3800) da orneklendigi icin bu kisim etkili. Ornek (xtal_rev.py, 120 mm CCz, baz 14.26 USD/kg): ccz_L 3000 icin L_max 2500'de 13.57, L_max 3800'de 13.0 USD/kg. Ikisi ayni bina/makine yuksekligi kararindan geldigi icin birlikte orneklenmeli, ya da CCz ingot boyu L_body_max'a oran olarak tanimlanmali. Gerekli bina yuksekligi saha kararina (altyapi) baglanmali.",
+  "dayanak/cz_shoulder_height_ratio: öneri — Aralik geometri olarak tutarli ama bagimsiz veriyle sinanmadi. Wafer alaninda ayni buyukluk wf_crown_h_over_D = 0.35 olarak var ve notunda 'kristal ajaninin degeri esas' yaziyor; iki deger tek parametreye (0.4) baglanmali. Benzer sekilde cz_tail_length_ratio (0.6) ile wf_tail_h_over_D (0.8) celisiyor. TI 'Taper (0.7 kg)' degeri, tam koni varsayimiyla 120 mm'de h/D ~0.66'ya karsilik geliyor. Ogrenme: prototipte omuz acisi ve ZD kaybi iliskisi.",
+  "dayanak/cz_t_cool_per_mm_h: öneri — Aralik tek olcumu kapsamiyor. TI'nin 1.9 h'i, baz 0.5 ile 0.0117 h/mm'ye (ust sinir 0.01'in ustunde), baz 1.0 ile 0.0075 h/mm'ye denk gelir. Ust sinir >=0.012 h/mm'ye genisletilmeli ya da mod TI'ye yaklastirilmali. Etki (xtal_rev.py, 120 mm, TI degeri): kg/gun 31.1'den 29.7'ye iner, USD/kg +%4.7. cz_t_cool_base_h ile birlikte orneklenmeli. Alma sicakligi kriteri (vana acma ve elle tutma icin) yazili tanimlanmali, cunku sure dogrudan ona bagli. Kablolu besleyicide soguma seri yolda, yan besleyicide ergitmeyle paralel. Ogrenme: prototipte alma odasinda termokupl/pirometre ile sicaklik-zaman egrisi; argon jetli ve jetsiz.",
+  "dayanak/cz_turnaround_crew_person_h: öneri — Aralik tutarli; etkisi kucuk. Cift sayim riski var: 7/24 odenen vardiya operatoru (xtal_operator_hours_per_furnace_hour 0.5 h/h) turnaround'i kendi vardiyasinda yapiyorsa bu kalem ikinci kez sayilir. Fizik denetcisinin vardiya kadro modeli onerisiyle birlikte ya bu kalem sifirlanmali ya da operator oranindan dusulmeli.",
+  "dayanak/cz_capex_per_crucible_area_usd_m2: öneri — Aralik dayanaksiz; BOM gelene kadar korunabilir. Hazne kabugu tam olarak D_cr^2 ile olceklenmiyor (0.21 m radyal ve 0.3 m yukseklik ofseti var); kucuk capta bu terim oldugundan az cikabilir. BOM'da hazne, mekanizma ve izolasyon destegi ayri kalemler olarak istenmeli.",
+  "dayanak/cz_capex_power_usd_per_kW: öneri — Aralik tutarli; etkisi kucuk (USD/kg'in %4'unden az). Ogrenme yolu: firmanin kendi 50 kW / 60 V kaynak BOM'u ve 1-2 endustriyel tristor-trafo teklifi.",
+  "dayanak/cz_puller_life_yr: öneri — Aralik alt ucu cok etkili (xtal_rev.py, 120 mm): 2/3/4/8 yil icin USD/kg sirasiyla +%35/+%18.5/+%10/-%1.7. 2 yillik alt sinir Cin'deki format degisimi eskimesini yansitiyor; cap sabit tasarimli unitemizde 1. nesilden 2. nesile gecis icin 3-5 yil daha savunulabilir bir alt sinir. Altyapi alani eco_life_machine_yr = 8 (5-12), wafer alani saw_life_yr = 8 kullaniyor; tum makineler icin tek omur parametresi olmali. Parametre FZ capex'inde de kullaniliyor; FZ icin ayri omur dusunulebilir.",
+  "dayanak/xtal_outage_events_per_yr: öneri — Tek sahip olmali; parametre altyapi'nin kesinti verisine baglanmali (cift tanim). Baglanirken esik filtresi tek yerde uygulanmali. Sorun: altyapi'da site_grid_outage_events_yr'nin adi zaten 'esigi asan kesinti' diyor, ama site_backup_net_value formulu onu ayrica p_outage_gt_t_loss ile carpiyor. Iki cozum var: ya sayi tum uzun kesintiler olarak tanimlanip filtre p_outage_gt_t_loss ile uygulanir, ya da sayi esik sonrasi tanimlanip p kaldirilir. Aksi halde filtre ya iki kez uygulanir ya da hic uygulanmaz. Deger jenerator/UPS kararina bagli. Ogrenme: bolge dagitim sirketi/OSB'den 3-5 yillik kesinti kaydi (sure dagilimi); esik suresi (kabuk ve catlama baslangici) isil modelle belirlenmeli.",
+  "dayanak/xtal_price_argon_usd_nm3: öneri — Deger ve aralik altyapi dayanagiyla tutarsiz. Parametre eco_price_argon_usd_kg*1.784'e baglanmali (baz ~1.96, aralik 1.25-5.35 USD/Nm3); tank kirasi (eco_argon_tank_rent_usd_month) saha_sabit olarak eklenmeli. Etki (xtal_rev.py, 120 mm, 2.36 Nm3/h): 1.96'da argon 1.89'dan 4.63 USD/h'e cikar, USD/kg 14.86'dan 16.97'ye (+%14.2); ust uc 5.35'te 23.15 USD/kg (+%56), argon tek basina 9.7 USD/kg. Bu, argon geri kazanimi ve ~1 atm induksiyonlu Cz seceneklerinin degerini artirir.",
+  "dayanak/xtal_wage_usd_h: öneri — Deger altyapi araligi icinde, tutarli. Tam teknisyen ucreti (13.4) alinirsa USD/kg +%4.0 (xtal_rev.py, 120 mm). Alanlar arasinda 6-13.4 USD/h arasi farkli iscilik ucretleri var; tek, rol bazli (operator/teknisyen) saha parametresine baglanmali. Kristal icin eco_labor_technician_usd_h ya da acik bir rol karisimi kullanilmali.",
+  "dayanak/xtal_wacc: öneri — Deger ve alt sinir altyapi dayanagiyla tutarsiz, ama etkisi orta-kucuk (xtal_rev.py, 120 mm): 0.12'de USD/kg +%1.3, 0.15'te +%3.3. Parametre kaldirilip altyapi'nin eco_wacc_usd / eco_crf_tax_* degerlerine baglanmali (tek finans sahibi). Wafer alani da ornekte ayri bir fin_crf (0.17) kullaniyor; ayni kaynaktan beslenmeli.",
+  "dayanak/xtal_recycle_remelt_frac: öneri — Geri donusum iki alanda ayri hesaplaniyor (kristal: bu parametre; wafer: wf_m_rec zinciri). Bu cift sayim ve tutarsizlik riski demek (fizik denetcisi, wafer bulgu 8). Tek sahip olmali: ya wafer'in wf_m_rec ciktisi arayuz olarak kristal alanina verilip bu parametre kaldirilmali, ya da deger ~0.9'a hizalanmali. Ogrenme: dagli dilimlerde ICP-MS ve eritilen partiden cekilen ingotta omur olcumu.",
+  "dayanak/fz_overhead_per_crystal_h: öneri — Aralik yargiyla tutarli. Not: benzetmedeki Cz soguma suresi (1.1 h) TI olcumunun (1.9 h) altinda (bkz. cz_t_cool_per_mm_h); TI degeriyle toplam ~5.8 h olur, bu da aralik icinde. FZ prototipi olmadan bu, FZ kg/gun belirsizliginin ZD'den sonraki ikinci kaynagi. FZ ana yol secilmedikce oncelik dusuk.",
+  "dayanak/fz_zd_yield: öneri — Aralik yalnizca olgun isletmeyi temsil ediyor. Cz'de ayri bir 'ogrenme yili' senaryosu (ZD 0.3-0.7) var; FZ icin de ayni yapilmali. FZ'de bilgi birikimi daha az oldugundan ogrenme bandi en az Cz kadar dusuk (~0.2-0.6) alinmali; aksi halde FZ, RCz ile karsilastirmada kayirilir.",
+  "dayanak/fz_crystal_length_mm: öneri — Kutle korunumu kontrolu (bu gorevde): fz_feed onerisi 'kendi on-cekme cubugumuz'. Ayni RCz cekicide 120 mm capta cekilen cubuk en fazla 35.2 kg (1337 mm, sarj sinirli, model carpimi 0.4675 ile); bu durumda FZ kristali en fazla ~1.34 m olabilir. Carpim TI nominaline (0.40) cekilirse cubuk ~30 kg, kristal en fazla ~1.14 m. 1500 mm'lik baz bu secenekle tutarsiz. Daha buyuk potada biraz daha buyuk capta (orn. 130 mm) cekilen cubuk bu siniri kaldirir. Oneri: fz_crystal_length = min(makine stroku, besleme kutlesi*verim/(rho*A)) formulune baglanmali; satin alinan cubukta 1500 mm korunabilir.",
+  "dayanak/saw_overcut_mm: öneri — Aralik tutarli. Yaklasma hizli beslemeyle yapilirsa (tasarim secimi) yalnizca plakaya giris kalir ve alt sinir ~1 mm'ye iner. Etkisi kucuk.",
+  "dayanak/saw_maint_usd_per_h: öneri — Capex orani olcutu (1.3-4.2 USD/h) baz degerin altinda; 3-20 araligi onu kismen kapsiyor. Degisiklik onerilmez. Ancak capex tabanli bakim orani wafer ekipmanina da uygulanirsa bu kalemle cift sayim olur; bu kalem yalnizca asinma sarfi olarak tanimlanmali. Ogrenme: makara kaplama tedarikcisinden yenileme fiyati ve kaplama omru (km tel ya da saat).",
+  "dayanak/sq_capex_usd: öneri — Aralik dayanaksiz; teklif gelene kadar korunabilir. Kullanim ~%1 oldugu icin saha duzeyinde paylasim (N unite) ya da hizmet alimi secenegi modelde ayri gosterilmeli.",
+  "dayanak/wf_brick_end_mm: öneri — Aralik tutarli. Kisa tuglalar uc uca yuklenirse her tugla iki uc kaybi getirir (K7, kisa RCz ingotlari); formul tugla boyunu min(L_govde - crop, L_yuk) ile dogru aliyor. Kare kesim makinesinin spesifikasyonuna uc yuzey dikligi toleransi yazilmali.",
+  "dayanak/wf_etch_util_factor: öneri — Aralik tutarli; etkisi sent mertebesinde, degisiklik onerilmez. Ogrenme: banyo omru boyunca Si yuku (g/L) ve daglama hizi kaydi.",
+  "dayanak/wf_hf_price_usd_kg: öneri — Ayni sahada ayni asit icin iki alan farkli fiyat kullaniyor; tek saha parametresine baglanmali ve sinif karari yazilmali. Eritilecek Si'nin metal temizligi (Fe, Cu vb.) HJT omrunu etkiledigi icin geri donusum daglamasinda da yariiletken sinifi gerekebilir; bu durumda hucre degeri (4 USD/kg) kullanilmali. Ogrenme: yerel tedarikciden teknik ve elektronik sinif icin ayri teklif.",
+  "dayanak/wf_hno3_price_usd_kg: öneri — Aralik yalnizca teknik sinifi kapsiyor; geri donusum icin elektronik sinif secilirse ust sinir dar kalir. HF ile ayni sinif karari verilmeli ve tek saha parametresine baglanmali. Ogrenme: teklif.",
+  "dayanak/wf_crusher_capex_usd: öneri — Aralik dayanaksiz ama genis; degisiklik onerilmez. Gunde onlarca kg icin saha basina tek kirici yeterli (saha paylasimi adayi). Ogrenme: kirma sonrasi parcalarda ICP-MS ile W/Co/Fe kontrolu (kaplama seciminin dogrulamasi) ve BOM ya da teklif.",
+  "dayanak/wf_etch_station_capex_usd: öneri — Aralik dayanaksiz; teklif gerekir. Kapasite ihtiyaci kucuk (gunde ~42 kg); saha paylasimi adayi. Hucre hattinin HF tezgahiyla paylasilmasi onerilmez (capraz metal kontaminasyonu riski; yargi).",
+  "dayanak/wf_incoming_qc_usd_per_wafer: öneri — Aralik tutarli. Olcum cihazi yatirimi ayri bir kalem olarak modelde yok. Cihazlar wf_brick_metrology_capex_usd ile paylasilacaksa bu belirtilmeli; kendi kristalin olmadigi K3 senaryosunda cihaz capex'i giris kontrolune yazilmali.",
+  "dayanak/wf_inspect_wph: öneri — Sabit wph kucuk wafer'i cezalandiriyor: ayni 0.28 m/s bantta 105 mm (60 mm aralik) ~6,100 wph, 50 mm (30 mm aralik) ~12,600 wph eder. Iki secenek onerilir: wph a'ya bagli yazilsin (bant hizi / (a + aralik), kamera/ayirma hizi tavaniyla), ya da tray uzerinde toplu goruntuleme secenegi (k^2 kat) modellensin. Aksi halde 50 mm'de N_inspect basamagi yapay olarak erken gelir.",
+  "dayanak/wf_inspect_uptime: öneri — Aralik tutarli; altyapi'nin eco_uptime_frac_default parametresine baglanabilir. Degisiklik onerilmez.",
+  "dayanak/wf_brick_metrology_capex_usd: öneri — Aralik dayanaksiz; BOM ya da teklif gerekir. Ayni cihazlar satin alinan wafer giris kontrolunde (wf_incoming_qc_usd_per_wafer) ve kristal alaninin ingot olcum paketinde (fizik denetcisinin 'adet' sinifi onerisi) de kullanilabilir. Cift sayimi onlemek icin tek bir olcum paketi tanimlanmali.",
+  "dayanak/wf_preclean_chem_usd_m2: öneri — Aralik tutarli; degisiklik onerilmez. Ogrenme: prototipte kimyasal tuketimi (L/m2) ve teklif. Hucre hattinin ilk temizlik/dokulama adimiyla tekrar sayilmadigi kontrol edilmeli (arayuz: wafer ciktisi tutkalsiz ve on-temizlenmis).",
+  "dayanak/wf_split_capex_usd: öneri — K3 + bolme yolunda karar-kritik: baz ile 150k arasindaki fark 0.70 USD/m2. Dusuk kullanim bir fiyat argumani degil; yalnizca daha yavas (ve muhtemelen ucuz) bir istasyonun kapasite olarak yetecegini gosteriyor. Baz degisikligi RFQ/BOM sonrasina birakilmali. O zamana kadar saha paylasimi (N unite) ve hizmet alimi secenekleri modelde ayri gosterilmeli. Ogrenme: ciplak wafer bolme deneyi (kenar hasari, kirilma), en az 2 teklif (ticari TLS ve lazer cizme sistemi) ve kendi yapim BOM.",
   "ekonomi: yeni kanonik parametre eco_usd_inflation_frac_yr (altyapi)",
-  "ekonomi: yeni kanonik parametre eco_maint_first_gen_extra_frac_yr (altyapi)"
+  "ekonomi: yeni kanonik parametre eco_maint_first_gen_extra_frac_yr (altyapi)",
+  "zincir: yeni kanonik parametre eta_cell (altyapi)",
+  "zincir: yeni kanonik parametre mod_ctm_power_calc (altyapi)",
+  "zincir: yeni kanonik parametre N_s_max (altyapi)",
+  "zincir: yeni kanonik parametre wf_break_cell_ref (altyapi)",
+  "zincir: yeni kanonik parametre wf_learn_weight (altyapi)",
+  "zincir: yeni kanonik parametre bat_E_cell_Wh (altyapi)",
+  "zincir: yeni kanonik parametre bat_cell_v_max_V (altyapi)",
+  "zincir: yeni kanonik parametre bat_ns_cells (altyapi)",
+  "zincir: yeni kanonik parametre D_ingot_mm (altyapi)",
+  "zincir: eco_life_machine_yr zaten ekonomi tarafından kanonik; ikinci tanım yok sayıldı",
+  "zincir: eco_hours_calendar_yr zaten ekonomi tarafından kanonik; ikinci tanım yok sayıldı",
+  "zincir: eco_uptime_frac_default zaten ekonomi tarafından kanonik; ikinci tanım yok sayıldı"
  ]
 }

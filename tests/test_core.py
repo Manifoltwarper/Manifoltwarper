@@ -73,3 +73,10 @@ def test_esdeger_tek_sahip():
 def test_esdeger_zinciri_hata():
     a = _p(id="a"); b = _p(id="b", esdeger="a"); c = _p(id="c", esdeger="b")
     assert any("zinciri" in h for h in ParamSet({"a": a, "b": b, "c": c}).dogrula())
+
+
+def test_gercek_varsayimlar_gecerli():
+    """data/varsayimlar/*.yaml: her kayıt tutarlı, eşdeğerler tek sahipli."""
+    ps = ParamSet.load()
+    assert len(ps) > 900
+    assert ps.dogrula() == []

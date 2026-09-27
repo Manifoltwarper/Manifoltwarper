@@ -113,8 +113,9 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: GW olcekli Cin hatlari, ticari arac, ticari (on-tavlanmis) wafer. Bizim baslangicimiz degil,
     ulasilabilir ust referans. Hucre formati (tam/yarim) kaynakta belirtilmemis.
-  aciklama: Ust sinir CPIA ~26.2 ile sinirlandi. Risen %26.61 (pv-tech 2025-07-04) olcen kurum belirtilmemis firma
-    beyani; Maxwell %26.92 ISFH sertifikali laboratuvar hucresi - ikisi de ust sinira alinmadi.
+  aciklama: 'Ust sinir CPIA ~26.2 ile sinirlandi. Risen %26.61 (pv-tech 2025-07-04) olcen kurum belirtilmemis firma
+    beyani; Maxwell %26.92 ISFH sertifikali laboratuvar hucresi - ikisi de ust sinira alinmadi. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → eta_cell: GW endustri referansi (H1); yalniz kalibrasyon.'
   dogrulama_deneyi: Referans; kendi verimimiz Deney 3 ile olculur.
 - id: hjt_ref_PA_per_mm
   ad: Endustri referans hucresinin cevre/alan orani (kalibrasyon formati)
@@ -943,16 +944,17 @@ parametreler:
   birim: um
   deger: 12
   alt: 8
-  ust: 20
-  kaynak: Tahmin (piramit 2-5 um + hasar giderme)
+  ust: 25
+  kaynak: Hucre tahmini (piramit 2-5 um + hasar giderme); wafer hafizadan 15 um; alt capa Ge 2025
   kaynak_turu: tahmin
-  kaynak_alintisi: '-'
+  kaynak_alintisi: 'Ge 2025 (wafer notu): ''~5 μm of material removal via etching'' (yuz basina)'
   kaynak_tarihi: 2026-09
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kendi waferimizda testere/lazer hasar derinligi belirler.
-  aciklama: t_cell = t_wafer - removal.
+  aciklama: t_cell = t_wafer - removal. | [Uzlaştırma/zincir] Kanonik (tek sahip). Wafer arayuzu 'hucre ajaninin
+    degeri esas' diyor; hucre sahip. Aralik wafer'in 8-25'ine genisletildi. t_cell, KOH ve H2 ayni degeri kullanir.
   dogrulama_deneyi: Once/sonra tartim.
 - id: hjt_koh_excess
   ad: KOH stokiyometri fazlasi (banyo yenileme/bosaltma)
@@ -1456,7 +1458,7 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: GW hatti; bizde olgunlukta 98-99 gercekci.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → hjt_line_yield_start: Olgun uc.'
   dogrulama_deneyi: '-'
 - id: hjt_line_yield_start
   ad: Baslangic hat verimi
@@ -1464,7 +1466,7 @@ parametreler:
   deger: 0.9
   alt: 0.75
   ust: 0.96
-  kaynak: 'Tahmin (Ballif 2019: ilk hatlarda tasima/bekleme sorunlari)'
+  kaynak: Hucre tahmini; Ballif 2019 (ilk hatlarda tasima/bekleme sorunlari); olgun 0.985 (Risen)
   kaynak_turu: tahmin
   kaynak_alintisi: '''many first lines having suffered from issues linked to wafer handling, queue time and sometimes
     low process control'''
@@ -1473,7 +1475,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] Kanonik (tek sahip). Varsayilan ilk nesil. hjt_yield_total = hat verimi x (1 -
+    wf_P_break_cell): ilk nesil ~0.883-0.895, olgun ~0.98; modul verimi (mod_module_yield 0.98) ve CTM ayri carpan.
+    Altyapinin sabit Y_line 0.95''i bu carpimla degistirilir.'
   dogrulama_deneyi: '-'
 - id: hjt_breakage_ref
   ad: Hucre hatti kirilma orani (referans 210-yarim, 110 um)
@@ -1489,7 +1493,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Olgun otomasyon; bizde baslangicta 2-4 kat (baslangic senaryosunda 3 kat alindi).
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/zincir] İlişkili (eşdeğer değil) → wf_break_cell_ref: Olgun kaynak; referans 210-yarim,
+    kalinlik terimi ve taban yok, baslangicta x3 (0.0075).'
   dogrulama_deneyi: Deney 8b.
 - id: hjt_breakage_size_exp
   ad: Kirilmanin wafer boyutu ussu (H3)
@@ -1506,7 +1511,8 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Wafer ajaniyla ortak.
   aciklama: 'Dayanak: kenar kusuru kaynakli kirilma kenar uzunlugu ~a ile (us 1); tasima/vakum egilme gerilmesi
-    ~a^2/t^2 ile (us 2); termal soku ~kucuk bagimlilik (us <1). p_break = ref x (a/210)^us.'
+    ~a^2/t^2 ile (us 2); termal soku ~kucuk bagimlilik (us <1). p_break = ref x (a/210)^us. | [Uzlaştırma/zincir]
+    İlişkili (eşdeğer değil) → wf_break_exp_size: (a/210)^1 formu, taban payi yok.'
   dogrulama_deneyi: Deney 8b.
 - id: hjt_capex_industry_usd_per_Wyr
   ad: Endustriyel HJT hucre hatti ekipman capex (yillik kapasite basina) - referans
@@ -1967,16 +1973,23 @@ parametreler:
   birim: V
   deger: 0.745
   alt: 0.72
-  ust: 0.755
-  kaynak: Wohler 2024 endustriyel M6 OLCUM 739-740 mV; LONGi sampiyon 749-755 mV
+  ust: 0.77
+  kaynak: 'Hucre: Wohler 2024 endustriyel M6 olcumu 739-740 mV; LONGi sampiyon 749-755 mV. Modul: Waaree Plexus
+    BiH-11-730 veri sayfasi 50.62 V / 66 seri pozisyon = 0.767 V'
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: '''open-circuit voltages between Voc=(739 to 740) mV''; ''Voc: 749.2 mV / 755.0 mV'''
+  kaynak_alintisi: '''open-circuit voltages between Voc=(739 to 740) mV''; ''Voc: 749.2 mV / 755.0 mV''; Waaree
+    BiH-11-730: Voc 50.62 V (132 yarim G12, 11x6||11x6)'
   kaynak_tarihi: 2024-2025
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Baslangic hattimizda 0.72-0.735 beklenir.
-  aciklama: Giglia'nin 743.1 mV degeri SIMULASYON oldugu icin olcum dayanagi olarak kullanilmiyor.
+  aciklama: Giglia'nin 743.1 mV degeri SIMULASYON oldugu icin olcum dayanagi olarak kullanilmiyor. | [Uzlaştırma/zincir]
+    Kanonik (tek sahip). Olculen buyuklugun sahibi hucre; iki alan ayni degeri (0.745) kullaniyor. Ust sinir (hucre
+    CSV'de 0.755) modul veri sayfasi turetmesini (0.767) kapsasin diye 0.77. Nominal deger tasarim tavaninda (mod_f_ns_max,
+    marjla) kullanilir; gerilim SINIR kontrolunde (std_f_ns_max, std_f_uoc_max; ELEME) kendi hucremizin olculen
+    P99'u, olcum yokken 0.77 kullanilir. Modulun kendi notu da 'gerilim siniri icin nominal degil, uretim dagiliminin
+    P99'u' diyor.
   dogrulama_deneyi: Deney 3.
 - id: hjt_jsc_mA_cm2
   ad: Hucre kisa devre akim yogunlugu
@@ -1984,7 +1997,7 @@ parametreler:
   deger: 40
   alt: 38
   ust: 41.4
-  kaynak: Wohler 2024 endustriyel M6 OLCUM 38.02-38.05; LONGi sampiyon 41.4
+  kaynak: 'Hucre: Wohler 2024 endustriyel M6 olcumu 38.02-38.05; LONGi sampiyon 41.4'
   kaynak_turu: dogrulanmis_url
   kaynak_alintisi: '''Jsc=(38.02 to 38.05) mA/cm2''; ''Jsc: 41.4 mA/cm2'''
   kaynak_tarihi: 2024-2025
@@ -1992,7 +2005,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Isc hucre alaniyla olceklenir.
-  aciklama: Giglia 38.12 simulasyon.
+  aciklama: 'Giglia 38.12 simulasyon. | [Uzlaştırma/zincir] Kanonik (tek sahip). Onceki ciktida tek parametre iki
+    rol icin kullanilmisti; ikiye ayrildi. Nominal Jsc hucre sahipli ve yalniz performans/kayip hesaplarina girer
+    (verim ayrica eta_core''dan). Tutarlilik: 0.745 V x 40 mA/cm2 ile ilk nesil eta 0.22 FF ~0.74 (ilk nesilde dusuk
+    Voc/FF ile tutarli), olgun eta 0.257 FF ~0.86 ima eder. Guvenlik kontrolleri ayri kanonik mod_jsc_A_per_cm2''yi
+    kullanir. | [Uzlaştırma/zincir] mod_jsc_A_per_cm2 ile ilişkili ama ayrı kanonik: Nominal (ayri kanonik); sinir
+    kontrolunde kullanilmaz.'
   dogrulama_deneyi: IV.
 - id: hjt_tc_pmax_pct_per_K
   ad: Pmax sicaklik katsayisi
@@ -2016,15 +2034,22 @@ parametreler:
   deger: -0.244
   alt: -0.28
   ust: -0.2
-  kaynak: PVEducation 'Effect of Temperature' (bu gorevde acildi) formulu
+  kaynak: 'Hucre: PVEducation ''Effect of Temperature'' formulu; Modul: Waaree veri sayfasi beta_Voc -0.22 %/C ve
+    fizik tahmini -0.22..-0.24'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '''dVoc/dT = -0.0043 + Voc1/300'' -> -0.0043 + 0.745/300 = -1.817 mV/K = -0.244 %/K'
+  kaynak_alintisi: '''dVoc/dT = -0.0043 + Voc1/300'' -> -1.817 mV/K = -0.244 %/K; Waaree: ''Temperature coefficient
+    of Voltage (Voc), ß (%/ºC) -0.22'''
   kaynak_tarihi: '-'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: K6 icin kritik; genel Si formulu, HJT'ye ozgu degil.
-  aciklama: Ilk ciktida hafizadan (dogrulanmadi) idi; simdi fizik formuluyle turetildi.
+  aciklama: 'Ilk ciktida hafizadan (dogrulanmadi) idi; simdi fizik formuluyle turetildi. | [Uzlaştırma/zincir] Kanonik
+    (tek sahip). IEC 60364-7-712 Ek B K_U formulu %/K kullanir (std_f_ku); tek birim %/K. Modulun -0.0024 1/K degeri
+    ayni buyuklugun yuvarlanmisi; -20 C''de N_s_max''i degistirmez (70) ama soguk uclarda 1 hucre fark eder (-37.2
+    C: kanonikle 67, -0.0024 ile 68). Beyan edilecek alfa kendi hucremizin olcumunden gelir; olcum ve beyan yokken
+    std_f_ku K_U = 1.2 kullanir (ku_yontemi = varsayilan_1.2), beyan sonrasi sinir kontrolunde alfa_sinir = olcumun
+    guvensiz ucu (olcum yokken -0.28).'
   dogrulama_deneyi: -20...+60 C Voc olcumu.
 - id: hjt_voc_irr_margin_mV
   ad: Soguk Voc icin isinim (>1000 W/m2, bulut kenari) ve cift yuzlu kazanc payi, hucre basina
@@ -2040,7 +2065,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Pazar senaryosuna bagli (A/B).
-  aciklama: '-20 C: 0.8255 + 0.006 = 0.8315 V -> N_s <= 72; -25 C -> 71; -30 C -> 70.'
+  aciklama: '-20 C: 0.8255 + 0.006 = 0.8315 V -> N_s <= 72; -25 C -> 71; -30 C -> 70. | [Uzlaştırma/zincir] İlişkili
+    (eşdeğer değil) → mod_voc_margin: Yalniz isinim + arka yuz; mutlak mV.'
   dogrulama_deneyi: Iklim kabini + yuksek isinim.
 - id: hjt_bifaciality
   ad: Cift yuzluluk orani
