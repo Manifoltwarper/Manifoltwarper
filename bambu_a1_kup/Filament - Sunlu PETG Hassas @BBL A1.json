@@ -1,0 +1,37 @@
+{
+    "type": "filament",
+    "name": "Sunlu PETG Hassas @BBL A1",
+    "inherits": "Generic PETG @BBL A1",
+    "from": "User",
+    "is_custom_defined": "0",
+    "filament_vendor": [
+        "SUNLU"
+    ],
+    "nozzle_temperature": [
+        "240"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "240"
+    ],
+    "textured_plate_temp": [
+        "75"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "75"
+    ],
+    "filament_flow_ratio": [
+        "0.95"
+    ],
+    "fan_min_speed": [
+        "30"
+    ],
+    "fan_max_speed": [
+        "60"
+    ],
+    "close_fan_the_first_x_layers": [
+        "3"
+    ],
+    "compatible_printers": [
+        "Bambu Lab A1 0.4 nozzle"
+    ]
+}

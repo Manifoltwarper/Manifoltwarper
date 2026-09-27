@@ -1,0 +1,43 @@
+{
+    "type": "process",
+    "name": "0.16mm Hassas Olcu @BBL A1",
+    "inherits": "0.16mm Optimal @BBL A1",
+    "from": "User",
+    "is_custom_defined": "0",
+    "layer_height": "0.16",
+    "initial_layer_print_height": "0.16",
+    "wall_loops": "3",
+    "wall_infill_order": "outer wall/inner wall/infill",
+    "seam_position": "back",
+    "top_shell_layers": "5",
+    "bottom_shell_layers": "4",
+    "sparse_infill_density": "20%",
+    "elefant_foot_compensation": "0.15",
+    "xy_contour_compensation": "0",
+    "xy_hole_compensation": "0",
+    "enable_prime_tower": "0",
+    "default_acceleration": [
+        "4000"
+    ],
+    "initial_layer_speed": [
+        "30"
+    ],
+    "outer_wall_speed": [
+        "40"
+    ],
+    "inner_wall_speed": [
+        "80"
+    ],
+    "top_surface_speed": [
+        "40"
+    ],
+    "internal_solid_infill_speed": [
+        "80"
+    ],
+    "sparse_infill_speed": [
+        "100"
+    ],
+    "compatible_printers": [
+        "Bambu Lab A1 0.4 nozzle"
+    ]
+}
