@@ -649,8 +649,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: EUR cinsinden laboratuvar tekliflerinin USD'ye cevrimi.
-  aciklama: INR icin ~87 INR/USD (tahmin).
+  aciklama: 'INR icin ~87 INR/USD (tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer el_fx_eur_usd üzerinden okunur.
+    Fark: Tahmin, kaynak yok; %1 yuksek. Tip testi ve AB ucretlerinin EUR->USD cevriminde kanonik kullanilmali.'
   dogrulama_deneyi: Guncel TCMB/ECB kuru.
+  esdeger: el_fx_eur_usd
+  esdeger_carpan: 1.0
 - id: std_tt_module_iec_usd
   ad: 'Modul tip testi + sertifika: IEC 61215 + IEC 61730 birlesik program, ilk aile'
   birim: USD/aile
@@ -1396,8 +1399,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Cift sayimi onlemek icin uretim/maliyet alaninin tek iscilik parametresi kullanilmali.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: Test teknisyeni,
+    tahmin; kendi notu uretim alaninin tek iscilik parametresini kullanmayi soyluyor. Dokunma testleri operatorce
+    yapilirsa operator ucreti.'
   dogrulama_deneyi: Firma bordro verisi.
+  esdeger: eco_labor_technician_usd_h
+  esdeger_carpan: 1.0
 - id: std_rt_module_test_capex_usd
   ad: Modul zorunlu test ekipmani (flas simulator + hipot; EL HARIC)
   birim: USD/istasyon

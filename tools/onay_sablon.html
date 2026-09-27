@@ -1,0 +1,353 @@
+<title>Mikro PV Ünitesi Onay Dosyası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #eef2f6;
+  --ink: #15202b;
+  --ink-2: #435061;
+  --muted: #677485;
+  --line: #d5dce4;
+  --line-strong: #b7c2ce;
+  --accent: #1d5c96;
+  --accent-soft: #e3edf7;
+  --series: #2a78d6;
+  --ok: #1b7a45;   --ok-soft: #e2f2e8;
+  --warn: #9a5a00; --warn-soft: #fbefd9;
+  --bad: #b3261e;  --bad-soft: #fbe5e3;
+  --neutral: #56606d; --neutral-soft: #e9edf1;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "Arial Narrow", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0e1319; --surface: #151c24; --surface-2: #1b242e;
+    --ink: #e6ecf2; --ink-2: #b4c0cc; --muted: #8b98a6;
+    --line: #28323d; --line-strong: #3a4653;
+    --accent: #6ea8e2; --accent-soft: #1a2a3b; --series: #3987e5;
+    --ok: #5cc98c; --ok-soft: #15291e; --warn: #e3a54a; --warn-soft: #2d2413;
+    --bad: #f07a71; --bad-soft: #321a19; --neutral: #a3adb9; --neutral-soft: #222a33;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1319; --surface: #151c24; --surface-2: #1b242e;
+  --ink: #e6ecf2; --ink-2: #b4c0cc; --muted: #8b98a6;
+  --line: #28323d; --line-strong: #3a4653;
+  --accent: #6ea8e2; --accent-soft: #1a2a3b; --series: #3987e5;
+  --ok: #5cc98c; --ok-soft: #15291e; --warn: #e3a54a; --warn-soft: #2d2413;
+  --bad: #f07a71; --bad-soft: #321a19; --neutral: #a3adb9; --neutral-soft: #222a33;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 24px 64px; }
+h1, h2, h3 { font-family: var(--font-head); text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+h1 { font-size: 30px; line-height: 1.15; font-weight: 700; }
+h2 { font-size: 22px; font-weight: 700; }
+h3 { font-size: 17px; font-weight: 600; }
+p { margin: 0; max-width: 72ch; }
+a { color: var(--accent); }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+.label { font-family: var(--font-head); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* başlık bloğu (teknik resim antet düzeni) */
+.titleblock { border: 1.5px solid var(--ink); background: var(--surface); display: grid; grid-template-columns: 2.2fr 1fr 1fr; }
+.titleblock > div { padding: 12px 14px; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 4px; }
+.titleblock .name { grid-row: span 2; justify-content: center; gap: 8px; }
+.titleblock .name p { color: var(--ink-2); }
+.titleblock > div:nth-child(3n) { border-right: 0; }
+.titleblock .val { font-family: var(--font-mono); font-size: 13.5px; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-head); font-weight: 600; color: var(--warn); }
+.status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--warn); }
+@media (max-width: 760px) { .titleblock { grid-template-columns: 1fr 1fr; } .titleblock .name { grid-column: span 2; grid-row: auto; } .titleblock > div:nth-child(3n) { border-right: 1px solid var(--line-strong); } .titleblock > div:nth-child(2n+1):not(.name) { border-right: 0; } }
+
+nav.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin-block: 20px 8px; display: flex; gap: 2px; overflow-x: auto; }
+nav.tabs a { font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--ink-2); text-decoration: none; padding: 10px 12px; white-space: nowrap; border-bottom: 2px solid transparent; }
+nav.tabs a:hover, nav.tabs a:focus-visible { color: var(--ink); border-bottom-color: var(--line-strong); outline: none; }
+section { padding-block: 28px 8px; scroll-margin-top: 56px; }
+section > header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+
+.lead { font-size: 16.5px; color: var(--ink); }
+.callout { border-left: 3px solid var(--bad); background: var(--surface); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.callout.info { border-left-color: var(--accent); }
+
+/* bulgular */
+.findings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.findings li { display: grid; grid-template-columns: 28px 1fr; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.findings .n { font-family: var(--font-mono); color: var(--muted); font-size: 13px; padding-top: 2px; }
+.findings h3 { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.findings details { grid-column: 2; }
+details > summary { cursor: pointer; color: var(--accent); font-size: 13.5px; list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "+ "; font-family: var(--font-mono); }
+details[open] > summary::before { content: "− "; }
+details .body { margin-top: 8px; color: var(--ink-2); font-size: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+.chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-head); font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 3px; white-space: nowrap; letter-spacing: 0.02em; }
+.chip.yuksek, .chip.katiliyorum { color: var(--ok); background: var(--ok-soft); }
+.chip.orta, .chip.kismen { color: var(--warn); background: var(--warn-soft); }
+.chip.dusuk, .chip.katilmiyorum { color: var(--bad); background: var(--bad-soft); }
+.chip.belirsiz, .chip.nt { color: var(--neutral); background: var(--neutral-soft); }
+.chip.acc { color: var(--accent); background: var(--accent-soft); }
+
+/* grafik */
+.chart { background: var(--surface); border: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .axis { stroke: var(--line); }
+.chart text { fill: var(--ink-2); font-family: var(--font-body); font-size: 12.5px; }
+.chart .ticklab { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.chart .val { fill: var(--ink); font-family: var(--font-mono); font-size: 12px; }
+.chart .mark { fill: var(--series); }
+.chart .hit { fill: transparent; cursor: default; }
+.chart .hit:hover + .mark, .chart .mark.hl { opacity: 0.85; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12.5px; padding: 6px 9px; max-width: 320px; border-radius: 3px; z-index: 20; }
+
+/* kararlar */
+.decisions { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+.decision { background: var(--surface); border: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.decision.key { border-top: 3px solid var(--accent); }
+.decision .code { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); }
+.decision ol { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 14px; display: flex; flex-direction: column; gap: 3px; }
+.decision .rec { background: var(--accent-soft); padding: 8px 10px; font-size: 14px; }
+.decision .rec b { font-family: var(--font-head); }
+
+/* tablolar */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-family: var(--font-head); font-weight: 600; font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; background: var(--surface-2); position: sticky; top: 0; z-index: 1; }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+td.id { font-family: var(--font-mono); font-size: 12px; white-space: nowrap; }
+tr.row { cursor: pointer; }
+tr.row:hover td { background: var(--surface-2); }
+tr.row:focus-visible td { outline: 2px solid var(--accent); outline-offset: -2px; }
+tr.detail td { background: var(--surface-2); font-size: 13.5px; color: var(--ink-2); }
+tr.detail dl { margin: 0; display: grid; grid-template-columns: 170px 1fr; gap: 6px 14px; }
+tr.detail dt { font-family: var(--font-head); font-weight: 600; color: var(--muted); font-size: 12.5px; }
+tr.detail dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 640px) { tr.detail dl { grid-template-columns: 1fr; } }
+.scrolltable { max-height: 70vh; overflow: auto; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-bottom: 12px; }
+.filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.filters select, .filters input { font: inherit; font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); padding: 6px 8px; border-radius: 3px; min-width: 150px; }
+.filters input { min-width: 220px; }
+.filters select:focus-visible, .filters input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-left: auto; align-self: center; }
+
+.stats { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--line); background: var(--surface); }
+.stats > div { flex: 1 1 150px; padding: 12px 14px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+.stats > div:last-child { border-right: 0; }
+.stats .big { font-family: var(--font-mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+
+.chain { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--line-strong); margin-left: 8px; }
+.chain .step { position: relative; padding: 8px 0 12px 20px; display: flex; flex-direction: column; gap: 4px; }
+.chain .step::before { content: ""; position: absolute; left: -6px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.chain .io { font-size: 13px; color: var(--ink-2); }
+.chain .io code { color: var(--ink); }
+
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.opt { background: var(--surface); border: 1px solid var(--line); padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.opt ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <div class="titleblock">
+    <div class="name">
+      <span class="label">Parametrik maliyet ve tasarım modeli</span>
+      <h1>Mikro PV + Na-iyon pil üretim ünitesi</h1>
+      <p>Faz 1 çıktısı: model iskeleti ve varsayım tablosu. Ayrıntılı modele (Faz 2) geçmeden önce onayınızı ve aşağıdaki kararları bekliyor.</p>
+    </div>
+    <div><span class="label">Aşama</span><span class="val">Faz 1 / 2</span></div>
+    <div><span class="label">Tarih</span><span class="val">27.09.2026</span></div>
+    <div><span class="label">Durum</span><span class="status">Onayınızı bekliyor</span></div>
+    <div><span class="label">Depo</span><span class="val">Manifoltwarper · PR #1</span></div>
+  </div>
+
+  <nav class="tabs" aria-label="Bölümler">
+    <a href="#ozet">Özet</a>
+    <a href="#kararlar">Kararlar</a>
+    <a href="#itirazlar">Varsayımlarınız</a>
+    <a href="#iskelet">Model iskeleti</a>
+    <a href="#tablo">Varsayım tablosu</a>
+    <a href="#deneyler">Deneyler</a>
+    <a href="#kaynak">Kaynak denetimi</a>
+  </nav>
+
+  <section id="ozet">
+    <header><span class="label">01 · Özet</span><h2>Önce bunu okuyun</h2></header>
+    <div class="stack">
+      <p class="lead" id="lead"></p>
+      <div class="callout">
+        <span class="label">En önemli sonuç</span>
+        <p id="ana-sonuc"></p>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="chart" id="chart">
+        <div class="stack" style="gap:4px">
+          <h3>Panel maliyeti kıyası (¢/W, hücre dahil)</h3>
+          <p class="small muted" id="chart-note"></p>
+        </div>
+        <svg id="chart-svg" role="img" aria-labelledby="chart-title"><title id="chart-title">Panel maliyeti kıyası</title></svg>
+      </div>
+      <h3 style="margin-top:8px">Ana bulgular</h3>
+      <ol class="findings" id="findings"></ol>
+    </div>
+  </section>
+
+  <section id="kararlar">
+    <header><span class="label">02 · Kararlar</span><h2>Faz 2'den önce sizden beklenen kararlar</h2>
+      <p class="muted">Üst sıradaki altı karar modelin yapısını değiştiriyor. Diğerlerinde itiraz etmezseniz araştırmanın önerisi varsayılan olacak.</p></header>
+    <div class="decisions" id="decisions-key"></div>
+    <h3 style="margin-block:22px 10px">Diğer kararlar (varsayılan: araştırmanın önerisi)</h3>
+    <div class="tablewrap"><table id="decisions-rest"><thead><tr><th>Kod</th><th>Soru</th><th>Önerilen</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="itirazlar">
+    <header><span class="label">03 · Varsayımlarınız</span><h2>Varsayımlarınıza hüküm ve itirazlar</h2>
+      <p class="muted">K = kararlarınız, H = önceki analizdeki hatalar (tespitleriniz), O = araştırmanın ortaya çıkardığı örtük varsayımlar. Hüküm kanıtın gücüne göre verildi.</p></header>
+    <div class="filters">
+      <label for="f-hukum">Hüküm<select id="f-hukum"><option value="">Tümü</option><option value="katiliyorum">Katılıyorum</option><option value="kismen">Kısmen</option><option value="katilmiyorum">Katılmıyorum</option><option value="belirsiz">Belirsiz</option></select></label>
+      <span class="count" id="itiraz-count"></span>
+    </div>
+    <div class="tablewrap"><table id="itiraz-table"><thead><tr><th>Kod</th><th>Varsayım</th><th>Hüküm</th><th>Etki</th><th>Özet</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="iskelet">
+    <header><span class="label">04 · Model iskeleti</span><h2>Hesap zinciri, maliyet sınıfları ve ünite seçenekleri</h2></header>
+    <div class="stack" id="iskelet-body"></div>
+  </section>
+
+  <section id="tablo">
+    <header><span class="label">05 · Varsayım tablosu</span><h2>954 varsayım: değer, aralık, kaynak, güven</h2>
+      <p class="muted">Bir satıra tıklayınca kaynak alıntısı, senaryoya uygunluk notu, dayanak ve doğrulama deneyi açılır. Aynı tablo <code>docs/faz1_varsayimlar.xlsx</code> ve <code>data/varsayimlar/*.yaml</code> içinde.</p></header>
+    <div class="filters">
+      <label for="f-alan">Alan<select id="f-alan"><option value="">Tümü</option></select></label>
+      <label for="f-guven">Güven<select id="f-guven"><option value="">Tümü</option><option value="yuksek">Yüksek</option><option value="orta">Orta</option><option value="dusuk">Düşük</option></select></label>
+      <label for="f-kt">Kaynak türü<select id="f-kt"><option value="">Tümü</option></select></label>
+      <label for="f-sinif">Sınıf<select id="f-sinif"><option value="">Tümü</option></select></label>
+      <label for="f-q">Ara<input id="f-q" type="search" placeholder="id, ad veya kaynak"></label>
+      <span class="count" id="param-count"></span>
+    </div>
+    <div class="tablewrap scrolltable"><table id="param-table"><thead><tr><th>Alan</th><th>id</th><th>Ad</th><th>Değer</th><th>Aralık</th><th>Birim</th><th>Güven</th><th>Kaynak türü</th><th>Sınıf</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="deneyler">
+    <header><span class="label">06 · Deneyler</span><h2>Doğrulanması gerekenler, öncelik sırasıyla</h2>
+      <p class="muted">Öncelik = (sonuca etki × belirsizlik) / (süre × maliyet), bir kararı açıp açmadığına göre düzeltildi. İlk 10 “önce bunlar”. Maliyetler tahmindir.</p></header>
+    <div class="tablewrap"><table id="deney-table"><thead><tr><th>#</th><th>Deney</th><th>Süre</th><th>Maliyet (USD)</th><th>Açtığı karar</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="kaynak">
+    <header><span class="label">07 · Kaynak denetimi</span><h2>Kaynaklar ne kadar güvenilir?</h2></header>
+    <div class="stack" id="kaynak-body"></div>
+  </section>
+
+  <footer>
+    <span>Üretim: 8 alan ajanı → alan başına 2 kırmızı takım denetçisi (kaynak + fizik) → revizyon; ardından 5 uzlaştırma görevi (her biri denetim + revizyon) ve 64 parametrelik bağımsız kaynak örneklemi.</span>
+    <span>Depo dosyaları: <code>docs/mimari.md</code>, <code>docs/varsayim_tablosu.md</code>, <code>docs/formul_envanteri.md</code>, <code>docs/faz1_varsayimlar.xlsx</code>, <code>arastirma/</code> (ham çıktılar ve denetim raporları).</span>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const V = /*__VERI__*/;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const GUVEN = { yuksek: "Yüksek", orta: "Orta", dusuk: "Düşük" };
+const HUKUM = { katiliyorum: "Katılıyorum", kismen: "Kısmen", katilmiyorum: "Katılmıyorum", belirsiz: "Belirsiz" };
+const chip = (cls, txt) => `<span class="chip ${cls}">${esc(txt)}</span>`;
+const fmt = (x) => { if (typeof x !== "number") return esc(x); const a = Math.abs(x); if (a !== 0 && (a < 0.001 || a >= 1e7)) return x.toExponential(2); return (+x.toPrecision(4)).toLocaleString("tr-TR", { maximumFractionDigits: 6 }); };
+
+// 01 özet
+$("#lead").textContent = V.lead;
+$("#ana-sonuc").textContent = V.ana_sonuc;
+$("#stats").innerHTML = V.stats.map((s) => `<div><span class="label">${esc(s[0])}</span><span class="big">${esc(s[1])}</span><span class="small muted">${esc(s[2])}</span></div>`).join("");
+$("#findings").innerHTML = V.bulgular.map((b, i) => `<li><span class="n">${String(i + 1).padStart(2, "0")}</span><div class="stack" style="gap:6px"><h3>${esc(b.baslik)} ${chip(b.guven, "Güven: " + GUVEN[b.guven])}</h3><p class="small" style="color:var(--ink-2)">${esc(b.kisa)}</p></div><details><summary>Ayrıntı ve kanıt</summary><div class="body"><p>${esc(b.aciklama)}</p><p class="small muted"><b>Kanıt:</b> ${esc(b.kanit)}</p></div></details></li>`).join("");
+
+// grafik: tek seri aralık çubukları (¢/W)
+(function chart() {
+  const d = V.grafik.satirlar; $("#chart-note").textContent = V.grafik.not;
+  const W = 760, rowH = 46, left = 300, right = 70, top = 8, H = top + d.length * rowH + 30;
+  const max = V.grafik.eksen_max, x = (v) => left + (v / max) * (W - left - right);
+  const svg = $("#chart-svg"); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  let s = "";
+  for (let t = 0; t <= max; t += 10) s += `<line class="axis" x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${H - 24}" /><text class="ticklab" x="${x(t)}" y="${H - 8}" text-anchor="middle">${t}</text>`;
+  d.forEach((r, i) => {
+    const y = top + i * rowH + 10, bh = 20, x0 = x(r.alt), x1 = x(r.ust), w = Math.max(x1 - x0, 6);
+    const lab = r.etiket.length > 44 ? [r.etiket.slice(0, r.etiket.lastIndexOf(" ", 44)), r.etiket.slice(r.etiket.lastIndexOf(" ", 44) + 1)] : [r.etiket];
+    lab.forEach((l, j) => (s += `<text x="${left - 12}" y="${y + 9 + (j - (lab.length - 1) / 2) * 15}" text-anchor="end" dominant-baseline="middle">${esc(l)}</text>`));
+    s += `<rect class="mark" x="${x(0)}" y="${y + bh / 2 - 1}" width="${Math.max(x0 - x(0), 0)}" height="2" opacity="0.35" />`;
+    s += `<rect class="mark" data-i="${i}" x="${x0 - (w === 6 ? 3 : 0)}" y="${y}" width="${w}" height="${bh}" rx="4" />`;
+    s += `<text class="val" x="${x0 + w + 8}" y="${y + bh / 2}" dominant-baseline="middle">${r.alt === r.ust ? fmt(r.alt) : fmt(r.alt) + "–" + fmt(r.ust)}</text>`;
+    s += `<rect class="hit" data-i="${i}" x="0" y="${y - 10}" width="${W}" height="${rowH}" />`;
+  });
+  svg.insertAdjacentHTML("beforeend", s);
+  const tip = $("#tip");
+  svg.querySelectorAll(".hit").forEach((h) => {
+    h.addEventListener("mousemove", (e) => { const r = d[+h.dataset.i]; tip.hidden = false; tip.innerHTML = `<b>${esc(r.etiket)}</b><br>${r.alt === r.ust ? fmt(r.alt) : fmt(r.alt) + "–" + fmt(r.ust)} ¢/W<br>${esc(r.kaynak)}`; tip.style.left = Math.min(e.clientX + 14, innerWidth - 330) + "px"; tip.style.top = e.clientY + 14 + "px"; });
+    h.addEventListener("mouseleave", () => (tip.hidden = true));
+  });
+})();
+
+// 02 kararlar
+const key = V.kararlar.filter((k) => V.kilit_kararlar.includes(k.kod)), rest = V.kararlar.filter((k) => !V.kilit_kararlar.includes(k.kod));
+$("#decisions-key").innerHTML = key.map((k) => `<article class="decision key"><span class="code">${esc(k.kod)}</span><h3>${esc(k.soru)}</h3><ol type="a">${k.secenekler.map((o) => `<li>${esc(o.replace(/^\([a-e]\)\s*/, ""))}</li>`).join("")}</ol><div class="rec"><b>Araştırmanın önerisi:</b> ${esc(k.arastirmanin_onerisi)}</div><details><summary>Gerekçe ve eksik bilgi</summary><div class="body"><p>${esc(k.gerekce)}</p><p><b>Etkisi:</b> ${esc(k.etkisi)}</p><p><b>Karar için eksik bilgi:</b> ${esc(k.eksik_bilgi)}</p></div></details></article>`).join("");
+$("#decisions-rest tbody").innerHTML = rest.map((k) => `<tr><td class="id">${esc(k.kod)}</td><td>${esc(k.soru)}<details><summary>Seçenekler ve gerekçe</summary><div class="body"><p>${k.secenekler.map(esc).join("<br>")}</p><p>${esc(k.gerekce)}</p></div></details></td><td>${esc(k.arastirmanin_onerisi)}</td></tr>`).join("");
+
+// 03 itirazlar
+function itirazlar() {
+  const f = $("#f-hukum").value, rows = V.itirazlar.filter((i) => !f || i.hukum === f);
+  $("#itiraz-count").textContent = `${rows.length} / ${V.itirazlar.length}`;
+  $("#itiraz-table tbody").innerHTML = rows.map((i) => `<tr><td class="id">${esc(i.varsayim_kodu)}</td><td style="min-width:220px">${esc(i.varsayim.replace(/^[KHO]\d+:\s*/, ""))}</td><td>${chip(i.hukum, HUKUM[i.hukum])}</td><td>${chip(i.etkisi, GUVEN[i.etkisi])}</td><td style="min-width:320px">${esc(i.ozet)}<details><summary>Kanıt ve öneri</summary><div class="body"><p><b>Öneri:</b> ${esc(i.oneri)}</p>${i.kanitlar.map((k) => `<p class="small">• ${esc(k)}</p>`).join("")}</div></details></td></tr>`).join("");
+}
+$("#f-hukum").addEventListener("change", itirazlar); itirazlar();
+
+// 04 iskelet
+$("#iskelet-body").innerHTML = V.iskelet_html;
+
+// 05 varsayım tablosu
+const P = V.parametreler, ALAN = V.alan_adlari;
+const opts = (sel, vals, lab = (v) => v) => sel.insertAdjacentHTML("beforeend", vals.map((v) => `<option value="${esc(v)}">${esc(lab(v))}</option>`).join(""));
+opts($("#f-alan"), Object.keys(ALAN), (v) => ALAN[v]);
+opts($("#f-kt"), [...new Set(P.map((p) => p.kaynak_turu))].sort());
+opts($("#f-sinif"), [...new Set(P.map((p) => p.maliyet_sinifi))].sort());
+const tbody = $("#param-table tbody");
+tbody.innerHTML = P.map((p, i) => `<tr class="row" tabindex="0" data-i="${i}"><td>${esc(p.alan)}</td><td class="id">${esc(p.id)}${p.esdeger ? '<br><span class="chip nt">→ ' + esc(p.esdeger) + "</span>" : ""}</td><td style="min-width:240px">${esc(p.ad)}</td><td class="num">${fmt(p.deger)}</td><td class="num">${fmt(p.alt)} – ${fmt(p.ust)}</td><td class="small">${esc(p.birim)}</td><td>${chip(p.guven, GUVEN[p.guven])}</td><td class="small">${esc(p.kaynak_turu)}</td><td class="small">${esc(p.maliyet_sinifi)}</td></tr>`).join("");
+const rows = [...tbody.querySelectorAll("tr.row")];
+function detail(tr) {
+  const nx = tr.nextElementSibling; if (nx && nx.classList.contains("detail")) { nx.remove(); return; }
+  const p = P[+tr.dataset.i];
+  const f = [["Kaynak", p.kaynak], ["Kaynak alıntısı", p.kaynak_alintisi], ["Kaynak tarihi", p.kaynak_tarihi], ["Senaryoya uygunluk", p.senaryoya_uygunluk], ["Açıklama / dayanak", p.aciklama], ["Doğrulama deneyi", p.dogrulama_deneyi], ["Ölçek", p.olcek], ["Eşdeğer (tek sahip)", p.esdeger ? p.esdeger + (p.esdeger_carpan && p.esdeger_carpan !== 1 ? " × " + p.esdeger_carpan : "") : ""]].filter((x) => x[1]);
+  tr.insertAdjacentHTML("afterend", `<tr class="detail"><td colspan="9"><dl>${f.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${/^https?:\/\//.test(v) ? `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(v)}</a>` : esc(v)}</dd>`).join("")}</dl></td></tr>`);
+}
+tbody.addEventListener("click", (e) => { const tr = e.target.closest("tr.row"); if (tr) detail(tr); });
+tbody.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.matches("tr.row")) { e.preventDefault(); detail(e.target); } });
+function filtre() {
+  const a = $("#f-alan").value, g = $("#f-guven").value, k = $("#f-kt").value, s = $("#f-sinif").value, q = $("#f-q").value.trim().toLocaleLowerCase("tr");
+  tbody.querySelectorAll("tr.detail").forEach((d) => d.remove());
+  let n = 0;
+  rows.forEach((tr) => { const p = P[+tr.dataset.i]; const ok = (!a || p.alan === a) && (!g || p.guven === g) && (!k || p.kaynak_turu === k) && (!s || p.maliyet_sinifi === s) && (!q || (p.id + " " + p.ad + " " + p.kaynak).toLocaleLowerCase("tr").includes(q)); tr.hidden = !ok; n += ok; });
+  $("#param-count").textContent = `${n} / ${P.length} satır`;
+}
+["#f-alan", "#f-guven", "#f-kt", "#f-sinif"].forEach((id) => $(id).addEventListener("change", filtre));
+$("#f-q").addEventListener("input", filtre); filtre();
+
+// 06 deneyler
+$("#deney-table tbody").innerHTML = V.deneyler.map((d) => `<tr><td class="num">${d.sira}${d.once_bunlar ? "<br>" + chip("acc", "önce") : ""}</td><td style="min-width:300px"><b>${esc(d.ad)}</b><br><span class="small" style="color:var(--ink-2)">${esc(d.soru)}</span><details><summary>Yöntem, ölçüm, bağımlılık</summary><div class="body"><p><b>Neden önemli:</b> ${esc(d.neden_onemli)}</p><p><b>Yöntem:</b> ${esc(d.yontem)}</p><p><b>Ölçüm:</b> ${esc(d.olcum)}</p><p><b>Bağımlılık:</b> ${esc(d.bagimliliklar)}</p><p class="small mono">${esc(d.etkiledigi_parametreler.join(", "))}</p></div></details></td><td class="small">${esc(d.sure)}</td><td class="small">${esc(d.maliyet_usd)}</td><td class="small" style="min-width:200px">${esc(d.actigi_karar)}</td></tr>`).join("");
+
+// 07 kaynak
+$("#kaynak-body").innerHTML = V.kaynak_html;
+</script>

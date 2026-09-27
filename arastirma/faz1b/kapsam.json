@@ -1,0 +1,1277 @@
+{
+ "gorev": "kapsam",
+ "sonuc": {
+  "eksik_kalemler": [
+   {
+    "kalem": "Genel yönetim, ofis işletmesi, satış/pazarlama ve müşteri hizmetleri",
+    "onerilen_alan": "yeni 'şirket' kalemi (altyapi altında toplanır)",
+    "sinif": "saha_sabit",
+    "olcek": "genel (şirket; önerilen sınıf sirket_sabit, bölen tüm ünitelerin toplam çıktısı)",
+    "neden_onemli": "Yalnızca ofis alanı var (site_area_shared_fixed_m2). Yönetim, finans/muhasebe, satın alma, İK, regülasyon/hukuk, satış, müşteri desteği (A için Almanca), denetim, seyahat ve banka giderleri hiçbir alanda yok. Ünite hacmi 0.75-2.4 MWp/yıl olduğunda bu tek kalem ürün maliyetinin büyük kısmını oluşturur; ünite tanımını (hacim, N) belirleyen kalemlerden biridir.",
+    "kaba_buyukluk": "0.35-1.2 M$/yıl. N=1'de 0.75 / 2.4 / 13.2 MWp/yıl için: 47-160 / 15-50 / 2.7-9.1 c/W; N üniteyle 1/N. B2C satış ve pazarlama ayrıca satışın %5-15'i (fiyatlama kararı; buraya dahil değil).",
+    "dayanak": "Tahmin: 8-15 FTE × 15-30 $/h × 2070 h (ücret bandı eco_labor_engineer_usd_h 12-35, altyapi) + 0.1-0.3 M$ diğer genel gider. Doğrulama: benzer ölçekli imalatçı bütçeleri ve mali müşavir."
+   },
+   {
+    "kalem": "BT/MES/ERP, izlenebilirlik, seri numaralandırma ve OT siber güvenliği",
+    "onerilen_alan": "altyapi (şirket ortak kalemi)",
+    "sinif": "saha_sabit",
+    "olcek": "genel (şirket; önerilen sirket_sabit)",
+    "neden_onemli": "Hiçbir alanda yok. Gerektiği yerler: AB 2024/3015 (zorla çalıştırma) için poli→wafer→hücre→panel izlenebilirliği (wafer alanı risk olarak yazıyor); AB 2023/1542 Md. 14 SOH verisi ve 2 kWh üstü pil pasaportu (std_batt_passport_setup_usd yalnızca kurulum); K5 kutu değişimlerinde seri numarası takibi; IEC/ISO 9001 kayıtları; kampanya/ingot verisi. H6'daki uçtan uca proses kontrolü bu veri altyapısı olmadan kurulamaz.",
+    "kaba_buyukluk": "Kurulum 150-400 k$ (×0.2122 = 32-85 k$/yıl) + yıllık lisans/BT personeli 60-150 k$ ≈ 100-250 k$/yıl. N=1'de 0.75 / 2.4 / 13.2 MWp/yıl: 13-33 / 4.2-10 / 0.76-1.9 c/W. Etiket/QR 0.05-0.2 $/adet.",
+    "dayanak": "Tahmin; piyasa fiyatı doğrulanmadı. Yıllıklaştırma eco_crf_tax_machine 0.2122 ile (hesap)."
+   },
+   {
+    "kalem": "Bakım ekibi (7/24 elektrik-mekanik-otomasyon müdahalesi) ve kendi makineleri için sürdürme mühendisliği",
+    "onerilen_alan": "altyapi",
+    "sinif": "zaman",
+    "olcek": "unite (7/24 teknisyen); genel/şirket (sürdürme mühendisliği)",
+    "neden_onemli": "eco_maint_frac_capex_yr notu 'kendi personelin işçilik maliyeti hariç' diyor. Bakım personeli yalnızca hucre hjt_fte_support içinde (gündüz) ve saha 24/7 yardımcı tesis teknisyeni olarak var. Kristal, wafer, modül, pil paket hattı ve kutu testi için arıza müdahale teknisyeni yok. F2'de ergiyik dakikalar içinde donmaya başladığı için (altyapi BULGU 5) 7/24 müdahale fiilen zorunlu; F1'de hücre hattının vardiya düzenine bağlı. Kendi tasarımı makinelerin tedarikçi servisi olmadığı için sürdürme mühendisliği gerekli.",
+    "kaba_buyukluk": "7/24 bir pozisyon ≈117 k$/yıl → 0.75 / 2.4 / 13.2 MWp/yıl: 16 / 4.9 / 0.89 c/W. Sürdürme mühendisliği 91-182 k$/yıl → 12-24 / 3.8-7.6 / 0.69-1.4 c/W (N=1; şirket düzeyinde 1/N).",
+    "dayanak": "Hesap: eco_fte_per_24x7_position 4.2 × eco_productive_hours_fte_yr 2070 × eco_labor_technician_usd_h 13.4; mühendislik 2-4 kişi × 2070 × eco_labor_engineer_usd_h 22. Kadro sayıları tahmin."
+   },
+   {
+    "kalem": "Ar-Ge ve doğrulama deney bütçesi (alanların bilinmeyenler_ve_deneyler listeleri) ile mühendislik/kalifikasyon lotları",
+    "onerilen_alan": "her alan kendi deneylerini tutar; toplam altyapi'de NRE ile aynı yöntemle yıllıklaştırılır",
+    "sinif": "urun_sabit",
+    "olcek": "genel (şirket; önerilen sirket_sabit)",
+    "neden_onemli": "122 deneyin çoğunun maliyet tahmini var ama hiçbiri bir maliyet formülüne girmiyor; bir kısmının hjt_tool_nre_usd veya eco_nre_machine_design_usd içinde olup olmadığı belirsiz. Rampa dönemindeki fazla malzeme tüketimi alanların başlangıç parametreleriyle (cell_eta_core_start_pct, hjt_line_yield_start, hjt_paste_laydown_start_g_per_m2, wf_learn_weight) modelde zaten var; eksik olan yalnızca mühendislik ve kalifikasyon lotları, onlar da bu kaleme alındı (ilk çıktıdaki ayrı 'rampa malzeme fazlası' kalemi geri çekildi).",
+    "kaba_buyukluk": "Ayrıştırılabilen 57/122 deney 0.7-2.0 M$. F1 kısmı (hücre 0.11-0.26, modül 0.05-0.17, altyapi 0.03-0.12, elektronik 0.03-0.07, pil 0.02-0.07, standart 0.01-0.04) 0.25-0.73 M$ → ×0.2122 = 53-155 k$/yıl: 0.75 / 2.4 / 13.2 MWp'ta 7.1-21 / 2.2-6.5 / 0.40-1.2 c/W. F2 eki (kristal 0.33-0.88, wafer 0.14-0.40) 0.47-1.28 M$ → 100-272 k$/yıl: 13-36 / 4.2-11 / 0.76-2.1 c/W. Gerçek toplam daha yüksek (65 deney ayrıştırılamadı).",
+    "dayanak": "Hesap: alanların 'sure_ve_maliyet_tahmini' alanları python ile ayrıştırılıp toplandı; değerlerin kendisi alanların tahmini. Yıllıklaştırma eco_crf_tax_machine."
+   },
+   {
+    "kalem": "Balkon montaj kiti (A: korkuluk askısı, kelepçe, profil) ve taşınabilir panel aksesuarı (B)",
+    "onerilen_alan": "modul (ya da yeni 'sistem/ticari' alanı)",
+    "sinif": "adet",
+    "olcek": "urun",
+    "neden_onemli": "Modul alanı korkuluğa monte panelin rüzgâr yükünü (≈3440 Pa; uç bölgede 6.5 kPa) ve çerçevesiz GG'nin kelepçe katsayısını hesaplıyor; askı/kelepçe takımının maliyeti ve mekanik doğrulama testi hiçbir alanda yok. Çerçevesiz cam-camda mekanik yeterliliği kelepçe tasarımı belirliyor. Elektronik 'sistem (BOS)' ajanına atıf yapıyor ama böyle bir alan yok.",
+    "kaba_buyukluk": "A: 8-25 $/panel → 400 W'ta 2-6 c/W, 100 W'ta 8-25 c/W (hacimden bağımsız). Varyant başına 10-30 k$ statik/rüzgâr doğrulama testi (×0.2122; 2.4 MWp'ta 0.09-0.27 c/W). B: 5-20 $/panel.",
+    "dayanak": "Tahmin (Al profil + paslanmaz bağlantı + kendi kalıp plastik; fiyatlar doğrulanmadı). Yükler modul ornek_hesap adım 6'dan."
+   },
+   {
+    "kalem": "Giden lojistik (fabrika → AB deposu → müşteri), sevkiyat ambalajı (palet, köşebent) ve tehlikeli madde (UN3551/3552) sevkiyat ek bedelleri",
+    "onerilen_alan": "yeni 'sistem/ticari' alanı; yoksa panel için modul, kutu için elektronik",
+    "sinif": "adet",
+    "olcek": "urun (pazar ve kanal kararına bağlı)",
+    "neden_onemli": "Hiçbir alan fabrika çıkışından sonrasını saymıyor. Var olanlar yalnızca ithalat lojistiği (wf_import_logistics_usd_per_wafer, bat_import_logistics_usd_Wh, cz_crucible_freight_36in_usd) ve garanti değişim lojistiği (el_logistics_swap_usd). Cam-cam panel ağır ve kırılgan (300 W GG 16.3 kg, 1.40 m2; modul ornek_hesap). Kutu Na-iyon pil içerdiği için ADR/IMDG belgesi gerekiyor. Fiyatın EXW mi DDP mi olduğu tanımlı değil.",
+    "kaba_buyukluk": "TR→AB deposu (tam TIR/palet): ~1.5-4 c/W (hacimden bağımsız). B2C son kilometre dahil edilirse 800 W set (2 panel + kutu) için +50-150 $/set = +6-19 c/W. Tehlikeli madde ek ücreti kutu başına 5-20 $.",
+    "dayanak": "Tahmin. TIR başına 3-5 k$ (hafızadan, doğrulanmadı), 30 palet × 20 panel × 300 W = 180 kWp ile ≈1.7-2.8 c/W. Panel kütlesi ve alanı modul ornek_hesap adım 4 ve 7. Nakliye RFQ ile doğrulanmalı."
+   },
+   {
+    "kalem": "Yedek parça stoku: kendi tasarımı makineler için ilk kritik yedek seti ve K5 değişim modeli için servis kutusu stoku",
+    "onerilen_alan": "altyapi (makine yedekleri); elektronik (servis kutusu stoku)",
+    "sinif": "zaman",
+    "olcek": "unite",
+    "neden_onemli": "Bakım oranları (eco_maint_frac_capex_yr, cz_maint_frac, hjt_maint_frac_capex_per_yr, mod_maint_frac_per_y, bat_line_maint_frac) yalnızca tüketimi kapsıyor. Kendi tasarımı makinelerin tedarikçi yedek stoku olmadığından RF jeneratör, kuru/turbo pompa, servo, ısıtıcı ve (F2) sıcak bölge setinden oluşan ilk yedek seti bağlı sermaye ister. eco_working_capital_days yalnızca malzeme ve mamul stoku için. K5 için sahada tutulacak kutu stoku da yok.",
+    "kaba_buyukluk": "İlk yedek seti makine capex'inin %5-10'u: F1 (≈4.6 M$) 0.23-0.46 M$, F2 (≈6.0 M$) 0.3-0.6 M$. Taşıma maliyeti ≈%20/yıl → F1 46-92 k$/yıl: 0.75 / 2.4 / 13.2 MWp'ta 6.1-12 / 1.9-3.8 / 0.35-0.70 c/W; F2 60-120 k$/yıl: 8-16 / 2.5-5.0 / 0.45-0.91 c/W. Servis kutu stoku 3000 kutu/yıl için 5-9 k$/yıl.",
+    "dayanak": "Oranlar (%5-10 capex; taşıma = WACC %12 + eskime ~%8) tahmin/hafızadan, doğrulanmadı. Capex toplamı hesap, alan örneklerinden: F1 = hücre 3.08 + modül 0.28 + pil paket 0.25 + kutu testi 0.09 + ünite içi altyapı 0.89 ≈ 4.6 M$; F2 = + 2 fırın 0.32 + wafer ~1.06 ≈ 6.0 M$."
+   },
+   {
+    "kalem": "Panel garanti karşılığı: ürün garantisi (10-12 yıl) ve performans garantisi (25 yıl), saha değişim lojistiği",
+    "onerilen_alan": "modul",
+    "sinif": "adet",
+    "olcek": "urun",
+    "neden_onemli": "Elektronik (el_f_warranty) ve pil (bat_warranty_reserve_frac) garanti karşılığı ayırıyor, panel ayırmıyor. Kendi HJT hücresi, düşük sıcaklık ara bağlantısı (SnBi/0BB), çerçevesiz GG ve balkon rüzgâr yükü (3440 Pa; uç bölgede 6.5 kPa) yeni riskler. Modul alanı 'ara bağlantı güvenilirliği garanti riskini belirliyor' diyor ama maliyete koymuyor.",
+    "kaba_buyukluk": "Ürün garantisi 0.5-4.4 c/W; performans garantisi (iskontolu) ayrıca ≈0.07-0.4 c/W. Hacimden bağımsız.",
+    "dayanak": "Hesap, tahmin girdilerle: ürün = %0.1-0.5/yıl × 12 yıl × (0.25-0.40 $/W × 300 W + 50-100 $/panel)/300 W → alt 0.001×12×125/300 = 0.5, üst 0.06×220/300 = 4.4 c/W. Performans: 25 yılda panellerin %0.5-3'ü eşiğin altına (tahmin) × ~0.73 $/W × iskonto (%12, ~15. yıl) 0.18. Arıza oranları hafızadan, doğrulanmadı; doğrulama modul DH/TC/UV/HF mini-modül deneyleri ve rakip garanti koşulları."
+   },
+   {
+    "kalem": "Kalite laboratuvarı eksikleri: flaş simülatörü referans kalibrasyonu, test cihazı kalibrasyonu, laboratuvar teknisyeni (F1); FTIR (Oi/Cs), dış ICP-MS/GDMS analizleri (F2)",
+    "onerilen_alan": "altyapi (saha kalite laboratuvarı; içerik standart ve süreç alanlarıyla birlikte tanımlanır)",
+    "sinif": "saha_sabit",
+    "olcek": "saha",
+    "neden_onemli": "Kristal alanı her ingotun tohum ve kuyruğunda FTIR (C, O), kampanya başı ve gelen poli lotlarında ICP-MS istiyor; hiçbir alanda FTIR yatırımı ya da analiz bütçesi yok. Var olanlar: hjt_capex_metrology_usd (QSSPC, PL, elipsometre, 4 nokta sonda, mikroskop), wf_brick_metrology_capex_usd, site_fixed_capex_usd içinde içeriği tanımsız 'saha lab 80 k$', mod_test_capex_usd (EL). Etiket gücü için flaş referans kalibrasyonu ve güvenlik test cihazlarının yıllık kalibrasyonu F1'de de gerekli ve yok.",
+    "kaba_buyukluk": "F1 çekirdeği: kalibrasyon 5-15 k$/yıl + 1 teknisyen ~28 k$/yıl ≈ 33-45 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 4.4-6.0 / 1.4-1.9 / 0.25-0.34 c/W. F2 ile toplam (FTIR 80-200 k$ ×0.2122 = 17-42 k$/yıl + dış analiz 10-60 k$/yıl) 60-147 k$/yıl → 8-20 / 2.5-6.1 / 0.45-1.1 c/W. Saha paylaşımında N'ye bölünür.",
+    "dayanak": "Cihaz ve analiz fiyatları tahmin, doğrulanmadı. Teknisyen hesap: eco_labor_technician_usd_h 13.4 × 2070 h. Analiz sayısı: 2-3 fırın × ~25 kampanya/yıl + poli lotları."
+   },
+   {
+    "kalem": "Sigorta: ürün sorumluluk, geri çağırma, iş durması (BI), nakliye; ayrıca alanların kendi sermaye yüklerinde uygulanmayan mülk sigortası",
+    "onerilen_alan": "altyapi (şirket)",
+    "sinif": "adet",
+    "olcek": "genel (şirket)",
+    "neden_onemli": "eco_insurance_frac_capex_yr yalnızca mülkü (deprem dahil) kapsıyor ve yalnızca eco_annual_capex_charge_usd_yr kullanan kalemlere uygulanıyor; cz_cost_capex_usd_h, f_hjt_zaman_per_W, mod_f_cost_equipment, pil ve elektronik kendi sermaye yüklerini sigortasız hesaplıyor. BI açıkça hariç. Pil içeren fişli tüketici ürünü AB'de ürün sorumluluk ve geri çağırma riski taşıyor; hiçbir alanda yok.",
+    "kaba_buyukluk": "Ürün sorumluluk + geri çağırma: satışın ~%0.3-1'i ≈ 0.3-1.5 c/W (satış 1-1.5 $/W varsayımı; hacimden bağımsız). Mülk sigortası boşluğu (koşullu, yalnızca alanların kendi yükleri kullanılırsa): 0.006 × F1 4.6 M$ ≈ 28 k$/yıl → 3.7 / 1.15 / 0.21 c/W; tek sermaye yükü formülüne geçilirse kapanır. BI teminatı mülk priminin +%30-50'si.",
+    "dayanak": "Tahmin; oranlar hafızadan, doğrulanmadı. eco_insurance_frac_capex_yr 0.006 (altyapi). İki sigorta brokerından teklif alınmalı."
+   },
+   {
+    "kalem": "Hurda, iade ve RMA: B2C cayma iadesi, RMA test ve yenileme, pil paket montaj hurdası, hurdaya giden modüldeki hücre değeri",
+    "onerilen_alan": "elektronik (kutu RMA merkezi); modul ve pil (kendi hurda payları)",
+    "sinif": "adet",
+    "olcek": "urun",
+    "neden_onemli": "Elektronik yalnızca üretim hurdasını (el_scrap_frac), yeniden işlemeyi ve garanti değişim lojistiğini sayıyor. AB mesafeli satışta 14 gün cayma iadesi, iade edilen setin testi, yenilenmesi ve değer kaybı hiçbir alanda yok. bat_f45_pack_parts ve bat_f48_misc_per_box pil paketinde montaj hurdası içermiyor. Modül verimi yalnızca modül BOM'unun paydasında; hurdaya giden modüldeki hücrelerin değeri hücre maliyetine eklenmiyor olabilir.",
+    "kaba_buyukluk": "B2C iade 0.3-2 c/W. Pil paket hurdası 0.24-0.95 c/W (A-200 W). Modül hurdasındaki hücre değeri ≈0.2-0.6 c/W. Hacimden bağımsız.",
+    "dayanak": "Tahmin: iade oranı %2-8 (doğrulanmadı), geri lojistik 50-150 $/set, yenileme 10-30 $/set. Pil: pil ornek_hesap adım 4-5, hücre 55.36 $ + parça 40.11 $ = 95.47 $ × %0.5-2 = 0.48-1.91 $/kutu / 200 W (hesap). Modül: %2 × hücre maliyeti (10-30 c/W)."
+   },
+   {
+    "kalem": "Polisilikon maliyeti (kendin yap yolunda, F2) ve ithal teslim bedeli (navlun, sigorta, TR gümrüğü/ek gümrük, Çin ihracat KDV'si): toplama hiç girmiyor, sahipsiz",
+    "onerilen_alan": "wafer (taze poli kütle dengesi wf_m_fresh_kg_m2 orada); fiyat girdisi altyapi eco_* altında teknik parametre olarak",
+    "sinif": "alan",
+    "olcek": "genel",
+    "neden_onemli": "İlk çıktı bunu çift sayım sanmıştı; dosyalar tersini gösteriyor. wf_poly_cost [ara_sonuc]: 'yalnizca KIYAS icin (maliyet toplamina kristal ajanindan girer)'; wafer arayüzü 'Poli maliyeti ... kristal ajaninin ciktisidir'; kristal xtal_ref_poly_price_usd_kg notu 'Poly maliyetinin sahibi ekonomi ajani'; xtal_make_cost_usd_m2 ve xtal_conversion_cost_usd_per_kg ara_sonuc ve 'poly haric'; altyapi'nin 138 parametresinde poli fiyatı yok. Ayrıca wf_poly_price_chain Çin iç fiyatını KDV hariç kullanıyor, lojistik/gümrük yok; satın alınan wafer ise gümrük ve lojistikle (wf_buy_cost_m2) sayılıyor, bu yüzden K3 yap-al karşılaştırması asimetrik.",
+    "kaba_buyukluk": "F2: 0.482 kg/m2 × 4.36-17.5 $/kg = 2.1-8.4 $/m2 ≈ 0.9-3.7 c/W (≈230 W/m2); ithal teslim eki (poli fiyatının %5-25'i) +0.05-0.9 c/W. F1'de (satın alınan wafer) sıfır. Hacimden bağımsız.",
+    "dayanak": "Hesap: wafer ornek_hesap adım 10 (4.36 $/kg × 0.482 kg/m2 = 2.10 $/m2); wf_poly_price_nonchina_usd_kg 17.5. Lojistik/gümrük oranı tahmin. Fiyat çelişkisi ayrıca çözülmeli: kristal 18.5, wafer Çin 4.36, Çin dışı 17.5 $/kg."
+   },
+   {
+    "kalem": "Patent/lisans (FTO) riski, faza göre: F1 HJT metalizasyonu, 0BB/çok telli ara bağlantı, TCO, fişli mikroinverter ve depolamalı balkon çözümleri, Na-iyon paket/BMS; F2 kristal çekme (su soğutmalı ceket ve ısı kalkanı, RCz yeniden şarj/besleyici), kendi PECVD/PVD araç tasarımları, wafer testere/bölme",
+    "onerilen_alan": "standart (mevzuat + fikri mülkiyet); karar kullanıcıda",
+    "sinif": "urun_sabit",
+    "olcek": "genel (şirket)",
+    "neden_onemli": "Hiçbir alanda maliyet olarak yok. Kristal alanı varsayılan seçtiği ceket ve ısı kalkanı için bir Jinko patentini (US11708643B2) kaynak gösteriyor (cz_jacket_speed_gain) ve örnek hesap 'ceketli' yapılmış; ilk çıktı kristali FTO kapsamına almamıştı. Satın alınan hücre ve pastada risk tedarikçi tazmin şartıyla kaydırılabilir; kendi yapılan süreç ve makinede risk firmada kalır. Patent durumları bu görevde incelenmedi.",
+    "kaba_buyukluk": "FTO analizi 60-240 k$ tek seferlik (×0.2122 = 13-51 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 1.7-6.8 / 0.53-2.1 / 0.10-0.39 c/W. Lisans gerekirse satışın %1-3'ü ≈ 1-4.5 c/W; tamamen belirsiz.",
+    "dayanak": "Tahmin; patent durumu incelenmedi (temel HJT patentlerinin bir kısmının süresinin dolmuş olabileceği hafızadan, doğrulanmadı). Doğrulama: patent vekiliyle F1 ve F2 kalemlerinde FTO taraması."
+   },
+   {
+    "kalem": "Eğitim ve sertifikalı personel (HF, silan/ATEX, kimyasal, forklift, IATA/ADR tehlikeli madde, ilk ekip eğitimi; kendi makineleri için 2006/42/AT kullanım ve eğitim dokümantasyonu)",
+    "onerilen_alan": "altyapi",
+    "sinif": "zaman",
+    "olcek": "unite",
+    "neden_onemli": "Eğitim yalnızca altyapi'nin eco_labor_overhead_factor çarpanında. Süreç alanları kendi ücretlerini kullandığı için (mod_labor_rate_usd_h 7, xtal_wage_usd_h 12, hjt_labor_cost_usd_per_fte_yr 20 k$, el_labor_usd_h 6.17, std_rt_labor_usd_per_h 10) çoğunda eğitim yükü yok. Kendi makinesini yapan firma 2006/42/AT anlamında üretici sayılıyor.",
+    "kaba_buyukluk": "İlk eğitim 45-110 k$/ünite (×0.2122) + devir 10-30 k$/yıl ≈ 20-53 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 2.6-7.1 / 0.81-2.2 / 0.15-0.40 c/W.",
+    "dayanak": "Hesap + tahmin. FTE alan kadrolarından: hücre 16.6, modül 2-4, pil paket 2-3, kutu ~2, saha 4.2 (F1 ≈28); F2 ek kristal ~4.2, wafer 6.3 (≈38). 80-120 h eğitim × 8-13 $/h + 20-50 k$ dış sertifika (tahmin)."
+   },
+   {
+    "kalem": "Yangın ve İSG donanımındaki boşluklar: bina geneli yangın algılama/alarm, HF ve silan acil müdahalesi için SCBA/KKD, yasal periyodik muayeneler (basınçlı kap, kaldırma, elektrik tesisatı, topraklama)",
+    "onerilen_alan": "altyapi",
+    "sinif": "saha_sabit",
+    "olcek": "saha",
+    "neden_onemli": "Sprinkler, gaz odası, yangın suyu, pil yangın bölmesi, acil duş/HF kiti ve OSGB sayılmış. Algılama/alarm sistemi, SCBA ve periyodik kontroller ayrı kalem olarak yok.",
+    "kaba_buyukluk": "30-80 k$ yatırım (×0.219) + 10-25 k$/yıl ≈ 17-43 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 2.2-5.7 / 0.69-1.8 / 0.13-0.32 c/W.",
+    "dayanak": "Tahmin. Yük faktörü 0.219 altyapi (bina ömürlü)."
+   },
+   {
+    "kalem": "Ürün tasarım NRE'si: panel varyantı (yerleşim, bağlantı kutusu, kenar), pil paketinin mekanik/ısıl tasarımı ve satın alma yolunda hücre tedarikçisi kalifikasyonu",
+    "onerilen_alan": "modul, pil",
+    "sinif": "urun_sabit",
+    "olcek": "urun",
+    "neden_onemli": "Elektronik ürün mühendisliğini sayıyor (el_py_A × el_eng_cost_usd_per_py + el_nre_other_A_usd). Modülde yalnızca kalıplar (mod_f_cost_molds), pilde yalnızca takım ve sertifika (bat_f47_product_fixed) var; mühendislik ve hücre yaşlandırma kalifikasyonu yok.",
+    "kaba_buyukluk": "Varyant başına 40-150 k$ + tedarikçi başına hücre kalifikasyonu 20-80 k$ = 60-230 k$ (×0.2122 = 13-49 k$/yıl). Varyant yıllık hacmi V varsayımıyla 0.75 / 2.4 / 13.2 MWp'ta 1.7-6.5 / 0.53-2.0 / 0.10-0.37 c/W.",
+    "dayanak": "Tahmin: 0.5-2 kişi-yıl × el_eng_cost_usd_per_py 40 k$ (elektronik, tahmin) + 20-60 k$ prototip ve ön test."
+   },
+   {
+    "kalem": "Bina uyarlaması: (F2) fırın bölgesinde lokal temel ve ankraj bloğu, yüksek tavan ve döşeme güçlendirme, vinç/caraskal; (F1 ve F2) kiralık binada tadilat ve kira sonunda eski hale getirme",
+    "onerilen_alan": "altyapi",
+    "sinif": "zaman",
+    "olcek": "unite",
+    "neden_onemli": "Altyapi 'bina güçlendirme hariç' (site_seismic_capex_frac) ve 'lokal temel ve ankraj bloğu gerekebilir' (site_floor_load_req_kN_m2) diyor ama maliyet parametresi yok. 9 m net yükseklik ve 30 kN/m2 döşemeyi tek ilana dayanan kira bedeli (eco_rent_usd_m2_month) karşılamayabilir. Pota, sıcak bölge ve ingot değişimi için kaldırma ekipmanı ne kristalde ne altyapi'de var.",
+    "kaba_buyukluk": "F2: 100-300 k$ (×0.219 = 22-66 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 2.9-8.8 / 0.91-2.7 / 0.17-0.50 c/W. F1: 30-100 k$ (6.6-22 k$/yıl) → 0.88-2.9 / 0.27-0.91 / 0.05-0.17 c/W.",
+    "dayanak": "Tutarlar tahmin. Yük faktörü altyapi eco_annual_infra_charge_usd_yr'den (hesap)."
+   },
+   {
+    "kalem": "Tehlikeli atık bertarafı: kuvars pota artığı, kullanılmış grafit sıcak bölge (F2), reddedilen Na-iyon hücreleri, solvent/yağ, kimyasal ambalajı",
+    "onerilen_alan": "altyapi",
+    "sinif": "alan",
+    "olcek": "saha",
+    "neden_onemli": "CaF2 ve kerf çamuru sayılmış. xtal_pot_scrap_kg_day için 'satış veya atık' denmiş ama bedel yok. Grafit/kuvars sarfı ve pil hücresi hurdası için lisanslı bertaraf bedeli yok.",
+    "kaba_buyukluk": "5-30 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 0.67-4 / 0.21-1.2 / 0.04-0.23 c/W (pota/grafit kısmı yalnız F2).",
+    "dayanak": "Tahmin. Miktar kristal kütle dengesinden (xtal_pot_scrap_frac_of_charge 0.05 × şarj) türetilebilir."
+   },
+   {
+    "kalem": "Reaktif güç kompanzasyonu ve harmonik filtre; elektrik tarife yapısı (tek/çift terimli, güç bedeli)",
+    "onerilen_alan": "altyapi",
+    "sinif": "saha_sabit",
+    "olcek": "saha",
+    "neden_onemli": "faz1 dosyalarında 'kompanzasyon', 'harmonik', 'güç bedeli' için eşleşme yok (grep; 'reaktif' yalnızca hücredeki RPD için geçiyor). eco_elec_price_usd_kwh tek fiyat. Grafit ısıtıcıların tristör sürücüleri, RF jeneratörler, indüksiyonlu ısıtma ve çok sayıda anahtarlamalı güç kaynağı düşük güç faktörü ve harmonik üretir. Türk mevzuatında reaktif enerji sınırları ve bedeli var (hafızadan, doğrulanmadı).",
+    "kaba_buyukluk": "20-80 k$ yatırım (×0.219 = 4.4-17.5 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 0.58-2.3 / 0.18-0.73 / 0.03-0.13 c/W. Kompanzasyonsuz reaktif bedel ve güç bedeli bilinmiyor.",
+    "dayanak": "Tahmin. EPDK tüketici hizmetleri mevzuatı ve OSB/tedarikçi teklifiyle doğrulanmalı."
+   },
+   {
+    "kalem": "Yatırım teşviki ve teşvikli finansman (NEGATİF kalem): makine KDV istisnası, gümrük muafiyeti, faiz desteği",
+    "onerilen_alan": "altyapi",
+    "sinif": "zaman",
+    "olcek": "genel (şirket)",
+    "neden_onemli": "Tarama yalnızca maliyet artıran kalemlere bakarsa sonuç yukarı yanlı olur. Altyapi SGK 5 puanını baz almış, eco_wacc için 'teşvikli kredi alt sınırı düşürebilir' notu ve yatırım teşvikleri hakkında bir deney sorusu var; ama makine KDV istisnası, gümrük muafiyeti ve faiz desteği sayısallaştırılmamış.",
+    "kaba_buyukluk": "Hesap (varsayımlı): WACC'deki her 1 puan düşüş eco_crf_tax_machine'i ≈0.0079 azaltır (0.2122 @%12 → 0.2042 @%11 → 0.1964 @%10); F1 capex 4.6 M$'da ≈ −36 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta −4.8 / −1.5 / −0.28 c/W puan başına. KDV istisnası KDV zaten indirilebildiği için büyük ölçüde nakit akışı zamanlaması (küçük finansman etkisi). Gümrük muafiyeti kendi yapım makinelerin ithal bileşenlerinde geçerli olabilir; oranlar bilinmiyor.",
+    "dayanak": "CRF_tax = CRF × (1 − t × PV_amortisman)/(1 − t), t = 0.125, 8 yıl (altyapi formülü; hesap). Teşvik kapsamı ve koşulları hafızadan, doğrulanmadı; Sanayi ve Teknoloji Bakanlığı mevzuatı ve banka teklifleriyle doğrulanmalı (altyapi'nin kendi deney sorusu)."
+   }
+  ],
+  "cift_sayimlar": [
+   {
+    "kalem": "Makine tasarım NRE'si uzlaştırması (toptan eco_nre ile aşağıdan yukarı alan NRE'leri) ve CE teknik dosyası",
+    "ilgili_idler": [
+     "eco_nre_machine_design_usd",
+     "eco_nre_per_unit_usd",
+     "xtal_puller_nre_usd",
+     "hjt_tool_nre_usd",
+     "f_hjt_urun_sabit",
+     "xtal_puller_ce_usd",
+     "std_mach_techfile_usd_per_machine_type",
+     "std_f_mach_techfile_per_unit",
+     "saw_capex_usd",
+     "sq_capex_usd",
+     "wf_split_capex_usd",
+     "wf_etch_station_capex_usd",
+     "mod_lam_capex_usd",
+     "mod_stringer_capex_usd",
+     "bat_pack_line_capex_usd"
+    ],
+    "alanlar": [
+     "altyapi",
+     "kristal",
+     "hucre",
+     "standart",
+     "wafer",
+     "modul",
+     "pil",
+     "elektronik"
+    ],
+    "cozum": "İlk çıktıdaki iki çelişkili madde (eksik 1.1-3.3 c/W ve çift 2.9 c/W) birleştirildi. eco_nre_machine_design_usd (5 M$, tahmin) 'ünite makinelerinin tasarım + prototip NRE'si': tüm makineleri kapsayan toptan sayı. Kristal (0.6 M$) ve hücre (2.5 M$, f_hjt_urun_sabit) aynı işi aşağıdan yukarı ayrıca tutuyor; wafer, modül, pil paketi ve kutu testi için aşağıdan yukarı NRE yok (tahmin 1.15-3.45 M$). Aşağıdan yukarı toplam 4.3-6.6 M$, yani toptan değerle aynı mertebe: net fark −0.7 ile +1.6 M$ (belirsiz). Gerçek riskler: (1) toplayıcı eco_nre_per_unit_usd ile f_hjt_urun_sabit'i ve kristal NRE'sini birlikte alırsa +3.1 M$ → ×0.2122 = 658 k$/yıl → N=1'de 0.75 / 2.4 / 13.2 MWp için 88 / 27 / 5.0 c/W; (2) F1'de (satın alınan wafer) eco_nre'nin kristal ve wafer makinelerine düşen kısmı yüklenmemeli: F1 aşağıdan yukarı NRE 3.05-3.95 M$ (hücre 2.5 + modül 0.3-0.8 + pil paket 0.2-0.5 + kutu testi 0.05-0.15), yani toptan 5 M$ F1'de 1.05-1.95 M$ fazla (2.4 MWp, N=1'de 9.3-17 c/W). Çözüm: eco_nre = Σ makine tipi NRE'si (faz bayrağıyla); her süreç alanı kendi tipini aşağıdan yukarı tutsun, altyapi yalnızca toplasın; bölen tek tanım (kopya ünite sayısı × yıllık çıktı) ve tek yıllıklaştırma (eco_crf_tax_machine). Şu an f_hjt_urun_sabit ömür boyu toplam üretime doğrusal bölüyor (W_cumulative_all_lines tanımsız), eco_nre_per_unit_usd N_units_planned'e (tanımsız). CE/teknik dosyanın sahibi standart (std_mach_techfile_usd_per_machine_type 25 k$/tip); xtal_puller_ce_usd (40 k$) silinsin."
+   },
+   {
+    "kalem": "Sermaye yükü, bakım, sigorta ve ortak birim fiyatların alanlardaki kopyaları (işçilik, elektrik, kur, WACC, ömür)",
+    "ilgili_idler": [
+     "eco_annual_capex_charge_usd_yr",
+     "eco_maint_frac_capex_yr",
+     "eco_insurance_frac_capex_yr",
+     "eco_crf_tax_machine",
+     "cz_cost_capex_usd_h",
+     "xtal_wacc",
+     "cz_maint_frac",
+     "cz_puller_life_yr",
+     "f_hjt_zaman_per_W",
+     "hjt_maint_frac_capex_per_yr",
+     "mod_f_cost_equipment",
+     "mod_maint_frac_per_y",
+     "mod_equip_life_y",
+     "bat_line_maint_frac",
+     "el_f_crf",
+     "el_discount_rate",
+     "el_n_amort_yr",
+     "xtal_price_electricity_usd_kwh",
+     "xtal_wage_usd_h",
+     "hjt_labor_cost_usd_per_fte_yr",
+     "mod_labor_rate_usd_h",
+     "el_labor_usd_h",
+     "std_rt_labor_usd_per_h",
+     "bat_fte_hours_yr",
+     "eco_labor_operator_usd_h",
+     "eco_labor_technician_usd_h",
+     "eco_elec_price_usd_kwh"
+    ],
+    "alanlar": [
+     "altyapi",
+     "kristal",
+     "wafer",
+     "hucre",
+     "modul",
+     "pil",
+     "elektronik",
+     "standart"
+    ],
+    "cozum": "Altyapi yükünü 'tüm proses ajanları kullanır' diye tanımlıyor, ama her alan kendi yükünü de hesaplıyor. Toplayıcı ikisini birlikte uygularsa bakım iki kez sayılır: %4-5 × F1 capex 4.6 M$ = 184-230 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 25-31 / 7.7-9.6 / 1.4-1.7 c/W. Uygulamazsa sigorta ve vergi düzeltmesi eksik kalır ve getiri tutarsız olur: hücrede f_hjt_zaman_per_W depr_years ile WACC'siz doğrusal (depr_years tanımsız, örnekte 5 yıl), modülde WACC'siz, elektronikte %8/5 yıl, kristalde %10/7 yıl, altyapi'de %12/8 yıl + vergi. Çözüm: alanlar yalnızca capex, ömür ve (isteğe bağlı) bakım oranı versin; yük tek formülle (eco_annual_capex_charge_usd_yr) hesaplansın. Ortak girdilerin tek kaynağı altyapi: işçilik 6.17 / 7 / ~9.7 / 10 / 12 / ~13.9 $/h yerine eco_labor_operator_usd_h 8.4 ve eco_labor_technician_usd_h 13.4; elektrik 0.10 / 0.105 / 0.12 $/kWh; kur 48.92 / 49.0; CNY 6.7 / 6.72 / 6.8; EUR 1.139 / 1.15; Cu 12 / 14.74 $/kg. Wafer'ın fin_crf'i hiçbir alanda tanımlı değil."
+   },
+   {
+    "kalem": "Kutunun dış kasası, contası, valfi ve kalıbı hem pilde hem elektronikte (ÜST SINIR; iki kasa modeli uzlaştırılmadan kesin tekrar verilemez)",
+    "ilgili_idler": [
+     "bat_enclosure_fixed_usd",
+     "bat_enclosure_ref_usd",
+     "bat_box_misc_usd",
+     "bat_tooling_fixed_usd",
+     "bat_tooling_ref_usd",
+     "bat_f45_pack_parts",
+     "bat_f47_product_fixed",
+     "el_f_kasa",
+     "el_enclosure_fixed_usd",
+     "el_f_shell_var",
+     "el_gasket_usd_per_m2",
+     "el_f_press",
+     "el_f_mold_tooling",
+     "el_mold_c0_usd",
+     "el_mold_c1_usd_per_cm2"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik"
+    ],
+    "cozum": "Mevcut arayüz anlaşması: elektronik arayüzü ('Sorumluluk siniri: pil mekanigi ve pil EPR') 'Dis kasa, BMS elektronigi ve UN 38.3 bu alanda (pil ajani saymasin)' diyor ve kasa hacmi pil bölmesini içeriyor; pil bat_f45_pack_parts içinde kutu sabit ve boyut ölçekli kasa sayarak anlaşmayı ihlal ediyor. Ancak iki model aynı 800 W kutuyu ~3 kat farklı fiyatlıyor: elektronik ornek_hesap adım 6 kabuk 16.8 $ (16.1 L; termal ve dolguyla kasa toplamı 32.9 $), pil 15 + 20 × 1.68^0.85 ≈ 46 $. İlk çıktı ucuz olanı sahip seçmişti; bu maliyeti aşağı çeken bir tercihti. Önce kasa maliyet modeli uzlaştırılsın (alev geciktirici V-0 reçine, havalandırma valfi, IP sınıfı, darbe/ezilme, pil bölmesi ısıl bariyeri); sonra tek sahip elektronik (mevcut anlaşma), pil yalnızca hücre tutucu, bara, ısıl bariyer, yalıtım ve tutucu kalıbını saysın. Tekrar aralığı: alt = elektronik kabuğunun pil bölmesi payı (11.2/16.1 × 16.8 ≈ 11.7 $), üst = pil tahmini (≈46 $) → 800 W'ta 1.5-5.8 c/W; A-200 W tek panelli kutu (430 Wh; pil ornek_hesap adım 5'te kasa 15 + 9.75 = 24.75 $) ≈3.5-12 c/W (alt uç kaba ölçekleme). Hacimden bağımsız. B senaryosu: AB 2023/1542 Md. 11 (18.02.2027) taşınabilir pilin son kullanıcı tarafından çıkarılabilir ve değiştirilebilir olmasını istiyor; B'de ayrı, çıkarılabilir paket muhafazası gerekebilir, bu yüzden pil muhafazası bir bayrakla (B ve ≤5 kg) korunmalı, silinmemeli."
+   },
+   {
+    "kalem": "UN 38.3 tip testi üç alanda sayılıyor",
+    "ilgili_idler": [
+     "bat_un383_cost_usd_per_design",
+     "bat_n_designs",
+     "bat_f47_product_fixed",
+     "el_un383_usd",
+     "el_f_F_variant",
+     "std_tt_batt_un383_usd",
+     "std_f_typetest_total_usd"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik",
+     "standart"
+    ],
+    "cozum": "Mevcut arayüz anlaşması UN 38.3'ü elektroniğe veriyor ('pil ajani saymasin'); pil yine de sayıyor (10 k$ × bat_n_designs 2), standart da sayıyor (12 k$/tasarım). Öneri: sahip standart; gerekçe tüm tip testlerinin tek laboratuvar programında ve std_f_typetest_total_usd içinde n_batt_designs ile tutulması. Bu elektronik-pil anlaşmasını değiştirir; alternatif: elektronik sahip kalır, std_tt_batt_un383_usd ve bat_un383_cost_usd_per_design toplamdan çıkar. Fazladan ≈35 k$/aile (×0.2122 = 7.4 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 0.99 / 0.31 / 0.06 c/W."
+   },
+   {
+    "kalem": "Pil güvenlik değerlendirmesi (IEC 62619 benzeri / VDE-AR-E 2510-50 / AB Ek V)",
+    "ilgili_idler": [
+     "bat_safety_cert_cost_usd",
+     "bat_f47_product_fixed",
+     "std_tt_batt_safety_usd",
+     "std_tt_batt_annexv_extra_usd"
+    ],
+    "alanlar": [
+     "pil",
+     "standart"
+    ],
+    "cozum": "Bu konuda yazılı arayüz anlaşması yok; pil bat_eu_industrial bayrağını standart'a veriyor. Sahip standart (SBESS ve taşınabilir bayraklarıyla); bat_safety_cert_cost_usd toplamdan çıksın, pil yalnızca gereklilik bayrağını versin. Fazladan ≈40 k$/aile (×0.2122 = 8.5 k$/yıl) → 1.1 / 0.35 / 0.06 c/W."
+   },
+   {
+    "kalem": "Kutu elektroniği tip testleri ve sertifikası (IEC 62109, VDE-AR-N 4105, EMC, RED, 62368)",
+    "ilgili_idler": [
+     "el_cert_cost_A_usd",
+     "el_cert_cost_B_usd",
+     "el_f_F_variant",
+     "std_tt_inverter_62109_usd",
+     "std_tt_emc_usd",
+     "std_tt_radio_cyber_usd",
+     "std_tt_gridcode_per_country_usd",
+     "std_tt_plugin_system_incr_usd",
+     "std_tt_portable_62368_usd"
+    ],
+    "alanlar": [
+     "elektronik",
+     "standart"
+    ],
+    "cozum": "Sahip standart (ülke ve varyant bayraklarıyla). el_f_F_variant yalnızca mühendislik (el_py_*), el_nre_other_* (ön uyum dahil), kalıp ve el_cra_* tutsun. İki liste uzlaştırılmalı: A için elektronik 150 k$, standart 92 k$ (30+12+15+25+10). Fazladan 92-150 k$/varyant (×0.2122 = 20-32 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 2.6-4.2 / 0.81-1.3 / 0.15-0.24 c/W."
+   },
+   {
+    "kalem": "EPR/WEEE ücretleri (pil ve kutu)",
+    "ilgili_idler": [
+     "bat_epr_fee_usd_per_kg",
+     "bat_f48_misc_per_box",
+     "std_epr_fee_batt_usd_per_kg",
+     "std_f_epr_batt_per_set",
+     "el_weee_usd_per_kg",
+     "el_f_adet_other",
+     "std_epr_fee_eee_usd_per_kg",
+     "std_f_epr_box_per_set",
+     "std_epr_admin_usd_per_country_year"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik",
+     "standart"
+    ],
+    "cozum": "Mevcut arayüz anlaşması: elektronik arayüzü 'pil EPR pil ajaninda' diyor; standart ise std_f_epr_batt_per_set ile pil EPR'sini, std_f_epr_box_per_set ile kutu WEEE'sini ayrıca sayıyor. Öneri: tek formül ailesi standart'ta (ülke bazlı ücret tablosu + std_epr_admin_usd_per_country_year; panel, kutu, pil aynı yerde). Bu elektronik-pil anlaşmasını değiştirir; alternatif: pil EPR'si pil'de kalır ve std_f_epr_batt_per_set toplamdan çıkar. Her iki durumda ücret parametreleri teknik. Fazladan: pil 1 $/kg × 4.57 kg = 4.57 $/kutu (A-200 W ≈2.3 c/W; Wh ile ölçeklendiği için kutu boyundan büyük ölçüde bağımsız). Kutu WEEE tekrarı küçük (A-800'de el WEEE 1.11 $ ≈0.14 c/W)."
+   },
+   {
+    "kalem": "Kutu hat sonu testi: hipot/topraklama/yalıtım istasyonu ve işçiliği elektronik ile standart'ta (pil'in BMS/OCV/IR testi ayrı işlev, çift sayım değil)",
+    "ilgili_idler": [
+     "el_test_station_capex_A_usd",
+     "el_test_station_capex_B_usd",
+     "el_f_test_station",
+     "el_test_time_A_s",
+     "std_rt_box_test_capex_usd",
+     "std_f_rt_capex_per_set",
+     "std_f_rt_box_usd",
+     "std_rt_box_hipot_touch_s",
+     "std_rt_box_bonding_touch_s"
+    ],
+    "alanlar": [
+     "elektronik",
+     "standart"
+    ],
+    "cozum": "İlk çıktıdaki 'BMS koruma testi üç alanda' iddiası geri çekildi: el_test_time_A_s tanımı 'hipot, fonksiyon, NA-koruma, kalibrasyon' (BMS yok); pil arayüzü 'BMS koruma EOL testi DAHIL (elektronik ajani tekrar saymamali)' ve bat_eol_test_usd_per_box notu aynı. Gerçek tekrar: el_test_station_capex_A_usd 'güvenlik test cihazı' içeriyor ve el_f_test_station ile amortize ediliyor; standart ayrıca std_rt_box_test_capex_usd (25 k$) istasyonunu std_f_rt_capex_per_set içinde ve dokunma işçiliğini std_f_rt_box_usd ile sayıyor. Sahip elektronik; standart zorunlu test listesini ve asgari dokunma sürelerini maliyet değil kısıt olarak versin; std_f_rt_box_usd ve std_f_rt_capex_per_set'in kutu terimi toplamdan çıksın. Pil ve elektronik istasyonlarının tek istasyonda birleştirilmesi yalnızca bir tasarım seçeneği. Fazladan ≈1-1.8 $/kutu (25 k$ × 0.2122 / 3000 kutu + ~0.03 $ işçilik): 800 W'ta 0.13-0.23 c/W, 200 W'ta 0.5-0.9 c/W."
+   },
+   {
+    "kalem": "Modül zorunlu rutin testi (flaş + hipot): istasyon ve işçilik",
+    "ilgili_idler": [
+     "mod_test_capex_usd",
+     "mod_f_cost_equipment",
+     "mod_labor_min_per_panel",
+     "std_rt_module_test_capex_usd",
+     "std_f_rt_capex_per_set",
+     "std_f_rt_panel_usd",
+     "std_rt_module_iv_touch_s",
+     "std_rt_module_hipot_touch_s"
+    ],
+    "alanlar": [
+     "modul",
+     "standart"
+    ],
+    "cozum": "Sahip modul: flaş, EL ve hipot aynı istasyonda (mod_test_capex_usd 70 k$) ve mod_labor_min_per_panel 'test yükleme'yi içeriyor. Standart'ta own_flash_in_std = 0 sabitlensin ve std_f_rt_panel_usd kaldırılsın. İkinci 80 k$ istasyon (×0.2122 = 17 k$/yıl) → 0.75 / 2.4 / 13.2 MWp'ta 2.3 / 0.71 / 0.13 c/W."
+   },
+   {
+    "kalem": "Kutu son montaj işçiliği (kapatma, kablaj, BMS bağlantısı, etiket)",
+    "ilgili_idler": [
+     "bat_pack_min_per_box",
+     "bat_f43_pack_labor",
+     "el_final_asm_A_min",
+     "el_final_asm_B_min",
+     "el_f_adet_other"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik"
+    ],
+    "cozum": "bat_pack_min_per_box tanımı açıkça 'kapatma, kablaj, BMS bağlantısı, etiket'; bunlar elektroniğin son montajıyla (el_final_asm_*) örtüşüyor. Sahip elektronik; pil yalnızca hücre→paket montajını (bat_pack_cells_per_h_*) saysın, bat_pack_min_per_box paket içi işlere indirilsin. Fazladan 8-15 dk × 6.17-13.89 $/h ≈ 0.8-3.5 $/kutu (A-200 W'ta 0.4-1.7 c/W)."
+   },
+   {
+    "kalem": "BMS çevresi: sigorta ve DC konnektör üç tanımda",
+    "ilgili_idler": [
+     "el_afe_usd",
+     "el_bms_support_usd",
+     "el_bms_bar_per_W_usd",
+     "el_f_bms_switch",
+     "bat_box_misc_usd"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik"
+    ],
+    "cozum": "BMS donanımının elektronikte olması doğru; pil 'BMS hariç' diyor. Sigorta üç tanımda geçiyor: el_bms_support_usd 'sigorta/ön şarj', el_bms_bar_per_W_usd 'bara/sigorta', bat_box_misc_usd 'DC konnektör, sigorta, rakor, kablo'. Sigorta ve DC konnektör elektronikte tek kalem olsun, bat_box_misc_usd'den çıkarılsın. BMS koruma testi pil'de kalır (mevcut anlaşma). Tekrar ≈1-4 $/kutu."
+   },
+   {
+    "kalem": "Tesis izinleri, ÇED ve patlamadan korunma dokümanı",
+    "ilgili_idler": [
+     "site_fixed_capex_usd",
+     "std_env_permit_usd_per_site",
+     "std_atex_gascode_compliance_usd_per_site",
+     "std_f_saha_fixed_per_unit",
+     "site_fixed_opex_usd_yr",
+     "std_factory_inspection_usd_per_year"
+    ],
+    "alanlar": [
+     "altyapi",
+     "standart"
+    ],
+    "cozum": "Sahip altyapi (saha_sabit kalemlerin tek toplayıcısı). site_fixed_capex_usd içindeki 'izin/mühendislik/ÇED/patlamadan korunma dokümanı 150 k$' kalsın; std_env_permit_usd_per_site ve std_atex_gascode_compliance_usd_per_site std_f_saha_fixed_per_unit'ten çıksın; standart yükümlülük listesini versin. QMS ve fabrika denetimi standart'ta kalabilir; site_fixed_opex_usd_yr içindeki 'kalibrasyon' kalite laboratuvarıyla aynı yerde toplanmalı. Gaz güvenliği donanımı (kabin, dedektör, abatement) çift sayılmamış. Tekrar ~100 k$ (×0.219 = 22 k$/yıl) → N=1'de 2.9 / 0.91 / 0.17 c/W."
+   },
+   {
+    "kalem": "Özel proses gazları (SiH4, H2, NF3, katkı karışımları)",
+    "ilgili_idler": [
+     "f_hjt_gas_cost",
+     "f_hjt_campaign",
+     "hjt_sih4_price_usd_per_kg",
+     "hjt_h2_price_usd_per_kg",
+     "hjt_dopant_gas_usd_per_m2",
+     "eco_gas_cost_var_usd_per_m2",
+     "eco_gas_cost_idle_usd_h",
+     "eco_dopant_cyl_cost_usd_yr",
+     "eco_price_sih4_usd_kg",
+     "eco_price_h2_usd_kg"
+    ],
+    "alanlar": [
+     "hucre",
+     "altyapi"
+    ],
+    "cozum": "Tüketim (g/m2, bekleme, sezonlama) hücrede; fiyat, silindir kirası ve raf ömrü altyapi'de. Maliyet tek formülle hücrede eco_price_* kullanılarak hesaplansın; eco_gas_cost_var_usd_per_m2, eco_gas_cost_idle_usd_h ve eco_dopant_cyl_cost_usd_yr ya toplama girmesin ya da hücre formülü kaldırılsın. Fiyatlar çelişiyor: SiH4 80 ve 60 $/kg, H2 10 ve 25 $/kg. Etkisi küçük (~0.1-0.2 c/W)."
+   },
+   {
+    "kalem": "Argon hem kristalde hem altyapi'de, ≈2.45 kat farklı fiyatla",
+    "ilgili_idler": [
+     "cz_cost_argon_usd_h",
+     "xtal_price_argon_usd_nm3",
+     "eco_argon_cost_usd_h",
+     "eco_price_argon_usd_kg",
+     "eco_argon_tank_cost_usd_yr"
+    ],
+    "alanlar": [
+     "kristal",
+     "altyapi"
+    ],
+    "cozum": "Debi kristalde (cz_argon_slpm); fiyat ve tank kirası altyapi'de; maliyet tek formülde (eco_argon_cost_usd_h). xtal_price_argon_usd_nm3 silinsin. Oran düzeltildi (ilk çıktıdaki 4.4 yanlıştı): altyapi 1.1 $/kg × 1.782 kg/Nm3 = 1.96 $/Nm3, kristal 0.8 $/Nm3 → 2.45 kat. 120 mm'de argon kristal fiyatıyla ~1.46, altyapi fiyatıyla ~3.6 $/kg ingot. Çift sayılırsa +0.5-1.1 c/W (F2)."
+   },
+   {
+    "kalem": "Mini-ortam FFU ve soğutma elektriği (hücre taban yükü ile altyapi yardımcı tesisleri)",
+    "ilgili_idler": [
+     "hjt_base_load_kW",
+     "f_hjt_elec",
+     "site_ffu_power_kw",
+     "site_cooling_power_kw",
+     "site_minienv_capex_usd_m2"
+    ],
+    "alanlar": [
+     "hucre",
+     "altyapi",
+     "kristal"
+    ],
+    "cozum": "Sahip altyapi (FFU, chiller, HVAC, basınçlı hava, UPW). hjt_base_load_kW tanımından 'mini-ortam FFU 5 kW' ve 'chiller' çıkarılsın. Altyapi'nin 'P_elec_unit_kW makine terminalinde tanımlı' kuralı süreç alanlarına yazılı arayüz olarak bildirilsin. Kristalin önerdiği ISO 5-6 besleme hazırlama mini-ortamı ve çekici FFU'su hiçbir yerde fiyatlanmamış; K4 kapsam kararı gerekli. Tekrar: FFU ≈4.6 k$/yıl, chiller payı bilinmiyor (13.2 MWp'ta ≤0.1-0.2 c/W)."
+   },
+   {
+    "kalem": "UPW/su hem hücrede hem altyapi'de, tüketim katsayıları 4 kat farklı",
+    "ilgili_idler": [
+     "f_hjt_alan_other",
+     "hjt_upw_L_per_m2",
+     "site_water_cost_usd_per_wafer",
+     "site_water_fixed_cost_usd_yr",
+     "site_upw_l_per_m2",
+     "wf_preclean_chem_usd_m2"
+    ],
+    "alanlar": [
+     "hucre",
+     "wafer",
+     "altyapi"
+    ],
+    "cozum": "Sahip altyapi (fiyat, sabit taşma, UPW üretim enerjisi). Tüketim hücre ve wafer'dan arayüzle gelsin; UPW terimi f_hjt_alan_other'dan, su payı wf_preclean_chem_usd_m2'den çıksın. Katsayılar uzlaştırılmalı: hücre 30 L/m2 (Louwen), altyapi 120 L/m2 (tahmin). Maliyet altyapi'de 0.6-0.8 c/W (182 mm), hücrede 0.04 c/W."
+   },
+   {
+    "kalem": "HF/asit atık arıtma, CaF2 ve kerf çamuru bertarafı, NOx yıkayıcı",
+    "ilgili_idler": [
+     "wf_etch_cost",
+     "wf_waste_treat_usd_per_kg_si",
+     "wf_kerf_cost",
+     "wf_kerf_value_usd_kg",
+     "wf_etch_station_capex_usd",
+     "site_hf_treatment_var_usd_per_m2",
+     "site_hf_treatment_fixed_usd_h",
+     "site_kerf_cost_usd_per_wafer",
+     "site_fixed_capex_usd"
+    ],
+    "alanlar": [
+     "wafer",
+     "altyapi"
+    ],
+    "cozum": "Sahip altyapi (arıtma, çamur, NOx). Wafer yalnızca asit kimyasalını ve dağlama tezgâhını saysın; wf_waste_treat_usd_per_kg_si terimi ve wf_kerf_cost toplamdan çıksın; HF ve kerf kütlesi arayüzle altyapi'ye gitsin. NOx yıkayıcı iki yerde: wf_etch_station_capex_usd içinde 'lokal gaz yıkayıcı' ve site_fixed_capex_usd içinde 'NOx yıkayıcı (K8) 80 k$'; biri silinsin (öneri: altyapi'de kalsın). İşletmede tekrar <0.1 c/W, capex tekrarı ≈40-80 k$ (F2)."
+   },
+   {
+    "kalem": "Şebeke kesintisi ve gerilim çökmesi kaybı ile yedek güç; altyapi'de yanlış atıf",
+    "ilgili_idler": [
+     "cz_cost_outage_usd_h",
+     "xtal_outage_events_per_yr",
+     "xtal_outage_loss_usd_per_event",
+     "site_power_quality_loss_usd_yr",
+     "site_backup_net_value_usd_yr",
+     "site_grid_outage_events_yr",
+     "site_voltage_sag_events_yr",
+     "site_p_structure_loss_per_sag",
+     "site_ups_capex_usd_kva",
+     "site_genset_capex_usd_kva"
+    ],
+    "alanlar": [
+     "kristal",
+     "altyapi"
+    ],
+    "cozum": "Risk-yatırım dengesi tek yerde, altyapi'de kurulsun: seçime göre ya beklenen kayıp ya da UPS/jeneratör yatırımı sayılır; cz_cost_outage_usd_h kristal toplamından çıksın. Değer çelişkisi 17 kat: altyapi ornek_hesap ADIM 16 '3 fırın × 50 kUSD (tahmin, kristal ajanı)' diyor, oysa kristal xtal_outage_loss_usd_per_event = 3 k$ (1-15 k$) veriyor; yani altyapi'deki atıf yanlış. Kristal adım 12'deki değerlerle fiziksel kontrol (pota ~306 $, 44 kg şarj × 5-18.5 $/kg = 0.2-0.8 k$, sıcak bölge 6000 $/m2 × 1.88 m2 ≈ 11 k$ tam hasarda, birkaç gün duruş × ~19 $/h) 120 mm fırın için ≈3-15 k$ aralığını destekliyor; 50 k$ büyük fırından aktarılmış olabilir. Olay başı kayıp ölçeğe bağlı tek formülle tanımlansın (pota + şarj + sıcak bölge hasar olasılığı × set bedeli + duruş saati × saatlik maliyet) ve jeneratör kararı bununla yeniden kurulsun. Kristal ≈6 k$/fırın/yıl, altyapi 90 k$/yıl beklenen kayıp; 13.2 MWp'ta 0.1-0.7 c/W (F2)."
+   },
+   {
+    "kalem": "Sismik ankraj ve ergiyik dökülme kabı",
+    "ilgili_idler": [
+     "xtal_safety_capex_frac",
+     "cz_capex_usd",
+     "site_seismic_capex_frac",
+     "site_seismic_capex_usd"
+    ],
+    "alanlar": [
+     "kristal",
+     "altyapi"
+    ],
+    "cozum": "Sahip altyapi; tüm ekipman için tek oran, tanımı ağır fırın ankrajını ve dökülme kabını zaten içeriyor. xtal_safety_capex_frac yalnızca altyapi'nin kapsamadığı kristale özgü bir kalem kalırsa tutulsun, yoksa 0. Etkisi küçük (≈8 k$/fırın)."
+   },
+   {
+    "kalem": "Panel-kutu kablosu ve PV konnektörleri",
+    "ilgili_idler": [
+     "mod_f_cost_cable",
+     "mod_connector_pair_usd",
+     "el_f_cable_cost",
+     "el_pv_conn_pair_usd",
+     "el_f_mppt_box"
+    ],
+    "alanlar": [
+     "modul",
+     "elektronik"
+    ],
+    "cozum": "Sahip modul: kablo ve kablo uçlarındaki konnektör yarıları (arayüz: 'kutu girişine kadar modül'). Elektronik yalnızca kutuya monte yarıyı saysın; el_pv_conn_pair_usd 'çift' yerine 'yarı' olarak yeniden tanımlansın. el_f_cable_cost hiçbir toplama girmesin (elektronik 'sistem ajanına' diyor ama böyle bir alan yok). Tekrar panel başına 0.3-1.5 $: 50 W'ta 0.6-3 c/W."
+   },
+   {
+    "kalem": "Kutu garantisi: kasa iki rezervin tabanında (çift); bütün kutu değişimi ise EKSİK sayılıyor",
+    "ilgili_idler": [
+     "bat_warranty_reserve_frac",
+     "bat_f48_misc_per_box",
+     "el_f_warranty",
+     "el_field_fail_rate_pct_yr",
+     "el_warranty_years_A",
+     "el_logistics_swap_usd"
+    ],
+    "alanlar": [
+     "pil",
+     "elektronik"
+    ],
+    "cozum": "İlk çıktıdaki 'çift rezerv' çerçevesi düzeltildi. el_f_warranty = arıza × yıl × (C_fixed + C_power + C_kasa + C_adet_other + lojistik) hücre içermiyor; bat_f48_misc_per_box garanti terimi = 0.03 × (hücre + paket parçaları) elektronik ve lojistik içermiyor. K5'te bütün kutu değişirse gerçek maliyet (p_el + p_bat) × (C_el + C_bat + lojistik − yenileme kredisi); mevcut toplam bunun ALTINDA. Gerçek çift sayım yalnızca kasanın iki tabanda bulunması (kasa maddesine bakın). Çözüm: tek kutu değişim modeli elektronikte: (el_field_fail_rate_pct_yr + pil/BMS arıza oranı + SOH garanti talebi) × (tam kutu maliyeti + lojistik − yenileme kredisi). Pil ömür modelindeki LO silindirik hücre için 10 yılda SOH 0.67 < 0.70 sonucu (pil adım 10) talep oranına bağlansın. A-200 W'ta pil rezervi 2.86 $ (≈1.4 c/W)."
+   },
+   {
+    "kalem": "Zaman profili: rampa ve öğrenme kaybı hem altyapi'de hem alanların başlangıç parametrelerinde",
+    "ilgili_idler": [
+     "eco_rampup_loss_usd",
+     "eco_rampup_avg_output_frac",
+     "eco_foak_premium_frac",
+     "cell_eta_core_start_pct",
+     "hjt_line_yield_start",
+     "hjt_paste_laydown_start_g_per_m2",
+     "f_hjt_eta_tau",
+     "f_hjt_ag_g",
+     "wf_learn_weight",
+     "wf_learn_half_m2",
+     "saw_wire_use_mult_firstgen"
+    ],
+    "alanlar": [
+     "altyapi",
+     "hucre",
+     "wafer",
+     "kristal"
+    ],
+    "cozum": "Yıl-1 hem alanların başlangıç değerleriyle (hücre formülleri f_hjt_eta_tau ve f_hjt_ag_g başlangıç/olgun arasında 'veya' ile seçiyor; wafer wf_learn_weight ile ağırlıklı geçiş yapıyor) hesaplanıp hem de altyapi'nin eco_rampup_loss_usd'u (%50 çıktı kaybına düşen sabit maliyet) uygulanırsa aynı olay iki kez sayılır; kristaldeki 'öğrenme yılında kg/gün yarıya iner' de aynı olay. Çözüm: model ufuk ortalamasını başlangıçtan olgunluğa tek bir geçiş fonksiyonuyla (wf_learn_weight benzeri) altyapi'de hesaplasın; alanlar yalnızca başlangıç ve olgun parametreleri versin; eco_rampup_avg_output_frac yalnızca hat verimi ve uptime dışı çıktı kaybını taşısın. İlk çıktıdaki ayrı 'rampa malzeme fazlası' eksik kalemi bu yüzden geri çekildi. Tekrar ≈0.5 × yıllık sabit maliyet, tek seferlik."
+   },
+   {
+    "kalem": "Pil hattı genel giderleri (yalnızca kendi hücre yolu)",
+    "ilgili_idler": [
+     "bat_line_overhead_cyl_usd_yr",
+     "bat_line_overhead_pris_usd_yr",
+     "site_fixed_opex_usd_yr",
+     "site_rent_unit_usd_yr",
+     "site_batt_fire_capex_usd_per_unit"
+    ],
+    "alanlar": [
+     "pil",
+     "altyapi"
+    ],
+    "cozum": "İçeriği tanımsız (130-180 k$/yıl). Kira, kalite, yangın ve yardımcı tesis altyapi'de sayıldığı için kalem kalem açılsın ve çakışan kısım silinsin. Yalnızca pil_kaynagi = ic_hat seçiminde etkili."
+   },
+   {
+    "kalem": "Kalite ve metroloji laboratuvarları",
+    "ilgili_idler": [
+     "hjt_capex_metrology_usd",
+     "wf_brick_metrology_capex_usd",
+     "site_fixed_capex_usd",
+     "el_site_lab_capex_usd",
+     "mod_test_capex_usd"
+    ],
+    "alanlar": [
+     "hucre",
+     "wafer",
+     "altyapi",
+     "elektronik",
+     "modul"
+    ],
+    "cozum": "PL/ömür görüntüleme hem hücre metrolojisinde hem wafer tuğla ölçümünde var; site_fixed_capex_usd içindeki 'saha lab 80 k$'ın içeriği tanımsız. Saha kalite laboratuvarı tek cihaz listesiyle tanımlansın (altyapi, saha_sabit; içerik standart ve süreç alanlarından); hat içi ölçüm süreç alanında kalsın. Tekrar ≈50-150 k$ capex, belirsiz."
+   }
+  ],
+  "sinif_hatalari": [
+   {
+    "id": "bat_f43_pack_labor",
+    "mevcut": "zaman",
+    "onerilen": "adet",
+    "gerekce": "Formül kutu başına (hücre sayısı/hız + dk/kutu) ölçekleniyor, sabit ekip değil (kural C). Elektronik eşdeğer montaj işçiliğini adet (el_f_adet_other), modül değişken işçiliği adet (mod_f_cost_labor_var) sayıyor."
+   },
+   {
+    "id": "bat_pack_min_per_box",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Süre parametresi (dk/kutu), para birimi yok (kural B1); sınıfı formül taşır."
+   },
+   {
+    "id": "hjt_capex_iv_station_usd",
+    "mevcut": "adet",
+    "onerilen": "zaman",
+    "gerekce": "Ünite içi ekipman capex'i; yük kullanımdan bağımsız, yıllık birikir (H6, kural B4). el_test_station_capex_A_usd ve std_rt_*_test_capex_usd zaman. UYARI: hücre alanı ilk çıktıda bunu hat capex'i (zaman) ile adet maliyetinde iki kez saydığını düzeltmişti; zaman sınıfına alınırken hjt_capex_zaman_usd toplamına ikinci kez girmemeli (istasyon sayısı adet hızından basamaklı boyutlanmaya devam eder)."
+   },
+   {
+    "id": "hjt_capex_handling_cell_usd",
+    "mevcut": "adet",
+    "onerilen": "zaman",
+    "gerekce": "Robot hücresi capex'i; gerekçe ve hjt_capex_zaman_usd'ye ikinci kez girmeme uyarısı hjt_capex_iv_station_usd ile aynı."
+   },
+   {
+    "id": "xtal_ref_wafer_price_usd_pc",
+    "mevcut": "alan",
+    "onerilen": "teknik (yalnızca referans; sahibi wafer wf_price_m10_usd)",
+    "gerekce": "Satın alma fiyatı (kural B2); birimi USD/adet olduğu halde alan etiketli. Aynı değer wafer'da wf_price_m10_usd."
+   },
+   {
+    "id": "wf_price_m10_usd",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Satın alınan wafer'ın piyasa fiyatı (kural B2); sınıfı wf_buy_cost_m2 formülü (adet) taşıyor."
+   },
+   {
+    "id": "wf_price_traceable_m10_usd",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Piyasa fiyatı tahmini (kural B2); sınıf wf_buy_cost_m2'de."
+   },
+   {
+    "id": "xtal_buy_cost_usd_m2",
+    "mevcut": "alan",
+    "onerilen": "ara_sonuc (yalnızca raporlama; sahibi wafer wf_buy_cost_m2)",
+    "gerekce": "Satın alma dalı wafer'da gümrük ve lojistikle adet sınıfında sayılıyor; kristaldeki kopya toplama girerse çift sayım olur."
+   },
+   {
+    "id": "wf_waste_treat_usd_per_kg_si",
+    "mevcut": "alan",
+    "onerilen": "teknik",
+    "gerekce": "Atık kütlesi başına hizmet fiyatı (kural B2); sınıfı wf_etch_cost (alan) taşır. Ayrıca altyapi'nin HF arıtmasıyla çift (bkz. çift sayım)."
+   },
+   {
+    "id": "cz_crucible_price_36in_usd",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Tek satın alınan kalemin piyasa fiyatı (kural B2); sınıfı pota maliyeti formülü (zaman) taşır. Aynı kural cz_crucible_price_fixed_usd için."
+   },
+   {
+    "id": "bat_cell_price_na_cyl_usd_Wh",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Satın alma piyasa fiyatı (SMM; kural B2). Sınıf hücre maliyeti formülünde guc_enerji. Aynı kural diğer bat_cell_price_* parametreleri için."
+   },
+   {
+    "id": "el_mcu_usd",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Tek bileşen satın alma fiyatı (kural B2). Elektronik özetinde 'birim fiyatlar teknik' dediği halde tek bileşen fiyatlarını adet etiketlemiş; sınıf C_fixed toplamını taşıyan el_f_* formülünde."
+   },
+   {
+    "id": "bat_epr_fee_usd_per_kg",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "USD/kg ücret (kural B2). Aynı kalem standart'ta guc_enerji etiketli; pildeki kopya zaten tek sahibe indirilmeli."
+   },
+   {
+    "id": "std_epr_fee_batt_usd_per_kg",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Ücret parametresi; sınıf std_f_epr_batt_per_set'te (guc_enerji) kalır."
+   },
+   {
+    "id": "std_epr_fee_eee_usd_per_kg",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Aynı ücret elektronikte el_weee_usd_per_kg olarak teknik; sınıf std_f_epr_box_per_set'te (adet)."
+   },
+   {
+    "id": "std_epr_fee_panel_usd_per_kg",
+    "mevcut": "alan",
+    "onerilen": "teknik",
+    "gerekce": "Ücret parametresi; formül std_f_epr_panel_per_set alan sınıfını taşısın."
+   },
+   {
+    "id": "xtal_price_electricity_usd_kwh",
+    "mevcut": "zaman",
+    "onerilen": "teknik (ve eco_elec_price_usd_kwh ile değiştirilsin)",
+    "gerekce": "Aynı fiyat hem zaman (cz_cost_elec_time_usd_h) hem alan (cz_cost_elec_melt_usd_per_kg) formülüne giriyor (kural B3); ayrıca yer tutucu kopya (0.10; altyapi 0.105)."
+   },
+   {
+    "id": "xtal_price_argon_usd_nm3",
+    "mevcut": "zaman",
+    "onerilen": "teknik (eco_price_argon_usd_kg ile değiştirilsin)",
+    "gerekce": "Piyasa fiyatı; altyapi fiyatının (1.96 $/Nm3) ≈2.45 katı düşük bir yer tutucu."
+   },
+   {
+    "id": "xtal_wage_usd_h",
+    "mevcut": "zaman",
+    "onerilen": "teknik (eco_labor_* ile değiştirilsin)",
+    "gerekce": "Ücret; hem sabit (cz_cost_labor_fixed_usd_h) hem ekip (cz_cost_labor_crew_usd_h) formülünde."
+   },
+   {
+    "id": "xtal_wacc",
+    "mevcut": "zaman",
+    "onerilen": "teknik (eco_wacc_usd ile değiştirilsin)",
+    "gerekce": "Ekonomik girdi, maliyet kalemi değil; 0.10 kopyası, altyapi 0.12."
+   },
+   {
+    "id": "hjt_labor_cost_usd_per_fte_yr",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Ücret (kural B2); hücre kendi notunda 'ortak maliyet parametresiyle birleştirilmeli' diyor."
+   },
+   {
+    "id": "mod_labor_rate_usd_h",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Hem adet (mod_f_cost_labor_var) hem zaman (mod_f_cost_labor_idle) formülünde (kural B3)."
+   },
+   {
+    "id": "std_rt_labor_usd_per_h",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Adet formüllerinde (std_f_rt_panel_usd, std_f_rt_box_usd) kullanılan ücret; zaman etiketi formülle çelişiyor."
+   },
+   {
+    "id": "mod_al_lme_usd_kg",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Emtia fiyatı; sınıfı mod_f_cost_frame (adet) taşısın."
+   },
+   {
+    "id": "mod_cu_price_usd_kg",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Emtia fiyatı; üstelik el_cu_price_usd_kg (14.74) ile değer çelişkisi (12)."
+   },
+   {
+    "id": "hjt_ag_price_usd_per_g",
+    "mevcut": "alan",
+    "onerilen": "teknik",
+    "gerekce": "Emtia fiyatı (USD/g). Aynı kural In, poli, katot, HF, cam, enkapsülan fiyatları için; sezgisel taramada ~56 fiyat/ücret parametresi teknik dışı etiketli."
+   },
+   {
+    "id": "xtal_ref_poly_price_usd_kg",
+    "mevcut": "alan",
+    "onerilen": "teknik (referans; fiyatın sahibi altyapi eco_*, kütle dengesinin sahibi wafer)",
+    "gerekce": "Emtia fiyatı; poli maliyeti bugün hiçbir toplama girmiyor (bkz. eksik kalem)."
+   },
+   {
+    "id": "bat_cathode_price_nfpp_usd_kg",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Malzeme fiyatı (USD/kg); sınıfı bat_material_cost_own_* formülü taşısın."
+   },
+   {
+    "id": "el_press_rate_a_usd_h",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Saat ücreti bir fiyat parametresi."
+   },
+   {
+    "id": "el_f_press",
+    "mevcut": "zaman",
+    "onerilen": "adet",
+    "gerekce": "Pres süresi parça çevrimiyle kutu adedine orantılı; firma presi başka ürünlerle paylaşıldığı için boş saat yükü bu ürüne yazılmıyor (kural C)."
+   },
+   {
+    "id": "el_gasket_usd_per_m2",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Kasa yüzeyi başına malzeme fiyatı; 'alan' işlenen PV alanına, guc_enerji USD/W-Wh birimlerine ayrılmış; sınıfı el_f_shell_var taşısın."
+   },
+   {
+    "id": "bat_small_lot_markup",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Boyutsuz oran (kural B1). Aynı kural bat_cn_export_vat_cost_frac, bat_warranty_reserve_frac ve wf_import_duty_frac için."
+   },
+   {
+    "id": "bat_prod_energy_kWh_per_kWh",
+    "mevcut": "guc_enerji",
+    "onerilen": "teknik",
+    "gerekce": "Enerji katsayısı; maliyet değil."
+   },
+   {
+    "id": "site_area_per_unit_m2",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Alan miktarı (para birimi yok); zaman sınıfını site_rent_unit_usd_yr ve sprinkler formülü taşıyor."
+   },
+   {
+    "id": "mod_lam_energy_kWh_m2",
+    "mevcut": "alan",
+    "onerilen": "teknik",
+    "gerekce": "Fiziksel katsayı; sınıfı mod_f_cost_lam_energy (alan) taşıyor."
+   },
+   {
+    "id": "hjt_sih4_g_per_m2",
+    "mevcut": "alan",
+    "onerilen": "teknik",
+    "gerekce": "Tüketim katsayısı. Temsilî örnek: para birimi içermediği halde sınıf taşıyan 90 parametre (hücre 39, pil 16, kristal 15, wafer 7, standart 6, modül 4, altyapi 3)."
+   },
+   {
+    "id": "cz_crucible_life_h",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Süre parametresi (temsilî örnek); sınıfı cz_cost_crucible_usd_h taşıyor."
+   },
+   {
+    "id": "site_pou_abatement_capex_usd",
+    "mevcut": "teknik",
+    "onerilen": "zaman",
+    "gerekce": "Cihaz başı ekipman capex'i (kural B4). Ölçeği (ünite mi saha mı) ayrı bir mimari soru: kullanıcı 'gaz kabini + yakma saha başına' demiş (docs/mimari.md İlke 4), altyapi BULGU 2 güvenlik gerekçesiyle ünite başına öneriyor; kullanıcı kararı gerekiyor (notlar, mimari seçenekler)."
+   },
+   {
+    "id": "site_gas_cabinet_capex_usd",
+    "mevcut": "teknik",
+    "onerilen": "saha_sabit",
+    "gerekce": "Saha düzeyinde paylaşılan gaz kabini seti (site_gas_set_units_per_set 4); proses dışı saha altyapısı, docs/mimari.md İlke 4 ile uyumlu."
+   },
+   {
+    "id": "site_upw_module_capex_usd",
+    "mevcut": "teknik",
+    "onerilen": "saha_sabit",
+    "gerekce": "Saha basamaklı modül capex'i. Aynısı site_wwt_module_capex_usd, site_trafo_module_capex_usd, site_cooling_module_capex_usd ve site_cda_module_capex_usd için. Altyapi'de USD birimli 18 capex parametresi 'teknik' etiketli."
+   },
+   {
+    "id": "site_minienv_capex_usd_m2",
+    "mevcut": "teknik",
+    "onerilen": "zaman",
+    "gerekce": "Ünite içi, makine ömürlü mini-ortam capex'i (site_unit_infra_capex_machine_usd içinde)."
+   },
+   {
+    "id": "eco_nre_machine_design_usd",
+    "mevcut": "urun_sabit",
+    "onerilen": "sirket_sabit (önerilen yeni sınıf; bölen kopya ünite sayısı × çıktı)",
+    "gerekce": "Altyapi 'urun_sabit tasarım_sabit anlamında kullanıldı' diyor. Ürün NRE'si (el_nre_other_A_usd) varyant hacmine, bu ise kopya ünite sayısına bölünüyor; aynı sınıfta iki farklı bölen toplayıcıyı yanıltır."
+   },
+   {
+    "id": "std_epr_admin_usd_per_country_year",
+    "mevcut": "urun_sabit",
+    "onerilen": "sirket_sabit (önerilen)",
+    "gerekce": "Ülke × yıl başına yinelenen şirket gideri; ürün varyantıyla ölçeklenmiyor."
+   },
+   {
+    "id": "std_rt_module_iv_touch_s",
+    "mevcut": "adet",
+    "onerilen": "teknik",
+    "gerekce": "Süre parametresi. Aynısı std_rt_module_hipot_touch_s, std_rt_box_hipot_touch_s ve std_rt_box_bonding_touch_s için."
+   },
+   {
+    "id": "xtal_outage_events_per_yr",
+    "mevcut": "zaman",
+    "onerilen": "teknik",
+    "gerekce": "Olay frekansı; ayrıca sahibi altyapi (site_grid_outage_events_yr ile aynı büyüklük)."
+   }
+  ],
+  "olcek_hatalari": [
+   {
+    "id": "xtal_price_electricity_usd_kwh",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Piyasa ve tarife fiyatı; sahaya özgü miktar değil. Rejim altyapi eco_elec_price_select'te seçilir."
+   },
+   {
+    "id": "xtal_wage_usd_h",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Bölgesel ücret, ekonomik girdi (altyapi eco_labor_* 'genel')."
+   },
+   {
+    "id": "xtal_price_argon_usd_nm3",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Piyasa fiyatı; sahaya özgü olan tank kirasıdır (eco_argon_tank_rent_usd_month)."
+   },
+   {
+    "id": "xtal_wacc",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Şirket sermaye maliyeti."
+   },
+   {
+    "id": "mod_lam_energy_kWh_m2",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Laminasyonun fiziksel ısı enerjisi; saha paylaşımıyla ilgisi yok."
+   },
+   {
+    "id": "mod_labor_min_per_panel",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Panel başı iş süresi bir proses parametresi; 'saha' etiketi modül hattının paylaşıldığını anlatmak için kullanılmış, parametre paylaşılan bir kaynak değil."
+   },
+   {
+    "id": "std_rt_module_test_capex_usd",
+    "mevcut": "unite",
+    "onerilen": "modül hattıyla aynı ölçek (mimari karara bağlı)",
+    "gerekce": "Aynı istasyon modülde mod_test_capex_usd olarak 'saha', standart'ta 'unite' etiketli; iki etiket tutarsız. Modülün 'saha' etiketleri (mod_test_capex_usd, mod_lam_capex_usd, mod_stringer_capex_usd) kendisi de kullanıcının ünite kavramından sapan bir mimari tercih; karar kullanıcıda (notlar, mimari seçenekler). Ayrıca bu istasyon modülle çift sayılıyor."
+   },
+   {
+    "id": "eco_nre_machine_design_usd",
+    "mevcut": "urun",
+    "onerilen": "genel (önerilen 'sirket' ölçeği)",
+    "gerekce": "Bölen N_units_planned (tüm kopyalar); ürün varyantına özgü değil."
+   },
+   {
+    "id": "hjt_tool_nre_usd",
+    "mevcut": "urun",
+    "onerilen": "genel (önerilen 'sirket')",
+    "gerekce": "Kendi notu 'tüm kopyalanan hatların toplam üretimine bölünür' diyor; makine tipi düzeyinde."
+   },
+   {
+    "id": "xtal_puller_nre_usd",
+    "mevcut": "urun",
+    "onerilen": "genel (önerilen 'sirket')",
+    "gerekce": "Makine tipi NRE'si; kopya ünitelere bölünür."
+   },
+   {
+    "id": "xtal_puller_ce_usd",
+    "mevcut": "urun",
+    "onerilen": "genel",
+    "gerekce": "Aynı kalem standart'ta std_mach_techfile_usd_per_machine_type olarak 'genel'; tutarsız (ayrıca çift sayım)."
+   },
+   {
+    "id": "bat_import_logistics_usd_Wh",
+    "mevcut": "urun",
+    "onerilen": "genel",
+    "gerekce": "İthalat lojistiği ve gümrük ürün varyantına özgü değil; wafer'daki karşılığı (wf_import_logistics_usd_per_wafer) 'genel'."
+   },
+   {
+    "id": "eco_elec_sktt_limit_kwh_yr",
+    "mevcut": "saha",
+    "onerilen": "genel",
+    "gerekce": "Düzenleyici eşik; saha tüketimiyle karşılaştırılır ama sahaya özgü değer değil."
+   },
+   {
+    "id": "std_rt_labor_usd_per_h",
+    "mevcut": "unite",
+    "onerilen": "genel",
+    "gerekce": "Bölgesel işçilik fiyatı; ünite kopyasına özgü değil."
+   }
+  ],
+  "etiketleme_kurali": "ÖNERİLEN ETİKETLEME KURALI (revize). Öncelik sırasıyla mekanik uygulanır; ilk uyan kural geçerlidir.\n\nA. TOPLAMA. Toplayıcı YALNIZCA formül çıktılarını toplar (elektronikteki el_f_* kuralı tüm alanlara genişletilir). Her formül çıktısı tek bir maliyet_sinifi, bir olcek, bir kalem_kodu ve bir sahip_alan taşır. Parametre etiketleri bilgi amaçlıdır; bir doğrulama betiği, 'teknik' olmayan her parametrenin yalnızca kendi sınıfındaki formüllere girdiğini kontrol eder.\n\nB. PARAMETRE maliyet_sinifi (öncelik sırası):\n B1. Birimde para birimi (USD, EUR, TRY, CNY/RMB) yoksa → teknik. Katsayılar, tüketimler (g/m2, kWh/m2, L/m2), süreler, oranlar, verimler, sayılar, alan miktarları, frekanslar.\n B2. Piyasa veya satın alma fiyatı → teknik, birimi ne olursa olsun. Kapsam: malzeme, emtia, enerji, gaz, su, işçilik saati, kira (USD/m2·ay), hizmet ve atık bertaraf fiyatı (USD/kg atık), EPR/harç ücreti, satın alınan tek bileşen, wafer veya hücre fiyatı (USD/adet, USD/Wh), kur, WACC. Sınıfı bu fiyatı kullanan formül taşır. Örnekler: wf_waste_treat_usd_per_kg_si teknik (sınıfı wf_etch_cost, alan); bat_cell_price_* teknik (sınıfı hücre maliyeti formülünde, guc_enerji); wf_price_m10_usd teknik (sınıfı wf_buy_cost_m2, adet). Böylece ilk kuraldaki 'USD/kg Si → alan' ile 'USD/kg → teknik' çakışması kalkar: USD/kg Si ancak alanın kendi türettiği ürün kütlesi başına toplu maliyetse B4'e düşer.\n B3. Aynı parametre farklı sınıftaki formüllere giriyorsa → teknik. Örnek: xtal_price_electricity_usd_kwh hem zaman hem alan formülüne giriyor.\n B4. Kalan para birimli parametreler, alanın kendi türettiği toplu maliyet tahminleridir (capex, NRE, sertifika, parça seti, test ve ambalaj seti). Sınıf sürücüden okunur:\n  - Ünite içi makine/ekipman capex'i (USD, USD/istasyon, USD/m2 mini-ortam) → zaman (kullanımdan bağımsız yıllık yük; H6).\n  - Proses dışı saha altyapısı ve yönetimi (gaz odası ve kabinleri, abatement [ölçek kararına bağlı], UPW, arıtma, trafo, soğutma/CDA modülleri, izin, QMS, denetim, KALİTE LABORATUVARI) → saha_sabit.\n  - USD/varyant, /tasarım, /aile → urun_sabit.\n  - Makine tipi NRE'si, şirket genel gideri, BT/MES, FTO, EPR kaydı → sirket_sabit (önerilen yeni sınıf; onaylanmazsa urun_sabit + olcek 'genel').\n  - USD/kutu, /panel, /wafer, /hücre toplu tahmin → adet. USD/m2 işlenen PV alanı toplu tahmin → alan. USD/W ve USD/Wh toplu tahmin → guc_enerji.\n\nC. FORMÜL ÇIKTISI SINIFI. Çıktı miktarıyla doğru orantılı kalemler (sarf, parça başı işçilik, marjinal enerji, parça başı pres/test süresi) sürücünün sınıfını alır (alan/adet/guc_enerji). Takvim saatiyle biriken kalemler (capex yükü, istasyon amortismanı, taban/bekleme enerjisi, asgari ekip, fırın saati) zaman alır.\n\nD. OLCEK kapsamı gösterir ve sınıftan bağımsızdır:\n  - genel: piyasa ve fizik.\n  - urun: varyanta özgü; bölen varyant yıllık hacmi.\n  - unite: her kopyada tekrarlanır.\n  - saha: sahada bir kez; bölen N_unite.\n  - sirket (önerilen): bölen tüm ünitelerin toplam çıktısı.\n Fiyat yer tutucuları 'genel' etiketlenir. Proses ekipmanının (fırın parkı, hücre ve modül hattı, test istasyonu, paket hattı, abatement) unite mi saha mı olacağı etiket kuralı değil, mimari karardır (kullanıcı). Karar verilene kadar kullanıcının ünite tanımı (unite) geçerlidir; saha paylaşımı ayrı senaryo olarak modellenir.\n\nE. TEK SAHİP. Ortak fiyatlar ve ekonomik girdilerin tek sahibi altyapi'dir (eco_*): kur, elektrik, su, işçilik, WACC, CRF, ömür, bakım ve sigorta oranları, gaz, argon ve POLİ fiyatı. Diğer alanlar bunlara id ile referans verir, kopya tutmaz.\n\nF. YILLIKLAŞTIRMA. Tek seferlik kalemler tek yöntemle yıllıklaştırılır: makine ömürlüler (NRE, deney, FTO, ürün NRE'si, ilk eğitim) eco_crf_tax_machine ile (0.2122), bina ömürlüler altyapi yük faktörüyle (0.219). Bölen tek tanımdır: V_unite_yıl × N_unite, ya da varyant yıllık hacmi. Doğrusal 'ömür boyu toplam üretime bölme' (f_hjt_urun_sabit, bat_f47_product_fixed, std_f_rt_capex_per_set) kaldırılır.\n\nG. KOD DEĞİŞİKLİĞİ ÖNERİSİ (pvbat/costs.py; bu görevde uygulanmadı):\n  - CostItem'a üç alan eklenir: olcek ('genel','urun','unite','saha','sirket'), kalem_kodu ve sahip_alan.\n  - kalem_kodu ortak bir taksonomiden gelir: CERT.UN383, CERT.PIL.GUVENLIK, EPR.PIL, EPR.KUTU, KASA.DIS, TEST.EOL.KUTU, TEST.RUTIN.MODUL, NRE.MAKINE.<tip>, GAZ.SIH4, GAZ.AR, SU.UPW, ATIK.HF, KESINTI.KAYIP, POLI.\n  - SINIFLAR'a 'sirket_sabit' eklenir (onaya tabi). 'teknik' eklenmez: teknik bir parametre etiketidir, CostItem sınıfı değildir. Bugün SINIFLAR 6 sınıf içeriyor; teknik ve olcek yok.\n  - Ledger.ekle, aynı kalem_kodu iki farklı sahip_alan'dan gelirse hata verir. Bugün yalnızca aynı id'nin tekrarını yakalıyor.\n\nMEVCUT DURUM (bu kurala göre, sezgisel tarama):\n  - Para birimi içermediği halde sınıf taşıyan 90 parametre: hücre 39, pil 16, kristal 15, wafer 7, standart 6, modül 4, altyapi 3.\n  - Adında veya id'sinde fiyat/ücret/kira/prim geçip teknik dışı etiketli ~56 parametre: kristal 8, wafer 10, hücre 7, modül 10, elektronik 5, pil 12, standart 4. Elektronik de tek bileşen fiyatlarını (ör. el_mcu_usd) 'adet' etiketliyor, yani kendi 'birim fiyatlar teknik' kuralına tam uymuyor.\n  - Altyapi'de 'teknik' etiketli, USD birimli 18 capex parametresi (+6 'capex' adlı oran). B4'e göre bunlar zaman veya saha_sabit olmalı.",
+  "kritik_zayif_halkalar": [
+   {
+    "id": "bat_line_cells_per_year",
+    "neden_kritik": "[F1+F2, sıra 1] Ünite yıllık PV hacmi = K9 hücre/yıl × hücre Wh / Wh/Wp, talep sınırıyla (el_N_demand_per_yr). Bu değer tüm zaman, saha_sabit, urun_sabit ve şirket kalemlerinin paydası. K9 = 150 bin hücre/yıl, format ise belirsiz: hücre alanı 26700 (10 Wh) ile 0.75 MWp, 155 Wh prizmatik ile 23 MWp veriyor; elektronik talebi (3000 kutu × 800 W) 2.4 MWp. 'Ünite = PV + pil senkron' tanımı, hücre hattının asgari ekonomik ölçeğiyle (40-50 MW) uyumsuz. Aynı parametre iki alanda kopya: bat_line_cells_per_year ve el_N_cell_per_year. İlk çıktı sabit kalemleri yalnızca 13.2 MWp ile çevirdiği için bunları 5-18 kat küçük göstermişti.",
+    "mevcut_kaynak_turu": "tahmin (K9 kullanıcı kararı; hücre formatı belirsiz)",
+    "etki_tahmini": "F1 ünite sabit yükü ≈2.4 M$/yıl (hesap: hücre zaman sınıfı ~1.2 M$ [2 MW'ta 61 c/W], saha payı 0.71, ünite içi altyapı 0.22, kira 0.20, modül hattı 0.07). Bu yük 0.75 / 2.4 / 13.2 MWp/yıl'da ≈320 / 100 / 18 c/W eder. Bu raporun şirket düzeyi eksik kalemleri 2.4 MWp'ta buna ~38-97 c/W daha ekler. Sıralamayı ve mimari kararları (saha paylaşımı, N) tek başına belirliyor.",
+    "nasil_guclendirilir": "Kullanıcı kararları: pil hücre formatı, Wh/Wp (A 1.6 / B 3.2 kullanılabilir) ve ünite tanımı (PV+pil senkron mu, yoksa hücre ve modül hattı saha düzeyinde N üniteye mi). Talep testi: niyet mektupları ve ön sipariş. Model çekirdeğinde tek bir V_unite_MWp_yr ve N_unite parametresi olsun, tüm bölenler buradan türetilsin."
+   },
+   {
+    "id": "eco_nre_machine_design_usd",
+    "neden_kritik": "[F1+F2, sıra 2] Kendi makine stratejisinin ana sabit maliyeti; kaynağı yok. Kristal ve hücre NRE'leriyle örtüşüyor; wafer, modül ve pil paketi için aşağıdan yukarı NRE yok. F1'de kristal ve wafer makinelerinin payı yüklenmemeli.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "N=1, ×0.2122: baz 5 M$ → 0.75 / 2.4 / 13.2 MWp'ta 140 / 44 / 8 c/W. Aralık 2-15 M$ → 2.4 MWp'ta 18-130 c/W. N ünitede 1/N. F1'de ilgili kısım 3.05-3.95 M$ (NRE uzlaştırmasına bakın).",
+    "nasil_guclendirilir": "Makine tipi başına aşağıdan yukarı hesap: mühendis-ay × eco_labor_engineer_usd_h + prototip BOM teklifleri. Firmanın geçmiş kalıp ve indüksiyon makinesi projelerindeki gerçekleşen maliyetlerle kalibrasyon. Faz bayrağıyla aşamalı prototip bütçesi."
+   },
+   {
+    "id": "hjt_capex_selfbuilt_line_usd",
+    "neden_kritik": "[F1, sıra 3] Hücre zaman sınıfının ana kalemi. Bileşenlerin hepsi tahmin: PECVD, PVD, ıslak tezgâh, metroloji.",
+    "mevcut_kaynak_turu": "hesap_turetilmis (bileşenler tahmin)",
+    "etki_tahmini": "3.08 M$ × 0.258 = 795 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 110 / 33 / 6.0 c/W. Aralık 2.0-6.5 M$ → 2.4 MWp'ta 22-70 c/W, 13.2 MWp'ta 3.9-13 c/W. 45 MW saha paylaşımında ≈1.8 c/W.",
+    "nasil_guclendirilir": "Bileşen RFQ'ları: RF jeneratör ve eşleştirme, kuru/turbo pompa, MFC, katot ve DC güç kaynağı, ıslak tank. Ticari küçük PECVD/PVD araçları ve kullanılmış ekipman teklifleriyle kıyas."
+   },
+   {
+    "id": "cell_eta_core_start_pct",
+    "neden_kritik": "[F1, sıra 4] İlk 12 ayın hücre verimi. Alan ve zaman sınıfı PV maliyetlerinin tamamı W çıktısına bölündüğü için W başına maliyet 1/eta ile büyür.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Olgun 26.1'e göre: 22.5'te PV tarafı $/W +%16, 19'da +%37 (ilk yıl). 2.4 MWp'ta PV tarafı ~1-1.2 $/W (kaba hesap) → +16-44 c/W. 13.2 MWp'ta PV tarafı 0.4-0.8 $/W → +6-30 c/W.",
+    "nasil_guclendirilir": "Satın alınan wafer ile pilot pasivasyon deneyi (hücre Deney 3). Tedarikçi demo araçlarında iVoc/QSSPC ölçümü. Referans pilot hatların ilk 12 aylık verim eğrileri."
+   },
+   {
+    "id": "site_fixed_capex_usd",
+    "neden_kritik": "[F1+F2, sıra 5] N küçükken saha payını belirliyor. Kalem toplamı tahmin; site_fixed_opex_usd_yr (180 k$/yıl) da tahmin.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "N=1'de saha payı 706 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 94 / 29 / 5.3 c/W. Capex 0.45-1.9 M$ ve opex 90-350 k$ uçları ≈ −180 / +400 k$/yıl oynatır: 2.4 MWp'ta −7.5 / +17 c/W, 13.2 MWp'ta −1.4 / +3.0 c/W.",
+    "nasil_guclendirilir": "Kalem kalem mühendislik ve müteahhit teklifleri (gaz odası, NOx, depo, yangın suyu, laboratuvar). Aday OSB'den atıksu, trafo ve bağlantı bedelinin yazılı teyidi."
+   },
+   {
+    "id": "site_area_per_unit_m2",
+    "neden_kritik": "[F1+F2, sıra 6] Ünite kirası (195 k$/yıl) ve sprinkler maliyeti bununla çarpılıyor. Kira bedeli (eco_rent_usd_m2_month) de tek ilana dayanıyor, güveni düşük.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Baz 195 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 26 / 8.1 / 1.5 c/W. 1500-5000 m2 × 4-10 $/m2/ay aralığı (72-600 k$/yıl) → 2.4 MWp'ta 3-25 c/W.",
+    "nasil_guclendirilir": "Süreç alanlarının ayak izlerinden yerleşim planı. En az 5 kira teklifi (9 m net yükseklik yalnız F2 için; 30 kN/m2 döşeme; kimyasal ve gaz izni)."
+   },
+   {
+    "id": "hjt_fte_per_shift",
+    "neden_kritik": "[F1, sıra 7] hjt_fte_support ve hjt_labor_cost_usd_per_fte_yr ile birlikte hücre işçiliğini (16.6 FTE) belirliyor; hepsi tahmin.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "332 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 44 / 14 / 2.5 c/W. FTE aralığı 10-27 → 2.4 MWp'ta 8.3-22 c/W. Ücret aralığı eklenince daha geniş.",
+    "nasil_guclendirilir": "Hat yerleşimi ve otomasyon düzeyine göre vardiya planı. Pilot HJT hatlarının kadro verisi. Altyapi ücretleriyle (eco_labor_*) yeniden hesap."
+   },
+   {
+    "id": "el_N_demand_per_yr",
+    "neden_kritik": "[F1+F2, sıra 8] urun_sabit bölümünün paydası. Kutu adedi = min(talep, pil hattı) olduğu için ünite hacmini de sınırlıyor (sıra 1 ile bağlantılı). el_cert_cost_A_usd (150 k$) ve standart tip testi toplamları (75-596 k$) da tahmin.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "A-800 urun_sabit: 3000 kutu/yıl'da +5 c/W, 1000'de +15 c/W, 20000'de +0.75 c/W. A-50'de 0.76 $/W.",
+    "nasil_guclendirilir": "Niyet mektupları ve ön siparişlerle talep testi. 2-3 onaylı laboratuvardan tam program teklifi: IEC 62109, VDE-AR-N 4105, EMC, UN 38.3, 61215/61730."
+   },
+   {
+    "id": "bat_small_lot_markup",
+    "neden_kritik": "[F1+F2, sıra 9] Pil hücresi A kutusunun en büyük kalemi: A-200 W örneğinde hücre 55.4 $. Hücre fiyatı SMM'den doğrulanmış, ama küçük alıcı primi dayanaksız.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Aralık 0.1-0.8 → hücre 0.111-0.174 $/Wh (baz 0.129). 2.15 Wh/W'ta −3.8 ile +9.7 c/W. Wh başına olduğu için hacimden büyük ölçüde bağımsız.",
+    "nasil_guclendirilir": "En az 5 üreticiden RFQ: 10k/50k hücre, DDP Gebze, MOQ, UN 38.3 özeti, çevrim garantisi. Distribütör ve fabrika kanalı fiyat farkı ölçülmeli."
+   },
+   {
+    "id": "bat_import_logistics_usd_Wh",
+    "neden_kritik": "[F1+F2, sıra 10] Türkiye'nin Çin menşeli pillere ek gümrük vergisi (EGV) uygulayıp uygulamadığı ve Na-iyonun GTİP'i doğrulanmamış; üst sınır bu yüzden 4 kat açılmış.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Aralık 0.005-0.05 $/Wh → A-200 W'ta −1.5 ile +8.2 c/W.",
+    "nasil_guclendirilir": "Gümrük müşaviriyle GTİP (8507.80?), gümrük vergisi, EGV ve KDV teyidi. Tehlikeli madde sınıfında ve sınıf dışında (0 V sevkiyat, ADR SP 400) navlun teklifi."
+   },
+   {
+    "id": "bat_enclosure_fixed_usd",
+    "neden_kritik": "[F1+F2, sıra 11] 50 W A kutusunda pil mekaniği (0.67 $/W) hücre maliyetini (0.37 $/W) aşıyor. bat_enclosure_ref_usd, bat_mech_per_cell_cyl_usd ve bat_box_misc_usd de tahmin. Kasa ayrıca elektronikle çift sayılıyor ve iki model aynı kutuyu ~3 kat farklı fiyatlıyor (16.8 $ ve ≈46 $).",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "A-200 W'ta kasa 24.75 $. Aralık (8-30 + 10-50 $) ≈ ±7 c/W. Çift sayımın üst sınırı 3.5-12 c/W.",
+    "nasil_guclendirilir": "Önce sahiplik ve kasa modeli uzlaştırılmalı: V-0 reçine, valf, IP sınıfı, darbe/ezilme. Ardından tutucu ve bara tasarım BOM'u ve firmanın kalıphanesinden iç maliyet teklifi."
+   },
+   {
+    "id": "eco_elec_sktt_limit_kwh_yr",
+    "neden_kritik": "[F1+F2, sıra 12] Elektrik rejimini seçiyor: düzenlenmiş 0.084 ya da piyasa 0.107-0.114 $/kWh. Kaynak sayfada '15.000 kWh' yazıyor, 'milyon kWh' olabilir; güven düşük.",
+    "mevcut_kaynak_turu": "dogrulanmis_url (güven düşük)",
+    "etki_tahmini": "Etki ≈ 0.021 $/kWh × yıllık tüketim. F2 tam ünite (~6.3 GWh, kaba tahmin): 130 k$/yıl → 0.75 / 2.4 / 13.2 MWp'ta 17 / 5.4 / 1.0 c/W. F1'de tüketim daha düşük (bu görevde hesaplanmadı). Limit 15 milyon kWh ise küçük ünite düzenlenmiş tarifede kalabilir.",
+    "nasil_guclendirilir": "EPDK'nın ilgili yıla ait SKTT limit kararının resmi metni. En az iki tedarik şirketinden ikili anlaşma teklifi."
+   },
+   {
+    "id": "el_field_fail_rate_pct_yr",
+    "neden_kritik": "[F1+F2, sıra 13] Kutu garanti karşılığını belirliyor. Pil tarafındaki oran (bat_warranty_reserve_frac 0.03) da tahmin ve pilin kendi ömür modeliyle çelişiyor: LO silindirik hücre 10 yılda SOH 0.67 < 0.70. Bütün kutu değişimi bugün eksik sayılıyor.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "A-800'de 8.75 $ (≈1.1 c/W). Arıza %0.1-2/yıl → 0.2-4.4 c/W. SOH garantisi verilirse pil talepleri bunun çok üstüne çıkabilir.",
+    "nasil_guclendirilir": "HALT/HASS. Hızlandırılmış takvim (iki sıcaklık) ve çevrim yaşlanması. Rakip ürünlerin saha arıza verisi. Garanti SOH eşiği ve süresi kullanıcı kararı olarak ömür modeline ve tek kutu değişim modeline bağlanmalı."
+   },
+   {
+    "id": "wf_price_traceable_m10_usd",
+    "neden_kritik": "[F1, sıra 14] A senaryosunda izlenebilir zincirde (AB 2024/3015) satın alınan wafer'ın doğrudan maliyeti; F2'de yap-al kararını tek başına belirliyor. Hiçbir fiyat kaynağında listelenmiyor.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Çin fiyatına göre düzey farkı: 0.35 − 0.148 $/adet ≈ +6.1 $/m2 ≈ +2.6 c/W. Her ±0.1 $/adet için ±3.0 $/m2 = ±1.3 c/W. F2'de yap-al farkının işaretini değiştirebilir.",
+    "nasil_guclendirilir": "Çin dışı wafer üreticilerinden RFQ (menşe belgesi ve izlenebilirlik şartıyla). Çin dışı poli ile teslim fiyatı karşılaştırması."
+   },
+   {
+    "id": "el_fixed_common_usd",
+    "neden_kritik": "[F1+F2, sıra 15] Küçük kutuda sabit elektronik baskın: A-50 kutusu 92 $, bunun ≈33 $'ı sabit elektronik. el_ac_interface_usd (10 $) ve el_fixed_B_extra_usd (16 $) da tahmin.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Bu kalemlerin uçları: 50 W'ta −15 ile +22 c/W, 800 W'ta −0.9 ile +1.4 c/W.",
+    "nasil_guclendirilir": "Tam BOM çıkarıp distribütörlerden kademeli fiyat alınmalı (1k/10k), el_mcu_usd ve el_afe_usd gibi doğrulanmış kalemlerde yapıldığı gibi. EMS montaj teklifi."
+   },
+   {
+    "id": "xtal_conversion_cost_usd_per_kg",
+    "neden_kritik": "[F2, sıra 16] Kristal toplam belirsizliği. Kristalin kendi açıklamasına göre yayılım sağ kuyruklu girdilerden geliyor: capex, sıcak bölge, pota fiyatı, kesinti, kayıp çarpanı (kristal ornek_hesap adım 17), ayrıca cz_zd_yield. İlk çıktı bu yayılımın tamamını yanlışlıkla ceket kazancına bağlamıştı.",
+    "mevcut_kaynak_turu": "hesap_turetilmis (Monte Carlo; girdiler çoğunlukla tahmin)",
+    "etki_tahmini": "120 mm'de P10-P90 18-37 $/kg (baz 14.9, medyan 25.7). 0.72 kg/m2 ve ~230 W/m2 ile düzey ≈5.6-11.6 c/W, yayılım ≈6 c/W. F1'de sıfır.",
+    "nasil_guclendirilir": "Prototip çekici ve 2B ısıl simülasyon. İlk 10 kampanyada ZD, kWh/kg ve pota ömrü kayıtları. Sıcak bölge ve pota teklifleri."
+   },
+   {
+    "id": "wf_staff_min_per_shift",
+    "neden_kritik": "[F2, sıra 17] Wafer dönüşüm maliyetinin en büyük kalemi (7.24 $/m2'nin 2.59 $/m2'si). İstasyon capex'leri (wf_handling_capex_usd, wf_inspect_capex_usd) de tahmin. Ücret 12 $/h bir yer tutucu (altyapi'de 8.4).",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Wafer dönüşümü ≈3.1 c/W. Parametre uçlarında 1.6-21 $/m2 → 0.7-9 c/W. F1'de sıfır.",
+    "nasil_guclendirilir": "Hat yerleşimi ve vardiya planı. Kullanılmış tel testere ve muayene ekipmanı teklifleri. Altyapi ücretleriyle yeniden hesap."
+   },
+   {
+    "id": "xtal_operator_hours_per_furnace_hour",
+    "neden_kritik": "[F2, sıra 18] Kristal özetine göre küçük çapta en büyük tekil maliyet kalemi: fırın saati maliyetinin ~%31'i (19.26 $/h'nin ~6 $/h'si).",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "0.5 h/h → 4.6 $/kg ingot. Aralık 0.2-1.0 → 1.9-9.3 $/kg ≈ 0.6-2.9 c/W. F1'de sıfır.",
+    "nasil_guclendirilir": "Prototip çekicide zaman etüdü. Otomasyon düzeyi kararı (N fırına 1 operatör; otomatik tohumlama ve boyun). Ücret eco_labor_operator_usd_h ile değiştirilmeli (12 yerine 8.4)."
+   },
+   {
+    "id": "cz_jacket_speed_gain",
+    "neden_kritik": "[F2, sıra 19] Çekme hızını ve kg/gün'ü çarpıyor; 1.0-2.0 arasında nerede olduğu bilinmiyor. Varsayılan tasarım bir Jinko patentine (US11708643B2) dayanıyor, bu yüzden FTO riski de taşıyor.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Tek parametre hesabı (kırmızı takım, kristal adım 1 ve 7 ile; bu görevde yeniden üretilmedi, kaba): gain 1.0 → ~17.1 $/kg, gain 2.0 → ~12.0 $/kg (baz 14.9) ≈ +0.7 / −0.9 c/W. F1'de sıfır.",
+    "nasil_guclendirilir": "Kristal öncelik-1 deneyi: aynı prototipte ceketli ve ceketsiz gövde hızı ve tutma gücü. FTO taramasına dahil edilmeli."
+   },
+   {
+    "id": "cz_ins_loss_mult",
+    "neden_kritik": "[F2, izlenecek] Küçük sıcak bölgenin tutma gücü ve kWh/kg bu çarpana bağlı; büyük fırın kalibrasyonundan aktarılmış (3.8, aralık 1.5-8). Maliyete etkisi küçük, ama jeneratör ve UPS boyutunu değiştiriyor.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Tutma gücü kabaca çarpanla orantılı. 120 mm'de 22 kWh/kg'lık zaman sınıfı enerji için 1.5'te ~%40 daha az, 8'de ~2 kat. 0.105 $/kWh ile ≈ ±0.5-1 c/W.",
+    "nasil_guclendirilir": "2B ısıl simülasyon ve prototipte kalorimetrik tutma gücü ölçümü (soğutma suyu ΔT × debi)."
+   },
+   {
+    "id": "xtal_outage_loss_usd_per_event",
+    "neden_kritik": "[F2, izlenecek] Altyapi jeneratör kararında 50 k$ kullanıyor ve bunu yanlışlıkla kristal ajanına atfediyor (ADIM 16); kristalin kendi değeri 3 k$. Aradaki 17 katlık fark jeneratör/UPS kararını tersine çevirebilir. site_voltage_sag_events_yr (15/yıl) hafızadan, site_p_structure_loss_per_sag (0.3) tahmin.",
+    "mevcut_kaynak_turu": "tahmin",
+    "etki_tahmini": "Kristal ≈6 k$/fırın/yıl, altyapi 90 k$/yıl; 13.2 MWp'ta 0.1-0.7 c/W. Jeneratör kararı ~100 k$ yatırımı değiştiriyor. Kristal adım 12'deki değerlerle fiziksel kontrol (pota 306 $, sıcak bölge ≈11 k$) 3-15 k$ aralığını destekliyor.",
+    "nasil_guclendirilir": "Prototipte kontrollü güç kesintisi ve donma süresi ölçümü. Isıl simülasyon. Dağıtım şirketi veya OSB'den kesinti ve gerilim çökmesi istatistikleri; güç kalitesi kaydedicisiyle ölçüm. Olay başı kaybı ölçeğe bağlı tek formülle tanımlama."
+   }
+  ],
+  "notlar": "KIRMIZI TAKIM BULGULARININ DEĞERLENDİRMESİ (dosyalardan kontrol edildi)\n1. Ölçek (kritik): KABUL. Sabit kalemler artık üç hacimde veriliyor: 0.75 / 2.4 / 13.2 MWp/yıl. Tek seferlik kalemler tek yöntemle yıllıklaştırıldı. Ünite yıllık hacmi kritik zayıf halkalar listesinin ilk sırasında.\n2. Polisilikon: KABUL, doğrulandı. wf_poly_cost, xtal_make_cost_usd_m2 ve xtal_conversion_cost_usd_per_kg ara_sonuc; wafer poliyi kristale, kristal 'ekonomi ajanı'na bırakıyor; altyapi'de poli fiyatı yok. Madde çift sayımdan eksik kalem listesine taşındı ve 'EN BÜYÜK ÇİFT SAYIMLAR'dan çıkarıldı.\n3. NRE iç çelişkisi: KABUL. İki madde tek 'NRE uzlaştırması' maddesinde birleşti. Faz etkisi (F1'de toptan eco_nre'nin fazlası) eklendi. Yıllıklaştırma CRF ile yapılıyor.\n4. Rampa malzeme fazlası: KABUL. Eksik kalem olarak geri çekildi. Kalifikasyon lotları Ar-Ge bütçesine eklendi; çift sayım maddesi 'zaman profili' olarak yeniden yazıldı. Ek gözlem: hücre formülleri başlangıç ve olgun değer arasında 'veya' ile seçim yapıyor, ağırlıklı geçiş yok.\n5. Argon oranı: KABUL. 1.96/0.8 = 2.45.\n6. BMS testi, EPR ve UN 38.3 sahipliği: KABUL. BMS koruma testinin çift sayıldığı iddiası geri çekildi. EPR ve UN 38.3 önerileri artık mevcut arayüz anlaşmasını açıkça yazıyor ve bir alternatif sunuyor.\n7. Kasa: KABUL. Tekrar 'üst sınır' olarak etiketlendi ve alt ucu hesaplandı (11.7 $). B senaryosu için Md. 11 bayrağı eklendi.\n8. Kutu garantisi: KABUL. Asıl sorun eksik sayım; çift sayım yalnızca kasada.\n9. Ceket kazancı: KABUL. Kırmızı takımın tek parametre hesabı kullanıldı; bu görevde yeniden üretilmedi. Monte Carlo yayılımı ayrı madde oldu. Liste referans tasarımdaki etkiye göre sıralandı; faz bilgisi neden_kritik alanının başında (şemada ayrı 'faz' alanı yok). Küçük etkili iki kristal maddesi 'izlenecek' olarak işaretlendi.\n10. FTO kapsamına kristal: KABUL. cz_jacket_speed_gain kaynağının US11708643B2 olduğu doğrulandı.\n11. Reaktif güç ve teşvik: KABUL, KISMEN. Grep'te 'kompanzasyon', 'harmonik' ve 'güç bedeli' için eşleşme yok (doğrulandı). 'Teşvik hiç taranmamış' ifadesi ise kısmen yanlış: altyapi SGK 5 puanını baz almış, WACC için teşvikli kredi notu ve bir deney sorusu var. Eksik olan sayısallaştırma; negatif kalem olarak eklendi.\n12. Mimari seçenekler: KABUL. İlgili maddeler olcek_hatalari'ndan aşağıdaki bölüme taşındı. Abatement çelişkisi ve IV istasyonu için geri dönüş riski yazıldı.\n13. Etiketleme kuralı: KABUL. Öncelik sırası konuldu, kalite laboratuvarı saha_sabit yapıldı, şema önerisi eklendi. Sayılar KISMEN RED: kendi taramamda para birimsiz ama sınıflı parametre 90 çıktı (wafer 7), 91 değil. Altyapi'de USD birimli ve 'teknik' etiketli capex parametresi 18 (+6 oran), 19-20 değil. Fark sayım yönteminden.\n14. Hurda ve garanti aritmetiği: KABUL. Aralıklar 0.24-0.95 ve 0.5-4.4 c/W; performans garantisi ayrıldı.\n15. Kesinti kaybının atfı: KABUL. Altyapi ADIM 16 '3 fırın × 50 kUSD (tahmin, kristal ajanı)' diyor, kristalin değeri ise 3 k$. Fiziksel kontrol kristal adım 12'deki değerlerle yapıldı.\n16. Tanımsız arayüzler: KABUL, tam liste aşağıda.\n\nÖLÇEK VE YILLIKLAŞTIRMA\n- Üç referans hacim:\n  - V1 = 0.75 MWp/yıl: K9 + 26700 (10 Wh), Wh/Wp 2 (hücre ornek_hesap adım 14).\n  - V2 = 2.4 MWp/yıl: el_N_demand_per_yr 3000 × 800 W.\n  - V3 = 13.2 MWp/yıl: altyapi ADIM 17, 5000 wafer/gün, 182 mm; hücre hattının asgari ölçeğine yakın.\n- N = 1 alındı; saha ve şirket kalemleri N'ye bölünür.\n- Tek seferlik kalemler eco_crf_tax_machine (0.2122) ile, bina ömürlüler 0.219 ile yıllıklaştırıldı.\n- Hacimle orantılı kalemler (adet, alan, guc_enerji) hacimden bağımsız verildi.\n- Fazlar: F1 = satın alınan wafer (K3); F2 = kendin yap (kristal + wafer).\n\nEN BÜYÜK EKSİKLER (2.4 MWp/yıl, F1, N=1; c/W)\n- Genel yönetim: 15-50\n- BT/MES: 4.2-10\n- Bakım: 7/24 teknisyen 4.9 + sürdürme mühendisliği 3.8-7.6\n- Ar-Ge deney bütçesi: 2.2-6.5\n- Montaj kiti (400 W): 2-6\n- Giden lojistik: 1.5-4 (B2C ile +6-19)\n- Yedek parça: 1.9-3.8\n- Panel garantisi: 0.5-4.4 (+ performans garantisi 0.07-0.4)\n- Kalite laboratuvarı: 1.4-1.9\n- FTO: 0.53-2.1 (+ lisans gerekirse 1-4.5)\n- Sigorta: ürün 0.3-1.5 + mülk boşluğu 1.15 (koşullu)\n- Eğitim 0.81-2.2; yangın/İSG 0.69-1.8; ürün NRE'si 0.53-2.0\n- Teşvik (negatif): WACC puanı başına −1.5\nF2 ekleri: polisilikon 0.9-3.7 (+ ithal teslim 0.05-0.9), Ar-Ge +4.2-11, bina +0.9-2.7, kalite laboratuvarı +1.1-4.2.\nŞirket ve ünite düzeyindeki eksik sabitlerin toplamı 2.4 MWp'ta kabaca 38-97 c/W, 13.2 MWp'ta ~7-18 c/W. Buna hacimden bağımsız eksikler (lojistik, montaj kiti, garanti, hurda, ürün sigortası; ~5-20 c/W) eklenir. Bu tablo, ünite hacminin ya da N'nin büyümesi gerektiği sonucunu güçlendiriyor. Sıralama hacme bağlı: 13.2 MWp'ta genel yönetim ve NRE yine başta, ama hacimden bağımsız kalemler öne çıkıyor.\n\nEN BÜYÜK ÇİFT SAYIMLAR (ortak temel)\n- NRE, toplayıcı üç NRE'yi birlikte alırsa: 2.4 MWp'ta 27 c/W (13.2 MWp'ta 5.0). F1'de toptan eco_nre'nin fazlası 9.3-17 c/W.\n- Bakım ve sermaye yükünün iki kez uygulanması: 7.7-9.6 c/W (13.2 MWp'ta 1.4-1.7).\n- Kutu dış kasası: 800 W'ta 1.5-5.8, A-200 W'ta 3.5-12 c/W (üst sınır; hacimden bağımsız).\n- Pil EPR'si: ≈2.3 c/W.\n- Kutu sertifikası: 0.81-1.3 c/W.\n- Modül test istasyonu: 0.71 c/W.\n- Kablo ve konnektör: 50 W'ta 0.6-3 c/W.\n- Argon (F2): 0.5-1.1 c/W.\n\nMİMARİ SEÇENEKLER (kullanıcı kararı; etiket hatası değil, ilk çıktıda olcek_hatalari altındaydı)\n- Kristal fırın parkı (cz_capex_fixed_usd, cz_capex_per_crucible_area_usd_m2): ünite başına kullanım %4-70, USD/kg 1.3-13 kat artıyor.\n- Hücre hattı (hjt_capex_selfbuilt_line_usd ve bileşenleri, hjt_capex_metrology_usd): zaman sınıfı maliyet 45 MW'ta ~2.7, 10 MW'ta ~12, 2 MW'ta ~61 c/W.\n- Modül hattı: modul alanı zaten 'saha' etiketlemiş (mod_test_capex_usd, mod_lam_capex_usd, mod_stringer_capex_usd). 0.2-1.5 MWp'ta 34-7 c/W, ≥3 MWp'ta ~2.8 c/W.\n- Kutu test istasyonu (el_test_station_capex_A_usd): kullanım ~%5.\n- Pil paket hattı (bat_pack_line_capex_usd): kullanım ~%14.\n- Abatement: kullanıcının 'gaz kabini + yakma saha başına' kararı (docs/mimari.md İlke 4) ile altyapi BULGU 2'nin 'yakma-ıslak abatement ünite başına' önerisi (site_pou_abatement_capex_usd) çelişiyor. Gerekçe güvenlik (SiO2 tozu, yanıcı karışımın kanala girmemesi) ve doğal sınır niteliğinde olabilir. Kullanıcıya açık soru.\n- IV istasyonunu zaman sınıfına almak, hücre alanının düzelttiği çift sayımı geri getirmemeli.\n\nKONTROL LİSTESİNDE KAPSANAN KALEMLER (eksik sayılmadı)\n- Ambalaj: mod_pack_*, el_packaging_A/B_usd. Palet ve tehlikeli madde ambalajı lojistik kalemine eklendi.\n- Elektronik ve pil garantisi.\n- İşletme sermayesi: eco_working_capital_days 90.\n- Öğrenme, FOAK ve rampa: var; çakışması çift sayım bölümünde.\n- ÇED, izin ve ATEX: var ama çift sayılmış.\n- Yangın ve İSG: büyük ölçüde var; boşluklar ayrı kalem.\n- Enerji bağlantı bedeli: site_fixed_capex_usd içinde 'OSB bağlantı 50 k$'.\n- Kira: yalnızca altyapi'de; istisna bat_line_overhead_*.\n- Mülk sigortası: var.\n- Makine NRE'si: toptan eco_nre olarak var; uzlaştırması çift sayım bölümünde.\n\nTANIMSIZ ARAYÜZLER (formüllerde kullanılan ama hiçbir alanda parametre olarak tanımlı olmayanlar)\n- fin_crf (wafer).\n- depr_years, n_units_served, W_cumulative_all_lines (hücre; f_hjt_zaman_per_W örnekte /5 ve WACC'siz).\n- N_units_planned (altyapi, eco_nre_per_unit_usd).\n- bat_boxes_lifetime (pil, bat_f47_product_fixed; örnekte 20k).\n- capex_life_years, boxes_per_year_unit, n_box_test_stations (standart, std_f_rt_capex_per_set).\n- N_box_yr (elektronik, el_f_test_station).\nÖneri: ekonomik ömür ve oranlar altyapi'de (eco_*), hacim ve kopya sayısı model çekirdeğinde tek yerde (V_unite, N_unite, varyant hacmi) tutulsun.\nDiğer sahipsiz noktalar: K9 iki alanda kopya (bat_line_cells_per_year, el_N_cell_per_year). 'Sistem ajanı' (elektronik) ve 'finans/ekonomi ajanı' (kristal, wafer) atıflarının karşılığı yok; poli maliyeti bu boşluktan düştü. Montaj kiti ve giden lojistik için bir 'sistem/ticari' alanı öneriliyor.\n\nDEĞER ÇELİŞKİLERİ (tek sahibe indirilirken çözülmeli)\n- Poli: 18.5 (kristal) / 4.36 (wafer, Çin, KDV hariç) / 17.5 $/kg (Çin dışı).\n- Argon: 0.8 ve 1.96 $/Nm3.\n- SiH4: 80 ve 60 $/kg. H2: 10 ve 25 $/kg.\n- Kesinti kaybı: 3 k$ ve 50 k$ (yanlış atıf).\n- İşçilik: 6.17-13.9 $/h. Elektrik: 0.10-0.12 $/kWh.\n- UPW: 30 ve 120 L/m2.\n- Kasa: 16.8 ve ≈46 $.\n\nKAYNAK DÜRÜSTLÜĞÜ. Bu görevde web doğrulaması yapılmadı. Eksik kalem büyüklüklerinin hepsi ya tahmin ya da alan parametrelerinden türetilmiş hesap. 'Hafızadan' işaretli değerler doğrulanmalı: TIR navlunu, sigorta oranları, patent durumu, reaktif enerji mevzuatı, teşvik kapsamı.\n\nŞEMA. Bu çıktının şeması 7 sınıfa izin veriyor. Bu yüzden şirket düzeyi kalemler geçici olarak saha_sabit, urun_sabit veya zaman ile, olcek 'genel (şirket)' yazılarak etiketlendi. 'sirket_sabit' bir öneridir ve kullanıcı onayına tabidir.\n\nRepo dosyaları değiştirilmedi. Deney bütçesi toplamı faz1/*.json dosyalarından python ile ayrıştırıldı (122 deneyin 57'si). Id'ler faz1 JSON'larında kontrol edildi."
+ },
+ "revize_edildi": true,
+ "denetim": {
+  "genel_degerlendirme": "Denetlenen kapsam çıktısı kapsamlı ve id düzeyinde büyük ölçüde doğru. Atıf yapılan yaklaşık 190 id'nin hepsi faz1/*.json dosyalarında var; bilinçli joker olan bat_material_cost_own_* ve gerçekten tanımsız olan fin_crf istisna. sinif_hatalari ve olcek_hatalari tablolarındaki 60 'mevcut' etiketin tamamı dosyalarla birebir tuttu. Sayıların çoğu da yeniden üretilebildi: pil adım 5'teki 24.75, 2.86 ve 4.57 $; bat_small_lot_markup ile 0.111-0.174 $/Wh; UN38.3 için bat_n_designs=2 alındığında 35 k$ fazla; eco_nre 4.7 c/W; saha payı 5.3/17.7 c/W; FTE toplamı 38.8; 122 deney.\n\nBuna karşılık sonucu değiştiren beş sorun var:\n(1) Tüm c/W büyüklükleri ve 'EN BÜYÜK EKSİKLER' sıralaması U13 = 13.2 MWp/yıl ile hesaplanmış. Oysa dosyaların kendi hacim dayanakları 0.75 MWp (K9 + 26700 hücre), 1 MWp (modül örneği) ve 2.4 MWp (el_N_demand 3000 kutu × 800 W). Sabit kalemler bu yüzden 5-18 kat küçük görünüyor. Kalemler ayrıca farklı ömür hacimlerine bölünmüş (105.6 MWp, 16 MWp, 12 MWp), bu yüzden sıralama tutarsız.\n(2) Polisilikon için yön ters: çift sayım denmiş, ama aslında sahipsiz. Wafer poliyi kristale, kristal ekonomi ajanına bırakıyor; altyapi'de poli fiyatı hiç yok.\n(3) Makine NRE'si aynı anda hem 'eksik' (1.1-3.3 c/W) hem 'çift' (2.9 c/W) yazılmış. eco_nre tüm ünite makinelerini kapsayan toptan bir sayı olduğu için bu iki iddia birbirini büyük ölçüde götürüyor. NRE ayrıca doğrusal bölünmüş, BT/MES ve bina ise CRF ile yıllıklaştırılmış.\n(4) Rampa malzeme fazlası 'eksik' sayılmış. Ama hücre formülleri başlangıç ve olgun değerleri arasında zaten geçiş yapıyor, çıktının kendi çift sayım maddesi de bunu söylüyor.\n(5) Argon fiyat farkı 4.4 kat yazılmış, doğrusu 2.45 kat.\n\nEk sorunlar:\n- Bazı sahiplik önerileri mevcut açık arayüz anlaşmalarını yok sayıyor (BMS koruma testi pil'de, pil EPR'si pil'de).\n- Kutu garantisi 'çift' diye çerçevelenmiş, oysa bütün kutu değiştirilirse sorun eksik sayım.\n- Kasa sahipliği önerisi, uzlaştırmadan düşük tahmini seçiyor.\n- Ceket hız kazancının etkisi Monte Carlo yayılımının tamamına bağlanmış.\n- FTO taramasında kristal (Jinko su soğutmalı kalkan patenti) atlanmış.\n- Reaktif güç ve harmonik kompanzasyonu hiçbir yerde yok.\n\nKullanıcıyı memnun etme eğilimi belirgin değil; çıktı genel olarak eleştirel. Ancak referans ölçeğin seçimi ve kasada düşük tahminin seçilmesi maliyeti aşağı çeken tercihler; not kısmında dürüstçe belirtilmiş, ama başlık rakamlarına yansıtılmamış.",
+  "bulgular": [
+   {
+    "hedef": "notlar (ÖLÇEK VARSAYIMI) + tüm eksik_kalemler kaba_buyukluk + 'EN BÜYÜK EKSİKLER' listesi",
+    "sorun": "Sabit ($/yıl) kalemler c/W'a U13 = 13.2 MWp/yıl ile çevrilmiş. Bu, dosyaların kendi baz hacimlerinin 5-18 katı; eksik kalemlerin büyüklüğü aynı oranda küçük görünüyor. Kalemler ayrıca farklı ömür hacimlerine bölünmüş (8×13.2 = 105.6 MWp, 20k kutu × 800 W = 16 MWp, 15k kutu × 800 W = 12 MWp). Sonuçta 'EN BÜYÜK EKSİKLER' sıralaması elma ile armudu kıyaslıyor. Ünite hacmi belirsizliği yalnızca notta; kritik_zayif_halkalar'da hiç yok.",
+    "kanit": "Referans hacimler: hucre ornek_hesap adım 14: '150 bin x 10 Wh = 1.5 MWh/yil. Wh/W orani 2 ise PV ihtiyaci 0.75 MW/yil' (U13'ün 1/17.6'sı). el_N_demand_per_yr = 3000 kutu/yıl (tahmin); A-800 ile 2.4 MWp/yıl (U13'ün 1/5.5'i). modul ornek_hesap: '1 MWp/yıl'. U13 yalnızca altyapi ADIM 17'deki 5000 wafer/gün ölçeğinden geliyor.\n\nGenel yönetim (0.35-1.2 M$/yıl) yeniden hesaplanınca:\n- 2.4 MWp'ta 15-50 c/W\n- 0.75 MWp'ta 47-160 c/W\n- çıktının verdiği değer 2.7-9 c/W\n\nBT/MES (100-250 k$/yıl) 2.4 MWp'ta 4-10 c/W.\n\nÖmür hacmi bölenleri: Ürün NRE ile sertifika maddesi 16 MWp ve 12 MWp kullanıyor, makine NRE maddesi 105.6 MWp. Hiçbir alanda tanımlı değiller: N_units_planned, bat_boxes_lifetime, W_cumulative_all_lines (grep ile parametre olarak bulunamadı).",
+    "onerilen_duzeltme": "(a) Her sabit kalemi üç referans hacimde verin: 0.75 MWp (K9 + 26700), 2.4 MWp (el_N_demand 3000 × 800 W) ve 13.2 MWp (hücre hattı asgari ölçeğine yakın).\n(b) Ömür boyu bölen için tek bir tanım koyun (yıllık hacim × ufuk × kopya ünite sayısı) ve tüm urun_sabit ile sirket_sabit kalemleri ona bölün.\n(c) 'Ünite yıllık hacmi (K9 hücre formatı × Wh/Wp; talep)' parametresini kritik_zayif_halkalar'ın ilk sırasına koyun; kaynağı tahmin, etkisi tüm sabit kalemlerde 1/hacim. Bu maddeye kullanıcının unite = PV + pil senkronu tanımını bağlayın.\n(d) 'EN BÜYÜK EKSİKLER' sıralamasını ortak hacimle yeniden yapın.",
+    "ciddiyet": "kritik"
+   },
+   {
+    "hedef": "cift_sayimlar: 'Polisilikon hem kristalin yapım maliyetinde hem wafer kütle dengesinde' + notlar 'EN BÜYÜK ÇİFT SAYIMLAR: Polisilikon 0.9-3.9 c/W'",
+    "sorun": "Teşhisin yönü ters. Polisilikon iki kez sayılmıyor; toplamaya hiç girmiyor (sahipsiz, eksik kalem). Çıktının 'cz_conversion poliyi ikinci kez taşır' iddiası da yanlış.",
+    "kanit": "Wafer tarafı:\n- wf_poly_cost [ara_sonuc]: 'Taze poli maliyeti, yalnizca KIYAS icin (maliyet toplamina kristal ajanindan girer)'.\n- arayuzler_tum.md wafer: 'Poli maliyeti ve eriyik yuku kristal ajaninin ciktisidir (cift sayim onlemi)'.\n\nKristal tarafı:\n- xtal_ref_poly_price_usd_kg notu: 'Poly maliyetinin sahibi ekonomi ajani; burada yalnizca yap/al karsilastirmasi icin'.\n- xtal_make_cost_usd_m2 [ara_sonuc]; xtal_conversion_cost_usd_per_kg 'poly haric' ve arayüzde 'yalnizca raporlama icin'.\n- Kristal arayüz girdisi: 'poly_price_usd_kg <-> altyapi / ekonomi'.\n\nAltyapi tarafı: 138 parametrede poli fiyatı yok (python taraması).\n\ncz_conversion_usd_m2 arayüzü: 'enerji, pota, argon, amortisman, iscilik', yani poli içermiyor.",
+    "onerilen_duzeltme": "Maddeyi cift_sayimlar'dan eksik_kalemler'e taşıyın. Sahip wafer olsun: taze poli kütle dengesi wf_m_fresh_kg_m2 orada, fiyat wf_poly_price_chain'den gelsin, alan sınıfında ve teknik fiyatla. Kristal yalnızca poli hariç dönüşüm maliyetini versin.\n\nBüyüklük: 0.482 kg/m2 × 4.36-17.5 $/kg = 2.1-8.4 $/m2, yani ≈0.9-3.7 c/W. Yalnızca kendin yap yolunda geçerli; K3 birinci fazında sıfır.\n\nFiyat çelişkisi (kristal 18.5, wafer Çin 4.36, Çin dışı 17.5 $/kg) ayrı bir madde olarak kalsın; kristalin yap/al sonucunu (1.6-5.6 kat) etkiliyor. 'EN BÜYÜK ÇİFT SAYIMLAR' listesinden çıkarın.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "eksik_kalemler 'Makine tasarım NRE'si: eksik alanlar' ile cift_sayimlar 'Makine tasarım NRE'si ve CE teknik dosyası'",
+    "sorun": "İç çelişki var. altyapi'nin 5 M$'ı hem kristal ve hücreyi içeriyor (çift sayım, 2.9 c/W) hem de wafer, modül ve pil paketini içermiyor (eksik, 1.1-3.3 c/W) kabul edilmiş. İki madde de başlık listelerinde; net etkileri yaklaşık sıfır. Ayrıca NRE c/W'ı doğrusal bölünmüş, oysa aynı çıktı BT/MES'i CRF 0.2122 ile, bina uyarlamasını 0.219 ile yıllıklaştırıyor. Bu, NRE'yi kendi yöntemine göre ~1.7 kat düşük gösteriyor.",
+    "kanit": "eco_nre_machine_design_usd: 'Unite makinelerinin tasarim + prototip NRE'si', dayanak '~30 muhendis x 2 yil ... + prototipler 2-5 MUSD'. Yani tüm ünite makineleri için toptan bir sayı.\n\nKristal arayüzü xtal_puller_nre_usd'yi 'ekonomi (urun_sabit)' alanına veriyor; yani altyapi'nin toplaması bekleniyor.\n\nAşağıdan yukarı toplam: 0.6 (kristal) + 2.5 (hücre) + 1.2-3.5 (çıktının eksik tahmini) = 4.3-6.6 M$, yani 5 M$ ile aynı mertebe.\n\nYöntem farkı: 5 M$/(8 × 13.2 MWp) = 4.7 c/W (çıktı, doğrusal). 5 M$ × 0.2122/13.2 MWp = 8.0 c/W (CRF ile). f_hjt_urun_sabit ve eco_nre_per_unit_usd ikisi de urun_sabit formül çıktısı; ikisi birlikte toplanırsa çift sayım gerçek olur.",
+    "onerilen_duzeltme": "İki maddeyi tek bir 'NRE uzlaştırması' maddesinde birleştirin. eco_nre = Σ makine tipi NRE'si (kristal, wafer, hücre, modül, pil paketi, kutu testi) olsun; altyapi yalnızca toplasın. Başlık listelerinde tek bir net fark verin: −0.7 ile +1.6 M$ arası, belirsiz.\n\nTüm tek seferlik kalemleri (NRE, Ar-Ge deneyleri, FTO, ürün NRE'si, rampa) aynı yöntemle yıllıklaştırın: eco_crf_tax_machine ve tek bir ömür boyu bölen.",
+    "ciddiyet": "yuksek"
+   },
+   {
+    "hedef": "eksik_kalemler 'Rampa dönemi malzeme fazlası ve mühendislik/kalifikasyon lotları'",
+    "sorun": "Madde 'eksik' diye yazılmış, ama mekanizma modelde zaten var. Hesabı da alanların başlangıç parametrelerinden (0.985/0.90 × 26.1/22.5 = 1.27) yapıyor. Çıktının kendi cift_sayimlar maddesi 'Rampa ve öğrenme kaybı hem altyapi'de hem alanların başlangıç parametrelerinde' aynı çakışmayı zaten söylüyor. Bu durumda madde üçüncü bir sayım ekliyor.",
+    "kanit": "formuller_tum.md f_hjt_eta_tau: 'hjt_eta_core_pct = cell_eta_core_mature_pct veya cell_eta_core_start_...'.\n\nf_hjt_ag_g: 'hjt_paste_laydown_start_g_per_m2*... (baslangic) | ...mature... (olgun)'.\n\nWafer: wf_learn_weight = 0.5**(Q_cum_m2/wf_learn_half_m2); saw_kerf_blend, wf_break_*_blend. Wafer tasarım seçimi wf_learning_scenario: 'ONERILEN: Ilk nesil + ogrenme egrisi'.\n\nYani yıl-1 malzeme tüketimi başlangıç değerleriyle zaten W başına hesaplanıyor.",
+    "onerilen_duzeltme": "Maddeyi eksik_kalemler'den çıkarın. Yerine 'zaman profili' maddesi yazın: model, ufuk ortalamasını başlangıçtan olgunluğa geçiş ağırlığıyla (wf_learn_weight benzeri tek bir fonksiyon) altyapi'de hesaplasın. eco_rampup_avg_output_frac yalnızca hat verimi ve uptime dışı çıktı kaybını taşısın. Yalnızca mühendislik ve kalifikasyon lotları (ayrı ve tahmin) eksik kalem olarak kalabilir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "cift_sayimlar 'Argon hem kristalde hem altyapi'de, 4.4 kat farklı fiyatla' + sinif_hatalari xtal_price_argon_usd_nm3 gerekçesi ('4.4 katı düşük')",
+    "sorun": "Oran yanlış hesaplanmış.",
+    "kanit": "eco_price_argon_usd_kg 1.1 × 1.782 kg/Nm3 (eco_argon_cost_usd_h formülündeki dönüşüm) = 1.96 $/Nm3. xtal_price_argon_usd_nm3 = 0.8. Oran 1.96/0.8 = 2.45.\n\nÇıktının kendi rakamları da 2.45 kat veriyor: 1.46 ve 3.6 $/kg ingot (3.6/1.46 = 2.47). Kristal ornek_hesap adım 12: 2.36 Nm3/h, 1.89 USD/h.\n\nDosyalarda argonla ilgili bir '4.4' yok. Tek '4.4', kristal adım 16'da karbon birikimi için geçiyor.",
+    "onerilen_duzeltme": "İki yerde de '≈2.4-2.5 kat' yazın. Çift sayım büyüklüğü (0.5-1.1 c/W) doğru kalabilir.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "cift_sayimlar 'Kutu hat sonu testi ... (BMS koruma testi dahil) üç alanda' ve 'EPR/WEEE' çözümü",
+    "sorun": "BMS koruma testinin çift sayıldığı iddiası dosyalarla desteklenmiyor. Önerilen sahiplik, alanların açıkça yazdığı arayüz anlaşmalarını tersine çeviriyor ve bunu belirtmiyor. Benzer durum pil EPR'sinde de var.",
+    "kanit": "el_test_time_A_s tanımı: 'A unite testi suresi (hipot, fonksiyon, NA-koruma, kalibrasyon)'. BMS testi burada yok.\n\nPil arayüzü (arayuzler_tum.md): 'BMS koruma EOL testi DAHIL (elektronik ajani tekrar saymamali)'. bat_eol_test_usd_per_box notu da aynı.\n\nElektronik arayüzü: 'Tutucu, bara, isil bariyer, pil EPR pil ajaninda'.\n\nGerçek çift sayım hipot/topraklama işçiliği ve istasyon amortismanında: el_f_test_station (zaman) + std_f_rt_capex_per_set içindeki kutu terimi + std_f_rt_box_usd. Pil'in OCV/IR/BMS istasyonu ayrı bir işlev; birleştirmek bir tasarım tercihi.",
+    "onerilen_duzeltme": "Maddeyi 'iki alan (elektronik + standart) hipot/istasyon tekrarı; pil BMS/OCV testi ayrı' olarak düzeltin. Tek istasyon önerisini 'seçenek' diye işaretleyin.\n\nMevcut arayüz anlaşmasını değiştiren her öneride eski anlaşmayı (id ve metin) belirtin, sahip değişikliğinin gerekçesini yazın. Bu, BMS testi, pil EPR'si ve UN 38.3 için geçerli.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "cift_sayimlar 'Kutunun dış kasası ... (En büyük çift sayım bu)' ve notlar 'Kutu dış kasası 6-12 c/W'",
+    "sorun": "Sahip seçimi, iki tahminden düşük olanı uzlaştırmadan seçiyor; maliyeti aşağı çeken bir yanlılık. Ayrıca pil kutusunun tamamen silinmesi B senaryosundaki mevzuat gereğini atlıyor. 6-12 c/W bu yüzden bir üst sınır, kesin tekrar değil.",
+    "kanit": "Aynı 800 W kutu için iki farklı değer var:\n- Elektronik ornek_hesap adım 6: 16.1 L kutu kabuğu 16.8 $ (reçine 8.87 + conta 3.37 + pres), kasa toplamı 32.9 $.\n- Pil: 15 + 20 × 1.68^0.85 ≈ 46 $.\n\nİki model aynı kutuyu ~3 kat farklı fiyatlıyor; çıktı ucuz olanı 'sahip' yapıyor.\n\nStandart özet (4): taşınabilir pil 18.02.2027'den itibaren Md. 11 gereği son kullanıcı tarafından çıkarılabilir ve değiştirilebilir olmalı. B'de ayrı bir pil paketi muhafazası gerekebilir.",
+    "onerilen_duzeltme": "Önce iki kasa modelini uzlaştırın: reçine türü (alev geciktirici V-0), havalandırma valfi, IP sınıfı, darbe/ezilme, pil bölmesi ısıl bariyeri. Tekrarı 'pil tahmini − elektronik kabuğunun pil bölmesi payı' olarak aralıkla verin.\n\nB senaryosu için Md. 11 gereği ayrı ve çıkarılabilir paket muhafazasını koruyan bir bayrak ekleyin. Büyüklüğü '6-12 c/W (üst sınır)' diye etiketleyin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "cift_sayimlar 'Kutu garantisi: pil ve elektronik ayrı rezerv ayırıyor'",
+    "sorun": "Madde çift sayım diye çerçevelenmiş, ama K5'te bütün kutu değiştirilirse mevcut yapı maliyeti eksik sayıyor. Gerçek tekrar yalnızca kasanın iki rezervin tabanına da girmesi.",
+    "kanit": "el_f_warranty = fail × yıl × (C_fixed + C_power + C_kasa + C_adet_other + el_logistics_swap_usd). Pil hücreleri yok.\n\nbat_f48_misc_per_box garanti terimi = 0.03 × (hücre + paket parçaları). Elektronik ve lojistik yok.\n\nBütün kutu değişirse gerçek maliyet (p_el + p_bat) × (C_el + C_bat + lojistik). Mevcut toplam bunun altında kalıyor, üstünde değil.",
+    "onerilen_duzeltme": "Tek bir kutu değişim modeli kurun: (el_field_fail_rate + pil/BMS arıza oranı + SOH garanti talebi) × (tam kutu maliyeti + lojistik − yenileme kredisi). Çift sayım olarak yalnızca kasanın iki tabanda bulunmasını yazın. Pil ömür modelindeki SOH 0.67 < 0.70 sonucunu (pil adım 10) talep oranına bağlayın.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "kritik_zayif_halkalar: cz_jacket_speed_gain (etki_tahmini) ve kristal maddelerinin sıralaması",
+    "sorun": "Kristal Monte Carlo yayılımının tamamı (18-37 $/kg, yani 5.6-11.6 c/W) ceket kazancına bağlanmış. Kristalin kendi açıklaması başka parametreleri gösteriyor ve verilen sayılar etki değil mutlak düzey. Ayrıca dört kristal maddesi, K3 birinci fazında (satın alınan wafer) sonuca hiç girmiyor. cz_ins_loss_mult (±0.5-1 c/W) ve xtal_outage (0.1-0.7 c/W) gibi küçük etkili maddeler, daha büyük etkili maddelerin önünde listelenmiş; liste etkiye göre sıralı değil.",
+    "kanit": "Kristal ornek_hesap adım 17: 'Bazdan kotu cikmasinin nedeni sag kuyruklu girdi araliklari (capex, sicak bolge, pota fiyati, kesinti, kayip carpani)'.\n\nYalnızca ceketin etkisi, adım 1 ve 7 ile kaba hesap:\n- gain 1.0: v = 1.64 mm/dk, gövde 13.6 h, çevrim ~20.7 h, ~27 kg/gün, ~17.1 $/kg\n- gain 2.0: v = 3.0 mm/dk (tavan), gövde 7.4 h, çevrim ~14.5 h, ~38.5 kg/gün, ~12.0 $/kg\n- Sonuç: baz 14.9 $/kg'a göre +2.2/−2.9 $/kg, yani ≈+0.7/−0.9 c/W (0.72 kg/m2, 230 W/m2)\n\nK3 kararı: hücre hattı önce satın alınan wafer ile.",
+    "onerilen_duzeltme": "Ceket etkisini kendi tek-parametre hesabıyla verin (≈±1 c/W, hesap_turetilmis). Monte Carlo yayılımını ayrı bir 'kristal toplam belirsizliği' maddesi yapın.\n\nkritik_zayif_halkalar'a 'faz' alanı ekleyin (F1: satın alınan wafer; F2: kendin yap) ve listeyi referans tasarımdaki etkiye göre sıralayın. Küçük etkili maddeleri (cz_ins_loss_mult, xtal_outage) 'izlenecek' sınıfına indirin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "eksik_kalemler 'Patent/lisans (FTO) riski'",
+    "sorun": "Madde 'Hiçbir alanda yok' diyor ve FTO kapsamına kristali almıyor. Oysa kristal alanı, varsayılan olarak seçtiği su soğutmalı ceket ve ısı kalkanı için bir Jinko patentini kaynak gösteriyor.",
+    "kanit": "cz_jacket_speed_gain kaynağı https://patents.google.com/patent/US11708643B2/en, alıntı: 'a water-cooling heat shield may be arranged ... so that the heat is quickly dissipated from the crystal'. Kristal ornek_hesap 'ceketli, baz degerler' ile yapılmış.",
+    "onerilen_duzeltme": "FTO kapsamına kristal çekme tasarımını (su soğutmalı ceket ve ısı kalkanı, RCz yeniden şarj/besleyici) ve kendi yapım PECVD/PVD araç tasarımlarını ekleyin. Madde faza göre bölünsün: F1'de HJT metalizasyonu, 0BB, mikroinverter ve Na-iyon paketi; F2'de kristal ve wafer.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "eksik_kalemler (kontrol listesi dışı arama)",
+    "sorun": "Reaktif güç kompanzasyonu, harmonik filtre ve güç (demand) bedeli hiçbir alanda yok; çıktı da bunları aramamış. Grafit ısıtıcıların tristör/SCR sürücüleri, RF jeneratörleri ve indüksiyonlu ön tavlama seçeneği düşük güç faktörü ve harmonik üretir. Ayrıca negatif maliyet kalemleri (yatırım teşvik belgesi ile KDV ve gümrük muafiyeti, faiz desteği) taranmamış; tarama tek yönlü.",
+    "kanit": "faz1/*.json içinde 'reaktif' yalnızca hucre'deki 'RPD (reaktif plazma biriktirme)' olarak geçiyor. 'kompanzasyon', 'harmonik', 'güç bedeli', 'çift terimli' için hiçbir eşleşme yok (grep).\n\neco_elec_price_usd_kwh tek fiyat olarak modellenmiş.\n\nTeşvik yalnızca SGK 5 puan ve 'Tesvikli kredi (faiz destegi) alt siniri dusurebilir' notu olarak var.",
+    "onerilen_duzeltme": "altyapi'ye 'kompanzasyon ve harmonik filtre' kalemi ekleyin: saha_sabit, saha. Büyüklük tahmin, 20-80 k$ yatırım. Türk mevzuatındaki reaktif enerji sınırları ve cezası hafızadan, doğrulanmadı; EPDK tüketici hizmetleri mevzuatından doğrulanmalı.\n\nElektrik tarifesinin tek mi çift terimli mi olduğu OSB ve tedarikçi teklifiyle netleştirilmeli.\n\nTeşviklerin etkisini (capex × KDV/gümrük oranı, faiz desteği) ayrı bir 'negatif kalemler' maddesinde, 'tahmin' etiketiyle verin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "olcek_hatalari: cz_capex_fixed_usd, cz_capex_per_crucible_area_usd_m2, hjt_capex_selfbuilt_line_usd, el_test_station_capex_A_usd, bat_pack_line_capex_usd; sinif_hatalari: site_pou_abatement_capex_usd, hjt_capex_iv_station_usd",
+    "sorun": "Proses ekipmanını üniteden sahaya taşıma önerileri 'etiket hatası' olarak sunulmuş. Oysa bunlar kullanıcının kopyalanan ünite mimarisini değiştiren kararlar. Kullanıcı saha düzeyinde yalnızca gaz kabini + yakma, saf su ve HF arıtmanın paylaşılmasını istemişti. Tersi yönde de sorun var: altyapi BULGU 2'nin 'yakma-ıslak abatement ünite başına' önerisi, kullanıcının 'gaz kabini + yakma saha başına' kararıyla çelişiyor, ama çıktı bu çelişkiyi işaretlemeden kabul etmiş. Ayrıca hjt_capex_iv_station_usd'yi zaman sınıfına almak, hücre alanının düzelttiği çift sayımı geri getirme riski taşıyor ve bu belirtilmemiş.",
+    "kanit": "docs/mimari.md İlke 4: 'Saha basina paylasilan altyapi (gaz kabini + yakma, saf su, HF atik aritma) saha_sabit'. Hücre özeti (3): 'Karar kullanicinin'.\n\nsite_pou_abatement_capex_usd ünite başına tanımlı (teknik, unite).\n\nhjt_capex_iv_station_usd notu: 'Ilk ciktida hat capex'i (zaman) ve adet maliyetinde iki kez sayiliyordu; duzeltildi'.",
+    "onerilen_duzeltme": "Bu maddeleri olcek_hatalari'ndan ayırıp 'kullanıcı kararı gerektiren mimari seçenekler' başlığına alın. Her biri için hacim eşiğini ve etkisini yazın; hücre örneğinden: 45 MW'ta 2.7 c/W, 10 MW'ta 12 c/W.\n\nAbatement için kullanıcı kararı ile altyapi bulgusu arasındaki çelişkiyi açıkça listeleyin. IV istasyonu için 'zaman sınıfı, ama hjt_capex_zaman_usd toplamına ikinci kez girmesin' notunu ekleyin.",
+    "ciddiyet": "orta"
+   },
+   {
+    "hedef": "etiketleme_kurali",
+    "sorun": "Kural 'mekanik uygulanır; tek ölçüt birimdir' diyor, ama kendi içinde çelişiyor ve mevcut kodla uyumsuz.",
+    "kanit": "(1) 'USD/kg Si → alan' ile (2) 'USD/kg → teknik' çakışıyor. Poli fiyatı USD/kg Si birimli, ama çıktı xtal_ref_poly_price_usd_kg için teknik öneriyor. Bu durumda wf_waste_treat_usd_per_kg_si hangi sınıfa girer, belirsiz.\n\n(4) saha_sabit sınıfını proses dışı saha altyapısına ayırıyor. Ama eksik 'Kalite laboratuvarı' maddesi zaman/saha etiketlenmiş.\n\npvbat/costs.py'de SINIFLAR = 6 sınıf ('teknik' yok) ve CostItem'da olcek alanı yok, yalnızca kapsam panel/kutu var. sirket_sabit, olcek ve kalem_kodu şema değişikliği gerektiriyor; not 'Enum yalnızca yedi sınıfa izin verdiği' diyor.\n\nSayım farkları: USD dışı birimli sınıflı parametre 91 (çıktıda 90; wafer 8, çıktıda 7). Altyapi'de teknik etiketli capex parametresi ~19-20 (çıktıda ~15).",
+    "onerilen_duzeltme": "Kural (1) ile (2) arasına öncelik koyun: satın alınan ve piyasa fiyatı olan her parametre birimi ne olursa olsun teknik; (1) yalnızca alanın kendi türettiği birim maliyet parametrelerine uygulansın. Kalite laboratuvarını saha_sabit yapın.\n\nŞema değişikliğini (CostItem.olcek, kalem_kodu, sahip_alan, SINIFLAR'a sirket_sabit) açık bir kod değişikliği önerisi olarak yazın. Sayıları düzeltin.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "eksik_kalemler 'Hurda, iade ve RMA' ve 'Panel garanti karşılığı' (kaba_buyukluk)",
+    "sorun": "İki maddede de kaba büyüklüğün üst ucu, verilen dayanağın kendisinden çıkan değerin altında.",
+    "kanit": "Pil hurdası: dayanak '%0.5-2 × (55.4 + 40.1)'. 95.47 $ × 0.005-0.02 = 0.48-1.91 $/kutu, 200 W'ta 0.24-0.95 c/W. Çıktı 0.2-0.6 yazmış.\n\nPanel garantisi: dayanak formülü '%0.1-0.5/yıl × 12 yıl × (0.25-0.40 $/W × 300 W + 50-100 $)/300 W'. Üst uç 0.06 × 220/300 = 4.4 c/W. Çıktı 0.5-3 yazmış.\n\nPanel için 25 yıllık performans garantisi hesaba katılmamış; el_warranty_years_A 10 yıl.",
+    "onerilen_duzeltme": "Aralıkları 0.24-0.95 c/W ve 0.5-4.4 c/W olarak düzeltin. Panel garantisini ürün garantisi (10-12 yıl) ve performans garantisi (25 yıl, iskontolu) olarak ikiye ayırın.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "kritik_zayif_halkalar xtal_outage_loss_usd_per_event ve cift_sayimlar 'Şebeke kesintisi'",
+    "sorun": "17 katlık çelişki doğru tespit edilmiş, ama altyapi'nin 50 k$ değerini 'kristal ajanı'na yanlış atfettiği gözden kaçmış. Fiziksel bir kontrol de yapılmamış.",
+    "kanit": "Altyapi ornek_hesap ADIM 16: '3 firin * 50 kUSD (tahmin, kristal ajani) = 90 kUSD/yil'. Kristal ise xtal_outage_loss_usd_per_event = 3000 (1000-15000), kaynak 'yok'.\n\n120 mm fırın için kaba kontrol: pota ~306 $, 44 kg şarj × 5-18.5 $/kg = 0.2-0.8 k$, sıcak bölge 6000 $/m2 × 1.88 m2 ≈ 11 k$ (tam hasarda), birkaç gün duruş × 19 $/h. Toplam ≈3-15 k$. 50 k$ büyük fırından aktarılmış olabilir.",
+    "onerilen_duzeltme": "Altyapi'deki yanlış atfı düzeltin ve olay başı kaybı ölçeğe bağlı bir formülle tek yerde tanımlayın: pota + şarj + sıcak bölge hasar olasılığı × set bedeli + duruş saati × saatlik maliyet. Jeneratör kararını bu formülle yeniden kurun.",
+    "ciddiyet": "dusuk"
+   },
+   {
+    "hedef": "notlar 'TANIMSIZ ARAYÜZLER'",
+    "sorun": "Listede yalnızca fin_crf var. Maliyet formüllerine giren ama hiçbir alanda parametre olarak tanımlanmamış diğer bölenler ve ömürler atlanmış.",
+    "kanit": "f_hjt_zaman_per_W formülü depr_years kullanıyor; hucre parametrelerinde yok, ornek_hesap adım 11'de '/5' alınmış.\n\nTanımsız diğerleri: N_units_planned (eco_nre_per_unit_usd), bat_boxes_lifetime (bat_f47; ornekte 20k), W_cumulative_all_lines (f_hjt_urun_sabit), capex_life_years ve boxes_per_year_unit (std_f_rt_capex_per_set), n_units_served. csv taramasında hiçbiri parametre olarak bulunamadı.",
+    "onerilen_duzeltme": "Tanımsız arayüzleri tam listeleyin ve her birine sahip atayın. Ekonomik ömür ve oran parametreleri altyapi'de olsun (eco_*). Hacim ve kopya sayısı, kullanıcı kararı olarak model çekirdeğinde tek bir yerde tutulsun.",
+    "ciddiyet": "dusuk"
+   }
+  ]
+ }
+}

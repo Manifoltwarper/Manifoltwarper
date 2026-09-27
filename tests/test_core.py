@@ -55,3 +55,21 @@ def test_crf():
     assert crf(0.0, 10) == pytest.approx(0.1)
     assert crf(0.10, 10) == pytest.approx(0.16275, rel=1e-4)
     assert capex_saatlik(1e6, 0.0, 10, 8000) == pytest.approx(12.5)
+
+
+def test_esdeger_tek_sahip():
+    sahip = _p(id="eco_x", deger=2.0, alt=1.0, ust=3.0)
+    takma = _p(id="mod_x", deger=9.0, alt=0.0, ust=10.0, esdeger="eco_x", esdeger_carpan=1.5)
+    ps = ParamSet({"eco_x": sahip, "mod_x": takma})
+    assert ps.mod_x == pytest.approx(3.0)
+    assert ps.override(eco_x=3.0).mod_x == pytest.approx(4.5)
+    with pytest.raises(KeyError):
+        ps.override(mod_x=1.0)
+    assert ps.sahipler() == ["eco_x"]
+    assert ps.dogrula() == []
+    assert "mod_x" in ps and "yok" not in ps
+
+
+def test_esdeger_zinciri_hata():
+    a = _p(id="a"); b = _p(id="b", esdeger="a"); c = _p(id="c", esdeger="b")
+    assert any("zinciri" in h for h in ParamSet({"a": a, "b": b, "c": c}).dogrula())

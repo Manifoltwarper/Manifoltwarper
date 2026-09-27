@@ -101,17 +101,21 @@ parametreler:
   birim: CNY/USD
   deger: 6.72
   alt: 6.5
-  ust: 7.2
-  kaynak: https://tradingeconomics.com/china/currency
+  ust: 7.3
+  kaynak: https://tradingeconomics.com/china/currency ; https://www.tcmb.gov.tr/kurlar/today.xml
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: The USD/CNY exchange rate rose to 6.7204 on September 25, 2026
+  kaynak_alintisi: 'TE: ''The USD/CNY exchange rate rose to 6.7204 on September 25, 2026'' (pil alaninda). TCMB
+    25.09.2026 CNY CrossRateUSD 6.7133 (onceki turda ve kirmizi takimca acildi).'
   kaynak_tarihi: '2026-09-25'
   guven: yuksek
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: CNY fiyatlarini USD'ye cevirmek icin kullanilir.
   aciklama: 'SMM''nin USD fiyatlari KDV haric gorunuyor: SMM 314 Ah 0.0483 $/Wh x 6.72 = 0.325 CNY; KDV''li 0.367
-    CNY. Mysteel araligi 0.38-0.41 CNY/Wh. Bu cikarim dogrulanmadi.'
+    CNY. Mysteel araligi 0.38-0.41 CNY/Wh. Bu cikarim dogrulanmadi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Altyapida karsiligi yok; yeni eco_ id zorunlu degil. bat_ ve cell_ ayni kaynak ve deger; bat_ secildi (tam URL;
+    id adi birim yonunu eco_fx_try_per_usd ile ayni kalipta veriyor). TCMB capraz kuru 6.713 teyit ediyor. Aralik
+    birlesimi: pil 6.5-7.2, hucre/modul/wafer ust 7.3 -> 6.5-7.3.'
   dogrulama_deneyi: Siparis tarihindeki kur; teklifte KDV ve iade durumunu yazili sor.
 - id: bat_cell_price_na_cyl_usd_Wh
   ad: Na-iyon silindirik 26700 (LO) Cin fiyati
@@ -121,8 +125,8 @@ parametreler:
   ust: 0.088
   kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'Sep 24, 2026 (USD/Wh): 26700 0.079-0.088, ort. 0.084; 18650 0.079-0.092; 32140 0.078-0.085;
-    46145 0.076-0.083; NVP 18650 0.197-0.208; Prusya mavisi silindirik 0.09-0.10'
+  kaynak_alintisi: 'Sep 24, 2026 (USD/Wh): 26700 0.079-0.088, ort. 0.084 (pil alaninda; onceki turda sayfa JS nedeniyle
+    yeniden okunamadi)'
   kaynak_tarihi: '2026-09-24'
   guven: orta
   maliyet_sinifi: guc_enerji
@@ -130,7 +134,10 @@ parametreler:
   senaryoya_uygunluk: GWh olcekli Cin ic piyasa fiyati; kucuk aliciya bat_small_lot_markup, bat_cn_export_vat_cost_frac
     ve lojistik eklenir.
   aciklama: '6.72 kurla 0.56 CNY/Wh; HiNa GM''nin 0.5-0.7 CNY/Wh degeriyle ortusuyor. Vanadyumlu polianyon (NVP/NVPF)
-    hucreler 2.4 kat pahali: ''NFPP'' etiketli bir 18650 aslinda NVPF olabilir.'
+    hucreler 2.4 kat pahali: ''NFPP'' etiketli bir 18650 aslinda NVPF olabilir. | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Tek sahip pil; diger alanlarda es anlamli yok. Cin ic GWh fiyati (KDV haric kabul). Gebze teslim bat_f25,
+    2027 kuraliyla: 0.084 x (1 + 0.13) x 1.3 + 0.012 = 0.135 USD/Wh. Aralik spot kotasyon dagilimidir, 12-24 aylik
+    ileri belirsizligi kapsamaz.'
   dogrulama_deneyi: 'En az 5 tedarikciye RFQ: 10k/50k adet, DDP Gebze, MOQ, UN38.3 ozeti, cevrim garantisi.'
 - id: bat_cell_price_na_prismatic_usd_Wh
   ad: Na-iyon NFPP prizmatik 50-200 Ah Cin fiyati
@@ -140,14 +147,16 @@ parametreler:
   ust: 0.09
   kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 50Ah Prismatic (NFPP) 0.08-0.09 (ortalama sutunu 0.090); 100Ah 0.082-0.089; 200Ah 0.079-0.084
-    USD/wh, Sep 24, 2026
+  kaynak_alintisi: 50Ah Prismatic (NFPP) 0.08-0.09; 100Ah 0.082-0.089; 200Ah 0.079-0.084 USD/wh, Sep 24, 2026 (pil
+    alaninda)
   kaynak_tarihi: '2026-09-24'
   guven: orta
   maliyet_sinifi: guc_enerji
   olcek: genel
   senaryoya_uygunluk: GWh fiyati; kucuk alim payi eklenir.
   aciklama: Deger 50 Ah araliginin orta noktasi. SMM'nin ortalama sutunu 0.090 ve bu, araligin ust ucuna esit (tutarsiz).
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok. Teslim hesabinda bat_cn_export_vat_cost_frac
+    0.13.
   dogrulama_deneyi: RFQ.
 - id: bat_cell_price_na_pris_small_usd_Wh
   ad: Na-iyon NFPP kucuk prizmatik 10-28 Ah Cin fiyati
@@ -157,15 +166,15 @@ parametreler:
   ust: 0.076
   kaynak: https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 10-28Ah Prismatic (NFPP) 0.07-0.076, ort. 0.073 USD/wh (Sep 24, 2026); ilk cikti ve kaynak denetcisi
-    gordu. Bu revizyondaki cekimde satir ozette listelenmedi.
+  kaynak_alintisi: 10-28Ah Prismatic (NFPP) 0.07-0.076, ort. 0.073 USD/wh (Sep 24, 2026; pil alaninda)
   kaynak_tarihi: '2026-09-24'
   guven: orta
   maliyet_sinifi: guc_enerji
   olcek: genel
   senaryoya_uygunluk: Orta boy kutular (0.8-2 kWh) icin en ucuz Na formati. 25 Ah NFS kese 0.059-0.066 daha ucuz,
     ama dis mekanik baski ister ve NFS icin gerilim verisi yok.
-  aciklama: Ayni sinifta LFP 20-25 Ah 0.072 -> prim ~+%1.
+  aciklama: Ayni sinifta LFP 20-25 Ah 0.072 -> prim ~+%1. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip
+    pil; es anlamli yok.
   dogrulama_deneyi: RFQ.
 - id: bat_cell_price_lfp_50ah_usd_Wh
   ad: LFP 50 Ah depolama (ESS) hucresi Cin fiyati
@@ -175,15 +184,16 @@ parametreler:
   ust: 0.0588
   kaynak: https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: China 50Ah ESS Battery 0.0543-0.0588 avg 0.0565; 100Ah ESS 0.0513-0.0601 avg 0.0557; 314Ah LFP
-    ESS 0.045-0.0517 avg 0.0483 USD/wh (Sep 24, 2026)
+  kaynak_alintisi: China 50Ah ESS Battery 0.0543-0.0588 avg 0.0565 USD/wh (Sep 24, 2026; pil alaninda)
   kaynak_tarihi: '2026-09-24'
   guven: orta
   maliyet_sinifi: guc_enerji
   olcek: genel
   senaryoya_uygunluk: 'Na 50 Ah ile ayni kaynak ve ayni format: prim +%50-59. 314 Ah (~1 kWh/hucre) bu urune uymaz.'
   aciklama: 'Mysteel Eylul 2026: 314 Ah icin 0.38-0.41 CNY/Wh (KDV dahil gorunuyor). SMM USD degeri KDV haric gorunuyor
-    (bkz. kur notu). Li2CO3 158,750 CNY/t (~23.6 k$/t).'
+    (bkz. kur notu). Li2CO3 158,750 CNY/t (~23.6 k$/t). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil;
+    es anlamli yok. Na ile ayni kaynak ve format (prim +%50-59). Lityum iyon pil de 2027''de iadesiz (pv-magazine:
+    ''lithium-ion batteries and battery packs'').'
   dogrulama_deneyi: Na RFQ'sunda ayni formatta LFP teklifi iste.
 - id: bat_cell_price_lfp_small_usd_Wh
   ad: LFP kucuk prizmatik 20-25 Ah Cin fiyati
@@ -193,15 +203,15 @@ parametreler:
   ust: 0.09
   kaynak: https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: China 20-25Ah Prismatic LFP Battery 0.069-0.075 avg 0.072; 47.7Ah 0.069-0.074 USD/wh (Sep 24,
-    2026)
+  kaynak_alintisi: China 20-25Ah Prismatic LFP Battery 0.069-0.075 avg 0.072 USD/wh (Sep 24, 2026; pil alaninda);
+    ust 0.09 silindirik LFP icin tahmin payi.
   kaynak_tarihi: '2026-09-24'
   guven: orta
   maliyet_sinifi: guc_enerji
   olcek: genel
   senaryoya_uygunluk: EV (guc) sinifi. Silindirik LFP (32700) fiyati SMM'de yok; ust sinir 0.09 bunun icin tahmin
     payi.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok.'
   dogrulama_deneyi: 32700 LFP RFQ.
 - id: bat_cn_li_consumption_tax_frac
   ad: Cin Li-iyon pil tuketim vergisi (Na-iyon muaf)
@@ -224,21 +234,28 @@ parametreler:
 - id: bat_cn_export_vat_cost_frac
   ad: Ihracatta iade edilmeyen KDV payi (Cin ic fiyatin ustune)
   birim: '-'
-  deger: 0.07
-  alt: 0
+  deger: 0.13
+  alt: 0.07
   ust: 0.13
-  kaynak: 'hafiza: pil ihracat KDV iadesi 2026''da %9''dan %6''ya indi, 2027''de sifirlaniyor (DOGRULANMADI). Mysteel
-    ''pre-export-rebate-removal rush'' ifadesi yonu destekliyor.'
-  kaynak_turu: hafizadan_dogrulanmadi
-  kaynak_alintisi: 'Mysteel: ''the pre-export-rebate-removal rush will be largely complete by end-November'' (oran
-    yok)'
+  kaynak: https://www.pv-magazine.com/2026/01/09/china-to-abolish-solar-export-tax-rebates-from-april/ + wf_cn_vat
+  kaynak_turu: hesap_turetilmis
+  kaynak_alintisi: '''For battery products, the export rebate rate will be cut from 9% to 6% between April 1 and
+    Dec. 31, 2026, before being eliminated entirely from Jan. 1, 2027.'' ; ''VAT export rebates for solar products
+    will be fully removed from April 1, 2026.'' (bu gorevde acildi). 2027: 0.13 - 0 = 0.13.'
   kaynak_tarihi: 2026-09
-  guven: dusuk
+  guven: orta
   maliyet_sinifi: guc_enerji
   olcek: genel
   senaryoya_uygunluk: Na ve LFP'ye ayni uygulanir; ikisinin farkini degil, ikisinin satin alma fiyatini etkiler.
   aciklama: '%13 KDV - %6 iade = 0.07; iade sifirlanirsa 0.13. SMM fiyati KDV haric varsayildi. Ihracatci bu farki
-    kismen ustlenebilir.'
+    kismen ustlenebilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Pil sahibi 0.07 (= 0.13 - 0.06, 2026 kurali;
+    kendi notu 2027 sifirlamasini dogrulanmadi diye biliyordu). Iade takvimi artik dogrulandi; zaman tabani kurumlar
+    vergisiyle ayni (2027) yapildi -> 0.13. Konvansiyon (KDV - iade, fiyat uzerinden) UST SINIRDIR: gercek iade
+    edilmeyen KDV yalniz girdi KDV''sidir ve ihracatcinin fiyata yansitma orani piyasaya bagli; alt 0.07 (2026 kurali
+    / kismi yansitma). Etki: 26700 teslim 0.084 x 1.13 x 1.3 + 0.012 = 0.135 USD/Wh (0.129''dan +%5). PV urunleri
+    icin ayri parametre ACILMADI: kullanilan wafer fiyati (InfoLink USD, FOB) Nisan 2026 sonrasi ihracat fiyatidir,
+    iptalin etkisini zaten icerir; 15.24 cm ustu mono wafer iptal kapsaminda (pv-magazine: ''monocrystalline silicon
+    wafers with diameters above 15.24 cm'').'
   dogrulama_deneyi: MOF/STA duyurusu ve tedarikci teklifleri (2026 ve 2027 teslim fiyatlarini ayri ayri iste).
 - id: bat_small_lot_markup
   ad: Kucuk alim primi — fabrikadan dogrudan alim
@@ -432,14 +449,15 @@ parametreler:
   alt: 2.85
   ust: 3.1
   kaynak: https://egroup18650.com/73-sodium-ion-cells ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650
-  kaynak_turu: dogrulanmis_url
+  kaynak_turu: hesap_turetilmis
   kaynak_alintisi: '''50Ah ... 2.85V platform voltage''; OGSolar 160Ah ''3.0 V''; EVLithium 210Ah ''≈3.10V'''
   kaynak_tarihi: '2026'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Uygun. Tablolarda 50 Ah hucre icin 2.85 V kullanildi.
-  aciklama: AB 2 kWh esigi hesabinda bu aralik (%9) kritik.
+  aciklama: 'AB 2 kWh esigi hesabinda bu aralik (%9) kritik. | Örneklem denetimi (2026-09-27): kaynaklar NFPP için
+    2,85–3,10 V aralığı veriyor; 2,9 V bu aralıktan seçilmiş muhafazakâr değer, doğrudan yazılı değil.'
   dogrulama_deneyi: Olculen C/5 enerjisi / Ah.
 - id: bat_cell_v_max_lfp_V
   ad: LFP sarj ust gerilimi (referans)
@@ -676,7 +694,7 @@ parametreler:
   alt: 2000
   ust: 10000
   kaynak: https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.highstar-sodium.com/technical-characteristics-of-prismatic-sodium-battery-cells/
-  kaynak_turu: dogrulanmis_url
+  kaynak_turu: hesap_turetilmis
   kaynak_alintisi: 160Ah '≥6000 cycles' (%80, 0.5C); Highstar 160Ah '10,000 cycles' (0.5P), '3,000 cycles' (1P),
     60 C'de '2,000'
   kaynak_tarihi: '2026'
@@ -684,7 +702,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 160 Ah degeri 10-50 Ah hucreye aktarilamaz; deger bu nedenle dusuruldu.
-  aciklama: '-'
+  aciklama: 'Örneklem denetimi (2026-09-27): 5000 çevrim kaynaklarda doğrudan yok; 0,5C''de 6000 ile 1C''de 3000
+    arasından seçilmiş. Highstar''ın 10 000 çevrimi %70 kapasite içindir (%80 değil).'
   dogrulama_deneyi: Bagimsiz hizlandirilmis cevrim testi.
 - id: bat_cycle_life_nfpp_cyl
   ad: Polianyon kucuk silindirik cevrim omru
@@ -1250,8 +1269,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Saha ajaniyla ortak olmali.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_productive_hours_fte_yr üzerinden okunur. Fark: Ayni kavram;
+    tahmin (40 h/hafta politikasina denk); birim ayni (saat/yil = h/yil). Senaryo olarak etiketlenmeli; bat_f43_pack_labor
+    paydasi kanonige baglanmali.'
   dogrulama_deneyi: '-'
+  esdeger: eco_productive_hours_fte_yr
+  esdeger_carpan: 1.0
 - id: bat_tooling_fixed_usd
   ad: Kutu ve tutucu kalip takimi — sabit kisim (tasarim basina)
   birim: USD/tasarim
@@ -1443,8 +1466,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Teknolojik eskime.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (hucre
+    ve paket hatti).'
   dogrulama_deneyi: '-'
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
 - id: bat_line_maint_frac
   ad: Yillik bakim / yatirim
   birim: 1/yil
@@ -1459,8 +1485,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: Paket hattina da uygulanir.
+  aciklama: 'Paket hattina da uygulanir. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden
+    okunur. Fark: Ayni kavram; tahmin; hucre ve paket hatti.'
   dogrulama_deneyi: '-'
+  esdeger: eco_maint_frac_capex_yr
+  esdeger_carpan: 1.0
 - id: bat_line_staff_fte_cyl
   ad: Hucre hatti personeli — 26700
   birim: FTE
@@ -1817,8 +1846,12 @@ parametreler:
   maliyet_sinifi: urun_sabit
   olcek: urun
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Kendi hucre gelistirme
+    harcamasi hat yetkinligine yatirimdir, urun varyantina degil (onceki ciktida yanlislikla el_Y_product_life''a
+    baglanmisti). Omur makine/hat omru; vergide aninda gider (PV_dep = 1) -> yuk CRF(r_reel, 8) = 0.1836.'
   dogrulama_deneyi: '-'
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
 - id: bat_un383_cost_usd_per_design
   ad: UN 38.3 testi (pil tasarimi basina)
   birim: USD/tasarim

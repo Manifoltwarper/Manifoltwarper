@@ -41,20 +41,28 @@ parametreler:
   ad: TRY/USD kuru (model baz)
   birim: TRY/USD
   deger: 49
-  alt: 46
+  alt: 45
   ust: 60
-  kaynak: https://finans.mynet.com/haber/detay/doviz/26-eylul-2026-dolar-bugun-kac-tl-serbest-piyasa-dolar-kuru-dolar-tl-gunluk-sinirli-yukselis-haftalik-yukselis/577072/
-    ; https://www.tcmb.gov.tr/kurlar/today.xml
+  kaynak: https://www.tcmb.gov.tr/kurlar/today.xml ; https://finans.mynet.com/haber/detay/doviz/26-eylul-2026-dolar-bugun-kac-tl-serbest-piyasa-dolar-kuru-dolar-tl-gunluk-sinirli-yukselis-haftalik-yukselis/577072/
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'Mynet: ''Serbest piyasa satis fiyati 49,01 TL'' (26.09.2026). TCMB bulten 2026/181 (25.09.2026):
-    USD ForexBuying 48.7901, ForexSelling 48.8780'
+  kaynak_alintisi: 'TCMB bulten 2026/181 (25.09.2026): USD ForexBuying 48.7901, ForexSelling 48.8780 (onceki turda
+    ve kirmizi takim denetiminde acildi). Mynet 26.09.2026: ''Serbest piyasa satis fiyati 49,01 TL'' (altyapi alaninda).'
   kaynak_tarihi: 2026-09-25/26
   guven: yuksek
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Spot kur. Tum TL kalemleri (iscilik, kira, su, elektrik) bununla USD'ye cevrilir. Ust sinir
     12-24 aylik nominal deger kaybini kapsar. USD maliyet reel kura baglidir (bkz. eco_try_cost_real_drift_frac_yr).
-  aciklama: 1 USD = 49.0 TRY.
+  aciklama: '1 USD = 49.0 TRY. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Uc kaynak (TCMB 48.79-48.88,
+    TradingEconomics 48.92, serbest piyasa 49.01) %0.5 icinde; baz 49.0 korunur. Aralik birlesimi: alt 45 hucre
+    araligindan (cell_fx_usd_try 45-60, bagimsiz tahmin), ust 60 altyapi. KULLANIM KURALI (kirmizi takim bulgusu
+    kabul): (1) TL kalemleri (ucret, EPDK tarifesi, ISU su, kira) USD''ye spot 49 ile NOKTA deger olarak cevrilir.
+    (2) TL''de enflasyonla guncellenen kalemlerin USD belirsizligi yalniz eco_try_cost_real_drift_frac_yr (reel
+    kayma) ile verilir; levelize carpan L(g) = sum((1+g)^(k-1) v^k)/sum(v^k), v = 1/(1+r_reel): 8 yilda g = 0.03
+    icin 1.096 (g = -0.05...0.10 icin 0.862-1.367). (3) 45-60 araligi yalnizca nominal TL''de sabit sozlesmeli kalemlere
+    (orn. yillik sabit kira) ve TL cinsinden vergisel amortisman kalkanina uygulanir. (4) Tornado''da eco_fx_try_per_usd
+    TL-endeksli kalemlerle birlikte hareket ettirilmez; iscilik USD araliklari kurdan degil TL ucret dagilimi ve
+    ek yuk carpanindan gelir.'
   dogrulama_deneyi: Yatirim karari tarihinde TCMB gosterge kuruyla guncelle.
 - id: eco_try_cost_real_drift_frac_yr
   ad: TL bazli maliyetlerin USD cinsinden yillik reel kaymasi
@@ -179,10 +187,11 @@ parametreler:
   deger: 0.12
   alt: 0.09
   ust: 0.2
-  kaynak: eco_rf_usd, eco_tr_erp, eco_beta_equity, eco_tr_eurobond_usd_10y, eco_kd_spread, eco_equity_frac, eco_corporate_tax_rate'ten
-    turetildi
+  kaynak: 'altyapi: eco_rf_usd, eco_tr_erp (Damodaran), eco_tr_eurobond_usd_10y, eco_kd_spread, eco_beta_equity,
+    eco_equity_frac, eco_corporate_tax_rate''ten turetildi'
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '-'
+  kaynak_alintisi: 'ke = 0.050 + 1.15 x 0.0889 = 0.152; kd = 0.071 + 0.02 = 0.091; E = 0.6, t = 0.125: 0.6 x 0.152
+    + 0.4 x 0.091 x 0.875 = 0.123 (yeniden hesaplandi).'
   kaynak_tarihi: '2026-09-27'
   guven: orta
   maliyet_sinifi: teknik
@@ -191,7 +200,11 @@ parametreler:
     faiz destegi alt siniri dusurebilir. Vergi SONRASI orandir; vergi oncesi maliyet modelinde dogrudan CRF''ye
     konmaz, eco_crf_tax_* kullanilir.'
   aciklama: 'ke = 0.050 + 1.15*0.0889 = 0.152. kd = 0.091. t=0.125 icin: E=0.5 -> 0.116; E=0.6 -> 0.123; E=0.7 ->
-    0.131. t=0.25 icin: 0.110-0.127. Karsilastirma: basit vergi oncesi WACC (E*ke/(1-t) + (1-E)*kd) 0.13-0.17.'
+    0.131. t=0.25 icin: 0.110-0.127. Karsilastirma: basit vergi oncesi WACC (E*ke/(1-t) + (1-E)*kd) 0.13-0.17. |
+    [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi ve tek turetilmis deger; kristal (0.10) ve elektronik
+    (0.08) kaynaksiz tahmin. Alt 0.09 korunur; kristalin 0.06 alt siniri kendini YER TUTUCU diye tanimladigi icin
+    ve Turkiye USD Eurobond (0.071) + sirket marji tabaninin altinda kaldigi icin birlesime alinmadi. Oran NOMINALDIR;
+    sermaye yukune dogrudan degil r_reel = 1.12/1.0234 - 1 = 0.0944 (aralik 0.066-0.173) uzerinden girer (sermaye_yuku_yontemi).'
   dogrulama_deneyi: Finansman ve tesvik teklifleriyle kd ve oz kaynak oranini netlestir.
 - id: eco_corporate_tax_rate
   ad: Kurumlar vergisi orani (imalat kazanci, 2027 sonrasi)
@@ -202,15 +215,18 @@ parametreler:
   kaynak: https://taxsummaries.pwc.com/turkey/corporate/taxes-on-corporate-income
   kaynak_turu: dogrulanmis_url
   kaynak_alintisi: '''The corporate income tax rate is 25%'' ... ''Starting from year 2027, the corporate income
-    tax rate will be applied as 12.5% on earnings from manufacturing activity'' (sanayi sicil belgesi kosulu; last
-    reviewed 09 September 2026)'
+    tax rate will be applied as 12.5% on earnings from manufacturing activity'' (altyapi alaninda; last reviewed
+    09.09.2026)'
   kaynak_tarihi: '2026-09-09'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Uretim 2027 ve sonrasinda baslayacagi icin baz %12.5 alindi (revize). Kosullar saglanmazsa
     %25 (ust sinir). Ihracat kazancinda ayrica 5 puan indirim var.
-  aciklama: eco_crf_tax_* ve WACC'teki borc vergi kalkaninda kullanilir.
+  aciklama: 'eco_crf_tax_* ve WACC''teki borc vergi kalkaninda kullanilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Tek kaynak (altyapi). %12.5 sanayi sicil belgesi kosullu; saglanmazsa 0.25 (makine CRF_tax_reel 0.1936 -> 0.2068).
+    Zaman tabani: tum mevzuat kurallari 2027 (ilk tam uretim yili varsayimi) itibariyla alinir; Cin pil ihracat
+    KDV iadesi de 2027 kuralina cekildi.'
   dogrulama_deneyi: Mali musavirle imalat kazanci tanimini, sanayi sicil kosulunu ve urunun (PV+pil+elektronik)
     kapsamini teyit et.
 - id: eco_dep_life_tax_machine_yr
@@ -219,7 +235,7 @@ parametreler:
   deger: 8
   alt: 5
   ust: 10
-  kaynak: tahmin (VUK amortisman listesi dogrulanmadi)
+  kaynak: tahmin (altyapi; VUK amortisman listesi dogrulanmadi)
   kaynak_turu: tahmin
   kaynak_alintisi: yok
   kaynak_tarihi: '2026-09-27'
@@ -227,7 +243,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Vergi kalkaninin bugunku degeri icin; ekonomik omurden farkli olabilir.
-  aciklama: Dogrusal amortisman varsayildi.
+  aciklama: Dogrusal amortisman varsayildi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; yalniz CRF_tax'taki
+    PV_dep icin (nominal USD oranla iskontolanir). Ekonomik omru daha kisa varlikta Nv = min(N, 8) (elden cikarista
+    kalan defter degeri gider yazilir varsayimi); daha uzun omurde Nv = 8.
   dogrulama_deneyi: VUK amortisman oranlari listesinden ilgili makine siniflarini kontrol et.
 - id: eco_dep_life_tax_infra_yr
   ad: Vergisel amortisman suresi, tesisat/altyapi
@@ -235,7 +253,7 @@ parametreler:
   deger: 12
   alt: 10
   ust: 25
-  kaynak: tahmin (VUK listesi dogrulanmadi)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
   kaynak_alintisi: yok
   kaynak_tarihi: '2026-09-27'
@@ -243,7 +261,7 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kiralik binada ozel maliyet bedelleri kira suresine gore itfa edilebilir (hafizadan, dogrulanmadi).
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; CRF_tax''taki PV_dep icin.'
   dogrulama_deneyi: Mali musavir.
 - id: eco_life_machine_yr
   ad: Makine ekonomik omru
@@ -251,16 +269,22 @@ parametreler:
   deger: 8
   alt: 5
   ust: 12
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'Baz ve aralik icin kaynak yok. Dayanak (altyapi notu): ''PV''de teknoloji nesli 3-5 yilda degisir.
+    Kendi tasarim makineler yukseltilebilir; yukseltme maliyeti bakim oranina eklenmeli.'''
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: PV'de teknoloji nesli 3-5 yilda degisir. Kendi tasarim makineler yukseltilebilir; yukseltme
     maliyeti bakim oranina eklenmeli.
-  aciklama: CRF(0.12; 8) = 0.2013.
+  aciklama: 'CRF(0.12; 8) = 0.2013. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; alanlar 5-8 yil
+    (hucre 5, kristal/modul/pil 7, wafer/altyapi 8), hicbiri kaynakli degil; sahip degeri ve araligi (5-12) korunur.
+    ONCEKI CIKTIDAKI 2-15 GERI ALINDI (kirmizi takim kabul): alt 2 yil ESIA''nin Cin GW olcegindeki cekici eskimesidir
+    (H1 aktarimi); ayri ''teknoloji eskimesi'' senaryosu olarak tutulur ve tornadoya parametre ucu olarak girmez
+    (N = 2''de CRF_tax_reel 0.5845, bazin 3.0 kati). Ust 15 (kristal fiziksel omur tahmini) de kaynaksiz, alinmadi.
+    Makineye ozgu omur gerekceli override olarak girilir.'
   dogrulama_deneyi: Ilk nesil makinelerin revizyon gecmisiyle 3 yil sonra yeniden kalibre et.
 - id: eco_life_infra_yr
   ad: Saha altyapisi ekonomik omru
@@ -268,15 +292,16 @@ parametreler:
   deger: 12
   alt: 8
   ust: 20
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'yok; dayanak: gaz kabini, gaz izleme ve UPW 10-15 yil, trafo daha uzun (altyapi notu)'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: saha
   senaryoya_uygunluk: Gaz kabini, gaz izleme ve UPW 10-15 yil; trafo daha uzun. Kira suresi ust siniri belirleyebilir.
-  aciklama: CRF(0.12; 12) = 0.1614.
+  aciklama: CRF(0.12; 12) = 0.1614. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak. Bina kiralik (eco_rent_usd_m2_month),
+    bu omur tesisat/altyapi icindir. Standart alanindaki degersiz site_amort_years buna baglanmali.
   dogrulama_deneyi: Kira sozlesmesi suresi ve tedarikci omur verileri.
 - id: eco_maint_frac_capex_yr
   ad: Yillik bakim (capex orani)
@@ -284,15 +309,23 @@ parametreler:
   deger: 0.04
   alt: 0.02
   ust: 0.08
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi; kristal, hucre, modul, pil degerleri de tahmin)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'yok; altyapi notu: ''Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi
+    beklenir.'''
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.
-  aciklama: Yedek parca + dis servis; kendi personelin iscilik maliyeti haric. Sinif formulde (zaman) atanir.
+  aciklama: 'Yedek parca + dis servis; kendi personelin iscilik maliyeti haric. Sinif formulde (zaman) atanir. |
+    [Uzlaştırma/ekonomi] Kanonik (tek sahip). ONCEKI CIKTIDAKI 0.04 -> 0.05 DEGISIKLIGI GERI ALINDI (kirmizi takim
+    kabul): tum adaylar tahmin, daha iyi kaynak yok; cogunluk oyu gorev kuralinda secim olcutu degil ve hucre/modul/pil
+    kapsamlarinin (RF, conta, tank, flas lambasi) altyapi tanimiyla ayni oldugu gosterilmemis. Sahibin ''ilk nesilde
+    ust banda yakin'' notu ayri parametreyle (eco_maint_first_gen_extra_frac_yr) yalniz kendi tasarim makinelere
+    uygulanir; boylece altyapi/tesisat ve satin alinan makineler bu artistan etkilenmez. Proses sarflari (sicak
+    bolge, pota, tasiyici, testere teli/makara kaplamasi) bu orana DAHIL DEGIL. Altyapi/tesisat bakim oraninin makineyle
+    ayni olmasi acik karar (sahip ayni oran kullaniyor; ayri kaynak yok).'
   dogrulama_deneyi: Ilk yil CMMS kayitlarindan gercek orani hesapla.
 - id: eco_insurance_frac_capex_yr
   ad: Yillik sigorta (deprem teminati dahil)
@@ -300,15 +333,16 @@ parametreler:
   deger: 0.006
   alt: 0.003
   ust: 0.012
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'yok; dayanak: 1. derece deprem bolgesi, yanici/toksik gaz ve pil stogu (altyapi notu)'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: '1. derece deprem bolgesi, yanici/toksik gaz ve Li/Na pil stogu: prim ve muafiyet yuksek olabilir.'
-  aciklama: Is durmasi (BI) teminati haric. Ornek hesapta artik 0.005 degil, bu deger (0.006) kullanildi.
+  aciklama: Is durmasi (BI) teminati haric. Ornek hesapta artik 0.005 degil, bu deger (0.006) kullanildi. | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Tek kaynak; diger alanlarda sigorta hic yok, kanonik yuk formulu ile tum capex'e eklenir.
   dogrulama_deneyi: 2 sigorta brokerindan kimyasal + deprem + pil stogu teminatli teklif.
 - id: eco_hours_calendar_yr
   ad: Takvim saati
@@ -324,7 +358,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Surekli calisan firin (K7) icin esas alinan sure.
-  aciklama: Planli durus eco_uptime_frac_default icinde dusulur.
+  aciklama: Planli durus eco_uptime_frac_default icinde dusulur. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Surekli
+    hatlarin (K7 firin, 24/7 HJT) paydasi. Vardiyali hatlarin yillik saati (elektronik 4000, pil paket 3600, modul
+    8 h x 250 gun) hat tasarim secimidir, bu parametrenin takma adi degildir (celiskilere bakiniz).
   dogrulama_deneyi: '-'
 - id: eco_uptime_frac_default
   ad: Varsayilan zaman kullanilabilirligi
@@ -332,9 +368,10 @@ parametreler:
   deger: 0.9
   alt: 0.8
   ust: 0.95
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'Altyapi tanimi: performans ve kalite kayiplari ayri tutulur; OEE''nin kalite bileseni burada
+    kullanilmaz.'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
@@ -342,7 +379,9 @@ parametreler:
   senaryoya_uygunluk: Proses ajanlari kendi degerleriyle ezer (pota degisimi, PECVD temizligi vb.).
   aciklama: 'Tanim: (takvim - planli durus - plansiz durus) / takvim. Performans ve kalite kayiplari ayri tutulur;
     OEE''nin kalite bileseni burada kullanilmaz (cift sayim olmasin). wafer_per_day arayuzu bu kullanilabilirlik
-    dahil ortalama deger olarak tanimlandi.'
+    dahil ortalama deger olarak tanimlandi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tanim altyapidan kanonik.
+    Ekipmana ozgu degerler (cz_availability_unplanned 0.9, saw_uptime 0.85, wf_inspect_uptime 0.9, hjt_line_uptime
+    0.85) takma ad degil gerekceli override''dir; ayni tanimla ve yalniz bir kez (kapasite/cikti formulunde) uygulanmali.'
   dogrulama_deneyi: Pilot hatta zaman damgali durus kaydi (MES).
 - id: eco_scale_exponent
   ad: Kapasite-maliyet olcek ussu (0.6 kurali)
@@ -489,10 +528,13 @@ parametreler:
   deger: 0.105
   alt: 0.084
   ust: 0.14
-  kaynak: eco_elec_ptf_try_mwh, eco_elec_yekdem_try_mwh, eco_elec_supplier_margin_frac, eco_elec_tax_frac, eco_elec_dist_og_kr_kwh,
-    eco_fx_try_per_usd'den
-  kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '-'
+  kaynak: 'altyapi: eco_elec_ptf_try_mwh (enerjigunlugu 26.08.2026), eco_elec_yekdem_try_mwh, eco_elec_dist_og_kr_kwh
+    (hakedis.org), eco_elec_energy_kr_kwh (AA/EPDK), eco_fx_try_per_usd'
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Piyasa rejimi formulu: ((3634.98 + 372.4)/10 x 1.05 x 1.01 + 118.25)/100/49 = 0.1109; duzenlenmis:
+    (290.97 x 1.01 + 118.25)/100/49 = 0.0841; ust: PTF 4500 + YEKDEM 603 + %9 marj = 0.14 (altyapi). Sahip notu:
+    ''Baz 0.105 secildi, cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir
+    (dogrulanmadi).'''
   kaynak_tarihi: '2026-09-27'
   guven: orta
   maliyet_sinifi: teknik
@@ -502,7 +544,12 @@ parametreler:
     ile benzer duzey'' ifadesi yanlisti; kaldirildi.'
   aciklama: 'Piyasa: ((3635+372.4)/10*1.05*1.01 + 118.25)/100/49 = 0.1109; marj 0 ile 0.1067. Baz 0.105 secildi,
     cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir (dogrulanmadi). Duzenlenmis:
-    (290.97*1.01 + 118.25)/100/49 = 0.0841.'
+    (290.97*1.01 + 118.25)/100/49 = 0.0841. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Sinirlar
+    kaynakli bilesenlerden turetilmis; BAZ 0.105 ise formul ciktisi degil YARGIDIR (piyasa formulu 0.1109; ''yaz
+    PTF''si yillik ortalamanin ustunde'' varsayimiyla asagi cekilmis, dogrulanmadi) - bu yuzden kaynak_turu tahmin/orta
+    olarak etiketlendi. ONCEKI CIKTIDAKI 0.07-0.16 ARALIGI 0.084-0.14''E GERI ALINDI: genisletme, kendi notu ''altyapi
+    degeri gecerlidir'' diyen kristal YER TUTUCU''sundan geliyordu. Rejim (duzenlenmis/piyasa) SKTT limitine ve
+    yillik tuketime bagli; dogrulama: EPIAS 12 aylik PTF ortalamasi.'
   dogrulama_deneyi: EPIAS 12 aylik PTF ortalamasi + tedarikci ikili anlasma teklifi + EPDK SKTT limiti.
 - id: eco_water_isu_sanayi_usd_m3
   ad: ISU sanayi su + atiksu bedeli (OSB disi)
@@ -560,16 +607,22 @@ parametreler:
   deger: 5.22
   alt: 3
   ust: 6.33
-  kaynak: eco_water_isu_osb_usd_m3 + eco_osb_wastewater_fee_usd_m3
+  kaynak: https://www.isu.gov.tr/sufiyatlari + eco_osb_wastewater_fee_usd_m3 (tahmin)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '-'
+  kaynak_alintisi: 'ISU: ''SANAYI (ORTAK ARITMA TESISI OLAN OSB): 206.697 + 0.0000 = 206.70'' TL/m3 (2026/9, altyapi
+    alaninda; onceki turda sayfa bos yanit verdi). 206.70/49 = 4.22 + OSB atiksu 1.0 (tahmin).'
   kaynak_tarihi: '2026-09-27'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 'Ust sinir OSB disi (ISU sanayi). Alt sinir: OSB''nin kendi daha ucuz su kaynagi olmasi (dogrulanmadi).'
   aciklama: 4.22 + 1.0 = 5.22. Geri kazanimin kucuk unitede ekonomik olup olmadigi olculen debi ve modul teklifiyle
-    ayrica degerlendirilmeli (Fraunhofer %79 tasarruf rakami 5 GW tesis icindir; H1).
+    ayrica degerlendirilmeli (Fraunhofer %79 tasarruf rakami 5 GW tesis icindir; H1). | [Uzlaştırma/ekonomi] Kanonik
+    (tek sahip). Tek kaynak (altyapi). Ham su + atiksu bedelidir. UPW birim maliyeti bir formul ciktisidir (site_upw_unit_cost
+    -> site_upw_cost_usd_m3 = bu parametre/site_ro_recovery_frac + site_upw_kwh_per_m3 x eco_elec_price_usd_kwh;
+    baz 5.22/0.75 + 2 x 0.105 = 7.17 USD/m3) ve kanonik parametre olarak DONDURULMADI (kirmizi takim kabul); hucrenin
+    upw_price_usd_per_m3'u bu formul ciktisina baglanir. OSB disi eco_water_isu_sanayi_usd_m3 (6.33) rejim alternatifidir,
+    takma ad degil.
   dogrulama_deneyi: OSB yazili tarifesi.
 - id: eco_rent_usd_m2_month
   ad: Gebze/Dilovasi OSB fabrika kira bedeli
@@ -579,7 +632,7 @@ parametreler:
   ust: 10
   kaynak: https://www.century21.com.tr/gebze-kiralik/fabrika-imalathane
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '''Dilovasi OSB 2000 m2 Factory ₺690,000'' (Guzeller OSB ₺700,000 ilaninda alan belirtilmemis)'
+  kaynak_alintisi: '''Dilovasi OSB 2000 m2 Factory TL 690,000'' -> 690,000/2,000/49 = 7.0 (altyapi)'
   kaynak_tarihi: 2026-09
   guven: dusuk
   maliyet_sinifi: teknik
@@ -587,6 +640,9 @@ parametreler:
   senaryoya_uygunluk: Orneklem tek dogrulanmis ilan. 690,000/2,000/49 = 7.0. Yuksek tavanli, gaz/kimyasal izinli,
     deprem performansi iyi bina ust banda yakin olur.
   aciklama: kaynak_turu 'dogrulanmis_url'den 'hesap_turetilmis'e dusuruldu; guven dusuk. Vergi durumu eco_rent_tax_factor'da.
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (tek ilan); diger alanlarda kira yok (alan maliyeti yalniz
+    altyapida site_share_per_unit_usd_yr ile). Sozlesme TL'de yillik sabitse kur araligi (45-60) bu kaleme uygulanabilecek
+    tek yerlerdendir.
   dogrulama_deneyi: 5+ ilan veya emlakci/OSB teklifi.
 - id: eco_rent_tax_factor
   ad: Kira vergi carpani (stopaj vb.)
@@ -663,26 +719,31 @@ parametreler:
   ust: 2200
   kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: 'md. 63: ''Genel bakimdan calisma suresi haftada en cok kirkbes saattir.'' md. 53: yillik izin
-    14/20/26 gunden az olamaz'
+  kaynak_alintisi: 'md. 63: ''Genel bakimdan calisma suresi haftada en cok kirkbes saattir.''; 45 x 52 = 2340 -
+    yillik izin 105-126 h - resmi tatil ~110 h - hastalik ~50 h = ~2060-2075 (altyapi).'
   kaynak_tarihi: 4857 s. Kanun (guncel metin)
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Turk is hukuku; dogrudan uygulanir.
-  aciklama: 45*52 = 2340 - yillik izin 105-126 h - resmi tatil ~110 h (hafizadan, ~15.5 gun) - hastalik ~50 h =
-    ~2060-2075. Tek deger 2070 (ilk ciktida ucrette 2100, FTE'de 2070 kullanilmisti).
+  aciklama: '45*52 = 2340 - yillik izin 105-126 h - resmi tatil ~110 h (hafizadan, ~15.5 gun) - hastalik ~50 h =
+    ~2060-2075. Tek deger 2070 (ilk ciktida ucrette 2100, FTE''de 2070 kullanilmisti). | [Uzlaştırma/ekonomi] Kanonik
+    (tek sahip). Is Kanunundan turetilmis, altyapi sahibi; sahip araligi 1950-2200 korunur. ONCEKI CIKTIDAKI ALT
+    1700 GERI ALINDI: pilin 1800''u kaynaksiz ve ''40 h/hafta sirket politikasi'' SENARYOSUDUR (ayri senaryo; bu
+    durumda saat ucretleri 2070/1800 = 1.15 kat artar), ornekleme araligina girmez. Tum saat ucretleri (operator/teknisyen/muhendis)
+    bu parametreyle turetilmistir; model icinde ucret = aylik isveren maliyeti x 12 x eco_labor_overhead_factor
+    / eco_productive_hours_fte_yr / eco_fx_try_per_usd olarak baglanmali ki tornado tutarli kalsin. Elektronigin
+    195 h/ay (2340 h/yil) tabani odenen saattir, verimli saat degil.'
   dogrulama_deneyi: Firma bordrosundaki gerceklesen saat.
 - id: eco_fte_per_24x7_position
   ad: 24/7 pozisyon basina FTE maliyet esdegeri
   birim: FTE
-  deger: 4.2
-  alt: 3.9
-  ust: 4.7
+  deger: 4.23
+  alt: 3.98
+  ust: 4.49
   kaynak: https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53, 41, 69)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: 'md. 63: haftada en cok 45 saat; md. 41: ''gece calismasinda fazla calisma yapilamaz'', yillik
-    fazla calisma 270 saati gecemez; md. 69: ''Iscilerin gece calismalari yedibucuk saati gecemez.'''
+  kaynak_alintisi: 8760 / 2070 = 4.23; 8760/2200 = 3.98; 8760/1950 = 4.49 (bu gorevde hesaplandi).
   kaynak_tarihi: 4857 s. Kanun (guncel metin)
   guven: orta
   maliyet_sinifi: teknik
@@ -690,25 +751,36 @@ parametreler:
   senaryoya_uygunluk: Surekli firin (K7) ve 24/7 HJT icin.
   aciklama: 'FTE sayisini md. 63 (45 h/hafta) ve izinler belirler; md. 69 yalnizca vardiya duzenini (3x8, 4 ekip)
     belirler (gerekce duzeltildi). 8760/2070 = 4.23. Esdeger: tatilde calisilir ve prim odenirse 8760/2165 = 4.05
-    FTE + ~%4 tatil primi = ~4.2. Alt sinir: gunduz vardiyasinda yasal fazla mesai kullanimi.'
+    FTE + ~%4 tatil primi = ~4.2. Alt sinir: gunduz vardiyasinda yasal fazla mesai kullanimi. | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Kirmizi takim bulgusu kabul: bagimsiz aralik (onceki 3.7-4.7, sahip 3.9-4.7) tanim geregi
+    verimli saat araligiyla celisiyordu. Parametre formul yapilir, aralik verimli saatten turer. Hucrenin alt 3.7''si
+    kisi basina ~2370 verimli saat demek; bu md. 63''un 2340 odenen saat tavaninin ustunde ve ancak %150 ucretli
+    fazla mesaiyle mumkun, maliyet dusurmez. Sahibin ''yasal fazla mesai'' alt siniri da ayni nedenle maliyet esdegerini
+    dusurmez.'
   dogrulama_deneyi: '-'
 - id: eco_labor_operator_usd_h
   ad: Operator tam yuklu saat maliyeti (Kocaeli)
   birim: USD/h
   deger: 8.4
-  alt: 6
+  alt: 5.8
   ust: 11.5
-  kaynak: https://www.eleman.net/meslek/operator/maas
+  kaynak: https://www.eleman.net/meslek/operator/maas ; https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '''Kocaeli icin 37.500₺''; 0-1 yil 28.100₺. Net/brut sayfada belirtilmiyor; 0-1 yil degeri net
-    asgari ucrete (28.075,50) esit oldugu icin net oldugu cikarsandi.'
+  kaynak_alintisi: '''Kocaeli icin 37.500 TL'' (net) -> brut 47,806 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 8.4 USD/h
+    (altyapi). Yasal taban ayni tabanda: asgari ucret isveren maliyeti 39,223.13 TL x 12 x 1.25 / 2070 / 49 = 5.80
+    USD/h (bu gorevde hesaplandi).'
   kaynak_tarihi: '2026'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Genel fabrika operatoru. Temiz oda ve kimyasal egitimli operator icin +%10-30.
-  aciklama: Net 37,500 -> brut 47,806 -> isveren 47,806*1.1875 = 56,770 TL/ay -> *12*1.25/2070/49 = 8.4 USD/h. Tesviksiz
-    8.75.
+  aciklama: 'Net 37,500 -> brut 47,806 -> isveren 47,806*1.1875 = 56,770 TL/ay -> *12*1.25/2070/49 = 8.4 USD/h.
+    Tesviksiz 8.75. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; kaynakli ve verimli saat tabanli
+    tek deger. TEK TABAN TANIMI (kirmizi takim kabul): tum ucretler ek yuklu (eco_labor_overhead_factor 1.25) ve
+    verimli saat (2070) bazinda. Alt 5.80 = bu tabanda yasal asgari ucret; sahip alti 6.0''a yakin. Onceki ciktinin
+    5-12 araligi geri alindi: alt 5 (modul) ve 4.1 (elektronik) odenen saat/ek yuksuz tabandadir, ayni tabana cevrilince
+    asgarinin altinda degil ustundedir (elektronik 6.17 -> 8.70). Ust 11.5 sahip; temiz oda/kimyasal egitimli operator
+    primi (+%10-30) bu banda dahil. Aralik kuru degil TL ucret dagilimini temsil eder.'
   dogrulama_deneyi: Firmanin kendi operator bordrosu.
 - id: eco_labor_technician_usd_h
   ad: Teknisyen tam yuklu saat maliyeti (Kocaeli)
@@ -718,13 +790,17 @@ parametreler:
   ust: 18
   kaynak: https://www.eleman.net/meslek/teknisyen/maas
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '''Kocaeli icin 55.100₺'' (ortalama 53.000 TL; 10+ yil 58.500 TL); net oldugu cikarsandi'
+  kaynak_alintisi: '''Kocaeli icin 55.100 TL'' (net) -> brut 76,522 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 13.4 USD/h
+    (altyapi).'
   kaynak_tarihi: '2026'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Vakum/plazma/gaz deneyimli teknisyen az; ust bant olasi.
-  aciklama: Net 55,100 -> brut 76,522 -> *1.1875*12*1.25/2070/49 = 13.4 USD/h (tesviksiz 14.0).
+  aciklama: 'Net 55,100 -> brut 76,522 -> *1.1875*12*1.25/2070/49 = 13.4 USD/h (tesviksiz 14.0). | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Altyapi sahibi; sahip araligi 10-18 korunur. Onceki ciktinin 8-20 genislemesi geri alindi:
+    kaynaklar kristal ve standartin tahminleri (kristalinki YER TUTUCU) ve genisleme kurdan bagimsiz ikinci bir
+    belirsizlik temsili yaratiyordu.'
   dogrulama_deneyi: 5-10 aday gorusmesi.
 - id: eco_labor_engineer_usd_h
   ad: Muhendis tam yuklu saat maliyeti
@@ -733,15 +809,19 @@ parametreler:
   alt: 12
   ust: 35
   kaynak: https://www.eleman.net/meslek/muhendis/maas + tahmin
-  kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '''Kocaeli icin 51.400₺''; ''en dusuk 40.700 TL ... en yuksek 75.600 TL'''
+  kaynak_turu: tahmin
+  kaynak_alintisi: '''Kocaeli icin 51.400 TL'' ortalama (12.4 USD/h); deneyimli proses muhendisi net 100-150 bin
+    TL tahmini -> 27-43 USD/h; sahip notu: ''Baz 22 bir karisim tahminidir.'''
   kaynak_tarihi: '2026'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Ortalama muhendis ucreti PV/yariiletken proses muhendisini temsil etmez; deneyimli proses
     muhendisi icin net 100-150 bin TL tahmini.
-  aciklama: 'Ortalama: 12.4 USD/h (tesvikli). Net 100k -> ~27, 150k -> ~43 USD/h. Baz 22 bir karisim tahminidir.'
+  aciklama: 'Ortalama: 12.4 USD/h (tesvikli). Net 100k -> ~27, 150k -> ~43 USD/h. Baz 22 bir karisim tahminidir.
+    | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (altyapi). Kaynak_turu hesap_turetilmis''ten TAHMIN''e
+    duzeltildi (kirmizi takim kabul): kaynak ortalamasi 12.4 USD/h, baz 22 ise ortalama ile proses muhendisi tahmini
+    arasinda yargi. Baska alanda ayri muhendis ucreti yok (hucre ve pilin harmanli FTE maliyetleri celiskilerde).'
   dogrulama_deneyi: Hedef profil icin ilan ve aday taramasi.
 - id: eco_price_argon_bulk_usd_kg
   ad: Argon toptan/endeks fiyati
@@ -783,17 +863,23 @@ parametreler:
   ad: Sivi argon teslim fiyati (kucuk kullanici)
   birim: USD/kg
   deger: 1.1
-  alt: 0.7
+  alt: 0.66
   ust: 3
-  kaynak: eco_price_argon_bulk_usd_kg*(1+eco_argon_small_user_premium_frac)
+  kaynak: eco_price_argon_bulk_usd_kg (https://www.imarcgroup.com/argon-pricing-report ; https://businessanalytiq.com/procurementanalytics/index/argon-price-index/)
+    x (1 + eco_argon_small_user_premium_frac)
   kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: '-'
+  kaynak_alintisi: 'IMARC ''Europe: 0.64 USD/KG'' (Eylul 2026); businessanalytiq ''Europe: US$0.62/KG''; 0.68 x
+    1.6 = 1.09 (altyapi). Alt: 0.55 x (1 + 0.2) = 0.66 (bu gorevde hesaplandi).'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Tank kirasi haric (eco_argon_tank_rent_usd_month). Guven 'orta'dan 'dusuk'e indirildi.
-  aciklama: 0.68*1.6 = 1.09.
+  aciklama: '0.68*1.6 = 1.09. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Alt sinir tutarli olcutle
+    yeniden kuruldu (kirmizi takim kabul): toptan alt 0.55 x (1 + prim alt 0.2) = 0.66 (sahip 0.7). Onceki ciktinin
+    primsiz 0.55''i kucuk kullanici teslim fiyati icin tutarsizdi. Kristalin 0.8 USD/Nm3 (= 0.45 USD/kg) yer tutucusu
+    ve 0.3 USD/Nm3 (= 0.17 USD/kg) alti Avrupa toptan endeksinin altinda; alinmadi. Birim donusumu: USD/Nm3 = USD/kg
+    x 1.782 (0 C, 1 atm; 39.948/22.414); 1.1 USD/kg = 1.96 USD/Nm3.'
   dogrulama_deneyi: RFQ.
 - id: eco_argon_tank_rent_usd_month
   ad: Sivi argon tanki + evaporator kirasi
@@ -817,32 +903,36 @@ parametreler:
   deger: 0.15
   alt: 0.07
   ust: 0.35
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: 'yok; dayanak: kucuk tuketici; yerinde PSA 0.2-0.4 kWh/Nm3 (hafizadan)'
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kucuk tuketici. Yerinde PSA 0.2-0.4 kWh/Nm3 (hafizadan) ile ~0.02-0.04 USD/Nm3 enerji + capex.
-  aciklama: Pompa purge'u N2 tuketimini buyutur (site_n2_purge_burnwet_slm).
+  aciklama: Pompa purge'u N2 tuketimini buyutur (site_n2_purge_burnwet_slm). | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Tek degerli id. Hucrenin degersiz n2_price_usd_per_Nm3 serbest degiskeni buna baglanmali.
   dogrulama_deneyi: RFQ + PSA teklifi.
 - id: eco_price_sih4_usd_kg
   ad: Monosilan fiyati (silindir, Turkiye'ye teslim)
   birim: USD/kg
   deger: 60
   alt: 25
-  ust: 150
-  kaynak: tahmin (kaynak yok)
+  ust: 300
+  kaynak: tahmin (altyapi, hucre)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok (businessanalytiq silan endeksi sayfasi denetcide 404 verdi)
+  kaynak_alintisi: yok (businessanalytiq silan endeksi 404 verdi; altyapi)
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Buyuk hacimli Cin fiyatlari cok daha dusuk olabilir. Kucuk alimda silindir kirasi ve piroforik
     gaz lojistigi baskin.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; iki deger de tahmin, sahip degeri korunur.
+    Ust 300 hucreden (bagimsiz gerekce: on-karisim primi) birlesime alindi; sahip ust 150 (degisiklik gunlugunde).
+    On-karisim secilirse (hjt_ts_silane_supply) karisim silindiri icin ayri fiyat parametresi gerekir (bilinmiyor,
+    teklif).'
   dogrulama_deneyi: 3-5 ozel gaz tedarikcisinden RFQ.
 - id: eco_price_nf3_usd_kg
   ad: NF3 fiyati
@@ -850,7 +940,7 @@ parametreler:
   deger: 40
   alt: 20
   ust: 100
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
   kaynak_alintisi: yok
   kaynak_tarihi: '2026-09-27'
@@ -858,15 +948,16 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: 'Yalnizca hazne temizligi NF3 ile yapilirsa. Oksitleyici gaz: ayri kabin, SiH4''ten ayri egzoz.'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id. Hucre NF3 tuketimi veriyor (hjt_nf3_g_per_m2
+    3 g/m2) ama f_hjt_gas_cost NF3''u icermiyor; altyapinin eco_gas_cost_var_usd_per_m2 formulu iceriyor.'
   dogrulama_deneyi: RFQ.
 - id: eco_price_h2_usd_kg
   ad: Hidrojen fiyati (5.0, silindir/demet)
   birim: USD/kg
   deger: 25
-  alt: 10
+  alt: 4
   ust: 60
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi, hucre)
   kaynak_turu: tahmin
   kaynak_alintisi: yok
   kaynak_tarihi: '2026-09-27'
@@ -874,7 +965,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Kucuk tuketim; demet kirasi eco_cyl_rent_usd_day ile.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Sahip degeri korunur (iki tahmin, daha iyi kaynak yok). ONCEKI
+    GEREKCE DUZELTILDI (kirmizi takim kabul): hucre parametresi de ''tup/demet'' fiyatidir; iki deger arasindaki
+    fark olcek degil varsayim farkidir. Unite tuketimi hjt_h2_g_per_m2 10 g/m2 (2.5-40) ile kirmizi takim hesabina
+    gore ~1.8 t/yil (0.45-7 t/yil); bu, demet ile tup trailer arasi olcektir ve saha ortak tedarikinde trailer daha
+    olasi. Fiyat tedarik bicimi karari (altyapi: demet / trailer / elektrolizor) ve RFQ ile belirlenmeli; 4-60 araligi
+    (alt 4 hucreden, birlesime alindi) korunur.'
   dogrulama_deneyi: RFQ.
 - id: eco_price_dopant_mix_usd_per_cyl
   ad: Katki gazi karisim silindiri (PH3 veya B2H6/TMB, %0.5-2, H2 icinde)
@@ -882,15 +978,17 @@ parametreler:
   deger: 3000
   alt: 1000
   ust: 8000
-  kaynak: tahmin (kaynak yok)
+  kaynak: tahmin (altyapi)
   kaynak_turu: tahmin
-  kaynak_alintisi: yok
+  kaynak_alintisi: yok; ~40-50 L silindir (altyapi notu)
   kaynak_tarihi: '2026-09-27'
   guven: dusuk
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Seyreltik karisim toksik envanteri azaltir.
-  aciklama: ~40-50 L silindir.
+  aciklama: ~40-50 L silindir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek fiyat parametresi. Hucrenin hjt_dopant_gas_usd_per_m2
+    (0.03 USD/m2) degeri fiyat degil turetilmis maliyet ve silindir raf omru tabanini (eco_dopant_cyl_shelf_life_months)
+    icermiyor; takma ad degil, celiskilerde.
   dogrulama_deneyi: RFQ.
 - id: eco_cyl_rent_usd_day
   ad: Gaz silindiri/demet kirasi
@@ -2341,3 +2439,43 @@ parametreler:
   senaryoya_uygunluk: Basamakli kisim.
   aciklama: Ilk ciktida formulde kullaniliyordu ama tanimsizdi. 1 FTE * 2070 h * 13.4 = 27.7 kUSD.
   dogrulama_deneyi: Organizasyon semasi.
+- id: eco_usd_inflation_frac_yr
+  ad: USD enflasyonu (reel/nominal donusum)
+  birim: 1/yil
+  deger: 0.0234
+  alt: 0.015
+  ust: 0.035
+  kaynak: https://fred.stlouisfed.org/series/T10YIE (fredgraph.csv) ; https://fred.stlouisfed.org/series/T5YIFR
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: 'T10YIE: ''2026-09-25,2.34''; T5YIFR (5 yil sonrasi 5 yillik): ''2026-09-25,2.34'' (ikisi de
+    bu gorevde acildi).'
+  guven: orta
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, zorunlu: eco_wacc_usd nominal, opex ve kiyas
+    fiyatlari (InfoLink, TrendForce, SMM, iscilik, elektrik) 2026-Q3 fiyatlariyla giriliyor; tutarli levelize yuk
+    icin r_reel = (1 + eco_wacc_usd)/(1 + bu parametre) - 1 = 1.12/1.0234 - 1 = 0.0944 gerekli. Girdilerde karsiligi
+    yok. Basabas orani enflasyon risk primi ve likidite primi icerir; aralik 0.015-0.035 bu primlerin ve gerceklesme
+    sapmasinin tahmini payidir (tahmin).'
+  dogrulama_deneyi: ''
+- id: eco_maint_first_gen_extra_frac_yr
+  ad: Ilk nesil kendi tasarim makinelerde ek bakim
+  birim: 1/yil
+  deger: 0.035
+  alt: 0
+  ust: 0.04
+  kaynak: tahmin; dayanak altyapi eco_maint_frac_capex_yr notu
+  kaynak_turu: tahmin
+  kaynak_alintisi: 'Altyapi: ''Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.''
+    Ust bant 0.08; ''yakin'' = 0.07-0.08 -> ek 0.03-0.04.'
+  guven: dusuk
+  maliyet_sinifi: teknik
+  olcek: genel
+  senaryoya_uygunluk: ''
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, sahip notunu levelize modelde uygulamak icin
+    zorunlu (tek duz oran ya altyapiyi sisirir ya ilk nesil makineyi eksik sayar). Seviyelenmis karsiligi: dm x
+    AF(r_reel, 3)/AF(r_reel, N) = 0.035 x 2.52/5.44 = 0.0161/yil (N = 8; 2 yil kabul edilirse 0.0112). Alt 0: kendi
+    tasarim makine satin alinan kadar olgun. Yalniz kendi tasarim ilk nesil proses makinelerine uygulanir; kopya
+    unitelerde (ogrenme sonrasi) 0 alinabilir.'
+  dogrulama_deneyi: ''

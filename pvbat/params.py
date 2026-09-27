@@ -55,6 +55,10 @@ class Param:
     senaryoya_uygunluk: str = ""
     aciklama: str = ""
     dogrulama_deneyi: str = ""
+    # Eşdeğer (takma ad): bu kavramın tek sahibi başka bir parametredir. Değer her zaman
+    # esdeger × esdeger_carpan olarak okunur; kendi 'deger' alanı yalnızca kayıt içindir.
+    esdeger: str = ""
+    esdeger_carpan: float = 1.0
 
     def hatalar(self) -> list[str]:
         """Kayıt tutarlılık hataları (boş liste = geçerli)."""
@@ -95,6 +99,9 @@ class ParamSet(Mapping[str, float]):
         values = object.__getattribute__(self, "_values")
         if name in values:
             object.__getattribute__(self, "kullanilan").add(name)
+            m = object.__getattribute__(self, "_meta").get(name)
+            if m is not None and m.esdeger:
+                return self.__getattr__(m.esdeger) * m.esdeger_carpan
             return values[name]
         raise AttributeError(f"Tanımsız parametre: {name}")
 
@@ -102,7 +109,13 @@ class ParamSet(Mapping[str, float]):
         raise AttributeError("ParamSet değişmezdir; override() kullanın")
 
     def __getitem__(self, key: str) -> float:
-        return self.__getattr__(key)
+        try:
+            return self.__getattr__(key)
+        except AttributeError as e:
+            raise KeyError(key) from e
+
+    def __contains__(self, key: object) -> bool:
+        return key in self._values
 
     def __iter__(self) -> Iterator[str]:
         return iter(self._values)
@@ -121,6 +134,10 @@ class ParamSet(Mapping[str, float]):
         bilinmeyen = set(values) - set(self._values)
         if bilinmeyen:
             raise KeyError(f"Tanımsız parametre(ler): {sorted(bilinmeyen)}")
+        takma = [k for k in values if self._meta[k].esdeger]
+        if takma:
+            raise KeyError(f"Eşdeğer parametre değiştirilemez; sahibini değiştirin: "
+                           f"{ {k: self._meta[k].esdeger for k in takma} }")
         new = dict(self._values)
         new.update(values)
         return ParamSet(self._meta, new)
@@ -150,7 +167,17 @@ class ParamSet(Mapping[str, float]):
         hatalar: list[str] = []
         for p in self._meta.values():
             hatalar.extend(p.hatalar())
+            if p.esdeger:
+                hedef = self._meta.get(p.esdeger)
+                if hedef is None:
+                    hatalar.append(f"{p.id}: eşdeğer hedefi tanımsız '{p.esdeger}'")
+                elif hedef.esdeger:
+                    hatalar.append(f"{p.id}: eşdeğer zinciri ({p.esdeger} de eşdeğer); tek sahibe bağlanmalı")
         return hatalar
+
+    def sahipler(self) -> list[str]:
+        """Eşdeğer olmayan (bağımsız) parametreler — duyarlılık analizi bunları gezer."""
+        return [k for k, m in self._meta.items() if not m.esdeger]
 
     def kayitlar(self) -> list[dict]:
         """Varsayım tablosu satırları (güncel değerle)."""

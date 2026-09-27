@@ -55,23 +55,31 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: TRY iscilik/ekipman donusumu. Ust sinir kontrollu deger kaybi (2027).
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak
+    (TradingEconomics 25.09.2026); fark %0.16; aralik 47-56.'
   dogrulama_deneyi: Her calistirmada guncelle.
+  esdeger: eco_fx_try_per_usd
+  esdeger_carpan: 1.0
 - id: el_fx_eur_usd
   ad: EUR/USD
   birim: USD/EUR
   deger: 1.139
-  alt: 1.08
-  ust: 1.2
-  kaynak: https://tradingeconomics.com/turkey/currency
-  kaynak_turu: hesap_turetilmis
-  kaynak_alintisi: EURTRY 55.7352; USDTRY 48.9163
+  alt: 1.05
+  ust: 1.25
+  kaynak: https://www.tcmb.gov.tr/kurlar/today.xml ; https://tradingeconomics.com/turkey/currency
+  kaynak_turu: dogrulanmis_url
+  kaynak_alintisi: TCMB 25.09.2026 EUR CrossRateOther 1.1393 (onceki turda ve kirmizi takimca acildi); TE EURTRY
+    55.7352 / USDTRY 48.9163 = 1.1394 (elektronik alaninda).
   kaynak_tarihi: '2026-09-25'
-  guven: orta
+  guven: yuksek
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: EUR fiyatlarinin donusumu.
-  aciklama: 55.7352/48.9163 = 1.1394
+  aciklama: '55.7352/48.9163 = 1.1394 | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsiligi yok. Sahip
+    kaydi hesap_turetilmis/orta idi, cunku TE degeri iki kurdan bolunerek bulunmustu (elektronik kaynak denetimi
+    bu yuzden hesap_turetilmis istemisti). TCMB capraz kuru 1.1393''u dogrudan yayimliyor, deger kaynakta goruldugu
+    icin dogrulanmis_url/yuksek''e yukseltildi (degisiklik gunlugunde). Aralik birlesimi: elektronik 1.08-1.2, standart
+    1.05-1.25 -> 1.05-1.25.'
   dogrulama_deneyi: '-'
 - id: el_discount_rate
   ad: Iskonto orani (USD, reel)
@@ -87,7 +95,8 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: CRF, garanti/bulut bugunku degeri ve GaN deger hesabi.
-  aciklama: 'Dayanak: USD bazli imalat yatirimi icin kaba sermaye maliyeti varsayimi.'
+  aciklama: 'Dayanak: USD bazli imalat yatirimi icin kaba sermaye maliyeti varsayimi. | Uzlaştırma: yalnız müşteri
+    iskonto oranı olarak kalır (GaN/verim değeri); şirket WACC''ı değil.'
   dogrulama_deneyi: Finans ajaninin WACC degeri.
 - id: el_n_amort_yr
   ad: Ekipman amortisman suresi
@@ -95,7 +104,7 @@ parametreler:
   deger: 5
   alt: 3
   ust: 8
-  kaynak: Kaynak yok
+  kaynak: 'Kaynak yok (elektronik); dayanak: elektronik test ekipmani muhasebe pratigi (hafiza)'
   kaynak_turu: tahmin
   kaynak_alintisi: '-'
   kaynak_tarihi: 2026-09
@@ -103,7 +112,9 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Test istasyonu, saha laboratuvari.
-  aciklama: Elektronik test ekipmani icin yaygin muhasebe pratigi (hafiza).
+  aciklama: Elektronik test ekipmani icin yaygin muhasebe pratigi (hafiza). | [Uzlaştırma/ekonomi] Kanonik (tek
+    sahip). Altyapida ayri test ekipmani omru yok; yeni eco_ id zorunlu degil, mevcut tek degerli id secildi. Standart
+    alaninin degersiz capex_life_years (zorunlu test istasyonlari) ve hucrenin IV istasyonlari buna baglanmali.
   dogrulama_deneyi: Finans ajani.
 - id: el_price_kWh_DE_usd
   ad: Almanya hane elektrik fiyati
@@ -209,13 +220,18 @@ parametreler:
   ust: 16.5
   kaynak: https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Cu_cash
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: '25 September 2026: 14,740.00 USD/t'
+  kaynak_alintisi: '''25. September 2026 14,740.00'' USD/t (onceki turda ve kirmizi takimca acildi)'
   kaynak_tarihi: '2026-09-25'
   guven: yuksek
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Sargi ve kablo.
-  aciklama: Alt sinir 2024 seviyesi.
+  aciklama: 'Alt sinir 2024 seviyesi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik yok; en iyi
+    kaynakli ve en guncel id. Urun fiyatlari LME x urune ozgu carpan: kablo (panel-kutu) YALNIZ modulde fiyatlanir
+    (mod_f_cost_cable; bakir disi bilesen mod_cable_core_fixed_usd_per_m ayri); elektronigin el_f_cable_cost''u
+    (x el_cable_price_factor 2.5) sistem toplamina girmez, yalniz kesit/kutle arayuzu kalir (celiskiler: kablo cift
+    sayimi). Emaye/TIW tel el_enamel_premium/el_tiw_premium ile. Modulun 2025 LME''sinden turetilmis 12 USD/kg''i
+    eski oldugu icin birlesime alinmadi.'
   dogrulama_deneyi: Firma emaye tel faturalari.
 - id: el_enamel_premium
   ad: Emaye tel / LME bakir fiyat orani
@@ -2206,8 +2222,13 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: '-'
-  aciklama: 39,223/48.92/195 h = 4.11 x 1.5 (teknisyen, tahmin).
+  aciklama: '39,223/48.92/195 h = 4.11 x 1.5 (teknisyen, tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h
+    üzerinden okunur. Fark: Etiket ''teknisyen'' ama turetim 1.5 x asgari ucret ve kullanim son montaj/test/yeniden
+    isleme (operator isi). Taban 195 h/ay odenen saat, ek yuk yok; kanonik tabanda 8.70 USD/h. Gercekten teknisyen
+    isi ise eco_labor_technician_usd_h.'
   dogrulama_deneyi: Bordro.
+  esdeger: eco_labor_operator_usd_h
+  esdeger_carpan: 1.0
 - id: el_test_time_A_s
   ad: A unite testi suresi (hipot, fonksiyon, NA-koruma, kalibrasyon)
   birim: s
@@ -2792,7 +2813,7 @@ parametreler:
   deger: 5
   alt: 3
   ust: 8
-  kaynak: Kaynak yok
+  kaynak: tahmin (elektronik)
   kaynak_turu: tahmin
   kaynak_alintisi: '-'
   kaynak_tarihi: 2026-09
@@ -2800,7 +2821,10 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: urun
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id; altyapida karsilik yok. urun_sabit CRF(r_reel,
+    bu sure) = 0.2600 ile yilliklastirilir. Standartin years_amort serbest degiskeni buna baglanir. modul N_panels_variant_life
+    bir ADET oldugundan yil parametresine baglanmaz; N_panels_variant_life = el_Y_product_life x yillik varyant
+    adedi olarak turetilir. bat_own_dev_amort_years takma ad degildir (makine omrune tasindi).'
   dogrulama_deneyi: '-'
 - id: el_N_cell_per_year
   ad: Pil hatti hucre kapasitesi (K9)

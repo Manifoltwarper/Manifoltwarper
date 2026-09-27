@@ -1,0 +1,521 @@
+{
+ "toplam": 64,
+ "dagilim": {
+  "destekliyor": 59,
+  "kismen": 5
+ },
+ "kontroller": [
+  {
+   "id": "cz_crucible_freight_36in_usd",
+   "alan": "kristal",
+   "acilan_url": "https://solaralliance.eu/wp-content/uploads/2024/03/ESIA-Report-Ingots-and-Wafers.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Bolum 2.2.2 (Quartz Crucibles): 'Each container can hold around 24 crucibles ... approximately 1 meter in diameter and 1 meter in height ... Container freight costs would be approximately 600 USD per crucible'",
+   "not": "Alinti birebir PDF metninde var (curl ile indirilip metni cikarildi). Rapor potalari yaklasik 1 m / 37 inc olarak tanimliyor; modeldeki '36 inc' etiketi raporda gecmiyor ama deger (600 USD/pota) ayni."
+  },
+  {
+   "id": "cz_hotzone_life_h",
+   "alan": "kristal",
+   "acilan_url": "https://solaralliance.eu/wp-content/uploads/2024/03/ESIA-Report-Ingots-and-Wafers.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Bolum 2.2.3 (Hotzone materials): 'The hotzone needs to be replaced 1.5 times per year, and it requires maintenance as some of its parts need frequent replacement.'",
+   "not": "Alinti birebir var. Donusum: 8760 h/yil / 1,5 = 5840 h, bu da 5800 h'e yuvarlanmis; makul. Donusum %100 calisma suresi varsayiyor, rapor saat cinsinden bir omur vermiyor."
+  },
+  {
+   "id": "xtal_ref_wafer_price_usd_pc",
+   "alan": "kristal",
+   "acilan_url": "https://www.infolink-group.com/spot-price",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "23 Eylul 2026 guncellemesi: 'Mono N Type Wafer - 182-183.75mm / 130µm (USD) 0.148 0.141 0.148'; (RMB) 1.000 0.950 1.000; '210mm / 130µm (RMB) 1.200 1.080 1.150'",
+   "not": "Yuksek, dusuk ve ortalama degerler ile RMB degerleri alintiyla birebir ortusuyor. Sayfa haftalik guncelleniyor; degerler 17-23 Eylul 2026 haftasina ait."
+  },
+  {
+   "id": "xtal_ref_poly_price_usd_kg",
+   "alan": "kristal",
+   "acilan_url": "https://www.infolink-group.com/spot-price",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Polysilicon Price - Mono-grade polysilicon (USD) 26.7 11.0 18.5'; '(RMB) 43.0 40.0 40.0'; not: 'Polysilicon prices in dollar terms are prices for polysilicon with non-China origins'",
+   "not": "Ortalama 18,5 USD/kg ve Cin icin 40,0 RMB/kg sayfada var. USD fiyatinin Cin disi mense oldugu sayfa notunda acikca yaziyor. Degerler 23 Eylul 2026 guncellemesine ait."
+  },
+  {
+   "id": "xtal_si_melting_point_C",
+   "alan": "kristal",
+   "acilan_url": "https://en.wikipedia.org/wiki/Silicon",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Bilgi kutusu: 'Melting point 1687 K (1414 °C, 2577 °F)'",
+   "not": "Deger birebir ortusuyor."
+  },
+  {
+   "id": "cz_seg_coeff_Fe",
+   "alan": "kristal",
+   "acilan_url": "https://www.cityu.edu.hk/phy/appkchu/AP6120/2.PDF",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Table 2.2: Segregation coefficients for common impurities in silicon': Al 0.002, As 0.3, B 0.8, C 0.07, Cu 4x10-6, Fe 8x10-6, O 0.25, P 0.35, Sb 0.023",
+   "not": "curl ile ilk denemede Incapsula bot sayfasi dondu; WebFetch ile PDF (23 sayfa, 'Chapter 2: Crystal Growth and Wafer Preparation') indirilip metni cikarildi. Tablo sirasina gore Fe icin 8x10-6 dogrulandi."
+  },
+  {
+   "id": "cz_tau_over_rho_min_us_per_ohmcm",
+   "alan": "kristal",
+   "acilan_url": "https://taiyangnews.info/technology/constraints-on-wafer-size-for-hjt",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'a joint research project by LONGi and Meyer Burger found a direct correlation between the ratio of lifetime and wafer resistivity (Teff/ρbulk). LONGi quotes this ratio at a minimum of 2,000 as the benchmark, while adding the same to the specifications of n-type wafers.'",
+   "not": "2000 degeri ve alinti birebir var. Makale birim vermiyor; modeldeki us/(ohm.cm) birimi bir cikarim (sektorde yaygin kullanim, makul). Ikinci URL'de (wafer-developments...) bu oran gecmiyor."
+  },
+  {
+   "id": "cz_t_unload_load_h",
+   "alan": "kristal",
+   "acilan_url": "https://archive.org/stream/NASA_NTRS_Archive_19780008498/NASA_NTRS_Archive_19780008498_djvu.txt",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "NTRS 19780008498 'Large area Czochralski silicon', s.92 'SEMICONTINUOUS (Three Crystals)' tablosu: Cleanup 0.5 h, Load and Melt (18 kg) 2.0, Seed and Top 2.0, Growth 7.0, Taper 1.0, 'Unload 1.0', Seed and Top 1.0 ... Totals 36.8 h",
+   "not": "'Unload 1.0' satiri tabloda iki kez geciyor. Modelin 'besleyiciyi yukleme' kismi bir yorum: tabloda yalnizca 'Unload' var, ergitme ayri tutulmus. Deger (1 h) destekleniyor."
+  },
+  {
+   "id": "saw_wire_price_steel_usd_km",
+   "alan": "wafer",
+   "acilan_url": "https://mp.ofweek.com/solar/a856714294547",
+   "sonuc": "kismen",
+   "sayfada_gorulen": "'2024年，金刚线单价从上一年的37.64元/公里骤降至17元/公里，同比下滑54.83%'; ayrica Meichang 2024 satisi 12175.10万公里, gelir 21.52亿元; 2025 Q1'de tungsten tel payi %40'in uzerinde",
+   "not": "Ham sayi (17 RMB/km) birebir var. 17 RMB/km, 2024 kuruyla (~7,1-7,2) yaklasik 2,36-2,40 USD/km ediyor; modeldeki 2,5 USD/km bundan ~%5-6 yuksek. Ayrica 17 RMB/km Meichang'in karbon celik ve tungsten karisik ortalama birim fiyati; sayfa celik cekirdek icin ayri bir fiyat vermiyor. Donusum yaklasik olarak makul ama tam ortusmuyor."
+  },
+  {
+   "id": "wf_price_m10_usd",
+   "alan": "wafer",
+   "acilan_url": "https://www.infolink-group.com/spot-price/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "23 Eylul 2026: 'Mono N Type Wafer - 182-183.75mm / 130µm (USD) 0.148 0.141 0.148'",
+   "not": "Deger ve tarih birebir ortusuyor. Alternatif kaynak pv-magazine (11 Eylul 2026, OPIS) M10 FOB Cin icin 0,149 USD/adet veriyor; tutarli."
+  },
+  {
+   "id": "wf_price_210r_usd",
+   "alan": "wafer",
+   "acilan_url": "https://www.pv-magazine.com/2026/09/11/china-wafer-prices-fall-as-august-rally-fades-polysilicon-outlook-remains-uncertain/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Free-On-Board (FOB) China M10 and 210R wafer prices fell to $0.149/pc and $0.156/pc, respectively, down 1.97% and 2.50% week on week.' (OPIS, 11 Eylul 2026)",
+   "not": "0,156 USD/adet birebir var. TrendForce sayfasi 210R'yi yalnizca RMB cinsinden veriyor (1,00-1,05 RMB); USD degeri orada yok."
+  },
+  {
+   "id": "wf_poly_price_nonchina_usd_kg",
+   "alan": "wafer",
+   "acilan_url": "https://www.trendforce.com/price/pv/cell",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Polysilicon (Per KG), Last Update 2026-09-23: 'Polysilicon Outside China (USD) 22.00 13.10 17.50 — 0.00 %'",
+   "not": "Yuksek, dusuk ve ortalama degerler birebir ortusuyor. InfoLink ayni hafta icin Cin disi ortalamayi 18,5 USD/kg veriyor; iki kaynak arasinda fark var ama beyan edilen kaynak 17,5'i destekliyor."
+  },
+  {
+   "id": "wf_t_ascut_mature_um",
+   "alan": "wafer",
+   "acilan_url": "https://taiyangnews.info/technology/wafer-developments-continue-to-support-hjt-adoption",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'This also aligns with the CPIA's estimate that the mainstream wafer thickness for HJT is about 110 μm, which is expected to narrow to 100 μm between 2026 and 2028 and remain at this level through 2035.'",
+   "not": "Alinti birebir var. Kaynak asil olarak CPIA tahmini."
+  },
+  {
+   "id": "saw_wire_core_um",
+   "alan": "wafer",
+   "acilan_url": "https://strathprints.strath.ac.uk/94630/1/Ge-etal-MSSP-2025-Progress-and-critical-challenges-in-slicing-of-thin-semiconductor-wafers.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Currently, high-carbon steel-core diamond wires with diameters of 35 μm are employed in PV wafer slicing, while tungsten-core wires (33 μm in 2024) are expected to shrink below 25 μm within five years'; Table 2: spesifikasyon 36 / dis cap 51±5 / cekirdek 36±2 / kopma kuvveti >5.8 N",
+   "not": "Iki alinti da PDF metninde var. Nuans: metin karbon celik cekirdekli teller icin 35 μm diyor; 36 μm ise Table 2'deki (malzemeye ozel olmayan) bir spesifikasyon satirinin cekirdek capi. Aradaki fark kucuk (~%3)."
+  },
+  {
+   "id": "saw_feed_mature_mm_min",
+   "alan": "wafer",
+   "acilan_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11279129/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'The slicing speed of photovoltaic silicon wafers is within the range of 1.5 mm/min~2 mm/min using DWS.' (Micromachines 2024, 15(7):910)",
+   "not": "1,75 mm/dk, 1,5-2 mm/dk araliginin orta noktasi; makul. '~182 mm temas' ifadesi sayfada yok, modelin eklemesi."
+  },
+  {
+   "id": "wf_weibull_m",
+   "alan": "wafer",
+   "acilan_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9692905/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Table 1: 'shape parameter mA 3.5; scale parameter σ0 151.3 Mpa'; metin: 'From the reference [28], these two Weibull parameters are taken 151.3 Mpa and 3.5.'",
+   "not": "Deger birebir var. Parametre sabit elmas telle kesilmis (as-sawn) wafer icin, ref [28]: Liu et al., Solar Energy 2017. Tablodaki diger degerler (156 mm wafer, 0,2 mm kalinlik, 100 μm tel) eski nesil kosullari yansitiyor."
+  },
+  {
+   "id": "hjt_ag_mg_per_W_itrpv_2025",
+   "alan": "hucre",
+   "acilan_url": "https://taiyangnews.info/technology/itrpv-sees-pv-shipments-stabilize-at-706-gw-in-2025",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "\"SHJ cells are projected to decline from 12.0 mg/W to 4.3 mg/W\" (2036'ya kadar). Ayni sayfada TOPCon icin \"around 10 mg/W in 2025 to 6.3 mg/W by 2036\".",
+   "not": "Alinti birebir sayfada var. 12.0 mg/W baslangic (2025) degeri olarak okunuyor; model degeri 12 mg/W ile ortusuyor."
+  },
+  {
+   "id": "hjt_ito_thickness_total_nm",
+   "alan": "hucre",
+   "acilan_url": "https://taiyangnews.info/technology/reducing-indium-in-hjt-tco-processing",
+   "sonuc": "kismen",
+   "sayfada_gorulen": "\"Taking a cell with 100 nm of ITO applied on both sides as reference\" (VON ARDENNE degerlendirmesi). Sayfada baska TCO kalinligi yok.",
+   "not": "Alinti sayfada var, ancak her yuzde 100 nm toplam 200 nm eder; model degeri 180 nm (yaklasik %10 dusuk). 180 nm'nin kaynagi olarak anilan Louwen 2016 icin URL verilmemis ve dogrulanamadi. Deger bu sayfadan dogrudan cikmiyor."
+  },
+  {
+   "id": "hjt_in_price_usd_per_kg",
+   "alan": "hucre",
+   "acilan_url": "https://tradingeconomics.com/commodity/indium ; https://www.procurementresource.com/resource-center/indium-price-trends ; https://pubs.usgs.gov/periodicals/mcs2025/mcs2025-indium.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "TE: \"Indium traded flat at 5,250 CNY/Kg on September 24, 2026.\" PR: China (FOB) \"USD 786.50/KG\" (Temmuz 2026). USGS MCS 2025: 2024e U.S. warehouse FOB 340, Rotterdam 300 $/kg.",
+   "not": "Uc kaynaktaki ham sayilar birebir dogru. 5250/6.72=781 $/kg (modelin kendi kuru 6.70 ile 784); PR 786.5. Model degeri 800 $/kg bunlarin ~%2 ustunde, makul yuvarlama. USGS 2024 fiyatlari (300-340) eski ve cok daha dusuk; 800 guncel Cin spotunu yansitiyor."
+  },
+  {
+   "id": "hjt_capex_industry_usd_per_Wyr",
+   "alan": "hucre",
+   "acilan_url": "https://images.assettype.com/taiyangnews/2024-06/4d81d4e5-ecda-429e-92d4-359d5806e4b5/TaiyangNews_Report_Heterojunction_Solar_Technology_2023_download_EN_v2.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "s.34: \"As for equipment CapEx, it is still high at 350 to 400 million RMB/GW as of the end of 2022 ... The target is to attain an equipment CapEx of 250 million/GW.\"",
+   "not": "Alinti PDF'te birebir var. Donusum: 0.35-0.40 RMB/W / 6.7 = 0.052-0.060 USD/W; 0.055 aralik icinde, makul. Uyari: veri 2022 sonuna ait (eski); hedef 250 M RMB/GW ~0.037 USD/W. Ikincil URL (chintiyansolar) kontrol edilmedi."
+  },
+  {
+   "id": "cell_eta_industry_2025_pct",
+   "alan": "hucre",
+   "acilan_url": "https://taiyangnews.info/technology/heterojunction-efficiency-roadmaps-approach-27",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "\"It places HJT efficiency at around 25.7% in 2025, then accelerates to around 26.5% in 2029.\" (ITRPV); CPIA: \"HJT cell efficiency was at around 25.9% in 2025 and is expected to improve to approximately 26.2%...\"",
+   "not": "ITRPV 25.7% (2025) ve CPIA 25.9%/26.2% ifadeleri sayfada var. Model degeri 25.7% ile birebir ortusuyor. pv-tech ve pv-magazine ikincil URL'leri acilmadi."
+  },
+  {
+   "id": "hjt_edge_j02_native_nA_cm",
+   "alan": "hucre",
+   "acilan_url": "https://d-nb.info/1355800013/34",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Wohler, Greulich, Bett, SOLMAT 278 (2024) 113192: \"J02,native =(2.41±0.46) nA/cm\"; \"Δη_native = -0.1% for the full cell\"; M6 SHJ, \"η = (22.8 to 22.9) %\".",
+   "not": "Acik erisim PDF indirildi; deger, belirsizlik, verim kaybi ve hucre verimi birebir mevcut. Olcum (fit) degeri oldugu dogru."
+  },
+  {
+   "id": "hjt_queue_time_max_min",
+   "alan": "hucre",
+   "acilan_url": "https://www.scientific.net/SSP.187.345",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Danel, Souche, Nolan, Le Tiec, Ribeyron, 'HF Last Passivation for High Efficiency a-Si/c-Si Heterojunction Solar Cells': \"With a high performance cleaning ... 30 min delay has no impact and 90 min leads to about 5% relative degradation of cell performance.\"",
+   "not": "Ozet cumlesi birebir sayfada var. 30 dk 'kayipsiz' degeri yalnizca yuksek performansli temizlik kosulunda gecerli; 30-90 dk arasi icin veri yok."
+  },
+  {
+   "id": "hjt_breakage_ref",
+   "alan": "hucre",
+   "acilan_url": "https://www.tradingview.com/news/eqs:c199be9e4094b:0-from-concept-to-mass-production-risen-energy-s-journey-with-ultra-thin-wafers/ ; https://taiyangnews.info/technology/the-supply-side-of-pecvd-tools-for-hjt-part-1",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Risen (11.03.2026): \"a stabilized yield rate consistently above 99.5% with a fragment rate below 0.25%\" (110 μm HJT). TaiyangNews: Maxwell MV-LH06 icin \"the spec for mechanical breakage is given as 0.25%.\"",
+   "not": "0.25% = 0.0025 her iki sayfada var. Kucuk baglam farki: Risen makalesinde 210-yarim hucre formati anilmiyor (yalniz 110 μm); Maxwell degeri tek arac (PECVD) spesifikasyonu, tum hat degil."
+  },
+  {
+   "id": "mod_fx_cny_per_usd",
+   "alan": "modul",
+   "acilan_url": "https://www.federalreserve.gov/releases/h10/hist/dat00_ch.htm",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Ham HTML (curl): \"18-SEP-26 6.6975\"; \"Last Update: September 21, 2026\". Onceki gunler 6.7060-6.7112 (10-17 Eylul).",
+   "not": "Deger birebir sayfada var; 6.7 makul yuvarlama."
+  },
+  {
+   "id": "mod_glass_price_usd_m2_per_mm",
+   "alan": "modul",
+   "acilan_url": "https://www.energytrend.com/solar-price.html ; https://www.montagtech.com/solar-glass-prices-rebound-what-20mm-and-32mm-buyers-should-know-september-2026",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "EnergyTrend (2026/09/23 update): \"2.0mm Double-glazed and Coated PV Glass (RMB) 11 | 10 | 10.5\"; \"3.2mm ... 17.5 | 17 | 17\". Montagtech: 31.08 2.0 mm cift kaplamali RMB 11/m², 3.2 mm RMB 17.15/m² (SCI); 01.09 liste 2.0 mm cift kaplamali RMB 11.5/m².",
+   "not": "Ham sayilar dogru. Donusum: 10.5/6.7/2=0.78; 11.5/6.7/2=0.86; 17/6.7/3.2=0.79 USD/m²/mm. 0.8 aralikta, makul."
+  },
+  {
+   "id": "mod_glass_rear_price_usd_m2_per_mm",
+   "alan": "modul",
+   "acilan_url": "https://www.energytrend.com/solar-price.html",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "\"2.0 Rear PV Glass (RMB) 9 | 8 | 8.5\" (2026/09/23 update).",
+   "not": "8.5/6.70/2 = 0.634 USD/m²/mm; model 0.63 ile ortusuyor. Sayfa birimi yalniz '(RMB)' yaziyor, m² basina oldugu sektor konvansiyonundan cikiyor."
+  },
+  {
+   "id": "mod_encap_price_usd_m2",
+   "alan": "modul",
+   "acilan_url": "https://faxiangongchang.com/en/reports/china-pv-encapsulation-film-2026",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "\"POE monolayer fell from RMB 26 to 13 (50%). EPE co-extruded fell from RMB 22 (when commercial volume began in late 2022) to 11.5 (48%).\" Donem: mid-2022 - end-2025; rapor tarihi 2026-06-24; Infolink, PVInsights, SolarMedia anilmis.",
+   "not": "13/6.70 = 1.94 USD/m² dogru. Not: fiyatlar 2025 sonuna ait; Infolink vb. yalnizca genel fiyat belirleyiciler olarak anilmis, rakamlar dogrudan onlara atfedilmemis."
+  },
+  {
+   "id": "mod_T_min_design_C",
+   "alan": "modul",
+   "acilan_url": "https://www.mgm.gov.tr/veridegerlendirme/il-ve-ilceler-istatistik.aspx?m=ISTANBUL ; ...m=ANKARA ; ...m=ERZURUM",
+   "sonuc": "kismen",
+   "sayfada_gorulen": "Istanbul (1950-2025) En Dusuk Sicaklik Subat -9,0; Ankara (1927-2025) Ocak -24,9; Erzurum (1929-2025) Aralik -37,2 °C.",
+   "not": "Alintilanan MGM degerleri birebir dogru. Ancak -20 °C degeri sayfalarda yok; bir tasarim secimi. Ankara (-24,9) ve Erzurum (-37,2) rekorlari -20'nin altinda oldugundan -20 bu sahalar icin muhafazakar degil. Almanya verileri (wetterdienst.de, Wikipedia) icin URL verilmedi, kontrol edilmedi."
+  },
+  {
+   "id": "mod_classIII_voc_max_V",
+   "alan": "modul",
+   "acilan_url": "https://www.sis.se/api/document/preview/8022082/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "IEC 61730-1 Ed.2.0 2016-08, 4.4.1 General: \"Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard test conditions.\"",
+   "not": "SIS onizleme PDF'inde madde 4.4.1 birebir mevcut. 2023 baskisindaki madde 5.4 iddiasi bu URL'den kontrol edilmedi."
+  },
+  {
+   "id": "mod_isc_max_factor",
+   "alan": "modul",
+   "acilan_url": "yerel-onbellek://scratchpad/712_2017.txt (web URL degil); alternatif: https://lsp.global/wp-content/uploads/2025/10/IEC-60364-7-712-2017-Part-7-712-Requirements-for-special-installations-or-locations-Solar-photovoltaic-PV-power-supply-systems.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "B.2 Calculation of ISC MAX: \"ISC MAX = KI ISC STC\"; \"Minimum value for KI is 1,25.\" (IEC 60364-7-712 Ed.2.0 2017-04, s.56; FR: \"La valeur minimale de KI est 1,25\").",
+   "not": "Beyan edilen 'URL' acilabilir bir web adresi degil (kaynak kaydinda eksiklik). Yerel dosyada ifade var; alternatif yol olarak lsp.global'deki kamuya acik PDF kopyasi indirildi ve ayni ifade Ek B.2'de dogrulandi. Kaynak kaydina bu gercek URL eklenmeli."
+  },
+  {
+   "id": "mod_gamma_Q",
+   "alan": "modul",
+   "acilan_url": "https://www.phd.eng.br/wp-content/uploads/2015/12/en.1990.2002.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Tablo A1.2(B) Not 2 (PDF s.57, OCR): \"γQ,1 = 1,50 where unfavourable (0 where favourable)\"; \"γQ,i = 1,50 where unfavourable\". A1.2(A)'da da ayni 1,50 degeri var.",
+   "not": "PDF (BS EN 1990:2002 taramasi, OCR) indirildi; deger ve ifade mevcut. Tavsiye edilen deger; Ulusal Ek ile degistirilebilecegi sayfada belirtiliyor."
+  },
+  {
+   "id": "el_fx_usd_try",
+   "alan": "elektronik",
+   "acilan_url": "https://tradingeconomics.com/turkey/currency",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'The USD/TRY exchange rate rose to 48.9163 on September 25, 2026, up 0.40%...'; '...is down by 18.28% over the last 12 months.'",
+   "not": "48.9163, 48.92'ye yuvarlanmis. %18.28 yillik deger kaybi da sayfada birebir var. Hem WebFetch hem ham HTML ile dogrulandi."
+  },
+  {
+   "id": "el_cu_price_usd_kg",
+   "alan": "elektronik",
+   "acilan_url": "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Cu_cash",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Tablo satiri: '25. September 2026 14,740.00 14,647.00 251,500' (LME Copper Cash-Settlement ilk sutun)",
+   "not": "14,740 USD/t / 1000 = 14.74 USD/kg; donusum dogru. Ham HTML ile dogrulandi."
+  },
+  {
+   "id": "el_mcu_usd",
+   "alan": "elektronik",
+   "acilan_url": "https://www.lcsc.com/product-detail/C730123.html",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "MPN STM32G474CBT6, LCSC Part # C730123; fiyat kademesi '1,000 + $ 3.0078 $ 3007.80'",
+   "not": "3.0078 -> 3.01 USD yuvarlama makul. Parca LQFP-48 STM32G474CBT6. Ham HTML ile dogrulandi."
+  },
+  {
+   "id": "el_afe_usd",
+   "alan": "elektronik",
+   "acilan_url": "https://www.lcsc.com/product-detail/C2862742.html",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "BQ76952PFBR, '1,000 + $ 2.0092 $ 2009.20'; 'battery monitor and protector for 3-series to 16-series lithium-ion, lithium polymer, and LiFePO4 battery packs'",
+   "not": "2.0092 -> 2.01 yuvarlama dogru. 3S-16S ve LiFePO4 ifadesi LCSC sayfasinda mevcut. TI PDF'i ayrica acilmadi (gerek kalmadi)."
+  },
+  {
+   "id": "el_Qoss_gan_nC",
+   "alan": "elektronik",
+   "acilan_url": "https://epc-co.com/epc/Portals/0/epc/documents/datasheet/EPC2218_datasheet.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Dynamic Characteristics: 'QOSS Output Charge VGS = 0 V, VDS = 50 V 46 69' (nC); 'QRR Source-Drain Recovery Charge 0'; 'QG Total Gate Charge VGS = 5 V, VDS = 50 V, ID = 25 A 10.5 13.6'; VDS 100 V",
+   "not": "PDF indirildi ve pypdf ile metin cikarildi. 46 nC tipik degerdir (maks 69). Datasheet 'Revised February 20, 2026'. (acilan_url'de URL: .../documents/datasheets/EPC2218_datasheet.pdf)"
+  },
+  {
+   "id": "el_T_charge_max_C",
+   "alan": "elektronik",
+   "acilan_url": "https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Maximum Continuous Charging Rate ... 0~45°C: ≤0.50C; ≥45°C：cannotchargingtemperature'; '6.1 Cell usage conditions Temperatureofcharge ：-10〜45°C'",
+   "not": "PDF metni pypdf ile cikarildi. Model 71173204E-220, Hunan Dpt Battery Co. 45 °C sarj ust siniri acikca yazili. (Belgenin onsozunde yanlislikla 'cylindrical' deniyor; deger etkilenmiyor.)"
+  },
+  {
+   "id": "el_C_charge_cold_C",
+   "alan": "elektronik",
+   "acilan_url": "https://ecoteardown.top/wp-content/uploads/2024/01/71173204E-220-220Ah-3.1V-Sodium-ion-Na-ion-Prismatic-Battery-Cell-Specification-Datasheet.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'≤-10°C:cannotchargingtemperature; -10~0°C:≤0.20C; 0~45°C: ≤0.50C'",
+   "not": "0.20C = 0.2 1/h, birebir ortusuyor."
+  },
+  {
+   "id": "el_grid_limit_VA",
+   "alan": "elektronik",
+   "acilan_url": "https://www.dke.de/de/arbeitsfelder/energy/normenhinweise/faq-zur-dinvdev012695 ; https://www.solakon.de/blogs/rechtliches/neue-vde-ar-n-4105-norm",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "DKE: 'Die maximal zulässige Einspeiseleistung des Wechselrichters beträgt 800 VA. Die maximal zulässige Gesamtmodulleistung wird auf 800 W + 20 % (also 960 W) festgelegt...'; '8. Umfasst die Produktnorm auch Steckersolargeräte mit Energiespeicher? Nein, diese Norm deckt Steckersolargeräte mit Energiespeicher nicht ab.'",
+   "not": "Her iki alinti DKE sayfasinda birebir var (ham HTML ile dogrulandi). Solakon sayfasi da 800 VA sinirini ve 1 Mart 2026'dan itibaren VDE-AR-N 4105'te standart oldugunu soyluyor; ayrica 800 VA'ya kadar kucuk depolamanin basitlestirilmis kayitla isletilebilecegini belirtiyor (DKE'nin 0126-95 kapsami disi ifadesiyle celismez, farkli norm)."
+  },
+  {
+   "id": "bat_fx_cny_per_usd",
+   "alan": "pil",
+   "acilan_url": "https://tradingeconomics.com/china/currency",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'The USD/CNY exchange rate rose to 6.7204 on September 25, 2026, up 0.09% from the previous session.'",
+   "not": "6.7204 -> 6.72 yuvarlama. Ham HTML ile dogrulandi."
+  },
+  {
+   "id": "bat_cell_price_na_prismatic_usd_Wh",
+   "alan": "pil",
+   "acilan_url": "https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'China 50Ah Prismatic Sodium-Ion Battery Cell (NFPP) (USD/wh) 0.08-0.09 0.09'; '100Ah ... 0.082-0.089 0.085'; '200Ah ... 0.079-0.084 0.082'; ayrica 75Ah ort. 0.086, 160Ah ort. 0.082; hepsi 'Sep 24, 2026'",
+   "not": "0.085 degeri 100Ah ortalamasina birebir esit ve 50-200Ah araligi (0.082-0.09 ortalamalar) icinde merkezi bir secim. Ham HTML (--compressed) ile dogrulandi."
+  },
+  {
+   "id": "bat_cell_price_lfp_50ah_usd_Wh",
+   "alan": "pil",
+   "acilan_url": "https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'China 50Ah ESS Battery (USD/wh) 0.0543-0.0588 0.0565 -0.0002 Sep 24, 2026'; '100Ah ESS Battery 0.0513-0.0601 0.0557'; '314Ah LFP ESS 0.045-0.0517 0.0483'",
+   "not": "0.0565 birebir. Kucuk not: 50Ah satiri sayfada yalnizca 'ESS Battery' olarak adlandirilmis, 'LFP' ibaresi bu satirda yok (ESS hucreleri pratikte LFP oldugu icin makul varsayim). mysteel URL'si bu deger icin acilmadi/gerekmedi."
+  },
+  {
+   "id": "bat_prod_energy_kWh_per_kWh",
+   "alan": "pil",
+   "acilan_url": "https://www.nature.com/articles/s41560-023-01355-z",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'Fig. 3 shows that SIB cells are likely to have an energy demand of 23.0 kWhprod, based on today's production technology...'; 'PLIB cell production will require less energy (10.6–23.0 kWhprod per kWhcell)'; 'same average energy consumption of 5.2 kWh_prod per m²_cell'; 'to achieve a constant dew point of Tdp = −40 °C, the air supply has to have a dew point of Tdp = −60 °C'",
+   "not": "Ilk WebFetch cerez yonlendirmesine takildi; yonlendirme URL'si ve curl ile acildi. Makale: 'Energy consumption of current and future production of lithium-ion and post lithium-ion battery cells' (Nature Energy). Birim kWh_prod/kWh_cell."
+  },
+  {
+   "id": "bat_cn_li_consumption_tax_frac",
+   "alan": "pil",
+   "acilan_url": "https://www.mysteel.net/analysis/5139214-china-lithium-industry-in-h2-2026-from-aggregate-surplus-to-structural-rebalancing",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'a 2% consumption tax will apply to lithium-ion batteries from September 1, 2026, rising to 4% from September 1, 2027. Solid-state and sodium-ion batteries are exempt through end-2028. The tax is levied at the cell manufacturing stage...'",
+   "not": "Alinti birebir; ham HTML ile dogrulandi. 0.02 = %2."
+  },
+  {
+   "id": "bat_cell_v_nom_nfpp_V",
+   "alan": "pil",
+   "acilan_url": "https://egroup18650.com/73-sodium-ion-cells ; https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html",
+   "sonuc": "kismen",
+   "sayfada_gorulen": "egroup: 'SIB-50160118-NFPP-50Ah ... 50Ah capacity and 2.85V platform voltage'; ayrica 'SIB 50160118-75Ah ... 75Ah at 2.9V'. OGSolar: 'SIB-P71173208-160Ah ... Nominal Voltage 3.0 V'. EVLithium 210Ah: 'Nominal Voltage ≈3.10V'",
+   "not": "Alintilarin ucu de sayfalarda mevcut. Ancak 2.9 V degeri kaynaklarin hicbirinde NFPP icin dogrudan yazmiyor; 2.85-3.10 V araligindan secilmis muhafazakar bir deger (2.9 V yalnizca kimyasi belirtilmemis 75Ah hucrede geciyor). EVLithium URL'si bu parametrenin olasi_urller listesinde yok, baska parametreden acildi. egroup curl ile engellendi (Mod_Security), WebFetch ile okundu."
+  },
+  {
+   "id": "bat_cycle_life_nfpp_pris",
+   "alan": "pil",
+   "acilan_url": "https://ogsolarstore.com/blogs/news/cell-review-sodium-ion-nfpp-18650 ; https://www.highstar-sodium.com/technical-characteristics-of-prismatic-sodium-battery-cells/",
+   "sonuc": "kismen",
+   "sayfada_gorulen": "OGSolar 160Ah: '0.5C charge ... 0.5C discharge ... at 25 °C. Spec calls out: ≥6000 cycles to 80% of initial capacity; ≥10000 cycles to 70%'. Highstar: 'Charge/discharge energy retention rate≥80% at 6000 times; ≥70% at 10000 times' (0.5P, 25 ℃); '≥80% at 3000 times' (1P, 25 ℃); '≥80% at 2000 times' (0.5P, 60 ℃)",
+   "not": "5000 degeri hicbir sayfada dogrudan yok; 0.5C'de 6000 ile 1C'de 3000 arasinda muhafazakar bir secim. Ayrica kaynak_alintisi Highstar'in '10,000 cycles'ini %80 cercevesinde sunuyor, oysa sayfada bu deger %70 kapasite icin; Highstar'in %80 icin 0.5P degeri 6000."
+  },
+  {
+   "id": "bat_charge_c_max_subzero",
+   "alan": "pil",
+   "acilan_url": "https://www.tycorun.com/products/sodium-ion-26700-battery ; https://www.evlithium.com/sodium-ion-battery/210ah-sodium-prismatic-battery-cell.html",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Tycorun 26700: 'Maximum Continuous Charging Rate -10 ℃ : can not charging temperature -10-0 ℃ :<0.20C 0-45C:≤1.00C >45 ℃ : can not charging temperature'. EVLithium 210Ah: 'Temperature and Charging Performance ≤-20 Battery performance affected ... -20~0 ≤0.20C 0~45 ≤0.50C'",
+   "not": "Her iki alinti ham HTML ile dogrulandi; 0.20C = 0.2 1/h."
+  },
+  {
+   "id": "eco_fx_try_per_usd",
+   "alan": "altyapi",
+   "acilan_url": "https://finans.mynet.com/haber/detay/doviz/26-eylul-2026-dolar-bugun-kac-tl-serbest-piyasa-dolar-kuru-dolar-tl-gunluk-sinirli-yukselis-haftalik-yukselis/577072/ ; https://www.tcmb.gov.tr/kurlar/today.xml",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Mynet (26 Eylul 2026): 'Dolar/TL serbest piyasa satis fiyati 49,01 TL olarak belirlendi', alis 48,85. TCMB today.xml: Tarih=25.09.2026, Bulten_No=2026/181, USD ForexBuying 48.7901, ForexSelling 48.8780.",
+   "not": "Iki kaynak da alintidaki rakamlari birebir iceriyor. 49 TRY/USD, Mynet'teki 49,01'in yuvarlanmis hali; TCMB doviz satis kuru 48,88 ile de uyumlu (fark yaklasik %0,25). Uyari: today.xml her gun degisir; bu kontrol 25.09.2026 bultenine denk geldi."
+  },
+  {
+   "id": "eco_tr_eurobond_usd_10y",
+   "alan": "altyapi",
+   "acilan_url": "https://hibya.com/eurobond-getirilerinde-yukselis-goruldu-1027379",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Haber tarihi 11 Eylul 2026: '2036 vadeli Eurobond getirisi yuzde 7,10 oldu'; 'Turkiye'nin 2034 vadeli Eurobond getirisi yuzde 6,73, 2047 vadeli Eurobond getirisi ise yuzde 7,82 olarak kaydedildi.'",
+   "not": "0,071/yil degeri sayfadaki %7,10 ile birebir ortusuyor. Tek gunluk bir haber verisi."
+  },
+  {
+   "id": "eco_water_isu_sanayi_usd_m3",
+   "alan": "altyapi",
+   "acilan_url": "https://www.isu.gov.tr/sufiyatlari",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "2026/9 donemi SANAYI: su 206.697 + atiksu 103.3485 = 310.05 TL/m3.",
+   "not": "Ham TL degerleri sayfada birebir var. Donusum: 310,05 / 49 = 6,3276, yani 6,33 USD/m3. Yuvarlama dogru ve model kuruyla (49) tutarli."
+  },
+  {
+   "id": "eco_water_isu_osb_usd_m3",
+   "alan": "altyapi",
+   "acilan_url": "https://www.isu.gov.tr/sufiyatlari",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "2026/9 donemi SANAYI (ORTAK ARITMA TESISI OLAN OSB): su 206.697 + atiksu 0.0000 = 206.70 TL/m3.",
+   "not": "Donusum: 206,70 / 49 = 4,218, yani 4,22 USD/m3. Dogru. Bu kategoride atiksu bedeli 0; OSB'nin kendi aritma bedeli bu rakama dahil degil."
+  },
+  {
+   "id": "eco_tr_erp",
+   "alan": "altyapi",
+   "acilan_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Tablo satiri: 'Turkey (updated February 2026)' | Ba3 | 3.06% | 4.66% | 8.89% | 25.00% | 2.85% | 8.56%. Sayfanin genel guncelleme notu: 'Last updated: January 5, 2026'.",
+   "not": "Ham HTML curl ile indirilip dogrulandi. ERP %8,89 = 0,0889 birebir. Degerler Subat 2026 tarihli; Temmuz 2026 ara guncellemesi yayimlanmis olabilir, bu kontrol edilmedi."
+  },
+  {
+   "id": "eco_elec_ptf_try_mwh",
+   "alan": "altyapi",
+   "acilan_url": "https://www.enerjigunlugu.net/spot-elektrik-fiyati-26-08-2026-icin-3634-98-tl-69541h.htm",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'26.08.2026 teslim gunu icin MWh basina kesinlesmemis PTF aritmetik ortalamasi 3634.98 TL oldu. Gunun maksimum fiyati saat 18:00-22:00 araligi icin 4500 TL/MWh, gunun minimum fiyati ise saat 12:00-13:00 dilimi icin 2699.99 TL/MWh'",
+   "not": "Alinti birebir dogru. Onemli cekince: bu yillik ortalama degil, tek bir gunun kesinlesmemis PTF ortalamasi. Parametre adi bunu 'vekil' olarak acikca soyluyor, ancak yillik ortalamanin temsilcisi olarak zayif (mevsimsellik var)."
+  },
+  {
+   "id": "site_f_discharge_limit_mg_l",
+   "alan": "altyapi",
+   "acilan_url": "https://web.deu.edu.tr/atiksu/ana39/skkypdf.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "TABLO 19 (Karisik endustriyel atiksular, kucuk ve buyuk OSB ve sektor belirlemesi yapilamayan diger sanayiler): 'FLORUR (F-) (mg/l) 15 -' (2 saatlik kompozit). Tablo 15.4 Daglama: FLORUR 20. Tablo 18.2 Tasit fabrikalari: FLORUR 5. Tablo 25'te florur parametresi yok. Metin: 'Bu yonetmelikte yer almayan endustri tipleri icin desarj standartlari Tablo 19 esas alinarak Bakanlik tarafindan tespit edilir.'",
+   "not": "PDF indirilip metni cikarildi; alintidaki butun unsurlar dogrulandi. 15 mg/L, 2 saatlik kompozit numune degeri (24 saatlik deger tanimli degil). DEU'daki kopya yonetmeligin eski bir derlemesi olabilir; sonraki degisiklikler kontrol edilmedi. Wikipedia (CaF2) URL'si bu deger icin ilgisiz, acilmadi."
+  },
+  {
+   "id": "site_seveso_ph3_lower_t",
+   "alan": "altyapi",
+   "acilan_url": "https://www.legislation.gov.uk/uksi/2015/483/schedule/1 ; https://www.resmigazete.gov.tr/eskiler/2019/03/20190302-1.htm (+ ek: 20190302-1-1.pdf)",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "UK COMAH 2015 Sch.1: '29. Phosphine (phosphorus trihydride) 7803-51-2 0.2 1'. TR RG 02.03.2019 (BEKRA Yonetmeligi) ana metin: alt seviye 'Sutun 2'deki esik degerlerine esit veya uzerinde, ancak Sutun 3'teki degerlerin altinda'. Ek-1 PDF (taranmis goruntu) sayfa 4: '29. Fosfor trihidrur (Fosfin) 7803-51-2 | 0,2 | 1'.",
+   "not": "Iki kaynakta da alt esik 0,2 t, ust esik 1 t. RG ek PDF'i taranmis goruntu oldugu icin sayfa gorseli acilarak okundu."
+  },
+  {
+   "id": "std_selv_pv_uocmax_limit_v",
+   "alan": "standart",
+   "acilan_url": "https://lsp.global/wp-content/uploads/2025/10/IEC-60364-7-712-2017-Part-7-712-Requirements-for-special-installations-or-locations-Solar-photovoltaic-PV-power-supply-systems.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "IEC 60364-7-712 Edition 2.0 2017-04: '712.414.101 For the use of SELV and PELV protective measures on the DC side, UOC MAX shall not exceed 60 V DC.'",
+   "not": "Metin birebir dogrulandi. Belge lisanssiz bir kopya ('Provided by IHS under license with IEC ... No reproduction'); beyan zaten lisansli kopya alinmasi gerektigini belirtiyor. Ikinci URL (iteh.ai, 2025 surum ornegi) yalnizca icindekiler kismini iceriyor; 712.414 basligi var ama madde metni yok, yani 2025 surumundeki deger buradan dogrulanamadi."
+  },
+  {
+   "id": "std_class3_pmax_w",
+   "alan": "standart",
+   "acilan_url": "https://www.sis.se/api/document/preview/8022082/",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "IEC 61730-1 Edition 2.0 2016-08 (SIS onizlemesi): '4.4 PV modules of class III / 4.4.1 General: Class III PV modules shall not have electrical ratings greater than 240 W where the open-circuit voltage does not exceed 35 V DC and the short-circuit current does not exceed 8 A when tested under standard test conditions.'",
+   "not": "Madde no ve deger birebir dogru. Not: 240 W siniri, Voc <= 35 V DC ve Isc <= 8 A (STC) kosullariyla birlikte gecerli. UL beyaz kagidinda da ayni ifade var: '...not allowed to have electrical ratings greater than 35 V DC, 240 W...'."
+  },
+  {
+   "id": "std_lvd_dc_lower_v",
+   "alan": "standart",
+   "acilan_url": "https://single-market-economy.ec.europa.eu/sectors/electrical-and-electronic-engineering-industries-eei/low-voltage-directive-lvd_en",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "'...50 and 1000 V for alternating current' ve '75 and 1500 V for direct current'",
+   "not": "DC alt sinir 75 V sayfada acikca var."
+  },
+  {
+   "id": "std_batt_due_diligence_turnover_eur",
+   "alan": "standart",
+   "acilan_url": "http://publications.europa.eu/resource/cellar/d0065c31-2ce3-11ee-95a2-01aa75ed71a1.0006.03/DOC_1 ; http://publications.europa.eu/resource/cellar/fe1163e4-6cdd-11f0-bf4e-01aa75ed71a1.0006.03/DOC_1",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "2023/1542 Article 47: 'This Chapter does not apply to economic operators that had a net turnover of less than EUR 40 million in the financial year preceding the last financial year, and that are not part of a group ... exceeds the limit of EUR 40 million.' 2025/1561 Article 1: 'Article 48 of Regulation (EU) 2023/1542 is amended as follows: (a) in paragraph 1, the date 18 August 2025 is replaced by 18 August 2027'.",
+   "not": "Iki alinti da birebir dogru. Kucuk bir ayrinti: 2025/1561 esigi degil, Madde 48(1)'deki uygulama tarihini degistiriyor; 40 milyon EUR esigi Madde 47'de ayni kaliyor. 2025/1561'den sonraki olasi degisiklikler (or. esigin yukseltilmesi) kontrol edilmedi. SPARQL URL'si acilmadi."
+  },
+  {
+   "id": "std_austria_selv_pv_v",
+   "alan": "standart",
+   "acilan_url": "https://lsp.global/wp-content/uploads/2025/10/IEC-60364-7-712-2017-Part-7-712-Requirements-for-special-installations-or-locations-Solar-photovoltaic-PV-power-supply-systems.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "Annex F (informative) 'List of notes concerning certain countries': 'AT 712.414.101 In Austria, due the \"particular characteristics of PV installations\" ... and the fact, that such equipment is as well used by ordinary persons only a limit of 35 V is acceptable.'",
+   "not": "Ek F ve madde numarasi dogrulandi. Kaynak lisanssiz bir kopya."
+  },
+  {
+   "id": "std_selv_dry_no_basic_protection_dc_v",
+   "alan": "standart",
+   "acilan_url": "http://erlerdesign.com/download/ESD/old_iec60364-4-41_protection_shock_inst_buildings.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "IEC 60364-4-41 Fifth edition 2005-12, 414.4.5: 'Basic protection is generally unnecessary in normal dry conditions for - SELV circuits where the nominal voltage does not exceed 25 V a.c. or 60 V d.c.; - PELV circuits where ... does not exceed 25 V a.c. or 60 V d.c. and exposed-conductive-parts ... connected by a protective conductor...'",
+   "not": "Birebir dogrulandi. PELV icin ek kosul var: iletken kisimlarin koruma iletkeniyle ana topraklama terminaline bagli olmasi. Kaynak lisanssiz bir IHS kopyasi."
+  },
+  {
+   "id": "std_selv_wet_no_basic_protection_dc_v",
+   "alan": "standart",
+   "acilan_url": "http://erlerdesign.com/download/ESD/old_iec60364-4-41_protection_shock_inst_buildings.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "414.4.5: 'In all other cases, basic protection is not required if the nominal voltage of the SELV or PELV system does not exceed 12 V a.c. or 30 V d.c.'",
+   "not": "Birebir dogrulandi."
+  },
+  {
+   "id": "std_elv_band1_dc_max_v",
+   "alan": "standart",
+   "acilan_url": "http://erlerdesign.com/download/ESD/old_iec60364-4-41_protection_shock_inst_buildings.pdf",
+   "sonuc": "destekliyor",
+   "sayfada_gorulen": "414.1.1: 'This protective measure requires: - limitation of voltage in the SELV or PELV system to the upper limit of voltage Band I, 50 V a.c. or 120 V d.c. (see IEC 60449)'",
+   "not": "Birebir dogrulandi."
+  }
+ ]
+}

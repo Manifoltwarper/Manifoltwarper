@@ -1618,8 +1618,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: 2 yil, Cin'deki teknolojik eskimeyi yansitir. Cap sabitse fiziksel omur 10+ yil olabilir.
-  aciklama: ''
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici);
+    TI 1977 muhasebe omru; aralik 2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: ''Cap sabitse fiziksel omur 10+
+    yil olabilir'').'
   dogrulama_deneyi: '-'
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
 - id: cz_maint_frac
   ad: Yillik bakim / capex
   birim: 1/yil
@@ -1634,8 +1638,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: ''
-  aciklama: Sicak bolge ve pota haric.
+  aciklama: 'Sicak bolge ve pota haric. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden
+    okunur. Fark: Ayni kavram ve deger; sicak bolge ve pota haric.'
   dogrulama_deneyi: '-'
+  esdeger: eco_maint_frac_capex_yr
+  esdeger_carpan: 1.0
 - id: xtal_operator_hours_per_furnace_hour
   ad: Firin saati basina operator saati (kucuk unite)
   birim: h/h
@@ -1701,8 +1708,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: Altyapi ajaninin degeri gecerlidir.
-  aciklama: 'Kur: dogrudan USD.'
+  aciklama: 'Kur: dogrudan USD. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_elec_price_usd_kwh üzerinden okunur. Fark:
+    YER TUTUCU; kendi notu ''altyapi degeri gecerlidir''; araligi 0.07-0.16 birlesime alinmadi.'
   dogrulama_deneyi: Altyapi ajani.
+  esdeger: eco_elec_price_usd_kwh
+  esdeger_carpan: 1.0
 - id: xtal_price_argon_usd_nm3
   ad: Argon fiyati (YER TUTUCU)
   birim: USD/Nm3
@@ -1717,8 +1727,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm))
+    üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3). 0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU,
+    kaynak yok; aralik 0.3-2 USD/Nm3.'
   dogrulama_deneyi: Altyapi ajani.
+  esdeger: eco_price_argon_usd_kg
+  esdeger_carpan: 1.784
 - id: xtal_wage_usd_h
   ad: Teknisyen tam yuklu saat ucreti (YER TUTUCU)
   birim: USD/h
@@ -1733,8 +1747,16 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_fixed_usd_h
+    = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd''deki ayni operator terimi
+    bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider. | [Uzlaştırma/ekonomi]
+    Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h = cz_turnaround_crew_person_h
+    x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir; operator terimi operator kanonigine.
+    Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik ayrimla 0.5 x 8.4 + 16 x 13.4/347.7
+    = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin ~%13''u fark).'
   dogrulama_deneyi: Ekonomi ajani.
+  esdeger: eco_labor_technician_usd_h
+  esdeger_carpan: 1.0
 - id: xtal_wacc
   ad: Sermaye maliyeti (YER TUTUCU)
   birim: 1/yil
@@ -1749,8 +1771,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: saha
   senaryoya_uygunluk: ''
-  aciklama: ''
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin; vergi duzeltmesi
+    yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd''de kullaniliyor; kanonik makine katsayisiyla
+    degistirilmeli.'
   dogrulama_deneyi: Ekonomi ajani.
+  esdeger: eco_wacc_usd
+  esdeger_carpan: 1.0
 - id: xtal_recycle_remelt_frac
   ad: Kare kesim artigi ve uclarin tekrar eritilebilir orani
   birim: '-'
@@ -2191,8 +2217,11 @@ parametreler:
   senaryoya_uygunluk: Cin spot fiyati; Turkiye'ye navlun, gumruk ve olasi ek vergiler BILINMIYOR. Fiyat donemsel
     olarak dusuk olabilir (asiri kapasite); ust sinir fiyat toparlanmasini temsil ediyor (tahmin).
   aciklama: 'YENI. Karsilastirma dali: ~4.5 USD/m2, 0.019 USD/W @%24. Izlenebilirlik belgesi primi 0.1-0.2 RMB/adet
-    (kaynakta).'
+    (kaynakta). | [Uzlaştırma/ekonomi] Eşdeğer: değer wf_price_m10_usd üzerinden okunur. Fark: Ayni kaynak (InfoLink
+    23.09.2026) ve deger; aralik 0.141-0.25.'
   dogrulama_deneyi: Turk ithalatcisindan teslim fiyat teklifi; gumruk musavirinden GTIP 3818 vergi ve mense kurali.
+  esdeger: wf_price_m10_usd
+  esdeger_carpan: 1.0
 - id: xtal_ref_wafer_area_m2
   ad: 182 mm wafer alani
   birim: m2
@@ -2224,5 +2253,10 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Turkiye'nin hangi kaynaktan alacagi bilinmiyor. Cin ici 40 RMB/kg ~5-6 USD/kg (KDV ve kur
     varsayimina bagli).
-  aciklama: YENI. Poly maliyetinin sahibi ekonomi ajani; burada yalnizca yap/al karsilastirmasi icin.
+  aciklama: 'YENI. Poly maliyetinin sahibi ekonomi ajani; burada yalnizca yap/al karsilastirmasi icin. | [Uzlaştırma/ekonomi]
+    Eşdeğer: değer wf_poly_price_nonchina_usd_kg üzerinden okunur. Fark: InfoLink genel satiri (ABD mensei dahil
+    birlesim); aralik 5-27 Cin ici fiyati da karistiriyor. Iki alan sahipligi birbirine atiyordu; kanonik sahip
+    bu id.'
   dogrulama_deneyi: Tedarikci teklifleri.
+  esdeger: wf_poly_price_nonchina_usd_kg
+  esdeger_carpan: 1.0

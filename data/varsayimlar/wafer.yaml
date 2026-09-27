@@ -460,7 +460,7 @@ parametreler:
   alt: 1.8
   ust: 5.5
   kaynak: https://mp.ofweek.com/solar/a856714294547
-  kaynak_turu: dogrulanmis_url
+  kaynak_turu: hesap_turetilmis
   kaynak_alintisi: 2024年，金刚线单价从上一年的37.64元/公里骤降至17元/公里，同比下滑54.83%
   kaynak_tarihi: 2024 yillik ortalama (Meichang)
   guven: dusuk
@@ -468,7 +468,9 @@ parametreler:
   olcek: genel
   senaryoya_uygunluk: Meichang'in urun karmasi ortalamasi (agirlikli celik oldugu varsayildi, dogrulanmadi). Cin
     ic piyasa, buyuk alici; kucuk hacim primi, nakliye ve gumruk haric. 2025-2026 fiyati dogrulanamadi.
-  aciklama: 17/6.8 = $2.5/km. Ust sinir 2023 ortalamasi 37.64/6.8 = $5.5.
+  aciklama: '17/6.8 = $2.5/km. Ust sinir 2023 ortalamasi 37.64/6.8 = $5.5. | Örneklem denetimi (2026-09-27): kaynak
+    17 RMB/km veriyor (2024, çelik ve tungsten karışık ortalama); 2024 kuruyla ~2,36–2,40 USD/km. 2,5 USD/km bundan
+    %5–6 yüksek; çelik çekirdek için ayrı fiyat kaynakta yok.'
   dogrulama_deneyi: 2-3 tedarikciden <1000 km/yil icin teslim teklifi.
 - id: saw_wire_price_w_usd_km
   ad: Tungsten cekirdekli elmas tel fiyati
@@ -599,8 +601,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Finans ajaninin fin_crf hesabina girdi.
-  aciklama: Formullerde fin_crf (faiz dahil sermaye geri kazanim faktoru) kullanilir.
+  aciklama: 'Formullerde fin_crf (faiz dahil sermaye geri kazanim faktoru) kullanilir. | [Uzlaştırma/ekonomi] Eşdeğer:
+    değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram ve deger (tum wafer ekipmanlari).'
   dogrulama_deneyi: Finans ajani ile uyum.
+  esdeger: eco_life_machine_yr
+  esdeger_carpan: 1.0
 - id: saw_labor_h_per_cycle
   ad: Testere cevrimi basina iscilik
   birim: adam-saat/cevrim
@@ -1241,9 +1246,11 @@ parametreler:
   deger: 0.148
   alt: 0.13
   ust: 0.3
-  kaynak: https://www.infolink-group.com/spot-price/
+  kaynak: https://www.infolink-group.com/spot-price
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: '182-183.75mm/130µm USD: High $0.148, Low $0.141, Average $0.148 (September 23, 2026)'
+  kaynak_alintisi: 'InfoLink (23.09.2026): ''Mono N Type Wafer - 182-183.75mm / 130um (USD) 0.148 0.141 0.148'';
+    ''InfoLink''s wafer price quotes exclude additional costs from special specifications or requirements (e.g.,
+    traceability documentation)'' (acildi). OPIS FOB M10 $0.149 (wafer alaninda).'
   kaynak_tarihi: '2026-09-23'
   guven: orta
   maliyet_sinifi: adet
@@ -1252,7 +1259,10 @@ parametreler:
     donemde ''FOB China M10 ... $0.149/pc'' (pv-magazine 2026-09-11). Cogunlukla TOPCon sinifi; HJT sinifi (ince,
     yuksek omur) fiyati bilinmiyor. Nakliye, gumruk ve olasi ticari korunma haric.'
   aciklama: 'Alt sinir: Cin ic fiyati KDV haric 1.0/1.13/6.8 = $0.130. Ust sinir 0.30: 8 yillik ufukta dongusel
-    risk (Ocak 2026 FOB $0.180; gecmis fiyatlar daha yuksekti, hafizadan). $0.148 = $4.47/m2.'
+    risk (Ocak 2026 FOB $0.180; gecmis fiyatlar daha yuksekti, hafizadan). $0.148 = $4.47/m2. | [Uzlaştırma/ekonomi]
+    Kanonik (tek sahip). Kristal ve wafer ayni kaynak ve deger; kanonik wafer alanindaki id (wf_buy_price_chain
+    kullaniyor, FOB teyidi var). Aralik 0.13-0.30. Nisan 2026 Cin ihracat KDV iadesi iptali bu FOB fiyata yansimis
+    (ek duzeltme yok). Cogunlukla TOPCon sinifi; HJT sinifi ve izlenebilirlik primi haric; navlun/gumruk ayri (wf_import_*).'
   dogrulama_deneyi: Turkiye'ye teslim (CIF + gumruk) HJT sinifi wafer teklifi, 3 tedarikci.
 - id: wf_price_210r_usd
   ad: Satin alinan n-tipi 210R (182x210 mm) wafer, FOB Cin
@@ -1373,17 +1383,26 @@ parametreler:
   birim: USD/kg
   deger: 17.5
   alt: 11
-  ust: 26.7
-  kaynak: https://www.trendforce.com/price/pv/cell
+  ust: 27
+  kaynak: https://www.trendforce.com/price/pv/cell ; https://www.infolink-group.com/spot-price
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'Polysilicon Outside China (USD): High 22.00, Low 13.10, Average 17.50'
+  kaynak_alintisi: 'TrendForce (Last Update 2026-09-23): ''Polysilicon Outside China (USD) 22.00 13.10 17.50''.
+    InfoLink (23.09.2026): ''Polysilicon Price - Mono-grade polysilicon (USD) 26.7 11.0 18.5''; ''Polysilicon prices
+    in dollar terms are prices for polysilicon with non-China origins ... not translated from RMB prices'' (ikisi
+    de acildi).'
   kaynak_tarihi: '2026-09-23'
   guven: orta
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: 'Kristal ajani asil sahibi; burada yalnizca yap-ya-da-al kiyasi icin. InfoLink ayni gun: ortalama
     $18.5 (11.0-26.7), ''not translated from RMB prices''. Turkiye teslimi bilinmiyor.'
-  aciklama: Maliyet toplamina yalnizca kristal ajanindan girer (cift sayim onlemi).
+  aciklama: 'Maliyet toplamina yalnizca kristal ajanindan girer (cift sayim onlemi). | [Uzlaştırma/ekonomi] Kanonik
+    (tek sahip). SAHIP DEGERI 17.5 GERI GETIRILDI (kirmizi takim kabul): onceki ciktidaki 18.5 secimi ''ayni raporlayici
+    tutarliligi'' gerekcesine dayaniyordu, gorev kuralindaki ''daha iyi kaynak/daha guncel'' olcutu degil; iki kaynak
+    ayni tarihli. Ayrica InfoLink genel satiri, altinda kilitli ''US made'' ve ''Other non-China made'' satirlari
+    bulunan bir birlesimdir (kirmizi takim gordu); ust ucun 26.7 olmasi ABD mensei etkisi olabilir (cikarim, dogrulanmadi).
+    InfoLink 18.5 capraz kontrol; baz belirsizligi 17.5-18.5. Aralik 11 (InfoLink alt) - 27 (InfoLink ust). Kristalin
+    5 USD/kg alti Cin ici fiyati karistirdigi icin alinmadi. Turkiye teslimi bilinmiyor.'
   dogrulama_deneyi: Wacker, OCI Malaysia, Hemlock, Tokuyama vb. teslim teklifleri.
 - id: wf_poly_price_china_rmb_kg
   ad: Poli-Si fiyati, Cin ic piyasa (n-tipi recharge, KDV dahil)
@@ -1393,14 +1412,17 @@ parametreler:
   ust: 45
   kaynak: https://www.trendforce.com/price/pv/cell
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'N-Type Recharge Polysilicon (RMB): High 45.00, Low 33.00, Average 33.50'
+  kaynak_alintisi: '''N-Type Recharge Polysilicon (RMB) 45.00 33.00 33.50'' (Last Update 2026-09-23; acildi). InfoLink
+    ayni gun ''Mono-grade polysilicon (RMB) 43.0 40.0 40.0''.'
   kaynak_tarihi: '2026-09-23'
   guven: orta
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: Cin ic fiyati; ihracat kosullari bilinmiyor. InfoLink ayni gun mono-grade 40.0 RMB/kg.
   aciklama: 'KDV haric 33.5/1.13/6.8 = $4.36/kg. pv-magazine 2026-09-11: wafer ureticileri vadeli piyasadan ~CNY
-    37/kg poli aliyor.'
+    37/kg poli aliyor. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). n-tipi recharge urune ozgu TrendForce degeri
+    korunur; InfoLink mono-grade 40-43 araligin icinde. USD cevrimi 33.5/1.13/6.72 = 4.41 USD/kg (KDV haric; ihracat
+    fiyati degil, yalniz referans).'
   dogrulama_deneyi: Cin'den Turkiye'ye poli ithalat teklifi.
 - id: wf_cn_vat
   ad: Cin KDV orani (ic fiyatlari KDV haric USD'ye cevirmek icin)
@@ -1408,15 +1430,19 @@ parametreler:
   deger: 0.13
   alt: 0.13
   ust: 0.13
-  kaynak: hafiza
+  kaynak: wafer alani (hafiza); dolayli teyit https://www.pv-magazine.com/2026/01/09/china-to-abolish-solar-export-tax-rebates-from-april/
   kaynak_turu: hafizadan_dogrulanmadi
-  kaynak_alintisi: yok (hafizadan)
+  kaynak_alintisi: 'pv-magazine (bu gorevde acildi): onceki PV ihracat iadesi ''was 9%, reduced from an earlier
+    13% in December 2024'' - tam iade %13''un standart KDV oranina esit olmasiyla tutarli (dolayli).'
   kaynak_tarihi: '-'
   guven: orta
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Imalat urunlerinde %13.
-  aciklama: ''
+  aciklama: '[Uzlaştırma/ekonomi] Kanonik (tek sahip). Mevcut id yeterli; kirmizi takimin onerdigi yeni eco_cn_vat_frac
+    REDDEDILDI (gorev kurali: altyapida karsilik yoksa mevcut en iyi id). Tek kural: (1) FOB/USD ihracat fiyati
+    varsa onu kullan; (2) yalniz RMB ic fiyat varsa /(1 + wf_cn_vat), bat_fx_cny_per_usd ile cevir, urun grubunun
+    ihracat KDV etkisini ayrica ekle. Kullanim: poli 33.5/1.13/6.72 = 4.41 USD/kg; cam 0.71.'
   dogrulama_deneyi: Resmi kaynaktan teyit.
 - id: wf_fx_cny_per_usd
   ad: Kur varsayimi
@@ -1432,8 +1458,12 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: Tum modelde tek kur (finans ajani).
-  aciklama: 1/0.149 = 6.71 (Eylul 2026); Ocak 2026 'CNY 1.4 ($0.20)' = 7.0.
+  aciklama: '1/0.149 = 6.71 (Eylul 2026); Ocak 2026 ''CNY 1.4 ($0.20)'' = 7.0. | [Uzlaştırma/ekonomi] Eşdeğer: değer
+    bat_fx_cny_per_usd üzerinden okunur. Fark: Kur kaynagi degil; wafer fiyat oranindan (1/0.149) ve ocak degeriyle
+    turetilmis, %1.2 yuksek. Cin poli KDV haric karsiligi 4.36 yerine 4.41 USD/kg olur.'
   dogrulama_deneyi: Calistirma tarihindeki piyasa kuru.
+  esdeger: bat_fx_cny_per_usd
+  esdeger_carpan: 1.0
 - id: wf_resistivity_ohm_cm
   ad: HJT n-tipi wafer ozdirenci
   birim: ohm.cm

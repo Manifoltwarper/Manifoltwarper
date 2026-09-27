@@ -620,16 +620,18 @@ parametreler:
   deger: 2.066
   alt: 1.6
   ust: 2.8
-  kaynak: TradingEconomics Silver
+  kaynak: https://tradingeconomics.com/commodity/silver
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: '''Silver rose to 64.26 USD/t.oz on September 25, 2026'' -> 64.26/31.1035'
+  kaynak_alintisi: '''Silver rose to 64.26 USD/t.oz on September 25, 2026'' (onceki turda ve kirmizi takimca acildi);
+    64.26 / 31.1035 = 2.066 USD/g'
   kaynak_tarihi: '2026-09-25'
   guven: yuksek
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: Genel emtia.
   aciklama: Aralik oynaklik tahmini (50-87 $/oz). Ilk ciktidaki dogrulanmamis arama ozeti notu kaldirildi. Kaynak
-    denetcisi Kitco'da 64.17 $/oz (27 Eylul) gordu.
+    denetcisi Kitco'da 64.17 $/oz (27 Eylul) gordu. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik
+    yok; tek id. Birim USD/g = USD/t.oz / 31.1035.
   dogrulama_deneyi: Piyasa takibi.
 - id: hjt_ag_paste_premium_usd_per_g
   ad: Pasta imalat primi (Ag icerigi basina)
@@ -654,14 +656,15 @@ parametreler:
   alt: 140
   ust: 220
   kaynak: TaiyangNews 'Reducing Indium In HJT TCO Processing' (VON ARDENNE 100 nm her iki yuz); Louwen 2016
-  kaynak_turu: dogrulanmis_url
+  kaynak_turu: hafizadan_dogrulanmadi
   kaynak_alintisi: '''100 nm of ITO applied on both sides as reference'''
   kaynak_tarihi: '2022'
   guven: orta
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: On ~75-80 nm (ARC kosulu); arka inceltilebilir.
-  aciklama: Film = 7.1 x 180e-3 = 1.278 g/m2.
+  aciklama: 'Film = 7.1 x 180e-3 = 1.278 g/m2. | Örneklem denetimi (2026-09-27): açılan kaynak yüzey başına ~100
+    nm (toplam ~200 nm) veriyor; 180 nm değeri Louwen 2016''ya dayandırılmış ama URL yok ve doğrulanamadı.'
   dogrulama_deneyi: Elipsometri.
 - id: hjt_ito_density_g_cm3
   ad: ITO yogunlugu
@@ -735,18 +738,19 @@ parametreler:
   deger: 800
   alt: 350
   ust: 1100
-  kaynak: TradingEconomics Indium (bu gorevde acildi); Procurement Resource (Temmuz 2026); USGS MCS 2025 (bu gorevde
-    okundu)
+  kaynak: https://tradingeconomics.com/commodity/indium ; Procurement Resource ; USGS MCS 2025 (hucre)
   kaynak_turu: dogrulanmis_url
-  kaynak_alintisi: 'TE: ''Indium traded flat at 5,250 CNY/Kg on September 24, 2026'' (/6.72 = 781 $/kg); PR: ''China
-    (FOB) USD 786.50/KG''; USGS: 2024e U.S. warehouse 340, Rotterdam 300 $/kg'
+  kaynak_alintisi: 'TE: ''Indium traded flat at 5,250 CNY/Kg on September 24, 2026'' (acildi) -> /6.72 = 781 USD/kg;
+    PR ''China (FOB) USD 786.50/KG'' (hucre).'
   kaynak_tarihi: 2026-09 / 2024
   guven: orta
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: Genel.
-  aciklama: Alt sinir USGS 2024 ortalamasi (geri donus riski); ust sinir oynaklik. Dogrulanmamis '880-972 $/kg'
-    ifadesi kaldirildi. TE fiyatinin KDV dahil olup olmadigi bilinmiyor.
+  aciklama: 'Alt sinir USGS 2024 ortalamasi (geri donus riski); ust sinir oynaklik. Dogrulanmamis ''880-972 $/kg''
+    ifadesi kaldirildi. TE fiyatinin KDV dahil olup olmadigi bilinmiyor. | [Uzlaştırma/ekonomi] Kanonik (tek sahip).
+    Tek id. RMB/KDV kuralinin 1. adimi uygulanir: FOB ihracat fiyati (PR 786.5) mevcut, bu yuzden TE CNY fiyatinin
+    KDV durumu (dahilse KDV haric ~691) bazi degistirmez; 800 degeri FOB''un %2 icinde.'
   dogrulama_deneyi: Hedef tedarikcisinden teklif.
 - id: hjt_ito_target_fab_adder_usd_per_kg
   ad: ITO hedef imalat ucreti (In degeri disinda)
@@ -878,8 +882,11 @@ parametreler:
   senaryoya_uygunluk: 'Kucuk tuketim: tup kirasi/lojistik baskin.'
   aciklama: 'Dayanak: dogrulanmis fiyat bulunamadi; Cin bulk fiyati onlarca $/kg mertebesinde (hafizadan); Turkiye''de
     tup + lojistik ve %1.4 karisim primi ust siniri belirler. 2 g/m2 x 300 $/kg = 0.24 c/W: en kotu durumda bile
-    ikincil.'
+    ikincil. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_sih4_usd_kg üzerinden okunur. Fark: Ayni kavram; tahmin;
+    aralik 30-300 on-karisim primini de kapsiyor.'
   dogrulama_deneyi: Gaz tedarikcisi teklifi (saf ve %1.4 karisim).
+  esdeger: eco_price_sih4_usd_kg
+  esdeger_carpan: 1.0
 - id: hjt_h2_price_usd_per_kg
   ad: Hidrojen fiyati (tup/demet)
   birim: USD/kg
@@ -894,8 +901,11 @@ parametreler:
   maliyet_sinifi: alan
   olcek: genel
   senaryoya_uygunluk: '-'
-  aciklama: 10 g/m2 x 10 $/kg = 0.1 $/m2 = 0.04 c/W.
+  aciklama: '10 g/m2 x 10 $/kg = 0.1 $/m2 = 0.04 c/W. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_h2_usd_kg
+    üzerinden okunur. Fark: Ayni kavram (tup/demet fiyati); tahmin; 2.5 kat dusuk; aralik 4-25.'
   dogrulama_deneyi: Teklif.
+  esdeger: eco_price_h2_usd_kg
+  esdeger_carpan: 1.0
 - id: hjt_dopant_gas_usd_per_m2
   ad: Katki gazlari (PH3, TMB/B2H6 karisimlari) maliyeti
   birim: USD/m2
@@ -1726,8 +1736,12 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: '-'
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram; tahmin;
+    kuru pompa revizyonu, RF, conta, tank dahil. Kendi tasarim ilk nesil PECVD/PVD icin kanonik 0.04 + ilk nesil
+    eki (seviyelenmis ~0.016) = ~0.056 ile ayni mertebede.'
   dogrulama_deneyi: Bakim kayitlari.
+  esdeger: eco_maint_frac_capex_yr
+  esdeger_carpan: 1.0
 - id: hjt_carrier_cost_usd
   ad: PECVD/PVD tasiyici birim maliyeti (1 m2)
   birim: USD
@@ -1839,8 +1853,11 @@ parametreler:
   maliyet_sinifi: zaman
   olcek: unite
   senaryoya_uygunluk: Kampanya/1-2 vardiya modunda orantili azalir.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fte_per_24x7_position üzerinden okunur. Fark: Ayni kavram (7/24
+    icin ekip sayisi), ayni deger; bagimsiz aralik 3.7-4.6 kaldirilmali, formule baglanmali.'
   dogrulama_deneyi: '-'
+  esdeger: eco_fte_per_24x7_position
+  esdeger_carpan: 1.0
 - id: hjt_fte_support
   ad: Gunduz destek kadrosu (proses muhendisi, bakim, kalite)
   birim: FTE
@@ -1921,8 +1938,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: RMB kaynakli degerler icin.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer bat_fx_cny_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak
+    (TE 25.09.2026); id adi ''usd_cny'' ama birim CNY/USD.'
   dogrulama_deneyi: '-'
+  esdeger: bat_fx_cny_per_usd
+  esdeger_carpan: 1.0
 - id: cell_fx_usd_try
   ad: Kur varsayimi USD/TRY
   birim: TRY/USD
@@ -1937,8 +1957,11 @@ parametreler:
   maliyet_sinifi: teknik
   olcek: genel
   senaryoya_uygunluk: TRY iscilik ve yerel alimlar icin; ust sinir enflasyon/devalue riski.
-  aciklama: '-'
+  aciklama: '[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram; TradingEconomics
+    25.09.2026; fark %0.16, onemsiz. Id adindaki ''usd_try'' piyasa gosterimi, birim ayni. Aralik 45-60.'
   dogrulama_deneyi: '-'
+  esdeger: eco_fx_try_per_usd
+  esdeger_carpan: 1.0
 - id: hjt_voc_cell_V
   ad: Hucre acik devre gerilimi (25 C)
   birim: V

@@ -1,0 +1,665 @@
+{
+ "saw_wire_price_steel_usd_km": {
+  "kaynak_turu": "hesap_turetilmis",
+  "guven": "dusuk",
+  "aciklama": "17/6.8 = $2.5/km. Ust sinir 2023 ortalamasi 37.64/6.8 = $5.5. | Örneklem denetimi (2026-09-27): kaynak 17 RMB/km veriyor (2024, çelik ve tungsten karışık ortalama); 2024 kuruyla ~2,36–2,40 USD/km. 2,5 USD/km bundan %5–6 yüksek; çelik çekirdek için ayrı fiyat kaynakta yok."
+ },
+ "hjt_ito_thickness_total_nm": {
+  "kaynak_turu": "hafizadan_dogrulanmadi",
+  "guven": "orta",
+  "aciklama": "Film = 7.1 x 180e-3 = 1.278 g/m2. | Örneklem denetimi (2026-09-27): açılan kaynak yüzey başına ~100 nm (toplam ~200 nm) veriyor; 180 nm değeri Louwen 2016'ya dayandırılmış ama URL yok ve doğrulanamadı."
+ },
+ "mod_T_min_design_C": {
+  "kaynak_turu": "hesap_turetilmis",
+  "guven": "orta",
+  "aciklama": "Pazar ve standart ajanının kararıdır. | Örneklem denetimi (2026-09-27): MGM rekorları doğru (İstanbul −9,0; Ankara −24,9; Erzurum −37,2 °C); −20 °C bir tasarım seçimi, sayfalarda yok. Ankara ve Erzurum için muhafazakâr değil; pazara göre seçilmeli (KK3)."
+ },
+ "bat_cell_v_nom_nfpp_V": {
+  "kaynak_turu": "hesap_turetilmis",
+  "guven": "orta",
+  "aciklama": "AB 2 kWh esigi hesabinda bu aralik (%9) kritik. | Örneklem denetimi (2026-09-27): kaynaklar NFPP için 2,85–3,10 V aralığı veriyor; 2,9 V bu aralıktan seçilmiş muhafazakâr değer, doğrudan yazılı değil."
+ },
+ "bat_cycle_life_nfpp_pris": {
+  "kaynak_turu": "hesap_turetilmis",
+  "guven": "dusuk",
+  "aciklama": "Örneklem denetimi (2026-09-27): 5000 çevrim kaynaklarda doğrudan yok; 0,5C'de 6000 ile 1C'de 3000 arasından seçilmiş. Highstar'ın 10 000 çevrimi %70 kapasite içindir (%80 değil)."
+ },
+ "eco_fx_try_per_usd": {
+  "deger": 49,
+  "alt": 45,
+  "ust": 60,
+  "kaynak": "https://www.tcmb.gov.tr/kurlar/today.xml ; https://finans.mynet.com/haber/detay/doviz/26-eylul-2026-dolar-bugun-kac-tl-serbest-piyasa-dolar-kuru-dolar-tl-gunluk-sinirli-yukselis-haftalik-yukselis/577072/",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "TCMB bulten 2026/181 (25.09.2026): USD ForexBuying 48.7901, ForexSelling 48.8780 (onceki turda ve kirmizi takim denetiminde acildi). Mynet 26.09.2026: 'Serbest piyasa satis fiyati 49,01 TL' (altyapi alaninda).",
+  "guven": "yuksek",
+  "aciklama": "1 USD = 49.0 TRY. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Uc kaynak (TCMB 48.79-48.88, TradingEconomics 48.92, serbest piyasa 49.01) %0.5 icinde; baz 49.0 korunur. Aralik birlesimi: alt 45 hucre araligindan (cell_fx_usd_try 45-60, bagimsiz tahmin), ust 60 altyapi. KULLANIM KURALI (kirmizi takim bulgusu kabul): (1) TL kalemleri (ucret, EPDK tarifesi, ISU su, kira) USD'ye spot 49 ile NOKTA deger olarak cevrilir. (2) TL'de enflasyonla guncellenen kalemlerin USD belirsizligi yalniz eco_try_cost_real_drift_frac_yr (reel kayma) ile verilir; levelize carpan L(g) = sum((1+g)^(k-1) v^k)/sum(v^k), v = 1/(1+r_reel): 8 yilda g = 0.03 icin 1.096 (g = -0.05...0.10 icin 0.862-1.367). (3) 45-60 araligi yalnizca nominal TL'de sabit sozlesmeli kalemlere (orn. yillik sabit kira) ve TL cinsinden vergisel amortisman kalkanina uygulanir. (4) Tornado'da eco_fx_try_per_usd TL-endeksli kalemlerle birlikte hareket ettirilmez; iscilik USD araliklari kurdan degil TL ucret dagilimi ve ek yuk carpanindan gelir."
+ },
+ "cell_fx_usd_try": {
+  "esdeger": "eco_fx_try_per_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram; TradingEconomics 25.09.2026; fark %0.16, onemsiz. Id adindaki 'usd_try' piyasa gosterimi, birim ayni. Aralik 45-60."
+ },
+ "el_fx_usd_try": {
+  "esdeger": "eco_fx_try_per_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fx_try_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak (TradingEconomics 25.09.2026); fark %0.16; aralik 47-56."
+ },
+ "bat_fx_cny_per_usd": {
+  "deger": 6.72,
+  "alt": 6.5,
+  "ust": 7.3,
+  "kaynak": "https://tradingeconomics.com/china/currency ; https://www.tcmb.gov.tr/kurlar/today.xml",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "TE: 'The USD/CNY exchange rate rose to 6.7204 on September 25, 2026' (pil alaninda). TCMB 25.09.2026 CNY CrossRateUSD 6.7133 (onceki turda ve kirmizi takimca acildi).",
+  "guven": "yuksek",
+  "aciklama": "SMM'nin USD fiyatlari KDV haric gorunuyor: SMM 314 Ah 0.0483 $/Wh x 6.72 = 0.325 CNY; KDV'li 0.367 CNY. Mysteel araligi 0.38-0.41 CNY/Wh. Bu cikarim dogrulanmadi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsiligi yok; yeni eco_ id zorunlu degil. bat_ ve cell_ ayni kaynak ve deger; bat_ secildi (tam URL; id adi birim yonunu eco_fx_try_per_usd ile ayni kalipta veriyor). TCMB capraz kuru 6.713 teyit ediyor. Aralik birlesimi: pil 6.5-7.2, hucre/modul/wafer ust 7.3 -> 6.5-7.3."
+ },
+ "cell_fx_usd_cny": {
+  "esdeger": "bat_fx_cny_per_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer bat_fx_cny_per_usd üzerinden okunur. Fark: Ayni kavram ve kaynak (TE 25.09.2026); id adi 'usd_cny' ama birim CNY/USD."
+ },
+ "mod_fx_cny_per_usd": {
+  "esdeger": "bat_fx_cny_per_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer bat_fx_cny_per_usd üzerinden okunur. Fark: Fed H.10, 18.09.2026 (6.6975); bir hafta eski, fark %0.3."
+ },
+ "wf_fx_cny_per_usd": {
+  "esdeger": "bat_fx_cny_per_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "1/0.149 = 6.71 (Eylul 2026); Ocak 2026 'CNY 1.4 ($0.20)' = 7.0. | [Uzlaştırma/ekonomi] Eşdeğer: değer bat_fx_cny_per_usd üzerinden okunur. Fark: Kur kaynagi degil; wafer fiyat oranindan (1/0.149) ve ocak degeriyle turetilmis, %1.2 yuksek. Cin poli KDV haric karsiligi 4.36 yerine 4.41 USD/kg olur."
+ },
+ "el_fx_eur_usd": {
+  "deger": 1.139,
+  "alt": 1.05,
+  "ust": 1.25,
+  "kaynak": "https://www.tcmb.gov.tr/kurlar/today.xml ; https://tradingeconomics.com/turkey/currency",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "TCMB 25.09.2026 EUR CrossRateOther 1.1393 (onceki turda ve kirmizi takimca acildi); TE EURTRY 55.7352 / USDTRY 48.9163 = 1.1394 (elektronik alaninda).",
+  "guven": "yuksek",
+  "aciklama": "55.7352/48.9163 = 1.1394 | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsiligi yok. Sahip kaydi hesap_turetilmis/orta idi, cunku TE degeri iki kurdan bolunerek bulunmustu (elektronik kaynak denetimi bu yuzden hesap_turetilmis istemisti). TCMB capraz kuru 1.1393'u dogrudan yayimliyor, deger kaynakta goruldugu icin dogrulanmis_url/yuksek'e yukseltildi (degisiklik gunlugunde). Aralik birlesimi: elektronik 1.08-1.2, standart 1.05-1.25 -> 1.05-1.25."
+ },
+ "std_fx_eur_usd": {
+  "esdeger": "el_fx_eur_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "INR icin ~87 INR/USD (tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer el_fx_eur_usd üzerinden okunur. Fark: Tahmin, kaynak yok; %1 yuksek. Tip testi ve AB ucretlerinin EUR->USD cevriminde kanonik kullanilmali."
+ },
+ "eco_wacc_usd": {
+  "deger": 0.12,
+  "alt": 0.09,
+  "ust": 0.2,
+  "kaynak": "altyapi: eco_rf_usd, eco_tr_erp (Damodaran), eco_tr_eurobond_usd_10y, eco_kd_spread, eco_beta_equity, eco_equity_frac, eco_corporate_tax_rate'ten turetildi",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "ke = 0.050 + 1.15 x 0.0889 = 0.152; kd = 0.071 + 0.02 = 0.091; E = 0.6, t = 0.125: 0.6 x 0.152 + 0.4 x 0.091 x 0.875 = 0.123 (yeniden hesaplandi).",
+  "guven": "orta",
+  "aciklama": "ke = 0.050 + 1.15*0.0889 = 0.152. kd = 0.091. t=0.125 icin: E=0.5 -> 0.116; E=0.6 -> 0.123; E=0.7 -> 0.131. t=0.25 icin: 0.110-0.127. Karsilastirma: basit vergi oncesi WACC (E*ke/(1-t) + (1-E)*kd) 0.13-0.17. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi ve tek turetilmis deger; kristal (0.10) ve elektronik (0.08) kaynaksiz tahmin. Alt 0.09 korunur; kristalin 0.06 alt siniri kendini YER TUTUCU diye tanimladigi icin ve Turkiye USD Eurobond (0.071) + sirket marji tabaninin altinda kaldigi icin birlesime alinmadi. Oran NOMINALDIR; sermaye yukune dogrudan degil r_reel = 1.12/1.0234 - 1 = 0.0944 (aralik 0.066-0.173) uzerinden girer (sermaye_yuku_yontemi)."
+ },
+ "xtal_wacc": {
+  "esdeger": "eco_wacc_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_wacc_usd üzerinden okunur. Fark: YER TUTUCU tahmin; vergi duzeltmesi yok; CRF(0.10, 7) ile cz_cost_capex_usd_h ve fz_cost_per_hour_usd'de kullaniliyor; kanonik makine katsayisiyla degistirilmeli."
+ },
+ "el_discount_rate": {
+  "aciklama": "Dayanak: USD bazli imalat yatirimi icin kaba sermaye maliyeti varsayimi. | Uzlaştırma: yalnız müşteri iskonto oranı olarak kalır (GaN/verim değeri); şirket WACC'ı değil."
+ },
+ "eco_corporate_tax_rate": {
+  "deger": 0.125,
+  "alt": 0.125,
+  "ust": 0.25,
+  "kaynak": "https://taxsummaries.pwc.com/turkey/corporate/taxes-on-corporate-income",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'The corporate income tax rate is 25%' ... 'Starting from year 2027, the corporate income tax rate will be applied as 12.5% on earnings from manufacturing activity' (altyapi alaninda; last reviewed 09.09.2026)",
+  "guven": "orta",
+  "aciklama": "eco_crf_tax_* ve WACC'teki borc vergi kalkaninda kullanilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (altyapi). %12.5 sanayi sicil belgesi kosullu; saglanmazsa 0.25 (makine CRF_tax_reel 0.1936 -> 0.2068). Zaman tabani: tum mevzuat kurallari 2027 (ilk tam uretim yili varsayimi) itibariyla alinir; Cin pil ihracat KDV iadesi de 2027 kuralina cekildi."
+ },
+ "eco_life_machine_yr": {
+  "deger": 8,
+  "alt": 5,
+  "ust": 12,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Baz ve aralik icin kaynak yok. Dayanak (altyapi notu): 'PV'de teknoloji nesli 3-5 yilda degisir. Kendi tasarim makineler yukseltilebilir; yukseltme maliyeti bakim oranina eklenmeli.'",
+  "guven": "dusuk",
+  "aciklama": "CRF(0.12; 8) = 0.2013. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; alanlar 5-8 yil (hucre 5, kristal/modul/pil 7, wafer/altyapi 8), hicbiri kaynakli degil; sahip degeri ve araligi (5-12) korunur. ONCEKI CIKTIDAKI 2-15 GERI ALINDI (kirmizi takim kabul): alt 2 yil ESIA'nin Cin GW olcegindeki cekici eskimesidir (H1 aktarimi); ayri 'teknoloji eskimesi' senaryosu olarak tutulur ve tornadoya parametre ucu olarak girmez (N = 2'de CRF_tax_reel 0.5845, bazin 3.0 kati). Ust 15 (kristal fiziksel omur tahmini) de kaynaksiz, alinmadi. Makineye ozgu omur gerekceli override olarak girilir."
+ },
+ "cz_puller_life_yr": {
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (cekici); TI 1977 muhasebe omru; aralik 2-15 (alt 2 = ESIA eskime senaryosu, kendi notu: 'Cap sabitse fiziksel omur 10+ yil olabilir')."
+ },
+ "saw_life_yr": {
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Formullerde fin_crf (faiz dahil sermaye geri kazanim faktoru) kullanilir. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram ve deger (tum wafer ekipmanlari)."
+ },
+ "mod_equip_life_y": {
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Önceden tanımsızdı (life_years). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (laminator, dizgi, test); 1/omur ile kullaniliyor, sermaye getirisi yok."
+ },
+ "bat_line_life_years": {
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Ayni kavram (hucre ve paket hatti)."
+ },
+ "bat_own_dev_amort_years": {
+  "esdeger": "eco_life_machine_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_life_machine_yr üzerinden okunur. Fark: Kendi hucre gelistirme harcamasi hat yetkinligine yatirimdir, urun varyantina degil (onceki ciktida yanlislikla el_Y_product_life'a baglanmisti). Omur makine/hat omru; vergide aninda gider (PV_dep = 1) -> yuk CRF(r_reel, 8) = 0.1836."
+ },
+ "eco_dep_life_tax_machine_yr": {
+  "deger": 8,
+  "alt": 5,
+  "ust": 10,
+  "kaynak": "tahmin (altyapi; VUK amortisman listesi dogrulanmadi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok",
+  "guven": "dusuk",
+  "aciklama": "Dogrusal amortisman varsayildi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; yalniz CRF_tax'taki PV_dep icin (nominal USD oranla iskontolanir). Ekonomik omru daha kisa varlikta Nv = min(N, 8) (elden cikarista kalan defter degeri gider yazilir varsayimi); daha uzun omurde Nv = 8."
+ },
+ "eco_life_infra_yr": {
+  "deger": 12,
+  "alt": 8,
+  "ust": 20,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok; dayanak: gaz kabini, gaz izleme ve UPW 10-15 yil, trafo daha uzun (altyapi notu)",
+  "guven": "dusuk",
+  "aciklama": "CRF(0.12; 12) = 0.1614. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak. Bina kiralik (eco_rent_usd_m2_month), bu omur tesisat/altyapi icindir. Standart alanindaki degersiz site_amort_years buna baglanmali."
+ },
+ "eco_dep_life_tax_infra_yr": {
+  "deger": 12,
+  "alt": 10,
+  "ust": 25,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; CRF_tax'taki PV_dep icin."
+ },
+ "el_n_amort_yr": {
+  "deger": 5,
+  "alt": 3,
+  "ust": 8,
+  "kaynak": "Kaynak yok (elektronik); dayanak: elektronik test ekipmani muhasebe pratigi (hafiza)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "-",
+  "guven": "dusuk",
+  "aciklama": "Elektronik test ekipmani icin yaygin muhasebe pratigi (hafiza). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida ayri test ekipmani omru yok; yeni eco_ id zorunlu degil, mevcut tek degerli id secildi. Standart alaninin degersiz capex_life_years (zorunlu test istasyonlari) ve hucrenin IV istasyonlari buna baglanmali."
+ },
+ "el_Y_product_life": {
+  "deger": 5,
+  "alt": 3,
+  "ust": 8,
+  "kaynak": "tahmin (elektronik)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "-",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id; altyapida karsilik yok. urun_sabit CRF(r_reel, bu sure) = 0.2600 ile yilliklastirilir. Standartin years_amort serbest degiskeni buna baglanir. modul N_panels_variant_life bir ADET oldugundan yil parametresine baglanmaz; N_panels_variant_life = el_Y_product_life x yillik varyant adedi olarak turetilir. bat_own_dev_amort_years takma ad degildir (makine omrune tasindi)."
+ },
+ "eco_maint_frac_capex_yr": {
+  "deger": 0.04,
+  "alt": 0.02,
+  "ust": 0.08,
+  "kaynak": "tahmin (altyapi; kristal, hucre, modul, pil degerleri de tahmin)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok; altyapi notu: 'Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.'",
+  "guven": "dusuk",
+  "aciklama": "Yedek parca + dis servis; kendi personelin iscilik maliyeti haric. Sinif formulde (zaman) atanir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). ONCEKI CIKTIDAKI 0.04 -> 0.05 DEGISIKLIGI GERI ALINDI (kirmizi takim kabul): tum adaylar tahmin, daha iyi kaynak yok; cogunluk oyu gorev kuralinda secim olcutu degil ve hucre/modul/pil kapsamlarinin (RF, conta, tank, flas lambasi) altyapi tanimiyla ayni oldugu gosterilmemis. Sahibin 'ilk nesilde ust banda yakin' notu ayri parametreyle (eco_maint_first_gen_extra_frac_yr) yalniz kendi tasarim makinelere uygulanir; boylece altyapi/tesisat ve satin alinan makineler bu artistan etkilenmez. Proses sarflari (sicak bolge, pota, tasiyici, testere teli/makara kaplamasi) bu orana DAHIL DEGIL. Altyapi/tesisat bakim oraninin makineyle ayni olmasi acik karar (sahip ayni oran kullaniyor; ayri kaynak yok)."
+ },
+ "cz_maint_frac": {
+  "esdeger": "eco_maint_frac_capex_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Sicak bolge ve pota haric. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram ve deger; sicak bolge ve pota haric."
+ },
+ "hjt_maint_frac_capex_per_yr": {
+  "esdeger": "eco_maint_frac_capex_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram; tahmin; kuru pompa revizyonu, RF, conta, tank dahil. Kendi tasarim ilk nesil PECVD/PVD icin kanonik 0.04 + ilk nesil eki (seviyelenmis ~0.016) = ~0.056 ile ayni mertebede."
+ },
+ "mod_maint_frac_per_y": {
+  "esdeger": "eco_maint_frac_capex_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram; tahmin; membran, conta, flas lambasi, vakum pompasi."
+ },
+ "bat_line_maint_frac": {
+  "esdeger": "eco_maint_frac_capex_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Paket hattina da uygulanir. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_maint_frac_capex_yr üzerinden okunur. Fark: Ayni kavram; tahmin; hucre ve paket hatti."
+ },
+ "eco_insurance_frac_capex_yr": {
+  "deger": 0.006,
+  "alt": 0.003,
+  "ust": 0.012,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok; dayanak: 1. derece deprem bolgesi, yanici/toksik gaz ve pil stogu (altyapi notu)",
+  "guven": "dusuk",
+  "aciklama": "Is durmasi (BI) teminati haric. Ornek hesapta artik 0.005 degil, bu deger (0.006) kullanildi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak; diger alanlarda sigorta hic yok, kanonik yuk formulu ile tum capex'e eklenir."
+ },
+ "eco_hours_calendar_yr": {
+  "deger": 8760,
+  "alt": 8760,
+  "ust": 8760,
+  "kaynak": "365 x 24",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "-",
+  "guven": "yuksek",
+  "aciklama": "Planli durus eco_uptime_frac_default icinde dusulur. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Surekli hatlarin (K7 firin, 24/7 HJT) paydasi. Vardiyali hatlarin yillik saati (elektronik 4000, pil paket 3600, modul 8 h x 250 gun) hat tasarim secimidir, bu parametrenin takma adi degildir (celiskilere bakiniz)."
+ },
+ "eco_uptime_frac_default": {
+  "deger": 0.9,
+  "alt": 0.8,
+  "ust": 0.95,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Altyapi tanimi: performans ve kalite kayiplari ayri tutulur; OEE'nin kalite bileseni burada kullanilmaz.",
+  "guven": "dusuk",
+  "aciklama": "Tanim: (takvim - planli durus - plansiz durus) / takvim. Performans ve kalite kayiplari ayri tutulur; OEE'nin kalite bileseni burada kullanilmaz (cift sayim olmasin). wafer_per_day arayuzu bu kullanilabilirlik dahil ortalama deger olarak tanimlandi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tanim altyapidan kanonik. Ekipmana ozgu degerler (cz_availability_unplanned 0.9, saw_uptime 0.85, wf_inspect_uptime 0.9, hjt_line_uptime 0.85) takma ad degil gerekceli override'dir; ayni tanimla ve yalniz bir kez (kapasite/cikti formulunde) uygulanmali."
+ },
+ "eco_productive_hours_fte_yr": {
+  "deger": 2070,
+  "alt": 1950,
+  "ust": 2200,
+  "kaynak": "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "md. 63: 'Genel bakimdan calisma suresi haftada en cok kirkbes saattir.'; 45 x 52 = 2340 - yillik izin 105-126 h - resmi tatil ~110 h - hastalik ~50 h = ~2060-2075 (altyapi).",
+  "guven": "orta",
+  "aciklama": "45*52 = 2340 - yillik izin 105-126 h - resmi tatil ~110 h (hafizadan, ~15.5 gun) - hastalik ~50 h = ~2060-2075. Tek deger 2070 (ilk ciktida ucrette 2100, FTE'de 2070 kullanilmisti). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Is Kanunundan turetilmis, altyapi sahibi; sahip araligi 1950-2200 korunur. ONCEKI CIKTIDAKI ALT 1700 GERI ALINDI: pilin 1800'u kaynaksiz ve '40 h/hafta sirket politikasi' SENARYOSUDUR (ayri senaryo; bu durumda saat ucretleri 2070/1800 = 1.15 kat artar), ornekleme araligina girmez. Tum saat ucretleri (operator/teknisyen/muhendis) bu parametreyle turetilmistir; model icinde ucret = aylik isveren maliyeti x 12 x eco_labor_overhead_factor / eco_productive_hours_fte_yr / eco_fx_try_per_usd olarak baglanmali ki tornado tutarli kalsin. Elektronigin 195 h/ay (2340 h/yil) tabani odenen saattir, verimli saat degil."
+ },
+ "bat_fte_hours_yr": {
+  "esdeger": "eco_productive_hours_fte_yr",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_productive_hours_fte_yr üzerinden okunur. Fark: Ayni kavram; tahmin (40 h/hafta politikasina denk); birim ayni (saat/yil = h/yil). Senaryo olarak etiketlenmeli; bat_f43_pack_labor paydasi kanonige baglanmali."
+ },
+ "eco_fte_per_24x7_position": {
+  "deger": 4.23,
+  "alt": 3.98,
+  "ust": 4.49,
+  "kaynak": "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.4857.pdf (md. 63, 53, 41, 69)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "8760 / 2070 = 4.23; 8760/2200 = 3.98; 8760/1950 = 4.49 (bu gorevde hesaplandi).",
+  "guven": "orta",
+  "aciklama": "FTE sayisini md. 63 (45 h/hafta) ve izinler belirler; md. 69 yalnizca vardiya duzenini (3x8, 4 ekip) belirler (gerekce duzeltildi). 8760/2070 = 4.23. Esdeger: tatilde calisilir ve prim odenirse 8760/2165 = 4.05 FTE + ~%4 tatil primi = ~4.2. Alt sinir: gunduz vardiyasinda yasal fazla mesai kullanimi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Kirmizi takim bulgusu kabul: bagimsiz aralik (onceki 3.7-4.7, sahip 3.9-4.7) tanim geregi verimli saat araligiyla celisiyordu. Parametre formul yapilir, aralik verimli saatten turer. Hucrenin alt 3.7'si kisi basina ~2370 verimli saat demek; bu md. 63'un 2340 odenen saat tavaninin ustunde ve ancak %150 ucretli fazla mesaiyle mumkun, maliyet dusurmez. Sahibin 'yasal fazla mesai' alt siniri da ayni nedenle maliyet esdegerini dusurmez."
+ },
+ "hjt_shift_crews": {
+  "esdeger": "eco_fte_per_24x7_position",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_fte_per_24x7_position üzerinden okunur. Fark: Ayni kavram (7/24 icin ekip sayisi), ayni deger; bagimsiz aralik 3.7-4.6 kaldirilmali, formule baglanmali."
+ },
+ "eco_elec_price_usd_kwh": {
+  "deger": 0.105,
+  "alt": 0.084,
+  "ust": 0.14,
+  "kaynak": "altyapi: eco_elec_ptf_try_mwh (enerjigunlugu 26.08.2026), eco_elec_yekdem_try_mwh, eco_elec_dist_og_kr_kwh (hakedis.org), eco_elec_energy_kr_kwh (AA/EPDK), eco_fx_try_per_usd",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "Piyasa rejimi formulu: ((3634.98 + 372.4)/10 x 1.05 x 1.01 + 118.25)/100/49 = 0.1109; duzenlenmis: (290.97 x 1.01 + 118.25)/100/49 = 0.0841; ust: PTF 4500 + YEKDEM 603 + %9 marj = 0.14 (altyapi). Sahip notu: 'Baz 0.105 secildi, cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir (dogrulanmadi).'",
+  "guven": "orta",
+  "aciklama": "Piyasa: ((3635+372.4)/10*1.05*1.01 + 118.25)/100/49 = 0.1109; marj 0 ile 0.1067. Baz 0.105 secildi, cunku PTF bir Agustos gununden alindi ve yaz degerleri yillik ortalamanin ustunde olabilir (dogrulanmadi). Duzenlenmis: (290.97*1.01 + 118.25)/100/49 = 0.0841. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Sinirlar kaynakli bilesenlerden turetilmis; BAZ 0.105 ise formul ciktisi degil YARGIDIR (piyasa formulu 0.1109; 'yaz PTF'si yillik ortalamanin ustunde' varsayimiyla asagi cekilmis, dogrulanmadi) - bu yuzden kaynak_turu tahmin/orta olarak etiketlendi. ONCEKI CIKTIDAKI 0.07-0.16 ARALIGI 0.084-0.14'E GERI ALINDI: genisletme, kendi notu 'altyapi degeri gecerlidir' diyen kristal YER TUTUCU'sundan geliyordu. Rejim (duzenlenmis/piyasa) SKTT limitine ve yillik tuketime bagli; dogrulama: EPIAS 12 aylik PTF ortalamasi."
+ },
+ "xtal_price_electricity_usd_kwh": {
+  "esdeger": "eco_elec_price_usd_kwh",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Kur: dogrudan USD. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_elec_price_usd_kwh üzerinden okunur. Fark: YER TUTUCU; kendi notu 'altyapi degeri gecerlidir'; araligi 0.07-0.16 birlesime alinmadi."
+ },
+ "eco_water_price_usd_m3": {
+  "deger": 5.22,
+  "alt": 3,
+  "ust": 6.33,
+  "kaynak": "https://www.isu.gov.tr/sufiyatlari + eco_osb_wastewater_fee_usd_m3 (tahmin)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "ISU: 'SANAYI (ORTAK ARITMA TESISI OLAN OSB): 206.697 + 0.0000 = 206.70' TL/m3 (2026/9, altyapi alaninda; onceki turda sayfa bos yanit verdi). 206.70/49 = 4.22 + OSB atiksu 1.0 (tahmin).",
+  "guven": "orta",
+  "aciklama": "4.22 + 1.0 = 5.22. Geri kazanimin kucuk unitede ekonomik olup olmadigi olculen debi ve modul teklifiyle ayrica degerlendirilmeli (Fraunhofer %79 tasarruf rakami 5 GW tesis icindir; H1). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (altyapi). Ham su + atiksu bedelidir. UPW birim maliyeti bir formul ciktisidir (site_upw_unit_cost -> site_upw_cost_usd_m3 = bu parametre/site_ro_recovery_frac + site_upw_kwh_per_m3 x eco_elec_price_usd_kwh; baz 5.22/0.75 + 2 x 0.105 = 7.17 USD/m3) ve kanonik parametre olarak DONDURULMADI (kirmizi takim kabul); hucrenin upw_price_usd_per_m3'u bu formul ciktisina baglanir. OSB disi eco_water_isu_sanayi_usd_m3 (6.33) rejim alternatifidir, takma ad degil."
+ },
+ "eco_labor_operator_usd_h": {
+  "deger": 8.4,
+  "alt": 5.8,
+  "ust": 11.5,
+  "kaynak": "https://www.eleman.net/meslek/operator/maas ; https://www.alomaliye.com/2025/12/23/2026-yili-asgari-ucreti-2026-yili-asgari-ucret-bilgilendirme/",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'Kocaeli icin 37.500 TL' (net) -> brut 47,806 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 8.4 USD/h (altyapi). Yasal taban ayni tabanda: asgari ucret isveren maliyeti 39,223.13 TL x 12 x 1.25 / 2070 / 49 = 5.80 USD/h (bu gorevde hesaplandi).",
+  "guven": "orta",
+  "aciklama": "Net 37,500 -> brut 47,806 -> isveren 47,806*1.1875 = 56,770 TL/ay -> *12*1.25/2070/49 = 8.4 USD/h. Tesviksiz 8.75. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; kaynakli ve verimli saat tabanli tek deger. TEK TABAN TANIMI (kirmizi takim kabul): tum ucretler ek yuklu (eco_labor_overhead_factor 1.25) ve verimli saat (2070) bazinda. Alt 5.80 = bu tabanda yasal asgari ucret; sahip alti 6.0'a yakin. Onceki ciktinin 5-12 araligi geri alindi: alt 5 (modul) ve 4.1 (elektronik) odenen saat/ek yuksuz tabandadir, ayni tabana cevrilince asgarinin altinda degil ustundedir (elektronik 6.17 -> 8.70). Ust 11.5 sahip; temiz oda/kimyasal egitimli operator primi (+%10-30) bu banda dahil. Aralik kuru degil TL ucret dagilimini temsil eder."
+ },
+ "mod_labor_rate_usd_h": {
+  "esdeger": "eco_labor_operator_usd_h",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: Ayni kavram; 2025 asgari ucretinden hafiza-tahmin, ~190 h/ay odenen saat tabani, ek yuk yok; aralik 5-12."
+ },
+ "el_labor_usd_h": {
+  "esdeger": "eco_labor_operator_usd_h",
+  "esdeger_carpan": 1.0,
+  "aciklama": "39,223/48.92/195 h = 4.11 x 1.5 (teknisyen, tahmin). | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: Etiket 'teknisyen' ama turetim 1.5 x asgari ucret ve kullanim son montaj/test/yeniden isleme (operator isi). Taban 195 h/ay odenen saat, ek yuk yok; kanonik tabanda 8.70 USD/h. Gercekten teknisyen isi ise eco_labor_technician_usd_h."
+ },
+ "xtal_wage_usd_h": {
+  "esdeger": "eco_labor_technician_usd_h",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_operator_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_fixed_usd_h = xtal_operator_hours_per_furnace_hour x xtal_wage_usd_h ve fz_cost_per_hour_usd'deki ayni operator terimi bu kanonige baglanir (izleme operator isi). Pota degisimi terimi teknisyen kanonigine gider. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: BOLUNMELI: cz_cost_labor_crew_usd_h = cz_turnaround_crew_person_h x xtal_wage_usd_h / cz_T_campaign_h (pota degisimi ekibi) bu kanonige baglanir; operator terimi operator kanonigine. Kristal ornegi: tek ucretle 0.5 x 12 + 16 x 12/347.7 = 6.55 USD/h; kanonik ayrimla 0.5 x 8.4 + 16 x 13.4/347.7 = 4.82 USD/h; hepsi teknisyen olsaydi 7.32 USD/h (firin-saat maliyetinin ~%13'u fark)."
+ },
+ "eco_labor_technician_usd_h": {
+  "deger": 13.4,
+  "alt": 10,
+  "ust": 18,
+  "kaynak": "https://www.eleman.net/meslek/teknisyen/maas",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'Kocaeli icin 55.100 TL' (net) -> brut 76,522 -> x 1.1875 x 12 x 1.25 / 2070 / 49 = 13.4 USD/h (altyapi).",
+  "guven": "orta",
+  "aciklama": "Net 55,100 -> brut 76,522 -> *1.1875*12*1.25/2070/49 = 13.4 USD/h (tesviksiz 14.0). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; sahip araligi 10-18 korunur. Onceki ciktinin 8-20 genislemesi geri alindi: kaynaklar kristal ve standartin tahminleri (kristalinki YER TUTUCU) ve genisleme kurdan bagimsiz ikinci bir belirsizlik temsili yaratiyordu."
+ },
+ "std_rt_labor_usd_per_h": {
+  "esdeger": "eco_labor_technician_usd_h",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_labor_technician_usd_h üzerinden okunur. Fark: Test teknisyeni, tahmin; kendi notu uretim alaninin tek iscilik parametresini kullanmayi soyluyor. Dokunma testleri operatorce yapilirsa operator ucreti."
+ },
+ "eco_labor_engineer_usd_h": {
+  "deger": 22,
+  "alt": 12,
+  "ust": 35,
+  "kaynak": "https://www.eleman.net/meslek/muhendis/maas + tahmin",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "'Kocaeli icin 51.400 TL' ortalama (12.4 USD/h); deneyimli proses muhendisi net 100-150 bin TL tahmini -> 27-43 USD/h; sahip notu: 'Baz 22 bir karisim tahminidir.'",
+  "guven": "dusuk",
+  "aciklama": "Ortalama: 12.4 USD/h (tesvikli). Net 100k -> ~27, 150k -> ~43 USD/h. Baz 22 bir karisim tahminidir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (altyapi). Kaynak_turu hesap_turetilmis'ten TAHMIN'e duzeltildi (kirmizi takim kabul): kaynak ortalamasi 12.4 USD/h, baz 22 ise ortalama ile proses muhendisi tahmini arasinda yargi. Baska alanda ayri muhendis ucreti yok (hucre ve pilin harmanli FTE maliyetleri celiskilerde)."
+ },
+ "eco_rent_usd_m2_month": {
+  "deger": 6.5,
+  "alt": 4,
+  "ust": 10,
+  "kaynak": "https://www.century21.com.tr/gebze-kiralik/fabrika-imalathane",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'Dilovasi OSB 2000 m2 Factory TL 690,000' -> 690,000/2,000/49 = 7.0 (altyapi)",
+  "guven": "dusuk",
+  "aciklama": "kaynak_turu 'dogrulanmis_url'den 'hesap_turetilmis'e dusuruldu; guven dusuk. Vergi durumu eco_rent_tax_factor'da. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek kaynak (tek ilan); diger alanlarda kira yok (alan maliyeti yalniz altyapida site_share_per_unit_usd_yr ile). Sozlesme TL'de yillik sabitse kur araligi (45-60) bu kaleme uygulanabilecek tek yerlerdendir."
+ },
+ "eco_price_argon_usd_kg": {
+  "deger": 1.1,
+  "alt": 0.66,
+  "ust": 3,
+  "kaynak": "eco_price_argon_bulk_usd_kg (https://www.imarcgroup.com/argon-pricing-report ; https://businessanalytiq.com/procurementanalytics/index/argon-price-index/) x (1 + eco_argon_small_user_premium_frac)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "IMARC 'Europe: 0.64 USD/KG' (Eylul 2026); businessanalytiq 'Europe: US$0.62/KG'; 0.68 x 1.6 = 1.09 (altyapi). Alt: 0.55 x (1 + 0.2) = 0.66 (bu gorevde hesaplandi).",
+  "guven": "dusuk",
+  "aciklama": "0.68*1.6 = 1.09. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi. Alt sinir tutarli olcutle yeniden kuruldu (kirmizi takim kabul): toptan alt 0.55 x (1 + prim alt 0.2) = 0.66 (sahip 0.7). Onceki ciktinin primsiz 0.55'i kucuk kullanici teslim fiyati icin tutarsizdi. Kristalin 0.8 USD/Nm3 (= 0.45 USD/kg) yer tutucusu ve 0.3 USD/Nm3 (= 0.17 USD/kg) alti Avrupa toptan endeksinin altinda; alinmadi. Birim donusumu: USD/Nm3 = USD/kg x 1.782 (0 C, 1 atm; 39.948/22.414); 1.1 USD/kg = 1.96 USD/Nm3."
+ },
+ "xtal_price_argon_usd_nm3": {
+  "esdeger": "eco_price_argon_usd_kg",
+  "esdeger_carpan": 1.784,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_argon_usd_kg × 1.784 (1 Nm3 Ar = 1,784 kg (0 °C, 1 atm)) üzerinden okunur. Fark: BIRIM FARKI (USD/Nm3). 0.8 USD/Nm3 = 0.45 USD/kg; kanonik 2.45 kat yuksek. YER TUTUCU, kaynak yok; aralik 0.3-2 USD/Nm3."
+ },
+ "eco_price_ln2_usd_nm3": {
+  "deger": 0.15,
+  "alt": 0.07,
+  "ust": 0.35,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok; dayanak: kucuk tuketici; yerinde PSA 0.2-0.4 kWh/Nm3 (hafizadan)",
+  "guven": "dusuk",
+  "aciklama": "Pompa purge'u N2 tuketimini buyutur (site_n2_purge_burnwet_slm). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id. Hucrenin degersiz n2_price_usd_per_Nm3 serbest degiskeni buna baglanmali."
+ },
+ "eco_price_sih4_usd_kg": {
+  "deger": 60,
+  "alt": 25,
+  "ust": 300,
+  "kaynak": "tahmin (altyapi, hucre)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok (businessanalytiq silan endeksi 404 verdi; altyapi)",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapi sahibi; iki deger de tahmin, sahip degeri korunur. Ust 300 hucreden (bagimsiz gerekce: on-karisim primi) birlesime alindi; sahip ust 150 (degisiklik gunlugunde). On-karisim secilirse (hjt_ts_silane_supply) karisim silindiri icin ayri fiyat parametresi gerekir (bilinmiyor, teklif)."
+ },
+ "hjt_sih4_price_usd_per_kg": {
+  "esdeger": "eco_price_sih4_usd_kg",
+  "esdeger_carpan": 1.0,
+  "aciklama": "Dayanak: dogrulanmis fiyat bulunamadi; Cin bulk fiyati onlarca $/kg mertebesinde (hafizadan); Turkiye'de tup + lojistik ve %1.4 karisim primi ust siniri belirler. 2 g/m2 x 300 $/kg = 0.24 c/W: en kotu durumda bile ikincil. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_sih4_usd_kg üzerinden okunur. Fark: Ayni kavram; tahmin; aralik 30-300 on-karisim primini de kapsiyor."
+ },
+ "eco_price_h2_usd_kg": {
+  "deger": 25,
+  "alt": 4,
+  "ust": 60,
+  "kaynak": "tahmin (altyapi, hucre)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Sahip degeri korunur (iki tahmin, daha iyi kaynak yok). ONCEKI GEREKCE DUZELTILDI (kirmizi takim kabul): hucre parametresi de 'tup/demet' fiyatidir; iki deger arasindaki fark olcek degil varsayim farkidir. Unite tuketimi hjt_h2_g_per_m2 10 g/m2 (2.5-40) ile kirmizi takim hesabina gore ~1.8 t/yil (0.45-7 t/yil); bu, demet ile tup trailer arasi olcektir ve saha ortak tedarikinde trailer daha olasi. Fiyat tedarik bicimi karari (altyapi: demet / trailer / elektrolizor) ve RFQ ile belirlenmeli; 4-60 araligi (alt 4 hucreden, birlesime alindi) korunur."
+ },
+ "hjt_h2_price_usd_per_kg": {
+  "esdeger": "eco_price_h2_usd_kg",
+  "esdeger_carpan": 1.0,
+  "aciklama": "10 g/m2 x 10 $/kg = 0.1 $/m2 = 0.04 c/W. | [Uzlaştırma/ekonomi] Eşdeğer: değer eco_price_h2_usd_kg üzerinden okunur. Fark: Ayni kavram (tup/demet fiyati); tahmin; 2.5 kat dusuk; aralik 4-25."
+ },
+ "eco_price_nf3_usd_kg": {
+  "deger": 40,
+  "alt": 20,
+  "ust": 100,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok",
+  "guven": "dusuk",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek degerli id. Hucre NF3 tuketimi veriyor (hjt_nf3_g_per_m2 3 g/m2) ama f_hjt_gas_cost NF3'u icermiyor; altyapinin eco_gas_cost_var_usd_per_m2 formulu iceriyor."
+ },
+ "eco_price_dopant_mix_usd_per_cyl": {
+  "deger": 3000,
+  "alt": 1000,
+  "ust": 8000,
+  "kaynak": "tahmin (altyapi)",
+  "kaynak_turu": "tahmin",
+  "kaynak_alintisi": "yok; ~40-50 L silindir (altyapi notu)",
+  "guven": "dusuk",
+  "aciklama": "~40-50 L silindir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek fiyat parametresi. Hucrenin hjt_dopant_gas_usd_per_m2 (0.03 USD/m2) degeri fiyat degil turetilmis maliyet ve silindir raf omru tabanini (eco_dopant_cyl_shelf_life_months) icermiyor; takma ad degil, celiskilerde."
+ },
+ "hjt_ag_price_usd_per_g": {
+  "deger": 2.066,
+  "alt": 1.6,
+  "ust": 2.8,
+  "kaynak": "https://tradingeconomics.com/commodity/silver",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'Silver rose to 64.26 USD/t.oz on September 25, 2026' (onceki turda ve kirmizi takimca acildi); 64.26 / 31.1035 = 2.066 USD/g",
+  "guven": "yuksek",
+  "aciklama": "Aralik oynaklik tahmini (50-87 $/oz). Ilk ciktidaki dogrulanmamis arama ozeti notu kaldirildi. Kaynak denetcisi Kitco'da 64.17 $/oz (27 Eylul) gordu. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik yok; tek id. Birim USD/g = USD/t.oz / 31.1035."
+ },
+ "hjt_in_price_usd_per_kg": {
+  "deger": 800,
+  "alt": 350,
+  "ust": 1100,
+  "kaynak": "https://tradingeconomics.com/commodity/indium ; Procurement Resource ; USGS MCS 2025 (hucre)",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "TE: 'Indium traded flat at 5,250 CNY/Kg on September 24, 2026' (acildi) -> /6.72 = 781 USD/kg; PR 'China (FOB) USD 786.50/KG' (hucre).",
+  "guven": "orta",
+  "aciklama": "Alt sinir USGS 2024 ortalamasi (geri donus riski); ust sinir oynaklik. Dogrulanmamis '880-972 $/kg' ifadesi kaldirildi. TE fiyatinin KDV dahil olup olmadigi bilinmiyor. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek id. RMB/KDV kuralinin 1. adimi uygulanir: FOB ihracat fiyati (PR 786.5) mevcut, bu yuzden TE CNY fiyatinin KDV durumu (dahilse KDV haric ~691) bazi degistirmez; 800 degeri FOB'un %2 icinde."
+ },
+ "el_cu_price_usd_kg": {
+  "deger": 14.74,
+  "alt": 11,
+  "ust": 16.5,
+  "kaynak": "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Cu_cash",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'25. September 2026 14,740.00' USD/t (onceki turda ve kirmizi takimca acildi)",
+  "guven": "yuksek",
+  "aciklama": "Alt sinir 2024 seviyesi. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Altyapida karsilik yok; en iyi kaynakli ve en guncel id. Urun fiyatlari LME x urune ozgu carpan: kablo (panel-kutu) YALNIZ modulde fiyatlanir (mod_f_cost_cable; bakir disi bilesen mod_cable_core_fixed_usd_per_m ayri); elektronigin el_f_cable_cost'u (x el_cable_price_factor 2.5) sistem toplamina girmez, yalniz kesit/kutle arayuzu kalir (celiskiler: kablo cift sayimi). Emaye/TIW tel el_enamel_premium/el_tiw_premium ile. Modulun 2025 LME'sinden turetilmis 12 USD/kg'i eski oldugu icin birlesime alinmadi."
+ },
+ "mod_cu_price_usd_kg": {
+  "esdeger": "el_cu_price_usd_kg",
+  "esdeger_carpan": 1.0,
+  "aciklama": "[Uzlaştırma/ekonomi] Eşdeğer: değer el_cu_price_usd_kg üzerinden okunur. Fark: Kavram 'LME x 1.1 (orgu/kablolama payi)'; 2025 LME ~9.5-10 k$/t hafizadan. Formule baglanmali: el_cu_price_usd_kg x 1.1 (1.1 tahmin) = 16.2 USD/kg; bakir disi maliyet ayrica 0.2 USD/m."
+ },
+ "mod_al_lme_usd_kg": {
+  "deger": 3.254,
+  "alt": 2.8,
+  "ust": 3.8,
+  "kaynak": "https://www.westmetall.com/en/markdaten.php?action=table&field=LME_Al_cash",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'25. September 2026 3,254.00' USD/t (acildi); SMM 21.09.2026: 'LME aluminum closed at $3,293.5/mt' (modul).",
+  "guven": "yuksek",
+  "aciklama": "Çerçeve maliyeti panel başına ve çevreyle ölçeklenir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek id; deger daha guncel kaynakla 3.29 -> 3.254 guncellendi (-%1.2). Bolgesel prim ayrica mod_al_premium_usd_kg. Cin menseli hazir PV cercevesi alinirsa %38.26-45.99 damping vergisi var (celiskiler: landed)."
+ },
+ "mod_glass_price_usd_m2_per_mm": {
+  "deger": 0.71,
+  "alt": 0.55,
+  "ust": 1.3,
+  "kaynak": "EnergyTrend (23.09.2026) ; Montagtech/SCI (03.09.2026) (modul)",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "EnergyTrend: 2.0 mm ortalama 10.5 RMB/m2; SCI/SMM 2.0 mm 11-11.5 RMB/m2 (modul alaninda). 10.75/6.72/2/1.13 = 0.708; uclar 10.5 -> 0.691, 11.25 -> 0.741 (bu gorevde hesaplandi).",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Kirmizi takim bulgusu kabul: ciktinin kendi RMB/KDV kurali (yalniz RMB ic fiyat varsa /(1 + wf_cn_vat), sonra ihracat KDV etkisi ayrica) poliye uygulanip cama uygulanmamisti. Cam icin FOB fiyat yok; ic fiyatin KDV dahil oldugu varsayildi (dogrulanmadi). Deger 0.80 -> 0.71 (-%11). Ihracat KDV iadesi: pv-magazine'in listeledigi iptal kapsaminda (wafer, hucre, modul) cam yok; camin iade durumu bilinmiyor. Iade sifirsa ust sinir konvansiyonuyla 0.71 x 1.13 = 0.80'e doner; aralik (0.55-1.3) iki durumu da kapsar. Turkiye'de 7007.19.80.00.23 icin 10.08.2026'dan itibaren 1 USD/kg brut gozetim kiymeti ve 19.06.2026'da acilan damping sorusturmasi var (celiskiler: landed); mod_landed_factor_glass bunlari icermeli."
+ },
+ "wf_cn_vat": {
+  "deger": 0.13,
+  "alt": 0.13,
+  "ust": 0.13,
+  "kaynak": "wafer alani (hafiza); dolayli teyit https://www.pv-magazine.com/2026/01/09/china-to-abolish-solar-export-tax-rebates-from-april/",
+  "kaynak_turu": "hafizadan_dogrulanmadi",
+  "kaynak_alintisi": "pv-magazine (bu gorevde acildi): onceki PV ihracat iadesi 'was 9%, reduced from an earlier 13% in December 2024' - tam iade %13'un standart KDV oranina esit olmasiyla tutarli (dolayli).",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Mevcut id yeterli; kirmizi takimin onerdigi yeni eco_cn_vat_frac REDDEDILDI (gorev kurali: altyapida karsilik yoksa mevcut en iyi id). Tek kural: (1) FOB/USD ihracat fiyati varsa onu kullan; (2) yalniz RMB ic fiyat varsa /(1 + wf_cn_vat), bat_fx_cny_per_usd ile cevir, urun grubunun ihracat KDV etkisini ayrica ekle. Kullanim: poli 33.5/1.13/6.72 = 4.41 USD/kg; cam 0.71."
+ },
+ "bat_cn_export_vat_cost_frac": {
+  "deger": 0.13,
+  "alt": 0.07,
+  "ust": 0.13,
+  "kaynak": "https://www.pv-magazine.com/2026/01/09/china-to-abolish-solar-export-tax-rebates-from-april/ + wf_cn_vat",
+  "kaynak_turu": "hesap_turetilmis",
+  "kaynak_alintisi": "'For battery products, the export rebate rate will be cut from 9% to 6% between April 1 and Dec. 31, 2026, before being eliminated entirely from Jan. 1, 2027.' ; 'VAT export rebates for solar products will be fully removed from April 1, 2026.' (bu gorevde acildi). 2027: 0.13 - 0 = 0.13.",
+  "guven": "orta",
+  "aciklama": "%13 KDV - %6 iade = 0.07; iade sifirlanirsa 0.13. SMM fiyati KDV haric varsayildi. Ihracatci bu farki kismen ustlenebilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Pil sahibi 0.07 (= 0.13 - 0.06, 2026 kurali; kendi notu 2027 sifirlamasini dogrulanmadi diye biliyordu). Iade takvimi artik dogrulandi; zaman tabani kurumlar vergisiyle ayni (2027) yapildi -> 0.13. Konvansiyon (KDV - iade, fiyat uzerinden) UST SINIRDIR: gercek iade edilmeyen KDV yalniz girdi KDV'sidir ve ihracatcinin fiyata yansitma orani piyasaya bagli; alt 0.07 (2026 kurali / kismi yansitma). Etki: 26700 teslim 0.084 x 1.13 x 1.3 + 0.012 = 0.135 USD/Wh (0.129'dan +%5). PV urunleri icin ayri parametre ACILMADI: kullanilan wafer fiyati (InfoLink USD, FOB) Nisan 2026 sonrasi ihracat fiyatidir, iptalin etkisini zaten icerir; 15.24 cm ustu mono wafer iptal kapsaminda (pv-magazine: 'monocrystalline silicon wafers with diameters above 15.24 cm')."
+ },
+ "wf_poly_price_nonchina_usd_kg": {
+  "deger": 17.5,
+  "alt": 11,
+  "ust": 27,
+  "kaynak": "https://www.trendforce.com/price/pv/cell ; https://www.infolink-group.com/spot-price",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "TrendForce (Last Update 2026-09-23): 'Polysilicon Outside China (USD) 22.00 13.10 17.50'. InfoLink (23.09.2026): 'Polysilicon Price - Mono-grade polysilicon (USD) 26.7 11.0 18.5'; 'Polysilicon prices in dollar terms are prices for polysilicon with non-China origins ... not translated from RMB prices' (ikisi de acildi).",
+  "guven": "orta",
+  "aciklama": "Maliyet toplamina yalnizca kristal ajanindan girer (cift sayim onlemi). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). SAHIP DEGERI 17.5 GERI GETIRILDI (kirmizi takim kabul): onceki ciktidaki 18.5 secimi 'ayni raporlayici tutarliligi' gerekcesine dayaniyordu, gorev kuralindaki 'daha iyi kaynak/daha guncel' olcutu degil; iki kaynak ayni tarihli. Ayrica InfoLink genel satiri, altinda kilitli 'US made' ve 'Other non-China made' satirlari bulunan bir birlesimdir (kirmizi takim gordu); ust ucun 26.7 olmasi ABD mensei etkisi olabilir (cikarim, dogrulanmadi). InfoLink 18.5 capraz kontrol; baz belirsizligi 17.5-18.5. Aralik 11 (InfoLink alt) - 27 (InfoLink ust). Kristalin 5 USD/kg alti Cin ici fiyati karistirdigi icin alinmadi. Turkiye teslimi bilinmiyor."
+ },
+ "xtal_ref_poly_price_usd_kg": {
+  "esdeger": "wf_poly_price_nonchina_usd_kg",
+  "esdeger_carpan": 1.0,
+  "aciklama": "YENI. Poly maliyetinin sahibi ekonomi ajani; burada yalnizca yap/al karsilastirmasi icin. | [Uzlaştırma/ekonomi] Eşdeğer: değer wf_poly_price_nonchina_usd_kg üzerinden okunur. Fark: InfoLink genel satiri (ABD mensei dahil birlesim); aralik 5-27 Cin ici fiyati da karistiriyor. Iki alan sahipligi birbirine atiyordu; kanonik sahip bu id."
+ },
+ "wf_poly_price_china_rmb_kg": {
+  "deger": 33.5,
+  "alt": 31,
+  "ust": 45,
+  "kaynak": "https://www.trendforce.com/price/pv/cell",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "'N-Type Recharge Polysilicon (RMB) 45.00 33.00 33.50' (Last Update 2026-09-23; acildi). InfoLink ayni gun 'Mono-grade polysilicon (RMB) 43.0 40.0 40.0'.",
+  "guven": "orta",
+  "aciklama": "KDV haric 33.5/1.13/6.8 = $4.36/kg. pv-magazine 2026-09-11: wafer ureticileri vadeli piyasadan ~CNY 37/kg poli aliyor. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). n-tipi recharge urune ozgu TrendForce degeri korunur; InfoLink mono-grade 40-43 araligin icinde. USD cevrimi 33.5/1.13/6.72 = 4.41 USD/kg (KDV haric; ihracat fiyati degil, yalniz referans)."
+ },
+ "wf_price_m10_usd": {
+  "deger": 0.148,
+  "alt": 0.13,
+  "ust": 0.3,
+  "kaynak": "https://www.infolink-group.com/spot-price",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "InfoLink (23.09.2026): 'Mono N Type Wafer - 182-183.75mm / 130um (USD) 0.148 0.141 0.148'; 'InfoLink's wafer price quotes exclude additional costs from special specifications or requirements (e.g., traceability documentation)' (acildi). OPIS FOB M10 $0.149 (wafer alaninda).",
+  "guven": "orta",
+  "aciklama": "Alt sinir: Cin ic fiyati KDV haric 1.0/1.13/6.8 = $0.130. Ust sinir 0.30: 8 yillik ufukta dongusel risk (Ocak 2026 FOB $0.180; gecmis fiyatlar daha yuksekti, hafizadan). $0.148 = $4.47/m2. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Kristal ve wafer ayni kaynak ve deger; kanonik wafer alanindaki id (wf_buy_price_chain kullaniyor, FOB teyidi var). Aralik 0.13-0.30. Nisan 2026 Cin ihracat KDV iadesi iptali bu FOB fiyata yansimis (ek duzeltme yok). Cogunlukla TOPCon sinifi; HJT sinifi ve izlenebilirlik primi haric; navlun/gumruk ayri (wf_import_*)."
+ },
+ "xtal_ref_wafer_price_usd_pc": {
+  "esdeger": "wf_price_m10_usd",
+  "esdeger_carpan": 1.0,
+  "aciklama": "YENI. Karsilastirma dali: ~4.5 USD/m2, 0.019 USD/W @%24. Izlenebilirlik belgesi primi 0.1-0.2 RMB/adet (kaynakta). | [Uzlaştırma/ekonomi] Eşdeğer: değer wf_price_m10_usd üzerinden okunur. Fark: Ayni kaynak (InfoLink 23.09.2026) ve deger; aralik 0.141-0.25."
+ },
+ "bat_cell_price_na_cyl_usd_Wh": {
+  "deger": 0.084,
+  "alt": 0.079,
+  "ust": 0.088,
+  "kaynak": "https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "Sep 24, 2026 (USD/Wh): 26700 0.079-0.088, ort. 0.084 (pil alaninda; onceki turda sayfa JS nedeniyle yeniden okunamadi)",
+  "guven": "orta",
+  "aciklama": "6.72 kurla 0.56 CNY/Wh; HiNa GM'nin 0.5-0.7 CNY/Wh degeriyle ortusuyor. Vanadyumlu polianyon (NVP/NVPF) hucreler 2.4 kat pahali: 'NFPP' etiketli bir 18650 aslinda NVPF olabilir. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; diger alanlarda es anlamli yok. Cin ic GWh fiyati (KDV haric kabul). Gebze teslim bat_f25, 2027 kuraliyla: 0.084 x (1 + 0.13) x 1.3 + 0.012 = 0.135 USD/Wh. Aralik spot kotasyon dagilimidir, 12-24 aylik ileri belirsizligi kapsamaz."
+ },
+ "bat_cell_price_na_prismatic_usd_Wh": {
+  "deger": 0.085,
+  "alt": 0.079,
+  "ust": 0.09,
+  "kaynak": "https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "50Ah Prismatic (NFPP) 0.08-0.09; 100Ah 0.082-0.089; 200Ah 0.079-0.084 USD/wh, Sep 24, 2026 (pil alaninda)",
+  "guven": "orta",
+  "aciklama": "Deger 50 Ah araliginin orta noktasi. SMM'nin ortalama sutunu 0.090 ve bu, araligin ust ucuna esit (tutarsiz). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok. Teslim hesabinda bat_cn_export_vat_cost_frac 0.13."
+ },
+ "bat_cell_price_na_pris_small_usd_Wh": {
+  "deger": 0.073,
+  "alt": 0.07,
+  "ust": 0.076,
+  "kaynak": "https://www-old.metal.com/price/New-Energy/Sodium-ion-Battery",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "10-28Ah Prismatic (NFPP) 0.07-0.076, ort. 0.073 USD/wh (Sep 24, 2026; pil alaninda)",
+  "guven": "orta",
+  "aciklama": "Ayni sinifta LFP 20-25 Ah 0.072 -> prim ~+%1. | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok."
+ },
+ "bat_cell_price_lfp_50ah_usd_Wh": {
+  "deger": 0.0565,
+  "alt": 0.0543,
+  "ust": 0.0588,
+  "kaynak": "https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "China 50Ah ESS Battery 0.0543-0.0588 avg 0.0565 USD/wh (Sep 24, 2026; pil alaninda)",
+  "guven": "orta",
+  "aciklama": "Mysteel Eylul 2026: 314 Ah icin 0.38-0.41 CNY/Wh (KDV dahil gorunuyor). SMM USD degeri KDV haric gorunuyor (bkz. kur notu). Li2CO3 158,750 CNY/t (~23.6 k$/t). | [Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok. Na ile ayni kaynak ve format (prim +%50-59). Lityum iyon pil de 2027'de iadesiz (pv-magazine: 'lithium-ion batteries and battery packs')."
+ },
+ "bat_cell_price_lfp_small_usd_Wh": {
+  "deger": 0.072,
+  "alt": 0.069,
+  "ust": 0.09,
+  "kaynak": "https://www-old.metal.com/price/New-Energy/Battery-Cell-And-Module",
+  "kaynak_turu": "dogrulanmis_url",
+  "kaynak_alintisi": "China 20-25Ah Prismatic LFP Battery 0.069-0.075 avg 0.072 USD/wh (Sep 24, 2026; pil alaninda); ust 0.09 silindirik LFP icin tahmin payi.",
+  "guven": "orta",
+  "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). Tek sahip pil; es anlamli yok."
+ },
+ "_yeni": [
+  {
+   "id": "eco_usd_inflation_frac_yr",
+   "ad": "USD enflasyonu (reel/nominal donusum)",
+   "birim": "1/yil",
+   "deger": 0.0234,
+   "alt": 0.015,
+   "ust": 0.035,
+   "kaynak": "https://fred.stlouisfed.org/series/T10YIE (fredgraph.csv) ; https://fred.stlouisfed.org/series/T5YIFR",
+   "kaynak_turu": "dogrulanmis_url",
+   "kaynak_alintisi": "T10YIE: '2026-09-25,2.34'; T5YIFR (5 yil sonrasi 5 yillik): '2026-09-25,2.34' (ikisi de bu gorevde acildi).",
+   "guven": "orta",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, zorunlu: eco_wacc_usd nominal, opex ve kiyas fiyatlari (InfoLink, TrendForce, SMM, iscilik, elektrik) 2026-Q3 fiyatlariyla giriliyor; tutarli levelize yuk icin r_reel = (1 + eco_wacc_usd)/(1 + bu parametre) - 1 = 1.12/1.0234 - 1 = 0.0944 gerekli. Girdilerde karsiligi yok. Basabas orani enflasyon risk primi ve likidite primi icerir; aralik 0.015-0.035 bu primlerin ve gerceklesme sapmasinin tahmini payidir (tahmin).",
+   "dogrulama_deneyi": ""
+  },
+  {
+   "id": "eco_maint_first_gen_extra_frac_yr",
+   "ad": "Ilk nesil kendi tasarim makinelerde ek bakim",
+   "birim": "1/yil",
+   "deger": 0.035,
+   "alt": 0,
+   "ust": 0.04,
+   "kaynak": "tahmin; dayanak altyapi eco_maint_frac_capex_yr notu",
+   "kaynak_turu": "tahmin",
+   "kaynak_alintisi": "Altyapi: 'Kendi tasarim ilk nesil makinelerde ilk 2-3 yil ust banda yakin olmasi beklenir.' Ust bant 0.08; 'yakin' = 0.07-0.08 -> ek 0.03-0.04.",
+   "guven": "dusuk",
+   "alan": "altyapi",
+   "maliyet_sinifi": "teknik",
+   "olcek": "genel",
+   "senaryoya_uygunluk": "",
+   "aciklama": "[Uzlaştırma/ekonomi] Kanonik (tek sahip). YENI eco_ id, sahip notunu levelize modelde uygulamak icin zorunlu (tek duz oran ya altyapiyi sisirir ya ilk nesil makineyi eksik sayar). Seviyelenmis karsiligi: dm x AF(r_reel, 3)/AF(r_reel, N) = 0.035 x 2.52/5.44 = 0.0161/yil (N = 8; 2 yil kabul edilirse 0.0112). Alt 0: kendi tasarim makine satin alinan kadar olgun. Yalniz kendi tasarim ilk nesil proses makinelerine uygulanir; kopya unitelerde (ogrenme sonrasi) 0 alinabilir.",
+   "dogrulama_deneyi": ""
+  }
+ ],
+ "_formul_degiskenleri": {
+  "wacc": "eco_wacc_usd",
+  "depr_years": "eco_life_machine_yr",
+  "elec_price_usd_kWh": "eco_elec_price_usd_kwh",
+  "elec_price_usd_per_kWh": "eco_elec_price_usd_kwh",
+  "labor_usd_h": "eco_labor_operator_usd_h",
+  "labor_usd_per_h": "eco_labor_operator_usd_h"
+ },
+ "_rapor": [
+  "ekonomi: yeni kanonik parametre eco_usd_inflation_frac_yr (altyapi)",
+  "ekonomi: yeni kanonik parametre eco_maint_first_gen_extra_frac_yr (altyapi)"
+ ]
+}
